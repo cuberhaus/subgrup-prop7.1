@@ -9,7 +9,7 @@ public class valoracio {
 
     /**
      * Modificadora del paràmetre valor
-     * @param  contrasenya El paràmetre valor pren el nou valor
+     * @param  valor El paràmetre valor pren el nou valor
      */
     public void setValor(double valor) {
         this.valor = valor;
