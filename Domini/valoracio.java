@@ -1,4 +1,4 @@
-package Dominio;
+package Domini;
 /**
  * Representa una valoració.
  * @author pol.casacuberta

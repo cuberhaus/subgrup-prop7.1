@@ -1,4 +1,4 @@
-package Dominio;
+package Domini;
 /**
  * Representa un usuari.
  * @author pol.casacuberta
