@@ -1,6 +1,6 @@
 package Dominio;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Representa un tipus d'ítem.
@@ -8,7 +8,8 @@ import java.util.ArrayList;
  */
 public class TipusItem {
     private String nom;
-    private ArrayList<TipusAtribut> tipusAtributs;
+    /** Relaciona el nom d'un atribut amb el seu tipus. */
+    private Map<String, TipusAtribut> tipusAtributs;
 
     /**
      * Crea un <code>TipusItem</code> amb el nom donat.
@@ -27,14 +28,6 @@ public class TipusItem {
     }
 
     /**
-     * Assigna els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
-     * @param tipusAtributs <code>ArrayList</code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
-     */
-    public void setTipusAtributs(ArrayList<TipusAtribut> tipusAtributs) {
-        this.tipusAtributs = tipusAtributs;
-    }
-
-    /**
      * Obté el nom d'un <code>TipusItem</code>.
      * @return String que conté el nom del <code>TipusItem</code>.
      */
@@ -43,19 +36,30 @@ public class TipusItem {
     }
 
     /**
-     * Obté els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
-     * @return <code>ArrayList</code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
+     * Assigna els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
+     * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
      */
-    public ArrayList<TipusAtribut> getTipusAtributs() {
+    public void setTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
+        this.tipusAtributs = tipusAtributs;
+    }
+
+    /**
+     * Obté els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
+     * @return <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
+     */
+    public Map<String, TipusAtribut> getTipusAtributs() {
         return tipusAtributs;
     }
 
     /**
-     * Afegeix un <code>TipusAtribut</code> als <code>tipusAtributs</code> d'un <code>TipusItem</code>.
+     * Afegeix el <code>TipusAtribut</code> amb el nom donats als <code>tipusAtributs</code> d'un <code>TipusItem</code>.
+     * Si <code>tipusAtributs</code> ja contenia un tipus d'atribut amb el nom donat, el sobreescriu.
+     * @param nomTipusAtribut Nom del <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
+     *                        <code>TipusItem</code>.
      * @param tipusAtribut <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
      *                     <code>TipusItem</code>.
      */
-    public void addTipusAtributs(TipusAtribut tipusAtribut) {
-        this.tipusAtributs.add(tipusAtribut);
+    public void addTipusAtribut(String nomTipusAtribut, TipusAtribut tipusAtribut) {
+        this.tipusAtributs.put(nomTipusAtribut, tipusAtribut);
     }
 }
