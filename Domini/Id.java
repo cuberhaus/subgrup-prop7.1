@@ -1,16 +1,16 @@
 package Domini;
 
 public class Id {
-    final int id;
+    final int valor;
     boolean actiu;
 
-    public Id(int id, boolean actiu) {
-        this.id = id;
+    public Id(int valor, boolean actiu) {
+        this.valor = valor;
         this.actiu = actiu;
     }
 
-    public int getId() {
-        return id;
+    public int getValor() {
+        return valor;
     }
 
     public boolean isActiu() {
