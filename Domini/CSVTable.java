@@ -1,5 +1,3 @@
-package Domini;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -224,6 +222,80 @@ public class CSVTable {
                     System.out.print(' ');
                 }
                 System.out.println();
+            }
+        }
+    }
+
+    public ArrayList<String> getValoresDeItemConValor(String id, String valor) {
+        if (numAtribs == -1) {
+            System.out.println("Encara no s'han introduit els atributs");
+            return null;
+        }
+
+        else if (!this.atributosToIndex.containsKey(id)) {
+            System.out.println("L'atribut seleccionat no existeix");
+            return null;
+        }
+
+        else  {
+            Integer index = this.atributosToIndex.get(id);
+
+            Integer tamano = this.valoresDeItem.size();
+            boolean trobat = false;
+            Integer i = 0;
+
+            while (!trobat && i < tamano) {
+                ArrayList<String> fila = valoresDeItem.get(i);
+                trobat = (fila.get(index) == valor);
+                ++i;
+            }
+
+            if (!trobat) {
+                System.out.println("No existeix un item amb el valor de l'tribut dessitjat");
+                return null;
+            }
+
+            else {
+                ArrayList<String> resultado = new ArrayList<>(valoresDeItem.get(i - 1));
+                resultado.remove(index);
+                return resultado;
+            }
+        }
+    }
+
+    public ArrayList<String> getValoresDeItemConValor(Integer ind, String valor) {
+        if (numAtribs == -1) {
+            System.out.println("Encara no s'han introduit els atributs");
+            return null;
+        }
+
+        else if (ind < 0 || numAtribs <= ind) {
+            System.out.println("L'atribut seleccionat no existeix");
+            return null;
+        }
+
+        else  {
+            Integer index = ind;
+
+            Integer tamano = this.valoresDeItem.size();
+            boolean trobat = false;
+            Integer i = 0;
+
+            while (!trobat && i < tamano) {
+                ArrayList<String> fila = valoresDeItem.get(i);
+                trobat = (fila.get(index) == valor);
+                ++i;
+            }
+
+            if (!trobat) {
+                System.out.println("No existeix un item amb el valor de l'tribut dessitjat");
+                return null;
+            }
+
+            else {
+                ArrayList<String> resultado = new ArrayList<>(valoresDeItem.get(i - 1));
+                resultado.remove(index);
+                return resultado;
             }
         }
     }
