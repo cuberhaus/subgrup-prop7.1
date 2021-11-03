@@ -10,12 +10,13 @@ public abstract class TipusAtribut {
      */
     public abstract TipusAtribut copy();
 
+    public abstract boolean admetValorAtribut(ValorAtribut<?> valorAtribut);
+
     /**
      * @param valor1 <code>ValorAtribut</code> que conté el valor del primer atribut.
      * @param valor2 <code>ValorAtribut</code> que conté el valor del segon atribut.
-     * @return <code>Double</code> que conté el valor de la distància entre els dos valors donats.
+     * @return <code>double</code> que conté el valor de la distància entre els dos valors donats.
      */
-    public abstract double obtenirDistancia(ValorAtribut valor1, ValorAtribut valor2);
-
+    public abstract double obtenirDistancia(ValorAtribut<?> valor1, ValorAtribut<?> valor2);
 }
 

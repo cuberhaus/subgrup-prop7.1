@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Item {
     final String id;
-    Map<String, ValorAtribut> atributs;
+    Map<String, ValorAtribut<?>> atributs;
     final TipusItem tipusItem;
 
     /**
@@ -19,7 +19,7 @@ public class Item {
      * @throws IllegalArgumentException llançada si el <code>TipusItem</code> i el <code>Map<String, ValorAtribut></code>
      * donats no són compatibles.
      */
-    public Item(String id, TipusItem tipusItem, Map<String, ValorAtribut> atributs) throws IllegalArgumentException {
+    public Item(String id, TipusItem tipusItem, Map<String, ValorAtribut<?>> atributs) throws IllegalArgumentException {
         this.id = id;
         this.tipusItem = tipusItem;
         this.atributs = atributs;

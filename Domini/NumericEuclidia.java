@@ -11,10 +11,15 @@ public class NumericEuclidia extends TipusAtribut {
     }
 
     @Override
-    public double obtenirDistancia(ValorAtribut valor1, ValorAtribut valor2) throws IllegalArgumentException {
-        if (!(valor1 instanceof ValorNumeric valorNumeric1 && valor2 instanceof ValorNumeric valorNumeric2)) {
+    public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) {
+        return valorAtribut instanceof ValorNumeric;
+    }
+
+    @Override
+    public double obtenirDistancia(ValorAtribut<?> valor1, ValorAtribut<?> valor2) throws IllegalArgumentException {
+        if (!(valor1 instanceof ValorNumeric && valor2 instanceof ValorNumeric)) {
             throw new IllegalArgumentException("Els dos ValorAtributs donats han de ser ValorNumerics.");
         }
-        return Math.abs(valorNumeric1.getValor() - valorNumeric2.getValor());
+        return Math.abs(((ValorNumeric) valor1).getValor() - ((ValorNumeric) valor2).getValor());
     }
 }

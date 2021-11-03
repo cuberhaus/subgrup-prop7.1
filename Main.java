@@ -15,20 +15,10 @@ public class Main{
 
         TipusItem song = new TipusItem("song", tipusAtributMap);
 
-        Map<String, ValorAtribut> valorAtributMap = new HashMap<>();
-        valorAtributMap.put("durada", new ValorNumeric(new NumericEuclidia(), 273));
+        Map<String, ValorAtribut<?>> valorAtributMap = new HashMap<>();
+        valorAtributMap.put("durada", new ValorNumeric(273.0));
 
         Item disco2000 = new Item("1", song, valorAtributMap);
         System.out.println(disco2000.getId());
-
-        /* Wrong usage
-
-        Map<String, ValorAtribut> wrongValorAtributMap = new HashMap<>();
-        wrongValorAtributMap.put("durada", new ValorNumeric(new NumericDiscret(), 258));
-
-        Item mondayMorning = new Item("1", song, wrongValorAtributMap);
-        System.out.println(mondayMorning.getId());
-
-        */
     }
 }

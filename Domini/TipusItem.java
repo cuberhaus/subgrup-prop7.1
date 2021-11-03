@@ -75,7 +75,7 @@ public class TipusItem {
      * @param atributs <code>Map<String, ValorAtribut></code> que relaciona el nom d'un atribut amb el seu <code>ValorAtribut</code>.
      * @return Retorna cert si els atributs donats són compatibles amb el tipus d'ítem actual i, altrament, retorna fals.
      */
-    public boolean esCompatible(Map<String, ValorAtribut> atributs) {
+    public boolean esCompatible(Map<String, ValorAtribut<?>> atributs) {
         if (tipusAtributs.size() != atributs.size()) {
             return false;
         }
@@ -83,7 +83,7 @@ public class TipusItem {
             if (!atributs.containsKey(entrada.getKey())) {
                 return false;
             }
-            if (!atributs.get(entrada.getKey()).getTipusAtribut().getClass().equals(entrada.getValue().getClass())) {
+            if (!entrada.getValue().admetValorAtribut(atributs.get(entrada.getKey()))) {
                 return false;
             }
         }
