@@ -4,7 +4,7 @@ package Domini;
  * @author pol.casacuberta
  */
 
-public class valoracio {
+public class Valoracio {
     private double valor;
 
     /**
