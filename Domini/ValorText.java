@@ -17,6 +17,7 @@ public class ValorText extends ValorAtribut<String> {
     /**
      * @return <code>String</code> que conté el valor d'aquest atribut.
      */
+    @Override
     public String getValor() {
         return valor;
     }

@@ -17,6 +17,7 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
     /**
      * @return <code>boolean</code> que conté el valor d'aquest atribut.
      */
+    @Override
     public Boolean getValor() {
         return valor;
     }
