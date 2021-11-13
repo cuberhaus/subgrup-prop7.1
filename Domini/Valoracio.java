@@ -11,6 +11,25 @@ public class Valoracio {
     private Usuari usuari;
     private Item item;
 
+    /**
+     * Indica si dues valoracions són iguals
+     *
+     * @return El resultat retorna true si són iguals, altrament retorna false.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        Valoracio val = (Valoracio)obj;
+        if(this.usuari == val.usuari && this.item==val.item)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.usuari.hashCode() - this.item.hashCode();
+    }
+
     /** Constructora donat un valor, un usuari i un item.
      * @param valor representa el valor de la valoració
      * @param usuari representa l'usuari que ha fet la valoració
