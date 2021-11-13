@@ -5,4 +5,5 @@ package Domini;
  */
 
 public interface Programa {
+
 }
