@@ -11,6 +11,17 @@ public class Valoracio {
     private Usuari usuari;
     private Item item;
 
+    /** Constructora donat un valor, un usuari i un item.
+     * @param valor representa el valor de la valoració
+     * @param usuari representa l'usuari que ha fet la valoració
+     * @param item representa l'item valorat
+     */
+    public Valoracio(double valor, Usuari usuari, Item item) {
+        this.valor = valor;
+        this.usuari = usuari;
+        this.item = item;
+    }
+
     /**
      * Consultora del item
      *
