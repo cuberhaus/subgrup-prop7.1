@@ -20,4 +20,18 @@ public class Id {
     public void setActiu(boolean actiu) {
         this.actiu = actiu;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Id id = (Id)obj;
+        if(this.valor == id.valor)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return valor;
+    }
 }
