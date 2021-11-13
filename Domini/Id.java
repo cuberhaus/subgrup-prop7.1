@@ -21,6 +21,11 @@ public class Id {
         this.actiu = actiu;
     }
 
+    /**
+     * Indica si dos id's són iguals
+     *
+     * @return El resultat retorna true si són iguals, altrament retorna false.
+     */
     @Override
     public boolean equals(Object obj) {
         Id id = (Id)obj;
@@ -30,6 +35,11 @@ public class Id {
             return false;
     }
 
+    /**
+     * Calcula un codi de hash idèntic per a les valoracions amb el mateix valor,
+     * altrament retorna un hash diferent.
+     * @return El resultat retorna true si són iguals, altrament retorna false.
+     */
     @Override
     public int hashCode() {
         return valor;

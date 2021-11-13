@@ -1,4 +1,7 @@
 package Domini;
+
+import java.util.Set;
+
 /**
  * Representa un usuari.
  * @author pol.casacuberta
@@ -8,7 +11,14 @@ public class Usuari {
     private Id id;
     private String nom;
     private String contrasenya;
+    private Set<Valoracio>  Valoracions;
+//    private ConjuntUsuari conjuntusuari;
 
+    /** Constructora donat un id, un usuari i una contrasenya.
+     * @param id representa el id de l'usuari
+     * @param nom representa el nom de l'usuari
+     * @param contrasenya representa la contrasenya de l'usuari
+     */
     public Usuari(Id id, String nom, String contrasenya) {
         this.id = id;
         this.nom = nom;
@@ -29,6 +39,11 @@ public class Usuari {
             return false;
     }
 
+    /**
+     * Calcula un codi de hash idèntic per als usuaris amb el mateix id,
+     * altrament retorna un hash diferent.
+     * @return El resultat retorna true si són iguals, altrament retorna false.
+     */
     @Override
     public int hashCode() {
         int prime1 = 29;
@@ -75,8 +90,16 @@ public class Usuari {
     }
 
 
-    public void setId(Id id) {
-        this.id = id;
+//    public void setId(Id id) {
+//        this.id = id;
+//    }
+
+    /**
+     * Modificadora del paràmetre "actiu"
+     * @param  actiu El paràmetre actiu pren el nou valor
+     */
+    public void setActiu(boolean actiu) {
+        id.actiu = actiu;
     }
 
     /**

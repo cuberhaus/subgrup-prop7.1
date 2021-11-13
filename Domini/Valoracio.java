@@ -11,6 +11,17 @@ public class Valoracio {
     private Usuari usuari;
     private Item item;
 
+    /** Constructora donat un valor, un usuari i un item.
+     * @param valor representa el valor de la valoració
+     * @param usuari representa l'usuari que ha fet la valoració
+     * @param item representa l'item valorat
+     */
+    public Valoracio(double valor, Usuari usuari, Item item) {
+        this.valor = valor;
+        this.usuari = usuari;
+        this.item = item;
+    }
+
     /**
      * Indica si dues valoracions són iguals
      *
@@ -25,6 +36,11 @@ public class Valoracio {
             return false;
     }
 
+    /**
+     * Calcula un codi de hash idèntic per a les valoracions amb el mateix usuari i item,
+     * altrament retorna un hash diferent.
+     * @return El resultat retorna true si són iguals, altrament retorna false.
+     */
     @Override
     public int hashCode() {
         int prime1 = 29;
@@ -41,17 +57,6 @@ public class Valoracio {
         hash = hash * prime2 + hash1;
         hash = hash * prime2 + hash2;
         return hash;
-    }
-
-    /** Constructora donat un valor, un usuari i un item.
-     * @param valor representa el valor de la valoració
-     * @param usuari representa l'usuari que ha fet la valoració
-     * @param item representa l'item valorat
-     */
-    public Valoracio(double valor, Usuari usuari, Item item) {
-        this.valor = valor;
-        this.usuari = usuari;
-        this.item = item;
     }
 
     /**
