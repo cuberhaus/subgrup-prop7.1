@@ -19,7 +19,7 @@ public class Valoracio {
     @Override
     public boolean equals(Object obj) {
         Valoracio val = (Valoracio)obj;
-        if(this.usuari == val.usuari && this.item==val.item)
+        if(this.usuari.equals(val.usuari) && this.item.equals(val.item))
             return true;
         else
             return false;
@@ -27,7 +27,20 @@ public class Valoracio {
 
     @Override
     public int hashCode() {
-        return this.usuari.hashCode() - this.item.hashCode();
+        int prime1 = 29;
+        int prime2 = 17;
+
+        int hash1, hash2;
+        // Comprovem que els atributs no siguin nulls
+        if (usuari == null) hash1 = 0;
+        else hash1 = usuari.hashCode();
+        if (item == null) hash2 = 0;
+        else hash2 = item.hashCode();
+
+        int hash = prime1;
+        hash = hash * prime2 + hash1;
+        hash = hash * prime2 + hash2;
+        return hash;
     }
 
     /** Constructora donat un valor, un usuari i un item.

@@ -23,7 +23,7 @@ public class Usuari {
     @Override
     public boolean equals(Object obj) {
         Usuari usuari = (Usuari)obj;
-        if(this.id == usuari.id)
+        if(this.id.equals(usuari.id))
             return true;
         else
             return false;
@@ -38,15 +38,15 @@ public class Usuari {
         // Comprovem que els atributs no siguin nulls
         if (id == null) hash1 = 0;
         else hash1 = id.hashCode();
-        if (nom == null) hash2 = 0;
-        else hash2 = nom.hashCode();
-        if (contrasenya == null) hash3 = 0;
-        else hash3 = contrasenya.hashCode();
+//        if (nom == null) hash2 = 0;
+//        else hash2 = nom.hashCode();
+//        if (contrasenya == null) hash3 = 0;
+//        else hash3 = contrasenya.hashCode();
 
         int hash = prime1;
         hash = hash * prime2 + hash1;
-        hash = hash * prime2 + hash2;
-        hash = hash * prime2 + hash3;
+//        hash = hash * prime2 + hash2;
+//        hash = hash * prime2 + hash3;
         return hash;
     }
 
