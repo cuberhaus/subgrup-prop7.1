@@ -2,7 +2,7 @@ package Domini;
 
 public class Id {
     final int valor;
-    boolean actiu;
+    private boolean actiu;
 
     public Id(int valor, boolean actiu) {
         this.valor = valor;
