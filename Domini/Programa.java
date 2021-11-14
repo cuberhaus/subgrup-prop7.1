@@ -4,6 +4,5 @@ package Domini;
  * @author pol.casacuberta
  */
 
-public interface Programa {
-
+public class Programa {
 }

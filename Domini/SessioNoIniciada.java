@@ -4,5 +4,19 @@ package Domini;
  * @author pol.casacuberta
  */
 
-public class SessioNoIniciada implements Programa{
+public class SessioNoIniciada implements Sessio{
+    @Override
+    public void tancarSessio() {
+
+    }
+
+    @Override
+    public void iniciarSessio() {
+
+    }
+
+    @Override
+    public boolean estatSessio() {
+        return false;
+    }
 }
