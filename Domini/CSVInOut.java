@@ -14,16 +14,13 @@ public class CSVInOut {
 
         ArrayList<String> atributs = new ArrayList<>();
         if ((row = csvReader.readLine()) != null) {
-            row = row;
             String[] atributos = row.split(",");
             for (String elem : atributos) {
                 atributs.add(elem);
             }
-
             tabla.introduirListaAtributs(atributs);
         }
 
-        int indice = 2;
         ArrayList<String> valores = new ArrayList<>();
         while ((row = csvReader.readLine()) != null) {
             row = row + ' ';
@@ -62,7 +59,6 @@ public class CSVInOut {
 
             tabla.introduirLlistaDeValors(valores);
             valores.clear();
-            ++indice;
         }
 
         atributs.clear();

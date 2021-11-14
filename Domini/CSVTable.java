@@ -29,9 +29,9 @@ public class CSVTable {
      * Constructora buida de la classe <code>CSVTable</code>
      */
     public CSVTable() {
-        valoresDeItem = new ArrayList<ArrayList<String>> ();
-        atributosToIndex = new HashMap<String, Integer>();
-        indexToAtributos = new ArrayList<String>();
+        valoresDeItem = new ArrayList<> ();
+        atributosToIndex = new HashMap<>();
+        indexToAtributos = new ArrayList<>();
         numAtribs = -1;
         numItems = 0;
     }
@@ -177,7 +177,7 @@ public class CSVTable {
         }
 
         else  {
-            ArrayList<ArrayList<String>> resultado = new ArrayList<ArrayList<String>>(this.valoresDeItem);
+            ArrayList<ArrayList<String>> resultado = new ArrayList<>(this.valoresDeItem);
             return resultado;
         }
     }
@@ -248,7 +248,7 @@ public class CSVTable {
 
             while (!trobat && i < tamano) {
                 ArrayList<String> fila = valoresDeItem.get(i);
-                trobat = (fila.get(index) == valor);
+                trobat = (fila.get(index).equals(valor));
                 ++i;
             }
 
@@ -285,7 +285,7 @@ public class CSVTable {
 
             while (!trobat && i < tamano) {
                 ArrayList<String> fila = valoresDeItem.get(i);
-                trobat = (fila.get(index) == valor);
+                trobat = (fila.get(index).equals(valor));
                 ++i;
             }
 
