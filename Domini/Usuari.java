@@ -1,5 +1,6 @@
 package Domini;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -8,16 +9,28 @@ import java.util.Set;
  */
 
 public class Usuari {
-    private Id id;
+    private final Id id;
     private String nom;
     private String contrasenya;
     private Set<Valoracio>  Valoracions;
 //    private ConjuntUsuari conjuntusuari;
 
-    /** Constructora donat un id, un usuari i una contrasenya.
-     * @param id representa el id de l'usuari
-     * @param nom representa el nom de l'usuari
-     * @param contrasenya representa la contrasenya de l'usuari
+    /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
+     * @param id representa l'id de l'usuari
+     * @param actiu representa si l'usuari està actiu o no.
+     * @param nom representa el nom de l'usuari.
+     * @param contrasenya representa la contrasenya de l'usuari.
+     */
+    public Usuari(int id, boolean actiu, String nom, String contrasenya) {
+        this.id = new Id(id,actiu);
+        this.nom = nom;
+        this.contrasenya = contrasenya;
+    }
+
+    /** Constructora donat un id, un nom i una contrasenya.
+     * @param id representa l'id de l'usuari
+     * @param nom representa el nom de l'usuari.
+     * @param contrasenya representa la contrasenya de l'usuari.
      */
     public Usuari(Id id, String nom, String contrasenya) {
         this.id = id;
@@ -33,10 +46,7 @@ public class Usuari {
     @Override
     public boolean equals(Object obj) {
         Usuari usuari = (Usuari)obj;
-        if(this.id.equals(usuari.id))
-            return true;
-        else
-            return false;
+        return this.id.equals(usuari.id);
     }
 
     /**
@@ -49,7 +59,8 @@ public class Usuari {
         int prime1 = 29;
         int prime2 = 17;
 
-        int hash1, hash2, hash3;
+        int hash1;
+//        int hash2, hash3;
         // Comprovem que els atributs no siguin nulls
         if (id == null) hash1 = 0;
         else hash1 = id.hashCode();
@@ -89,7 +100,6 @@ public class Usuari {
         return id.getValor();
     }
 
-
 //    public void setId(Id id) {
 //        this.id = id;
 //    }
@@ -99,7 +109,15 @@ public class Usuari {
      * @param  actiu El paràmetre actiu pren el nou valor
      */
     public void setActiu(boolean actiu) {
-        id.actiu = actiu;
+        id.setActiu(actiu);
+    }
+
+    /**
+     * Consultora de "actiu"
+     * @return El resultat és el valor del P.I.
+     */
+    public boolean isActiu() {
+        return id.isActiu();
     }
 
     /**
@@ -110,5 +128,12 @@ public class Usuari {
         this.contrasenya = contrasenya;
     }
 
+    /**
+     * Retorna true si la contrasenya passada com a paràmetre es igual a la del P.I.
+     * @param  contrasenya El paràmetre contrasenya pren el nou valor.
+     */
+    public boolean isContrasenya(String contrasenya) {
+        return Objects.equals(this.contrasenya, contrasenya);
+    }
 }
 

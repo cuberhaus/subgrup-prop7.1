@@ -30,10 +30,7 @@ public class Valoracio {
     @Override
     public boolean equals(Object obj) {
         Valoracio val = (Valoracio)obj;
-        if(this.usuari.equals(val.usuari) && this.item.equals(val.item))
-            return true;
-        else
-            return false;
+        return this.usuari.equals(val.usuari) && this.item.equals(val.item);
     }
 
     /**
@@ -96,20 +93,20 @@ public class Valoracio {
     }
 
     /**
-     * Modificadora del paràmetre valor
-     *
-     * @param valor El paràmetre valor pren el nou valor
-     */
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    /**
      * Consultora del valor
      *
      * @return El resultat és el valor del P.I.
      */
     public double getValor() {
         return valor;
+    }
+
+    /**
+     * Modificadora del paràmetre valor
+     *
+     * @param valor El paràmetre valor pren el nou valor
+     */
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 }
