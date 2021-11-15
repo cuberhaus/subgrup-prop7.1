@@ -123,6 +123,10 @@ public class Usuari {
         this.contrasenya = contrasenya;
     }
 
+    /**
+     * Afegeix una valoració al conjunt de valoracions.
+     * @param  valoracio el paràmetre s'ha afegit  al conjunt de valoracions si no hi era abans.
+     */
     public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
         if (!this.equals(valoracio.getUsuari())) {
             throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
@@ -130,6 +134,10 @@ public class Usuari {
         return valoracions.add(valoracio);
     }
 
+    /**
+     * Esborra una valoració del conjunt de valoracions.
+     * @param  valoracio el paràmetre s'ha esborrat del conjunt de valoracions si hi era abans.
+     */
     public boolean esborraValoracio(Valoracio valoracio) {
         if (!this.equals(valoracio.getUsuari())) {
             throw new IllegalArgumentException("No es pot esborrar d'un usuari una valoració d'un altre usuari.");
