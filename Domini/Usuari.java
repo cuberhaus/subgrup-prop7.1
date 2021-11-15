@@ -13,7 +13,7 @@ public class Usuari {
     private String nom;
     private String contrasenya;
     private Set<Valoracio>  Valoracions;
-//    private ConjuntUsuari conjuntusuari;
+//    private ConjuntUsuari conjuntUsuari;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
      * @param id representa l'id de l'usuari

@@ -1,4 +1,8 @@
 package Domini;
+
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * Representa l'estat del programa.
  * @author pol.casacuberta
@@ -6,7 +10,9 @@ package Domini;
 
 public class Programa {
     private Sessio sessio;
-
+    private Set<Usuari> usuaris;
+    private Set<TipusItem> tipusItems;
+//    ArrayList<conjuntPrograma> conjuntsPrograma;
     public void tancarSessio() {
         sessio.tancarSessio(this);
     }
