@@ -12,7 +12,7 @@ public class Usuari {
     private final Id id;
     private String nom;
     private String contrasenya;
-    private Set<Valoracio>  Valoracions;
+    private Set<Valoracio>  valoracions;
 //    private ConjuntUsuari conjuntUsuari;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
@@ -121,6 +121,20 @@ public class Usuari {
      */
     public void setContrasenya(String contrasenya) {
         this.contrasenya = contrasenya;
+    }
+
+    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+        if (!this.equals(valoracio.getUsuari())) {
+            throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
+        }
+        return valoracions.add(valoracio);
+    }
+
+    public boolean esborraValoracio(Valoracio valoracio) {
+        if (!this.equals(valoracio.getUsuari())) {
+            throw new IllegalArgumentException("No es pot esborrar d'un usuari una valoració d'un altre usuari.");
+        }
+        return valoracions.remove(valoracio);
     }
 
     /**
