@@ -1,5 +1,6 @@
 package domini.classes;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class Usuari {
     private final Id id;
     private String nom;
     private String contrasenya;
-    private Set<Valoracio>  valoracions;
+    private Map<Item,Valoracio> valoracions;
 //    private ConjuntUsuari conjuntUsuari;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
@@ -131,18 +132,23 @@ public class Usuari {
         if (!this.equals(valoracio.getUsuari())) {
             throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
         }
-        return valoracions.add(valoracio);
+        if (!valoracions.containsKey(valoracio.getItem())) {
+            return false;
+        }
+        valoracions.put(valoracio.getItem(),valoracio);
+        return true;
     }
 
     /**
      * Esborra una valoració del conjunt de valoracions.
-     * @param  valoracio el paràmetre s'ha esborrat del conjunt de valoracions si hi era abans.
+     * @param  item la valoració amb l'item s'ha esborrat del conjunt.
      */
-    public boolean esborraValoracio(Valoracio valoracio) {
-        if (!this.equals(valoracio.getUsuari())) {
-            throw new IllegalArgumentException("No es pot esborrar d'un usuari una valoració d'un altre usuari.");
+    public boolean esborraValoracio(Item item) {
+        if (!valoracions.containsKey(item)) {
+            return false;
         }
-        return valoracions.remove(valoracio);
+        valoracions.remove(item);
+        return true;
     }
 
     /**
