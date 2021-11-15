@@ -50,10 +50,17 @@ public class Item {
         return distancia;
     }
 
-    public void afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
         if (!this.equals(valoracio.getItem())) {
             throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
         }
-        valoracions.add(valoracio);
+        return valoracions.add(valoracio);
+    }
+
+    public boolean esborraValoracio(Valoracio valoracio) {
+        if (!this.equals(valoracio.getItem())) {
+            throw new IllegalArgumentException("No es pot esborrar d'un ítem una valoració d'un altre ítem.");
+        }
+        return valoracions.remove(valoracio);
     }
 }
