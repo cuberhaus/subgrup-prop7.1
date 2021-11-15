@@ -4,15 +4,23 @@ package Domini;
  * @author pol.casacuberta
  */
 
-public class SessioIniciada implements Sessio{
-    @Override
-    public void tancarSessio() {
+public class SessioIniciada extends Sessio{
+    private Usuari usuari = null;
 
+    SessioIniciada(Usuari usuari) {
+        this.usuari = usuari;
     }
 
     @Override
-    public void iniciarSessio() {
+    public void tancarSessio(Programa programa) {
+        usuari = null;
+        programa.changeState(new SessioNoIniciada());
+    }
 
+    @Override
+    public void iniciarSessio(Programa programa, Usuari usuari) {
+        this.usuari = usuari;
+        programa.changeState(new SessioIniciada(usuari));
     }
 
     @Override
