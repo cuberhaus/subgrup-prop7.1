@@ -3,9 +3,8 @@ package domini.classes;
 import domini.classes.atributs.tipus.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Representa un ítem.
@@ -15,7 +14,7 @@ public class Item {
     final Id id;
     final TipusItem tipusItem;
     Map<String, ValorAtribut<?>> atributs;
-    private Set<Valoracio> valoracions;
+    private Map<Usuari, Valoracio> valoracions;
 
     /**
      * Constructor d'un ítem amb conjunt de valoracions buit.
@@ -29,7 +28,7 @@ public class Item {
         this.id = id;
         this.tipusItem = tipusItem;
         this.atributs = atributs;
-        this.valoracions = new HashSet<>();
+        this.valoracions = new HashMap<>();
         if (!tipusItem.esCompatible(atributs)) {
             throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
         }
@@ -56,13 +55,18 @@ public class Item {
         if (!this.equals(valoracio.getItem())) {
             throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
         }
-        return valoracions.add(valoracio);
+        if (!valoracions.containsKey(valoracio.getUsuari())) {
+            return false;
+        }
+        valoracions.put(valoracio.getUsuari(), valoracio);
+        return true;
     }
 
-    public boolean esborraValoracio(Valoracio valoracio) {
-        if (!this.equals(valoracio.getItem())) {
-            throw new IllegalArgumentException("No es pot esborrar d'un ítem una valoració d'un altre ítem.");
+    public boolean esborrarValoracio(Usuari usuari) {
+        if (!valoracions.containsKey(usuari)) {
+            return false;
         }
-        return valoracions.remove(valoracio);
+        valoracions.remove(usuari);
+        return true;
     }
 }
