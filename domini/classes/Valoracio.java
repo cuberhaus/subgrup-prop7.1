@@ -20,6 +20,8 @@ public class Valoracio {
         this.valor = valor;
         this.usuari = usuari;
         this.item = item;
+        usuari.afegirValoracio(this);
+        item.afegirValoracio(this);
     }
 
     /**

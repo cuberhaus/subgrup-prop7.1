@@ -6,6 +6,8 @@ import java.util.Set;
  * Representa l'estat del programa.
  * @author pol.casacuberta
  */
+
+// TODO: canviar diagrama de classes
 public class Programa {
     private Sessio sessio;
     private static Programa instancia_unica = null;

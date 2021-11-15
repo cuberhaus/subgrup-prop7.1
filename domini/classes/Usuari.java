@@ -9,7 +9,7 @@ import java.util.Set;
  * Representa un usuari.
  * @author pol.casacuberta
  */
-// TODO: afegir valoracio
+
 public class Usuari {
     private final Id id;
     private String nom;
