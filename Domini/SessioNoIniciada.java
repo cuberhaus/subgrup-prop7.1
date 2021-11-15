@@ -16,7 +16,7 @@ public class SessioNoIniciada implements Sessio{
     }
 
     @Override
-    public boolean estatSessio() {
+    public boolean isSessioIniciada() {
         return false;
     }
 }
