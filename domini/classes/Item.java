@@ -3,6 +3,7 @@ package domini.classes;
 import domini.classes.atributs.tipus.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,12 +13,12 @@ import java.util.Set;
  */
 public class Item {
     final Id id;
-    Map<String, ValorAtribut<?>> atributs;
     final TipusItem tipusItem;
+    Map<String, ValorAtribut<?>> atributs;
     private Set<Valoracio> valoracions;
 
     /**
-     * Constructor d'un ítem.
+     * Constructor d'un ítem amb conjunt de valoracions buit.
      * @param id <code>Id</code> que conté l'identificador de l'ítem.
      * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
      * @param atributs <code>Map<String, ValorAtribut></code> que relaciona el nom de cada atribut de l'ítem amb el seu <code>ValorAtribut</code>.
@@ -28,6 +29,7 @@ public class Item {
         this.id = id;
         this.tipusItem = tipusItem;
         this.atributs = atributs;
+        this.valoracions = new HashSet<>();
         if (!tipusItem.esCompatible(atributs)) {
             throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
         }
