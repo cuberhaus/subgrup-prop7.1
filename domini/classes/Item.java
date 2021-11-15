@@ -34,6 +34,33 @@ public class Item implements Comparable<Item>{
         }
     }
 
+    @Override
+    public int compareTo(Item o) {
+        return id.compareTo(o.id);
+    }
+
+    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+        if (valoracio == null) {
+            throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
+        }
+        if (!this.equals(valoracio.getItem())) {
+            throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
+        }
+        if (!valoracions.containsKey(valoracio.getUsuari())) {
+            return false;
+        }
+        valoracions.put(valoracio.getUsuari(), valoracio);
+        return true;
+    }
+
+    public boolean esborrarValoracio(Usuari usuari) {
+        if (usuari == null || !valoracions.containsKey(usuari)) {
+            return false;
+        }
+        valoracions.remove(usuari);
+        return true;
+    }
+
     /**
      * @param item <code>Item</code> que conté l'ítem amb el qual es vol calcular la distància.
      * @return <code>double</code> que conté la distància entre l'ítem actual i l'ítem donat si els ítem són del mateix
@@ -49,30 +76,5 @@ public class Item implements Comparable<Item>{
                     item.atributs.get(entrada.getKey()));
         }
         return distancia;
-    }
-
-    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
-        if (!this.equals(valoracio.getItem())) {
-            throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
-        }
-        if (!valoracions.containsKey(valoracio.getUsuari())) {
-            return false;
-        }
-        valoracions.put(valoracio.getUsuari(), valoracio);
-        return true;
-    }
-
-    public boolean esborrarValoracio(Usuari usuari) {
-        if (!valoracions.containsKey(usuari)) {
-            return false;
-        }
-        valoracions.remove(usuari);
-        return true;
-    }
-
-
-    @Override
-    public int compareTo(Item o) {
-        return id.compareTo(o.id);
     }
 }
