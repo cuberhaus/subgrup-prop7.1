@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-// TODO: javadoc
+/**
+ * Processa un conjunt de punts i permet obtenir les particions mitjançant l'algorisme de K-means.
+ * @author edgar.moreno
+ */
 public class KMeans {
     private final int k;
     private final int n_punts;
@@ -13,9 +16,11 @@ public class KMeans {
     private final ConjuntDePunts punts;
     private final Punt[] baricentres;
 
-    // Els id's dels punts han de ser contigus de 0 a num_punts-1.
-    // k <= num_punts
-    // s'ha de decidir si volem fer aleatori o si assumim que la entrada es prou aleatoria.
+    /**
+     * Inicialitza el algorisme amb el conjunt de punts desitjat.
+     * @param punts Conjunt de punts per executar l'algorisme. Els identificadors han de ser contigus començant en 0.
+     * @param k Nombre de particions a realitzar. Han de ser menors al nombre de punts.
+     */
     public KMeans(ConjuntDePunts punts, int k) {
         this.k = k;
         this.punts = punts;
@@ -26,6 +31,9 @@ public class KMeans {
         inicialitzarEnOrdre();
     }
 
+    /**
+     * @return Les particions obtingudes amb l'algorisme.
+     */
     public ArrayList<ArrayList<Integer>> getParticions() {
         processa();
         ArrayList<ArrayList<Integer>> id_parts = new ArrayList<>(k);
@@ -57,6 +65,7 @@ public class KMeans {
             }
         }
     }
+
     private void inicialitzarEnOrdre() {
         Arrays.fill(conjunt_del_punt, -1);
         Random r = new Random();
