@@ -50,7 +50,7 @@ public class Item {
         return distancia;
     }
 
-    public void addValoracio(Valoracio valoracio) throws IllegalArgumentException {
+    public void afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
         if (!this.equals(valoracio.getItem())) {
             throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
         }
