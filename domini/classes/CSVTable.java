@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 /**
  * Representa un tipus de dades en el que emmagatzarem les dades llegides del CSV.
+ *
  * @author pablo.vega
  */
-
 public class CSVTable {
 
     /** Variable on guardarem els atributs del objectes que rebem del csv.*/
@@ -38,6 +38,7 @@ public class CSVTable {
 
     /**
      * Donada una llista d'atributs, els introdueix en la estructura de dades.
+     *
      * @param atribs es la llista de atributs que volem tenir.
      */
     public void introduirListaAtributs(ArrayList<String> atribs) {
@@ -59,6 +60,7 @@ public class CSVTable {
 
     /**
      * Donada una llista de valors, afegeix els valors al contenidor de valors.
+     *
      * @param valors conjunt de valors.
      */
     public void introduirLlistaDeValors(ArrayList<String> valors) {
@@ -80,9 +82,11 @@ public class CSVTable {
 
     /**
      * Donat un atribut, retorna la llista de valors d'aquest atribut per aquest ítem.
-     * @param atribut
+     *
+     * @param atribut the atribut
+     * @return the valors atribut
      */
-    public ArrayList<String> getValorsAtribut(String atribut) {
+    public ArrayList<String> obtenirValorsAtribut(String atribut) {
         if (numAtribs == -1) {
             System.out.println("No has introduit els atributs");
             return null;
@@ -103,7 +107,13 @@ public class CSVTable {
         }
     }
 
-    public ArrayList<String> getValorsAtribut(int indexAtrib) {
+    /**
+     * Gets valors atribut.
+     *
+     * @param indexAtrib the index atrib
+     * @return the valors atribut
+     */
+    public ArrayList<String> obtenirValorsAtribut(int indexAtrib) {
         if (numAtribs == -1) {
             System.out.println("No has introduit els atributs");
             return null;
@@ -126,10 +136,11 @@ public class CSVTable {
 
     /**
      * Retorna els valors de l'item seleccionat.
-     * @param indexItem
-     * @return
+     *
+     * @param indexItem the index item
+     * @return item
      */
-    public ArrayList<String> getItem(Integer indexItem) {
+    public ArrayList<String> obtenirItem(Integer indexItem) {
         if (numAtribs == -1) {
             System.out.println("Atributs no inicialitzats");
             return null;
@@ -149,9 +160,10 @@ public class CSVTable {
 
     /**
      * Retorna la llista d'adtributs.
-     * @return
+     *
+     * @return atrib list
      */
-    public ArrayList<String> getAtribList() {
+    public ArrayList<String> obtenirLlistaAtributs() {
         if (numAtribs == -1) {
             System.out.println("Encara no s'han introduit els atributs");
             return null;
@@ -168,9 +180,10 @@ public class CSVTable {
 
     /**
      * Retorna la llista de tots els valors dels ítems
-     * @return
+     *
+     * @return valores de todos los items
      */
-    public ArrayList<ArrayList<String>> getValoresDeTodosLosItems() {
+    public ArrayList<ArrayList<String>> obtenirValorsDeTotsElsItems() {
         if (numAtribs == -1) {
             System.out.println("Encara no s'han introduit els atributs");
             return null;
@@ -184,9 +197,10 @@ public class CSVTable {
 
     /**
      * Retorna el contingut de la taula amb els atributs
-     * @return
+     *
+     * @return table
      */
-    public ArrayList<ArrayList<String>> getTable() {
+    public ArrayList<ArrayList<String>> obtenirTaula() {
         if (numAtribs == -1) {
             System.out.println("Encara no s'han introduit els atributs");
             return null;
@@ -194,7 +208,7 @@ public class CSVTable {
 
         else {
             ArrayList<ArrayList<String>> resultado = new ArrayList<>();
-            resultado.add(this.getAtribList());
+            resultado.add(this.obtenirLlistaAtributs());
             for (ArrayList<String> elem : valoresDeItem) {
                 resultado.add(elem);
             }
@@ -205,13 +219,13 @@ public class CSVTable {
     /**
      * Imprimeix el contingut de les dades.
      */
-    public void print() {
+    public void imprimir() {
         if (numAtribs == -1) {
             System.out.println("Encara no s'han introduit els atributs");
         }
 
         else {
-            for (String elem : this.getAtribList()) {
+            for (String elem : this.obtenirLlistaAtributs()) {
                 System.out.print(elem);
                 System.out.print('|');
             }
@@ -228,7 +242,14 @@ public class CSVTable {
         }
     }
 
-    public ArrayList<String> getValoresDeItemConValor(String id, String valor) {
+    /**
+     * Gets valores de item con valor.
+     *
+     * @param id    the id
+     * @param valor the valor
+     * @return the valores de item con valor
+     */
+    public ArrayList<String> obtenirValorsDeItemSeleccionat(String id, String valor) {
         if (numAtribs == -1) {
             System.out.println("Encara no s'han introduit els atributs");
             return null;
@@ -265,7 +286,14 @@ public class CSVTable {
         }
     }
 
-    public ArrayList<String> getValoresDeItemConValor(Integer ind, String valor) {
+    /**
+     * Gets valores de item con valor.
+     *
+     * @param ind   the ind
+     * @param valor the valor
+     * @return the valores de item con valor
+     */
+    public ArrayList<String> obtenirValorsDeItemSeleccionat(Integer ind, String valor) {
         if (numAtribs == -1) {
             System.out.println("Encara no s'han introduit els atributs");
             return null;
@@ -302,14 +330,27 @@ public class CSVTable {
         }
     }
 
-    public boolean isInitialized() {
+    /**
+     * Is initialized boolean.
+     *
+     * @return the boolean
+     */
+    public boolean estaInicialitzat() {
         return numAtribs != -1;
     }
 
-    public void print_numElems() {
+    /**
+     * Print num elems.
+     */
+    public void imprimirNumeroElements() {
         System.out.println(numItems);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         System.out.println("Funciona Bien");
     }
