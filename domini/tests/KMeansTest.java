@@ -31,7 +31,6 @@ class KMeansTest {
         assertTrue(part1.equals(particions.get(0)) || part1.equals(particions.get(1)) || part1.equals(particions.get(2)));
         assertTrue(part2.equals(particions.get(0)) || part2.equals(particions.get(1)) || part2.equals(particions.get(2)));
         assertTrue(part3.equals(particions.get(0)) || part3.equals(particions.get(1)) || part3.equals(particions.get(2)));
-
     }
 
 }

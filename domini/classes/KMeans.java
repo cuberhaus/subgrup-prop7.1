@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+// TODO: javadoc
 public class KMeans {
     private final int k;
     private final int n_punts;
@@ -18,7 +19,7 @@ public class KMeans {
     public KMeans(ConjuntDePunts punts, int k) {
         this.k = k;
         this.punts = punts;
-        n_punts = punts.getNumPunts();
+        n_punts = punts.obtenirNumPunts();
         particions = new ConjuntDePunts[k];
         conjunt_del_punt = new int[n_punts];
         baricentres = new Punt[k];
@@ -114,7 +115,7 @@ public class KMeans {
 
     private void guardaBaricentres() {
         for (int i = 0; i < k; ++i) {
-            baricentres[i] = particions[i].getBaricentre();
+            baricentres[i] = particions[i].obtenirBaricentre();
         }
     }
 }

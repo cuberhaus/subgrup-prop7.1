@@ -8,10 +8,10 @@ class PuntTest {
     @org.junit.jupiter.api.Test
     void getDimensio() {
         Punt p = new Punt();
-        assertEquals(0, p.getDimensio());
+        assertEquals(0, p.obtenirDimensio());
         p.add(-1.);
         p.add(-2.);
-        assertEquals(2, p.getDimensio());
+        assertEquals(2, p.obtenirDimensio());
     }
 
     @org.junit.jupiter.api.Test

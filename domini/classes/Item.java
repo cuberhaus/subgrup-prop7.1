@@ -10,7 +10,7 @@ import java.util.Map;
  * Representa un ítem.
  * @author maria.prat
  */
-public class Item {
+public class Item implements Comparable<Item>{
     final Id id;
     final TipusItem tipusItem;
     Map<String, ValorAtribut<?>> atributs;
@@ -68,5 +68,11 @@ public class Item {
         }
         valoracions.remove(usuari);
         return true;
+    }
+
+
+    @Override
+    public int compareTo(Item o) {
+        return id.compareTo(o.id);
     }
 }

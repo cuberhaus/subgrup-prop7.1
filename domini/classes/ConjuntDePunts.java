@@ -1,7 +1,7 @@
 package domini.classes;
 
 import java.util.TreeMap;
-
+// TODO javadoc
 public class ConjuntDePunts extends TreeMap<Integer, Punt> {
     private int dimensio;
     private Punt baricentre;
@@ -12,14 +12,14 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
         baricentre = null;
     }
 
-    public int getDimensio() {
+    public int obtenirDimensio() {
         return dimensio;
     }
-    public int getNumPunts() {
+    public int obtenirNumPunts() {
         return super.size();
     }
-    public Punt getBaricentre() { return (Punt) baricentre.clone(); }
-    public Integer getIdLliure() {
+    public Punt obtenirBaricentre() { return (Punt) baricentre.clone(); }
+    public Integer obtenirIdLliure() {
         while (super.containsKey(new_id)) {
             new_id++;
         }
@@ -29,14 +29,14 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
         if (baricentre == null) {
             baricentre = (Punt) nouPunt.clone();
         }
-        int n = this.getNumPunts();
+        int n = this.obtenirNumPunts();
         baricentre.mult(n);
         baricentre.afegir(nouPunt);
         baricentre.mult(1/(n+1.));
     }
 
     private void recalculaBaricentreEliminat(Punt vellPunt) {
-        int n = this.getNumPunts();
+        int n = this.obtenirNumPunts();
         if (n == 1) {
             baricentre = null;
             return;
@@ -49,9 +49,9 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
     @Override
     public Punt put(Integer id, Punt doubles) throws IllegalArgumentException {
         if (dimensio == -1) {
-            dimensio = doubles.getDimensio();
+            dimensio = doubles.obtenirDimensio();
             baricentre = (Punt) doubles.clone();
-        } else if(dimensio != doubles.getDimensio()) {
+        } else if(dimensio != doubles.obtenirDimensio()) {
             throw new IllegalArgumentException("No es pot afegir un punt de diferent dimensio.");
         }
         recalculaBaricentreAfegit(doubles);
@@ -59,7 +59,7 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
     }
 
     public Integer add(Punt punt) throws IllegalArgumentException {
-        Integer id = getIdLliure();
+        Integer id = obtenirIdLliure();
         put(id, punt);
         return id;
     }

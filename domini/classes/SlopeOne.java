@@ -1,6 +1,7 @@
 package domini.classes;
 
 import java.util.Arrays;
+// TODO: javadoc
 
 public class SlopeOne {
     private final int num_usuaris;
@@ -12,7 +13,7 @@ public class SlopeOne {
     private final Double[][] desviacions;
 
     // Matriu rectangular!
-    // valoracions[i][j] conte la valoració de l'usuari i  l'item j, o null si no existeix
+    // valoracions[i][j] conte la valoració de l'usuari i l'item j, o null si no existeix
     public SlopeOne(Double[][] valoracions) {
         num_usuaris = valoracions.length;
         num_valoracions = valoracions[0].length;

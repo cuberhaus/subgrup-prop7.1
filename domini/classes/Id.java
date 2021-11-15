@@ -1,6 +1,6 @@
 package domini.classes;
 
-public class Id {
+public class Id implements Comparable<Id> {
     final int valor;
     private boolean actiu;
 
@@ -29,10 +29,7 @@ public class Id {
     @Override
     public boolean equals(Object obj) {
         Id id = (Id)obj;
-        if(this.valor == id.valor)
-            return true;
-        else
-            return false;
+        return this.valor == id.valor;
     }
 
     /**
@@ -43,5 +40,10 @@ public class Id {
     @Override
     public int hashCode() {
         return valor;
+    }
+
+    @Override
+    public int compareTo(Id o) {
+        return Integer.compare(this.valor, o.valor);
     }
 }

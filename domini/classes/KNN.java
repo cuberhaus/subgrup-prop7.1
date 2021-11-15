@@ -2,6 +2,7 @@ package domini.classes;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+// TODO: javadoc
 
 public class KNN {
     private final Item[] items;
@@ -12,8 +13,7 @@ public class KNN {
     public ArrayList<Item> getVeins(Item item, int k) {
         PriorityQueue<Pair<Double, Item>> pq = new PriorityQueue<>();
         for (Item iter : items) {
-            // TODO: distance between items?
-            double distance = 0;
+            double distance = item.obtenirDistancia(iter);
             if (pq.size() < k) {
                 pq.add(new Pair<>(-distance, iter));
             }

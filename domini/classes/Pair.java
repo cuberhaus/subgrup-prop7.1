@@ -1,4 +1,5 @@
 package domini.classes;
+// TODO: javadoc
 
 public class Pair<X extends Comparable<X>,Y /*extends Comparable<Y>*/> implements Comparable<Pair<X,Y>>{
     public final X x;

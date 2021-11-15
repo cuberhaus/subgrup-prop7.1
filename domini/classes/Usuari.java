@@ -1,5 +1,6 @@
 package domini.classes;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -150,7 +151,19 @@ public class Usuari {
         valoracions.remove(item);
         return true;
     }
-
+    public Valoracio obtenirValoracio(Item item) {
+        return valoracions.get(item);
+    }
+    public Punt obteComPunt(ArrayList<Item> conjuntItems) {
+        Punt res = new Punt();
+        for (Item item : conjuntItems) {
+            if (valoracions.containsKey(item)) {
+                res.add(valoracions.get(item).getValor());
+            } else res.add(-1.);
+            // TODO: -1 per denotar que no esta vist. Potser seria millor agafar la mitjana
+        }
+        return res;
+    }
     /**
      * Retorna true si la contrasenya passada com a paràmetre es igual a la del P.I.
      * @param  contrasenya El paràmetre contrasenya pren el nou valor.

@@ -10,12 +10,12 @@ class ConjuntDePuntsTest {
     @org.junit.jupiter.api.Test
     void getDimensio() {
         ConjuntDePunts conjunt = new ConjuntDePunts();
-        assertEquals(-1,conjunt.getDimensio());
+        assertEquals(-1, conjunt.obtenirDimensio());
         Punt p = new Punt();
         p.add(0.0);
         p.add(0.0);
         conjunt.add(p);
-        assertEquals(2, conjunt.getDimensio());
+        assertEquals(2, conjunt.obtenirDimensio());
     }
 
     @org.junit.jupiter.api.Test
@@ -23,7 +23,7 @@ class ConjuntDePuntsTest {
         ConjuntDePunts conjunt = new ConjuntDePunts();
         conjunt.add(new Punt());
         conjunt.add(new Punt());
-        assertEquals(2, conjunt.getNumPunts());
+        assertEquals(2, conjunt.obtenirNumPunts());
     }
 
     @org.junit.jupiter.api.Test
@@ -49,7 +49,7 @@ class ConjuntDePuntsTest {
         p.add(3.0);
         conjunt.add(p);
 
-        Punt baricentre = conjunt.getBaricentre();
+        Punt baricentre = conjunt.obtenirBaricentre();
         assertEquals(2., baricentre.get(0));
         assertEquals(3., baricentre.get(1));
 
@@ -58,13 +58,13 @@ class ConjuntDePuntsTest {
         q.add(14.);
         conjunt.add(q);
 
-        baricentre = conjunt.getBaricentre();
+        baricentre = conjunt.obtenirBaricentre();
         assertEquals(0.5, baricentre.get(0));
         assertEquals(8.5, baricentre.get(1));
 
         conjunt.remove(1);
 
-        baricentre = conjunt.getBaricentre();
+        baricentre = conjunt.obtenirBaricentre();
         assertEquals(2., baricentre.get(0));
         assertEquals(3., baricentre.get(1));
     }
