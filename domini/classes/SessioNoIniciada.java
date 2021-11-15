@@ -15,7 +15,7 @@ public class SessioNoIniciada extends Sessio{
     @Override
     public void iniciarSessio(Programa programa,Usuari usuari) {
         this.usuari = usuari;
-        programa.changeState(new SessioIniciada(usuari));
+        programa.cambiarEstat(new SessioIniciada(usuari));
     }
 
     @Override

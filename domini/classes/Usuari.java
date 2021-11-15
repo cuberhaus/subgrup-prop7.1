@@ -7,12 +7,12 @@ import java.util.Set;
  * Representa un usuari.
  * @author pol.casacuberta
  */
-
+// TODO: afegir valoracio
 public class Usuari {
     private final Id id;
     private String nom;
     private String contrasenya;
-    private Set<Valoracio>  Valoracions;
+    private Set<Valoracio>  valoracions;
 //    private ConjuntUsuari conjuntUsuari;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
@@ -58,21 +58,16 @@ public class Usuari {
     public int hashCode() {
         int prime1 = 29;
         int prime2 = 17;
-
         int hash1;
-//        int hash2, hash3;
         // Comprovem que els atributs no siguin nulls
-        if (id == null) hash1 = 0;
-        else hash1 = id.hashCode();
-//        if (nom == null) hash2 = 0;
-//        else hash2 = nom.hashCode();
-//        if (contrasenya == null) hash3 = 0;
-//        else hash3 = contrasenya.hashCode();
-
+        if (id == null) {
+            hash1 = 0;
+        }
+        else {
+            hash1 = id.hashCode();
+        }
         int hash = prime1;
         hash = hash * prime2 + hash1;
-//        hash = hash * prime2 + hash2;
-//        hash = hash * prime2 + hash3;
         return hash;
     }
 
@@ -126,6 +121,20 @@ public class Usuari {
      */
     public void setContrasenya(String contrasenya) {
         this.contrasenya = contrasenya;
+    }
+
+    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+        if (!this.equals(valoracio.getUsuari())) {
+            throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
+        }
+        return valoracions.add(valoracio);
+    }
+
+    public boolean esborraValoracio(Valoracio valoracio) {
+        if (!this.equals(valoracio.getUsuari())) {
+            throw new IllegalArgumentException("No es pot esborrar d'un usuari una valoració d'un altre usuari.");
+        }
+        return valoracions.remove(valoracio);
     }
 
     /**

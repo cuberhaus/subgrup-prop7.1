@@ -14,13 +14,13 @@ public class SessioIniciada extends Sessio{
     @Override
     public void tancarSessio(Programa programa) {
         usuari = null;
-        programa.changeState(new SessioNoIniciada());
+        programa.cambiarEstat(new SessioNoIniciada());
     }
 
     @Override
     public void iniciarSessio(Programa programa, Usuari usuari) {
         this.usuari = usuari;
-        programa.changeState(new SessioIniciada(usuari));
+        programa.cambiarEstat(new SessioIniciada(usuari));
     }
 
     @Override
