@@ -1,11 +1,15 @@
-import Domini.*;
+import domini.classes.*;
+import domini.classes.atributs.tipus.NumericEuclidia;
+import domini.classes.atributs.tipus.TipusAtribut;
+import domini.classes.atributs.valors.ValorAtribut;
+import domini.classes.atributs.valors.ValorNumeric;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main{
     public static void main(String[] args) {
-        Usuari u1 = new Usuari(4,"Pol", "123");
+        Usuari u1 = new Usuari(new Id(4, true),"Pol", "123");
         System.out.println(u1.getNom());
 
         /* Correct usage of Item */
