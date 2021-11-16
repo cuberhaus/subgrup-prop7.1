@@ -2,14 +2,28 @@ package domini.classes;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-// TODO: javadoc
 
+/**
+ * Processa un conjunt de <code>Item</code> i permet obtenir els més propers a un <code>Item</code> donat.
+ * @author edgar.moreno
+ */
 public class KNN {
+    /** Items considerats a l'algorisme*/
     private final Item[] items;
+
+    /**
+     * @param items Conjunt de <code>Item</code> que seran considerats.
+     */
     public KNN(Item[] items) {
         this.items = items;
     }
 
+
+    /**
+     * @param item <code>Item</code> del que es vol buscar els propers.
+     * @param k nombre de veins a obtenir.
+     * @return els k items més propers al donat.
+     */
     public ArrayList<Item> getVeins(Item item, int k) {
         PriorityQueue<Pair<Double, Item>> pq = new PriorityQueue<>();
         for (Item iter : items) {

@@ -5,18 +5,39 @@ import domini.classes.MetodeRecomanador;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.PriorityQueue;
-// TODO: javadoc
 
+/**
+ * Recomanador basat en <code>Collaborative filtering</code> mitjançant K-means i Slope1.
+ * @author edgar.moreno
+ */
 public class RecomanadorCollaborative extends MetodeRecomanador {
+    /** Nombre de clusters que s'utilitzarà com K al K-means**/
     private int num_clusters;
 
-    public void setNumeroClusters(int num) { num_clusters = num; }
+    /**
+     * Crea un <code>RecomanadorCollaborative</code> donant un conjunt de dades per defecte.
+     * @param usuaris pot ser buit
+     * @param items pot ser buit
+     * @param valoracions_publiques pot ser buit
+     */
     public RecomanadorCollaborative(Usuari[] usuaris, Item[] items, Valoracio[] valoracions_publiques) {
         super(usuaris, items, valoracions_publiques);
         // TODO: numero arbitrari de clusters.
-        num_clusters = (int)Math.sqrt(usuaris.length)+1;
+        num_clusters = Math.min((int)Math.sqrt(usuaris.length)+1, usuaris.length);
     }
 
+    /**
+     * @param num nou valor per <code>num_clusters</code> del K-means
+     */
+    public void setNumeroClusters(int num) { num_clusters = num; }
+
+    /**
+     * Genera recomanacions per l'usuari donat.
+     * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
+     * @param valoracions_usuari Valoracions en les que es basaran les recomanacions.
+     * @param numRecomanacions numero maxim de recomanacions que es generaran.
+     * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
+     */
     @Override
     public ConjuntDeRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
         ConjuntDePunts punts_usuaris = new ConjuntDePunts();

@@ -1,19 +1,29 @@
 package domini.classes;
 
 import java.util.Arrays;
-// TODO: javadoc
-
+/**
+ * Processa un conjunt de valoracions d'un conjunt d'usuaris a un conjunt d'ítems.
+ * Prediu la valoració d'un usuari donat a un item donat.
+ * @author edgar.moreno
+ */
 public class SlopeOne {
+
+    /** Numero de usuaris processats */
     private final int num_usuaris;
+    /** Numero de valoracions processades */
     private final int num_valoracions;
+
+    /** Valoracions reals dels usuaris, <code>valoracions[i][j]</code> conté la valoració de l'usuari a l'item j*/
     private final Double[][] valoracions;
+    /** Prediccions de l'algorisme, <code>prediccions[i][j]</code> conté la predicció de l'usuari a l'item j */
     private final Double[][] prediccions;
-    //private Double[] mitjana_usuari;
-    //private int[] valoracions_usuari;
+    /** Desviacions entre ítems, <code>desviacions[i][j]</code> conté la desviació del item i respecte el j */
     private final Double[][] desviacions;
 
-    // Matriu rectangular!
-    // valoracions[i][j] conte la valoració de l'usuari i l'item j, o null si no existeix
+    /**
+     * @param valoracions Matriu rectangular. <code>prediccions[i][j]</code> conté la predicció de l'usuari a l'item j
+     *                    Si la valoració no es coneguda hi ha un valor de <code>null</code>.
+     */
     public SlopeOne(Double[][] valoracions) {
         num_usuaris = valoracions.length;
         num_valoracions = valoracions[0].length;
@@ -24,29 +34,14 @@ public class SlopeOne {
         }
         desviacions = new Double[num_valoracions][num_valoracions];
         calculaDesviacions();
-        //calculaMitjanesUsuaris();
     }
-    /*
-    private void calculaMitjanesUsuaris() {
-        valoracions_usuari = new int[num_usuaris];
-        mitjana_usuari = new Double[num_usuaris];
-        for (int i = 0; i < num_usuaris; ++i) {
-            for (int j = 0; j < num_valoracions; ++j) {
-                if (valoracions[i][j] != null) {
-                    valoracions_usuari[i]++;
-                    mitjana_usuari[i] += valoracions[i][j];
-                }
-            }
-            mitjana_usuari[i] /= valoracions_usuari[i];
-        }
-    }
-    */
 
     private void calculaDesviacions() {
         for (int i = 0; i < num_valoracions; ++i)
             for (int j = 0; j < num_valoracions; ++j)
                 desviacions[i][j] = calculaDesviacio(i,j);
     }
+
     private double calculaDesviacio(int j, int i) {
         int cardinal = 0;
         double suma = 0;
@@ -60,6 +55,10 @@ public class SlopeOne {
         return suma/cardinal;
     }
 
+
+    /**
+     * @return una matriu de num_usuaris x num_items amb totes les prediccions.
+     */
     public Double[][] getTotesPrediccions() {
         for (int i = 0; i < num_usuaris; ++i)
             for (int j = 0; j < num_valoracions; ++j)
@@ -67,6 +66,11 @@ public class SlopeOne {
         return prediccions;
     }
 
+    /**
+     * @param usuari un nombre 0..num_usuaris-1 que correspon al mateix ordre que a l'entrada inicial.
+     * @param item un nombre 0..num_items-1 que correspon al mateix ordre que a l'entrada inicial.
+     * @return la predicció del usuari al item
+     */
     public double getPrediccio(int usuari, int item) {
         if (prediccions[usuari][item] != null)
             return prediccions[usuari][item];
