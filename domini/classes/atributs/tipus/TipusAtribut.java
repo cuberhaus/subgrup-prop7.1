@@ -12,6 +12,11 @@ public abstract class TipusAtribut {
      */
     public abstract TipusAtribut copy();
 
+    @Override
+    public boolean equals(Object obj) {
+        return getClass() == obj.getClass();
+    }
+
     public abstract boolean admetValorAtribut(ValorAtribut<?> valorAtribut);
 
     /**
