@@ -10,7 +10,8 @@ public class Pair<X extends Comparable<X>,Y> implements Comparable<Pair<X,Y>> {
     /** Segon element de la parella */
     public final Y y;
 
-
+    public X x() { return x; }
+    public Y y() { return y; }
     /**
      * Inicialitza una parella
      * @param x primer element

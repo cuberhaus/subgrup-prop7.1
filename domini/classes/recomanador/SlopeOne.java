@@ -1,4 +1,4 @@
-package domini.classes;
+package domini.classes.recomanador;
 
 import java.util.Arrays;
 /**
@@ -13,11 +13,11 @@ public class SlopeOne {
     /** Numero de valoracions processades */
     private final int num_valoracions;
 
-    /** Valoracions reals dels usuaris, <code>valoracions[i][j]</code> conté la valoració de l'usuari a l'item j*/
+    /** Valoracions reals dels usuaris, <code>valoracions[i][j]</code> conté la valoració de l'usuari a l'item j */
     private final Double[][] valoracions;
     /** Prediccions de l'algorisme, <code>prediccions[i][j]</code> conté la predicció de l'usuari a l'item j */
     private final Double[][] prediccions;
-    /** Desviacions entre ítems, <code>desviacions[i][j]</code> conté la desviació del item i respecte el j */
+    /** Desviacions entre ítems, <code>desviacions[i][j]</code> conté la desviació de l'item i respecte el j */
     private final Double[][] desviacions;
 
     /**

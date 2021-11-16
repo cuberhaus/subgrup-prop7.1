@@ -1,4 +1,6 @@
-package domini.classes;
+package domini.classes.recomanador;
+
+import domini.classes.Pair;
 
 import java.util.*;
 
@@ -89,15 +91,15 @@ public class ConjuntDeRecomanacions {
         }
         Double[] top_val = pq.toArray(new Double[0]);
         Arrays.sort(top_val, Collections.reverseOrder());
-        double dgc = 0;
+        idgc = 0.;
         int pos = 1;
         for(int i = 0; i < top_val.length; ++i) {
             if (i > 0 && !Objects.equals(top_val[i], top_val[i - 1]))
                 pos = i+1;
             double rel = top_val[i];
-            dgc += (Math.pow(2,rel)-1)/log2(pos);
+            idgc += (Math.pow(2,rel)-1)/log2(pos);
         }
-        return dgc;
+        return idgc;
     }
 
     public double calculaNDGC(ArrayList<Pair<Integer,Double>> valoracions) {

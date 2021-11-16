@@ -1,4 +1,10 @@
-package domini.classes;
+package domini.classes.recomanador;
+
+import domini.classes.*;
+import domini.classes.recomanador.ConjuntDeRecomanacions;
+import domini.classes.recomanador.KNN;
+import domini.classes.recomanador.MetodeRecomanador;
+import domini.classes.recomanador.Recomanacio;
 
 import java.util.*;
 
@@ -45,11 +51,11 @@ public class RecomanadorContentBased extends MetodeRecomanador {
                 // TODO: agafo tants veins com recomanacions volem, no te perque ser la millor eleccio
                 ArrayList<Item> veins = knn.getVeins(val.getItem(), numRecomanacions);
                 for (Item it : veins) {
-                    if (valor_item.containsKey(it.id)) {
-                        valor_item.put(it.id ,valor_item.get(it.id) + val.getValor());
+                    if (valor_item.containsKey(it.obtenirId())) {
+                        valor_item.put(it.obtenirId() ,valor_item.get(it.obtenirId()) + val.getValor());
                     } else {
-                        valor_item.put(it.id, val.getValor());
-                        id_a_item.put(it.id, it);
+                        valor_item.put(it.obtenirId(), val.getValor());
+                        id_a_item.put(it.obtenirId(), it);
                     }
                 }
             }
@@ -66,7 +72,7 @@ public class RecomanadorContentBased extends MetodeRecomanador {
         ConjuntDeRecomanacions res = new ConjuntDeRecomanacions();
         while(!pq.isEmpty()) {
             Pair<Double, Item> pair = pq.remove();
-            res.afegirRecomanacio(new Recomanacio(pair.y.id, pair.x));
+            res.afegirRecomanacio(new Recomanacio(pair.y.obtenirId(), pair.x));
         }
         res.ordena();
         return res;

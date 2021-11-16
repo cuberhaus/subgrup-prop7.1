@@ -1,4 +1,4 @@
-package domini.classes;
+package domini.classes.recomanador;
 
 import java.util.TreeMap;
 
@@ -52,6 +52,7 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
         }
         return new_id;
     }
+
     private void recalculaBaricentreAfegit(Punt nouPunt) {
         if (baricentre == null) {
             baricentre = (Punt) nouPunt.clone();

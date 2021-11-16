@@ -1,6 +1,6 @@
-package domini.classes;
+package domini.classes.recomanador;
 
-import java.util.Comparator;
+import domini.classes.Id;
 
 /**
  * @author pablo.vega

@@ -1,7 +1,11 @@
-package domini.classes;
+package domini.classes.recomanador;
+
+import domini.classes.Item;
+import domini.classes.Usuari;
+import domini.classes.Valoracio;
+import domini.classes.recomanador.ConjuntDeRecomanacions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
