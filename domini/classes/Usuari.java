@@ -166,9 +166,14 @@ public class Usuari {
         return true;
     }
 
+    /**
+     * Consultora d'una valoració feta per l'usuari a l'item passat com a parametre
+     * @return El resultat és el valor del P.I.
+     */
     public Valoracio obtenirValoracio(Item item) {
         return valoracions.get(item);
     }
+
     public Punt obteComPunt(ArrayList<Item> conjuntItems) {
         Punt res = new Punt();
         for (Item item : conjuntItems) {
