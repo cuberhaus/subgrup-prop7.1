@@ -1,9 +1,10 @@
 package domini.classes;
 
+import domini.classes.recomanador.Punt;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Representa un usuari.

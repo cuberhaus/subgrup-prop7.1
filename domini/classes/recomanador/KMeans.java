@@ -1,4 +1,4 @@
-package domini.classes;
+package domini.classes.recomanador;
 
 import java.util.ArrayList;
 import java.util.Arrays;

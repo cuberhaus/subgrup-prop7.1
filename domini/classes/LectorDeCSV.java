@@ -5,10 +5,27 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CSVReader {
-    public CSVReader() {}
-    public CSVTable readCSV(String pathname) throws IOException {
-        CSVTable tabla = new CSVTable();
+/**
+ * Classe que implementa el lector de CSV
+ * @author pablo.vega
+ */
+
+public class LectorDeCSV extends LectorDeFitxers{
+    public LectorDeCSV() {}
+
+    @Override
+    public Taula lectorDeFitxers(String pathname) throws IOException {
+        return llegirCSV(pathname);
+    }
+
+    /**
+     * Funció que donat un pathname, et retorna la taula amb el contingut del CSV
+     * @param pathname <code>String</code> pathname amb la ubicació de l'arxiu.
+     * @return <code>Taula</code> amb el contingut de lal CSV
+     * @throws IOException
+     */
+    public Taula llegirCSV(String pathname) throws IOException {
+        Taula tabla = new Taula();
         BufferedReader csvReader = new BufferedReader(new FileReader(pathname));
 
         String row;

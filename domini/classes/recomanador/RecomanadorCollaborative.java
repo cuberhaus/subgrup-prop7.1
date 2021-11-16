@@ -1,9 +1,8 @@
-package domini.classes;
+package domini.classes.recomanador;
 
-import domini.classes.MetodeRecomanador;
+import domini.classes.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -83,7 +82,7 @@ public class RecomanadorCollaborative extends MetodeRecomanador {
         ConjuntDeRecomanacions res = new ConjuntDeRecomanacions();
         while(!pq.isEmpty()) {
             Pair<Double, Item> pair = pq.remove();
-            res.afegirRecomanacio(new Recomanacio(pair.y.id, pair.x));
+            res.afegirRecomanacio(new Recomanacio(pair.y.obtenirId(), pair.x));
         }
         res.ordena();
         return res;

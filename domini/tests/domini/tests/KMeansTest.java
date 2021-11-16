@@ -1,8 +1,8 @@
 package domini.tests;
 
-import domini.classes.ConjuntDePunts;
-import domini.classes.KMeans;
-import domini.classes.Punt;
+import domini.classes.recomanador.ConjuntDePunts;
+import domini.classes.recomanador.KMeans;
+import domini.classes.recomanador.Punt;
 
 import java.util.ArrayList;
 import java.util.Arrays;

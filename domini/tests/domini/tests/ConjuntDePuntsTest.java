@@ -1,7 +1,7 @@
 package domini.tests;
 
-import domini.classes.ConjuntDePunts;
-import domini.classes.Punt;
+import domini.classes.recomanador.ConjuntDePunts;
+import domini.classes.recomanador.Punt;
 
 import static org.junit.jupiter.api.Assertions.*;
 

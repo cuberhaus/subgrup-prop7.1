@@ -8,7 +8,7 @@ import java.util.HashMap;
  *
  * @author pablo.vega
  */
-public class CSVTable {
+public class Taula {
 
     /** Variable on guardarem els atributs del objectes que rebem del csv.*/
     private ArrayList<ArrayList<String>> valoresDeItem;
@@ -28,7 +28,7 @@ public class CSVTable {
     /**
      * Constructora buida de la classe <code>CSVTable</code>
      */
-    public CSVTable() {
+    public Taula() {
         valoresDeItem = new ArrayList<> ();
         atributosToIndex = new HashMap<>();
         indexToAtributos = new ArrayList<>();

@@ -1,4 +1,7 @@
-package domini.classes;
+package domini.classes.recomanador;
+
+import domini.classes.Item;
+import domini.classes.Pair;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
