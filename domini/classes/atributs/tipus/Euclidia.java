@@ -1,6 +1,7 @@
 package domini.classes.atributs.tipus;
 
 import domini.classes.atributs.valors.ValorAtribut;
+import domini.classes.atributs.valors.ValorConjuntNumeric;
 import domini.classes.atributs.valors.ValorNumeric;
 
 /**
@@ -15,7 +16,7 @@ public class Euclidia extends TipusAtribut {
 
     @Override
     public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) {
-        return valorAtribut instanceof ValorNumeric;
+        return valorAtribut instanceof ValorNumeric || valorAtribut instanceof ValorConjuntNumeric;
     }
 
     @Override
@@ -26,6 +27,20 @@ public class Euclidia extends TipusAtribut {
         if (!admetValorAtribut(valor1)) {
             throw new IllegalArgumentException("El TipusAtribut no admet el tipus dels ValorAtributs donats.");
         }
-        return Math.abs(((ValorNumeric) valor1).getValor() - ((ValorNumeric) valor2).getValor());
+        if (valor1 instanceof ValorNumeric) {
+            return Math.abs(((ValorNumeric) valor1).getValor() - ((ValorNumeric) valor2).getValor());
+        } else {
+            ValorConjuntNumeric valorConjuntNumeric1 = (ValorConjuntNumeric) valor1;
+            ValorConjuntNumeric valorConjuntNumeric2 = (ValorConjuntNumeric) valor2;
+            if (valorConjuntNumeric1.getValor().size() != valorConjuntNumeric2.getValor().size()) {
+                throw new IllegalArgumentException("No es pot calcular la distància euclidiana entre dos " +
+                        "ValorConjuntNumerics de mides diferents");
+            }
+            double distancia = 0.0;
+            for (int i = 0; i < valorConjuntNumeric1.getValor().size(); ++i) {
+                distancia += Math.pow(valorConjuntNumeric1.getValor().get(i).getValor() - valorConjuntNumeric2.getValor().get(i).getValor(), 2);
+            }
+            return Math.sqrt(distancia);
+        }
     }
 }
