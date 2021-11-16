@@ -5,7 +5,7 @@ package domini.classes;
  */
 
 public class SessioNoIniciada extends Sessio{
-    private Usuari usuari = null;
+    private Usuari usuari;
 
     @Override
     public void tancarSessio(Programa programa) {
@@ -21,5 +21,10 @@ public class SessioNoIniciada extends Sessio{
     @Override
     public boolean isSessioIniciada() {
         return false;
+    }
+
+    @Override
+    public Usuari obtenirUsuariSessioIniciada() throws IllegalStateException{
+        throw new IllegalStateException("L'estat de la sessio no és SessioIniciada");
     }
 }

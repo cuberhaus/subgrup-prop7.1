@@ -28,7 +28,8 @@ public class SessioIniciada extends Sessio{
         return true;
     }
 
-    public Usuari obtenirUsuariSessioIniciada() {
+    @Override
+    public Usuari obtenirUsuariSessioIniciada() throws IllegalStateException{
         return usuari;
     }
 //    private static SessioIniciada sessio_unica = null;

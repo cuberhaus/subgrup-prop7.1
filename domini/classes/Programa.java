@@ -11,7 +11,7 @@ import java.util.Set;
 
 // TODO: canviar diagrama de classes
 public class Programa {
-    private Sessio sessio;
+    private Sessio sessio = new SessioNoIniciada();
     private static Programa instancia_unica = null;
     private Map<Usuari,Usuari> usuaris;
     private Map<TipusItem,TipusItem> tipusItems;

@@ -6,4 +6,6 @@ public abstract class Sessio {
     abstract void iniciarSessio(Programa programa, Usuari usuari);
 
     abstract boolean isSessioIniciada();
+
+    abstract public Usuari obtenirUsuariSessioIniciada();
 }
