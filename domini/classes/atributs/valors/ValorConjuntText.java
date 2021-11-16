@@ -17,6 +17,17 @@ public class ValorConjuntText extends ValorConjunt<String> {
     }
 
     /**
+     * Constructor amb un conjunt de <code>Strings</code>.
+     * @param valors <code>String[]</code> que conté els valors que s'assignaran a aquest atribut.
+     */
+    public ValorConjuntText(String[] valors) {
+        this.valor = new ArrayList<>();
+        for (String valor : valors) {
+            this.valor.add(new ValorTextual(valor));
+        }
+    }
+
+    /**
      * @return <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
      */
     @Override

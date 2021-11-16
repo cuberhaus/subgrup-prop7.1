@@ -17,6 +17,17 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
     }
 
     /**
+     * Constructor amb un conjunt de <code>Strings</code>.
+     * @param valors <code>String[]</code> que conté els valors que s'assignaran a aquest atribut.
+     */
+    public ValorConjuntCategoric(String[] valors) {
+        this.valor = new ArrayList<>();
+        for (String valor : valors) {
+            this.valor.add(new ValorCategoric(valor));
+        }
+    }
+
+    /**
      * @return <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
      */
     @Override

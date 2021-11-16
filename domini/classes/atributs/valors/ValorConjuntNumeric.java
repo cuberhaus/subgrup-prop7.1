@@ -3,24 +3,36 @@ package domini.classes.atributs.valors;
 import java.util.ArrayList;
 
 /**
- * Representa el valor compost categòric d'un atribut.
+ * Representa el valor compost numèric d'un atribut.
  * @author maria.prat
  */
-public class ValorConjuntNumeric extends ValorConjunt<String> {
+public class ValorConjuntNumeric extends ValorConjunt<Double> {
 
     /**
-     * Constructor amb el conjunt categòric.
-     * @param valor <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
+     * Constructor amb el conjunt numèric.
+     * @param valor <code>ArrayList<ValorAtribut<Double>></code> que conté el valor d'aquest atribut.
      */
-    public ValorConjuntNumeric(ArrayList<ValorAtribut<String>> valor) {
+    public ValorConjuntNumeric(ArrayList<ValorAtribut<Double>> valor) {
         this.valor = valor;
     }
 
     /**
-     * @return <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
+     * Constructor amb un conjunt de <code>doubles</code>.
+     * @param valors <code>double[]</code> que conté els valors que s'assignaran a aquest atribut.
+     */
+    public ValorConjuntNumeric(double[] valors) {
+        this.valor = new ArrayList<>();
+        for (double valor : valors) {
+            this.valor.add(new ValorNumeric(valor));
+        }
+    }
+
+    /**
+     * @return <code>ArrayList<ValorAtribut<Double>></code> que conté el valor d'aquest atribut.
      */
     @Override
-    public ArrayList<ValorAtribut<String>> getValor() {
+    public ArrayList<ValorAtribut<Double>> getValor() {
         return valor;
     }
+
 }
