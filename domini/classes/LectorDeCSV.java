@@ -14,8 +14,9 @@ public class LectorDeCSV extends LectorDeFitxers{
     public LectorDeCSV() {}
 
     @Override
-    public Taula lectorDeFitxers(String pathname) throws IOException {
-        return llegirCSV(pathname);
+    public Contenidor lectorDeFitxers(String pathname) throws IOException {
+        Contenidor temp = this.llegirCSV(pathname);
+        return temp;
     }
 
     /**

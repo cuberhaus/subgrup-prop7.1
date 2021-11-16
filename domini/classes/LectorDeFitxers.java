@@ -8,5 +8,5 @@ import java.io.IOException;
  */
 public abstract class LectorDeFitxers {
     public LectorDeFitxers() {}
-    public abstract Taula lectorDeFitxers(String pathname) throws IOException;
+    public abstract Contenidor lectorDeFitxers(String pathname) throws IOException;
 }

@@ -12,10 +12,18 @@ import java.util.Objects;
  */
 
 public class Usuari {
+    /** Conté l'identificador de l'usuari */
     private final Id id;
+
+    /** Conté el nom de l'usuari */
     private String nom;
+
+    /** Conté la contrasenya de l'usuari */
     private String contrasenya;
+
+    /** Conté el conjunt d'items valorat per l'usuari */
     private Map<Item,Valoracio> valoracions;
+
 //    private ConjuntUsuari conjuntUsuari;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
@@ -128,9 +136,13 @@ public class Usuari {
 
     /**
      * Afegeix una valoració al conjunt de valoracions.
-     * @param  valoracio el paràmetre s'ha afegit  al conjunt de valoracions si no hi era abans.
+     * Retorna true si s'ha afegit correctament, retorna false si ja hi era
+     * @param  valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+        if (valoracio == null) {
+            throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
+        }
         if (!this.equals(valoracio.getUsuari())) {
             throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
         }
@@ -143,18 +155,25 @@ public class Usuari {
 
     /**
      * Esborra una valoració del conjunt de valoracions.
-     * @param  item la valoració amb l'item s'ha esborrat del conjunt.
+     * Retorna true si s'ha esborrat correctament, retorna false si no hi era
+     * @param  item la valoració amb l'item s'ha esborrat del conjunt, si hi era.
      */
     public boolean esborraValoracio(Item item) {
-        if (!valoracions.containsKey(item)) {
+        if (item == null || !valoracions.containsKey(item)) {
             return false;
         }
         valoracions.remove(item);
         return true;
     }
+
+    /**
+     * Consultora d'una valoració feta per l'usuari a l'item passat com a parametre
+     * @return El resultat és el valor del P.I.
+     */
     public Valoracio obtenirValoracio(Item item) {
         return valoracions.get(item);
     }
+
     public Punt obteComPunt(ArrayList<Item> conjuntItems) {
         Punt res = new Punt();
         for (Item item : conjuntItems) {
@@ -165,6 +184,7 @@ public class Usuari {
         }
         return res;
     }
+
     /**
      * Retorna true si la contrasenya passada com a paràmetre es igual a la del P.I.
      * @param  contrasenya El paràmetre contrasenya pren el nou valor.
