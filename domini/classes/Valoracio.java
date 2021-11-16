@@ -10,7 +10,7 @@ public class Valoracio {
     private double valor;
     private Usuari usuari;
     private Item item;
-
+    // TODO: preguntar al sergio si això de treure getters i setters i afegir directament des de la constructora es bona idea
     /** Constructora donat un valor, un usuari i un item.
      * @param valor representa el valor de la valoració
      * @param usuari representa l'usuari que ha fet la valoració

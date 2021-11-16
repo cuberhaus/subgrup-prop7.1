@@ -128,9 +128,13 @@ public class Usuari {
 
     /**
      * Afegeix una valoració al conjunt de valoracions.
-     * @param  valoracio el paràmetre s'ha afegit  al conjunt de valoracions si no hi era abans.
+     * Retorna true si s'ha afegit correctament, retorna false si ja hi era
+     * @param  valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+        if (valoracio == null) {
+            throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
+        }
         if (!this.equals(valoracio.getUsuari())) {
             throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
         }
@@ -143,15 +147,17 @@ public class Usuari {
 
     /**
      * Esborra una valoració del conjunt de valoracions.
-     * @param  item la valoració amb l'item s'ha esborrat del conjunt.
+     * Retorna true si s'ha esborrat correctament, retorna false si no hi era
+     * @param  item la valoració amb l'item s'ha esborrat del conjunt, si hi era.
      */
     public boolean esborraValoracio(Item item) {
-        if (!valoracions.containsKey(item)) {
+        if (item == null || !valoracions.containsKey(item)) {
             return false;
         }
         valoracions.remove(item);
         return true;
     }
+
     public Valoracio obtenirValoracio(Item item) {
         return valoracions.get(item);
     }
@@ -165,6 +171,7 @@ public class Usuari {
         }
         return res;
     }
+
     /**
      * Retorna true si la contrasenya passada com a paràmetre es igual a la del P.I.
      * @param  contrasenya El paràmetre contrasenya pren el nou valor.

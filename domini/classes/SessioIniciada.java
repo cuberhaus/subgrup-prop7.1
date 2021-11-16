@@ -28,6 +28,9 @@ public class SessioIniciada extends Sessio{
         return true;
     }
 
+    public Usuari obtenirUsuariSessioIniciada() {
+        return usuari;
+    }
 //    private static SessioIniciada sessio_unica = null;
 //
 //    private SessioIniciada() {
