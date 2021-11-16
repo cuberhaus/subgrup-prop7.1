@@ -4,13 +4,13 @@ package domini.classes.atributs.valors;
  * Representa el valor textual d'un atribut.
  * @author maria.prat
  */
-public class ValorText extends ValorAtribut<String> {
+public class ValorTextual extends ValorAtribut<String> {
 
     /**
      * Constructor amb el valor numèric.
      * @param valor <code>String</code> que conté el valor d'aquest atribut.
      */
-    public ValorText(String valor) {
+    public ValorTextual(String valor) {
         this.valor = valor;
     }
 
