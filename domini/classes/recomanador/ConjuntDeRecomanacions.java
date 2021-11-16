@@ -5,60 +5,128 @@ import domini.classes.Pair;
 import java.util.*;
 
 /**
+ * Representa un conjunt de recomanacions ordenat gran a petit segon el valor de la recomanació
  * @author pablo.vega
  */
 public class ConjuntDeRecomanacions {
+
+    /** Contenidor de les recomanacions */
     private ArrayList<Recomanacio> conjuntRecomanacions;
+
+    /** */
     private Double dgc = null;
+
+    /** */
     private Double idgc = null;
+
+    /** Constructora buida per defecte */
     public ConjuntDeRecomanacions() {
         this.conjuntRecomanacions = new ArrayList<>();
     }
 
+    /**
+     * Contructora a partir d'una recomanació
+     * @param rec <code>Recomanacio</code> rec és la primera recomanació.
+     */
     public ConjuntDeRecomanacions(Recomanacio rec) {
         this.conjuntRecomanacions = new ArrayList<>();
         this.conjuntRecomanacions.add(rec);
     }
 
+    /**
+     * Constructora a partir d'un conjunt de recomanacions.
+     * @param recs <code>ArrayList<ArrayList<Recomanacio></code> recs és el conjunt de recomanacions.
+     */
     public ConjuntDeRecomanacions(ArrayList<Recomanacio> recs) {
         this.conjuntRecomanacions = new ArrayList<>(recs);
         this.conjuntRecomanacions.sort(Collections.reverseOrder());
     }
 
+    /**
+     * Afegeix una recomanació sempre mantenint l'ordre.
+     * @param rec <code>Recomanacio</code> és la recomanació a afegir dins el conjunt.
+     */
     public void afegirRecomanacio(Recomanacio rec) {
         this.conjuntRecomanacions.add(rec);
+        this.ordena();
         dgc = null;
         idgc = null;
-        //Collections.sort(this.ConjuntRecomanacions);
     }
 
+    /**
+     * Ordena el conjunt de recomanacions.
+     */
     public void ordena() {
         this.conjuntRecomanacions.sort(Collections.reverseOrder());
     }
 
+    /**
+     * Retorna el conjunt ordenat.
+     * @return <code>ArrayList<Recomanacio></code>
+     */
     public ArrayList<Recomanacio> obtenirConjuntRecomanacions() {
         return new ArrayList<>(this.conjuntRecomanacions);
     }
 
+    /**
+     * Imprimeix el contingut del conjunt.
+     */
     public void imprimir() {
         for (Recomanacio rec : this.conjuntRecomanacions) {
             rec.imprimir();
         }
     }
 
-    public double obteDGC() { return dgc; }
-    public double obteIDGC() { return idgc; }
-    public double obteNDGC() { return dgc/idgc; }
+    /**
+     *
+     * @return
+     */
+    public double obteDGC() {
+        return dgc;
+    }
 
+    /**
+     *
+     * @return
+     */
+    public double obteIDGC() {
+        return idgc;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double obteNDGC() {
+        return dgc/idgc;
+    }
+
+    /**
+     *
+     * @param a
+     * @return
+     */
     private static double log2(double a){
         return Math.log(a)/Math.log(2);
     }
 
+    /**
+     *
+     * @param valoracions
+     * @return
+     */
     public double calculaDGC(ArrayList<Pair<Integer,Double>> valoracions) {
         return dgc = calculaDGC(valoracions, conjuntRecomanacions.size());
     }
 
     // @pre: recomanacions ordenades segons el sistema.
+
+    /**
+     *
+     * @param valoracions
+     * @param p
+     * @return
+     */
     public double calculaDGC(ArrayList<Pair<Integer,Double>> valoracions, int p) {
         ordena();
         Map<Integer,Double> id_to_valoracio = new HashMap<>();
@@ -78,6 +146,12 @@ public class ConjuntDeRecomanacions {
         return dgc;
     }
 
+    /**
+     *
+     * @param valoracions
+     * @param p
+     * @return
+     */
     public double calculaIDGC(ArrayList<Pair<Integer,Double>> valoracions, int p) {
         PriorityQueue<Double> pq = new PriorityQueue<>();
         for (var x : valoracions) {
@@ -102,10 +176,21 @@ public class ConjuntDeRecomanacions {
         return idgc;
     }
 
+    /**
+     *
+     * @param valoracions
+     * @return
+     */
     public double calculaNDGC(ArrayList<Pair<Integer,Double>> valoracions) {
         return calculaNDGC(valoracions, conjuntRecomanacions.size());
     }
 
+    /**
+     *
+     * @param valoracions
+     * @param p
+     * @return
+     */
     public double calculaNDGC( ArrayList<Pair<Integer,Double>> valoracions, int p) {
         if (dgc == null) calculaDGC(valoracions, p);
         if (idgc == null) calculaIDGC(valoracions, p);
