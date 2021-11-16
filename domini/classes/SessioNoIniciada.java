@@ -5,16 +5,13 @@ package domini.classes;
  */
 
 public class SessioNoIniciada extends Sessio{
-    private Usuari usuari;
-
     @Override
-    public void tancarSessio(Programa programa) {
-        // no cal fer res
+    public void tancarSessio(Programa programa) throws IllegalStateException{
+        throw new IllegalStateException("No es pot tancar la sessió d'una sessió ja tancada");
     }
 
     @Override
     public void iniciarSessio(Programa programa,Usuari usuari) {
-        this.usuari = usuari;
         programa.cambiarEstat(new SessioIniciada(usuari));
     }
 

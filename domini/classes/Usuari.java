@@ -12,10 +12,18 @@ import java.util.Objects;
  */
 
 public class Usuari {
+    /** Conté l'identificador de l'usuari */
     private final Id id;
+
+    /** Conté el nom de l'usuari */
     private String nom;
+
+    /** Conté la contrasenya de l'usuari */
     private String contrasenya;
+
+    /** Conté el conjunt d'items valorat per l'usuari */
     private Map<Item,Valoracio> valoracions;
+
 //    private ConjuntUsuari conjuntUsuari;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.

@@ -5,6 +5,7 @@ package domini.classes;
  */
 
 public class SessioIniciada extends Sessio{
+    /** Conté l'usuari que ha iniciat la sessió */
     private Usuari usuari = null;
 
     SessioIniciada(Usuari usuari) {
@@ -18,9 +19,8 @@ public class SessioIniciada extends Sessio{
     }
 
     @Override
-    public void iniciarSessio(Programa programa, Usuari usuari) {
-        this.usuari = usuari;
-        programa.cambiarEstat(new SessioIniciada(usuari));
+    public void iniciarSessio(Programa programa, Usuari usuari) throws IllegalStateException{
+        throw new IllegalStateException("No es pot iniciar sessió sense abans tancar la sessió");
     }
 
     @Override
@@ -29,24 +29,7 @@ public class SessioIniciada extends Sessio{
     }
 
     @Override
-    public Usuari obtenirUsuariSessioIniciada() throws IllegalStateException{
+    public Usuari obtenirUsuariSessioIniciada() {
         return usuari;
     }
-//    private static SessioIniciada sessio_unica = null;
-//
-//    private SessioIniciada() {
-//    }
-//
-//    public static SessioIniciada getInstance() {
-//        if (sessio_unica == null) sessio_unica = new SessioIniciada();
-//        return sessio_unica;
-//    }
 }
-
-//public enum SessioIniciada implements Programa{
-//    INSTANCE;
-//
-//    private SessioIniciada() {
-//    }
-//}
-

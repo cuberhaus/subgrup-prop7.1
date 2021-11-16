@@ -11,11 +11,20 @@ import java.util.Set;
 
 // TODO: canviar diagrama de classes
 public class Programa {
+    /** Conté l'estat de la sessio */
     private Sessio sessio = new SessioNoIniciada();
+
+    /** Conté l'única instància de Programa */
     private static Programa instancia_unica = null;
+
+    /** Conté el conjunt d'usuaris */
     private Map<Usuari,Usuari> usuaris;
+
+    /** Conté el conjunt de tipus d'items */
     private Map<TipusItem,TipusItem> tipusItems;
-//    ArrayList<conjuntPrograma> conjuntsPrograma;
+
+//    /** Conté els conjunts de programes */
+//    private ArrayList<conjuntPrograma> conjuntsPrograma;
 
     /**
      * Constructora per defecte de Programa

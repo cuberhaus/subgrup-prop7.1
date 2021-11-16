@@ -7,10 +7,16 @@ package domini.classes;
  */
 
 public class Valoracio {
+    /** Conté el valor de la valoració */
     private double valor;
+
+    /** Conté l'usuari que escriu la valoració */
     private Usuari usuari;
+
+    /** Conté l'item valorat */
     private Item item;
     // TODO: preguntar al sergio si això de treure getters i setters i afegir directament des de la constructora es bona idea
+
     /** Constructora donat un valor, un usuari i un item.
      * @param valor representa el valor de la valoració
      * @param usuari representa l'usuari que ha fet la valoració
