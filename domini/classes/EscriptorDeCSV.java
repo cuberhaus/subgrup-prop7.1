@@ -11,8 +11,8 @@ public class EscriptorDeCSV extends EscriptorDeFitxers{
     public EscriptorDeCSV() {}
 
     @Override
-    public void escriptorFitxers(String pathname, Taula tabla) throws IOException {
-        escriureCSV(pathname, tabla);
+    public void escriptorFitxers(String pathname, Contenidor tabla) throws IOException {
+        escriureCSV(pathname, (Taula) tabla);
     }
 
     /**
