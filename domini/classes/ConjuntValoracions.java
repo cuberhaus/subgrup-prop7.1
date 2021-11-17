@@ -1,6 +1,8 @@
 package domini.classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Representa un conjunt de valoracions
@@ -8,9 +10,9 @@ import java.util.ArrayList;
  */
 
 public class ConjuntValoracions {
+    private Map<Pair<Usuari,Item>,Valoracio> valoracions;
 
-    public void afegir(String nomTipusItem,TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) {
-
+    public void afegir(String nomTipusItem,TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws InterruptedException {
         ArrayList<String> idsUsuaris= valoracions.obtenirValorsAtribut("userId");
         ArrayList<String> idsItems= valoracions.obtenirValorsAtribut("itemId");
         ArrayList<String> valors= valoracions.obtenirValorsAtribut("rating");
@@ -24,7 +26,9 @@ public class ConjuntValoracions {
             Usuari usuari = usuaris.obte(idUsuari);
             double doubleValoracio = Double.parseDouble(valors.get(i));
             Valoracio valoracio = new Valoracio(doubleValoracio, usuari,item);
-//            this.afegir(valoracio);
+            if (!this.valoracions.containsKey(new Pair(usuari,item))) {
+                this.valoracions.put(new Pair(usuari,item), valoracio);
+            }
         }
 
     }

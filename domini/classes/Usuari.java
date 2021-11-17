@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author pol.casacuberta
  */
 
-public class Usuari implements ElementIdentificat {
+public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     /** Conté l'identificador de l'usuari */
     private final Id id;
 
@@ -187,6 +187,11 @@ public class Usuari implements ElementIdentificat {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public int compareTo(Usuari o) {
+        return id.compareTo(o.id);
     }
 }
 
