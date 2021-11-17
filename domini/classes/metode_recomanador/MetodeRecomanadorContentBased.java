@@ -8,7 +8,7 @@ import java.util.*;
  * Recomanador basat en <code>Content-based filtering</code> mitjançant k-NN.
  * @author edgar.moreno
  */
-public class RecomanadorContentBased extends MetodeRecomanador {
+public class MetodeRecomanadorContentBased extends MetodeRecomanador {
 
     /** Minima valoració necessària perquè sigui considerada com rellevant per l'algorisme **/
     double minimaValoracioConsiderada = 0;
@@ -19,7 +19,7 @@ public class RecomanadorContentBased extends MetodeRecomanador {
      * @param items pot ser buit
      * @param valoracions_publiques pot ser buit
      */
-    public RecomanadorContentBased(Usuari[] usuaris, Item[] items, Valoracio[] valoracions_publiques) {
+    public MetodeRecomanadorContentBased(Usuari[] usuaris, Item[] items, Valoracio[] valoracions_publiques) {
         super(usuaris, items, valoracions_publiques);
     }
 

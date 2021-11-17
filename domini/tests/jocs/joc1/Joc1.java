@@ -2,7 +2,7 @@ package jocs.joc1;
 
 import domini.classes.*;
 import domini.classes.atributs.valors.ValorAtribut;
-import domini.classes.metode_recomanador.RecomanadorCollaborative;
+import domini.classes.metode_recomanador.MetodeRecomanadorCollaborative;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class Joc1 {
 
         Usuari[] usuaris = new Usuari[0];
         Valoracio[] valoracions = new Valoracio[0];
-        RecomanadorCollaborative recomanador = new RecomanadorCollaborative(usuaris, items, valoracions);
+        MetodeRecomanadorCollaborative recomanador = new MetodeRecomanadorCollaborative(usuaris, items, valoracions);
         File inputQueries = new File("./domini/tests/jocs/joc1/inputqueries.txt");
         Scanner inputQueriesReader = new Scanner(inputQueries);
         int q = inputQueriesReader.nextInt();

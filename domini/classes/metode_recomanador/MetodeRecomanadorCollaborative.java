@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
  * Recomanador basat en <code>Collaborative filtering</code> mitjançant K-means i Slope1.
  * @author edgar.moreno
  */
-public class RecomanadorCollaborative extends MetodeRecomanador {
+public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
     /** Nombre de clusters que s'utilitzarà com K al K-means**/
     private int num_clusters;
 
@@ -19,7 +19,7 @@ public class RecomanadorCollaborative extends MetodeRecomanador {
      * @param items pot ser buit
      * @param valoracions_publiques pot ser buit
      */
-    public RecomanadorCollaborative(Usuari[] usuaris, Item[] items, Valoracio[] valoracions_publiques) {
+    public MetodeRecomanadorCollaborative(Usuari[] usuaris, Item[] items, Valoracio[] valoracions_publiques) {
         super(usuaris, items, valoracions_publiques);
         // TODO: numero arbitrari de clusters.
         num_clusters = Math.min((int)Math.sqrt(usuaris.length)+1, usuaris.length);
