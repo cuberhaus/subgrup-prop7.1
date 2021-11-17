@@ -41,9 +41,9 @@ public class TaulaCSV extends Contenidor {
      *
      * @param atribs es la llista de atributs que volem tenir.
      */
-    public void introduirListaAtributs(ArrayList<String> atribs) {
+    public void introduirListaAtributs(ArrayList<String> atribs) throws InterruptedException {
         if (numAtribs != -1) {
-            System.out.println("No es pot introduir de nou una llista d'atributs, proba a crear un nou objecte");
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else {

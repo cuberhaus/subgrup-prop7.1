@@ -1,11 +1,23 @@
 package domini.tests.csv;
 
+import domini.classes.TaulaCSV;
 import org.junit.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 public class TaulaCSVTest {
 
-    @Test
-    public void introduirListaAtributs() {
+    //Probem que no podem assignar dos cops els atributs a la taula
+    @Test(expected = InterruptedException.class)
+    public void introduirListaAtributs() throws InterruptedException {
+        TaulaCSV tablita = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        atributs.add("hores");
+        tablita.introduirListaAtributs(atributs);
+        tablita.introduirListaAtributs(atributs);
     }
 
     @Test
