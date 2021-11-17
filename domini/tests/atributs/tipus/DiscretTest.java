@@ -1,4 +1,4 @@
-package domini.tests.atributs.tipus;
+package atributs.tipus;
 
 import domini.classes.atributs.tipus.Discret;
 import domini.classes.atributs.tipus.TipusAtribut;

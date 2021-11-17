@@ -1,4 +1,4 @@
-package domini.classes.recomanador;
+package domini.classes.metode_recomanador;
 
 import domini.classes.Item;
 import domini.classes.Pair;

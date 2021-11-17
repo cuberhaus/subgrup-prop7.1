@@ -1,4 +1,4 @@
-package domini.classes.recomanador;
+package domini.classes.metode_recomanador;
 
 import java.util.TreeMap;
 
@@ -6,7 +6,7 @@ import java.util.TreeMap;
  * Representa un conjunt de punts i calcula el baricentre d'aquests.
  * @author edgar.moreno
  */
-public class ConjuntDePunts extends TreeMap<Integer, Punt> {
+public class ConjuntPunts extends TreeMap<Integer, Punt> {
 
     /** Dimensió dels punts del conjunt */
     private int dimensio;
@@ -19,7 +19,7 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
     /**
      * Crea un conjunt de punts buit sense cap dimensió assignada.
      */
-    public ConjuntDePunts() {
+    public ConjuntPunts() {
         dimensio = -1;
         baricentre = null;
     }

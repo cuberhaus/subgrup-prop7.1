@@ -1,9 +1,8 @@
-package domini.classes.recomanador;
+package domini.classes.metode_recomanador;
 
 import domini.classes.Item;
 import domini.classes.Usuari;
 import domini.classes.Valoracio;
-import domini.classes.recomanador.ConjuntDeRecomanacions;
 
 import java.util.ArrayList;
 import java.util.List;

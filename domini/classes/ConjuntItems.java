@@ -1,5 +1,6 @@
 package domini.classes;
 
+/**
 public class ConjuntItems extends Conjunt<Item> {
     //map<id, item>
     TipusItem tipusItem;
@@ -15,3 +16,4 @@ public class ConjuntItems extends Conjunt<Item> {
         }
     }
 }
+ */

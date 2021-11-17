@@ -1,4 +1,4 @@
-package domini.classes.recomanador;
+package domini.classes.metode_recomanador;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +11,9 @@ import java.util.Random;
 public class KMeans {
     private final int k;
     private final int n_punts;
-    private final ConjuntDePunts[] particions;
+    private final ConjuntPunts[] particions;
     private final int[] conjunt_del_punt;
-    private final ConjuntDePunts punts;
+    private final ConjuntPunts punts;
     private final Punt[] baricentres;
 
     /**
@@ -21,11 +21,11 @@ public class KMeans {
      * @param punts Conjunt de punts per executar l'algorisme. Els identificadors han de ser contigus començant en 0.
      * @param k Nombre de particions a realitzar. Han de ser menors al nombre de punts.
      */
-    public KMeans(ConjuntDePunts punts, int k) {
+    public KMeans(ConjuntPunts punts, int k) {
         this.k = k;
         this.punts = punts;
         n_punts = punts.obtenirNumPunts();
-        particions = new ConjuntDePunts[k];
+        particions = new ConjuntPunts[k];
         conjunt_del_punt = new int[n_punts];
         baricentres = new Punt[k];
         inicialitzarEnOrdre();
@@ -48,7 +48,7 @@ public class KMeans {
         Random r = new Random();
         for (int i = 0; i < k; ++i)
         {
-            particions[i] = new ConjuntDePunts();
+            particions[i] = new ConjuntPunts();
             int center;
             do {
                 center = r.nextInt(n_punts);
@@ -71,7 +71,7 @@ public class KMeans {
         Random r = new Random();
         for (int i = 0; i < k; ++i)
         {
-            particions[i] = new ConjuntDePunts();
+            particions[i] = new ConjuntPunts();
             conjunt_del_punt[i] = i;
             particions[i].put(i, punts.get(i));
         }

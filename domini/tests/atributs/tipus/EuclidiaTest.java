@@ -1,4 +1,4 @@
-package domini.tests.atributs.tipus;
+package atributs.tipus;
 
 import domini.classes.atributs.tipus.Euclidia;
 import domini.classes.atributs.tipus.TipusAtribut;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
 @RunWith(Enclosed.class)
-class EuclidiaTest {
+public class EuclidiaTest {
 
     private final static double delta = 1e-10;
     private final static Euclidia euclidia = new Euclidia();

@@ -1,8 +1,8 @@
 package domini.tests.recomanador;
 
-import domini.classes.recomanador.ConjuntDePunts;
-import domini.classes.recomanador.KMeans;
-import domini.classes.recomanador.Punt;
+import domini.classes.metode_recomanador.ConjuntPunts;
+import domini.classes.metode_recomanador.KMeans;
+import domini.classes.metode_recomanador.Punt;
 
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ class KMeansTest {
     @Test
     void getParticions() {
         int k = 3;
-        ConjuntDePunts cjt = new ConjuntDePunts();
+        ConjuntPunts cjt = new ConjuntPunts();
         List<Double> x = Arrays.asList(1., 1., 3., 5., 6., 7.,8.);
         List<Double> y = Arrays.asList(3.,4.,5.,1.,2.,2.,8.);
         for (int i = 0; i < x.size(); ++i) {

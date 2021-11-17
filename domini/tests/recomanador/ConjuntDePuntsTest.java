@@ -1,7 +1,7 @@
 package domini.tests.recomanador;
 
-import domini.classes.recomanador.ConjuntDePunts;
-import domini.classes.recomanador.Punt;
+import domini.classes.metode_recomanador.ConjuntPunts;
+import domini.classes.metode_recomanador.Punt;
 
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ class ConjuntDePuntsTest {
 
     @Test
     public void getDimensio() {
-        ConjuntDePunts conjunt = new ConjuntDePunts();
+        ConjuntPunts conjunt = new ConjuntPunts();
         assertEquals(-1, conjunt.obtenirDimensio());
         Punt p = new Punt();
         p.add(0.0);
@@ -22,7 +22,7 @@ class ConjuntDePuntsTest {
 
     @Test
     public void getNumPunts() {
-        ConjuntDePunts conjunt = new ConjuntDePunts();
+        ConjuntPunts conjunt = new ConjuntPunts();
         conjunt.add(new Punt());
         conjunt.add(new Punt());
         assertEquals(2, conjunt.obtenirNumPunts());
@@ -30,7 +30,7 @@ class ConjuntDePuntsTest {
 
     @Test
     public void add() {
-        ConjuntDePunts conjunt = new ConjuntDePunts();
+        ConjuntPunts conjunt = new ConjuntPunts();
         Punt p = new Punt();
         p.add(0.0);
         p.add(0.0);
@@ -43,7 +43,7 @@ class ConjuntDePuntsTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void addThrows() {
-        ConjuntDePunts conjunt = new ConjuntDePunts();
+        ConjuntPunts conjunt = new ConjuntPunts();
         Punt p = new Punt();
         p.add(0.0);
         p.add(0.0);
@@ -54,7 +54,7 @@ class ConjuntDePuntsTest {
 
     @Test
     public void getBaricentre() {
-        ConjuntDePunts conjunt = new ConjuntDePunts();
+        ConjuntPunts conjunt = new ConjuntPunts();
         Punt p = new Punt();
         p.add(2.0);
         p.add(3.0);

@@ -85,7 +85,7 @@ public class Programa {
      * @param  usuari el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public boolean afegirUsuari(Usuari usuari) {
-        if (!usuaris.containsKey(usuari)) {
+        if (usuaris.containsKey(usuari)) {
             return false;
         }
         usuaris.put(usuari,usuari);
@@ -98,7 +98,7 @@ public class Programa {
      * @param  tipusItem el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public boolean afegirTipusItem(TipusItem tipusItem) {
-        if (!tipusItems.containsKey(tipusItem)) {
+        if (tipusItems.containsKey(tipusItem)) {
             return false;
         }
         tipusItems.put(tipusItem,tipusItem);
