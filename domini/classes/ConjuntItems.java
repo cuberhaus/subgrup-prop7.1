@@ -9,18 +9,22 @@ import java.util.ArrayList;
 
 public class ConjuntItems extends ConjuntIdentificat<Item> {
     TipusItem tipusItem;
-    ArrayList<Item> conjuntItems;
 
-    public ConjuntItems(String nomTipusItem, TaulaCSV taula) {
+    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InterruptedException {
         tipusItem = new TipusItem(nomTipusItem, taula.obtenirLlistaAtributs(), taula.obtenirItem(1));
+        int id;
         for (int i = 0; i < taula.obtenirNumeroElements(); ++i) {
             String sid = taula.obtenirValorAtributItem(i, "id");
             try {
-                int id = Integer.parseInt(sid);
+                id = Integer.parseInt(sid);
+            } catch (NumberFormatException e1) {
+                throw e1;
             }
-            catch ()
-
-            conjuntItems.add(new Item(new Id(),tipusItem,taula.obtenirItem(i)));
+            Id identificador = new Id(id, true);
+            if (elements.containsKey(identificador)) {
+                throw new InterruptedException("L'item creat ja existeix al conjunt");
+            }
+            elements.put(identificador, new Item(identificador, tipusItem, taula.obtenirItem(i)));
         }
     }
 }
