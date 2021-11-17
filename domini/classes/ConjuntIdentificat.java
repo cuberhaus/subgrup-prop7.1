@@ -14,7 +14,7 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
     }
 
     public T obte(Id id) {
-        if (id == null | !elements.containsKey(id)) {
+        if (id == null || !elements.containsKey(id)) {
             throw new IllegalArgumentException("El conjunt no conté cap element amb aquest Id");
         }
         return elements.get(id);
