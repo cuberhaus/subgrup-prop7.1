@@ -49,8 +49,8 @@ public class Recomanacio implements Comparable<Recomanacio>{
     }
 
     @Override
-    public int compareTo(Recomanacio rec) {
-        return Double.compare(this.obtenirRate(), rec.obtenirRate());
+    public int compareTo(Recomanacio o) {
+        return Double.compare(this.obtenirRate(), o.obtenirRate());
     }
 }
 
