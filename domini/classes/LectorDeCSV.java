@@ -14,20 +14,20 @@ public class LectorDeCSV extends LectorDeFitxers{
     public LectorDeCSV() {}
 
     @Override
-    public Contenidor lectorDeFitxers(String pathname) throws IOException {
-        Contenidor temp = this.llegirCSV(pathname);
+    public Contenidor lectorDeFitxers(String ubicacio) throws IOException {
+        Contenidor temp = this.llegirCSV(ubicacio);
         return temp;
     }
 
     /**
      * Funció que donat un pathname, et retorna la taula amb el contingut del CSV
-     * @param pathname <code>String</code> pathname amb la ubicació de l'arxiu.
+     * @param ubicacio <code>String</code> pathname amb la ubicació de l'arxiu.
      * @return <code>Taula</code> amb el contingut de lal CSV
      * @throws IOException
      */
-    public TaulaCSV llegirCSV(String pathname) throws IOException {
+    public TaulaCSV llegirCSV(String ubicacio) throws IOException {
         TaulaCSV tabla = new TaulaCSV();
-        BufferedReader csvReader = new BufferedReader(new FileReader(pathname));
+        BufferedReader csvReader = new BufferedReader(new FileReader(ubicacio));
 
         String row;
 

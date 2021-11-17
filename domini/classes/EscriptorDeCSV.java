@@ -11,23 +11,23 @@ public class EscriptorDeCSV extends EscriptorDeFitxers{
     public EscriptorDeCSV() {}
 
     @Override
-    public void escriptorFitxers(String pathname, Contenidor tabla) throws IOException {
-        escriureCSV(pathname, (TaulaCSV) tabla);
+    public void escriptorFitxers(String ubicacio, Contenidor taula) throws IOException {
+        escriureCSV(ubicacio, (TaulaCSV) taula);
     }
 
     /**
      * Funció que donat un pathaname i una taula, emmagatzema el contingut en un fitxer.
-     * @param pathname <code>String</code> pathname que conté la ubicació de l'arxiu.
+     * @param ubicacio <code>String</code> pathname que conté la ubicació de l'arxiu.
      * @param tabla <code>Taula</code> tabla que és un conjunt de valors
      * @throws IOException
      */
-    public void escriureCSV(String pathname, TaulaCSV tabla) throws IOException {
+    public void escriureCSV(String ubicacio, TaulaCSV tabla) throws IOException {
         if (!tabla.estaInicialitzat()) {
             System.out.println("La taula que intentes escriure, no està inicialitzada.");
         }
 
         else {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(pathname));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ubicacio));
             ArrayList<ArrayList<String>> tablita = tabla.obtenirTaula();
             for (ArrayList<String> elem1 : tablita) {
                 boolean primero = true;
