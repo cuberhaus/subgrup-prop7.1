@@ -234,7 +234,7 @@ public class TaulaCSV extends Contenidor {
             for (ArrayList<String> fila : valoresDeItem) {
                 for (String elem : fila) {
                     System.out.print(elem);
-                    System.out.print('|');
+                    System.out.print(" | ");
                 }
                 System.out.println();
             }
