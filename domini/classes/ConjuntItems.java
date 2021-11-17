@@ -8,6 +8,9 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         tipusItem = tipus;
     }
 
+    public Item obtenirItem(Id itemId) {
+    }
+
     public ConjuntItems(TaulaCSV taula) {
         /*
         tipusItem = new TipusItem(taula.obtenirLlistaAtributs(), taula.obtenirItem(0));
