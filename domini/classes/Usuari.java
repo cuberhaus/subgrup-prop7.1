@@ -176,6 +176,10 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         return Objects.equals(this.contrasenya, contrasenya);
     }
 
+    /**
+     * Indica si dos usuaris són iguals.
+     * @return El resultat retorna true si són iguals, altrament retorna false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -183,7 +187,10 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         Usuari usuari = (Usuari) o;
         return id.equals(usuari.id);
     }
-
+    /**
+     * Calcula un codi de hash idèntic per als usuaris amb el mateix id,
+     * altrament retorna un hash diferent.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);
