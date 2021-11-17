@@ -1,7 +1,6 @@
 package jocs.joc1;
 
 import domini.classes.*;
-import domini.classes.atributs.tipus.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.recomanador.RecomanadorCollaborative;
 
@@ -15,7 +14,7 @@ import java.util.TreeMap;
 public class Joc1 {
     public static void main(String[] args) throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        Taula taula_items = lector.llegirCSV("./domini/tests/jocs/joc1/items.csv");
+        TaulaCSV taula_items = lector.llegirCSV("./domini/tests/jocs/joc1/items.csv");
         taula_items.imprimir();
         Item[] items = new Item[taula_items.obtenirNumeroElements()];
         TipusItem tipusItem = new TipusItem("pelicula", new TreeMap<>());

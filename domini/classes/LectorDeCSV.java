@@ -25,8 +25,8 @@ public class LectorDeCSV extends LectorDeFitxers{
      * @return <code>Taula</code> amb el contingut de lal CSV
      * @throws IOException
      */
-    public Taula llegirCSV(String pathname) throws IOException {
-        Taula tabla = new Taula();
+    public TaulaCSV llegirCSV(String pathname) throws IOException {
+        TaulaCSV tabla = new TaulaCSV();
         BufferedReader csvReader = new BufferedReader(new FileReader(pathname));
 
         String row;
