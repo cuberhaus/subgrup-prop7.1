@@ -7,7 +7,6 @@ import java.util.Arrays;
  * @author edgar.moreno
  */
 public class SlopeOne {
-
     /** Numero de usuaris processats */
     private final int num_usuaris;
     /** Numero de valoracions processades */

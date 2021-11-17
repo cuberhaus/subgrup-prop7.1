@@ -1,13 +1,14 @@
 package domini.classes;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Representa un conjunt d'elements identificats per un <code>Id</code>.
  * @author maria.prat
  */
 public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
-    protected Map<Id, T> elements;
+    protected TreeMap<Id, T> elements;
 
     public boolean conte(Id id) {
         return elements.containsKey(id);
@@ -31,4 +32,8 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
     public boolean esborrar(T element) {
         return elements.remove(element.obtenirId(), element);
     }
+
+    public TreeMap<Id, T> obteTotsElements() { return elements; }
+
+    public int mida() { return elements.size(); }
 }

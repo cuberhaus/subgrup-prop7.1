@@ -2,6 +2,7 @@ package domini.classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Representa un tipus de dades en el que emmagatzarem les dades llegides del CSV.
@@ -281,15 +282,13 @@ public class TaulaCSV extends Contenidor {
      * @param valor the valor
      * @return the valores de item con valor
      */
-    public ArrayList<String> obtenirValorsDeItemSeleccionat(Integer ind, String valor) {
+    public ArrayList<String> obtenirValorsDeItemSeleccionat(Integer ind, String valor) throws InterruptedException, IllegalArgumentException {
         if (numAtribs == -1) {
-            System.out.println("Encara no s'han introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else if (ind < 0 || numAtribs <= ind) {
-            System.out.println("L'atribut seleccionat no existeix");
-            return null;
+            throw new IllegalArgumentException("L'atribut seleccionat no existeix");
         }
 
         else  {
@@ -318,20 +317,19 @@ public class TaulaCSV extends Contenidor {
         }
     }
 
-    public String obtenirValorAtributItem(int indexItem, String atribut) {
+    public String obtenirValorAtributItem(int indexItem, String atribut) throws InterruptedException, IllegalArgumentException,
+            IllegalStateException
+    {
         if (numAtribs == -1) {
-            System.out.println("Encara no s'han introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else if (!this.atributosToIndex.containsKey(atribut)) {
-            System.out.println("L'atribut seleccionat no existeix");
-            return null;
+            throw new IllegalArgumentException("L'atribut seleccionat no existeix");
         }
 
         else if (indexItem < 0 || numItems <= indexItem) {
-            System.out.println("No existeix l'objecte");
-            return null;
+            throw new IllegalStateException("No existeix l'objecte");
         }
 
         return valoresDeItem.get(indexItem).get(atributosToIndex.get(atribut));

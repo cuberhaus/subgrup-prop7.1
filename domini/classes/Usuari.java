@@ -157,9 +157,9 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * @param conjuntItems Items considerats per la conversió a punt.
      * @return El <code>Punt</code> corresponent a l'usuari.
      */
-    public Punt obteComPunt(ArrayList<Item> conjuntItems) {
+    public Punt obteComPunt(ConjuntItems conjuntItems) {
         Punt res = new Punt();
-        for (Item item : conjuntItems) {
+        for (Item item : conjuntItems.obteTotsElements().values()) {
             if (valoracions.containsKey(item)) {
                 res.add(valoracions.get(item).getValor());
             } else res.add(-1.);

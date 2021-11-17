@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 /**
- * @pablo.vega
+ * @author pablo.vega
  */
 
 public class ConjuntItems extends ConjuntIdentificat<Item> {
