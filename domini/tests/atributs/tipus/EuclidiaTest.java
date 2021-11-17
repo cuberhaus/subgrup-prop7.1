@@ -56,7 +56,7 @@ class EuclidiaTest {
         }
 
         @Parameterized.Parameters(name = "{index}: obtenirDistancia")
-        public static Collection<Object[]> dadesValorsNumerics() {
+        public static Collection<Object[]> dades() {
             return Arrays.asList(new Object[][]{
                     // ValorNumeric
                     {new ValorNumeric(0.0), new ValorNumeric(0.0), 0.0},
