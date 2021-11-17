@@ -20,12 +20,33 @@ public class TaulaCSVTest {
         tablita.introduirListaAtributs(atributs);
     }
 
-    @Test
-    public void introduirLlistaDeValors() {
+    //Si no hem inicialitzat amb atributs la taula abans excepcio
+    @Test(expected = InterruptedException.class)
+    public void introduirLlistaDeValors() throws InterruptedException {
+        TaulaCSV tablita = new TaulaCSV();
+        ArrayList<String> valors = new ArrayList<>();
+        valors.add("hola");
+        valors.add("pol");
+        tablita.introduirLlistaDeValors(valors);
     }
 
-    @Test
-    public void obtenirValorsAtribut() {
+    //Si no tenim la mateixa quantitat de valors que d'atributs
+    @Test(expected = IllegalArgumentException.class)
+    public void introduirLlistaDeValors1() throws InterruptedException {
+        TaulaCSV tablita = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        ArrayList<String> valors = new ArrayList<>();
+        atributs.add("genere");
+        valors.add("hola");
+        valors.add("pol");
+        tablita.introduirListaAtributs(atributs);
+        tablita.introduirLlistaDeValors(valors);
+    }
+
+    @Test(expected = InterruptedException.class)
+    public void obtenirValorsAtribut() throws InterruptedException {
+        TaulaCSV tablita = new TaulaCSV();
+        tablita.obtenirValorsAtribut("id");
     }
 
     @Test

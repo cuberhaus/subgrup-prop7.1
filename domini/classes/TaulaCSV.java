@@ -62,14 +62,14 @@ public class TaulaCSV extends Contenidor {
      *
      * @param valors conjunt de valors.
      */
-    public void introduirLlistaDeValors(ArrayList<String> valors) {
+    public void introduirLlistaDeValors(ArrayList<String> valors) throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("Encara no has introduit la quantitat d'atributs de l'ítem a emmagatzemar, proba a cridar" +
-                    "la funcio '.introduirLlistaAtributs' ");
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else if (numAtribs != valors.size()) {
-            System.out.println("El numero d'atributs de l'item a afegir es diferent al numero d'atributs del tipus d'item.");
+            throw new IllegalArgumentException("La quantitat de valors de l'item a afegir es diferent a la " +
+                    "quantitat d'atributs");
         }
 
         else {
@@ -85,10 +85,9 @@ public class TaulaCSV extends Contenidor {
      * @param atribut the atribut
      * @return the valors atribut
      */
-    public ArrayList<String> obtenirValorsAtribut(String atribut) {
+    public ArrayList<String> obtenirValorsAtribut(String atribut) throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("No has introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
         else if (!this.atributosToIndex.containsKey(atribut)) {
             System.out.println("L'atribut dessitjat no es troba en aquest contenidor");
