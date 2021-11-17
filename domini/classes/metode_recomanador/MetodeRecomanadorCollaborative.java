@@ -45,14 +45,17 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
             if (usuari == it_usu) continue;
             punts_usuaris.add(it_usu.obteComPunt(conjuntRecomanable));
         }
+
         KMeans kMeans = new KMeans(punts_usuaris, num_clusters);
         ArrayList<ArrayList<Integer>> particions = kMeans.getParticions();
         ArrayList<Integer> particio_usuari = new ArrayList<>();
+
         for (ArrayList<Integer> part : particions) {
             if (part.contains(0)) {
                 particio_usuari = part;
             }
         }
+
         int num_usuaris = particio_usuari.size();
         int num_items = conjuntRecomanable.size();
 

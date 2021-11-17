@@ -12,6 +12,7 @@ public class Pair<X extends Comparable<X>,Y> implements Comparable<Pair<X,Y>> {
 
     public X x() { return x; }
     public Y y() { return y; }
+
     /**
      * Inicialitza una parella
      * @param x primer element

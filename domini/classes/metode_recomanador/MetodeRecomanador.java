@@ -13,6 +13,7 @@ import java.util.List;
  * @author edgar.moreno
  */
 public abstract class MetodeRecomanador {
+    // TODO: conjunt usuaris blabla
     /** Conjunt d'usuaris per defecte **/
     protected Usuari[] usuaris;
     /** Conjunt d'items per defecte **/

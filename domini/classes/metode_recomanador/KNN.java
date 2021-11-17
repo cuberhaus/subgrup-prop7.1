@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
  * @author edgar.moreno
  */
 public class KNN {
+    // TODO: conjunt items
     /** Items considerats a l'algorisme*/
     private final Item[] items;
 
