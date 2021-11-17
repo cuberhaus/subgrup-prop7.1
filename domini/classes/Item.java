@@ -11,9 +11,9 @@ import java.util.Map;
  * @author maria.prat
  */
 public class Item implements Comparable<Item>{
-    final Id id;
-    final TipusItem tipusItem;
-    Map<String, ValorAtribut<?>> atributs;
+    private final Id id;
+    private final TipusItem tipusItem;
+    private Map<String, ValorAtribut<?>> atributs;
     private Map<Usuari, Valoracio> valoracions;
 
     /**
