@@ -13,6 +13,13 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
         return elements.containsKey(id);
     }
 
+    public T obte(Id id) {
+        if (id == null | !elements.containsKey(id)) {
+            throw new IllegalArgumentException("El conjunt no conté cap element amb aquest Id");
+        }
+        return elements.get(id);
+    }
+
     public T afegir(T element) {
         return elements.put(element.obtenirId(), element);
     }
