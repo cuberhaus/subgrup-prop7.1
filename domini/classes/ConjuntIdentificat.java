@@ -13,15 +13,15 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
         return elements.containsKey(id);
     }
 
-    public T afegeix(T element) {
+    public T afegir(T element) {
         return elements.put(element.obtenirId(), element);
     }
 
-    public T esborra(Id id) {
+    public T esborrar(Id id) {
         return elements.remove(id);
     }
 
-    public boolean esborra(T element) {
+    public boolean esborrar(T element) {
         return elements.remove(element.obtenirId(), element);
     }
 }
