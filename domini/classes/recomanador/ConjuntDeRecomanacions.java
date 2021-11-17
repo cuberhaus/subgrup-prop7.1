@@ -14,10 +14,10 @@ public class ConjuntDeRecomanacions {
     private ArrayList<Recomanacio> conjuntRecomanacions;
 
     /** */
-    private Double dgc = null;
+    private Double dcg = null;
 
     /** */
-    private Double idgc = null;
+    private Double idcg = null;
 
     /** Constructora buida per defecte */
     public ConjuntDeRecomanacions() {
@@ -49,8 +49,8 @@ public class ConjuntDeRecomanacions {
     public void afegirRecomanacio(Recomanacio rec) {
         this.conjuntRecomanacions.add(rec);
         this.ordena();
-        dgc = null;
-        idgc = null;
+        dcg = null;
+        idcg = null;
     }
 
     /**
@@ -78,62 +78,32 @@ public class ConjuntDeRecomanacions {
     }
 
     /**
-     *
-     * @return
-     */
-    public double obteDGC() {
-        return dgc;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public double obteIDGC() {
-        return idgc;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public double obteNDGC() {
-        return dgc/idgc;
-    }
-
-    /**
-     *
-     * @param a
-     * @return
+     * @return log_2(a)
      */
     private static double log2(double a){
         return Math.log(a)/Math.log(2);
     }
 
     /**
-     *
-     * @param valoracions
-     * @return
+     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @return El Discount Cumulative Gain associat a les recomanacions donades les valoracions.
      */
-    public double calculaDGC(ArrayList<Pair<Integer,Double>> valoracions) {
-        return dgc = calculaDGC(valoracions, conjuntRecomanacions.size());
+    public double calculaDCG(ArrayList<Pair<Integer,Double>> valoracions) {
+        return calculaDCG(valoracions, conjuntRecomanacions.size());
     }
 
-    // @pre: recomanacions ordenades segons el sistema.
-
     /**
-     *
-     * @param valoracions
-     * @param p
-     * @return
+     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param p nombre de recomanacions a tenir en compte.
+     * @return El Discount Cumulative Gain associat a les p primeres recomanacions donades les valoracions.
      */
-    public double calculaDGC(ArrayList<Pair<Integer,Double>> valoracions, int p) {
+    public double calculaDCG(ArrayList<Pair<Integer,Double>> valoracions, int p) {
         ordena();
         Map<Integer,Double> id_to_valoracio = new HashMap<>();
         for(Pair<Integer,Double> x : valoracions) {
             id_to_valoracio.put(x.x, x.y);
         }
-        dgc = 0.;
+        dcg = 0.;
         int pos = 1;
         for(int i = 0; i < Math.min(conjuntRecomanacions.size(), p); ++i) {
             if (i > 0 && !Objects.equals(conjuntRecomanacions.get(i).obtenirRate(), conjuntRecomanacions.get(i - 1).obtenirRate()))
@@ -141,18 +111,17 @@ public class ConjuntDeRecomanacions {
             double rel = 0;
             if (id_to_valoracio.containsKey(conjuntRecomanacions.get(i).obtenirId()))
                 rel = id_to_valoracio.get(conjuntRecomanacions.get(i).obtenirId());
-            dgc += (Math.pow(2,rel)-1)/log2(pos);
+            dcg += (Math.pow(2,rel)-1)/log2(pos);
         }
-        return dgc;
+        return dcg;
     }
 
     /**
-     *
-     * @param valoracions
-     * @param p
-     * @return
+     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param p nombre de recomanacions sobre el que calcular p.
+     * @return El Ideal Discount Cumulative Gain assolible amb p recomanacions.
      */
-    public double calculaIDGC(ArrayList<Pair<Integer,Double>> valoracions, int p) {
+    public double calculaIDCG(ArrayList<Pair<Integer,Double>> valoracions, int p) {
         PriorityQueue<Double> pq = new PriorityQueue<>();
         for (var x : valoracions) {
             if (pq.size() < p) {
@@ -165,35 +134,38 @@ public class ConjuntDeRecomanacions {
         }
         Double[] top_val = pq.toArray(new Double[0]);
         Arrays.sort(top_val, Collections.reverseOrder());
-        idgc = 0.;
+        idcg = 0.;
         int pos = 1;
         for(int i = 0; i < top_val.length; ++i) {
             if (i > 0 && !Objects.equals(top_val[i], top_val[i - 1]))
                 pos = i+1;
             double rel = top_val[i];
-            idgc += (Math.pow(2,rel)-1)/log2(pos);
+            idcg += (Math.pow(2,rel)-1)/log2(pos);
         }
-        return idgc;
+        return idcg;
     }
 
     /**
-     *
-     * @param valoracions
-     * @return
+     * A més de retornar el NDCG actualitza el valor de dcg i idcg consultables amb <code>obteDCG()</code> i <code>obteIDCG()</code>
+     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @return El Normalized Discount Cumulative Gain associat a les p primeres recomanacions donades les valoracions (entre 0 i 1).
      */
-    public double calculaNDGC(ArrayList<Pair<Integer,Double>> valoracions) {
-        return calculaNDGC(valoracions, conjuntRecomanacions.size());
+    public double calculaNDCG(ArrayList<Pair<Integer,Double>> valoracions) {
+        return calculaNDCG(valoracions, conjuntRecomanacions.size());
     }
 
     /**
-     *
-     * @param valoracions
-     * @param p
-     * @return
+     * A més de retornar el NDCG actualitza el valor de dcg i idcg consultables amb <code>obteDCG()</code> i <code>obteIDCG()</code>
+     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param p nombre de recomanacions a tenir en compte.
+     * @return El Normalized Discount Cumulative Gain associat a les p primeres recomanacions donades les valoracions (entre 0 i 1).
      */
-    public double calculaNDGC( ArrayList<Pair<Integer,Double>> valoracions, int p) {
-        if (dgc == null) calculaDGC(valoracions, p);
-        if (idgc == null) calculaIDGC(valoracions, p);
-        return dgc/idgc;
+    public double calculaNDCG(ArrayList<Pair<Integer,Double>> valoracions, int p) {
+        calculaDCG(valoracions, p);
+        calculaIDCG(valoracions, p);
+        return dcg / idcg;
     }
+
+    public double obteDCG() { return dcg; }
+    public double obteIDCG() { return idcg; }
 }

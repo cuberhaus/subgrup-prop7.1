@@ -27,7 +27,7 @@ public class KNN {
      * @param k nombre de veins a obtenir.
      * @return els k items més propers al donat.
      */
-    public ArrayList<Item> getVeins(Item item, int k) {
+    public ArrayList<Item> obtenirVeins(Item item, int k) {
         PriorityQueue<Pair<Double, Item>> pq = new PriorityQueue<>();
         for (Item iter : items) {
             double distance = item.obtenirDistancia(iter);

@@ -2,11 +2,13 @@ package domini.tests.recomanador;
 
 import domini.classes.recomanador.Punt;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 class PuntTest {
-    @org.junit.jupiter.api.Test
-    void getDimensio() {
+    @Test
+    public void getDimensio() {
         Punt p = new Punt();
         assertEquals(0, p.obtenirDimensio());
         p.add(-1.);
@@ -14,17 +16,25 @@ class PuntTest {
         assertEquals(2, p.obtenirDimensio());
     }
 
-    @org.junit.jupiter.api.Test
-    void afegir() {
+    @Test
+    public void afegir() {
         Punt p = new Punt();
         p.add(-1.);
         p.add(-2.);
         Punt q = new Punt();
-        assertThrows(IllegalArgumentException.class, () -> p.afegir(q));
         q.add(2.);
         q.add(6.);
-        assertDoesNotThrow(()-> p.afegir(q));
-        assertEquals(1., p.get(0));
-        assertEquals(4., p.get(1));
+        p.afegir(q);
+        assertEquals(1., p.get(0), 0.000001);
+        assertEquals(4., p.get(1), 0.000001);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void afegirThrows() {
+        Punt p = new Punt();
+        p.add(-1.);
+        p.add(-2.);
+        Punt q = new Punt();
+        p.afegir(q);
     }
 }

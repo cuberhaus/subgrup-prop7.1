@@ -47,7 +47,6 @@ public class Taula extends Contenidor {
         }
 
         else {
-
             this.numAtribs = atribs.size();
             ArrayList<String> copyAtribs = new ArrayList<>(atribs);
 
@@ -344,6 +343,13 @@ public class Taula extends Contenidor {
      */
     public void imprimirNumeroElements() {
         System.out.println(numItems);
+    }
+
+    public int obtenirNumeroElements() {
+        return numItems;
+    }
+    public int obtenirNumeroAtrib() {
+        return numAtribs;
     }
 
     /**
