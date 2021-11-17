@@ -22,6 +22,8 @@ public class ProgramaTest {
     @Test
     public void tancarSessio() {
         Programa p1 = Programa.obtenirInstancia();
+        Usuari u1 = new Usuari(3,true,"Pol","1234");
+        p1.iniciarSessio(u1);
         p1.tancarSessio();
         assertFalse(p1.isSessioIniciada());
         System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
