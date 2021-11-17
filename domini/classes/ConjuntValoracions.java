@@ -3,6 +3,8 @@ package domini.classes;
 import domini.classes.csv.TaulaCSV;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -13,14 +15,14 @@ import java.util.TreeMap;
 public class ConjuntValoracions {
     private TreeMap<Pair<Usuari,Item>,Valoracio> valoracions;
 
-    public void afegir(String nomTipusItem, TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws InterruptedException {
+    public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws InterruptedException {
         ArrayList<String> idsUsuaris= valoracions.obtenirValorsAtribut("userId");
         ArrayList<String> idsItems= valoracions.obtenirValorsAtribut("itemId");
         ArrayList<String> valors= valoracions.obtenirValorsAtribut("rating");
 
         for (int i = 0; i < idsUsuaris.size(); ++i) {
             int idUsuariInt = Integer.parseInt(idsUsuaris.get(i));
-            int idItemInt = Integer.parseInt(idsUsuaris.get(i));
+            int idItemInt = Integer.parseInt(idsItems.get(i));
             Id idItem = new Id (idItemInt,true);
             Id idUsuari = new Id (idUsuariInt,true);
             Item item = items.obte(idItem);
