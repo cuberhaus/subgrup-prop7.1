@@ -9,7 +9,7 @@ public class ConjuntUsuarisTest {
 
     @Test
     public void inicialitzarUsuaris() throws IOException {
-        String ubicacio = "/home/pol/fib/PROP/Projecte/BD/250/ratings.db.csv";
+        String ubicacio = "./domini/tests/jocs/joc1/ratings.test.known.csv";
         ConjuntUsuaris c1 = new ConjuntUsuaris();
 //        c1.inicialitzarUsuaris(ubicacio);
     }
