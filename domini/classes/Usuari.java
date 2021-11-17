@@ -174,6 +174,12 @@ public class Usuari {
         return valoracions.get(item);
     }
 
+    /**
+     * Donat un conjunt d'items es retorna un punt de dimensio el cardinal del conjunt on cada coordenada correspon
+     * a la valoració d'un item per l'usuari. Si l'usuari no ha valorat l'ítem es marca amb un -1.
+     * @param conjuntItems Items considerats per la conversió a punt.
+     * @return El <code>Punt</code> corresponent a l'usuari.
+     */
     public Punt obteComPunt(ArrayList<Item> conjuntItems) {
         Punt res = new Punt();
         for (Item item : conjuntItems) {

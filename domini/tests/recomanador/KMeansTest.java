@@ -4,15 +4,18 @@ import domini.classes.recomanador.ConjuntDePunts;
 import domini.classes.recomanador.KMeans;
 import domini.classes.recomanador.Punt;
 
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class KMeansTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getParticions() {
         int k = 3;
         ConjuntDePunts cjt = new ConjuntDePunts();

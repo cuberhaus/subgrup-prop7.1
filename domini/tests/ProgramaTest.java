@@ -2,14 +2,15 @@ package domini.tests;
 
 import domini.classes.Programa;
 import domini.classes.Usuari;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+
 
 class ProgramaTest {
 
     @Test
-    void obtenirInstancia() {
+    public void obtenirInstancia() {
         Programa p1 = Programa.obtenirInstancia();
         Programa p2 = Programa.obtenirInstancia();
 
@@ -39,15 +40,15 @@ class ProgramaTest {
     }
 
     @Test
-    void obtenirUsuariSessioIniciada() {
+    public void obtenirUsuariSessioIniciada() {
     }
 
     @Test
-    void cambiarEstat() {
+    public void cambiarEstat() {
     }
 
     @Test
-    void isSessioIniciada() {
+    public void isSessioIniciada() {
         Programa p1 = Programa.obtenirInstancia();
         assertFalse(p1.isSessioIniciada());
         System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
@@ -63,14 +64,14 @@ class ProgramaTest {
     }
 
     @Test
-    void afegirUsuari() {
+    public void afegirUsuari() {
     }
 
     @Test
-    void afegirTipusItem() {
+    public void afegirTipusItem() {
     }
 
     @Test
-    void esborraUsuari() {
+    public void esborraUsuari() {
     }
 }

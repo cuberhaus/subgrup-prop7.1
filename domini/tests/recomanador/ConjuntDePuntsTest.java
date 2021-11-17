@@ -3,12 +3,14 @@ package domini.tests.recomanador;
 import domini.classes.recomanador.ConjuntDePunts;
 import domini.classes.recomanador.Punt;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 class ConjuntDePuntsTest {
 
-    @org.junit.jupiter.api.Test
-    void getDimensio() {
+    @Test
+    public void getDimensio() {
         ConjuntDePunts conjunt = new ConjuntDePunts();
         assertEquals(-1, conjunt.obtenirDimensio());
         Punt p = new Punt();
@@ -18,31 +20,40 @@ class ConjuntDePuntsTest {
         assertEquals(2, conjunt.obtenirDimensio());
     }
 
-    @org.junit.jupiter.api.Test
-    void getNumPunts() {
+    @Test
+    public void getNumPunts() {
         ConjuntDePunts conjunt = new ConjuntDePunts();
         conjunt.add(new Punt());
         conjunt.add(new Punt());
         assertEquals(2, conjunt.obtenirNumPunts());
     }
 
-    @org.junit.jupiter.api.Test
-    void add() {
+    @Test
+    public void add() {
         ConjuntDePunts conjunt = new ConjuntDePunts();
         Punt p = new Punt();
         p.add(0.0);
         p.add(0.0);
         conjunt.add(p);
         Punt q = new Punt();
-        assertThrows(IllegalArgumentException.class, () -> conjunt.add(q));
         q.add(1.);
         q.add(0.);
-        assertDoesNotThrow(() -> conjunt.add(q) );
-        assertEquals(1. , conjunt.get(1).get(0));
+        conjunt.add(q);
+        assertEquals(1. , conjunt.get(1).get(0), 0.000001);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void addThrows() {
+        ConjuntDePunts conjunt = new ConjuntDePunts();
+        Punt p = new Punt();
+        p.add(0.0);
+        p.add(0.0);
+        conjunt.add(p);
+        Punt q = new Punt();
+        conjunt.add(q);
     }
 
-    @org.junit.jupiter.api.Test
-    void getBaricentre() {
+    @Test
+    public void getBaricentre() {
         ConjuntDePunts conjunt = new ConjuntDePunts();
         Punt p = new Punt();
         p.add(2.0);
@@ -50,8 +61,8 @@ class ConjuntDePuntsTest {
         conjunt.add(p);
 
         Punt baricentre = conjunt.obtenirBaricentre();
-        assertEquals(2., baricentre.get(0));
-        assertEquals(3., baricentre.get(1));
+        assertEquals(2., baricentre.get(0), 0.000001);
+        assertEquals(3., baricentre.get(1), 0.000001);
 
         Punt q = new Punt();
         q.add(-1.);
@@ -59,14 +70,14 @@ class ConjuntDePuntsTest {
         conjunt.add(q);
 
         baricentre = conjunt.obtenirBaricentre();
-        assertEquals(0.5, baricentre.get(0));
-        assertEquals(8.5, baricentre.get(1));
+        assertEquals(0.5, baricentre.get(0), 0.000001);
+        assertEquals(8.5, baricentre.get(1), 0.000001);
 
         conjunt.remove(1);
 
         baricentre = conjunt.obtenirBaricentre();
-        assertEquals(2., baricentre.get(0));
-        assertEquals(3., baricentre.get(1));
+        assertEquals(2., baricentre.get(0), 0.000001);
+        assertEquals(3., baricentre.get(1), 0.000001);
     }
 
 }

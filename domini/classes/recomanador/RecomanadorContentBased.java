@@ -1,10 +1,6 @@
 package domini.classes.recomanador;
 
 import domini.classes.*;
-import domini.classes.recomanador.ConjuntDeRecomanacions;
-import domini.classes.recomanador.KNN;
-import domini.classes.recomanador.MetodeRecomanador;
-import domini.classes.recomanador.Recomanacio;
 
 import java.util.*;
 
@@ -49,7 +45,7 @@ public class RecomanadorContentBased extends MetodeRecomanador {
         for (Valoracio val : valoracions_usuari) {
             if (val.getValor() > minimaValoracioConsiderada) {
                 // TODO: agafo tants veins com recomanacions volem, no te perque ser la millor eleccio
-                ArrayList<Item> veins = knn.getVeins(val.getItem(), numRecomanacions);
+                ArrayList<Item> veins = knn.obtenirVeins(val.getItem(), numRecomanacions);
                 for (Item it : veins) {
                     if (valor_item.containsKey(it.obtenirId())) {
                         valor_item.put(it.obtenirId() ,valor_item.get(it.obtenirId()) + val.getValor());
