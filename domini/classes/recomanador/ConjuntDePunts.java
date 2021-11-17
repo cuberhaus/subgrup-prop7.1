@@ -14,7 +14,7 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
     private Punt baricentre;
 
     /** ID de referencia per buscar la primera ID no utilitzada */
-    private int new_id = 0;
+    private int ultimId = 0;
 
     /**
      * Crea un conjunt de punts buit sense cap dimensió assignada.
@@ -47,10 +47,10 @@ public class ConjuntDePunts extends TreeMap<Integer, Punt> {
      * @return una id que no estigui utilitzada per cap element del conjunt.
      */
     public Integer obtenirIdLliure() {
-        while (super.containsKey(new_id)) {
-            new_id++;
+        while (super.containsKey(ultimId)) {
+            ultimId++;
         }
-        return new_id;
+        return ultimId;
     }
 
     private void recalculaBaricentreAfegit(Punt nouPunt) {
