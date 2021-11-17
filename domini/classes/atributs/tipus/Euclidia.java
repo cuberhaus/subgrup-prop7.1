@@ -16,6 +16,9 @@ public class Euclidia extends TipusAtribut {
 
     @Override
     public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) {
+        if (valorAtribut == null) {
+            throw new IllegalArgumentException("No es pot comprovar si un ValorAtribut nul és admissible.");
+        }
         return valorAtribut instanceof ValorNumeric || valorAtribut instanceof ValorConjuntNumeric;
     }
 
@@ -38,7 +41,8 @@ public class Euclidia extends TipusAtribut {
             }
             double distancia = 0.0;
             for (int i = 0; i < valorConjuntNumeric1.getValor().size(); ++i) {
-                distancia += Math.pow(valorConjuntNumeric1.getValor().get(i).getValor() - valorConjuntNumeric2.getValor().get(i).getValor(), 2);
+                distancia += Math.pow(valorConjuntNumeric1.getValor().get(i).getValor()
+                        - valorConjuntNumeric2.getValor().get(i).getValor(), 2);
             }
             return Math.sqrt(distancia);
         }
