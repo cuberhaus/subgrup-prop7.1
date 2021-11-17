@@ -48,7 +48,7 @@ public class Item implements Comparable<Item>{
         if (!this.equals(valoracio.getItem())) {
             throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
         }
-        if (!valoracions.containsKey(valoracio.getUsuari())) {
+        if (valoracions.containsKey(valoracio.getUsuari())) {
             return false;
         }
         valoracions.put(valoracio.getUsuari(), valoracio);
