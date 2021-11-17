@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 
 public class ConjuntValoracions {
+
     public void afegir(String nomTipusItem,TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) {
 
         ArrayList<String> idsUsuaris= valoracions.obtenirValorsAtribut("userId");
@@ -23,7 +24,7 @@ public class ConjuntValoracions {
             Usuari usuari = usuaris.obte(idUsuari);
             double doubleValoracio = Double.parseDouble(valors.get(i));
             Valoracio valoracio = new Valoracio(doubleValoracio, usuari,item);
-            this.afegir(valoracio);
+//            this.afegir(valoracio);
         }
 
     }
