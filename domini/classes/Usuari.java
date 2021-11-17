@@ -38,6 +38,16 @@ public class Usuari {
         this.contrasenya = contrasenya;
     }
 
+    /** Constructora donat un id, un estat "actiu".
+     * @param id representa l'id de l'usuari
+     * @param actiu representa si l'usuari està actiu o no.
+     */
+    public Usuari(int id, boolean actiu) {
+        this.id = new Id(id,actiu);
+        this.nom = null;
+        this.contrasenya = null;
+    }
+
     /** Constructora donat un id, un nom i una contrasenya.
      * @param id representa l'id de l'usuari
      * @param nom representa el nom de l'usuari.

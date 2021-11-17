@@ -1,3 +1,5 @@
+package domini.classes;
+
 import domini.classes.Programa;
 import domini.classes.Usuari;
 import org.junit.Test;

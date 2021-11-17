@@ -1,5 +1,6 @@
 package domini.classes;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -18,12 +19,13 @@ public class Programa {
     private static Programa instancia_unica = null;
 
     /** Conté el conjunt d'usuaris */
-    private Map<Usuari,Usuari> usuaris;
+//    private Map<Usuari,Usuari> usuaris;
+    private ConjuntUsuaris conjuntUsuaris;
 
     /** Conté el conjunt de tipus d'items */
-    private Map<TipusItem,TipusItem> tipusItems;
+    private Map<TipusItem,TipusItem> tipusItems = new HashMap<TipusItem,TipusItem>();
 
-//    /** Conté els conjunts de programes */
+//    /** Conté els conjunts de programa */
 //    private ArrayList<conjuntPrograma> conjuntsPrograma;
 
     /**
@@ -84,13 +86,13 @@ public class Programa {
      * Retorna true si s'ha afegit correctament, retorna false si ja hi era
      * @param  usuari el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
-    public boolean afegirUsuari(Usuari usuari) {
-        if (usuaris.containsKey(usuari)) {
-            return false;
-        }
-        usuaris.put(usuari,usuari);
-        return true;
-    }
+//    public boolean afegirUsuari(Usuari usuari) {
+////        if (usuaris.containsKey(usuari)) {
+////            return false;
+////        }
+////        usuaris.put(usuari,usuari);
+////        return true;
+//    }
 
     /**
      * Afegeix un tipus d'item al conjunt de tipus d'items.
@@ -106,9 +108,12 @@ public class Programa {
     }
 
     // TODO: junit comprovar que atribut actiu del usuari del conjunt es false
+    /**
+     * Marca com a no actiu un usuari del conjunt d'usuaris.
+     * @param usuari el paràmetre s'ha marcat com a no actiu.
+     */
     public void esborraUsuari(Usuari usuari) {
-        usuari.setActiu(false);
-        usuaris.replace(usuari,usuari,usuari);
+        conjuntUsuaris.esborraUsuari(usuari);
     }
 
 //    /**
