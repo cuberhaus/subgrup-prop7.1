@@ -146,7 +146,7 @@ public class Usuari {
         if (!this.equals(valoracio.getUsuari())) {
             throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
         }
-        if (!valoracions.containsKey(valoracio.getItem())) {
+        if (valoracions.containsKey(valoracio.getItem())) {
             return false;
         }
         valoracions.put(valoracio.getItem(),valoracio);

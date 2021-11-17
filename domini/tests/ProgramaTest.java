@@ -18,12 +18,12 @@ class ProgramaTest {
         System.out.println(getClass(p1));
     }
 
-    private String getClass(Programa p) {
+    public String getClass(Programa p) {
         return "The class is of type Programa";
     }
 
     @Test
-    void tancarSessio() {
+    public void tancarSessio() {
         Programa p1 = Programa.obtenirInstancia();
         p1.tancarSessio();
         assertFalse(p1.isSessioIniciada());
@@ -31,7 +31,7 @@ class ProgramaTest {
     }
 
     @Test
-    void iniciarSessio() {
+    public void iniciarSessio() {
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
