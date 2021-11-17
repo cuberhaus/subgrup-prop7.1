@@ -11,34 +11,31 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 @RunWith(Enclosed.class)
 class LevenshteinTest {
 
-    static Levenshtein levenshtein = new Levenshtein();
+    private final static double delta = 1e-10;
+    private final static Levenshtein levenshtein = new Levenshtein();
 
     public static class NonParametrizedLevenshteinTest {
-        @org.junit.Test
+        @Test
         public void copy_HauriaDeRetornarCopia() {
             TipusAtribut copia = levenshtein.copy();
             assertNotSame(copia, levenshtein);
             assertEquals(copia, levenshtein);
         }
 
-        @org.junit.Test
+        @Test(expected = IllegalArgumentException.class)
         public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
-            Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                    levenshtein.obtenirDistancia(new ValorBoolea(true), new ValorNumeric(1.0)));
-            assertEquals("Els dos ValorAtributs donats han de ser instàncies de la mateixa classe.",
-                    exception.getMessage());
+            levenshtein.obtenirDistancia(new ValorBoolea(true), new ValorNumeric(1.0));
         }
 
-        @org.junit.Test
+        @Test(expected = IllegalArgumentException.class)
         public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
-            Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                    levenshtein.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false)));
-            assertEquals("El TipusAtribut no admet el tipus dels ValorAtributs donats.", exception.getMessage());
+            levenshtein.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false));
         }
     }
 
@@ -65,6 +62,7 @@ class LevenshteinTest {
                     {new ValorCategoric("foobar"), new ValorCategoric("foofoobarbar"), 6.0},
                     {new ValorCategoric("foobar"), new ValorCategoric("fOObar"), 2.0},
                     {new ValorCategoric("foobar"), new ValorCategoric("foOba"), 2.0},
+                    {new ValorCategoric("foobar"), new ValorCategoric("1foOba"), 3.0},
                     // ValorTextual
                     {new ValorTextual("foobar"), new ValorTextual("foobar"), 0.0},
                     {new ValorTextual("foobar"), new ValorTextual("foobar0"), 1.0},
@@ -73,12 +71,13 @@ class LevenshteinTest {
                     {new ValorTextual("foobar"), new ValorTextual("foofoobarbar"), 6.0},
                     {new ValorTextual("foobar"), new ValorTextual("fOObar"), 2.0},
                     {new ValorCategoric("foobar"), new ValorCategoric("foOba"), 2.0},
+                    {new ValorCategoric("foobar"), new ValorCategoric("1foOba"), 3.0},
             });
         }
 
         @Test
         public void obtenirDistancia_HauriaDeRetornarDistancia() {
-            assertEquals(levenshtein.obtenirDistancia(valor1, valor2), resultat);
+            assertEquals(levenshtein.obtenirDistancia(valor1, valor2), resultat, delta);
         }
     }
 }

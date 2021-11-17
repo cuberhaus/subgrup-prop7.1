@@ -12,12 +12,14 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 @RunWith(Enclosed.class)
 class EuclidiaTest {
 
-    static Euclidia euclidia = new Euclidia();
+    private final static double delta = 1e-10;
+    private final static Euclidia euclidia = new Euclidia();
 
     public static class NonParametrizedEuclidiaTest {
         @Test
@@ -27,19 +29,14 @@ class EuclidiaTest {
             assertEquals(copia, euclidia);
         }
 
-        @Test
+        @Test(expected = IllegalArgumentException.class)
         public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
-            Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                    euclidia.obtenirDistancia(new ValorBoolea(true), new ValorNumeric(1.0)));
-            assertEquals("Els dos ValorAtributs donats han de ser instàncies de la mateixa classe.",
-                    exception.getMessage());
+            euclidia.obtenirDistancia(new ValorBoolea(true), new ValorNumeric(1.0));
         }
 
-        @Test
+        @Test(expected = IllegalArgumentException.class)
         public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
-            Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                    euclidia.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false)));
-            assertEquals("El TipusAtribut no admet el tipus dels ValorAtributs donats.", exception.getMessage());
+            euclidia.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false));
         }
     }
 
@@ -73,7 +70,7 @@ class EuclidiaTest {
 
         @Test
         public void obtenirDistancia_HauriaDeRetornarDistancia() {
-            assertEquals(euclidia.obtenirDistancia(valor1, valor2), resultat);
+            assertEquals(euclidia.obtenirDistancia(valor1, valor2), resultat, delta);
         }
     }
 }
