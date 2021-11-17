@@ -1,8 +1,9 @@
 package domini.classes;
 
-import domini.classes.atributs.tipus.TipusAtribut;
-import domini.classes.atributs.valors.ValorAtribut;
+import domini.classes.atributs.tipus.*;
+import domini.classes.atributs.valors.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,51 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         if (!tipusItem.esCompatible(atributs)) {
             throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
         }
+    }
+
+    public Item(Id id, TipusItem tipusItem, ArrayList<String> valors) {
+        this.id = id;
+        this.tipusItem = tipusItem;
+        this.atributs = obtenirAtributs(tipusItem, valors);
+        this.valoracions = new HashMap<>();
+        if (!tipusItem.esCompatible(atributs)) {
+            throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
+        }
+    }
+
+    private ValorAtribut<?> dedueixValorAtribut(String s) {
+        double d;
+        try {
+            d = Double.parseDouble(s);
+        } catch (NumberFormatException e1) {
+            if (ValorBoolea.esBoolea(s)) {
+                return new ValorBoolea(s);
+            }
+            if (s.contains(";")) {
+                String primerValor = s.split(";", 2)[0];
+                try {
+                    Double.parseDouble(primerValor);
+                } catch (NumberFormatException e2) {
+                    return new ValorConjuntCategoric(s);
+                }
+                return new ValorConjuntNumeric(s);
+            }
+            return new ValorCategoric(s);
+        }
+        return new ValorNumeric(d);
+    }
+
+    private Map<String, ValorAtribut<?>> obtenirAtributs(TipusItem tipusItem, ArrayList<String> valors) throws IllegalArgumentException {
+        if (tipusItem.obtenirTipusAtributs().size() != valors.size()) {
+            throw new IllegalArgumentException("No es poden obtenir els atributs d'un ítem d'un TipusItem i un conjunt de valors de mides diferents.");
+        }
+        Map<String, ValorAtribut<?>> atributs = new HashMap<>();
+        int index = 0;
+        for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
+            atributs.put(atribut.getKey(), dedueixValorAtribut(valors.get(index)));
+            ++index;
+        }
+        return atributs;
     }
 
     public Id obtenirId() { return id; }
@@ -73,7 +119,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
             return Double.POSITIVE_INFINITY;
         }
         double distancia = 0.0;
-        for (Map.Entry<String, TipusAtribut> entrada : tipusItem.getTipusAtributs().entrySet()) {
+        for (Map.Entry<String, TipusAtribut> entrada : tipusItem.obtenirTipusAtributs().entrySet()) {
             distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
                     item.atributs.get(entrada.getKey()));
         }

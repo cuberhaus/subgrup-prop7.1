@@ -1,8 +1,10 @@
 package domini.classes;
 
-import domini.classes.atributs.tipus.TipusAtribut;
+import domini.classes.atributs.tipus.*;
 import domini.classes.atributs.valors.ValorAtribut;
+import domini.classes.atributs.valors.ValorBoolea;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,17 +28,60 @@ public class TipusItem {
     }
 
     /**
+     * Crea un <code>TipusItem</code> donats el nom del <code>TipusItem</code>, els noms dels atributs i un conjunt de valors.
+     * Assigna el <code>TipusAtribut</code>. per defecte en funció del tipus de cada valor.
+     * @param nomTipusItem <code>String</code> que conté el nom del <code>TipusItem</code>.
+     * @param nomsAtributs <code>ArrayList<String></code> que conté el nom dels atributs del <code>TipusItem</code>.
+     * @param valors <code>ArrayList<String></code> que conté el conjunt de valors d'un item del <code>TipusItem</code>
+     *               corresponents als noms que conté <code>nomsAtributs</code>.
+     */
+    public TipusItem(String nomTipusItem, ArrayList<String> nomsAtributs, ArrayList<String> valors) throws IllegalArgumentException {
+        this.nom = nomTipusItem;
+        this.tipusAtributs = new HashMap<>();
+        if (nomsAtributs.size() != valors.size()) {
+            throw new IllegalArgumentException("No es pot deduir el TipusItem d'un conjunt de noms i valors de mides diferents.");
+        }
+        for (int i = 0; i < nomsAtributs.size(); ++i) {
+            this.tipusAtributs.put(nomsAtributs.get(i), dedueixTipusAtribut(valors.get(i)));
+        }
+    }
+
+    private TipusAtribut dedueixTipusAtribut(String s) {
+        try {
+            Double.parseDouble(s);
+        } catch (NumberFormatException e1) {
+            if (ValorBoolea.esBoolea(s)) {
+                return new Discret();
+            }
+            if (s.contains(";")) {
+                String primerValor = s.split(";", 2)[0];
+                try {
+                    Double.parseDouble(primerValor);
+                } catch (NumberFormatException e2) {
+                    // TODO(maria): pensar si volem que aquest mètode pugui llegir conjunts de booleans (caldria iterar
+                    // per tots els elements per assegurar que són tots booleans. L'alternativa és fer el cast més endavant
+                    // si l'usuari ho demana.
+                    return new DiferenciaDeConjunts();
+                }
+                return new Euclidia();
+            }
+            return new Levenshtein();
+        }
+        return new Euclidia();
+    }
+
+    /**
      * Assigna el nom del <code>TipusItem</code>.
      * @param nom <code>String</code> que conté el nom del <code>TipusItem</code>.
      */
-    public void setNom(String nom) {
+    public void assignarNom(String nom) {
         this.nom = nom;
     }
 
     /**
      * @return <code>String</code> que conté el nom del <code>TipusItem</code>.
      */
-    public String getNom() {
+    public String obtenirNom() {
         return nom;
     }
 
@@ -44,14 +89,14 @@ public class TipusItem {
      * Assigna els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
      * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
      */
-    public void setTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
+    public void assignarTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
         this.tipusAtributs = tipusAtributs;
     }
 
     /**
      * @return <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
      */
-    public Map<String, TipusAtribut> getTipusAtributs() {
+    public Map<String, TipusAtribut> obtenirTipusAtributs() {
         Map<String, TipusAtribut> copiaTipusAtributs = new HashMap<>();
         for (Map.Entry<String, TipusAtribut> entrada : tipusAtributs.entrySet()) {
             copiaTipusAtributs.put(entrada.getKey(), entrada.getValue().copy());
@@ -67,7 +112,7 @@ public class TipusItem {
      * @param tipusAtribut <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
      *                     <code>TipusItem</code>.
      */
-    public void addTipusAtribut(String nomTipusAtribut, TipusAtribut tipusAtribut) {
+    public void afegirTipusAtribut(String nomTipusAtribut, TipusAtribut tipusAtribut) {
         this.tipusAtributs.put(nomTipusAtribut, tipusAtribut);
     }
 

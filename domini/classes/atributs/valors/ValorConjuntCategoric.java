@@ -27,6 +27,10 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
         }
     }
 
+    public ValorConjuntCategoric(String s) {
+        this(s.split(";"));
+    }
+
     /**
      * @return <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
      */

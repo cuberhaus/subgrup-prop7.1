@@ -113,7 +113,7 @@ public class Programa {
      * @param usuari el paràmetre s'ha marcat com a no actiu.
      */
     public void esborraUsuari(Usuari usuari) {
-        conjuntUsuaris.esborraUsuari(usuari);
+        conjuntUsuaris.esborrar(usuari);
     }
 
 //    /**

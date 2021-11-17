@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Joc1 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV taula_items = lector.llegirCSV("./domini/tests/jocs/joc1/items.csv");
         taula_items.imprimir();

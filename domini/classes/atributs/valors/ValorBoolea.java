@@ -14,11 +14,20 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
         this.valor = valor;
     }
 
+    public ValorBoolea(String s) {
+        this.valor = Boolean.parseBoolean(s.toLowerCase());
+    }
+
     /**
      * @return <code>boolean</code> que conté el valor d'aquest atribut.
      */
     @Override
     public Boolean getValor() {
         return valor;
+    }
+
+
+    public static boolean esBoolea(String s) {
+        return s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false");
     }
 }
