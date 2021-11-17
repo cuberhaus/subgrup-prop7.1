@@ -30,6 +30,29 @@ public class ConjuntValoracions {
                 this.valoracions.put(new Pair(usuari,item), valoracio);
             }
         }
-
     }
+
+    public boolean conte(Usuari usuari, Item item){
+        return valoracions.containsKey(new Pair(usuari,item));
+    }
+
+    public Valoracio obte(Usuari usuari, Item item) {
+        if (item == null || usuari == null || !valoracions.containsKey(new Pair(usuari,item))) {
+            throw new IllegalArgumentException("El conjunt no conté cap element amb aquest Id");
+        }
+        return valoracions.get(new Pair(usuari, item));
+    }
+
+    public Valoracio afegir(Valoracio valoracio) {
+        return valoracions.put(new Pair(valoracio.getUsuari(),valoracio.getItem()), valoracio);
+    }
+
+    public Valoracio esborrar(Usuari usuari, Item item) {
+        return valoracions.remove(new Pair(usuari,item));
+    }
+
+    public boolean esborrar(Valoracio valoracio) {
+        return valoracions.remove(new Pair(valoracio.getUsuari(),valoracio.getItem()), valoracio);
+    }
+
 }
