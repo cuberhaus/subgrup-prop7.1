@@ -1,5 +1,4 @@
-package domini.classes;
-
+import domini.classes.ConjuntUsuaris;
 import org.junit.Test;
 
 import java.io.IOException;
