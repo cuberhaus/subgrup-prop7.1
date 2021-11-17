@@ -60,39 +60,6 @@ public class Usuari implements ElementIdentificat {
     }
 
     /**
-     * Indica si dos usuaris són iguals.
-     *
-     * @return El resultat retorna true si són iguals, altrament retorna false.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        Usuari usuari = (Usuari)obj;
-        return this.id.equals(usuari.id);
-    }
-
-    /**
-     * Calcula un codi de hash idèntic per als usuaris amb el mateix id,
-     * altrament retorna un hash diferent.
-     * @return El resultat retorna true si són iguals, altrament retorna false.
-     */
-    @Override
-    public int hashCode() {
-        int prime1 = 29;
-        int prime2 = 17;
-        int hash1;
-        // Comprovem que els atributs no siguin nulls
-        if (id == null) {
-            hash1 = 0;
-        }
-        else {
-            hash1 = id.hashCode();
-        }
-        int hash = prime1;
-        hash = hash * prime2 + hash1;
-        return hash;
-    }
-
-    /**
      * Consultora del nom
      * @return El resultat és el valor del P.I.
      */
@@ -207,6 +174,19 @@ public class Usuari implements ElementIdentificat {
      */
     public boolean isContrasenya(String contrasenya) {
         return Objects.equals(this.contrasenya, contrasenya);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuari usuari = (Usuari) o;
+        return id.equals(usuari.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
 
