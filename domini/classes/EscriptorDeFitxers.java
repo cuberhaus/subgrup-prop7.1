@@ -8,5 +8,5 @@ import java.io.IOException;
  */
 public abstract class EscriptorDeFitxers {
     public EscriptorDeFitxers() {}
-    public void escriptorFitxers(String ubicacio, Contenidor taula) throws IOException {}
+    public void escriptorFitxers(String ubicacio, Contenidor taula) throws IOException, InterruptedException {}
 }

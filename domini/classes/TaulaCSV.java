@@ -90,8 +90,7 @@ public class TaulaCSV extends Contenidor {
             throw new InterruptedException("No s'han inicialitzat els atributs");
         }
         else if (!this.atributosToIndex.containsKey(atribut)) {
-            System.out.println("L'atribut dessitjat no es troba en aquest contenidor");
-            return null;
+            throw new IllegalArgumentException("L'atribut dessitjat no es troba en aquest contenidor");
         }
 
         else {
@@ -111,14 +110,12 @@ public class TaulaCSV extends Contenidor {
      * @param indexAtrib the index atrib
      * @return the valors atribut
      */
-    public ArrayList<String> obtenirValorsAtribut(int indexAtrib) {
+    public ArrayList<String> obtenirValorsAtribut(int indexAtrib) throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("No has introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
         else if (indexAtrib < 0 || indexAtrib >= numAtribs) {
-            System.out.println("L'index de l'atribut dessitjat no es troba en aquest contenidor");
-            return null;
+            throw new IllegalArgumentException("L'index d'atribut dessitjat no es troba en aquest contenidor");
         }
 
         else {
@@ -138,15 +135,13 @@ public class TaulaCSV extends Contenidor {
      * @param indexItem the index item
      * @return item
      */
-    public ArrayList<String> obtenirItem(Integer indexItem) {
+    public ArrayList<String> obtenirItem(Integer indexItem) throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("Atributs no inicialitzats");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
-        else if (indexItem < 0 || numAtribs <= indexItem) {
-            System.out.println("L'índex de l'item no es el valid");
-            return null;
+        else if (indexItem < 0 || numItems <= indexItem) {
+            throw new IllegalArgumentException("L'index de l'item no correspon amb cap");
         }
 
         else {
@@ -161,10 +156,9 @@ public class TaulaCSV extends Contenidor {
      *
      * @return atrib list
      */
-    public ArrayList<String> obtenirLlistaAtributs() {
+    public ArrayList<String> obtenirLlistaAtributs() throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("Encara no s'han introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else {
@@ -181,10 +175,9 @@ public class TaulaCSV extends Contenidor {
      *
      * @return valores de todos los items
      */
-    public ArrayList<ArrayList<String>> obtenirValorsDeTotsElsItems() {
+    public ArrayList<ArrayList<String>> obtenirValorsDeTotsElsItems() throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("Encara no s'han introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else  {
@@ -198,10 +191,9 @@ public class TaulaCSV extends Contenidor {
      *
      * @return table
      */
-    public ArrayList<ArrayList<String>> obtenirTaula() {
+    public ArrayList<ArrayList<String>> obtenirTaula() throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("Encara no s'han introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else {
@@ -217,9 +209,9 @@ public class TaulaCSV extends Contenidor {
     /**
      * Imprimeix el contingut de les dades.
      */
-    public void imprimir() {
+    public void imprimir() throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("Encara no s'han introduit els atributs");
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else {
@@ -247,15 +239,13 @@ public class TaulaCSV extends Contenidor {
      * @param valor the valor
      * @return the valores de item con valor
      */
-    public ArrayList<String> obtenirValorsDeItemSeleccionat(String id, String valor) {
+    public ArrayList<String> obtenirValorsDeItemSeleccionat(String id, String valor) throws InterruptedException {
         if (numAtribs == -1) {
-            System.out.println("Encara no s'han introduit els atributs");
-            return null;
+            throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
         else if (!this.atributosToIndex.containsKey(id)) {
-            System.out.println("L'atribut seleccionat no existeix");
-            return null;
+            throw new IllegalArgumentException("L'atribut seleccionat no existeix");
         }
 
         else  {
