@@ -1,4 +1,4 @@
-package recomanador;
+package metode_recomanador;
 
 import domini.classes.metode_recomanador.ConjuntPunts;
 import domini.classes.metode_recomanador.Punt;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ConjuntDePuntsTest {
+public class ConjuntPuntsTest {
 
     @Test
     public void getDimensio() {

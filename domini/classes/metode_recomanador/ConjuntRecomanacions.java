@@ -8,7 +8,7 @@ import java.util.*;
  * Representa un conjunt de recomanacions ordenat gran a petit segon el valor de la recomanació
  * @author pablo.vega
  */
-public class ConjuntDeRecomanacions {
+public class ConjuntRecomanacions {
 
     /** Contenidor de les recomanacions */
     private ArrayList<Recomanacio> conjuntRecomanacions;
@@ -20,7 +20,7 @@ public class ConjuntDeRecomanacions {
     private Double idealDiscountedCumulativeGain = null;
 
     /** Constructora buida per defecte */
-    public ConjuntDeRecomanacions() {
+    public ConjuntRecomanacions() {
         this.conjuntRecomanacions = new ArrayList<>();
     }
 
@@ -28,7 +28,7 @@ public class ConjuntDeRecomanacions {
      * Contructora a partir d'una recomanació
      * @param rec <code>Recomanacio</code> rec és la primera recomanació.
      */
-    public ConjuntDeRecomanacions(Recomanacio rec) {
+    public ConjuntRecomanacions(Recomanacio rec) {
         this.conjuntRecomanacions = new ArrayList<>();
         this.conjuntRecomanacions.add(rec);
     }
@@ -37,7 +37,7 @@ public class ConjuntDeRecomanacions {
      * Constructora a partir d'un conjunt de recomanacions.
      * @param recs <code>ArrayList<ArrayList<Recomanacio></code> recs és el conjunt de recomanacions.
      */
-    public ConjuntDeRecomanacions(ArrayList<Recomanacio> recs) {
+    public ConjuntRecomanacions(ArrayList<Recomanacio> recs) {
         this.conjuntRecomanacions = new ArrayList<>(recs);
         this.conjuntRecomanacions.sort(Collections.reverseOrder());
     }

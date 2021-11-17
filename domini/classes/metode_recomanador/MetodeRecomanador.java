@@ -39,7 +39,7 @@ public abstract class MetodeRecomanador {
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
-    public ConjuntDeRecomanacions obteRecomanacions(Usuari usuari, Valoracio[] valoracions_usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, Valoracio[] valoracions_usuari, int numRecomanacions) {
         return obteRecomanacions(usuari, new ArrayList<>(List.of(items)), valoracions_usuari, numRecomanacions);
     }
 
@@ -49,7 +49,7 @@ public abstract class MetodeRecomanador {
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
-    public ConjuntDeRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) {
         ArrayList<Valoracio> valoracions_usuari = new ArrayList<>();
         for (var x : valoracionsPubliques) {
             if (x.getUsuari().equals(usuari)) {
@@ -67,5 +67,5 @@ public abstract class MetodeRecomanador {
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
-    public abstract ConjuntDeRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions);
+    public abstract ConjuntRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions);
 }

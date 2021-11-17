@@ -38,7 +38,7 @@ public class RecomanadorContentBased extends MetodeRecomanador {
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     @Override
-    public ConjuntDeRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
         TreeMap<Id, Double> valor_item = new TreeMap<>();
         TreeMap<Id, Item> id_a_item = new TreeMap<>();
         KNN knn = new KNN(conjuntRecomanable.toArray(new Item[0]));
@@ -65,7 +65,7 @@ public class RecomanadorContentBased extends MetodeRecomanador {
             pq.remove();
         }
 
-        ConjuntDeRecomanacions res = new ConjuntDeRecomanacions();
+        ConjuntRecomanacions res = new ConjuntRecomanacions();
         while(!pq.isEmpty()) {
             Pair<Double, Item> pair = pq.remove();
             res.afegirRecomanacio(new Recomanacio(pair.y.obtenirId(), pair.x));

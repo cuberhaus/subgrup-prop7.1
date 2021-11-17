@@ -1,4 +1,4 @@
-package recomanador;
+package metode_recomanador;
 
 import domini.classes.metode_recomanador.Punt;
 

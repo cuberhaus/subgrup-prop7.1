@@ -1,4 +1,4 @@
-package recomanador;
+package metode_recomanador;
 
 import domini.classes.metode_recomanador.ConjuntPunts;
 import domini.classes.metode_recomanador.KMeans;
@@ -16,7 +16,7 @@ import java.util.List;
 public class KMeansTest {
 
     @Test
-    void getParticions() {
+    public void getParticions() {
         int k = 3;
         ConjuntPunts cjt = new ConjuntPunts();
         List<Double> x = Arrays.asList(1., 1., 3., 5., 6., 7.,8.);

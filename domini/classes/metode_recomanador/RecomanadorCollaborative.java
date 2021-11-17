@@ -38,7 +38,7 @@ public class RecomanadorCollaborative extends MetodeRecomanador {
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     @Override
-    public ConjuntDeRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
         ConjuntPunts punts_usuaris = new ConjuntPunts();
         punts_usuaris.add(usuari.obteComPunt(conjuntRecomanable));
         for (Usuari it_usu : usuaris) {
@@ -79,7 +79,7 @@ public class RecomanadorCollaborative extends MetodeRecomanador {
             pq.remove();
         }
 
-        ConjuntDeRecomanacions res = new ConjuntDeRecomanacions();
+        ConjuntRecomanacions res = new ConjuntRecomanacions();
         while(!pq.isEmpty()) {
             Pair<Double, Item> pair = pq.remove();
             res.afegirRecomanacio(new Recomanacio(pair.y.obtenirId(), pair.x));
