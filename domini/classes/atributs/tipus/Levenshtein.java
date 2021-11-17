@@ -14,6 +14,9 @@ public class Levenshtein extends TipusAtribut {
 
     @Override
     public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) {
+        if (valorAtribut == null) {
+            throw new IllegalArgumentException("No es pot comprovar si un ValorAtribut nul és admissible.");
+        }
         return valorAtribut instanceof ValorCategoric || valorAtribut instanceof ValorTextual;
     }
 

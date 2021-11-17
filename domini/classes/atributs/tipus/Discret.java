@@ -13,7 +13,10 @@ public class Discret extends TipusAtribut {
     }
 
     @Override
-    public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) {
+    public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) throws IllegalArgumentException {
+        if (valorAtribut == null) {
+            throw new IllegalArgumentException("No es pot comprovar si un ValorAtribut nul és admissible.");
+        }
         return valorAtribut instanceof ValorBoolea || valorAtribut instanceof ValorCategoric ||
                 valorAtribut instanceof ValorNumeric || valorAtribut instanceof ValorTextual;
     }

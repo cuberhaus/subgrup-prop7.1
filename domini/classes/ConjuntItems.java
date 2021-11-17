@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 public class ConjuntItems extends ConjuntIdentificat<Item> {
     TipusItem tipusItem;
 
-    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException {
+    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException, InterruptedException {
         tipusItem = new TipusItem(nomTipusItem, taula.obtenirLlistaAtributs(), taula.obtenirItem(1));
         int id;
         for (int i = 0; i < taula.obtenirNumeroElements(); ++i) {

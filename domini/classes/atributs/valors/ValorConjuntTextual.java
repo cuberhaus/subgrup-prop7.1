@@ -6,13 +6,13 @@ import java.util.ArrayList;
  * Representa el valor compost textual d'un atribut.
  * @author maria.prat
  */
-public class ValorConjuntText extends ValorConjunt<String> {
+public class ValorConjuntTextual extends ValorConjunt<String> {
 
     /**
      * Constructor amb el conjunt textual.
      * @param valor <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
      */
-    public ValorConjuntText(ArrayList<ValorAtribut<String>> valor) {
+    public ValorConjuntTextual(ArrayList<ValorAtribut<String>> valor) {
         this.valor = valor;
     }
 
@@ -20,7 +20,7 @@ public class ValorConjuntText extends ValorConjunt<String> {
      * Constructor amb un conjunt de <code>Strings</code>.
      * @param valors <code>String[]</code> que conté els valors que s'assignaran a aquest atribut.
      */
-    public ValorConjuntText(String[] valors) {
+    public ValorConjuntTextual(String[] valors) {
         this.valor = new ArrayList<>();
         for (String valor : valors) {
             this.valor.add(new ValorTextual(valor));
