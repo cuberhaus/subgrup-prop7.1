@@ -29,6 +29,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         this.id = id;
         this.tipusItem = tipusItem;
         this.atributs = atributs;
+        actualitzarFactorNormalitzacio();
         this.valoracions = new HashMap<>();
         if (!tipusItem.esCompatible(atributs)) {
             throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
@@ -39,9 +40,18 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         this.id = id;
         this.tipusItem = tipusItem;
         this.atributs = obtenirAtributs(tipusItem, valors);
+        actualitzarFactorNormalitzacio();
         this.valoracions = new HashMap<>();
         if (!tipusItem.esCompatible(atributs)) {
             throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
+        }
+    }
+
+    private void actualitzarFactorNormalitzacio() {
+        for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
+            if (atribut.getValue() instanceof Euclidia) {
+                ((Euclidia)atribut.getValue()).actualitzarFactorNormalitzacio(atributs.get(atribut.getKey()));
+            }
         }
     }
 
@@ -112,16 +122,22 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     /**
      * @param item <code>Item</code> que conté l'ítem amb el qual es vol calcular la distància.
      * @return <code>double</code> que conté la distància entre l'ítem actual i l'ítem donat si els ítem són del mateix
-     * tipus. Altrament, retorna INF.
+     * tipus.
      */
-    public double obtenirDistancia(Item item) {
+    public double obtenirDistancia(Item item) throws IllegalArgumentException {
         if (!tipusItem.equals(item.tipusItem)) {
-            return Double.POSITIVE_INFINITY;
+            throw new IllegalArgumentException("No es pot calcular la distància entre dos ítems de TipusItems diferents.");
         }
         double distancia = 0.0;
         for (Map.Entry<String, TipusAtribut> entrada : tipusItem.obtenirTipusAtributs().entrySet()) {
-            distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
-                    item.atributs.get(entrada.getKey()));
+            // TODO(maria): normalitzar totes les normes
+            if (entrada.getValue() instanceof Euclidia) {
+                distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
+                        item.atributs.get(entrada.getKey()))/(((Euclidia) entrada.getValue()).obtenirFactorNormalitzacio());
+            } else {
+                distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
+                        item.atributs.get(entrada.getKey()));
+            }
         }
         return distancia;
     }
