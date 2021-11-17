@@ -329,6 +329,26 @@ public class TaulaCSV extends Contenidor {
         }
     }
 
+    public String obtenirValorAtributItem(int indexItem, String atribut) {
+        if (numAtribs == -1) {
+            System.out.println("Encara no s'han introduit els atributs");
+            return null;
+        }
+
+        else if (!this.atributosToIndex.containsKey(atribut)) {
+            System.out.println("L'atribut seleccionat no existeix");
+            return null;
+        }
+
+        else if (indexItem < 0 || numItems <= indexItem) {
+            System.out.println("No existeix l'objecte");
+            return null;
+        }
+
+        return valoresDeItem.get(indexItem).get(atributosToIndex.get(atribut));
+
+    }
+
     /**
      * Is initialized boolean.
      *
