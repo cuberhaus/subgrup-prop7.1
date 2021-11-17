@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author pol.casacuberta
  */
 
-public class Usuari {
+public class Usuari implements ElementIdentificat {
     /** Conté l'identificador de l'usuari */
     private final Id id;
 
@@ -100,10 +100,10 @@ public class Usuari {
 
     /**
      * Consultora del id
-     * @return El resultat és el valor del P.I.
+     * @return El resultat és l'identificador
      */
-    public int getId() {
-        return id.getValor();
+    public Id obtenirId() {
+        return id;
     }
 
 //    public void setId(Id id) {

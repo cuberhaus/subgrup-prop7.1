@@ -10,7 +10,7 @@ import java.util.Map;
  * Representa un ítem.
  * @author maria.prat
  */
-public class Item implements Comparable<Item>{
+public class Item implements Comparable<Item>, ElementIdentificat {
     private final Id id;
     private final TipusItem tipusItem;
     private Map<String, ValorAtribut<?>> atributs;
