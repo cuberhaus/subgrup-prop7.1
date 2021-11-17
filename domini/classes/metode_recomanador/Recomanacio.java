@@ -8,19 +8,19 @@ import domini.classes.Id;
  */
 public class Recomanacio implements Comparable<Recomanacio>{
     /** Representa l'Id de l'ítem. */
-    private Id id;
+    private final Id id;
 
     /** Representa el valor de la recomanació. */
-    private double rate;
+    private final double seguretat;
 
     /**
      * Contructora de recomnacio donta un id i un valor de la recomanacio
      * @param id <code>Id</code> id és l'identificador de l'ítem.
-     * @param rate <code>double</code> rate és el valor de la recomanació.
+     * @param seguretat <code>double</code> rate és el valor de la recomanació.
      */
-    public Recomanacio(Id id, double rate) {
+    public Recomanacio(Id id, double seguretat) {
         this.id = id;
-        this.rate = rate;
+        this.seguretat = seguretat;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Recomanacio implements Comparable<Recomanacio>{
      * @return <code>double</code>
      */
     public double obtenirRate() {
-        return this.rate;
+        return this.seguretat;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Recomanacio implements Comparable<Recomanacio>{
     public void imprimir() {
         System.out.print(this.id.getValor());
         System.out.print(' ');
-        System.out.println(this.rate);
+        System.out.println(this.seguretat);
     }
 
     @Override
