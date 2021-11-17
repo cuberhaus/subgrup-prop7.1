@@ -2,6 +2,7 @@ package domini.classes.atributs.tipus;
 
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.atributs.valors.ValorConjuntNumeric;
+import domini.classes.atributs.valors.ValorConjuntTextual;
 import domini.classes.atributs.valors.ValorNumeric;
 
 /**
@@ -9,6 +10,18 @@ import domini.classes.atributs.valors.ValorNumeric;
  * @author maria.prat
  */
 public class Euclidia extends TipusAtribut {
+    private double normaMinima = Double.POSITIVE_INFINITY;
+    private double normaMaxima = 0.0;
+
+    public void actualitzarFactorNormalitzacio(ValorAtribut<?> valor) {
+        normaMinima = Math.min(obtenirNorma(valor), normaMinima);
+        normaMaxima = Math.max(obtenirNorma(valor), normaMaxima);
+    }
+
+    public double obtenirFactorNormalitzacio() {
+        return normaMaxima - normaMinima;
+    }
+
     @Override
     public TipusAtribut copy() {
         return new Euclidia();
@@ -45,6 +58,18 @@ public class Euclidia extends TipusAtribut {
                         - valorConjuntNumeric2.getValor().get(i).getValor(), 2);
             }
             return Math.sqrt(distancia);
+        }
+    }
+
+    public double obtenirNorma(ValorAtribut<?> valor) throws IllegalArgumentException {
+        if (!admetValorAtribut(valor)) {
+            throw new IllegalArgumentException("El TipusAtribut no admet el tipus del ValorAtribut donat.");
+        }
+        if (valor instanceof ValorNumeric) {
+            return obtenirDistancia(new ValorNumeric(0.0), valor);
+        } else {
+            double[] zero = new double[((ValorConjuntNumeric)valor).getValor().size()];
+            return obtenirDistancia(new ValorConjuntNumeric(zero), valor);
         }
     }
 }
