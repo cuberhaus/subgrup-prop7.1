@@ -26,20 +26,22 @@ public class Levenshtein extends TipusAtribut {
             throw new IllegalArgumentException("El TipusAtribut no admet el tipus dels ValorAtributs donats.");
         }
 
+        int m = ((String) valor1.getValor()).length();
         int n = ((String) valor2.getValor()).length();
+
         double[] u = new double[n + 1];
         double[] v = new double[n + 1];
 
-        for (int i = 0; i < u.length; ++i) {
+        for (int i = 0; i < n + 1; ++i) {
             u[i] = i;
         }
 
-        for (int i = 0; i < n - 1; ++i) {
+        for (int i = 0; i < m; ++i) {
             v[0] = i + 1;
-            for (int j = 0; j < u.length - 1; ++j) {
+            for (int j = 0; j < n; ++j) {
                 double costEsborrat = u[j + 1] + 1;
                 double costInsercio = v[j] + 1;
-                double costSubstitucio = u[j] + 1;
+                double costSubstitucio = u[j];
                 if (((String)valor1.getValor()).charAt(i) != ((String)valor2.getValor()).charAt(j)) {
                     costSubstitucio += 1;
                 }
