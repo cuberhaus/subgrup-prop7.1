@@ -1,4 +1,4 @@
-package domini.tests.recomanador;
+package recomanador;
 
 import domini.classes.metode_recomanador.ConjuntPunts;
 import domini.classes.metode_recomanador.KMeans;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-class KMeansTest {
+public class KMeansTest {
 
     @Test
     void getParticions() {

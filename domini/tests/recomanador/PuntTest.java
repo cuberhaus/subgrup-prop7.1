@@ -1,4 +1,4 @@
-package domini.tests.recomanador;
+package recomanador;
 
 import domini.classes.metode_recomanador.Punt;
 
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-class PuntTest {
+public class PuntTest {
     @Test
     public void getDimensio() {
         Punt p = new Punt();
