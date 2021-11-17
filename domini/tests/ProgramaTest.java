@@ -15,7 +15,7 @@ public class ProgramaTest {
         System.out.println(getClass(p1));
     }
 
-    private String getClass(Programa p) {
+    public String getClass(Programa p) {
         return "The class is of type Programa";
     }
 

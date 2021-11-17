@@ -12,7 +12,7 @@ public class EscriptorDeCSV extends EscriptorDeFitxers{
 
     @Override
     public void escriptorFitxers(String pathname, Contenidor tabla) throws IOException {
-        escriureCSV(pathname, (Taula) tabla);
+        escriureCSV(pathname, (TaulaCSV) tabla);
     }
 
     /**
@@ -21,7 +21,7 @@ public class EscriptorDeCSV extends EscriptorDeFitxers{
      * @param tabla <code>Taula</code> tabla que és un conjunt de valors
      * @throws IOException
      */
-    public void escriureCSV(String pathname, Taula tabla) throws IOException {
+    public void escriureCSV(String pathname, TaulaCSV tabla) throws IOException {
         if (!tabla.estaInicialitzat()) {
             System.out.println("La taula que intentes escriure, no està inicialitzada.");
         }
