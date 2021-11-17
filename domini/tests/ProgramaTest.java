@@ -1,13 +1,10 @@
-package domini.tests;
-
 import domini.classes.Programa;
 import domini.classes.Usuari;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
-class ProgramaTest {
+public class ProgramaTest {
 
     @Test
     public void obtenirInstancia() {
@@ -23,7 +20,7 @@ class ProgramaTest {
     }
 
     @Test
-    void tancarSessio() {
+    public void tancarSessio() {
         Programa p1 = Programa.obtenirInstancia();
         p1.tancarSessio();
         assertFalse(p1.isSessioIniciada());
@@ -31,7 +28,7 @@ class ProgramaTest {
     }
 
     @Test
-    void iniciarSessio() {
+    public void iniciarSessio() {
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
