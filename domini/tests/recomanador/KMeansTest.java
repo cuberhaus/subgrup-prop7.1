@@ -1,4 +1,4 @@
-package domini.tests;
+package domini.tests.recomanador;
 
 import domini.classes.recomanador.ConjuntDePunts;
 import domini.classes.recomanador.KMeans;
