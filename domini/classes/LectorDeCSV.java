@@ -47,24 +47,31 @@ public class LectorDeCSV extends LectorDeFitxers{
             boolean comillas = true;
             boolean entreComillas = false;
 
+            ArrayList<Integer> posicionComillas = new ArrayList<>();
+            ArrayList<Integer> posicionComas = new ArrayList<>();
+
             for (int i = 1; i < caracteres.length; ++i) {
                 if (entreComillas && comillas && caracteres[i - 1] == '\"' && caracteres[i] == ',') {
                     caracteres[i - 1] = ' ';
+                    posicionComillas.add(i - 1);
                     entreComillas = false;
                 }
 
                 else if (!entreComillas && caracteres[i - 1] == ',' && caracteres[i] == '\"') {
                     comillas = true;
                     caracteres[i] = ' ';
+                    posicionComillas.add(i);
                     entreComillas = true;
                 }
 
                 if (entreComillas && caracteres[i - 1] == '\"') {
                     comillas = !comillas;
+                    posicionComillas.add(i - 1);
                     caracteres[i - 1] = '\'';
                 }
 
                 if (entreComillas && caracteres[i] == ',') {
+                    posicionComas.add(i);
                     caracteres[i] = ';';
                 }
             }
@@ -76,7 +83,20 @@ public class LectorDeCSV extends LectorDeFitxers{
                 valores.add(elem);
             }
 
-            tabla.introduirLlistaDeValors(valores);
+            ArrayList<String> temporal = new ArrayList<>();
+            Integer indice = 0;
+            for (String valor : valores) {
+                char[] letras = valor.toCharArray();
+                for (int i = 0; i < letras.length; ++i) {
+                    if (posicionComas.contains(indice)) letras[i] = ',';
+                    if (posicionComillas.contains(indice)) letras[i] = '\"';
+                    ++indice;
+                }
+                temporal.add(String.valueOf(letras));
+                ++indice;
+            }
+
+            tabla.introduirLlistaDeValors(temporal);
             valores.clear();
         }
 
