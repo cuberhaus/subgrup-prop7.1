@@ -11,8 +11,8 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(Enclosed.class)
 public class LevenshteinTest {
@@ -26,6 +26,22 @@ public class LevenshteinTest {
             TipusAtribut copia = levenshtein.copy();
             assertNotSame(copia, levenshtein);
             assertEquals(copia, levenshtein);
+        }
+
+        @Test
+        public void admetValorAtribut_HauriaDeRetornarCert() {
+            assertTrue(levenshtein.admetValorAtribut(new ValorCategoric("a")));
+            assertTrue(levenshtein.admetValorAtribut(new ValorTextual("a")));
+        }
+
+        @Test
+        public void admetValorAtribut_HauriaDeRetornarFals() {
+            assertFalse(levenshtein.admetValorAtribut(new ValorBoolea(true)));
+            assertFalse(levenshtein.admetValorAtribut(new ValorNumeric(0.0)));
+            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntBoolea(new boolean[]{true})));
+            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntCategoric(new String[]{"a"})));
+            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntNumeric(new double[]{0.0})));
+            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntTextual(new String[]{"a"})));
         }
 
         @Test(expected = IllegalArgumentException.class)
