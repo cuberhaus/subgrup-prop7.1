@@ -29,6 +29,11 @@ public class EuclidiaTest {
             assertEquals(copia, euclidia);
         }
 
+        @Test(expected = IllegalArgumentException.class)
+        public void admetValorAtribut_HauriaDEmetreExcepcio_Quan_Nul() {
+            euclidia.admetValorAtribut(null);
+        }
+
         @Test
         public void admetValorAtribut_HauriaDeRetornarCert() {
             assertTrue(euclidia.admetValorAtribut(new ValorNumeric(0.0)));

@@ -19,6 +19,11 @@ public class DiscretTest {
         assertEquals(copia, discret);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void admetValorAtribut_HauriaDEmetreExcepcio_Quan_Nul() {
+        discret.admetValorAtribut(null);
+    }
+
     @Test
     public void admetValorAtribut_HauriaDeRetornarCert() {
         assertTrue(discret.admetValorAtribut(new ValorBoolea(true)));

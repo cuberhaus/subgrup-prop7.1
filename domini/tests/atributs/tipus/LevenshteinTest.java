@@ -28,6 +28,11 @@ public class LevenshteinTest {
             assertEquals(copia, levenshtein);
         }
 
+        @Test(expected = IllegalArgumentException.class)
+        public void admetValorAtribut_HauriaDEmetreExcepcio_Quan_Nul() {
+            levenshtein.admetValorAtribut(null);
+        }
+
         @Test
         public void admetValorAtribut_HauriaDeRetornarCert() {
             assertTrue(levenshtein.admetValorAtribut(new ValorCategoric("a")));
