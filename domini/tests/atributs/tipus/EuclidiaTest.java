@@ -19,7 +19,7 @@ class EuclidiaTest {
 
     static Euclidia euclidia = new Euclidia();
 
-    public static class NonParametrizedTest {
+    public static class NonParametrizedEuclidiaTest {
         @Test
         public void copy_HauriaDeRetornarCopia() {
             TipusAtribut copia = euclidia.copy();
@@ -44,12 +44,12 @@ class EuclidiaTest {
     }
 
     @RunWith(Parameterized.class)
-    public static class ParametrizedTest {
+    public static class ParametrizedEuclidiaTest {
         private final ValorAtribut<?> valor1;
         private final ValorAtribut<?> valor2;
         private final double resultat;
 
-        public ParametrizedTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
+        public ParametrizedEuclidiaTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
             this.valor1 = valor1;
             this.valor2 = valor2;
             this.resultat = resultat;

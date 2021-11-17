@@ -18,7 +18,7 @@ class LevenshteinTest {
 
     static Levenshtein levenshtein = new Levenshtein();
 
-    public static class NonParametrizedTest {
+    public static class NonParametrizedLevenshteinTest {
         @org.junit.Test
         public void copy_HauriaDeRetornarCopia() {
             TipusAtribut copia = levenshtein.copy();
@@ -43,12 +43,12 @@ class LevenshteinTest {
     }
 
     @RunWith(Parameterized.class)
-    public static class ParametrizedTest {
+    public static class ParametrizedLevenshteinTest {
         private final ValorAtribut<?> valor1;
         private final ValorAtribut<?> valor2;
         private final double resultat;
 
-        public ParametrizedTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
+        public ParametrizedLevenshteinTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
             this.valor1 = valor1;
             this.valor2 = valor2;
             this.resultat = resultat;
