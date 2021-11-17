@@ -33,7 +33,7 @@ public class DiferenciaDeConjunts extends TipusAtribut {
             throw new IllegalArgumentException("El TipusAtribut no admet el tipus dels ValorAtributs donats.");
         }
         Set<ValorAtribut<?>> set1 = new HashSet<>(((ValorConjunt<?>) valor1).getValor());
-        Set<ValorAtribut<?>> set2 = new HashSet<>(((ValorConjunt<?>) valor1).getValor());
+        Set<ValorAtribut<?>> set2 = new HashSet<>(((ValorConjunt<?>) valor2).getValor());
         Set<ValorAtribut<?>> union = new HashSet<>(set1);
         union.addAll(set2);
         Set<ValorAtribut<?>> intersection = new HashSet<>(set1);
