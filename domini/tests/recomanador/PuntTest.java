@@ -1,6 +1,6 @@
 package domini.tests.recomanador;
 
-import domini.classes.recomanador.Punt;
+import domini.classes.metode_recomanador.Punt;
 
 import org.junit.Test;
 

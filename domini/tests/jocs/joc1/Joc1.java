@@ -2,7 +2,7 @@ package jocs.joc1;
 
 import domini.classes.*;
 import domini.classes.atributs.valors.ValorAtribut;
-import domini.classes.recomanador.RecomanadorCollaborative;
+import domini.classes.metode_recomanador.RecomanadorCollaborative;
 
 import java.io.File;
 import java.io.IOException;

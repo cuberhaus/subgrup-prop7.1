@@ -1,4 +1,4 @@
-package domini.classes.recomanador;
+package domini.classes.metode_recomanador;
 
 import domini.classes.*;
 
@@ -39,7 +39,7 @@ public class RecomanadorCollaborative extends MetodeRecomanador {
      */
     @Override
     public ConjuntDeRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
-        ConjuntDePunts punts_usuaris = new ConjuntDePunts();
+        ConjuntPunts punts_usuaris = new ConjuntPunts();
         punts_usuaris.add(usuari.obteComPunt(conjuntRecomanable));
         for (Usuari it_usu : usuaris) {
             if (usuari == it_usu) continue;
