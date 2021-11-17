@@ -4,6 +4,7 @@ import domini.classes.TaulaCSV;
 import domini.classes.atributs.valors.ValorAtribut;
 import org.junit.Test;
 
+import javax.swing.text.TabableView;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -138,7 +139,7 @@ public class TaulaCSVTest {
         tablita.obtenirValorsDeItemSeleccionat("hola", "adios");
     }
 
-    //Si no s'ha incialitzat excepcio
+    //Si no existeix un atribut amb aquell nom, excepcio
     @Test(expected = IllegalArgumentException.class)
     public void obtenirValorsDeItemSeleccionat1() throws IllegalArgumentException, InterruptedException {
         TaulaCSV tablita = new TaulaCSV();
@@ -154,27 +155,67 @@ public class TaulaCSVTest {
         tablita.obtenirValorsDeItemSeleccionat("hola", "adios");
     }
 
-    @Test
-    public void testObtenirValorsDeItemSeleccionat() {
+    //Si no s'ha inicialitzat la taula excepcio
+    @Test(expected = InterruptedException.class)
+    public void testObtenirValorsDeItemSeleccionat() throws InterruptedException {
+        TaulaCSV tablita = new TaulaCSV();
+        tablita.obtenirValorsDeItemSeleccionat(1, "adios");
     }
 
-    @Test
-    public void obtenirValorAtributItem() {
+    //Si l'index no té atribut, excepcio
+    @Test(expected = IllegalArgumentException.class)
+    public void testObtenirValorsDeItemSeleccionat1() throws InterruptedException, IllegalArgumentException {
+        TaulaCSV tablita = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("edad");
+        atributs.add("genere");
+        tablita.introduirListaAtributs(atributs);
+
+        System.out.println("Llego");
+        tablita.obtenirValorsDeItemSeleccionat(3, "hola");
+
     }
 
-    @Test
-    public void estaInicialitzat() {
+    //Si no estan els atributs inicialitzats, excepcio
+    @Test(expected = InterruptedException.class)
+    public void obtenirValorAtributItem() throws InterruptedException {
+        TaulaCSV tablita = new TaulaCSV();
+        tablita.obtenirValorAtributItem(1, "hola");
     }
 
-    @Test
-    public void imprimirNumeroElements() {
+    //Si no estan els atributs inicialitzats, excepcio
+    @Test(expected = IllegalArgumentException.class)
+    public void obtenirValorAtributItem1() throws IllegalArgumentException, InterruptedException {
+        TaulaCSV tablita = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        atributs.add("edad");
+        tablita.introduirListaAtributs(atributs);
+
+        ArrayList<String> valors = new ArrayList<>();
+        valors.add("home");
+        valors.add("20");
+        tablita.introduirLlistaDeValors(valors);
+
+        System.out.println("Llego");
+        tablita.obtenirValorAtributItem(1, "hola");
     }
 
-    @Test
-    public void obtenirNumeroElements() {
-    }
+    //Si no existeix l'index de l'item, excepcio
+    @Test(expected = IllegalStateException.class)
+    public void obtenirValorAtributItem2() throws IllegalArgumentException, InterruptedException, IllegalStateException {
+        TaulaCSV tablita = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        atributs.add("edad");
+        tablita.introduirListaAtributs(atributs);
 
-    @Test
-    public void obtenirNumeroAtrib() {
+        ArrayList<String> valors = new ArrayList<>();
+        valors.add("home");
+        valors.add("20");
+        tablita.introduirLlistaDeValors(valors);
+
+        System.out.println("Llego");
+        tablita.obtenirValorAtributItem(3, "genere");
     }
 }
