@@ -1,4 +1,7 @@
-package domini.classes;
+package domini.classes.csv;
+
+import domini.classes.Contenidor;
+import domini.classes.LectorDeFitxers;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +13,7 @@ import java.util.ArrayList;
  * @author pablo.vega
  */
 
-public class LectorDeCSV extends LectorDeFitxers{
+public class LectorDeCSV extends LectorDeFitxers {
     public LectorDeCSV() {}
 
     @Override

@@ -1,13 +1,9 @@
 package domini.tests.csv;
 
-import domini.classes.TaulaCSV;
-import domini.classes.atributs.valors.ValorAtribut;
+import domini.classes.csv.TaulaCSV;
 import org.junit.Test;
 
-import javax.swing.text.TabableView;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class TaulaCSVTest {
 

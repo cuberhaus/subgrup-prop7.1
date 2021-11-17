@@ -1,4 +1,6 @@
-package domini.classes;
+package domini.classes.csv;
+
+import domini.classes.Contenidor;
 
 import java.util.ArrayList;
 import java.util.HashMap;

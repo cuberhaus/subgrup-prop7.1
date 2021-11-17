@@ -1,5 +1,7 @@
-package domini.classes;
+package csv;
 
+import domini.classes.csv.LectorDeCSV;
+import domini.classes.csv.TaulaCSV;
 import org.junit.Test;
 
 import java.io.IOException;

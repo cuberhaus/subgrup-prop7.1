@@ -1,4 +1,7 @@
-package domini.classes;
+package domini.classes.csv;
+
+import domini.classes.Contenidor;
+import domini.classes.EscriptorDeFitxers;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.ArrayList;
  * Classe que s'encarrega de la escriptura de CSV.
  * @author pablo.vega
  */
-public class EscriptorDeCSV extends EscriptorDeFitxers{
+public class EscriptorDeCSV extends EscriptorDeFitxers {
     public EscriptorDeCSV() {}
 
     @Override

@@ -1,5 +1,7 @@
 package domini.classes;
 
+import domini.classes.csv.TaulaCSV;
+
 import java.util.ArrayList;
 
 /**

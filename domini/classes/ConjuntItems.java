@@ -1,7 +1,8 @@
 package domini.classes;
 
 
-import java.util.ArrayList;
+import domini.classes.csv.TaulaCSV;
+
 import java.util.InputMismatchException;
 
 /**
