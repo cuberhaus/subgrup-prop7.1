@@ -4,7 +4,7 @@ package domini.classes;
  * S'ordena pel primer element i per tant ha de ser <code>Comparable</code>
  * @author edgar.moreno
  */
-public class Pair<X extends Comparable<X>,Y> implements Comparable<Pair<X,Y>> {
+public class Pair<X extends Comparable<X>,Y extends Comparable<Y>> implements Comparable<Pair<X,Y>> {
     /** Primer element de la parella */
     public final X x;
     /** Segon element de la parella */
@@ -25,6 +25,8 @@ public class Pair<X extends Comparable<X>,Y> implements Comparable<Pair<X,Y>> {
 
     @Override
     public int compareTo(Pair<X,Y> object) {
-        return x.compareTo(object.x);
+        int primer = x.compareTo(object.x);
+        if (primer == 0) return y.compareTo(object.y);
+        return primer;
     }
 }

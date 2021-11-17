@@ -17,7 +17,7 @@ public class KMeans {
     private final Punt[] baricentres;
 
     /**
-     * Inicialitza el algorisme amb el conjunt de punts desitjat.
+     * Inicialitza l'algorisme amb el conjunt de punts desitjat.
      * @param punts Conjunt de punts per executar l'algorisme. Els identificadors han de ser contigus començant en 0.
      * @param k Nombre de particions a realitzar. Han de ser menors al nombre de punts.
      */

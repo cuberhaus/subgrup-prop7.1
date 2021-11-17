@@ -19,7 +19,7 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
      * @param items pot ser buit
      * @param valoracions_publiques pot ser buit
      */
-    public MetodeRecomanadorContentBased(Usuari[] usuaris, Item[] items, Valoracio[] valoracions_publiques) {
+    public MetodeRecomanadorContentBased(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracions_publiques) {
         super(usuaris, items, valoracions_publiques);
     }
 
@@ -38,11 +38,11 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
         TreeMap<Id, Double> valor_item = new TreeMap<>();
         TreeMap<Id, Item> id_a_item = new TreeMap<>();
-        KNN knn = new KNN(conjuntRecomanable.toArray(new Item[0]));
-        for (Valoracio val : valoracions_usuari) {
+        KNN knn = new KNN(conjuntRecomanable.obteTotsElements().values().toArray(new Item[0]));
+        for (Valoracio val : valoracions_usuari.obteTotesValoracions().values()) {
             if (val.getValor() > minimaValoracioConsiderada) {
                 // TODO: agafo tants veins com recomanacions volem, no te perque ser la millor eleccio
                 ArrayList<Item> veins = knn.obtenirVeins(val.getItem(), numRecomanacions);

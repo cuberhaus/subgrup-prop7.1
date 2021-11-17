@@ -19,10 +19,10 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      * @param items pot ser buit
      * @param valoracions_publiques pot ser buit
      */
-    public MetodeRecomanadorCollaborative(Usuari[] usuaris, Item[] items, Valoracio[] valoracions_publiques) {
+    public MetodeRecomanadorCollaborative(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracions_publiques) {
         super(usuaris, items, valoracions_publiques);
         // TODO: numero arbitrari de clusters.
-        num_clusters = Math.min((int)Math.sqrt(usuaris.length)+1, usuaris.length);
+        num_clusters = Math.min((int)Math.sqrt(usuaris.mida())+1, usuaris.mida());
     }
 
     /**
@@ -38,10 +38,10 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ArrayList<Item> conjuntRecomanable, Valoracio[] valoracions_usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
         ConjuntPunts punts_usuaris = new ConjuntPunts();
         punts_usuaris.add(usuari.obteComPunt(conjuntRecomanable));
-        for (Usuari it_usu : usuaris) {
+        for (Usuari it_usu : usuaris.obteTotsElements().values()) {
             if (usuari == it_usu) continue;
             punts_usuaris.add(it_usu.obteComPunt(conjuntRecomanable));
         }
@@ -57,12 +57,13 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
         }
 
         int num_usuaris = particio_usuari.size();
-        int num_items = conjuntRecomanable.size();
+        int num_items = conjuntRecomanable.mida();
 
         Double[][] valoracions = new Double[num_usuaris][num_items];
+        Item[] items = conjuntRecomanable.obteTotsElements().values().toArray(new Item[0]);
         for (int i = 0; i < num_usuaris; ++i) {
             for (int j = 0; j < num_items; ++j) {
-                Valoracio valoracio = usuari.obtenirValoracio(conjuntRecomanable.get(j));
+                Valoracio valoracio = usuari.obtenirValoracio(items[j]);
                 if (valoracio == null) {
                     valoracions[i][j] = null;
                 }
@@ -76,7 +77,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
 
         PriorityQueue<Pair<Double,Item>> pq = new PriorityQueue<>();
         for (int i = 0; i < num_items; ++i) {
-            pq.add(new Pair<>(slopeOne.getPrediccio(0, i), conjuntRecomanable.get(i)));
+            pq.add(new Pair<>(slopeOne.getPrediccio(0, i), items[i]));
         }
         while (pq.size() > numRecomanacions) {
             pq.remove();
