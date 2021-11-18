@@ -2,7 +2,6 @@ package domini.classes.atributs.tipus;
 
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.atributs.valors.ValorConjuntNumeric;
-import domini.classes.atributs.valors.ValorConjuntTextual;
 import domini.classes.atributs.valors.ValorNumeric;
 
 /**
@@ -12,15 +11,6 @@ import domini.classes.atributs.valors.ValorNumeric;
 public class Euclidia extends TipusAtribut {
     private double normaMinima = Double.POSITIVE_INFINITY;
     private double normaMaxima = 0.0;
-
-    public void actualitzarFactorNormalitzacio(ValorAtribut<?> valor) {
-        normaMinima = Math.min(obtenirNorma(valor), normaMinima);
-        normaMaxima = Math.max(obtenirNorma(valor), normaMaxima);
-    }
-
-    public double obtenirFactorNormalitzacio() {
-        return normaMaxima - normaMinima;
-    }
 
     @Override
     public TipusAtribut copy() {
@@ -62,6 +52,9 @@ public class Euclidia extends TipusAtribut {
     }
 
     public double obtenirNorma(ValorAtribut<?> valor) throws IllegalArgumentException {
+        if (valor == null) {
+            throw new IllegalArgumentException("No es pot obtenir la norma d'un ValorAtribut nul.");
+        }
         if (!admetValorAtribut(valor)) {
             throw new IllegalArgumentException("El TipusAtribut no admet el tipus del ValorAtribut donat.");
         }
@@ -71,5 +64,20 @@ public class Euclidia extends TipusAtribut {
             double[] zero = new double[((ValorConjuntNumeric)valor).getValor().size()];
             return obtenirDistancia(new ValorConjuntNumeric(zero), valor);
         }
+    }
+
+    public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
+        if (valor == null) {
+            throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
+        }
+        normaMinima = Math.min(obtenirNorma(valor), normaMinima);
+        normaMaxima = Math.max(obtenirNorma(valor), normaMaxima);
+    }
+
+    public double obtenirFactorDeNormalitzacio() {
+        if (normaMaxima == Double.POSITIVE_INFINITY || normaMaxima == normaMinima) {
+            return 1.0;
+        }
+        return normaMaxima - normaMinima;
     }
 }
