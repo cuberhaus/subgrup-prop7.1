@@ -14,7 +14,7 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
 
     /**
      * Constructor amb el conjunt categòric.
-     * @param valor <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
+     * @param valor <code>ArrayList<ValorAtribut<String></code> que conté el valor d'aquest atribut.
      */
     public ValorConjuntCategoric(ArrayList<ValorAtribut<String>> valor) {
         this.valor = valor;
@@ -36,7 +36,7 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
     }
 
     /**
-     * @return <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
+     * @return <code>ArrayList<ValorAtribut<String></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<String>> getValor() {

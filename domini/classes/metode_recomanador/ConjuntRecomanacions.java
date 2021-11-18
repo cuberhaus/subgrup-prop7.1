@@ -35,7 +35,7 @@ public class ConjuntRecomanacions {
 
     /**
      * Constructora a partir d'un conjunt de recomanacions.
-     * @param recs <code>ArrayList<ArrayList<Recomanacio></code> recs és el conjunt de recomanacions.
+     * @param recs <code>ArrayList<ArrayList<Recomanacio>></code> recs és el conjunt de recomanacions.
      */
     public ConjuntRecomanacions(ArrayList<Recomanacio> recs) {
         this.conjuntRecomanacions = new ArrayList<>(recs);
@@ -127,7 +127,7 @@ public class ConjuntRecomanacions {
             if (pq.size() < p) {
                 pq.add(x.y);
             }
-            else if(pq.poll() < x.y) {
+            else if(!pq.isEmpty() && pq.poll() < x.y) {
                 pq.remove();
                 pq.add(x.y);
             }

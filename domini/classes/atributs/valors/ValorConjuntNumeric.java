@@ -15,7 +15,7 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
 
     /**
      * Constructor amb el conjunt numèric.
-     * @param valor <code>ArrayList<ValorAtribut<Double>></code> que conté el valor d'aquest atribut.
+     * @param valor <code>ArrayList<ValorAtribut<Double></code> que conté el valor d'aquest atribut.
      */
     public ValorConjuntNumeric(ArrayList<ValorAtribut<Double>> valor) {
         this.valor = valor;
@@ -37,7 +37,7 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
     }
 
     /**
-     * @return <code>ArrayList<ValorAtribut<Double>></code> que conté el valor d'aquest atribut.
+     * @return <code>ArrayList<ValorAtribut<Double></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<Double>> getValor() {
