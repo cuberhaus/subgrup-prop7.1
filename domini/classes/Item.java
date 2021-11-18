@@ -50,9 +50,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
 
     private void actualitzarFactorNormalitzacio() {
         for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
-            if (atribut.getValue().obtenirDistancia() instanceof Euclidiana) {
-                ((Euclidiana)atribut.getValue().obtenirDistancia()).actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
-            }
+            atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
         }
     }
 
@@ -135,15 +133,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
         double distancia = 0.0;
         for (Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
-            // TODO(maria): normalitzar totes les normes
-            if (tipusAtribut.getValue().obtenirDistancia() instanceof Euclidiana) {
-                distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
-                        item.atributs.get(tipusAtribut.getKey())) /
-                        (((Euclidiana) tipusAtribut.getValue().obtenirDistancia()).obtenirFactorDeNormalitzacio());
-            } else {
-                distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
-                        item.atributs.get(tipusAtribut.getKey()));
-            }
+            distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
+                    item.atributs.get(tipusAtribut.getKey())) /
+                    (tipusAtribut.getValue().obtenirDistancia().obtenirFactorDeNormalitzacio());
         }
         return distancia;
     }

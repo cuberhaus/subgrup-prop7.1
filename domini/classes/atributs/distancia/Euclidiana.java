@@ -66,6 +66,7 @@ public class Euclidiana extends Distancia {
         }
     }
 
+    @Override
     public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
         if (valor == null) {
             throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
@@ -74,6 +75,7 @@ public class Euclidiana extends Distancia {
         normaMaxima = Math.max(obtenirNorma(valor), normaMaxima);
     }
 
+    @Override
     public double obtenirFactorDeNormalitzacio() {
         if (normaMaxima == Double.POSITIVE_INFINITY || normaMaxima == normaMinima) {
             return 1.0;

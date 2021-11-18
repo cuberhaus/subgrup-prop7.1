@@ -7,6 +7,8 @@ import domini.classes.atributs.valors.*;
  * @author maria.prat
  */
 public class Levenshtein extends Distancia {
+    private double normaMaxima = 0.0;
+
     @Override
     public Distancia copy() {
         return new Levenshtein();
@@ -55,5 +57,22 @@ public class Levenshtein extends Distancia {
             v = temp;
         }
         return u[n];
+    }
+
+    @Override
+    public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
+        if (valor == null) {
+            throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
+        }
+        normaMaxima = Math.max(normaMaxima, ((String) valor.getValor()).length());
+    }
+
+    @Override
+    public double obtenirFactorDeNormalitzacio() {
+        if (normaMaxima == 0.0) {
+            return 1.0;
+        }
+        // Valor màxim de la distància de Levenshtein entre paraules amb norma igual o més petita que normaMaxima.
+        return 3.0 * normaMaxima;
     }
 }

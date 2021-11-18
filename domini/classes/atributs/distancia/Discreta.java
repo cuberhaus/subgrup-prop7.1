@@ -35,4 +35,16 @@ public class Discreta extends Distancia {
             return 1.0d;
         }
     }
+
+    @Override
+    public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
+        if (valor == null) {
+            throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
+        }
+    }
+
+    @Override
+    public double obtenirFactorDeNormalitzacio() {
+        return 1.0;
+    }
 }

@@ -25,5 +25,9 @@ public abstract class Distancia {
      * @return <code>double</code> que conté el valor de la distància entre els dos valors donats.
      */
     public abstract double obtenir(ValorAtribut<?> valor1, ValorAtribut<?> valor2);
+
+    public abstract void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor);
+
+    public abstract double obtenirFactorDeNormalitzacio();
 }
 
