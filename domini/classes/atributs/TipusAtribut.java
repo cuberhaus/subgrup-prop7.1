@@ -3,6 +3,10 @@ package domini.classes.atributs;
 import domini.classes.atributs.distancia.Distancia;
 import domini.classes.atributs.valors.ValorAtribut;
 
+/**
+ * Representa el tipus d'un atribut.
+ * @author maria.prat
+ */
 public class TipusAtribut {
     private final ValorAtribut<?> valorAtribut;
     private final Distancia distancia;
