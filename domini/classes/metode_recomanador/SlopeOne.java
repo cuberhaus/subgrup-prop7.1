@@ -45,7 +45,7 @@ public class SlopeOne {
         int cardinal = 0;
         double suma = 0;
         for (int k = 0; k < num_usuaris; ++k) {
-            if (valoracions[k][i] != null && valoracions[k][i] != null) {
+            if (valoracions[k][j] != null && valoracions[k][i] != null) {
                 ++cardinal;
                 suma += valoracions[k][j] - valoracions[k][i];
             }
@@ -53,7 +53,6 @@ public class SlopeOne {
         if(cardinal == 0) return Double.NaN;
         return suma/cardinal;
     }
-
 
     /**
      * @return una matriu de num_usuaris x num_items amb totes les prediccions.
