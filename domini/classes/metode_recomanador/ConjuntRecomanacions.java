@@ -124,7 +124,7 @@ public class ConjuntRecomanacions {
             if (pq.size() < p) {
                 pq.add(x.y);
             }
-            else if(!pq.isEmpty() && pq.poll() < x.y) {
+            else if(!pq.isEmpty() && pq.peek() < x.y) {
                 pq.remove();
                 pq.add(x.y);
             }

@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
  * @author edgar.moreno
  */
 public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
-    /** Nombre de clusters que s'utilitzarà com K al K-means**/
+    /** Nombre de clusters que s'utilitzarà com K al K-means **/
     private int num_clusters;
 
     /**
@@ -41,10 +41,20 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      */
     @Override
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
+
+        ConjuntItems items_usables = new ConjuntItems(conjuntRecomanable.obteTipusItem());
+        for (Valoracio val : valoracions_usuari.obteTotesValoracions().values()) {
+            items_usables.afegir(val.getItem());
+        }
+        for (Item item : conjuntRecomanable.obtenirTotsElsElements().values()) {
+            items_usables.afegir(item);
+        }
         ConjuntPunts punts_usuaris = new ConjuntPunts();
         ArrayList<Id> ids = new ArrayList<>();
+
         punts_usuaris.add(usuari.transformaAPunt(items));
         ids.add(usuari.obtenirId());
+
         for (Usuari it_usu : usuaris.obtenirTotsElsElements().values()) {
             if (usuari == it_usu) continue;
             punts_usuaris.add(it_usu.transformaAPunt(items));
@@ -61,32 +71,32 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
         }
 
         int num_usuaris = particio_usuari.size();
-        int num_items = items.mida();
+        int num_items = items_usables.mida();
         Double[][] valoracions = new Double[num_usuaris][num_items];
-        Item[] items = this.items.obtenirTotsElsElements().values().toArray(new Item[0]);
+        Item[] items_slope1 = items_usables.obtenirTotsElsElements().values().toArray(new Item[0]);
         ArrayList<Integer> posicions_recomanables = new ArrayList<>();
+
         for (int i = 0; i < num_items; ++i) {
-            if (conjuntRecomanable.conte(items[i].obtenirId())) {
+            if (conjuntRecomanable.conte(items_slope1[i].obtenirId())) {
                 posicions_recomanables.add(i);
             }
         }
+
         for (int i = 0; i < num_usuaris; ++i) {
+            Usuari usuari_it = usuaris.obtenir(ids.get(particio_usuari.get(i)));
             for (int j = 0; j < num_items; ++j) {
-                Valoracio valoracio = usuaris.obtenir(ids.get(particio_usuari.get(i))).obtenirValoracio(items[j]);
-                if (valoracio == null) {
+                if (valoracionsPubliques.conte(usuari_it, items_slope1[j]))
+                    valoracions[i][j] = valoracionsPubliques.obte(usuari_it, items_slope1[j]).getValor();
+                else
                     valoracions[i][j] = null;
-                }
-                else {
-                    valoracions[i][j] = valoracio.getValor();
-                }
             }
         }
 
         SlopeOne slopeOne = new SlopeOne(valoracions);
 
         PriorityQueue<Pair<Double,Item>> pq = new PriorityQueue<>();
-        for (Integer posicions_recomanable : posicions_recomanables) {
-            pq.add(new Pair<>(slopeOne.getPrediccio(0, posicions_recomanable), items[posicions_recomanable]));
+        for (Integer posicio_recomanable : posicions_recomanables) {
+            pq.add(new Pair<>(slopeOne.getPrediccio(0, posicio_recomanable), items_slope1[posicio_recomanable]));
         }
         while (pq.size() > numRecomanacions) {
             pq.remove();

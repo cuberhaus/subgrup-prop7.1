@@ -75,7 +75,6 @@ public class Joc1 {
             totalDCG2 += recomanacionsContent.calculaDiscountedCumulativeGain(valoracions_unk);
             totalIDCG2 += recomanacionsContent.calculaIdealDiscountedCumulativeGain(valoracions_unk, Q);
             totalNDCG2 += recomanacionsContent.obteDiscountedCumulativeGain()/recomanacionsContent.obteIdealDiscountedCumulativeGain();
-
         }
         System.out.println(totalDCG/q + " " + totalIDCG/q + " " + totalNDCG/q);
         System.out.println(totalDCG2/q + " " + totalIDCG2/q + " " + totalNDCG2/q);
