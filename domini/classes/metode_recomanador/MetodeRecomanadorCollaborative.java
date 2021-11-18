@@ -22,7 +22,9 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
     public MetodeRecomanadorCollaborative(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracions_publiques) {
         super(usuaris, items, valoracions_publiques);
         // TODO: numero arbitrari de clusters.
-        num_clusters = Math.min((int)Math.sqrt(usuaris.mida())+1, usuaris.mida());
+        //num_clusters = Math.min((int)Math.sqrt(usuaris.mida())+1, usuaris.mida());
+        num_clusters = Math.min(3, usuaris.mida());
+
     }
 
     /**
@@ -40,16 +42,18 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
     @Override
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
         ConjuntPunts punts_usuaris = new ConjuntPunts();
-        punts_usuaris.add(usuari.obteComPunt(conjuntRecomanable));
+        ArrayList<Id> ids = new ArrayList<>();
+        punts_usuaris.add(usuari.transformaAPunt(conjuntRecomanable));
+        ids.add(usuari.obtenirId());
         for (Usuari it_usu : usuaris.obteTotsElements().values()) {
             if (usuari == it_usu) continue;
-            punts_usuaris.add(it_usu.obteComPunt(conjuntRecomanable));
+            punts_usuaris.add(it_usu.transformaAPunt(conjuntRecomanable));
+            ids.add(it_usu.obtenirId());
         }
 
         KMeans kMeans = new KMeans(punts_usuaris, num_clusters);
         ArrayList<ArrayList<Integer>> particions = kMeans.getParticions();
         ArrayList<Integer> particio_usuari = new ArrayList<>();
-
         for (ArrayList<Integer> part : particions) {
             if (part.contains(0)) {
                 particio_usuari = part;
@@ -58,12 +62,11 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
 
         int num_usuaris = particio_usuari.size();
         int num_items = conjuntRecomanable.mida();
-
         Double[][] valoracions = new Double[num_usuaris][num_items];
         Item[] items = conjuntRecomanable.obteTotsElements().values().toArray(new Item[0]);
         for (int i = 0; i < num_usuaris; ++i) {
             for (int j = 0; j < num_items; ++j) {
-                Valoracio valoracio = usuari.obtenirValoracio(items[j]);
+                Valoracio valoracio = usuaris.obte(ids.get(particio_usuari.get(i))).obtenirValoracio(items[j]);
                 if (valoracio == null) {
                     valoracions[i][j] = null;
                 }

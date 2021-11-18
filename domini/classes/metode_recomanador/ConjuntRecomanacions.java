@@ -111,7 +111,7 @@ public class ConjuntRecomanacions {
             double rel = 0;
             if (id_to_valoracio.containsKey(conjuntRecomanacions.get(i).obtenirId()))
                 rel = id_to_valoracio.get(conjuntRecomanacions.get(i).obtenirId());
-            discountedCumulativeGain += (Math.pow(2,rel)-1)/log2(pos);
+            discountedCumulativeGain += (Math.pow(2,rel)-1)/log2(pos+1);
         }
         return discountedCumulativeGain;
     }
@@ -140,7 +140,7 @@ public class ConjuntRecomanacions {
             if (i > 0 && !Objects.equals(top_val[i], top_val[i - 1]))
                 pos = i+1;
             double rel = top_val[i];
-            idealDiscountedCumulativeGain += (Math.pow(2,rel)-1)/log2(pos);
+            idealDiscountedCumulativeGain += (Math.pow(2,rel)-1)/log2(pos+1);
         }
         return idealDiscountedCumulativeGain;
     }
