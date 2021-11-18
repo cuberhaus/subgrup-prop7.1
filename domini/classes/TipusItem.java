@@ -48,15 +48,15 @@ public class TipusItem {
         for (int i = 0; i < taulaCSV.obtenirNomsAtributs().size(); ++i) {
             for (int j = 0; j < numCandidats; ++j) {
                 if (this.tipusAtributs.containsKey(taulaCSV.obtenirNomsAtributs().get(i))) {
-                    TipusAtribut tipusAtributActual = dedueixTipusAtribut(taulaCSV.obtenirValorAtributItem(j,
+                    TipusAtribut tipusAtributActual = dedueixTipusAtribut(taulaCSV.obtenirValorAtribut(j,
                             taulaCSV.obtenirNomsAtributs().get(i)));
-                    TipusAtribut tipusAtributNou = dedueixTipusAtribut(taulaCSV.obtenirValorAtributItem(j,
+                    TipusAtribut tipusAtributNou = dedueixTipusAtribut(taulaCSV.obtenirValorAtribut(j,
                             taulaCSV.obtenirNomsAtributs().get(i)));
                     this.tipusAtributs.put(taulaCSV.obtenirNomsAtributs().get(i), trobaTipusAtributMenysRestrictiu(
                             tipusAtributActual.obtenirValorAtribut(), tipusAtributNou.obtenirValorAtribut()));
                 } else {
                     this.tipusAtributs.put(taulaCSV.obtenirNomsAtributs().get(i),
-                            dedueixTipusAtribut(taulaCSV.obtenirValorAtributItem(j,
+                            dedueixTipusAtribut(taulaCSV.obtenirValorAtribut(j,
                                     taulaCSV.obtenirNomsAtributs().get(i))));
                 }
             }

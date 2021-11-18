@@ -15,12 +15,13 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
     TipusItem tipusItem;
 
     public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException {
+        taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula);
 
         elements = new TreeMap<>();
         int id;
         for (int i = 0; i < taula.obtenirNumItems(); ++i) {
-            String sid = taula.obtenirValorAtributItem(i, "id");
+            String sid = taula.obtenirValorAtribut(i, "id");
             try {
                 id = Integer.parseInt(sid);
             } catch (NumberFormatException e1) {

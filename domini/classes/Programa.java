@@ -84,7 +84,7 @@ public class Programa {
     }
 
     public Usuari obtenirUsuari(Id idUsuari) {
-        return conjuntUsuaris.obte(idUsuari);
+        return conjuntUsuaris.obtenir(idUsuari);
     }
 
     /**

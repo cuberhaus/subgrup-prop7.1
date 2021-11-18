@@ -14,7 +14,7 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
         return elements.containsKey(id);
     }
 
-    public T obte(Id id) {
+    public T obtenir(Id id) {
         if (id == null || !elements.containsKey(id)) {
             throw new IllegalArgumentException("El conjunt no conté cap element amb aquest Id");
         }
@@ -33,7 +33,7 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
         return elements.remove(element.obtenirId(), element);
     }
 
-    public TreeMap<Id, T> obteTotsElements() { return elements; }
+    public TreeMap<Id, T> obtenirTotsElsElements() { return elements; }
 
     public int mida() { return elements.size(); }
 }

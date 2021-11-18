@@ -25,7 +25,7 @@ public class EscriptorDeCSV extends EscriptorDeFitxers {
      * @throws IOException
      */
     public void escriureCSV(String ubicacio, TaulaCSV taula) throws IOException, InterruptedException {
-        if (!taula.estaInicialitzat()) {
+        if (!taula.estaInicialitzada()) {
             System.out.println("La taula que intentes escriure, no està inicialitzada.");
         }
 

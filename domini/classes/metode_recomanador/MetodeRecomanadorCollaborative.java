@@ -45,7 +45,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
         ArrayList<Id> ids = new ArrayList<>();
         punts_usuaris.add(usuari.transformaAPunt(conjuntRecomanable));
         ids.add(usuari.obtenirId());
-        for (Usuari it_usu : usuaris.obteTotsElements().values()) {
+        for (Usuari it_usu : usuaris.obtenirTotsElsElements().values()) {
             if (usuari == it_usu) continue;
             punts_usuaris.add(it_usu.transformaAPunt(conjuntRecomanable));
             ids.add(it_usu.obtenirId());
@@ -63,10 +63,10 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
         int num_usuaris = particio_usuari.size();
         int num_items = conjuntRecomanable.mida();
         Double[][] valoracions = new Double[num_usuaris][num_items];
-        Item[] items = conjuntRecomanable.obteTotsElements().values().toArray(new Item[0]);
+        Item[] items = conjuntRecomanable.obtenirTotsElsElements().values().toArray(new Item[0]);
         for (int i = 0; i < num_usuaris; ++i) {
             for (int j = 0; j < num_items; ++j) {
-                Valoracio valoracio = usuaris.obte(ids.get(particio_usuari.get(i))).obtenirValoracio(items[j]);
+                Valoracio valoracio = usuaris.obtenir(ids.get(particio_usuari.get(i))).obtenirValoracio(items[j]);
                 if (valoracio == null) {
                     valoracions[i][j] = null;
                 }

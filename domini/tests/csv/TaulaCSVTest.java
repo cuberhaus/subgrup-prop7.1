@@ -16,8 +16,8 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("hores");
-        tauleta.introduirListaAtributs(atributs);
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
     }
 
     //Probem que funciona correctament
@@ -27,7 +27,7 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("hores");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
         ArrayList<String> atributsTaula = tauleta.obtenirNomsAtributs();
         assertEquals(atributsTaula, atributs);
     }
@@ -39,7 +39,7 @@ public class TaulaCSVTest {
         ArrayList<String> valors = new ArrayList<>();
         valors.add("hola");
         valors.add("pol");
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntValors(valors);
     }
 
     //Si no tenim la mateixa quantitat de valors que d'atributs
@@ -51,8 +51,8 @@ public class TaulaCSVTest {
         atributs.add("genere");
         valors.add("hola");
         valors.add("pol");
-        tauleta.introduirListaAtributs(atributs);
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntAtributs(atributs);
+        tauleta.afegirConjuntValors(valors);
     }
 
     //Comparem que hem afegit una fila correctament
@@ -65,8 +65,8 @@ public class TaulaCSVTest {
         atributs.add("edad");
         valors.add("home");
         valors.add("20");
-        tauleta.introduirListaAtributs(atributs);
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntAtributs(atributs);
+        tauleta.afegirConjuntValors(valors);
         ArrayList<String> comparar = tauleta.obtenirItem(0);
         assertEquals(valors, comparar);
     }
@@ -84,7 +84,7 @@ public class TaulaCSVTest {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("hola");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
         tauleta.obtenirValorsAtribut("id");
     }
 
@@ -94,10 +94,10 @@ public class TaulaCSVTest {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
         ArrayList<String> valors = new ArrayList<>();
         valors.add("home");
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntValors(valors);
         ArrayList<String> comparar = tauleta.obtenirValorsAtribut("genere");
         assertEquals(comparar, valors);
     }
@@ -116,7 +116,7 @@ public class TaulaCSVTest {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("hola");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
         tauleta.obtenirValorsAtribut(1);
     }
 
@@ -128,8 +128,8 @@ public class TaulaCSVTest {
         atributs.add("genere");
         ArrayList<String> valors = new ArrayList<>();
         valors.add("dona");
-        tauleta.introduirListaAtributs(atributs);
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntAtributs(atributs);
+        tauleta.afegirConjuntValors(valors);
         ArrayList<String> compara = tauleta.obtenirValorsAtribut(0);
         assertEquals(valors, compara);
     }
@@ -148,12 +148,12 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("edad");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         ArrayList<String> valors = new ArrayList<>();
         valors.add("home");
         valors.add("20");
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntValors(valors);
 
         System.out.println("Arribo");
         tauleta.obtenirItem(1);
@@ -166,12 +166,12 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("edad");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         ArrayList<String> valors = new ArrayList<>();
         valors.add("home");
         valors.add("20");
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntValors(valors);
 
         System.out.println("Arribo");
         ArrayList<String> compara = tauleta.obtenirItem(0);
@@ -199,7 +199,7 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("edad");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         ArrayList<String> valors1 = new ArrayList<>();
         valors1.add("home");
@@ -213,8 +213,8 @@ public class TaulaCSVTest {
         conjuntValors.add(valors1);
         conjuntValors.add(valors2);
 
-        tauleta.introduirLlistaDeValors(valors1);
-        tauleta.introduirLlistaDeValors(valors2);
+        tauleta.afegirConjuntValors(valors1);
+        tauleta.afegirConjuntValors(valors2);
         ArrayList<ArrayList<String>> compara = tauleta.obtenirValorsDeTotsElsItems();
 
         assertEquals(conjuntValors, compara);
@@ -234,7 +234,7 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("edad");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         ArrayList<String> valors1 = new ArrayList<>();
         valors1.add("home");
@@ -249,8 +249,8 @@ public class TaulaCSVTest {
         conjuntValors.add(valors1);
         conjuntValors.add(valors2);
 
-        tauleta.introduirLlistaDeValors(valors1);
-        tauleta.introduirLlistaDeValors(valors2);
+        tauleta.afegirConjuntValors(valors1);
+        tauleta.afegirConjuntValors(valors2);
         ArrayList<ArrayList<String>> compara = tauleta.obtenirTaula();
 
         assertEquals(conjuntValors, compara);
@@ -277,7 +277,7 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("edad");
         atributs.add("genere");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         ArrayList<String> valors = new ArrayList<>();
         valors.add("16");
@@ -300,7 +300,7 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("edad");
         atributs.add("genere");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         System.out.println("Arribo");
         tauleta.obtenirValorsDeItemSeleccionat(3, "hola");
@@ -311,7 +311,7 @@ public class TaulaCSVTest {
     @Test(expected = IllegalStateException.class)
     public void obtenirValorAtributItem() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
-        tauleta.obtenirValorAtributItem(1, "hola");
+        tauleta.obtenirValorAtribut(1, "hola");
     }
 
     //Si no estan els atributs inicialitzats, excepcio
@@ -321,15 +321,15 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("edad");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         ArrayList<String> valors = new ArrayList<>();
         valors.add("home");
         valors.add("20");
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntValors(valors);
 
         System.out.println("Arribo");
-        tauleta.obtenirValorAtributItem(1, "hola");
+        tauleta.obtenirValorAtribut(1, "hola");
     }
 
     //Si no existeix l'index de l'item, excepcio
@@ -339,14 +339,14 @@ public class TaulaCSVTest {
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
         atributs.add("edad");
-        tauleta.introduirListaAtributs(atributs);
+        tauleta.afegirConjuntAtributs(atributs);
 
         ArrayList<String> valors = new ArrayList<>();
         valors.add("home");
         valors.add("20");
-        tauleta.introduirLlistaDeValors(valors);
+        tauleta.afegirConjuntValors(valors);
 
         System.out.println("Arribo");
-        tauleta.obtenirValorAtributItem(3, "genere");
+        tauleta.obtenirValorAtribut(3, "genere");
     }
 }

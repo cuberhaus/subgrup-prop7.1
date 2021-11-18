@@ -158,7 +158,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      */
     public Punt transformaAPunt(ConjuntItems conjuntItems) {
         Punt res = new Punt();
-        for (Item item : conjuntItems.obteTotsElements().values()) {
+        for (Item item : conjuntItems.obtenirTotsElsElements().values()) {
             if (valoracions.containsKey(item)) {
                 res.add(valoracions.get(item).getValor());
             } else res.add(-1.);

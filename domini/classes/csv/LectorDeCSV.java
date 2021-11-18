@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Classe que implementa el lector de CSV
@@ -18,8 +19,7 @@ public class LectorDeCSV extends LectorDeFitxers {
 
     @Override
     public Contenidor lectorDeFitxers(String ubicacio) throws IOException {
-        Contenidor temp = this.llegirCSV(ubicacio);
-        return temp;
+        return this.llegirCSV(ubicacio);
     }
 
     /**
@@ -41,11 +41,8 @@ public class LectorDeCSV extends LectorDeFitxers {
 
         ArrayList<String> atributs = new ArrayList<>();
         if ((fila = csvReader.readLine()) != null) {
-            String[] atributos = fila.split(",");
-            for (String elem : atributos) {
-                atributs.add(elem);
-            }
-            tabla.introduirListaAtributs(atributs);
+            atributs.addAll(Arrays.asList(fila.split(",")));
+            tabla.afegirConjuntAtributs(atributs);
         }
 
         ArrayList<String> valors = new ArrayList<>();
@@ -87,9 +84,7 @@ public class LectorDeCSV extends LectorDeFitxers {
             String actual = String.valueOf(caracters);
             String[] temp = actual.split(",");
 
-            for (String elem : temp) {
-                valors.add(elem);
-            }
+            valors.addAll(Arrays.asList(temp));
 
             ArrayList<String> temporal = new ArrayList<>();
             Integer index = 0;
@@ -104,7 +99,7 @@ public class LectorDeCSV extends LectorDeFitxers {
                 ++index;
             }
 
-            tabla.introduirLlistaDeValors(temporal);
+            tabla.afegirConjuntValors(temporal);
             valors.clear();
         }
 

@@ -12,6 +12,7 @@ import java.util.TreeMap;
 
 public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     public void afegir(TaulaCSV taula) throws InterruptedException {
+        taula.eliminarEspaisInnecessaris();
         elements = new TreeMap<>();
         ArrayList<String> idsUsuaris = taula.obtenirValorsAtribut("userId");
         for (String idUsuari : idsUsuaris) {
@@ -21,7 +22,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     }
     @Override
     public  Usuari esborrar(Id id) {
-        Usuari u1 = this.obte(id);
+        Usuari u1 = this.obtenir(id);
         u1.setActiu(false);
         return elements.put(u1.obtenirId(),u1);
     }

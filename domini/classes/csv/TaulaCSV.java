@@ -43,9 +43,9 @@ public class TaulaCSV extends Contenidor {
      *
      * @param atributs es la llista de atributs que volem tenir.
      */
-    public void introduirListaAtributs(ArrayList<String> atributs) throws IllegalStateException {
+    public void afegirConjuntAtributs(ArrayList<String> atributs) throws IllegalStateException {
         if (numAtributs != -1) {
-            throw new IllegalStateException("No s'han inicialitzat els atributs");
+            throw new IllegalStateException("La taula ja s'havia inicialitzat prèviament.");
         }
 
         else {
@@ -64,7 +64,7 @@ public class TaulaCSV extends Contenidor {
      *
      * @param valors conjunt de valors.
      */
-    public void introduirLlistaDeValors(ArrayList<String> valors) throws IllegalStateException {
+    public void afegirConjuntValors(ArrayList<String> valors) throws IllegalStateException {
         if (numAtributs == -1) {
             throw new IllegalStateException("No s'han inicialitzat els atributs");
         }
@@ -122,9 +122,8 @@ public class TaulaCSV extends Contenidor {
 
         else {
             ArrayList<String> resultat = new ArrayList<>();
-            Integer index = indexAtribut;
             for (int i = 0; i < numItems; ++i) {
-                resultat.add(this.valorsItem.get(i).get(index));
+                resultat.add(this.valorsItem.get(i).get(indexAtribut));
             }
 
             return resultat;
@@ -147,8 +146,7 @@ public class TaulaCSV extends Contenidor {
         }
 
         else {
-            ArrayList<String> resultat = new ArrayList<>(valorsItem.get(indexItem));
-            return resultat;
+            return new ArrayList<>(valorsItem.get(indexItem));
         }
 
     }
@@ -183,8 +181,7 @@ public class TaulaCSV extends Contenidor {
         }
 
         else  {
-            ArrayList<ArrayList<String>> resultat = new ArrayList<>(this.valorsItem);
-            return resultat;
+            return new ArrayList<>(this.valorsItem);
         }
     }
 
@@ -201,9 +198,7 @@ public class TaulaCSV extends Contenidor {
         else {
             ArrayList<ArrayList<String>> resultat = new ArrayList<>();
             resultat.add(this.obtenirNomsAtributs());
-            for (ArrayList<String> elem : valorsItem) {
-                resultat.add(elem);
-            }
+            resultat.addAll(valorsItem);
             return resultat;
         }
     }
@@ -283,7 +278,7 @@ public class TaulaCSV extends Contenidor {
      * @param valor the valor
      * @return the valores de item con valor
      */
-    public ArrayList<String> obtenirValorsDeItemSeleccionat(Integer ind, String valor) throws IllegalStateException, IllegalArgumentException {
+    public ArrayList<String> obtenirValorsDeItemSeleccionat(int ind, String valor) throws IllegalStateException, IllegalArgumentException {
         if (numAtributs == -1) {
             throw new IllegalStateException("No s'han inicialitzat els atributs");
         }
@@ -293,7 +288,6 @@ public class TaulaCSV extends Contenidor {
         }
 
         else  {
-            Integer index = ind;
 
             int refactor = this.valorsItem.size();
             boolean trobat = false;
@@ -301,7 +295,7 @@ public class TaulaCSV extends Contenidor {
 
             while (!trobat && i < refactor) {
                 ArrayList<String> fila = valorsItem.get(i);
-                trobat = (fila.get(index).equals(valor));
+                trobat = (fila.get(ind).equals(valor));
                 ++i;
             }
 
@@ -312,7 +306,7 @@ public class TaulaCSV extends Contenidor {
 
             else {
                 ArrayList<String> resultat = new ArrayList<>(valorsItem.get(i - 1));
-                resultat.remove(index);
+                resultat.remove(ind);
                 return resultat;
             }
         }
@@ -327,7 +321,7 @@ public class TaulaCSV extends Contenidor {
      * @throws IllegalArgumentException
      * @throws IllegalStateException
      */
-    public String obtenirValorAtributItem(int indexItem, String atribut) throws IllegalStateException, IllegalArgumentException
+    public String obtenirValorAtribut(int indexItem, String atribut) throws IllegalStateException, IllegalArgumentException
     {
         if (numAtributs == -1) {
             throw new IllegalStateException("No s'han inicialitzat els atributs");
@@ -345,12 +339,31 @@ public class TaulaCSV extends Contenidor {
 
     }
 
+    public void eliminarEspaisInnecessaris() {
+        if (!estaInicialitzada()) {
+            throw new IllegalStateException("La taula no ha estat inicialitzada.");
+        }
+        for (int i = 0; i < numAtributs; ++i) {
+            String nomRetallat = indexAAtributs.get(i).trim();
+            if (!nomRetallat.equals(indexAAtributs.get(i))) {
+                atributsAIndex.remove(indexAAtributs.get(i));
+                atributsAIndex.put(indexAAtributs.get(i), i);
+                indexAAtributs.set(i, nomRetallat);
+            }
+        }
+        for (int i = 0; i < numItems; ++i) {
+            for (int j = 0; j < numAtributs; ++j) {
+                valorsItem.get(i).set(j, valorsItem.get(i).get(j).trim());
+            }
+        }
+    }
+
     /**
      * Is initialized boolean.
      *
      * @return the boolean
      */
-    public boolean estaInicialitzat() {
+    public boolean estaInicialitzada() {
         return numAtributs != -1;
     }
 

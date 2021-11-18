@@ -49,20 +49,20 @@ public class Joc1 {
             int known = inputQueriesReader.nextInt();
             int unknown = inputQueriesReader.nextInt();
             int Q = inputQueriesReader.nextInt();
-            Usuari usuari = usuaris.obte(new Id(userid, true));
+            Usuari usuari = usuaris.obtenir(new Id(userid, true));
             ConjuntValoracions val_usuari = new ConjuntValoracions();
             for (int j = 0; j < known; ++j) {
                 int itemid = inputQueriesReader.nextInt();
                 String nextDouble = inputQueriesReader.next();
                 double rating = Double.parseDouble(nextDouble);
-                val_usuari.afegir(new Valoracio(rating, usuari, items.obte(new Id(itemid, true))));
+                val_usuari.afegir(new Valoracio(rating, usuari, items.obtenir(new Id(itemid, true))));
             }
             ConjuntItems items_recomanables = new ConjuntItems(items.obteTipusItem());
             ArrayList<Pair<Integer, Double>> valoracions_unk = new ArrayList<>();
             for (int j = 0; j < unknown; ++j) {
                 int itemid = inputQueriesReader.nextInt();
-                items_recomanables.afegir(items.obte(new Id(itemid, true)));
-                valoracions_unk.add(new Pair<>(itemid, unknown_conjunt.obte(usuari, items.obte(new Id(itemid, true))).getValor()));
+                items_recomanables.afegir(items.obtenir(new Id(itemid, true)));
+                valoracions_unk.add(new Pair<>(itemid, unknown_conjunt.obte(usuari, items.obtenir(new Id(itemid, true))).getValor()));
             }
             ConjuntRecomanacions recomanacionsCollab = recomanadorCollaborative.obteRecomanacions(usuari, items_recomanables, val_usuari, Q);
             //ConjuntRecomanacions recomanacionsContent = recomanadorContentBased.obteRecomanacions(usuari, items_recomanables, val_usuari, Q);
