@@ -9,6 +9,10 @@ import java.util.Arrays;
  */
 public class ValorConjuntNumeric extends ValorConjunt<Double> {
 
+    public ValorConjuntNumeric() {
+        this.valor = null;
+    }
+
     /**
      * Constructor amb el conjunt numèric.
      * @param valor <code>ArrayList<ValorAtribut<Double>></code> que conté el valor d'aquest atribut.
@@ -38,6 +42,11 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
     @Override
     public ArrayList<ValorAtribut<Double>> getValor() {
         return valor;
+    }
+
+    @Override
+    public ValorConjuntNumeric copy() {
+        return new ValorConjuntNumeric(valor);
     }
 
 }

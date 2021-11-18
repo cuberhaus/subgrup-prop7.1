@@ -23,4 +23,6 @@ public abstract class ValorAtribut<T> {
     public int hashCode() {
         return Objects.hash(valor);
     }
+
+    public abstract ValorAtribut<?> copy();
 }

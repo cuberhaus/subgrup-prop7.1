@@ -1,7 +1,7 @@
-package atributs.tipus;
+package atributs.distancia;
 
-import domini.classes.atributs.tipus.Euclidia;
-import domini.classes.atributs.tipus.TipusAtribut;
+import domini.classes.atributs.distancia.Euclidiana;
+import domini.classes.atributs.distancia.Distancia;
 import domini.classes.atributs.valors.*;
 
 import org.junit.Test;
@@ -16,73 +16,73 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 
 @RunWith(Enclosed.class)
-public class EuclidiaTest {
+public class EuclidianaTest {
 
     private final static double delta = 1e-10;
-    private final static Euclidia euclidia = new Euclidia();
+    private final static Euclidiana euclidiana = new Euclidiana();
 
-    public static class NonParametrizedEuclidiaTest {
+    public static class NonParametrizedEuclidianaTest {
         @Test
         public void copy_HauriaDeRetornarCopia() {
-            TipusAtribut copia = euclidia.copy();
-            assertNotSame(copia, euclidia);
-            assertEquals(copia, euclidia);
+            Distancia copia = euclidiana.copy();
+            assertNotSame(copia, euclidiana);
+            assertEquals(copia, euclidiana);
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void admetValorAtribut_HauriaDEmetreExcepcio_Quan_Nul() {
-            euclidia.admetValorAtribut(null);
+        public void admet_HauriaDEmetreExcepcio_Quan_Nul() {
+            euclidiana.admet(null);
         }
 
         @Test
-        public void admetValorAtribut_HauriaDeRetornarCert() {
-            assertTrue(euclidia.admetValorAtribut(new ValorNumeric(0.0)));
-            assertTrue(euclidia.admetValorAtribut(new ValorConjuntNumeric(new double[]{0.0})));
+        public void admet_HauriaDeRetornarCert() {
+            assertTrue(euclidiana.admet(new ValorNumeric(0.0)));
+            assertTrue(euclidiana.admet(new ValorConjuntNumeric(new double[]{0.0})));
         }
 
         @Test
-        public void admetValorAtribut_HauriaDeRetornarFals() {
-            assertFalse(euclidia.admetValorAtribut(new ValorBoolea(true)));
-            assertFalse(euclidia.admetValorAtribut(new ValorCategoric("a")));
-            assertFalse(euclidia.admetValorAtribut(new ValorTextual("a")));
-            assertFalse(euclidia.admetValorAtribut(new ValorConjuntBoolea(new boolean[]{true})));
-            assertFalse(euclidia.admetValorAtribut(new ValorConjuntCategoric(new String[]{"a"})));
-            assertFalse(euclidia.admetValorAtribut(new ValorConjuntTextual(new String[]{"a"})));
+        public void admet_HauriaDeRetornarFals() {
+            assertFalse(euclidiana.admet(new ValorBoolea(true)));
+            assertFalse(euclidiana.admet(new ValorCategoric("a")));
+            assertFalse(euclidiana.admet(new ValorTextual("a")));
+            assertFalse(euclidiana.admet(new ValorConjuntBoolea(new boolean[]{true})));
+            assertFalse(euclidiana.admet(new ValorConjuntCategoric(new String[]{"a"})));
+            assertFalse(euclidiana.admet(new ValorConjuntTextual(new String[]{"a"})));
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
-            euclidia.obtenirDistancia(new ValorBoolea(true), new ValorNumeric(1.0));
+        public void obtenir_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
+            euclidiana.obtenir(new ValorBoolea(true), new ValorNumeric(1.0));
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
-            euclidia.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false));
+        public void obtenir_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
+            euclidiana.obtenir(new ValorBoolea(true), new ValorBoolea(false));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void obtenirNorma_HauriaDEmetreExcepcio_Quan_Nul() {
-            euclidia.obtenirNorma(null);
+            euclidiana.obtenirNorma(null);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void obtenirNorma_HauriaDEmetreExcepcio_Quan_ValorAtributNoEsAdmissible() {
-            euclidia.obtenirNorma(new ValorBoolea(true));
+            euclidiana.obtenirNorma(new ValorBoolea(true));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void actualitzarFactorDeNormalitzacio_HauriaDEmetreExcepcio_Quan_Nul() {
-            euclidia.actualitzarFactorDeNormalitzacio(null);
+            euclidiana.actualitzarFactorDeNormalitzacio(null);
         }
     }
 
     @RunWith(Parameterized.class)
-    public static class ParametrizedObtenirDistanciaEuclidiaTest {
+    public static class ParametrizedObtenirEuclidianaTest {
         private final ValorAtribut<?> valor1;
         private final ValorAtribut<?> valor2;
         private final double resultat;
 
-        public ParametrizedObtenirDistanciaEuclidiaTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
+        public ParametrizedObtenirEuclidianaTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
             this.valor1 = valor1;
             this.valor2 = valor2;
             this.resultat = resultat;
@@ -105,17 +105,17 @@ public class EuclidiaTest {
         }
 
         @Test
-        public void obtenirDistancia_HauriaDeRetornarDistancia() {
-            assertEquals(euclidia.obtenirDistancia(valor1, valor2), resultat, delta);
+        public void obtenir_HauriaDeRetornarDistancia() {
+            assertEquals(euclidiana.obtenir(valor1, valor2), resultat, delta);
         }
     }
 
     @RunWith(Parameterized.class)
-    public static class ParametrizedObtenirNormaEuclidiaTest {
+    public static class ParametrizedObtenirNormaEuclidianaTest {
         private final ValorAtribut<?> valor;
         private final double resultat;
 
-        public ParametrizedObtenirNormaEuclidiaTest(ValorAtribut<?> valor, double resultat) {
+        public ParametrizedObtenirNormaEuclidianaTest(ValorAtribut<?> valor, double resultat) {
             this.valor = valor;
             this.resultat = resultat;
         }
@@ -138,7 +138,7 @@ public class EuclidiaTest {
 
         @Test
         public void obtenirNorma_HauriaDeRetornarNorma() {
-            assertEquals(euclidia.obtenirNorma(valor), resultat, delta);
+            assertEquals(euclidiana.obtenirNorma(valor), resultat, delta);
         }
     }
 }

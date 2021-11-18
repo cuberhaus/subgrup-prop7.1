@@ -1,9 +1,7 @@
 package domini.classes;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Representa l'estat del programa.
@@ -23,7 +21,7 @@ public class Programa {
     private ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
 
     /** Conté el conjunt de tipus d'items */
-    private Map<TipusItem,TipusItem> tipusItems = new HashMap<TipusItem,TipusItem>();
+    private Map<TipusItem,TipusItem> tipusItems = new HashMap<>();
 
 //    /** Conté els conjunts de programa */
 //    private ArrayList<conjuntPrograma> conjuntsPrograma;
@@ -85,6 +83,10 @@ public class Programa {
         return conjuntUsuaris.conte(usuari.obtenirId());
     }
 
+    public Usuari obtenirUsuari(Id idUsuari) {
+        return conjuntUsuaris.obte(idUsuari);
+    }
+
     /**
      * Afegeix un usuari al conjunt d'usuaris.
      * @param  usuari el paràmetre s'ha afegit al conjunt si no hi era abans.
@@ -106,7 +108,6 @@ public class Programa {
         return true;
     }
 
-    // TODO: junit comprovar que atribut actiu del usuari del conjunt es false
     /**
      * Marca com a no actiu un usuari del conjunt d'usuaris.
      * @param usuari el paràmetre s'ha marcat com a no actiu.

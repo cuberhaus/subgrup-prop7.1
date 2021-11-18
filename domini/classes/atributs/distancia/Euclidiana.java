@@ -1,24 +1,24 @@
-package domini.classes.atributs.tipus;
+package domini.classes.atributs.distancia;
 
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.atributs.valors.ValorConjuntNumeric;
 import domini.classes.atributs.valors.ValorNumeric;
 
 /**
- * Representa un tipus d'atribut numèric amb la distància euclidiana.
+ * Representa la distància euclidiana entre dos atributs numèrics.
  * @author maria.prat
  */
-public class Euclidia extends TipusAtribut {
+public class Euclidiana extends Distancia {
     private double normaMinima = Double.POSITIVE_INFINITY;
     private double normaMaxima = 0.0;
 
     @Override
-    public TipusAtribut copy() {
-        return new Euclidia();
+    public Distancia copy() {
+        return new Euclidiana();
     }
 
     @Override
-    public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) {
+    public boolean admet(ValorAtribut<?> valorAtribut) {
         if (valorAtribut == null) {
             throw new IllegalArgumentException("No es pot comprovar si un ValorAtribut nul és admissible.");
         }
@@ -26,12 +26,12 @@ public class Euclidia extends TipusAtribut {
     }
 
     @Override
-    public double obtenirDistancia(ValorAtribut<?> valor1, ValorAtribut<?> valor2) throws IllegalArgumentException {
+    public double obtenir(ValorAtribut<?> valor1, ValorAtribut<?> valor2) throws IllegalArgumentException {
         if (!(valor1.getClass().equals(valor2.getClass()))) {
             throw new IllegalArgumentException("Els dos ValorAtributs donats han de ser instàncies de la mateixa classe.");
         }
-        if (!admetValorAtribut(valor1)) {
-            throw new IllegalArgumentException("El TipusAtribut no admet el tipus dels ValorAtributs donats.");
+        if (!admet(valor1)) {
+            throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
         if (valor1 instanceof ValorNumeric) {
             return Math.abs(((ValorNumeric) valor1).getValor() - ((ValorNumeric) valor2).getValor());
@@ -55,14 +55,14 @@ public class Euclidia extends TipusAtribut {
         if (valor == null) {
             throw new IllegalArgumentException("No es pot obtenir la norma d'un ValorAtribut nul.");
         }
-        if (!admetValorAtribut(valor)) {
-            throw new IllegalArgumentException("El TipusAtribut no admet el tipus del ValorAtribut donat.");
+        if (!admet(valor)) {
+            throw new IllegalArgumentException("La distància no admet el tipus del ValorAtribut donat.");
         }
         if (valor instanceof ValorNumeric) {
-            return obtenirDistancia(new ValorNumeric(0.0), valor);
+            return obtenir(new ValorNumeric(0.0), valor);
         } else {
             double[] zero = new double[((ValorConjuntNumeric)valor).getValor().size()];
-            return obtenirDistancia(new ValorConjuntNumeric(zero), valor);
+            return obtenir(new ValorConjuntNumeric(zero), valor);
         }
     }
 

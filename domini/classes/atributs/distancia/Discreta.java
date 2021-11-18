@@ -1,19 +1,19 @@
-package domini.classes.atributs.tipus;
+package domini.classes.atributs.distancia;
 
 import domini.classes.atributs.valors.*;
 
 /**
- * Representa un tipus d'atribut simple (booleà, categòric, numèric o textual) amb la distància discreta.
+ * Representa la distància discreta entre dos atributs simples (booleans, categòrics, numèrics o textuals).
  * @author maria.prat
  */
-public class Discret extends TipusAtribut {
+public class Discreta extends Distancia {
     @Override
-    public TipusAtribut copy() {
-        return new Discret();
+    public Distancia copy() {
+        return new Discreta();
     }
 
     @Override
-    public boolean admetValorAtribut(ValorAtribut<?> valorAtribut) throws IllegalArgumentException {
+    public boolean admet(ValorAtribut<?> valorAtribut) throws IllegalArgumentException {
         if (valorAtribut == null) {
             throw new IllegalArgumentException("No es pot comprovar si un ValorAtribut nul és admissible.");
         }
@@ -22,12 +22,12 @@ public class Discret extends TipusAtribut {
     }
 
     @Override
-    public double obtenirDistancia(ValorAtribut<?> valor1, ValorAtribut<?> valor2) throws IllegalArgumentException {
+    public double obtenir(ValorAtribut<?> valor1, ValorAtribut<?> valor2) throws IllegalArgumentException {
         if (!(valor1.getClass().equals(valor2.getClass()))) {
             throw new IllegalArgumentException("Els dos ValorAtributs donats han de ser instàncies de la mateixa classe.");
         }
-        if (!admetValorAtribut(valor1)) {
-            throw new IllegalArgumentException("El TipusAtribut no admet el tipus dels ValorAtributs donats.");
+        if (!admet(valor1)) {
+            throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
         if (valor1.getValor().equals(valor2.getValor())) {
             return 0.0d;

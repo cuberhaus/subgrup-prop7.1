@@ -1,7 +1,7 @@
-package atributs.tipus;
+package atributs.distancia;
 
-import domini.classes.atributs.tipus.DiferenciaDeConjunts;
-import domini.classes.atributs.tipus.TipusAtribut;
+import domini.classes.atributs.distancia.DiferenciaDeConjunts;
+import domini.classes.atributs.distancia.Distancia;
 import domini.classes.atributs.valors.*;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -22,41 +22,41 @@ public class DiferenciaDeConjuntsTest {
     public static class NonParametrizedDiferenciaDeConjuntsTest {
         @Test
         public void copy_HauriaDeRetornarCopia() {
-            TipusAtribut copia = diferenciaDeConjunts.copy();
+            Distancia copia = diferenciaDeConjunts.copy();
             assertNotSame(copia, diferenciaDeConjunts);
             assertEquals(copia, diferenciaDeConjunts);
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void admetValorAtribut_HauriaDEmetreExcepcio_Quan_Nul() {
-            diferenciaDeConjunts.admetValorAtribut(null);
+        public void admet_HauriaDEmetreExcepcio_Quan_Nul() {
+            diferenciaDeConjunts.admet(null);
         }
 
         @Test
-        public void admetValorAtribut_HauriaDeRetornarCert() {
-            assertTrue(diferenciaDeConjunts.admetValorAtribut(new ValorConjuntBoolea(new boolean[]{true})));
-            assertTrue(diferenciaDeConjunts.admetValorAtribut(new ValorConjuntCategoric(new String[]{"a"})));
-            assertTrue(diferenciaDeConjunts.admetValorAtribut(new ValorConjuntNumeric(new double[]{0.0})));
-            assertTrue(diferenciaDeConjunts.admetValorAtribut(new ValorConjuntTextual(new String[]{"a"})));
+        public void admet_HauriaDeRetornarCert() {
+            assertTrue(diferenciaDeConjunts.admet(new ValorConjuntBoolea(new boolean[]{true})));
+            assertTrue(diferenciaDeConjunts.admet(new ValorConjuntCategoric(new String[]{"a"})));
+            assertTrue(diferenciaDeConjunts.admet(new ValorConjuntNumeric(new double[]{0.0})));
+            assertTrue(diferenciaDeConjunts.admet(new ValorConjuntTextual(new String[]{"a"})));
         }
 
         @Test
-        public void admetValorAtribut_HauriaDeRetornarFals() {
-            assertFalse(diferenciaDeConjunts.admetValorAtribut(new ValorBoolea(true)));
-            assertFalse(diferenciaDeConjunts.admetValorAtribut(new ValorCategoric("a")));
-            assertFalse(diferenciaDeConjunts.admetValorAtribut(new ValorNumeric(0.0)));
-            assertFalse(diferenciaDeConjunts.admetValorAtribut(new ValorTextual("a")));
+        public void admet_HauriaDeRetornarFals() {
+            assertFalse(diferenciaDeConjunts.admet(new ValorBoolea(true)));
+            assertFalse(diferenciaDeConjunts.admet(new ValorCategoric("a")));
+            assertFalse(diferenciaDeConjunts.admet(new ValorNumeric(0.0)));
+            assertFalse(diferenciaDeConjunts.admet(new ValorTextual("a")));
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
-            diferenciaDeConjunts.obtenirDistancia(new ValorConjuntBoolea(new boolean[]{true}),
+        public void obtenir_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
+            diferenciaDeConjunts.obtenir(new ValorConjuntBoolea(new boolean[]{true}),
                     new ValorConjuntNumeric(new double[]{0.0}));
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
-            diferenciaDeConjunts.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false));
+        public void obtenir_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
+            diferenciaDeConjunts.obtenir(new ValorBoolea(true), new ValorBoolea(false));
         }
     }
 
@@ -113,8 +113,8 @@ public class DiferenciaDeConjuntsTest {
         }
 
         @Test
-        public void obtenirDistancia_HauriaDeRetornarDistancia() {
-            assertEquals(diferenciaDeConjunts.obtenirDistancia(valor1, valor2), resultat, delta);
+        public void obtenir_HauriaDeRetornarDistancia() {
+            assertEquals(diferenciaDeConjunts.obtenir(valor1, valor2), resultat, delta);
         }
     }
 }

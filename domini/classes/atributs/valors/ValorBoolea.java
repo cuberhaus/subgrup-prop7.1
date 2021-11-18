@@ -6,6 +6,10 @@ package domini.classes.atributs.valors;
  */
 public class ValorBoolea extends ValorAtribut<Boolean> {
 
+    public ValorBoolea() {
+        this.valor = null;
+    }
+
     /**
      * Constructor amb el valor booleà.
      * @param valor <code>Boolean</code> que conté el valor d'aquest atribut.
@@ -24,6 +28,11 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
     @Override
     public Boolean getValor() {
         return valor;
+    }
+
+    @Override
+    public ValorBoolea copy() {
+        return new ValorBoolea(valor);
     }
 
 

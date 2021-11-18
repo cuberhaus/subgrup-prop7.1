@@ -8,6 +8,10 @@ import java.util.ArrayList;
  */
 public class ValorConjuntCategoric extends ValorConjunt<String> {
 
+    public ValorConjuntCategoric() {
+        this.valor = null;
+    }
+
     /**
      * Constructor amb el conjunt categòric.
      * @param valor <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
@@ -37,5 +41,10 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
     @Override
     public ArrayList<ValorAtribut<String>> getValor() {
         return valor;
+    }
+
+    @Override
+    public ValorConjuntCategoric copy() {
+        return new ValorConjuntCategoric(valor);
     }
 }

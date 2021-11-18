@@ -6,6 +6,10 @@ package domini.classes.atributs.valors;
  */
 public class ValorCategoric extends ValorAtribut<String> {
 
+    public ValorCategoric() {
+        this.valor = null;
+    }
+
     /**
      * Constructor amb el valor categòric.
      * @param valor <code>String</code> que conté el valor d'aquest atribut.
@@ -20,5 +24,10 @@ public class ValorCategoric extends ValorAtribut<String> {
     @Override
     public String getValor() {
         return valor;
+    }
+
+    @Override
+    public ValorCategoric copy() {
+        return new ValorCategoric(valor);
     }
 }

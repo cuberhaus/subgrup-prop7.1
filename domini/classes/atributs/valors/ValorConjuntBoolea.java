@@ -1,12 +1,17 @@
 package domini.classes.atributs.valors;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Representa el valor compost booleà d'un atribut.
  * @author maria.prat
  */
 public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
+
+    public ValorConjuntBoolea() {
+        this.valor = null;
+    }
 
     /**
      * Constructor amb el conjunt booleà.
@@ -27,11 +32,28 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
         }
     }
 
+    public ValorConjuntBoolea(Boolean[] valors) {
+        this.valor = new ArrayList<>();
+        for (Boolean valor : valors) {
+            this.valor.add(new ValorBoolea(valor));
+        }
+    }
+
+
+    public ValorConjuntBoolea(String s) {
+        this((Boolean[]) Arrays.stream(s.split(";")).map(Boolean::parseBoolean).toArray());
+    }
+
     /**
      * @return <code>ArrayList<ValorAtribut<Boolean>></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<Boolean>> getValor() {
         return valor;
+    }
+
+    @Override
+    public ValorConjuntBoolea copy() {
+        return new ValorConjuntBoolea(valor);
     }
 }

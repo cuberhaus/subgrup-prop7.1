@@ -8,7 +8,7 @@ import java.util.TreeMap;
  * @author maria.prat
  */
 public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
-    protected TreeMap<Id, T> elements = new TreeMap<Id, T>();
+    protected TreeMap<Id, T> elements;
 
     public boolean conte(Id id) {
         return elements.containsKey(id);

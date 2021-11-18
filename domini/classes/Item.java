@@ -1,6 +1,7 @@
 package domini.classes;
 
-import domini.classes.atributs.tipus.*;
+import domini.classes.atributs.TipusAtribut;
+import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 
 import java.util.ArrayList;
@@ -36,11 +37,10 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
-    public Item(Id id, TipusItem tipusItem, ArrayList<String> valors, ArrayList<String> nom_atributs) {
+    public Item(Id id, TipusItem tipusItem, ArrayList<String> nom_atributs, ArrayList<String> valors) {
         this.id = id;
         this.tipusItem = tipusItem;
-        // TODO: aqui els atributs s'haurien d'obtenir de tipus forçats.
-        this.atributs = obtenirAtributs(tipusItem, valors, nom_atributs);
+        obtenirAtributs(nom_atributs, valors);
         actualitzarFactorNormalitzacio();
         this.valoracions = new HashMap<>();
         if (!tipusItem.esCompatible(atributs)) {
@@ -50,58 +50,51 @@ public class Item implements Comparable<Item>, ElementIdentificat {
 
     private void actualitzarFactorNormalitzacio() {
         for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
-            if (atribut.getValue() instanceof Euclidia) {
-                ((Euclidia)atribut.getValue()).actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
+            if (atribut.getValue().obtenirDistancia() instanceof Euclidiana) {
+                ((Euclidiana)atribut.getValue().obtenirDistancia()).actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
             }
         }
     }
 
-    private ValorAtribut<?> dedueixValorAtribut(String s) {
-        double d;
-        try {
-            d = Double.parseDouble(s);
-        } catch (NumberFormatException e1) {
-            if (ValorBoolea.esBoolea(s)) {
-                return new ValorBoolea(s);
+    private void obtenirAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
+        if (tipusItem.obtenirTipusAtributs().size() != nomAtributs.size() ||
+                tipusItem.obtenirTipusAtributs().size() != valors.size()) {
+            throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
+                    "mides diferents.");
+        }
+        atributs = new HashMap<>();
+        for (int i = 0; i < nomAtributs.size(); ++i) {
+            if (!tipusItem.obtenirTipusAtributs().containsKey(nomAtributs.get(i))) {
+                throw new IllegalArgumentException("El TipusItem no és compatible amb els noms dels atributs donats.");
             }
-            if (s.contains(";")) {
-                String primerValor = s.split(";", 2)[0];
-                try {
-                    Double.parseDouble(primerValor);
-                } catch (NumberFormatException e2) {
-                    return new ValorConjuntCategoric(s);
-                }
-                return new ValorConjuntNumeric(s);
-            }
+            atributs.put(nomAtributs.get(i),
+                    obtenirValorAtribut(tipusItem.obtenirTipusAtributs().get(nomAtributs.get(i)).obtenirValorAtribut(),
+                    valors.get(i)));
+        }
+    }
+
+    private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException {
+        if (valorAtribut instanceof ValorBoolea) {
+            return new ValorBoolea(Boolean.parseBoolean(s));
+        } else if (valorAtribut instanceof ValorCategoric) {
             return new ValorCategoric(s);
+        } else if (valorAtribut instanceof ValorNumeric) {
+            return new ValorNumeric(Double.parseDouble(s));
+        } else if (valorAtribut instanceof ValorTextual) {
+            return new ValorTextual(s);
+        } else if (valorAtribut instanceof ValorConjuntBoolea) {
+            return new ValorConjuntBoolea(s);
+        } else if (valorAtribut instanceof ValorConjuntCategoric) {
+            return new ValorConjuntCategoric(s);
+        } else if (valorAtribut instanceof ValorConjuntNumeric) {
+            return new ValorConjuntNumeric(s);
+        } else if (valorAtribut instanceof ValorConjuntTextual) {
+            return new ValorConjuntTextual(s);
+        } else {
+            throw new IllegalArgumentException("El ValorAtribut donat no és una instància de cap subclasse reconeguda.");
         }
-        return new ValorNumeric(d);
     }
 
-
-
-    private Map<String, ValorAtribut<?>> obtenirAtributs(TipusItem tipusItem, ArrayList<String> valors) throws IllegalArgumentException {
-        if (tipusItem.obtenirTipusAtributs().size() != valors.size()) {
-            throw new IllegalArgumentException("No es poden obtenir els atributs d'un ítem d'un TipusItem i un conjunt de valors de mides diferents.");
-        }
-        Map<String, ValorAtribut<?>> atributs = new HashMap<>();
-        int index = 0;
-        for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
-            atributs.put(atribut.getKey(), dedueixValorAtribut(valors.get(index)));
-            ++index;
-        }
-        return atributs;
-    }
-    private Map<String, ValorAtribut<?>> obtenirAtributs(TipusItem tipusItem, ArrayList<String> valors, ArrayList<String> nom_atributs) throws IllegalArgumentException {
-        if (tipusItem.obtenirTipusAtributs().size() != valors.size()) {
-            throw new IllegalArgumentException("No es poden obtenir els atributs d'un ítem d'un TipusItem i un conjunt de valors de mides diferents.");
-        }
-        Map<String, ValorAtribut<?>> atributs = new HashMap<>();
-        for (int i = 0; i < nom_atributs.size(); ++i) {
-            atributs.put(nom_atributs.get(i), dedueixValorAtribut(valors.get(i)));
-        }
-        return atributs;
-    }
     public Id obtenirId() { return id; }
 
     @Override
@@ -141,14 +134,15 @@ public class Item implements Comparable<Item>, ElementIdentificat {
             throw new IllegalArgumentException("No es pot calcular la distància entre dos ítems de TipusItems diferents.");
         }
         double distancia = 0.0;
-        for (Map.Entry<String, TipusAtribut> entrada : tipusItem.obtenirTipusAtributs().entrySet()) {
+        for (Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             // TODO(maria): normalitzar totes les normes
-            if (entrada.getValue() instanceof Euclidia) {
-                distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
-                        item.atributs.get(entrada.getKey()))/(((Euclidia) entrada.getValue()).obtenirFactorDeNormalitzacio());
+            if (tipusAtribut.getValue().obtenirDistancia() instanceof Euclidiana) {
+                distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
+                        item.atributs.get(tipusAtribut.getKey())) /
+                        (((Euclidiana) tipusAtribut.getValue().obtenirDistancia()).obtenirFactorDeNormalitzacio());
             } else {
-                distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
-                        item.atributs.get(entrada.getKey()));
+                distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
+                        item.atributs.get(tipusAtribut.getKey()));
             }
         }
         return distancia;

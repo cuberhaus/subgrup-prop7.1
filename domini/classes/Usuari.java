@@ -2,7 +2,6 @@ package domini.classes;
 
 import domini.classes.metode_recomanador.Punt;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -145,7 +144,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
 
     /**
      * Consultora d'una valoració feta per l'usuari a l'item passat com a parametre
-     * @return El resultat és el valor del P.I.
+     * @return El resultat és el valor del P.I. o null si no existeix
      */
     public Valoracio obtenirValoracio(Item item) {
         return valoracions.get(item);
@@ -157,7 +156,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * @param conjuntItems Items considerats per la conversió a punt.
      * @return El <code>Punt</code> corresponent a l'usuari.
      */
-    public Punt obteComPunt(ConjuntItems conjuntItems) {
+    public Punt transformaAPunt(ConjuntItems conjuntItems) {
         Punt res = new Punt();
         for (Item item : conjuntItems.obteTotsElements().values()) {
             if (valoracions.containsKey(item)) {
