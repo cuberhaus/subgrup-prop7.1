@@ -72,7 +72,8 @@ public class ConjuntValoracions {
 
     /**
      * Esborra una valoració del conjunt de valoracions.
-     * @param valoracio La valoració que es vol borrar del conjunt
+     * @param usuari usuari que fa la valoració
+     * @param item item valorat
      */
     public Valoracio esborrar(Usuari usuari, Item item) {
         return valoracions.remove(new Pair<>(usuari,item));
@@ -81,7 +82,7 @@ public class ConjuntValoracions {
     /**
      * Esborra una valoració del conjunt de valoracions.
      * Retorna true si s'ha esborrat correctament, retorna false si no hi era
-     * @param valoracio La valoració que es vol borrar del conjunt
+     * @param valoracio La valoració que es vol esborrar del conjunt
      */
     public boolean esborrar(Valoracio valoracio) {
         return valoracions.remove(new Pair<>(valoracio.getUsuari(),valoracio.getItem()), valoracio);
