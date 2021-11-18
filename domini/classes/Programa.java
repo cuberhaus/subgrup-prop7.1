@@ -81,16 +81,16 @@ public class Programa {
         return sessio.obtenirUsuariSessioIniciada();
     }
 
+    public boolean conteUsuari(Usuari usuari) {
+        return conjuntUsuaris.conte(usuari.obtenirId());
+    }
+
     /**
      * Afegeix un usuari al conjunt d'usuaris.
      * @param  usuari el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public void afegirUsuari(Usuari usuari) {
         conjuntUsuaris.afegir(usuari);
-    }
-
-    public boolean conteUsuari(Usuari usuari) {
-        return conjuntUsuaris.conte(usuari.obtenirId());
     }
 
     /**

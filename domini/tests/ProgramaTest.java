@@ -1,6 +1,7 @@
 import domini.classes.Programa;
 import domini.classes.SessioIniciada;
 import domini.classes.Usuari;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,11 +14,6 @@ public class ProgramaTest {
         Programa p2 = Programa.obtenirInstancia();
 
         assertEquals(p1,p2);
-        System.out.println(getClass(p1));
-    }
-
-    public String getClass(Programa p) {
-        return "The class is of type Programa";
     }
 
     @Test
@@ -39,12 +35,8 @@ public class ProgramaTest {
         System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
     }
 
-    @Test
-    public void obtenirUsuariSessioIniciada() {
-    }
-
     /**
-     * Provem a preguntar si la sessió iniciada en els 3 casos possibles, quan encara
+     * Provem a preguntar si la sessió està iniciada en els 3 casos possibles, quan encara
      * no hem executat cap funció, i després d'iniciar i tancar sessio.
      */
     @Test
@@ -64,10 +56,44 @@ public class ProgramaTest {
     }
 
     @Test
+    public void obtenirUsuariSessioIniciadaIniciantSessioAbans() {
+        Programa p1 = Programa.obtenirInstancia();
+        Usuari u1 = new Usuari(3,true,"Pol","1234");
+        p1.iniciarSessio(u1);
+        Usuari u2 = p1.obtenirUsuariSessioIniciada();
+        assertEquals(u1,u2);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void obtenirUsuariSessioIniciadaDemanantUsuariAbansDiniciarSessio() {
+        Programa p1 = Programa.obtenirInstancia();
+        Usuari u2 = p1.obtenirUsuariSessioIniciada();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void obtenirUsuariSessioIniciadaDespresDeTancarSessio() {
+        Programa p1 = Programa.obtenirInstancia();
+        Usuari u1 = new Usuari(3,true,"Pol","1234");
+        p1.iniciarSessio(u1);
+        p1.tancarSessio();
+        Usuari u2 = p1.obtenirUsuariSessioIniciada();
+    }
+
+    @Test
+    public void conteUsuari() {
+        Programa p1 = Programa.obtenirInstancia();
+        Usuari u1 = new Usuari(3,true,"Pol","1234");
+        Usuari u2 = new Usuari(5,true,"Marta","4321");
+        p1.afegirUsuari(u1);
+        assertTrue(p1.conteUsuari(u1));
+        assertFalse(p1.conteUsuari(u2));
+    }
+
+    @Test
     public void afegirUsuari() {
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
-        Usuari u2 = new Usuari(4,true,"Marta","4321");
+        Usuari u2 = new Usuari(5,true,"Marta","4321");
         p1.afegirUsuari(u1);
         assertTrue(p1.conteUsuari(u1));
         assertFalse(p1.conteUsuari(u2));
@@ -80,6 +106,11 @@ public class ProgramaTest {
     @Test
     public void esborraUsuari() {
         Programa p1 = Programa.obtenirInstancia();
-//        p1.
+        Usuari u1 = new Usuari(3,true,"Pol","1234");
+        Usuari u2 = new Usuari(4,true,"Marta","4321");
+        p1.afegirUsuari(u1);
+        p1.esborraUsuari(u1);
+        p1.obte
+        assertFalse(p1.conteUsuari(u1));
     }
 }
