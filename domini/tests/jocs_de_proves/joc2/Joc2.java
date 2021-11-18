@@ -41,7 +41,7 @@ public class Joc2 {
         double totalIDCG2 = 0.;
         double totalNDCG2 = 0.;
 
-        for (Usuari us : usuaris.obteTotsElements().values()) {
+        for (Usuari us : usuaris.obtenirTotsElsElements().values()) {
             ConjuntItems items_recomanables = new ConjuntItems(items.obteTipusItem());
             ArrayList<Pair<Integer, Double>> valoracions_unk = new ArrayList<>();
             for (Valoracio val : unknown_conjunt.obteTotesValoracions().values()) {
