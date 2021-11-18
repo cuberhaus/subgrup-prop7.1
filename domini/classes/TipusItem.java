@@ -1,8 +1,8 @@
 package domini.classes;
 
-import domini.classes.atributs.tipus.*;
-import domini.classes.atributs.valors.ValorAtribut;
-import domini.classes.atributs.valors.ValorBoolea;
+import domini.classes.atributs.TipusAtribut;
+import domini.classes.atributs.distancia.*;
+import domini.classes.atributs.valors.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class TipusItem {
 
     /**
      * Crea un <code>TipusItem</code> donats el nom del <code>TipusItem</code>, els noms dels atributs i un conjunt de valors.
-     * Assigna el <code>TipusAtribut</code>. per defecte en funció del tipus de cada valor.
+     * Assigna el <code>TipusAtribut</code> per defecte en funció del tipus de cada valor.
      * @param nomTipusItem <code>String</code> que conté el nom del <code>TipusItem</code>.
      * @param nomsAtributs <code>ArrayList<String></code> que conté el nom dels atributs del <code>TipusItem</code>.
      * @param valors <code>ArrayList<String></code> que conté el conjunt de valors d'un item del <code>TipusItem</code>
@@ -51,7 +51,7 @@ public class TipusItem {
             Double.parseDouble(s);
         } catch (NumberFormatException e1) {
             if (ValorBoolea.esBoolea(s)) {
-                return new Discret();
+                return new TipusAtribut(new ValorBoolea(), new Discreta());
             }
             if (s.contains(";")) {
                 String primerValor = s.split(";", 2)[0];
@@ -61,13 +61,13 @@ public class TipusItem {
                     // TODO(maria): pensar si volem que aquest mètode pugui llegir conjunts de booleans (caldria iterar
                     // per tots els elements per assegurar que són tots booleans. L'alternativa és fer el cast més endavant
                     // si l'usuari ho demana.
-                    return new DiferenciaDeConjunts();
+                    return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
                 }
-                return new Euclidia();
+                return new TipusAtribut(new ValorConjuntNumeric(), new Euclidiana());
             }
-            return new Levenshtein();
+            return new TipusAtribut(new ValorCategoric(), new Levenshtein());
         }
-        return new Euclidia();
+        return new TipusAtribut(new ValorNumeric(), new Euclidiana());
     }
 
     /**
@@ -127,11 +127,11 @@ public class TipusItem {
         if (tipusAtributs.size() != atributs.size()) {
             return false;
         }
-        for (Map.Entry<String, TipusAtribut> entrada : tipusAtributs.entrySet()) {
-            if (!atributs.containsKey(entrada.getKey())) {
+        for (Map.Entry<String, ValorAtribut<?>> atribut : atributs.entrySet()) {
+            if (!tipusAtributs.containsKey(atribut.getKey())) {
                 return false;
             }
-            if (!entrada.getValue().admetValorAtribut(atributs.get(entrada.getKey()))) {
+            if (tipusAtributs.get(atribut.getKey()).obtenirValorAtribut().getClass() != atribut.getValue().getClass()) {
                 return false;
             }
         }

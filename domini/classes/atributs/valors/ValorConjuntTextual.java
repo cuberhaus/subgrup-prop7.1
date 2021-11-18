@@ -8,6 +8,10 @@ import java.util.ArrayList;
  */
 public class ValorConjuntTextual extends ValorConjunt<String> {
 
+    public ValorConjuntTextual() {
+        this.valor = null;
+    }
+
     /**
      * Constructor amb el conjunt textual.
      * @param valor <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
@@ -27,11 +31,20 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         }
     }
 
+    public ValorConjuntTextual(String s) {
+        this(s.split(";"));
+    }
+
     /**
      * @return <code>ArrayList<ValorAtribut<String>></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<String>> getValor() {
         return valor;
+    }
+
+    @Override
+    public ValorConjuntTextual copy() {
+        return new ValorConjuntTextual(valor);
     }
 }

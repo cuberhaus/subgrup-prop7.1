@@ -6,6 +6,10 @@ package domini.classes.atributs.valors;
  */
 public class ValorTextual extends ValorAtribut<String> {
 
+    public ValorTextual() {
+        this.valor = null;
+    }
+
     /**
      * Constructor amb el valor numèric.
      * @param valor <code>String</code> que conté el valor d'aquest atribut.
@@ -20,5 +24,10 @@ public class ValorTextual extends ValorAtribut<String> {
     @Override
     public String getValor() {
         return valor;
+    }
+
+    @Override
+    public ValorTextual copy() {
+        return new ValorTextual(valor);
     }
 }

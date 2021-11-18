@@ -1,7 +1,7 @@
-package atributs.tipus;
+package atributs.distancia;
 
-import domini.classes.atributs.tipus.Levenshtein;
-import domini.classes.atributs.tipus.TipusAtribut;
+import domini.classes.atributs.distancia.Levenshtein;
+import domini.classes.atributs.distancia.Distancia;
 import domini.classes.atributs.valors.*;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -23,40 +23,40 @@ public class LevenshteinTest {
     public static class NonParametrizedLevenshteinTest {
         @Test
         public void copy_HauriaDeRetornarCopia() {
-            TipusAtribut copia = levenshtein.copy();
+            Distancia copia = levenshtein.copy();
             assertNotSame(copia, levenshtein);
             assertEquals(copia, levenshtein);
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void admetValorAtribut_HauriaDEmetreExcepcio_Quan_Nul() {
-            levenshtein.admetValorAtribut(null);
+        public void admet_HauriaDEmetreExcepcio_Quan_Nul() {
+            levenshtein.admet(null);
         }
 
         @Test
-        public void admetValorAtribut_HauriaDeRetornarCert() {
-            assertTrue(levenshtein.admetValorAtribut(new ValorCategoric("a")));
-            assertTrue(levenshtein.admetValorAtribut(new ValorTextual("a")));
+        public void admet_HauriaDeRetornarCert() {
+            assertTrue(levenshtein.admet(new ValorCategoric("a")));
+            assertTrue(levenshtein.admet(new ValorTextual("a")));
         }
 
         @Test
-        public void admetValorAtribut_HauriaDeRetornarFals() {
-            assertFalse(levenshtein.admetValorAtribut(new ValorBoolea(true)));
-            assertFalse(levenshtein.admetValorAtribut(new ValorNumeric(0.0)));
-            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntBoolea(new boolean[]{true})));
-            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntCategoric(new String[]{"a"})));
-            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntNumeric(new double[]{0.0})));
-            assertFalse(levenshtein.admetValorAtribut(new ValorConjuntTextual(new String[]{"a"})));
+        public void admet_HauriaDeRetornarFals() {
+            assertFalse(levenshtein.admet(new ValorBoolea(true)));
+            assertFalse(levenshtein.admet(new ValorNumeric(0.0)));
+            assertFalse(levenshtein.admet(new ValorConjuntBoolea(new boolean[]{true})));
+            assertFalse(levenshtein.admet(new ValorConjuntCategoric(new String[]{"a"})));
+            assertFalse(levenshtein.admet(new ValorConjuntNumeric(new double[]{0.0})));
+            assertFalse(levenshtein.admet(new ValorConjuntTextual(new String[]{"a"})));
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
-            levenshtein.obtenirDistancia(new ValorBoolea(true), new ValorNumeric(1.0));
+        public void obtenir_HauriaDEmetreExcepcio_Quan_ValorAtributsSonDeClassesDiferents() {
+            levenshtein.obtenir(new ValorBoolea(true), new ValorNumeric(1.0));
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
-            levenshtein.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false));
+        public void obtenir_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
+            levenshtein.obtenir(new ValorBoolea(true), new ValorBoolea(false));
         }
     }
 
@@ -97,8 +97,8 @@ public class LevenshteinTest {
         }
 
         @Test
-        public void obtenirDistancia_HauriaDeRetornarDistancia() {
-            assertEquals(levenshtein.obtenirDistancia(valor1, valor2), resultat, delta);
+        public void obtenir_HauriaDeRetornarDistancia() {
+            assertEquals(levenshtein.obtenir(valor1, valor2), resultat, delta);
         }
     }
 }

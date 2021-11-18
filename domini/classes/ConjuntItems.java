@@ -29,7 +29,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             if (elements.containsKey(identificador)) {
                 throw new InputMismatchException("L'item creat ja existeix al conjunt");
             }
-            afegir(new Item(identificador, tipusItem, taula.obtenirItem(i), taula.obtenirLlistaAtributs()));
+            afegir(new Item(identificador, tipusItem, taula.obtenirLlistaAtributs(), taula.obtenirItem(i)));
         }
     }
 
