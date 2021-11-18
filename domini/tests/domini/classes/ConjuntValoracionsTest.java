@@ -32,10 +32,6 @@ public class ConjuntValoracionsTest {
         conjuntValoracions.afegir(taulaCSVratings,conjuntItems,conjuntUsuaris);
         Usuari u1 = new Usuari(1,true);
         TreeMap<Pair<Usuari, Item>, Valoracio> valoracions = conjuntValoracions.obteTotesValoracions();
-        Set<Map.Entry<Pair<Usuari, Item>, Valoracio>> entrades = valoracions.entrySet();
-//        for(Map.Entry<Pair<Usuari,Item> >entrada:entrades) {
-//            entrada.getKey().y;
-//        }
     }
 
     @Test
