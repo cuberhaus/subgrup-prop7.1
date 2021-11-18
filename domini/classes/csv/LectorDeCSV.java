@@ -26,17 +26,12 @@ public class LectorDeCSV extends LectorDeFitxers {
      * Funció que donat un pathname, et retorna la taula amb el contingut del CSV
      * @param ubicacio <code>String</code> pathname amb la ubicació de l'arxiu.
      * @return <code>Taula</code> amb el contingut de lal CSV
-     * @throws IOException
+     * @throws IOException si no existeix el ftixer llença exepcio
      */
     public TaulaCSV llegirCSV(String ubicacio) throws IOException {
         TaulaCSV tabla = new TaulaCSV();
 
-        BufferedReader csvReader;
-        try {
-            csvReader = new BufferedReader(new FileReader(ubicacio));
-        } catch (IOException e1) {
-            throw e1;
-        }
+        BufferedReader csvReader = new BufferedReader(new FileReader(ubicacio));
         String fila;
 
         ArrayList<String> atributs = new ArrayList<>();

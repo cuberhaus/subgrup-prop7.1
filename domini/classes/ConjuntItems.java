@@ -51,8 +51,8 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
 
     /**
      * Creacio d'un conjunt d'items a partir d'un TipusItem i un contenidor de Id-Item
-     * @param tipusItem
-     * @param elements
+     * @param tipusItem <code>TipusItem</code> del tipus d'item de tot el conjunt.
+     * @param elements <code>TreeMap<Id, Item></code> conte la relacio id-item
      */
     public ConjuntItems(TipusItem tipusItem, TreeMap<Id, Item> elements) {
         this.tipusItem = tipusItem;
@@ -64,10 +64,19 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
 
     public TipusItem obteTipusItem() { return tipusItem; }
 
+    /**
+     * Retorna si el tipus d'atribut conté els atributs dessitjats.
+     * @param nomAtributs <code>ArrayList<String></code> contenidor dels noms dels atributs.
+     * @return <code>boolean</code> true si el nomAtributs són els atributs, altrament false.
+     */
     public boolean conteAtributs(ArrayList<String> nomAtributs) {
         return tipusItem.conteAtributs(nomAtributs);
     }
 
+    /**
+     * Esborra els atributs desitjats.
+     * @param nomAtributs <code>TreeSet<String></code> contenidor de nomAtributs.
+     */
     public void esborrarAtributs(TreeSet<String> nomAtributs) {
         tipusItem.esborrarAtributs(nomAtributs);
         for (Map.Entry<Id, Item> itemIdentificat : elements.entrySet()) {
