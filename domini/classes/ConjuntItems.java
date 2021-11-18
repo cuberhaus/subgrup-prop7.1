@@ -13,6 +13,12 @@ import java.util.*;
 public class ConjuntItems extends ConjuntIdentificat<Item> {
     TipusItem tipusItem;
 
+    /**
+     * Constructora de Conjunt d'items.
+     * @param nomTipusItem <code>String</code> nom del tipus d'item.
+     * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
+     * @throws InputMismatchException si id no es correcte o l'item creat ja es al conjunt.
+     */
     public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException {
         taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula);
@@ -34,11 +40,20 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
+    /**
+     * Creacio d'un conjunt d'items buit.
+     * @param tipusItem <code>TipusItem</code> el tipus d'item dels objectes.
+     */
     public ConjuntItems(TipusItem tipusItem) {
         this.tipusItem = tipusItem;
         this.elements = new TreeMap<>();
     }
 
+    /**
+     * Creacio d'un conjunt d'items a partir d'un TipusItem i un contenidor de Id-Item
+     * @param tipusItem
+     * @param elements
+     */
     public ConjuntItems(TipusItem tipusItem, TreeMap<Id, Item> elements) {
         this.tipusItem = tipusItem;
         this.elements = new TreeMap<>();

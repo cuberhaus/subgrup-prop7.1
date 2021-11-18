@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class TaulaCSV extends Contenidor {
 
-    /** Variable on guardarem els atributs del objectes que rebem del csv.*/
+    /** Variable on guardarem els atributs del objectes que rebem del domini.tests.csv.*/
     private ArrayList<ArrayList<String>> valorsItem;
 
     /** Variable que farem servir per trobar l'índex de l'atribut que volem consultar.*/

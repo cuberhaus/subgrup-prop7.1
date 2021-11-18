@@ -1,4 +1,4 @@
-package csv;
+package domini.tests.csv;
 
 import domini.classes.csv.TaulaCSV;
 import org.junit.Test;
@@ -11,7 +11,7 @@ public class TaulaCSVTest {
 
     //Probem que no podem assignar dos cops els atributs a la taula
     @Test(expected = IllegalStateException.class)
-    public void introduirListaAtributs() throws IllegalStateException {
+    public void introduirListaAtributsDosCops() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -22,7 +22,7 @@ public class TaulaCSVTest {
 
     //Probem que funciona correctament
     @Test
-    public void introduirListaAtributs2() {
+    public void introduirListaAtributsFuncionaCorrectament() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -34,7 +34,7 @@ public class TaulaCSVTest {
 
     //Si no hem inicialitzat amb atributs la taula abans excepcio
     @Test(expected = IllegalStateException.class)
-    public void introduirLlistaDeValors() throws IllegalStateException {
+    public void introduirLlistaDeValorsLlencaExcepcioSiNoInicialitzat() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> valors = new ArrayList<>();
         valors.add("hola");
@@ -44,7 +44,7 @@ public class TaulaCSVTest {
 
     //Si no tenim la mateixa quantitat de valors que d'atributs
     @Test(expected = IllegalArgumentException.class)
-    public void introduirLlistaDeValors1() {
+    public void introduirLlistaDeValorsExepcioSiNoQuantitatAtributsCorrecte() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         ArrayList<String> valors = new ArrayList<>();
@@ -57,7 +57,7 @@ public class TaulaCSVTest {
 
     //Comparem que hem afegit una fila correctament
     @Test
-    public void introduirLlistaDeValors2() {
+    public void introduirLlistaDeValorsFuncionaCorrectament() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         ArrayList<String> valors = new ArrayList<>();
@@ -73,14 +73,14 @@ public class TaulaCSVTest {
 
     //Dona excepcio si no s'ha inicialitzat la taula previament
     @Test(expected = IllegalStateException.class)
-    public void obtenirValorsAtribut() throws IllegalStateException {
+    public void obtenirValorsAtributTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirValorsAtribut("id");
     }
 
     //Dona excepcio si no existeix l'atribut
     @Test(expected = IllegalArgumentException.class)
-    public void obtenirValorsAtribut1() throws IllegalArgumentException {
+    public void obtenirValorsAtributExcepcioSiAtributNoExisteix() throws IllegalArgumentException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("hola");
@@ -88,9 +88,9 @@ public class TaulaCSVTest {
         tauleta.obtenirValorsAtribut("id");
     }
 
-    //Dona excepcio si no existeix l'atribut
+    //Funciona correctament
     @Test
-    public void obtenirValorsAtribut3(){
+    public void obtenirValorsAtributFuncionaCorrectament(){
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -105,14 +105,14 @@ public class TaulaCSVTest {
 
     //Dona excepcio si no s'han inicialitzat els atributs
     @Test(expected = IllegalStateException.class)
-    public void testObtenirValorsAtribut() throws IllegalStateException {
+    public void testObtenirValorsAtributExcepcioSiNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirValorsAtribut(1);
     }
 
     //Dona excepcio si no existeix l'atribut
     @Test(expected = IllegalArgumentException.class)
-    public void obtenirValorsAtribut2() throws IllegalArgumentException {
+    public void obtenirValorsAtributExcepcioSiIndexNoCorresponAtribut() throws IllegalArgumentException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("hola");
@@ -122,7 +122,7 @@ public class TaulaCSVTest {
 
     //Funciona correctament
     @Test
-    public void obtenirValorsAtribut4() {
+    public void obtenirValorsAtributFuncionaCorrectamentAmbIndex() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -136,14 +136,14 @@ public class TaulaCSVTest {
 
     //Excepcio si no s'ha inicialitzat la taula
     @Test(expected = IllegalStateException.class)
-    public void obtenirItem() throws IllegalStateException {
+    public void obtenirItemExcepcioSiNoInicialitzat() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirItem(1);
     }
 
     //No existeix l'item, excepcio
     @Test(expected = IllegalArgumentException.class)
-    public void obtenirItem1() throws IllegalArgumentException, IllegalStateException {
+    public void obtenirItemExepcioSiIndexNoCorresponItem() throws IllegalArgumentException, IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -161,7 +161,7 @@ public class TaulaCSVTest {
 
     //Existeix l'item, excepcio
     @Test
-    public void obtenirItem2() {
+    public void obtenirItemFuncionaCorrectament() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -180,21 +180,21 @@ public class TaulaCSVTest {
 
     //Excepcio si no s'ha inicialitzat la taula
     @Test(expected = IllegalStateException.class)
-    public void obtenirLlistaAtributs() throws IllegalStateException {
+    public void obtenirLlistaAtributsExcepcioSiNoInicialitzat() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirNomsAtributs();
     }
 
     //Excepcio si no s'ha inicialitzat la taula
     @Test(expected = IllegalStateException.class)
-    public void obtenirValorsDeTotsElsItems() throws IllegalStateException {
+    public void obtenirValorsDeTotsElsItemsExcepcioSiNoInicialitzat() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirValorsDeTotsElsItems();
     }
 
     //Funciona correctament
     @Test
-    public void obtenirValorsDeTotsElsItems1() {
+    public void obtenirValorsDeTotsElsItemsFuncionaCorrectament() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -222,14 +222,14 @@ public class TaulaCSVTest {
 
     //Excepcio si no s'ha inicialitzat la taula
     @Test(expected = IllegalStateException.class)
-    public void obtenirTaula() throws IllegalStateException {
+    public void obtenirTaulaExcepcioTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirTaula();
     }
 
     //Funciona correctament
     @Test
-    public void obtenirTaula1() {
+    public void obtenirTaulaFuncionaCorrectament() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -258,44 +258,41 @@ public class TaulaCSVTest {
 
     //Si no s'ha inicialitzat excepcio
     @Test(expected = IllegalStateException.class)
-    public void imprimir() throws IllegalStateException {
+    public void imprimirExepcioTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.imprimir();
     }
 
     //Si no s'ha incialitzat excepcio
     @Test(expected = IllegalStateException.class)
-    public void obtenirValorsDeItemSeleccionat() throws IllegalStateException {
+    public void obtenirValorsDeItemSeleccionatExepcioTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirValorsDeItemSeleccionat("hola", "adios");
     }
 
     //Si no existeix un atribut amb aquell nom, excepcio
     @Test(expected = IllegalArgumentException.class)
-    public void obtenirValorsDeItemSeleccionat1() throws IllegalArgumentException, IllegalStateException {
+    public void obtenirValorsDeItemSeleccionatExcepcioSiNoExisteixAtribut() throws IllegalArgumentException, IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("edad");
         atributs.add("genere");
         tauleta.afegirConjuntAtributs(atributs);
 
-        ArrayList<String> valors = new ArrayList<>();
-        valors.add("16");
-        valors.add("mujer");
         System.out.println("Arribo");
         tauleta.obtenirValorsDeItemSeleccionat("hola", "adios");
     }
 
     //Si no s'ha inicialitzat la taula excepcio
     @Test(expected = IllegalStateException.class)
-    public void testObtenirValorsDeItemSeleccionat() throws IllegalStateException {
+    public void testObtenirValorsDeItemSeleccionatExcepcioSiTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirValorsDeItemSeleccionat(1, "adios");
     }
 
     //Si l'index no té atribut, excepcio
     @Test(expected = IllegalArgumentException.class)
-    public void testObtenirValorsDeItemSeleccionat1() throws IllegalStateException, IllegalArgumentException {
+    public void testObtenirValorsDeItemSeleccionatExcepcioSiIndexNoCorresponAtribut() throws IllegalStateException, IllegalArgumentException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("edad");
@@ -309,14 +306,14 @@ public class TaulaCSVTest {
 
     //Si no estan els atributs inicialitzats, excepcio
     @Test(expected = IllegalStateException.class)
-    public void obtenirValorAtributItem() throws IllegalStateException {
+    public void obtenirValorAtributItemExcepcioSiTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirValorAtribut(1, "hola");
     }
 
     //Si no estan els atributs inicialitzats, excepcio
     @Test(expected = IllegalArgumentException.class)
-    public void obtenirValorAtributItem1() throws IllegalArgumentException, IllegalStateException {
+    public void obtenirValorAtributItemExcepcioSiNoExisteixLobjecte() throws IllegalArgumentException, IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -334,7 +331,7 @@ public class TaulaCSVTest {
 
     //Si no existeix l'index de l'item, excepcio
     @Test(expected = IllegalArgumentException.class)
-    public void obtenirValorAtributItem2() throws IllegalArgumentException, IllegalStateException {
+    public void obtenirValorAtributItemExcepcioSiNoIndexAtribut() throws IllegalArgumentException, IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");

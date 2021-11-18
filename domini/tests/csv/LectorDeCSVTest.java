@@ -1,4 +1,4 @@
-package csv;
+package domini.tests.csv;
 
 import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
@@ -23,9 +23,9 @@ public class LectorDeCSVTest {
 
     //No existeix el fitxer
     @Test(expected = IOException.class)
-    public void llegirCSV1() throws IOException {
+    public void llegirCSVExcepcioNoExisteixFitxer() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV tauleta = lector.llegirCSV("./domingo/tests/jocs_de_proves/joc1/items.csv");
+        TaulaCSV tauleta = lector.llegirCSV("./domingo/tests/jocs_de_proves/joc1/items.domini.tests.csv");
     }
 
 
