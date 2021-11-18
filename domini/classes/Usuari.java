@@ -2,7 +2,6 @@ package domini.classes;
 
 import domini.classes.metode_recomanador.Punt;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -40,7 +39,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         this.valoracions = new TreeMap<>();
     }
 
-    /** Constructora donat un id, un estat "actiu".
+    /** Constructora donat un id i un estat "actiu".
      * @param id representa l'id de l'usuari
      * @param actiu representa si l'usuari està actiu o no.
      */
@@ -86,10 +85,6 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     public Id obtenirId() {
         return id;
     }
-
-//    public void setId(Id id) {
-//        this.id = id;
-//    }
 
     /**
      * Modificadora del paràmetre "actiu"

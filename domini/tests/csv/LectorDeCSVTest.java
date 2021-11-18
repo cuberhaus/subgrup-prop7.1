@@ -10,10 +10,11 @@ import static org.junit.Assert.*;
 
 public class LectorDeCSVTest {
 
+    //La taula llegida té tots els atributs i tots els items
     @Test
     public void llegirCSV() throws IOException, InterruptedException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV tablita = lector.llegirCSV("C:/Users/pable/Desktop/items.csv");
+        TaulaCSV tablita = lector.llegirCSV("./domini/tests/jocs_de_proves/joc1/items.csv");
         int tamanoItems = tablita.obtenirNumeroElements();
         int tamanoAtributs = tablita.obtenirNumeroAtrib();
         assertEquals(25, tamanoAtributs);
