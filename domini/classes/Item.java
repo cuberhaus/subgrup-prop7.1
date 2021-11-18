@@ -36,10 +36,11 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
-    public Item(Id id, TipusItem tipusItem, ArrayList<String> valors) {
+    public Item(Id id, TipusItem tipusItem, ArrayList<String> valors, ArrayList<String> nom_atributs) {
         this.id = id;
         this.tipusItem = tipusItem;
-        this.atributs = obtenirAtributs(tipusItem, valors);
+        // TODO: aqui els atributs s'haurien d'obtenir de tipus forçats.
+        this.atributs = obtenirAtributs(tipusItem, valors, nom_atributs);
         actualitzarFactorNormalitzacio();
         this.valoracions = new HashMap<>();
         if (!tipusItem.esCompatible(atributs)) {
@@ -50,7 +51,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     private void actualitzarFactorNormalitzacio() {
         for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             if (atribut.getValue() instanceof Euclidia) {
-                ((Euclidia)atribut.getValue()).actualitzarFactorNormalitzacio(atributs.get(atribut.getKey()));
+                ((Euclidia)atribut.getValue()).actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
             }
         }
     }
@@ -77,6 +78,8 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         return new ValorNumeric(d);
     }
 
+
+
     private Map<String, ValorAtribut<?>> obtenirAtributs(TipusItem tipusItem, ArrayList<String> valors) throws IllegalArgumentException {
         if (tipusItem.obtenirTipusAtributs().size() != valors.size()) {
             throw new IllegalArgumentException("No es poden obtenir els atributs d'un ítem d'un TipusItem i un conjunt de valors de mides diferents.");
@@ -89,7 +92,16 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
         return atributs;
     }
-
+    private Map<String, ValorAtribut<?>> obtenirAtributs(TipusItem tipusItem, ArrayList<String> valors, ArrayList<String> nom_atributs) throws IllegalArgumentException {
+        if (tipusItem.obtenirTipusAtributs().size() != valors.size()) {
+            throw new IllegalArgumentException("No es poden obtenir els atributs d'un ítem d'un TipusItem i un conjunt de valors de mides diferents.");
+        }
+        Map<String, ValorAtribut<?>> atributs = new HashMap<>();
+        for (int i = 0; i < nom_atributs.size(); ++i) {
+            atributs.put(nom_atributs.get(i), dedueixValorAtribut(valors.get(i)));
+        }
+        return atributs;
+    }
     public Id obtenirId() { return id; }
 
     @Override
@@ -133,7 +145,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
             // TODO(maria): normalitzar totes les normes
             if (entrada.getValue() instanceof Euclidia) {
                 distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
-                        item.atributs.get(entrada.getKey()))/(((Euclidia) entrada.getValue()).obtenirFactorNormalitzacio());
+                        item.atributs.get(entrada.getKey()))/(((Euclidia) entrada.getValue()).obtenirFactorDeNormalitzacio());
             } else {
                 distancia += entrada.getValue().obtenirDistancia(atributs.get(entrada.getKey()),
                         item.atributs.get(entrada.getKey()));

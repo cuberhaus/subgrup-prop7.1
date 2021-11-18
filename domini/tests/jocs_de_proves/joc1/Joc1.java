@@ -16,7 +16,6 @@ public class Joc1 {
     public static void main(String[] args) throws IOException, InterruptedException {
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV taula_items = lector.llegirCSV("./domini/tests/jocs_de_proves/joc1/items.csv");
-        //taula_items.imprimir();
         ConjuntItems items = new ConjuntItems("pelis", taula_items);
         ConjuntUsuaris usuaris = new ConjuntUsuaris();
         LectorDeCSV lector2 = new LectorDeCSV();
@@ -52,7 +51,8 @@ public class Joc1 {
             ConjuntValoracions val_usuari = new ConjuntValoracions();
             for (int j = 0; j < known; ++j) {
                 int itemid = inputQueriesReader.nextInt();
-                double rating = inputQueriesReader.nextDouble();
+                String nextDouble = inputQueriesReader.next();
+                double rating = Double.parseDouble(nextDouble);
                 val_usuari.afegir(new Valoracio(rating, usuari, items.obte(new Id(itemid, true))));
             }
             ConjuntItems items_recomanables = new ConjuntItems(items.obteTipusItem());
