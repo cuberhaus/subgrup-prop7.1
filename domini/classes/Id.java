@@ -1,5 +1,7 @@
 package domini.classes;
 
+import java.util.Objects;
+
 public class Id implements Comparable<Id> {
     final int valor;
     private boolean actiu;
@@ -21,29 +23,21 @@ public class Id implements Comparable<Id> {
         this.actiu = actiu;
     }
 
-    /**
-     * Indica si dos id's són iguals
-     *
-     * @return El resultat retorna true si són iguals, altrament retorna false.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        Id id = (Id)obj;
-        return this.valor == id.valor;
-    }
-
-    /**
-     * Calcula un codi de hash idèntic per a les valoracions amb el mateix valor,
-     * altrament retorna un hash diferent.
-     * @return El resultat retorna true si són iguals, altrament retorna false.
-     */
-    @Override
-    public int hashCode() {
-        return valor;
-    }
-
     @Override
     public int compareTo(Id o) {
         return Integer.compare(this.valor, o.valor);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Id id = (Id) o;
+        return valor == id.valor;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(valor);
     }
 }
