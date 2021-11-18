@@ -35,6 +35,10 @@ public class KNN {
             if (pq.size() < k) {
                 pq.add(new Pair<>(-distance, iter));
             }
+            else if(!pq.isEmpty() && -pq.poll().x > distance) {
+                pq.remove();
+                pq.add(new Pair<>(-distance,iter));
+            }
         }
         ArrayList<Item> result_items = new ArrayList<>();
         while (!pq.isEmpty()) {

@@ -64,13 +64,20 @@ public class Joc1 {
                 items_recomanables.afegir(items.obte(new Id(itemid, true)));
                 valoracions_unk.add(new Pair<>(itemid, unknown_conjunt.obte(usuari, items.obte(new Id(itemid, true))).getValor()));
             }
+
             ConjuntRecomanacions recomanacionsCollab = recomanadorCollaborative.obteRecomanacions(usuari, items_recomanables, val_usuari, Q);
-            //ConjuntRecomanacions recomanacionsContent = recomanadorContentBased.obteRecomanacions(usuari, items_recomanables, val_usuari, Q);
+            ConjuntRecomanacions recomanacionsContent = recomanadorContentBased.obteRecomanacions(usuari, items_recomanables, val_usuari, Q);
 
             totalDCG += recomanacionsCollab.calculaDiscountedCumulativeGain(valoracions_unk);
             totalIDCG += recomanacionsCollab.calculaIdealDiscountedCumulativeGain(valoracions_unk, Q);
             totalNDCG += recomanacionsCollab.obteDiscountedCumulativeGain()/recomanacionsCollab.obteIdealDiscountedCumulativeGain();
+
+            totalDCG2 += recomanacionsContent.calculaDiscountedCumulativeGain(valoracions_unk);
+            totalIDCG2 += recomanacionsContent.calculaIdealDiscountedCumulativeGain(valoracions_unk, Q);
+            totalNDCG2 += recomanacionsContent.obteDiscountedCumulativeGain()/recomanacionsContent.obteIdealDiscountedCumulativeGain();
+
         }
         System.out.println(totalDCG/q + " " + totalIDCG/q + " " + totalNDCG/q);
+        System.out.println(totalDCG2/q + " " + totalIDCG2/q + " " + totalNDCG2/q);
     }
 }

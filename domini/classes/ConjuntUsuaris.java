@@ -20,7 +20,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         }
     }
     @Override
-    public  Usuari esborrar(Id id) {
+    public Usuari esborrar(Id id) {
         Usuari u1 = this.obte(id);
         u1.setActiu(false);
         return elements.put(u1.obtenirId(),u1);

@@ -104,14 +104,11 @@ public class ConjuntRecomanacions {
             id_to_valoracio.put(x.x, x.y);
         }
         discountedCumulativeGain = 0.;
-        int pos = 1;
         for(int i = 0; i < Math.min(conjuntRecomanacions.size(), p); ++i) {
-            if (i > 0 && !Objects.equals(conjuntRecomanacions.get(i).obtenirRate(), conjuntRecomanacions.get(i - 1).obtenirRate()))
-                pos = i+1;
             double rel = 0;
             if (id_to_valoracio.containsKey(conjuntRecomanacions.get(i).obtenirId()))
                 rel = id_to_valoracio.get(conjuntRecomanacions.get(i).obtenirId());
-            discountedCumulativeGain += (Math.pow(2,rel)-1)/log2(pos+1);
+            discountedCumulativeGain += (Math.pow(2,rel)-1)/log2(i+2);
         }
         return discountedCumulativeGain;
     }
@@ -135,12 +132,9 @@ public class ConjuntRecomanacions {
         Double[] top_val = pq.toArray(new Double[0]);
         Arrays.sort(top_val, Collections.reverseOrder());
         idealDiscountedCumulativeGain = 0.;
-        int pos = 1;
         for(int i = 0; i < top_val.length; ++i) {
-            if (i > 0 && !Objects.equals(top_val[i], top_val[i - 1]))
-                pos = i+1;
             double rel = top_val[i];
-            idealDiscountedCumulativeGain += (Math.pow(2,rel)-1)/log2(pos+1);
+            idealDiscountedCumulativeGain += (Math.pow(2,rel)-1)/log2(i+2);
         }
         return idealDiscountedCumulativeGain;
     }
