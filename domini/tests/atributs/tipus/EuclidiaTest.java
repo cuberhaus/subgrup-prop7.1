@@ -59,15 +59,30 @@ public class EuclidiaTest {
         public void obtenirDistancia_HauriaDEmetreExcepcio_Quan_ValorAtributsDeLaMateixaClasseNoSonAdmissibles() {
             euclidia.obtenirDistancia(new ValorBoolea(true), new ValorBoolea(false));
         }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void obtenirNorma_HauriaDEmetreExcepcio_Quan_Nul() {
+            euclidia.obtenirNorma(null);
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void obtenirNorma_HauriaDEmetreExcepcio_Quan_ValorAtributNoEsAdmissible() {
+            euclidia.obtenirNorma(new ValorBoolea(true));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void actualitzarFactorDeNormalitzacio_HauriaDEmetreExcepcio_Quan_Nul() {
+            euclidia.actualitzarFactorDeNormalitzacio(null);
+        }
     }
 
     @RunWith(Parameterized.class)
-    public static class ParametrizedEuclidiaTest {
+    public static class ParametrizedObtenirDistanciaEuclidiaTest {
         private final ValorAtribut<?> valor1;
         private final ValorAtribut<?> valor2;
         private final double resultat;
 
-        public ParametrizedEuclidiaTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
+        public ParametrizedObtenirDistanciaEuclidiaTest(ValorAtribut<?> valor1, ValorAtribut<?> valor2, double resultat) {
             this.valor1 = valor1;
             this.valor2 = valor2;
             this.resultat = resultat;
@@ -92,6 +107,38 @@ public class EuclidiaTest {
         @Test
         public void obtenirDistancia_HauriaDeRetornarDistancia() {
             assertEquals(euclidia.obtenirDistancia(valor1, valor2), resultat, delta);
+        }
+    }
+
+    @RunWith(Parameterized.class)
+    public static class ParametrizedObtenirNormaEuclidiaTest {
+        private final ValorAtribut<?> valor;
+        private final double resultat;
+
+        public ParametrizedObtenirNormaEuclidiaTest(ValorAtribut<?> valor, double resultat) {
+            this.valor = valor;
+            this.resultat = resultat;
+        }
+
+        @Parameterized.Parameters(name = "{index}: obtenirNorma")
+        public static Collection<Object[]> dades() {
+            return Arrays.asList(new Object[][]{
+                    // ValorNumeric
+                    {new ValorNumeric(0.0), 0.0},
+                    {new ValorNumeric(-1.0), 1.0},
+                    {new ValorNumeric(1.0), 1.0},
+                    {new ValorNumeric(2.0), 2.0},
+                    // ValorConjuntNumeric
+                    {new ValorConjuntNumeric(new double[]{0.0, 0.0}), 0.0},
+                    {new ValorConjuntNumeric(new double[]{1.0, 1.0}), Math.sqrt(2)},
+                    {new ValorConjuntNumeric(new double[]{-1.0, -1.0}), Math.sqrt(2)},
+                    {new ValorConjuntNumeric(new double[]{-1.0, -1.0, -1.0}), Math.sqrt(3)},
+            });
+        }
+
+        @Test
+        public void obtenirNorma_HauriaDeRetornarNorma() {
+            assertEquals(euclidia.obtenirNorma(valor), resultat, delta);
         }
     }
 }
