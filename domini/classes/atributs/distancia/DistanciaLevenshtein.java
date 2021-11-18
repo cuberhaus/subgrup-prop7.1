@@ -3,15 +3,15 @@ package domini.classes.atributs.distancia;
 import domini.classes.atributs.valors.*;
 
 /**
- * Representa la distància Levenshtein entre dos atributs categòrics o textuals.
+ * Representa la distància DistanciaLevenshtein entre dos atributs categòrics o textuals.
  * @author maria.prat
  */
-public class Levenshtein extends Distancia {
+public class DistanciaLevenshtein extends Distancia {
     private double normaMaxima = 0.0;
 
     @Override
     public Distancia copy() {
-        return new Levenshtein();
+        return new DistanciaLevenshtein();
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Levenshtein extends Distancia {
         if (normaMaxima == 0.0) {
             return 1.0;
         }
-        // Valor màxim de la distància de Levenshtein entre paraules amb norma igual o més petita que normaMaxima.
+        // Valor màxim de la distància de DistanciaLevenshtein entre paraules amb norma igual o més petita que normaMaxima.
         return 3.0 * normaMaxima;
     }
 }

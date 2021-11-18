@@ -3,21 +3,22 @@ package domini.classes.atributs.distancia;
 import domini.classes.atributs.valors.*;
 
 /**
- * Representa la distància zero entre dos atributs.
+ * Representa la distància discreta entre dos atributs simples (booleans, categòrics, numèrics o textuals).
  * @author maria.prat
  */
-public class Zero extends Distancia {
+public class DistanciaDiscreta extends Distancia {
     @Override
     public Distancia copy() {
-        return new Zero();
+        return new DistanciaDiscreta();
     }
 
     @Override
-    public boolean admet(ValorAtribut<?> valorAtribut) {
+    public boolean admet(ValorAtribut<?> valorAtribut) throws IllegalArgumentException {
         if (valorAtribut == null) {
             throw new IllegalArgumentException("No es pot comprovar si un ValorAtribut nul és admissible.");
         }
-        return true;
+        return valorAtribut instanceof ValorBoolea || valorAtribut instanceof ValorCategoric ||
+                valorAtribut instanceof ValorNumeric || valorAtribut instanceof ValorTextual;
     }
 
     @Override
@@ -28,7 +29,11 @@ public class Zero extends Distancia {
         if (!admet(valor1)) {
             throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
-        return 0.0d;
+        if (valor1.getValor().equals(valor2.getValor())) {
+            return 0.0d;
+        } else {
+            return 1.0d;
+        }
     }
 
     @Override

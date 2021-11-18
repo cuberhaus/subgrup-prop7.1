@@ -10,12 +10,12 @@ import java.util.Set;
  * Representa la distància de diferència de conjunts entre dos atributs conjunts.
  * @author maria.prat
  */
-public class DiferenciaDeConjunts extends Distancia {
+public class DistanciaDiferenciaDeConjunts extends Distancia {
     private double normaMaxima = 0.0;
 
     @Override
     public Distancia copy() {
-        return new DiferenciaDeConjunts();
+        return new DistanciaDiferenciaDeConjunts();
     }
 
     @Override
