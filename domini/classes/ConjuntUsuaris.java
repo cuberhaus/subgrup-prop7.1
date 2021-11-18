@@ -19,4 +19,21 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             this.afegir(new Usuari(id, true));
         }
     }
+    @Override
+    public  Usuari esborrar(Id id) {
+        Usuari u1 = this.obte(id);
+        u1.setActiu(false);
+        return elements.put(u1.obtenirId(),u1);
+    }
+
+    @Override
+    public boolean esborrar(Usuari usuari) {
+        usuari.setActiu(false);
+        if (!elements.containsKey(usuari.obtenirId())) {
+            return false;
+        }
+        elements.put(usuari.obtenirId(), usuari);
+        return true;
+    }
+
 }
