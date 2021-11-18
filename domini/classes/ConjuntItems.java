@@ -4,6 +4,7 @@ package domini.classes;
 import domini.classes.csv.TaulaCSV;
 
 import java.util.InputMismatchException;
+import java.util.TreeMap;
 
 /**
  * @author pablo.vega
@@ -14,6 +15,8 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
 
     public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException, InterruptedException {
         tipusItem = new TipusItem(nomTipusItem, taula.obtenirLlistaAtributs(), taula.obtenirItem(1));
+
+        elements = new TreeMap<>();
         int id;
         for (int i = 0; i < taula.obtenirNumeroElements(); ++i) {
             String sid = taula.obtenirValorAtributItem(i, "id");
@@ -29,4 +32,8 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             afegir(new Item(identificador, tipusItem, taula.obtenirItem(i)));
         }
     }
+
+    public ConjuntItems(TipusItem tipusItem) { this.tipusItem = tipusItem; }
+
+    public TipusItem obteTipusItem() { return tipusItem; }
 }
