@@ -32,75 +32,75 @@ public class LectorDeCSV extends LectorDeFitxers {
         TaulaCSV tabla = new TaulaCSV();
         BufferedReader csvReader = new BufferedReader(new FileReader(ubicacio));
 
-        String row;
+        String fila;
 
         ArrayList<String> atributs = new ArrayList<>();
-        if ((row = csvReader.readLine()) != null) {
-            String[] atributos = row.split(",");
+        if ((fila = csvReader.readLine()) != null) {
+            String[] atributos = fila.split(",");
             for (String elem : atributos) {
                 atributs.add(elem);
             }
             tabla.introduirListaAtributs(atributs);
         }
 
-        ArrayList<String> valores = new ArrayList<>();
-        while ((row = csvReader.readLine()) != null) {
-            row = row + ' ';
-            char[] caracteres = row.toCharArray();
-            boolean comillas = true;
-            boolean entreComillas = false;
+        ArrayList<String> valors = new ArrayList<>();
+        while ((fila = csvReader.readLine()) != null) {
+            fila = fila + ' ';
+            char[] caracters = fila.toCharArray();
+            boolean cometes = true;
+            boolean entreCometes = false;
 
-            ArrayList<Integer> posicionComillas = new ArrayList<>();
-            ArrayList<Integer> posicionComas = new ArrayList<>();
+            ArrayList<Integer> posicioCometes = new ArrayList<>();
+            ArrayList<Integer> posicioComes = new ArrayList<>();
 
-            for (int i = 1; i < caracteres.length; ++i) {
-                if (entreComillas && comillas && caracteres[i - 1] == '\"' && caracteres[i] == ',') {
-                    caracteres[i - 1] = ' ';
-                    posicionComillas.add(i - 1);
-                    entreComillas = false;
+            for (int i = 1; i < caracters.length; ++i) {
+                if (entreCometes && cometes && caracters[i - 1] == '\"' && caracters[i] == ',') {
+                    caracters[i - 1] = ' ';
+                    posicioCometes.add(i - 1);
+                    entreCometes = false;
                 }
 
-                else if (!entreComillas && caracteres[i - 1] == ',' && caracteres[i] == '\"') {
-                    comillas = true;
-                    caracteres[i] = ' ';
-                    posicionComillas.add(i);
-                    entreComillas = true;
+                else if (!entreCometes && caracters[i - 1] == ',' && caracters[i] == '\"') {
+                    cometes = true;
+                    caracters[i] = ' ';
+                    posicioCometes.add(i);
+                    entreCometes = true;
                 }
 
-                if (entreComillas && caracteres[i - 1] == '\"') {
-                    comillas = !comillas;
-                    posicionComillas.add(i - 1);
-                    caracteres[i - 1] = '\'';
+                if (entreCometes && caracters[i - 1] == '\"') {
+                    cometes = !cometes;
+                    posicioCometes.add(i - 1);
+                    caracters[i - 1] = '\'';
                 }
 
-                if (entreComillas && caracteres[i] == ',') {
-                    posicionComas.add(i);
-                    caracteres[i] = ';';
+                if (entreCometes && caracters[i] == ',') {
+                    posicioComes.add(i);
+                    caracters[i] = ';';
                 }
             }
 
-            String actual = String.valueOf(caracteres);
+            String actual = String.valueOf(caracters);
             String[] temp = actual.split(",");
 
             for (String elem : temp) {
-                valores.add(elem);
+                valors.add(elem);
             }
 
             ArrayList<String> temporal = new ArrayList<>();
-            Integer indice = 0;
-            for (String valor : valores) {
-                char[] letras = valor.toCharArray();
-                for (int i = 0; i < letras.length; ++i) {
-                    if (posicionComas.contains(indice)) letras[i] = ',';
-                    if (posicionComillas.contains(indice)) letras[i] = '\"';
-                    ++indice;
+            Integer index = 0;
+            for (String valor : valors) {
+                char[] lletres = valor.toCharArray();
+                for (int i = 0; i < lletres.length; ++i) {
+                    if (posicioComes.contains(index)) lletres[i] = ',';
+                    if (posicioCometes.contains(index)) lletres[i] = '\"';
+                    ++index;
                 }
-                temporal.add(String.valueOf(letras));
-                ++indice;
+                temporal.add(String.valueOf(lletres));
+                ++index;
             }
 
             tabla.introduirLlistaDeValors(temporal);
-            valores.clear();
+            valors.clear();
         }
 
         atributs.clear();

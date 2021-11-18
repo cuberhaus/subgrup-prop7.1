@@ -4,7 +4,6 @@ import domini.classes.Contenidor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Representa un tipus de dades en el que emmagatzarem les dades llegides del CSV.
@@ -14,13 +13,13 @@ import java.util.regex.PatternSyntaxException;
 public class TaulaCSV extends Contenidor {
 
     /** Variable on guardarem els atributs del objectes que rebem del csv.*/
-    private ArrayList<ArrayList<String>> valoresDeItem;
+    private ArrayList<ArrayList<String>> valorsItem;
 
     /** Variable que farem servir per trobar l'índex de l'atribut que volem consultar.*/
-    private HashMap<String, Integer> atributosToIndex;
+    private HashMap<String, Integer> atributsAIndex;
 
     /** Variable que farem per trobar l'atribut que relaciona el número de columna a consultar.*/
-    private ArrayList<String> indexToAtributos;
+    private ArrayList<String> indexAAtributs;
 
     /** Variable que representa el número d'atributs de les dades introduïdes */
     private Integer numAtribs;
@@ -32,9 +31,9 @@ public class TaulaCSV extends Contenidor {
      * Constructora buida de la classe <code>CSVTable</code>
      */
     public TaulaCSV() {
-        valoresDeItem = new ArrayList<> ();
-        atributosToIndex = new HashMap<>();
-        indexToAtributos = new ArrayList<>();
+        valorsItem = new ArrayList<> ();
+        atributsAIndex = new HashMap<>();
+        indexAAtributs = new ArrayList<>();
         numAtribs = -1;
         numItems = 0;
     }
@@ -51,11 +50,11 @@ public class TaulaCSV extends Contenidor {
 
         else {
             this.numAtribs = atribs.size();
-            ArrayList<String> copyAtribs = new ArrayList<>(atribs);
+            ArrayList<String> copiaAtributs = new ArrayList<>(atribs);
 
             for (int i = 0; i < atribs.size(); ++i) {
-                this.indexToAtributos.add(copyAtribs.get(i));
-                this.atributosToIndex.put(copyAtribs.get(i), i);
+                this.indexAAtributs.add(copiaAtributs.get(i));
+                this.atributsAIndex.put(copiaAtributs.get(i), i);
             }
         }
     }
@@ -76,8 +75,8 @@ public class TaulaCSV extends Contenidor {
         }
 
         else {
-            ArrayList<String> valorsCopy = new ArrayList<>(valors);
-            valoresDeItem.add(valorsCopy);
+            ArrayList<String> copiaValors = new ArrayList<>(valors);
+            valorsItem.add(copiaValors);
             ++numItems;
         }
     }
@@ -92,18 +91,18 @@ public class TaulaCSV extends Contenidor {
         if (numAtribs == -1) {
             throw new InterruptedException("No s'han inicialitzat els atributs");
         }
-        else if (!this.atributosToIndex.containsKey(atribut)) {
+        else if (!this.atributsAIndex.containsKey(atribut)) {
             throw new IllegalArgumentException("L'atribut dessitjat no es troba en aquest contenidor");
         }
 
         else {
-            ArrayList<String> resultado = new ArrayList<>();
-            Integer index = this.atributosToIndex.get(atribut);
+            ArrayList<String> resultat = new ArrayList<>();
+            Integer index = this.atributsAIndex.get(atribut);
             for (int i = 0; i < numItems; ++i) {
-                resultado.add(this.valoresDeItem.get(i).get(index));
+                resultat.add(this.valorsItem.get(i).get(index));
             }
 
-            return resultado;
+            return resultat;
         }
     }
 
@@ -122,13 +121,13 @@ public class TaulaCSV extends Contenidor {
         }
 
         else {
-            ArrayList<String> resultado = new ArrayList<>();
+            ArrayList<String> resultat = new ArrayList<>();
             Integer index = indexAtrib;
             for (int i = 0; i < numItems; ++i) {
-                resultado.add(this.valoresDeItem.get(i).get(index));
+                resultat.add(this.valorsItem.get(i).get(index));
             }
 
-            return resultado;
+            return resultat;
         }
     }
 
@@ -148,8 +147,8 @@ public class TaulaCSV extends Contenidor {
         }
 
         else {
-            ArrayList<String> resultado = new ArrayList<>(valoresDeItem.get(indexItem));
-            return resultado;
+            ArrayList<String> resultat = new ArrayList<>(valorsItem.get(indexItem));
+            return resultat;
         }
 
     }
@@ -165,11 +164,11 @@ public class TaulaCSV extends Contenidor {
         }
 
         else {
-            ArrayList<String> atributos = new ArrayList<>();
+            ArrayList<String> atributs = new ArrayList<>();
             for (int i = 0; i < numAtribs; ++i) {
-                atributos.add(this.indexToAtributos.get(i));
+                atributs.add(this.indexAAtributs.get(i));
             }
-            return atributos;
+            return atributs;
         }
     }
 
@@ -184,8 +183,8 @@ public class TaulaCSV extends Contenidor {
         }
 
         else  {
-            ArrayList<ArrayList<String>> resultado = new ArrayList<>(this.valoresDeItem);
-            return resultado;
+            ArrayList<ArrayList<String>> resultat = new ArrayList<>(this.valorsItem);
+            return resultat;
         }
     }
 
@@ -200,12 +199,12 @@ public class TaulaCSV extends Contenidor {
         }
 
         else {
-            ArrayList<ArrayList<String>> resultado = new ArrayList<>();
-            resultado.add(this.obtenirLlistaAtributs());
-            for (ArrayList<String> elem : valoresDeItem) {
-                resultado.add(elem);
+            ArrayList<ArrayList<String>> resultat = new ArrayList<>();
+            resultat.add(this.obtenirLlistaAtributs());
+            for (ArrayList<String> elem : valorsItem) {
+                resultat.add(elem);
             }
-            return resultado;
+            return resultat;
         }
     }
 
@@ -225,7 +224,7 @@ public class TaulaCSV extends Contenidor {
 
             System.out.println();
 
-            for (ArrayList<String> fila : valoresDeItem) {
+            for (ArrayList<String> fila : valorsItem) {
                 for (String elem : fila) {
                     System.out.print(elem);
                     System.out.print(" | ");
@@ -247,19 +246,19 @@ public class TaulaCSV extends Contenidor {
             throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
-        else if (!this.atributosToIndex.containsKey(id)) {
+        else if (!this.atributsAIndex.containsKey(id)) {
             throw new IllegalArgumentException("L'atribut seleccionat no existeix");
         }
 
         else  {
-            Integer index = this.atributosToIndex.get(id);
+            Integer index = this.atributsAIndex.get(id);
 
-            Integer tamano = this.valoresDeItem.size();
+            Integer tamany = this.valorsItem.size();
             boolean trobat = false;
             Integer i = 0;
 
-            while (!trobat && i < tamano) {
-                ArrayList<String> fila = valoresDeItem.get(i);
+            while (!trobat && i < tamany) {
+                ArrayList<String> fila = valorsItem.get(i);
                 trobat = (fila.get(index).equals(valor));
                 ++i;
             }
@@ -270,9 +269,9 @@ public class TaulaCSV extends Contenidor {
             }
 
             else {
-                ArrayList<String> resultado = new ArrayList<>(valoresDeItem.get(i - 1));
-                resultado.remove(index);
-                return resultado;
+                ArrayList<String> resultat = new ArrayList<>(valorsItem.get(i - 1));
+                resultat.remove(index);
+                return resultat;
             }
         }
     }
@@ -296,12 +295,12 @@ public class TaulaCSV extends Contenidor {
         else  {
             Integer index = ind;
 
-            Integer tamano = this.valoresDeItem.size();
+            Integer refactor = this.valorsItem.size();
             boolean trobat = false;
             Integer i = 0;
 
-            while (!trobat && i < tamano) {
-                ArrayList<String> fila = valoresDeItem.get(i);
+            while (!trobat && i < refactor) {
+                ArrayList<String> fila = valorsItem.get(i);
                 trobat = (fila.get(index).equals(valor));
                 ++i;
             }
@@ -312,13 +311,22 @@ public class TaulaCSV extends Contenidor {
             }
 
             else {
-                ArrayList<String> resultado = new ArrayList<>(valoresDeItem.get(i - 1));
-                resultado.remove(index);
-                return resultado;
+                ArrayList<String> resultat = new ArrayList<>(valorsItem.get(i - 1));
+                resultat.remove(index);
+                return resultat;
             }
         }
     }
 
+    /**
+     * Donat un item i un atribut et retorna el valor
+     * @param indexItem <code>int</code> indexItem de l'item
+     * @param atribut <code>String</code> nom de l'atribut
+     * @return <code>String</code> del valor de l'atribut
+     * @throws InterruptedException
+     * @throws IllegalArgumentException
+     * @throws IllegalStateException
+     */
     public String obtenirValorAtributItem(int indexItem, String atribut) throws InterruptedException, IllegalArgumentException,
             IllegalStateException
     {
@@ -326,7 +334,7 @@ public class TaulaCSV extends Contenidor {
             throw new InterruptedException("No s'han inicialitzat els atributs");
         }
 
-        else if (!this.atributosToIndex.containsKey(atribut)) {
+        else if (!this.atributsAIndex.containsKey(atribut)) {
             throw new IllegalArgumentException("L'atribut seleccionat no existeix");
         }
 
@@ -334,7 +342,7 @@ public class TaulaCSV extends Contenidor {
             throw new IllegalStateException("No existeix l'objecte");
         }
 
-        return valoresDeItem.get(indexItem).get(atributosToIndex.get(atribut));
+        return valorsItem.get(indexItem).get(atributsAIndex.get(atribut));
 
     }
 
