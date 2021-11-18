@@ -20,8 +20,7 @@ public class TaulaCSVTest {
         tauleta.introduirListaAtributs(atributs);
     }
 
-    //Probem que no podem assignar dos cops els atributs a la taula, supose, que la funcio obtenir atributs funciona,
-    //testejada a la part d'abaix
+    //Probem que funciona correctament
     @Test
     public void introduirListaAtributs2() {
         TaulaCSV tauleta = new TaulaCSV();
@@ -56,6 +55,22 @@ public class TaulaCSVTest {
         tauleta.introduirLlistaDeValors(valors);
     }
 
+    //Comparem que hem afegit una fila correctament
+    @Test
+    public void introduirLlistaDeValors2() {
+        TaulaCSV tauleta = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        ArrayList<String> valors = new ArrayList<>();
+        atributs.add("genere");
+        atributs.add("edad");
+        valors.add("home");
+        valors.add("20");
+        tauleta.introduirListaAtributs(atributs);
+        tauleta.introduirLlistaDeValors(valors);
+        ArrayList<String> comparar = tauleta.obtenirItem(0);
+        assertEquals(valors, comparar);
+    }
+
     //Dona excepcio si no s'ha inicialitzat la taula previament
     @Test(expected = IllegalStateException.class)
     public void obtenirValorsAtribut() throws IllegalStateException {
@@ -73,6 +88,21 @@ public class TaulaCSVTest {
         tauleta.obtenirValorsAtribut("id");
     }
 
+    //Dona excepcio si no existeix l'atribut
+    @Test
+    public void obtenirValorsAtribut3(){
+        TaulaCSV tauleta = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        tauleta.introduirListaAtributs(atributs);
+        ArrayList<String> valors = new ArrayList<>();
+        valors.add("home");
+        tauleta.introduirLlistaDeValors(valors);
+        ArrayList<String> comparar = tauleta.obtenirValorsAtribut("genere");
+        assertEquals(comparar, valors);
+    }
+
+
     //Dona excepcio si no s'han inicialitzat els atributs
     @Test(expected = IllegalStateException.class)
     public void testObtenirValorsAtribut() throws IllegalStateException {
@@ -88,6 +118,20 @@ public class TaulaCSVTest {
         atributs.add("hola");
         tauleta.introduirListaAtributs(atributs);
         tauleta.obtenirValorsAtribut(1);
+    }
+
+    //Funciona correctament
+    @Test
+    public void obtenirValorsAtribut4() {
+        TaulaCSV tauleta = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        ArrayList<String> valors = new ArrayList<>();
+        valors.add("dona");
+        tauleta.introduirListaAtributs(atributs);
+        tauleta.introduirLlistaDeValors(valors);
+        ArrayList<String> compara = tauleta.obtenirValorsAtribut(0);
+        assertEquals(valors, compara);
     }
 
     //Excepcio si no s'ha inicialitzat la taula
@@ -115,6 +159,25 @@ public class TaulaCSVTest {
         tauleta.obtenirItem(1);
     }
 
+    //Existeix l'item, excepcio
+    @Test
+    public void obtenirItem2() {
+        TaulaCSV tauleta = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        atributs.add("edad");
+        tauleta.introduirListaAtributs(atributs);
+
+        ArrayList<String> valors = new ArrayList<>();
+        valors.add("home");
+        valors.add("20");
+        tauleta.introduirLlistaDeValors(valors);
+
+        System.out.println("Arribo");
+        ArrayList<String> compara = tauleta.obtenirItem(0);
+        assertEquals(valors, compara);
+    }
+
     //Excepcio si no s'ha inicialitzat la taula
     @Test(expected = IllegalStateException.class)
     public void obtenirLlistaAtributs() throws IllegalStateException {
@@ -129,11 +192,68 @@ public class TaulaCSVTest {
         tauleta.obtenirValorsDeTotsElsItems();
     }
 
+    //Funciona correctament
+    @Test
+    public void obtenirValorsDeTotsElsItems1() {
+        TaulaCSV tauleta = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        atributs.add("edad");
+        tauleta.introduirListaAtributs(atributs);
+
+        ArrayList<String> valors1 = new ArrayList<>();
+        valors1.add("home");
+        valors1.add("20");
+
+        ArrayList<String> valors2 = new ArrayList<>();
+        valors2.add("dona");
+        valors2.add("21");
+
+        ArrayList<ArrayList<String>> conjuntValors = new ArrayList<>();
+        conjuntValors.add(valors1);
+        conjuntValors.add(valors2);
+
+        tauleta.introduirLlistaDeValors(valors1);
+        tauleta.introduirLlistaDeValors(valors2);
+        ArrayList<ArrayList<String>> compara = tauleta.obtenirValorsDeTotsElsItems();
+
+        assertEquals(conjuntValors, compara);
+    }
+
     //Excepcio si no s'ha inicialitzat la taula
     @Test(expected = IllegalStateException.class)
     public void obtenirTaula() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
         tauleta.obtenirTaula();
+    }
+
+    //Funciona correctament
+    @Test
+    public void obtenirTaula1() {
+        TaulaCSV tauleta = new TaulaCSV();
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("genere");
+        atributs.add("edad");
+        tauleta.introduirListaAtributs(atributs);
+
+        ArrayList<String> valors1 = new ArrayList<>();
+        valors1.add("home");
+        valors1.add("20");
+
+        ArrayList<String> valors2 = new ArrayList<>();
+        valors2.add("dona");
+        valors2.add("21");
+
+        ArrayList<ArrayList<String>> conjuntValors = new ArrayList<>();
+        conjuntValors.add(atributs);
+        conjuntValors.add(valors1);
+        conjuntValors.add(valors2);
+
+        tauleta.introduirLlistaDeValors(valors1);
+        tauleta.introduirLlistaDeValors(valors2);
+        ArrayList<ArrayList<String>> compara = tauleta.obtenirTaula();
+
+        assertEquals(conjuntValors, compara);
     }
 
     //Si no s'ha inicialitzat excepcio
