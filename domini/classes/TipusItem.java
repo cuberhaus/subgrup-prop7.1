@@ -3,6 +3,7 @@ package domini.classes;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
+import domini.classes.csv.TaulaCSV;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +44,84 @@ public class TipusItem {
         }
         for (int i = 0; i < nomsAtributs.size(); ++i) {
             this.tipusAtributs.put(nomsAtributs.get(i), dedueixTipusAtribut(valors.get(i)));
+        }
+    }
+
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV) throws IllegalArgumentException {
+        this.nom = nomTipusItem;
+        this.tipusAtributs = new HashMap<>();
+        for (int i = 0; i < taulaCSV.obtenirNomsAtributs().size(); ++i) {
+            for (int j = 0; j < taulaCSV.obtenirNumItems(); ++j) {
+                if (this.tipusAtributs.containsKey(taulaCSV.obtenirNomsAtributs().get(i))) {
+                    TipusAtribut tipusAtributActual = dedueixTipusAtribut(taulaCSV.obtenirValorAtributItem(j,
+                            taulaCSV.obtenirNomsAtributs().get(i)));
+                    TipusAtribut tipusAtributNou = dedueixTipusAtribut(taulaCSV.obtenirValorAtributItem(j,
+                            taulaCSV.obtenirNomsAtributs().get(i)));
+                    this.tipusAtributs.put(taulaCSV.obtenirNomsAtributs().get(i), trobaTipusAtributMenysRestrictiu(
+                            tipusAtributActual.obtenirValorAtribut(), tipusAtributNou.obtenirValorAtribut()));
+                } else {
+                    this.tipusAtributs.put(taulaCSV.obtenirNomsAtributs().get(i),
+                            dedueixTipusAtribut(taulaCSV.obtenirValorAtributItem(j,
+                                    taulaCSV.obtenirNomsAtributs().get(i))));
+                }
+            }
+        }
+    }
+
+    private TipusAtribut trobaTipusAtributMenysRestrictiu(ValorAtribut<?> valorAtribut1,
+                                                             ValorAtribut<?> valorAtribut2) throws IllegalArgumentException {
+        // Considerem cada cas particularment per a poder definir la distància que li correspon a cada TipusAtribut
+        // i assegurar-nos que és compatible amb el ValorAtribut.
+        if (valorAtribut1 instanceof ValorBoolea) {
+            if (valorAtribut2 instanceof ValorBoolea) {
+                return new TipusAtribut(new ValorBoolea(), new Discreta());
+            } else if (valorAtribut2 instanceof ValorConjuntBoolea) {
+                return new TipusAtribut(new ValorConjuntBoolea(), new DiferenciaDeConjunts());
+            } else if (valorAtribut2 instanceof ValorConjunt<?>) {
+                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+            } else {
+                return new TipusAtribut(new ValorCategoric(), new Levenshtein());
+            }
+        } else if (valorAtribut1 instanceof ValorCategoric) {
+            if (valorAtribut2 instanceof ValorConjunt<?>) {
+                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+            } else {
+                return new TipusAtribut(new ValorCategoric(), new Levenshtein());
+            }
+        } else if (valorAtribut1 instanceof ValorNumeric) {
+            if (valorAtribut2 instanceof ValorNumeric) {
+                return new TipusAtribut(new ValorNumeric(), new Euclidiana());
+            } else if (valorAtribut2 instanceof ValorConjuntNumeric) {
+                return new TipusAtribut(new ValorConjuntNumeric(), new Euclidiana());
+            } else if (valorAtribut2 instanceof ValorConjunt<?>) {
+                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+            } else {
+                return new TipusAtribut(new ValorCategoric(), new Levenshtein());
+            }
+        } else if (valorAtribut1 instanceof ValorTextual) {
+            if (valorAtribut2 instanceof ValorConjunt<?>) {
+                return new TipusAtribut(new ValorConjuntTextual(), new DiferenciaDeConjunts());
+            } else {
+                return new TipusAtribut(new ValorTextual(), new Levenshtein());
+            }
+        } else if (valorAtribut1 instanceof ValorConjuntBoolea) {
+            if (valorAtribut2 instanceof ValorConjuntBoolea) {
+                return new TipusAtribut(new ValorConjuntBoolea(), new DiferenciaDeConjunts());
+            } else {
+                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+            }
+        } else if (valorAtribut1 instanceof ValorConjuntCategoric) {
+            return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+        } else if (valorAtribut1 instanceof ValorConjuntNumeric) {
+            if (valorAtribut2 instanceof ValorConjuntNumeric) {
+                return new TipusAtribut(new ValorConjuntNumeric(), new Euclidiana());
+            } else {
+                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+            }
+        } else if (valorAtribut1 instanceof ValorConjuntTextual) {
+            return new TipusAtribut(new ValorConjuntTextual(), new DiferenciaDeConjunts());
+        } else {
+            throw new IllegalArgumentException("No hi ha una relació de restrictivitat definida per la parella de ValorsAtributs donada.");
         }
     }
 
