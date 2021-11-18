@@ -124,7 +124,8 @@ public class KMeans {
 
     private void guardaBaricentres() {
         for (int i = 0; i < k; ++i) {
-            baricentres[i] = particions[i].obtenirBaricentre();
+            if (particions[i].obtenirNumPunts() != 0)
+                baricentres[i] = particions[i].obtenirBaricentre();
         }
     }
 }

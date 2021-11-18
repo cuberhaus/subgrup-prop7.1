@@ -5,6 +5,7 @@ import domini.classes.metode_recomanador.Punt;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 /**
  * Representa un usuari.
@@ -36,6 +37,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         this.id = new Id(id,actiu);
         this.nom = nom;
         this.contrasenya = contrasenya;
+        this.valoracions = new TreeMap<>();
     }
 
     /** Constructora donat un id, un estat "actiu".
@@ -46,6 +48,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         this.id = new Id(id,actiu);
         this.nom = null;
         this.contrasenya = null;
+        this.valoracions = new TreeMap<>();
     }
 
     /** Constructora donat un id, un nom i una contrasenya.
@@ -57,6 +60,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         this.id = id;
         this.nom = nom;
         this.contrasenya = contrasenya;
+        this.valoracions = new TreeMap<>();
     }
 
     /**

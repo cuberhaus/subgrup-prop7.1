@@ -29,11 +29,14 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             if (elements.containsKey(identificador)) {
                 throw new InputMismatchException("L'item creat ja existeix al conjunt");
             }
-            afegir(new Item(identificador, tipusItem, taula.obtenirItem(i)));
+            afegir(new Item(identificador, tipusItem, taula.obtenirItem(i), taula.obtenirLlistaAtributs()));
         }
     }
 
-    public ConjuntItems(TipusItem tipusItem) { this.tipusItem = tipusItem; }
+    public ConjuntItems(TipusItem tipusItem) {
+        this.tipusItem = tipusItem;
+        this.elements = new TreeMap<>();
+    }
 
     public TipusItem obteTipusItem() { return tipusItem; }
 }
