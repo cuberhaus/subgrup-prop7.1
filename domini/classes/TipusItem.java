@@ -5,8 +5,10 @@ import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 import domini.classes.csv.TaulaCSV;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Representa un tipus d'ítem.
@@ -44,7 +46,7 @@ public class TipusItem {
                     " el TipusItem.");
         }
         this.nom = nomTipusItem;
-        this.tipusAtributs = new HashMap<>();
+        this.tipusAtributs = new TreeMap<>();
         for (int i = 0; i < taulaCSV.obtenirNomsAtributs().size(); ++i) {
             for (int j = 0; j < numCandidats; ++j) {
                 if (this.tipusAtributs.containsKey(taulaCSV.obtenirNomsAtributs().get(i))) {
@@ -69,52 +71,52 @@ public class TipusItem {
         // i assegurar-nos que és compatible amb el ValorAtribut.
         if (valorAtribut1 instanceof ValorBoolea) {
             if (valorAtribut2 instanceof ValorBoolea) {
-                return new TipusAtribut(new ValorBoolea(), new Discreta());
+                return new TipusAtribut(new ValorBoolea(), new DistanciaDiscreta());
             } else if (valorAtribut2 instanceof ValorConjuntBoolea) {
-                return new TipusAtribut(new ValorConjuntBoolea(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntBoolea(), new DistanciaDiferenciaDeConjunts());
             } else if (valorAtribut2 instanceof ValorConjunt<?>) {
-                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
             } else {
-                return new TipusAtribut(new ValorCategoric(), new Levenshtein());
+                return new TipusAtribut(new ValorCategoric(), new DistanciaLevenshtein());
             }
         } else if (valorAtribut1 instanceof ValorCategoric) {
             if (valorAtribut2 instanceof ValorConjunt<?>) {
-                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
             } else {
-                return new TipusAtribut(new ValorCategoric(), new Levenshtein());
+                return new TipusAtribut(new ValorCategoric(), new DistanciaLevenshtein());
             }
         } else if (valorAtribut1 instanceof ValorNumeric) {
             if (valorAtribut2 instanceof ValorNumeric) {
-                return new TipusAtribut(new ValorNumeric(), new Euclidiana());
+                return new TipusAtribut(new ValorNumeric(), new DistanciaEuclidiana());
             } else if (valorAtribut2 instanceof ValorConjuntNumeric) {
-                return new TipusAtribut(new ValorConjuntNumeric(), new Euclidiana());
+                return new TipusAtribut(new ValorConjuntNumeric(), new DistanciaEuclidiana());
             } else if (valorAtribut2 instanceof ValorConjunt<?>) {
-                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
             } else {
-                return new TipusAtribut(new ValorCategoric(), new Levenshtein());
+                return new TipusAtribut(new ValorCategoric(), new DistanciaLevenshtein());
             }
         } else if (valorAtribut1 instanceof ValorTextual) {
             if (valorAtribut2 instanceof ValorConjunt<?>) {
-                return new TipusAtribut(new ValorConjuntTextual(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntTextual(), new DistanciaDiferenciaDeConjunts());
             } else {
-                return new TipusAtribut(new ValorTextual(), new Levenshtein());
+                return new TipusAtribut(new ValorTextual(), new DistanciaLevenshtein());
             }
         } else if (valorAtribut1 instanceof ValorConjuntBoolea) {
             if (valorAtribut2 instanceof ValorConjuntBoolea) {
-                return new TipusAtribut(new ValorConjuntBoolea(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntBoolea(), new DistanciaDiferenciaDeConjunts());
             } else {
-                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
             }
         } else if (valorAtribut1 instanceof ValorConjuntCategoric) {
-            return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+            return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
         } else if (valorAtribut1 instanceof ValorConjuntNumeric) {
             if (valorAtribut2 instanceof ValorConjuntNumeric) {
-                return new TipusAtribut(new ValorConjuntNumeric(), new Euclidiana());
+                return new TipusAtribut(new ValorConjuntNumeric(), new DistanciaEuclidiana());
             } else {
-                return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+                return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
             }
         } else if (valorAtribut1 instanceof ValorConjuntTextual) {
-            return new TipusAtribut(new ValorConjuntTextual(), new DiferenciaDeConjunts());
+            return new TipusAtribut(new ValorConjuntTextual(), new DistanciaDiferenciaDeConjunts());
         } else {
             throw new IllegalArgumentException("No hi ha una relació de restrictivitat definida per la parella de ValorsAtributs donada.");
         }
@@ -125,7 +127,7 @@ public class TipusItem {
             Double.parseDouble(s);
         } catch (NumberFormatException e1) {
             if (ValorBoolea.esBoolea(s)) {
-                return new TipusAtribut(new ValorBoolea(), new Discreta());
+                return new TipusAtribut(new ValorBoolea(), new DistanciaDiscreta());
             }
             if (s.contains(";")) {
                 String primerValor = s.split(";", 2)[0];
@@ -135,13 +137,13 @@ public class TipusItem {
                     // TODO(maria): pensar si volem que aquest mètode pugui llegir conjunts de booleans (caldria iterar
                     // per tots els elements per assegurar que són tots booleans. L'alternativa és fer el cast més endavant
                     // si l'usuari ho demana.
-                    return new TipusAtribut(new ValorConjuntCategoric(), new DiferenciaDeConjunts());
+                    return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
                 }
-                return new TipusAtribut(new ValorConjuntNumeric(), new Euclidiana());
+                return new TipusAtribut(new ValorConjuntNumeric(), new DistanciaEuclidiana());
             }
-            return new TipusAtribut(new ValorCategoric(), new Levenshtein());
+            return new TipusAtribut(new ValorCategoric(), new DistanciaLevenshtein());
         }
-        return new TipusAtribut(new ValorNumeric(), new Euclidiana());
+        return new TipusAtribut(new ValorNumeric(), new DistanciaEuclidiana());
     }
 
     /**
@@ -171,7 +173,7 @@ public class TipusItem {
      * @return <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
      */
     public Map<String, TipusAtribut> obtenirTipusAtributs() {
-        Map<String, TipusAtribut> copiaTipusAtributs = new HashMap<>();
+        Map<String, TipusAtribut> copiaTipusAtributs = new TreeMap<>();
         for (Map.Entry<String, TipusAtribut> entrada : tipusAtributs.entrySet()) {
             copiaTipusAtributs.put(entrada.getKey(), entrada.getValue().copy());
         }
@@ -210,5 +212,23 @@ public class TipusItem {
             }
         }
         return true;
+    }
+
+    public boolean conteAtributs(ArrayList<String> nomAtributs) {
+        return tipusAtributs.keySet().containsAll(nomAtributs);
+    }
+
+    public void esborrarAtributs(TreeSet<String> nomAtributs) {
+        for (String nomAtribut : nomAtributs) {
+            tipusAtributs.remove(nomAtribut);
+        }
+    }
+
+    public TipusItem copy() {
+        Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+        for (Map.Entry<String, TipusAtribut> tipusAtribut : this.tipusAtributs.entrySet()) {
+            tipusAtributs.put(tipusAtribut.getKey(), tipusAtribut.getValue().copy());
+        }
+        return new TipusItem(nom, tipusAtributs);
     }
 }

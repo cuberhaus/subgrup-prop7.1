@@ -40,4 +40,8 @@ public class Id implements Comparable<Id> {
     public int hashCode() {
         return Objects.hash(valor);
     }
+
+    public Id copy() {
+        return new Id(valor, actiu);
+    }
 }

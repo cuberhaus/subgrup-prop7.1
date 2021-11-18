@@ -3,8 +3,7 @@ package domini.classes;
 
 import domini.classes.csv.TaulaCSV;
 
-import java.util.InputMismatchException;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Classe que representa un conjunt d'items
@@ -40,5 +39,24 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         this.elements = new TreeMap<>();
     }
 
+    public ConjuntItems(TipusItem tipusItem, TreeMap<Id, Item> elements) {
+        this.tipusItem = tipusItem;
+        this.elements = new TreeMap<>();
+        for (Map.Entry<Id, Item> itemIdentificat : elements.entrySet()) {
+            this.elements.put(itemIdentificat.getKey().copy(), itemIdentificat.getValue().copy());
+        }
+    }
+
     public TipusItem obteTipusItem() { return tipusItem; }
+
+    public boolean conteAtributs(ArrayList<String> nomAtributs) {
+        return tipusItem.conteAtributs(nomAtributs);
+    }
+
+    public void esborrarAtributs(TreeSet<String> nomAtributs) {
+        tipusItem.esborrarAtributs(nomAtributs);
+        for (Map.Entry<Id, Item> itemIdentificat : elements.entrySet()) {
+            itemIdentificat.getValue().esborrarAtributs(nomAtributs);
+        }
+    }
 }

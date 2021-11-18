@@ -98,4 +98,8 @@ public class Valoracio {
     public int hashCode() {
         return Objects.hash(usuari, item);
     }
+
+    public Valoracio copy() {
+        return new Valoracio(valor, usuari.copy(), item.copy());
+    }
 }

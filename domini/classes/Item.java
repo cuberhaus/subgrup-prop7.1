@@ -1,12 +1,12 @@
 package domini.classes;
 
 import domini.classes.atributs.TipusAtribut;
-import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 /**
  * Representa un ítem.
@@ -31,7 +31,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         this.tipusItem = tipusItem;
         this.atributs = atributs;
         actualitzarFactorNormalitzacio();
-        this.valoracions = new HashMap<>();
+        this.valoracions = new TreeMap<>();
         if (!tipusItem.esCompatible(atributs)) {
             throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
         }
@@ -42,10 +42,17 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         this.tipusItem = tipusItem;
         obtenirAtributs(nom_atributs, valors);
         actualitzarFactorNormalitzacio();
-        this.valoracions = new HashMap<>();
+        this.valoracions = new TreeMap<>();
         if (!tipusItem.esCompatible(atributs)) {
             throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
         }
+    }
+
+    public Item(Id id, TipusItem tipusItem, Map<String, ValorAtribut<?>> atributs, Map<Usuari, Valoracio> valoracions) {
+        this.id = id;
+        this.tipusItem = tipusItem;
+        this.atributs = atributs;
+        this.valoracions = valoracions;
     }
 
     private void actualitzarFactorNormalitzacio() {
@@ -60,7 +67,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
             throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
                     "mides diferents.");
         }
-        atributs = new HashMap<>();
+        atributs = new TreeMap<>();
         for (int i = 0; i < nomAtributs.size(); ++i) {
             if (!tipusItem.obtenirTipusAtributs().containsKey(nomAtributs.get(i))) {
                 throw new IllegalArgumentException("El TipusItem no és compatible amb els noms dels atributs donats.");
@@ -138,5 +145,24 @@ public class Item implements Comparable<Item>, ElementIdentificat {
                     (tipusAtribut.getValue().obtenirDistancia().obtenirFactorDeNormalitzacio());
         }
         return distancia;
+    }
+
+    public void esborrarAtributs(TreeSet<String> nomAtributs) {
+        tipusItem.esborrarAtributs(nomAtributs);
+        for (String nomAtribut : nomAtributs) {
+            atributs.remove(nomAtribut);
+        }
+    }
+
+    public Item copy() {
+        Map<String, ValorAtribut<?>> atributs = new TreeMap<>();
+        for (Map.Entry<String, ValorAtribut<?>> valorAtributEntry : this.atributs.entrySet()) {
+            atributs.put(valorAtributEntry.getKey(), valorAtributEntry.getValue().copy());
+        }
+        Map<Usuari, Valoracio> valoracions = new TreeMap<>();
+        for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
+            valoracions.put(valoracioEntry.getKey().copy(), valoracioEntry.getValue().copy());
+        }
+        return new Item(this.id.copy(), this.tipusItem.copy(), atributs, valoracions);
     }
 }
