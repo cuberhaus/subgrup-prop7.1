@@ -20,7 +20,7 @@ public class Programa {
 
     /** Conté el conjunt d'usuaris */
 //    private Map<Usuari,Usuari> usuaris;
-    private ConjuntUsuaris conjuntUsuaris;
+    private ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
 
     /** Conté el conjunt de tipus d'items */
     private Map<TipusItem,TipusItem> tipusItems = new HashMap<TipusItem,TipusItem>();
@@ -83,16 +83,15 @@ public class Programa {
 
     /**
      * Afegeix un usuari al conjunt d'usuaris.
-     * Retorna true si s'ha afegit correctament, retorna false si ja hi era
      * @param  usuari el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
-//    public boolean afegirUsuari(Usuari usuari) {
-////        if (usuaris.containsKey(usuari)) {
-////            return false;
-////        }
-////        usuaris.put(usuari,usuari);
-////        return true;
-//    }
+    public void afegirUsuari(Usuari usuari) {
+        conjuntUsuaris.afegir(usuari);
+    }
+
+    public boolean conteUsuari(Usuari usuari) {
+        return conjuntUsuaris.conte(usuari.obtenirId());
+    }
 
     /**
      * Afegeix un tipus d'item al conjunt de tipus d'items.
