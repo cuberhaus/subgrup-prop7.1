@@ -7,6 +7,7 @@ import java.util.InputMismatchException;
 import java.util.TreeMap;
 
 /**
+ * Classe que representa un conjunt d'items
  * @author pablo.vega
  */
 
