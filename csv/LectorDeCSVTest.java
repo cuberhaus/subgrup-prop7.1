@@ -20,4 +20,13 @@ public class LectorDeCSVTest {
         assertEquals(25, tamanyAtributs);
         assertEquals(250, tamanyItems);
     }
+
+    //No existeix el fitxer
+    @Test(expected = IOException.class)
+    public void llegirCSV1() throws IOException, InterruptedException {
+        LectorDeCSV lector = new LectorDeCSV();
+        TaulaCSV tauleta = lector.llegirCSV("./domingo/tests/jocs_de_proves/joc1/items.csv");
+    }
+
+
 }

@@ -30,7 +30,12 @@ public class EscriptorDeCSV extends EscriptorDeFitxers {
         }
 
         else {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(ubicacio));
+            BufferedWriter bw;
+            try {
+                bw = new BufferedWriter(new FileWriter(ubicacio));
+            } catch(IOException e1) {
+                throw e1;
+            }
             ArrayList<ArrayList<String>> tauleta = taula.obtenirTaula();
             for (ArrayList<String> elem1 : tauleta) {
                 boolean primer = true;

@@ -17,7 +17,7 @@ public class LectorDeCSV extends LectorDeFitxers {
     public LectorDeCSV() {}
 
     @Override
-    public Contenidor lectorDeFitxers(String ubicacio) throws IOException, InterruptedException {
+    public Contenidor lectorDeFitxers(String ubicacio) throws IOException {
         Contenidor temp = this.llegirCSV(ubicacio);
         return temp;
     }
@@ -28,10 +28,15 @@ public class LectorDeCSV extends LectorDeFitxers {
      * @return <code>Taula</code> amb el contingut de lal CSV
      * @throws IOException
      */
-    public TaulaCSV llegirCSV(String ubicacio) throws IOException, InterruptedException {
+    public TaulaCSV llegirCSV(String ubicacio) throws IOException {
         TaulaCSV tabla = new TaulaCSV();
-        BufferedReader csvReader = new BufferedReader(new FileReader(ubicacio));
 
+        BufferedReader csvReader;
+        try {
+            csvReader = new BufferedReader(new FileReader(ubicacio));
+        } catch (IOException e1) {
+            throw e1;
+        }
         String fila;
 
         ArrayList<String> atributs = new ArrayList<>();
