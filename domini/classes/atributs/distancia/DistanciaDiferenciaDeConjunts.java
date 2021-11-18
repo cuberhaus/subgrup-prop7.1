@@ -10,10 +10,12 @@ import java.util.Set;
  * Representa la distància de diferència de conjunts entre dos atributs conjunts.
  * @author maria.prat
  */
-public class DiferenciaDeConjunts extends Distancia {
+public class DistanciaDiferenciaDeConjunts extends Distancia {
+    private double normaMaxima = 0.0;
+
     @Override
     public Distancia copy() {
-        return new DiferenciaDeConjunts();
+        return new DistanciaDiferenciaDeConjunts();
     }
 
     @Override
@@ -39,5 +41,22 @@ public class DiferenciaDeConjunts extends Distancia {
         Set<ValorAtribut<?>> intersection = new HashSet<>(set1);
         intersection.retainAll(set2);
         return union.size() - intersection.size();
+    }
+
+    @Override
+    public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
+        if (valor == null) {
+            throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
+        }
+        normaMaxima = Math.max(normaMaxima, ((ValorConjunt<?>) valor).getValor().size());
+    }
+
+    @Override
+    public double obtenirFactorDeNormalitzacio() {
+        if (normaMaxima == 0.0) {
+            return 1.0;
+        }
+        // Valor màxim de la distància diferència de conjunts entre conjunts amb norma igual o més petita que normaMaxima.
+        return 2.0 * normaMaxima;
     }
 }

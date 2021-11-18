@@ -62,6 +62,13 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         this.valoracions = new TreeMap<>();
     }
 
+    public Usuari(Id id, String nom, String contrasenya, Map<Item, Valoracio> valoracions) {
+        this.id = id;
+        this.nom = nom;
+        this.contrasenya = contrasenya;
+        this.valoracions = valoracions;
+    }
+
     /**
      * Consultora del nom
      * @return El resultat és el valor del paràmetre implícit
@@ -198,6 +205,14 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     @Override
     public int compareTo(Usuari o) {
         return id.compareTo(o.id);
+    }
+
+    public Usuari copy() {
+        Map<Item, Valoracio> valoracions = new TreeMap<>();
+        for (Map.Entry<Item, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
+            valoracions.put(valoracioEntry.getKey().copy(), valoracioEntry.getValue().copy());
+        }
+        return new Usuari(id.copy(), nom, contrasenya, valoracions);
     }
 }
 

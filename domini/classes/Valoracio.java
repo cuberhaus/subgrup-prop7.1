@@ -17,7 +17,6 @@ public class Valoracio {
 
     /** Conté l'item valorat */
     private Item item;
-    // TODO: preguntar al sergio si això de treure getters i setters i afegir directament des de la constructora es bona idea
 
     /** Constructora donat un valor, un usuari i un item.
      * @param valor representa el valor de la valoració
@@ -46,9 +45,9 @@ public class Valoracio {
      *
      * @param item El paràmetre item pren el nou valor
      */
-    public void setItem(Item item) {
-        this.item = item;
-    }
+//    public void setItem(Item item) {
+//        this.item = item;
+//    }
 
     /**
      * Consultora del usuari
@@ -64,9 +63,9 @@ public class Valoracio {
      *
      * @param usuari El paràmetre usuari pren el nou valor
      */
-    public void setUsuari(Usuari usuari) {
-        this.usuari = usuari;
-    }
+//    public void setUsuari(Usuari usuari) {
+//        this.usuari = usuari;
+//    }
 
     /**
      * Consultora del valor
@@ -82,9 +81,9 @@ public class Valoracio {
      *
      * @param valor El paràmetre valor pren el nou valor
      */
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
+//    public void setValor(double valor) {
+//        this.valor = valor;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -97,5 +96,9 @@ public class Valoracio {
     @Override
     public int hashCode() {
         return Objects.hash(usuari, item);
+    }
+
+    public Valoracio copy() {
+        return new Valoracio(valor, usuari.copy(), item.copy());
     }
 }

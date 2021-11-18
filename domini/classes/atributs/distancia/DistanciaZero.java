@@ -3,22 +3,21 @@ package domini.classes.atributs.distancia;
 import domini.classes.atributs.valors.*;
 
 /**
- * Representa la distància discreta entre dos atributs simples (booleans, categòrics, numèrics o textuals).
+ * Representa la distància zero entre dos atributs.
  * @author maria.prat
  */
-public class Discreta extends Distancia {
+public class DistanciaZero extends Distancia {
     @Override
     public Distancia copy() {
-        return new Discreta();
+        return new DistanciaZero();
     }
 
     @Override
-    public boolean admet(ValorAtribut<?> valorAtribut) throws IllegalArgumentException {
+    public boolean admet(ValorAtribut<?> valorAtribut) {
         if (valorAtribut == null) {
             throw new IllegalArgumentException("No es pot comprovar si un ValorAtribut nul és admissible.");
         }
-        return valorAtribut instanceof ValorBoolea || valorAtribut instanceof ValorCategoric ||
-                valorAtribut instanceof ValorNumeric || valorAtribut instanceof ValorTextual;
+        return true;
     }
 
     @Override
@@ -29,10 +28,18 @@ public class Discreta extends Distancia {
         if (!admet(valor1)) {
             throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
-        if (valor1.getValor().equals(valor2.getValor())) {
-            return 0.0d;
-        } else {
-            return 1.0d;
+        return 0.0d;
+    }
+
+    @Override
+    public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
+        if (valor == null) {
+            throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
         }
+    }
+
+    @Override
+    public double obtenirFactorDeNormalitzacio() {
+        return 1.0;
     }
 }

@@ -11,6 +11,10 @@ import java.util.TreeMap;
  */
 
 public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
+    /**
+     * Afegeix un conjunt de valoracions al Paràmetre implícit a partir de:
+     * @param taula Taula amb usuaris
+     */
     public void afegir(TaulaCSV taula) throws InterruptedException {
         taula.eliminarEspaisInnecessaris();
         elements = new TreeMap<>();
@@ -20,6 +24,10 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             this.afegir(new Usuari(id, true));
         }
     }
+    /**
+     * Esborra un usuari del conjunt d'usuaris.
+     * @param id que correspon al usuari que volem esborrar
+     */
     @Override
     public  Usuari esborrar(Id id) {
         Usuari u1 = this.obtenir(id);
@@ -27,6 +35,11 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         return elements.put(u1.obtenirId(),u1);
     }
 
+    /**
+     * Esborra un usuari del conjunt d'usuaris.
+     * Retorna true si s'ha esborrat correctament, retorna false si no hi era
+     * @param usuari L'usuari que es vol esborrar del conjunt
+     */
     @Override
     public boolean esborrar(Usuari usuari) {
         usuari.setActiu(false);
