@@ -16,6 +16,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      * @param taula Taula amb usuaris
      */
     public void afegir(TaulaCSV taula) throws InterruptedException {
+        taula.eliminarEspaisInnecessaris();
         elements = new TreeMap<>();
         ArrayList<String> idsUsuaris = taula.obtenirValorsAtribut("userId");
         for (String idUsuari : idsUsuaris) {

@@ -26,7 +26,7 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
     /**
      * @param minimaValoracioConsiderada nou valor de <code>minimaValoracioConsiderada</code>
      */
-    void setMinimaValoracioConsiderada(double minimaValoracioConsiderada) {
+    public void setMinimaValoracioConsiderada(double minimaValoracioConsiderada) {
         this.minimaValoracioConsiderada = minimaValoracioConsiderada;
     }
 
