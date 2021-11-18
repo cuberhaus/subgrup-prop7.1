@@ -12,18 +12,18 @@ public class LectorDeCSVTest {
 
     //La taula llegida té tots els atributs i tots els items
     @Test
-    public void llegirCSV() throws IOException, InterruptedException {
+    public void llegirCSV() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV tauleta = lector.llegirCSV("./domini/tests/jocs_de_proves/joc1/items.csv");
-        int tamanyItems = tauleta.obtenirNumeroElements();
-        int tamanyAtributs = tauleta.obtenirNumeroAtrib();
+        int tamanyItems = tauleta.obtenirNumItems();
+        int tamanyAtributs = tauleta.obtenirNumAtributs();
         assertEquals(25, tamanyAtributs);
         assertEquals(250, tamanyItems);
     }
 
     //No existeix el fitxer
     @Test(expected = IOException.class)
-    public void llegirCSV1() throws IOException, InterruptedException {
+    public void llegirCSV1() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV tauleta = lector.llegirCSV("./domingo/tests/jocs_de_proves/joc1/items.csv");
     }

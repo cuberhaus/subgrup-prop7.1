@@ -14,12 +14,12 @@ import java.util.TreeMap;
 public class ConjuntItems extends ConjuntIdentificat<Item> {
     TipusItem tipusItem;
 
-    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException, InterruptedException {
-        tipusItem = new TipusItem(nomTipusItem, taula.obtenirLlistaAtributs(), taula.obtenirItem(1));
+    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException {
+        tipusItem = new TipusItem(nomTipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(1));
 
         elements = new TreeMap<>();
         int id;
-        for (int i = 0; i < taula.obtenirNumeroElements(); ++i) {
+        for (int i = 0; i < taula.obtenirNumItems(); ++i) {
             String sid = taula.obtenirValorAtributItem(i, "id");
             try {
                 id = Integer.parseInt(sid);
@@ -30,7 +30,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             if (elements.containsKey(identificador)) {
                 throw new InputMismatchException("L'item creat ja existeix al conjunt");
             }
-            afegir(new Item(identificador, tipusItem, taula.obtenirLlistaAtributs(), taula.obtenirItem(i)));
+            afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
         }
     }
 

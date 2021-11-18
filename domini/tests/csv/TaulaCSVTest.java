@@ -1,4 +1,4 @@
-package domini.tests.csv;
+package csv;
 
 import domini.classes.csv.TaulaCSV;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class TaulaCSVTest {
         atributs.add("genere");
         atributs.add("hores");
         tauleta.introduirListaAtributs(atributs);
-        ArrayList<String> atributsTaula = tauleta.obtenirLlistaAtributs();
+        ArrayList<String> atributsTaula = tauleta.obtenirNomsAtributs();
         assertEquals(atributsTaula, atributs);
     }
 
@@ -119,7 +119,7 @@ public class TaulaCSVTest {
     @Test(expected = IllegalStateException.class)
     public void obtenirLlistaAtributs() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
-        tauleta.obtenirLlistaAtributs();
+        tauleta.obtenirNomsAtributs();
     }
 
     //Excepcio si no s'ha inicialitzat la taula
