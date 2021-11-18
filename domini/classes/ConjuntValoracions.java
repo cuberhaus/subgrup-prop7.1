@@ -63,7 +63,7 @@ public class ConjuntValoracions {
 
     /**
      * Afegeix una valoració al conjunt de valoracions.
-     * Retorna la valoració anterior amb mateix usuari i item o null si no existia.
+     * Retorna la valoració anterior amb el mateix usuari i item o null si no existia.
      * @param  valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public Valoracio afegir(Valoracio valoracio) {
