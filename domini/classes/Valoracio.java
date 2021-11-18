@@ -1,5 +1,7 @@
 package domini.classes;
 
+import java.util.Objects;
+
 /**
  * Representa una valoració.
  *
@@ -28,40 +30,6 @@ public class Valoracio {
         this.item = item;
         usuari.afegirValoracio(this);
         item.afegirValoracio(this);
-    }
-
-    /**
-     * Indica si dues valoracions són iguals
-     *
-     * @return El resultat retorna true si són iguals, altrament retorna false.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        Valoracio val = (Valoracio)obj;
-        return this.usuari.equals(val.usuari) && this.item.equals(val.item);
-    }
-
-    /**
-     * Calcula un codi de hash idèntic per a les valoracions amb el mateix usuari i item,
-     * altrament retorna un hash diferent.
-     * @return El resultat retorna true si són iguals, altrament retorna false.
-     */
-    @Override
-    public int hashCode() {
-        int prime1 = 29;
-        int prime2 = 17;
-
-        int hash1, hash2;
-        // Comprovem que els atributs no siguin nulls
-        if (usuari == null) hash1 = 0;
-        else hash1 = usuari.hashCode();
-        if (item == null) hash2 = 0;
-        else hash2 = item.hashCode();
-
-        int hash = prime1;
-        hash = hash * prime2 + hash1;
-        hash = hash * prime2 + hash2;
-        return hash;
     }
 
     /**
@@ -116,5 +84,18 @@ public class Valoracio {
      */
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Valoracio valoracio = (Valoracio) o;
+        return usuari.equals(valoracio.usuari) && item.equals(valoracio.item);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usuari, item);
     }
 }
