@@ -85,6 +85,10 @@ public class Programa {
         return conjuntUsuaris.conte(usuari.obtenirId());
     }
 
+    public Usuari obtenirUsuari(Id idUsuari) {
+        return conjuntUsuaris.obte(idUsuari);
+    }
+
     /**
      * Afegeix un usuari al conjunt d'usuaris.
      * @param  usuari el paràmetre s'ha afegit al conjunt si no hi era abans.

@@ -1,3 +1,4 @@
+import domini.classes.Id;
 import domini.classes.Programa;
 import domini.classes.SessioIniciada;
 import domini.classes.Usuari;
@@ -107,10 +108,10 @@ public class ProgramaTest {
     public void esborraUsuari() {
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
-        Usuari u2 = new Usuari(4,true,"Marta","4321");
         p1.afegirUsuari(u1);
         p1.esborraUsuari(u1);
-        p1.obte
-        assertFalse(p1.conteUsuari(u1));
+
+        Usuari u2 = p1.obtenirUsuari(new Id(3,true));
+        assertFalse(u2.isActiu());
     }
 }
