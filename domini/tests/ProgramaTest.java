@@ -1,4 +1,5 @@
 import domini.classes.Programa;
+import domini.classes.SessioIniciada;
 import domini.classes.Usuari;
 import org.junit.Test;
 
@@ -42,10 +43,10 @@ public class ProgramaTest {
     public void obtenirUsuariSessioIniciada() {
     }
 
-    @Test
-    public void cambiarEstat() {
-    }
-
+    /**
+     * Provem a preguntar si la sessió iniciada en els 3 casos possibles, quan encara
+     * no hem executat cap funció, i després d'iniciar i tancar sessio.
+     */
     @Test
     public void isSessioIniciada() {
         Programa p1 = Programa.obtenirInstancia();
@@ -64,6 +65,12 @@ public class ProgramaTest {
 
     @Test
     public void afegirUsuari() {
+        Programa p1 = Programa.obtenirInstancia();
+        Usuari u1 = new Usuari(3,true,"Pol","1234");
+        Usuari u2 = new Usuari(4,true,"Marta","4321");
+        p1.afegirUsuari(u1);
+        assertTrue(p1.conteUsuari(u1));
+        assertFalse(p1.conteUsuari(u2));
     }
 
     @Test
@@ -72,5 +79,7 @@ public class ProgramaTest {
 
     @Test
     public void esborraUsuari() {
+        Programa p1 = Programa.obtenirInstancia();
+//        p1.
     }
 }
