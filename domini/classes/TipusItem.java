@@ -5,7 +5,6 @@ import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 import domini.classes.csv.TaulaCSV;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,30 +27,26 @@ public class TipusItem {
         this.tipusAtributs = tipusAtributs;
     }
 
-    /**
-     * Crea un <code>TipusItem</code> donats el nom del <code>TipusItem</code>, els noms dels atributs i un conjunt de valors.
-     * Assigna el <code>TipusAtribut</code> per defecte en funció del tipus de cada valor.
-     * @param nomTipusItem <code>String</code> que conté el nom del <code>TipusItem</code>.
-     * @param nomsAtributs <code>ArrayList<String></code> que conté el nom dels atributs del <code>TipusItem</code>.
-     * @param valors <code>ArrayList<String></code> que conté el conjunt de valors d'un item del <code>TipusItem</code>
-     *               corresponents als noms que conté <code>nomsAtributs</code>.
-     */
-    public TipusItem(String nomTipusItem, ArrayList<String> nomsAtributs, ArrayList<String> valors) throws IllegalArgumentException {
-        this.nom = nomTipusItem;
-        this.tipusAtributs = new HashMap<>();
-        if (nomsAtributs.size() != valors.size()) {
-            throw new IllegalArgumentException("No es pot deduir el TipusItem d'un conjunt de noms i valors de mides diferents.");
-        }
-        for (int i = 0; i < nomsAtributs.size(); ++i) {
-            this.tipusAtributs.put(nomsAtributs.get(i), dedueixTipusAtribut(valors.get(i)));
-        }
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV) throws IllegalArgumentException {
+        this(nomTipusItem, taulaCSV, taulaCSV.obtenirNumItems());
     }
 
-    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV) throws IllegalArgumentException {
+    /**
+     * Crea un <code>TipusItem</code> donats el nom del <code>TipusItem</code> i un conjunt d'ítems.
+     * Assigna el <code>TipusAtribut</code> per defecte en funció del tipus de cada valor.
+     * @param nomTipusItem <code>String</code> que conté el nom del <code>TipusItem</code>.
+     * @param taulaCSV <code>TaulaCSV<String></code> que conté els ítems.
+     * @param numCandidats Es deduirà el <code>TipusItem</code> a partir dels primers <code>numCandidats</code> ítems.
+     */
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws IllegalArgumentException {
+        if (numCandidats > taulaCSV.obtenirNumItems()) {
+            throw new IllegalArgumentException("No es poden considerar més candidats que ítems a la taula per deduir" +
+                    " el TipusItem.");
+        }
         this.nom = nomTipusItem;
         this.tipusAtributs = new HashMap<>();
         for (int i = 0; i < taulaCSV.obtenirNomsAtributs().size(); ++i) {
-            for (int j = 0; j < taulaCSV.obtenirNumItems(); ++j) {
+            for (int j = 0; j < numCandidats; ++j) {
                 if (this.tipusAtributs.containsKey(taulaCSV.obtenirNomsAtributs().get(i))) {
                     TipusAtribut tipusAtributActual = dedueixTipusAtribut(taulaCSV.obtenirValorAtributItem(j,
                             taulaCSV.obtenirNomsAtributs().get(i)));

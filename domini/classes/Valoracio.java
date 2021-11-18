@@ -35,7 +35,7 @@ public class Valoracio {
     /**
      * Consultora del item
      *
-     * @return El resultat és l'item del P.I.
+     * @return El resultat és l'item del paràmetre implícit
      */
     public Item getItem() {
         return item;
@@ -53,7 +53,7 @@ public class Valoracio {
     /**
      * Consultora del usuari
      *
-     * @return El resultat és l'usuari del P.I.
+     * @return El resultat és l'usuari del paràmetre implícit
      */
     public Usuari getUsuari() {
         return usuari;
@@ -71,7 +71,7 @@ public class Valoracio {
     /**
      * Consultora del valor
      *
-     * @return El resultat és el valor del P.I.
+     * @return El resultat és el valor del paràmetre implícit
      */
     public double getValor() {
         return valor;
