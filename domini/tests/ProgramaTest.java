@@ -1,8 +1,6 @@
 import domini.classes.Id;
 import domini.classes.Programa;
-import domini.classes.SessioIniciada;
 import domini.classes.Usuari;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -78,7 +76,7 @@ public class ProgramaTest {
         p1.iniciarSessio(u1);
         p1.tancarSessio();
         Usuari u2 = p1.obtenirUsuariSessioIniciada();
-    }
+   }
 
     @Test
     public void conteUsuari() {
@@ -88,6 +86,15 @@ public class ProgramaTest {
         p1.afegirUsuari(u1);
         assertTrue(p1.conteUsuari(u1));
         assertFalse(p1.conteUsuari(u2));
+    }
+
+    @Test
+    public void obtenirUsuari() {
+        Programa p1 = Programa.obtenirInstancia();
+        Usuari u1 = new Usuari(3,true,"Pol","1234");
+        p1.afegirUsuari(u1);
+        Usuari u2 = p1.obtenirUsuari(u1.obtenirId());
+        assertEquals(u1,u2);
     }
 
     @Test
