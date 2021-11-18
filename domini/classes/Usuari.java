@@ -64,7 +64,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
 
     /**
      * Consultora del nom
-     * @return El resultat és el valor del P.I.
+     * @return El resultat és el valor del paràmetre implícit
      */
     public String getNom() {
         return nom;
@@ -96,7 +96,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
 
     /**
      * Consultora de "actiu"
-     * @return El resultat és el valor del P.I.
+     * @return El resultat és el valor del paràmetre implícit
      */
     public boolean isActiu() {
         return id.isActiu();
@@ -144,7 +144,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
 
     /**
      * Consultora d'una valoració feta per l'usuari a l'item passat com a parametre
-     * @return El resultat és el valor del P.I. o null si no existeix
+     * @return El resultat és el valor del paràmetre implícit o null si no existeix
      */
     public Valoracio obtenirValoracio(Item item) {
         return valoracions.get(item);
@@ -168,7 +168,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     }
 
     /**
-     * Retorna true si la contrasenya passada com a paràmetre es igual a la del P.I.
+     * Retorna true si la contrasenya passada com a paràmetre es igual a la del paràmetre implícit
      * @param  contrasenya El paràmetre contrasenya pren el nou valor.
      */
     public boolean isContrasenya(String contrasenya) {
