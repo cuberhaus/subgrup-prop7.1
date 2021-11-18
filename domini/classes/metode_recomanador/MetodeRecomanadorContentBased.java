@@ -40,7 +40,6 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
     @Override
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
         TreeMap<Id, Double> valor_item = new TreeMap<>();
-        TreeMap<Id, Item> id_a_item = new TreeMap<>();
         KNN knn = new KNN(conjuntRecomanable.obtenirTotsElsElements().values().toArray(new Item[0]));
         for (Valoracio val : valoracions_usuari.obteTotesValoracions().values()) {
             if (val.getValor() > minimaValoracioConsiderada) {
@@ -48,10 +47,9 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
                 ArrayList<Item> veins = knn.obtenirVeins(val.getItem(), numRecomanacions);
                 for (Item it : veins) {
                     if (valor_item.containsKey(it.obtenirId())) {
-                        valor_item.put(it.obtenirId() ,valor_item.get(it.obtenirId()) + val.getValor());
+                        valor_item.put(it.obtenirId(), valor_item.get(it.obtenirId()) + val.getValor());
                     } else {
                         valor_item.put(it.obtenirId(), val.getValor());
-                        id_a_item.put(it.obtenirId(), it);
                     }
                 }
             }
@@ -59,7 +57,7 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
 
         PriorityQueue<Pair<Double,Item>> pq = new PriorityQueue<>();
         for (Map.Entry<Id,Double> entry: valor_item.entrySet()) {
-            pq.add(new Pair<>(entry.getValue(), id_a_item.get(entry.getKey())));
+            pq.add(new Pair<>(entry.getValue(), conjuntRecomanable.obtenir(entry.getKey())));
         }
         while (pq.size() > numRecomanacions) {
             pq.remove();

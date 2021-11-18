@@ -11,7 +11,6 @@ import java.util.List;
  * @author edgar.moreno
  */
 public abstract class MetodeRecomanador {
-    // TODO: conjunt usuaris blabla
     /** Conjunt d'usuaris per defecte **/
     protected ConjuntUsuaris usuaris;
     /** Conjunt d'items per defecte **/
@@ -40,6 +39,22 @@ public abstract class MetodeRecomanador {
      */
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
         return obteRecomanacions(usuari, items, valoracions_usuari, numRecomanacions);
+    }
+
+    /**
+     * Genera recomanacions per l'usuari donat.
+     * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
+     * @param items_recomanables Items que es poden recomanar al usuari.
+     * @param numRecomanacions numero maxim de recomanacions que es generaran.
+     * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades, extreura les valoracions de les valoracions publiques de l'usuari.
+     */
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems items_recomanables, int numRecomanacions) {
+        ConjuntValoracions valoracions = new ConjuntValoracions();
+        for (Valoracio val : valoracionsPubliques.obteTotesValoracions().values()) {
+            if (val.getUsuari().equals(usuari))
+                valoracions.afegir(val);
+        }
+        return obteRecomanacions(usuari, items_recomanables, valoracions, numRecomanacions);
     }
 
     /**
