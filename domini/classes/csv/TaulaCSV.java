@@ -236,7 +236,7 @@ public class TaulaCSV extends Contenidor {
      * @param valor the valor
      * @return the valores de item con valor
      */
-    public ArrayList<String> obtenirValorsDeItemSeleccionat(String id, String valor) throws IllegalStateException {
+    public ArrayList<String> obtenirValorsDeItemSeleccionatAmbValorSeleccionat(String id, String valor) throws IllegalStateException {
         if (numAtributs == -1) {
             throw new IllegalStateException("No s'han inicialitzat els atributs");
         }
@@ -259,8 +259,7 @@ public class TaulaCSV extends Contenidor {
             }
 
             if (!trobat) {
-                System.out.println("No existeix un item amb el valor de l'tribut dessitjat");
-                return null;
+                throw new IllegalArgumentException("No hi ha un item amb un un atribut amb aquell valor");
             }
 
             else {
@@ -278,7 +277,7 @@ public class TaulaCSV extends Contenidor {
      * @param valor the valor
      * @return the valores de item con valor
      */
-    public ArrayList<String> obtenirValorsDeItemSeleccionat(int ind, String valor) throws IllegalStateException, IllegalArgumentException {
+    public ArrayList<String> obtenirValorsDeItemSeleccionatAmbValorSeleccionat(int ind, String valor) throws IllegalStateException, IllegalArgumentException {
         if (numAtributs == -1) {
             throw new IllegalStateException("No s'han inicialitzat els atributs");
         }
@@ -300,8 +299,7 @@ public class TaulaCSV extends Contenidor {
             }
 
             if (!trobat) {
-                System.out.println("No existeix un item amb el valor de l'tribut dessitjat");
-                return null;
+                throw new IllegalArgumentException("No hi ha un item amb un un atribut amb aquell valor");
             }
 
             else {
