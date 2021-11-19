@@ -29,15 +29,15 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * Constructor d'un ítem amb conjunt de valoracions buit.
      * @param id <code>Id</code> que conté l'identificador de l'ítem.
      * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
-     * @param nom_atributs <code>ArrayList<String></code> que conté els noms dels atributs els valors dels quals es troben a <code>valors</code>.
+     * @param nomAtributs <code>ArrayList<String></code> que conté els noms dels atributs els valors dels quals es troben a <code>valors</code>.
      * @param valors <code>ArrayList<String></code> que conté els valors de l'ítem en forma de String.
      * @throws IllegalArgumentException llançada si el <code>TipusItem</code> i el <code>Map<String, ValorAtribut></code>
      * donats no són compatibles.
      */
-    public Item(Id id, TipusItem tipusItem, ArrayList<String> nom_atributs, ArrayList<String> valors) throws IllegalArgumentException {
+    public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
         this.id = id;
         this.tipusItem = tipusItem;
-        obtenirAtributs(nom_atributs, valors);
+        assignarAtributs(nomAtributs, valors);
         actualitzarFactorNormalitzacioAtributs();
         this.valoracions = new TreeMap<>();
         if (!tipusItem.esCompatible(atributs)) {
@@ -49,6 +49,25 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         return new Item(this.obtenirId(), this.obtenirTipusItem(), this.obtenirAtributs(), this.obtenirValoracions());
     }
 
+    @Override
+    public int compareTo(Item o) {
+        return id.compareTo(o.id);
+    }
+
+    public Id obtenirId() { return id.copiar(); }
+
+    public TipusItem obtenirTipusItem() {
+        return tipusItem.copiar();
+    }
+
+    public Map<String, ValorAtribut<?>> obtenirAtributs() {
+        Map<String, ValorAtribut<?>> atributs = new TreeMap<>();
+        for (Map.Entry<String, ValorAtribut<?>> valorAtributEntry : this.atributs.entrySet()) {
+            atributs.put(valorAtributEntry.getKey(), valorAtributEntry.getValue().copy());
+        }
+        return atributs;
+    }
+
     public Map<Usuari, Valoracio> obtenirValoracions() {
         Map<Usuari, Valoracio> valoracions = new TreeMap<>();
         for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
@@ -56,13 +75,6 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
         return valoracions;
     }
-
-    @Override
-    public int compareTo(Item o) {
-        return id.compareTo(o.id);
-    }
-
-    public Id obtenirId() { return id.copiar(); }
 
     /**
      * @param item <code>Item</code> que conté l'ítem amb el qual es vol calcular la distància.
@@ -126,7 +138,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
-    private void obtenirAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
+    private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
         if (tipusItem.obtenirTipusAtributs().size() != nomAtributs.size() ||
                 tipusItem.obtenirTipusAtributs().size() != valors.size()) {
             throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
@@ -154,17 +166,5 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
         }
-    }
-
-    public TipusItem obtenirTipusItem() {
-        return tipusItem.copiar();
-    }
-
-    public Map<String, ValorAtribut<?>> obtenirAtributs() {
-        Map<String, ValorAtribut<?>> atributs = new TreeMap<>();
-        for (Map.Entry<String, ValorAtribut<?>> valorAtributEntry : this.atributs.entrySet()) {
-            atributs.put(valorAtributEntry.getKey(), valorAtributEntry.getValue().copy());
-        }
-        return atributs;
     }
 }

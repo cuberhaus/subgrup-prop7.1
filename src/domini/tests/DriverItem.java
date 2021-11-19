@@ -40,6 +40,42 @@ public class DriverItem {
 
     public static void testObtenirId() {
         System.out.println("Testejant obtenirId.");
+        try {
+            Item item = UtilitatsDeLectura.llegirItem();
+            UtilitatsDEscriptura.imprimirId(item.obtenirId());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void testObtenirValoracions() {
+        System.out.println("Testejant obtenirValoracions.");
+        try {
+            Item item = UtilitatsDeLectura.llegirItem();
+            UtilitatsDEscriptura.imprimirValoracions(item.obtenirValoracions());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void testObtenirAtributs() {
+        System.out.println("Testejant obtenirAtributs.");
+        try {
+            Item item = UtilitatsDeLectura.llegirItem();
+            UtilitatsDEscriptura.imprimirAtributs(item.obtenirAtributs());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void testObtenirTipusItem() {
+        System.out.println("Testejant obtenirTipusItem.");
+        try {
+            Item item = UtilitatsDeLectura.llegirItem();
+            UtilitatsDEscriptura.imprimirTipusItem(item.obtenirTipusItem());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void testObtenirDistancia() {
@@ -66,14 +102,17 @@ public class DriverItem {
                 "3 - Test Copiar\n" +
                 "4 - Test CompareTo\n" +
                 "5 - Test ObtenirId\n" +
-                "6 - Test ObtenirDistancia\n" +
-                "7 - Test AfegirValoracio\n" +
-                "8 - Test EsborrarValoracio\n" +
-                "9 - Test EsborrarAtributs\n";
-        String err = "Valor invàlid: introdueix un enter entre 0 i 9";
+                "6 - Test ObtenirTipusItem\n" +
+                "7 - Test ObtenirAtributs\n" +
+                "8 - Test ObtenirValoracions\n" +
+                "9 - Test ObtenirDistancia\n" +
+                "10 - Test AfegirValoracio\n" +
+                "11 - Test EsborrarValoracio\n" +
+                "12 - Test EsborrarAtributs\n";
+        String err = "Valor invàlid: introdueix un enter entre 0 i 12";
         while(true){
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 9);
+                int i = consola.llegeixEnter(consulta, err, 0, 12);
                 switch (i) {
                     case 0:
                         return;
@@ -93,15 +132,24 @@ public class DriverItem {
                         testObtenirId();
                         break;
                     case 6:
-                        testObtenirDistancia();
+                        testObtenirTipusItem();
                         break;
                     case 7:
-                        testAfegirValoracio();
+                        testObtenirAtributs();
                         break;
                     case 8:
-                        testEsborrarValoracio();
+                        testObtenirValoracions();
                         break;
                     case 9:
+                        testObtenirDistancia();
+                        break;
+                    case 10:
+                        testAfegirValoracio();
+                        break;
+                    case 11:
+                        testEsborrarValoracio();
+                        break;
+                    case 12:
                         testEsborrarAtributs();
                         break;
                 }

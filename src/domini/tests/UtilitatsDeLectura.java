@@ -1,5 +1,4 @@
-import domini.classes.Id;
-import domini.classes.TipusItem;
+import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
@@ -118,6 +117,31 @@ public class UtilitatsDeLectura {
             BufferedReader fitxer = new BufferedReader(lector);
             String noms = fitxer.readLine();
             return new ArrayList<>(Arrays.asList(noms.split(",", 0)));
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Fitxer invàlid.");
+        }
+    }
+
+    public static Item llegirItem() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("Item", "Item1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            Id id = UtilitatsDeLectura.llegirId();
+            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+            ArrayList<String> nomAtributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
+            ArrayList<String> valorAtributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
+            Item item = new Item(id, tipusItem, nomAtributs, valorAtributs);
+            Map<Usuari, Valoracio> valoracions;
+            int numValoracions = Integer.parseInt(fitxer.readLine());
+            for (int i = 0; i < numValoracions; ++i) {
+                // TODO(maria): afegir stubs
+                Usuari usuari = new Usuari(new Id(Integer.parseInt(fitxer.readLine()), true));
+                new Valoracio(Double.parseDouble(fitxer.readLine()), usuari, item);
+            }
+            return item;
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());
         } catch (Exception e) {

@@ -39,12 +39,11 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         this.valoracions = new TreeMap<>();
     }
 
-    /** Constructora donat un id i un estat "actiu".
+    /** Constructora donat un id.
      * @param id representa l'id de l'usuari
-     * @param actiu representa si l'usuari està actiu o no.
      */
-    public Usuari(int id, boolean actiu) {
-        this.id = new Id(id,actiu);
+    public Usuari(Id id) {
+        this.id = id;
         this.nom = null;
         this.contrasenya = null;
         this.valoracions = new TreeMap<>();
