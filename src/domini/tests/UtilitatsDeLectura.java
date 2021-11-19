@@ -2,11 +2,11 @@ import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
+import domini.classes.csv.LectorDeCSV;
+import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -146,6 +146,19 @@ public class UtilitatsDeLectura {
             throw new Exception(e.getMessage());
         } catch (Exception e) {
             throw new Exception("Fitxer invàlid.");
+        }
+    }
+
+    public static String obtenirUbicacioArxiu() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("Ubicacio", "Ubicacio1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            return fitxer.readLine();
+        } catch (FileNotFoundException e) {
+            throw new Exception((e.getMessage()));
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invalid");
         }
     }
 }
