@@ -40,24 +40,31 @@ public class Joc2 {
         double totalIDCG2 = 0.;
         double totalNDCG2 = 0.;
 
+        int numRecomanacions = 5;
         for (Usuari us : usuaris.obtenirTotsElsElements().values()) {
             ConjuntItems items_recomanables = new ConjuntItems(items.obteTipusItem());
             ArrayList<Pair<Integer, Double>> valoracions_unk = new ArrayList<>();
+
             for (Valoracio val : unknown_conjunt.obteTotesValoracions().values()) {
                 if (val.getUsuari().equals(us)) {
                     items_recomanables.afegir(val.getItem());
                     valoracions_unk.add(new Pair<>(val.getItem().obtenirId().getValor(), val.getValor()));
                 }
             }
-            ConjuntRecomanacions recomanacionsCollab = recomanadorCollaborative.obteRecomanacions(us, items_recomanables, (int)Math.sqrt(items_recomanables.mida()));
-            //ConjuntRecomanacions recomanacionsContent = recomanadorContentBased.obteRecomanacions(us, items_recomanables, val_usuari, Q);
+
+            ConjuntRecomanacions recomanacionsCollab = recomanadorCollaborative.obteRecomanacions(us, items_recomanables, numRecomanacions);
+            ConjuntRecomanacions recomanacionsContent = recomanadorContentBased.obteRecomanacions(us, items_recomanables, numRecomanacions);
             totalDCG += recomanacionsCollab.calculaDiscountedCumulativeGain(valoracions_unk);
-            totalIDCG += recomanacionsCollab.calculaIdealDiscountedCumulativeGain(valoracions_unk, (int)Math.sqrt(items_recomanables.mida()));
+            totalIDCG += recomanacionsCollab.calculaIdealDiscountedCumulativeGain(valoracions_unk, numRecomanacions);
             totalNDCG += recomanacionsCollab.obteDiscountedCumulativeGain()/recomanacionsCollab.obteIdealDiscountedCumulativeGain();
 
+            totalDCG2 += recomanacionsContent.calculaDiscountedCumulativeGain(valoracions_unk);
+            totalIDCG2 += recomanacionsContent.calculaIdealDiscountedCumulativeGain(valoracions_unk, numRecomanacions);
+            totalNDCG2 += recomanacionsContent.obteDiscountedCumulativeGain()/recomanacionsContent.obteIdealDiscountedCumulativeGain();
         }
-        System.out.println(totalDCG/usuaris.mida() + " " + totalIDCG/usuaris.mida() + " " + totalNDCG/usuaris.mida());
-
-
+        System.out.println("Recomanador colaboratiu:\nDGC mitja: " + totalDCG/usuaris.mida() + ", IDCG mitja: " + totalIDCG/usuaris.mida() +
+                ", NDCG mitja: " + totalNDCG/usuaris.mida());
+        System.out.println("Recomanador per contingut:\nDGC mitja: " + totalDCG2/usuaris.mida() + ", IDCG mitja: " + totalIDCG2/usuaris.mida() +
+                ", NDCG mitja: " + totalNDCG2/usuaris.mida());
     }
 }
