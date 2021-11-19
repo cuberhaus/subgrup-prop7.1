@@ -11,7 +11,7 @@ import java.util.*;
 public class ConjuntRecomanacions {
 
     /** Contenidor de les recomanacions */
-    private ArrayList<Recomanacio> conjuntRecomanacions;
+    private final ArrayList<Recomanacio> conjuntRecomanacions;
 
     /** Discounted Cumulative Gain del conjunt de recomanacions */
     private Double discountedCumulativeGain = null;
@@ -85,7 +85,7 @@ public class ConjuntRecomanacions {
     }
 
     /**
-     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param valoracions Valoracions (id, valoracio) fetes per l'usuari sobre el conjunt d'items recomanables.
      * @return El Discounted Cumulative Gain associat a les recomanacions donades les valoracions.
      */
     public double calculaDiscountedCumulativeGain(ArrayList<Pair<Integer,Double>> valoracions) {
@@ -93,7 +93,7 @@ public class ConjuntRecomanacions {
     }
 
     /**
-     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param valoracions Valoracions (id, valoracio) fetes per l'usuari sobre el conjunt d'items recomanables.
      * @param p nombre de recomanacions a tenir en compte.
      * @return El Discounted Cumulative Gain associat a les p primeres recomanacions donades les valoracions.
      */
@@ -114,7 +114,7 @@ public class ConjuntRecomanacions {
     }
 
     /**
-     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param valoracions Valoracions (id, valoracio) fetes per l'usuari sobre el conjunt d'items recomanables.
      * @param p nombre de recomanacions sobre el que calcular p.
      * @return El Ideal Discounted Cumulative Gain assolible amb p recomanacions.
      */
@@ -141,7 +141,7 @@ public class ConjuntRecomanacions {
 
     /**
      * A més de retornar el NDCG actualitza el valor de DCG i IDCG consultables amb <code>obteDCG()</code> i <code>obteIDCG()</code>
-     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param valoracions Valoracions (id, valoracio) fetes per l'usuari sobre el conjunt d'items recomanables.
      * @return El Normalized Discounted Cumulative Gain associat a les p primeres recomanacions donades les valoracions (entre 0 i 1).
      */
     public double calculaNormalizedDiscountedCumulativeGain(ArrayList<Pair<Integer,Double>> valoracions) {
@@ -150,7 +150,7 @@ public class ConjuntRecomanacions {
 
     /**
      * A més de retornar el NDCG actualitza el valor de dcg i idcg consultables amb <code>obteDCG()</code> i <code>obteIDCG()</code>
-     * @param valoracions Valoracions fetes per l'usuari sobre el conjunt d'items recomanables.
+     * @param valoracions Valoracions (id, valoracio) fetes per l'usuari sobre el conjunt d'items recomanables.
      * @param p nombre de recomanacions a tenir en compte.
      * @return El Normalized Discount Cumulative Gain associat a les p primeres recomanacions donades les valoracions (entre 0 i 1).
      */
