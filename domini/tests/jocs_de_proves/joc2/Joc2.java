@@ -3,14 +3,12 @@ package jocs_de_proves.joc2;
 import domini.classes.*;
 import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
-import domini.classes.metode_recomanador.ConjuntRecomanacions;
-import domini.classes.metode_recomanador.MetodeRecomanadorCollaborative;
-import domini.classes.metode_recomanador.MetodeRecomanadorContentBased;
+import domini.classes.recomanador.metode_recomanador.ConjuntRecomanacions;
+import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
+import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Joc2 {
     public static void main(String[] args) throws IOException, InterruptedException {

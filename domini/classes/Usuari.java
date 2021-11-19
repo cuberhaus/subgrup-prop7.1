@@ -1,6 +1,6 @@
 package domini.classes;
 
-import domini.classes.metode_recomanador.Punt;
+import domini.classes.recomanador.metode_recomanador.Punt;
 
 import java.util.Map;
 import java.util.Objects;
