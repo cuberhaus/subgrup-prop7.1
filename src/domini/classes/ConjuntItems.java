@@ -58,7 +58,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         this.tipusItem = tipusItem;
         this.elements = new TreeMap<>();
         for (Map.Entry<Id, Item> itemIdentificat : elements.entrySet()) {
-            this.elements.put(itemIdentificat.getKey().copy(), itemIdentificat.getValue().copy());
+            this.elements.put(itemIdentificat.getKey().copiar(), itemIdentificat.getValue().copiar());
         }
     }
 

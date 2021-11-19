@@ -36,7 +36,7 @@ public class Valoracio {
      *
      * @return El resultat és l'item del paràmetre implícit
      */
-    public Item getItem() {
+    public Item obtenirItem() {
         return item;
     }
 
@@ -54,7 +54,7 @@ public class Valoracio {
      *
      * @return El resultat és l'usuari del paràmetre implícit
      */
-    public Usuari getUsuari() {
+    public Usuari obtenirUsuari() {
         return usuari;
     }
 
@@ -72,7 +72,7 @@ public class Valoracio {
      *
      * @return El resultat és el valor del paràmetre implícit
      */
-    public double getValor() {
+    public double obtenirValor() {
         return valor;
     }
 
@@ -99,6 +99,6 @@ public class Valoracio {
     }
 
     public Valoracio copy() {
-        return new Valoracio(valor, usuari.copy(), item.copy());
+        return new Valoracio(valor, usuari.copy(), item.copiar());
     }
 }

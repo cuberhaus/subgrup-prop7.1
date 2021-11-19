@@ -28,7 +28,7 @@ public class Recomanacio implements Comparable<Recomanacio>{
      * @return <code>int</code>
      */
     public int obtenirId() {
-        return this.id.getValor();
+        return this.id.obtenirValor();
     }
 
     /**
@@ -43,7 +43,7 @@ public class Recomanacio implements Comparable<Recomanacio>{
      * Imprimeix el valor de la recomanació.
      */
     public void imprimir() {
-        System.out.print(this.id.getValor());
+        System.out.print(this.id.obtenirValor());
         System.out.print(' ');
         System.out.println(this.seguretat);
     }

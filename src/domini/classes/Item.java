@@ -18,36 +18,6 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     private Map<String, ValorAtribut<?>> atributs;
     private Map<Usuari, Valoracio> valoracions;
 
-    /**
-     * Constructor d'un ítem amb conjunt de valoracions buit.
-     * @param id <code>Id</code> que conté l'identificador de l'ítem.
-     * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
-     * @param atributs <code>Map<String, ValorAtribut></code> que relaciona el nom de cada atribut de l'ítem amb el seu <code>ValorAtribut</code>.
-     * @throws IllegalArgumentException llançada si el <code>TipusItem</code> i el <code>Map<String, ValorAtribut></code>
-     * donats no són compatibles.
-     */
-    public Item(Id id, TipusItem tipusItem, Map<String, ValorAtribut<?>> atributs) throws IllegalArgumentException {
-        this.id = id;
-        this.tipusItem = tipusItem;
-        this.atributs = atributs;
-        actualitzarFactorNormalitzacio();
-        this.valoracions = new TreeMap<>();
-        if (!tipusItem.esCompatible(atributs)) {
-            throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
-        }
-    }
-
-    public Item(Id id, TipusItem tipusItem, ArrayList<String> nom_atributs, ArrayList<String> valors) {
-        this.id = id;
-        this.tipusItem = tipusItem;
-        obtenirAtributs(nom_atributs, valors);
-        actualitzarFactorNormalitzacio();
-        this.valoracions = new TreeMap<>();
-        if (!tipusItem.esCompatible(atributs)) {
-            throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
-        }
-    }
-
     public Item(Id id, TipusItem tipusItem, Map<String, ValorAtribut<?>> atributs, Map<Usuari, Valoracio> valoracions) {
         this.id = id;
         this.tipusItem = tipusItem;
@@ -55,27 +25,83 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         this.valoracions = valoracions;
     }
 
-    private void actualitzarFactorNormalitzacio() {
-        for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
-            atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
+    /**
+     * Constructor d'un ítem amb conjunt de valoracions buit.
+     * @param id <code>Id</code> que conté l'identificador de l'ítem.
+     * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
+     * @param nom_atributs <code>ArrayList<String></code> que conté els noms dels atributs els valors dels quals es troben a <code>valors</code>.
+     * @param valors <code>ArrayList<String></code> que conté els valors de l'ítem en forma de String.
+     * @throws IllegalArgumentException llançada si el <code>TipusItem</code> i el <code>Map<String, ValorAtribut></code>
+     * donats no són compatibles.
+     */
+    public Item(Id id, TipusItem tipusItem, ArrayList<String> nom_atributs, ArrayList<String> valors) throws IllegalArgumentException {
+        this.id = id;
+        this.tipusItem = tipusItem;
+        obtenirAtributs(nom_atributs, valors);
+        actualitzarFactorNormalitzacioAtributs();
+        this.valoracions = new TreeMap<>();
+        if (!tipusItem.esCompatible(atributs)) {
+            throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
         }
     }
 
-    private void obtenirAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
-        if (tipusItem.obtenirTipusAtributs().size() != nomAtributs.size() ||
-                tipusItem.obtenirTipusAtributs().size() != valors.size()) {
-            throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
-                    "mides diferents.");
+    public Item copiar() {
+        return new Item(this.obtenirId(), this.obtenirTipusItem(), this.obtenirAtributs(), this.obtenirValoracions());
+    }
+
+    public Map<Usuari, Valoracio> obtenirValoracions() {
+        Map<Usuari, Valoracio> valoracions = new TreeMap<>();
+        for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
+            valoracions.put(valoracioEntry.getKey().copy(), valoracioEntry.getValue().copy());
         }
-        atributs = new TreeMap<>();
-        for (int i = 0; i < nomAtributs.size(); ++i) {
-            if (!tipusItem.obtenirTipusAtributs().containsKey(nomAtributs.get(i))) {
-                throw new IllegalArgumentException("El TipusItem no és compatible amb els noms dels atributs donats.");
-            }
-            atributs.put(nomAtributs.get(i),
-                    obtenirValorAtribut(tipusItem.obtenirTipusAtributs().get(nomAtributs.get(i)).obtenirValorAtribut(),
-                    valors.get(i)));
+        return valoracions;
+    }
+
+    @Override
+    public int compareTo(Item o) {
+        return id.compareTo(o.id);
+    }
+
+    public Id obtenirId() { return id.copiar(); }
+
+    /**
+     * @param item <code>Item</code> que conté l'ítem amb el qual es vol calcular la distància.
+     * @return <code>double</code> que conté la distància entre l'ítem actual i l'ítem donat si els ítem són del mateix
+     * tipus.
+     */
+    public double obtenirDistancia(Item item) throws IllegalArgumentException {
+        if (!tipusItem.equals(item.tipusItem)) {
+            throw new IllegalArgumentException("No es pot calcular la distància entre dos ítems de TipusItems diferents.");
         }
+        double distancia = 0.0;
+        for (Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
+            distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
+                    item.atributs.get(tipusAtribut.getKey())) /
+                    (tipusAtribut.getValue().obtenirDistancia().obtenirFactorDeNormalitzacio());
+        }
+        return distancia;
+    }
+
+    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+        if (valoracio == null) {
+            throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
+        }
+        if (!this.equals(valoracio.obtenirItem())) {
+            throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
+        }
+        if (valoracions.containsKey(valoracio.obtenirUsuari())) {
+            return false;
+        }
+        valoracions.put(valoracio.obtenirUsuari(), valoracio);
+        return true;
+    }
+
+    public boolean esborrarValoracio(Usuari usuari) {
+        if (usuari == null || !valoracions.containsKey(usuari)) {
+            return false;
+        }
+        valoracions.remove(usuari);
+        return true;
     }
 
     private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException {
@@ -100,51 +126,21 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
-    public Id obtenirId() { return id; }
-
-    @Override
-    public int compareTo(Item o) {
-        return id.compareTo(o.id);
-    }
-
-    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
-        if (valoracio == null) {
-            throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
+    private void obtenirAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
+        if (tipusItem.obtenirTipusAtributs().size() != nomAtributs.size() ||
+                tipusItem.obtenirTipusAtributs().size() != valors.size()) {
+            throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
+                    "mides diferents.");
         }
-        if (!this.equals(valoracio.getItem())) {
-            throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
+        atributs = new TreeMap<>();
+        for (int i = 0; i < nomAtributs.size(); ++i) {
+            if (!tipusItem.obtenirTipusAtributs().containsKey(nomAtributs.get(i))) {
+                throw new IllegalArgumentException("El TipusItem no és compatible amb els noms dels atributs donats.");
+            }
+            atributs.put(nomAtributs.get(i),
+                    obtenirValorAtribut(tipusItem.obtenirTipusAtributs().get(nomAtributs.get(i)).obtenirValorAtribut(),
+                            valors.get(i)));
         }
-        if (valoracions.containsKey(valoracio.getUsuari())) {
-            return false;
-        }
-        valoracions.put(valoracio.getUsuari(), valoracio);
-        return true;
-    }
-
-    public boolean esborrarValoracio(Usuari usuari) {
-        if (usuari == null || !valoracions.containsKey(usuari)) {
-            return false;
-        }
-        valoracions.remove(usuari);
-        return true;
-    }
-
-    /**
-     * @param item <code>Item</code> que conté l'ítem amb el qual es vol calcular la distància.
-     * @return <code>double</code> que conté la distància entre l'ítem actual i l'ítem donat si els ítem són del mateix
-     * tipus.
-     */
-    public double obtenirDistancia(Item item) throws IllegalArgumentException {
-        if (!tipusItem.equals(item.tipusItem)) {
-            throw new IllegalArgumentException("No es pot calcular la distància entre dos ítems de TipusItems diferents.");
-        }
-        double distancia = 0.0;
-        for (Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
-            distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
-                    item.atributs.get(tipusAtribut.getKey())) /
-                    (tipusAtribut.getValue().obtenirDistancia().obtenirFactorDeNormalitzacio());
-        }
-        return distancia;
     }
 
     public void esborrarAtributs(TreeSet<String> nomAtributs) {
@@ -154,15 +150,21 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
-    public Item copy() {
+    private void actualitzarFactorNormalitzacioAtributs() {
+        for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
+            atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
+        }
+    }
+
+    public TipusItem obtenirTipusItem() {
+        return tipusItem.copiar();
+    }
+
+    public Map<String, ValorAtribut<?>> obtenirAtributs() {
         Map<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for (Map.Entry<String, ValorAtribut<?>> valorAtributEntry : this.atributs.entrySet()) {
             atributs.put(valorAtributEntry.getKey(), valorAtributEntry.getValue().copy());
         }
-        Map<Usuari, Valoracio> valoracions = new TreeMap<>();
-        for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
-            valoracions.put(valoracioEntry.getKey().copy(), valoracioEntry.getValue().copy());
-        }
-        return new Item(this.id.copy(), this.tipusItem.copy(), atributs, valoracions);
+        return atributs;
     }
 }

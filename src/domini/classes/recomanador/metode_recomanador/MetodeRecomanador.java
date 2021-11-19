@@ -48,7 +48,7 @@ public abstract class MetodeRecomanador {
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems items_recomanables, int numRecomanacions) {
         ConjuntValoracions valoracions = new ConjuntValoracions();
         for (Valoracio val : valoracionsPubliques.obteTotesValoracions().values()) {
-            if (val.getUsuari().equals(usuari))
+            if (val.obtenirUsuari().equals(usuari))
                 valoracions.afegir(val);
         }
         return obteRecomanacions(usuari, items_recomanables, valoracions, numRecomanacions);

@@ -11,7 +11,7 @@ public class Id implements Comparable<Id> {
         this.actiu = actiu;
     }
 
-    public int getValor() {
+    public int obtenirValor() {
         return valor;
     }
 
@@ -41,7 +41,7 @@ public class Id implements Comparable<Id> {
         return Objects.hash(valor);
     }
 
-    public Id copy() {
+    public Id copiar() {
         return new Id(valor, actiu);
     }
 }

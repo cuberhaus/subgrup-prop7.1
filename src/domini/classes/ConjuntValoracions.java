@@ -67,7 +67,7 @@ public class ConjuntValoracions {
      * @param  valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public Valoracio afegir(Valoracio valoracio) {
-        return valoracions.put(new Pair<>(valoracio.getUsuari(),valoracio.getItem()), valoracio);
+        return valoracions.put(new Pair<>(valoracio.obtenirUsuari(),valoracio.obtenirItem()), valoracio);
     }
 
     /**
@@ -85,7 +85,7 @@ public class ConjuntValoracions {
      * @param valoracio La valoració que es vol esborrar del conjunt
      */
     public boolean esborrar(Valoracio valoracio) {
-        return valoracions.remove(new Pair<>(valoracio.getUsuari(),valoracio.getItem()), valoracio);
+        return valoracions.remove(new Pair<>(valoracio.obtenirUsuari(),valoracio.obtenirItem()), valoracio);
     }
 
     /**

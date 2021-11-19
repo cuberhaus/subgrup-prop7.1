@@ -42,14 +42,14 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
         TreeMap<Id, Double> valor_item = new TreeMap<>();
         KNN knn = new KNN(conjuntRecomanable.obtenirTotsElsElements().values().toArray(new Item[0]));
         for (Valoracio val : valoracions_usuari.obteTotesValoracions().values()) {
-            if (val.getValor() > minimaValoracioConsiderada) {
+            if (val.obtenirValor() > minimaValoracioConsiderada) {
                 // TODO: agafo tants veins com recomanacions volem, no te perque ser la millor eleccio
-                ArrayList<Item> veins = knn.obtenirVeins(val.getItem(), numRecomanacions);
+                ArrayList<Item> veins = knn.obtenirVeins(val.obtenirItem(), numRecomanacions);
                 for (Item it : veins) {
                     if (valor_item.containsKey(it.obtenirId())) {
-                        valor_item.put(it.obtenirId(), valor_item.get(it.obtenirId()) + val.getValor());
+                        valor_item.put(it.obtenirId(), valor_item.get(it.obtenirId()) + val.obtenirValor());
                     } else {
-                        valor_item.put(it.obtenirId(), val.getValor());
+                        valor_item.put(it.obtenirId(), val.obtenirValor());
                     }
                 }
             }

@@ -62,7 +62,7 @@ public class Joc1 {
             for (int j = 0; j < unknown; ++j) {
                 int itemid = inputQueriesReader.nextInt();
                 items_recomanables.afegir(items.obtenir(new Id(itemid, true)));
-                valoracions_unk.add(new Pair<>(itemid, unknown_conjunt.obte(usuari, items.obtenir(new Id(itemid, true))).getValor()));
+                valoracions_unk.add(new Pair<>(itemid, unknown_conjunt.obte(usuari, items.obtenir(new Id(itemid, true))).obtenirValor()));
             }
 
             ConjuntRecomanacions recomanacionsCollab = recomanadorCollaborative.obteRecomanacions(usuari, items_recomanables, val_usuari, Q);

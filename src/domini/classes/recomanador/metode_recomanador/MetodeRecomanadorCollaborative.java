@@ -93,7 +93,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
 
         ConjuntItems items_usables = new ConjuntItems(conjuntRecomanable.obteTipusItem());
         for (Valoracio val : valoracions_usuari.obteTotesValoracions().values()) {
-            items_usables.afegir(val.getItem());
+            items_usables.afegir(val.obtenirItem());
         }
         for (Item item : conjuntRecomanable.obtenirTotsElsElements().values()) {
             items_usables.afegir(item);
@@ -116,7 +116,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
             Usuari usuari_it = usuaris.obtenir(ids.get(particio_usuari.get(i)));
             for (int j = 0; j < num_items; ++j) {
                 if (valoracionsPubliques.conte(usuari_it, items_slope1[j]))
-                    valoracions[i][j] = valoracionsPubliques.obte(usuari_it, items_slope1[j]).getValor();
+                    valoracions[i][j] = valoracionsPubliques.obte(usuari_it, items_slope1[j]).obtenirValor();
                 else
                     valoracions[i][j] = null;
             }

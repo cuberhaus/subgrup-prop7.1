@@ -44,9 +44,9 @@ public class Joc2 {
             ArrayList<Pair<Integer, Double>> valoracions_unk = new ArrayList<>();
 
             for (Valoracio val : unknown_conjunt.obteTotesValoracions().values()) {
-                if (val.getUsuari().equals(us)) {
-                    items_recomanables.afegir(val.getItem());
-                    valoracions_unk.add(new Pair<>(val.getItem().obtenirId().getValor(), val.getValor()));
+                if (val.obtenirUsuari().equals(us)) {
+                    items_recomanables.afegir(val.obtenirItem());
+                    valoracions_unk.add(new Pair<>(val.obtenirItem().obtenirId().obtenirValor(), val.obtenirValor()));
                 }
             }
 

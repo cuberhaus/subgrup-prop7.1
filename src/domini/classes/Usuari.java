@@ -126,13 +126,13 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         if (valoracio == null) {
             throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
         }
-        if (!this.equals(valoracio.getUsuari())) {
+        if (!this.equals(valoracio.obtenirUsuari())) {
             throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
         }
-        if (valoracions.containsKey(valoracio.getItem())) {
+        if (valoracions.containsKey(valoracio.obtenirItem())) {
             return false;
         }
-        valoracions.put(valoracio.getItem(),valoracio);
+        valoracions.put(valoracio.obtenirItem(),valoracio);
         return true;
     }
 
@@ -167,7 +167,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         Punt res = new Punt();
         for (Item item : conjuntItems.obtenirTotsElsElements().values()) {
             if (valoracions.containsKey(item)) {
-                res.add(valoracions.get(item).getValor());
+                res.add(valoracions.get(item).obtenirValor());
             } else res.add(-1.);
             // TODO: -1 per denotar que no esta vist. Potser seria millor agafar la mitjana
         }
@@ -210,9 +210,9 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     public Usuari copy() {
         Map<Item, Valoracio> valoracions = new TreeMap<>();
         for (Map.Entry<Item, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
-            valoracions.put(valoracioEntry.getKey().copy(), valoracioEntry.getValue().copy());
+            valoracions.put(valoracioEntry.getKey().copiar(), valoracioEntry.getValue().copy());
         }
-        return new Usuari(id.copy(), nom, contrasenya, valoracions);
+        return new Usuari(id.copiar(), nom, contrasenya, valoracions);
     }
 }
 

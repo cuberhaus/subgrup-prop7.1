@@ -224,7 +224,7 @@ public class TipusItem {
         }
     }
 
-    public TipusItem copy() {
+    public TipusItem copiar() {
         Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (Map.Entry<String, TipusAtribut> tipusAtribut : this.tipusAtributs.entrySet()) {
             tipusAtributs.put(tipusAtribut.getKey(), tipusAtribut.getValue().copy());
