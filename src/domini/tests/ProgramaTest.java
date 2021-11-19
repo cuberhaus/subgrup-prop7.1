@@ -6,9 +6,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ProgramaTest {
+    Programa p1 = Programa.obtenirInstancia();
+    Programa p2 = Programa.obtenirInstancia();
 
     @Test
     public void obtenirInstancia() {
+        p1.reset();
+        p2.reset();
         Programa p1 = Programa.obtenirInstancia();
         Programa p2 = Programa.obtenirInstancia();
 
@@ -17,6 +21,7 @@ public class ProgramaTest {
 
     @Test
     public void tancarSessio() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
@@ -27,6 +32,7 @@ public class ProgramaTest {
 
     @Test
     public void iniciarSessio() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
@@ -40,6 +46,7 @@ public class ProgramaTest {
      */
     @Test
     public void isSessioIniciada() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         assertFalse(p1.isSessioIniciada());
         System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
@@ -56,6 +63,7 @@ public class ProgramaTest {
 
     @Test
     public void obtenirUsuariSessioIniciadaIniciantSessioAbans() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
@@ -65,12 +73,14 @@ public class ProgramaTest {
 
     @Test(expected = IllegalStateException.class)
     public void obtenirUsuariSessioIniciadaDemanantUsuariAbansDiniciarSessio() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u2 = p1.obtenirUsuariSessioIniciada();
     }
 
     @Test(expected = IllegalStateException.class)
     public void obtenirUsuariSessioIniciadaDespresDeTancarSessio() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
@@ -80,6 +90,7 @@ public class ProgramaTest {
 
     @Test
     public void conteUsuari() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         Usuari u2 = new Usuari(5,true,"Marta","4321");
@@ -90,6 +101,7 @@ public class ProgramaTest {
 
     @Test
     public void obtenirUsuari() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.afegirUsuari(u1);
@@ -99,6 +111,7 @@ public class ProgramaTest {
 
     @Test
     public void afegirUsuari() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         Usuari u2 = new Usuari(5,true,"Marta","4321");
@@ -109,10 +122,12 @@ public class ProgramaTest {
 
     @Test
     public void afegirTipusItem() {
+        p1.reset();
     }
 
     @Test
     public void esborraUsuari() {
+        p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.afegirUsuari(u1);

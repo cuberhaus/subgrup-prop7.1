@@ -43,6 +43,13 @@ public class Programa {
         return instancia_unica;
     }
 
+    public void reset() {
+        sessio = new SessioNoIniciada();
+        instancia_unica = null;
+        conjuntUsuaris = new ConjuntUsuaris();
+        tipusItems = new HashMap<>();
+    }
+
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
      */

@@ -11,13 +11,16 @@ import java.util.TreeMap;
  */
 
 public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
+    public ConjuntUsuaris() {
+        elements = new TreeMap<>();
+    }
     /**
      * Afegeix un conjunt de valoracions al Paràmetre implícit a partir de:
      * @param taula Taula amb usuaris
      */
     public void afegir(TaulaCSV taula) throws InterruptedException {
         taula.eliminarEspaisInnecessaris();
-        elements = new TreeMap<>();
+//        elements = new TreeMap<>();
         ArrayList<String> idsUsuaris = taula.obtenirValorsAtribut("userId");
         for (String idUsuari : idsUsuaris) {
             int id = Integer.parseInt(idUsuari);
