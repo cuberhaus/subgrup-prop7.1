@@ -1,6 +1,6 @@
 package domini.classes;
 /**
- * Representa l'estat del programa en el cas en que no s'ha iniciat una sessió.
+ * Representa l'estat de la sessió en el cas en què no s'ha iniciat una sessió.
  * @author pol.casacuberta
  */
 

@@ -14,7 +14,7 @@ public class LectorDeCSVTest {
     @Test
     public void llegirCSV() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV tauleta = lector.llegirCSV("./domini/tests/jocs_de_proves/joc1/items.csv");
+        TaulaCSV tauleta = lector.llegirCSV("src/domini/tests/jocs_de_proves/joc1/items.csv");
         int tamanyItems = tauleta.obtenirNumItems();
         int tamanyAtributs = tauleta.obtenirNumAtributs();
         assertEquals(25, tamanyAtributs);
@@ -25,7 +25,7 @@ public class LectorDeCSVTest {
     @Test(expected = IOException.class)
     public void llegirCSVExcepcioNoExisteixFitxer() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV tauleta = lector.llegirCSV("./domingo/tests/jocs_de_proves/joc1/items.domini.tests.csv");
+        TaulaCSV tauleta = lector.llegirCSV("src/domingo/tests/jocs_de_proves/joc1/items.domini.tests.csv");
     }
 
 
