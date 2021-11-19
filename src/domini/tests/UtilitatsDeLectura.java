@@ -4,6 +4,7 @@ import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
+import domini.classes.recomanador.metode_recomanador.Recomanacio;
 import libs.consola;
 
 import java.io.*;
@@ -149,7 +150,7 @@ public class UtilitatsDeLectura {
         }
     }
 
-    public static String obtenirUbicacioArxiu() throws Exception {
+    public static String llegirUbicacioArxiu() throws Exception {
         String ruta = obtenirRutaORutaPerDefecte("Ubicacio", "Ubicacio1");
         try {
             FileReader lector = new FileReader(ruta);
@@ -157,6 +158,55 @@ public class UtilitatsDeLectura {
             return fitxer.readLine();
         } catch (FileNotFoundException e) {
             throw new Exception((e.getMessage()));
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invalid");
+        }
+    }
+
+    public static double llegirDouble() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("double", "double1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            String linia = fitxer.readLine();
+            try {
+                return Double.parseDouble(linia);
+            } catch (NumberFormatException e1) {
+                throw new Exception("No es un double");
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invalid");
+        }
+    }
+
+    public static Recomanacio llegirRecomanacio() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("Recomanacio", "Recomanacio1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            String linia1 = fitxer.readLine();
+            int numId;
+            try {
+                numId = Integer.parseInt(linia1);
+            } catch (NumberFormatException e) {
+                throw new Exception("Id no es un int");
+            }
+
+            double seguretat;
+            String linia2 = fitxer.readLine();
+            try {
+                seguretat = Double.parseDouble(linia2);
+            } catch (NumberFormatException e) {
+                throw new Exception("Seguretat no es un double");
+            }
+
+            Id id = new Id(numId, true);
+            return new Recomanacio(id, seguretat);
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
         } catch (Exception e1) {
             throw new Exception("Fitxer invalid");
         }

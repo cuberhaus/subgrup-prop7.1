@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class DriverLectorDeCSV {
     public static void testLectorCSV() throws Exception {
-        String ubicacio = UtilitatsDeLectura.obtenirUbicacioArxiu();
+        String ubicacio = UtilitatsDeLectura.llegirUbicacioArxiu();
         try {
             LectorDeCSV lector = new LectorDeCSV();
             TaulaCSV taula = lector.llegirCSV(ubicacio);
