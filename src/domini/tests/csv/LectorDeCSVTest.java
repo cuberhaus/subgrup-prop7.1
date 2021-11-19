@@ -1,4 +1,4 @@
-package domini.tests.csv;
+package csv;
 
 import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
