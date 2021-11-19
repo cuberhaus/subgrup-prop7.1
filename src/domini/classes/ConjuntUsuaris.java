@@ -24,7 +24,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         ArrayList<String> idsUsuaris = taula.obtenirValorsAtribut("userId");
         for (String idUsuari : idsUsuaris) {
             int id = Integer.parseInt(idUsuari);
-            this.afegir(new Usuari(id, true));
+            this.afegir(new Usuari(new Id(id, true)));
         }
     }
     /**
