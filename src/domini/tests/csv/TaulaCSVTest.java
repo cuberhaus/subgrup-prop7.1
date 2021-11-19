@@ -266,7 +266,7 @@ public class TaulaCSVTest {
     @Test(expected = IllegalStateException.class)
     public void obtenirValorsDeItemSeleccionatExepcioTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
-        tauleta.obtenirValorsDeItemSeleccionat("hola", "adios");
+        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat("hola", "adios");
     }
 
     //Si no existeix un atribut amb aquell nom, excepcio
@@ -279,14 +279,14 @@ public class TaulaCSVTest {
         tauleta.afegirConjuntAtributs(atributs);
 
         System.out.println("Arribo");
-        tauleta.obtenirValorsDeItemSeleccionat("hola", "adios");
+        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat("hola", "adios");
     }
 
     //Si no s'ha inicialitzat la taula excepcio
     @Test(expected = IllegalStateException.class)
     public void testObtenirValorsDeItemSeleccionatExcepcioSiTaulaNoInicialitzada() throws IllegalStateException {
         TaulaCSV tauleta = new TaulaCSV();
-        tauleta.obtenirValorsDeItemSeleccionat(1, "adios");
+        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat(1, "adios");
     }
 
     //Si l'index no té atribut, excepcio
@@ -299,7 +299,7 @@ public class TaulaCSVTest {
         tauleta.afegirConjuntAtributs(atributs);
 
         System.out.println("Arribo");
-        tauleta.obtenirValorsDeItemSeleccionat(3, "hola");
+        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat(3, "hola");
 
     }
 
