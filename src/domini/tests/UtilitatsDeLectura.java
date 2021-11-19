@@ -211,4 +211,17 @@ public class UtilitatsDeLectura {
             throw new Exception("Fitxer invalid");
         }
     }
+
+    public static String llegirUbicacioDestiArxiu() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("Desti", "Desti1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            return fitxer.readLine();
+        } catch (FileNotFoundException e) {
+            throw new Exception((e.getMessage()));
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invalid");
+        }
+    }
 }
