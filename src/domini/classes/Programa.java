@@ -8,7 +8,6 @@ import java.util.Map;
  * @author pol.casacuberta
  */
 
-// TODO: canviar diagrama de classes
 public class Programa {
     /** Conté l'estat de la sessio */
     private Sessio sessio = new SessioNoIniciada();
@@ -17,7 +16,6 @@ public class Programa {
     private static Programa instancia_unica = null;
 
     /** Conté el conjunt d'usuaris */
-//    private Map<Usuari,Usuari> usuaris;
     private ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
 
     /** Conté el conjunt de tipus d'items */
@@ -43,6 +41,9 @@ public class Programa {
         return instancia_unica;
     }
 
+    /**
+     * Restaura les variables a l'estat inicial
+     */
     public void reset() {
         sessio = new SessioNoIniciada();
         instancia_unica = null;
