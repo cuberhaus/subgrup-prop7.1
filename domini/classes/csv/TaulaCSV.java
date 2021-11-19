@@ -317,9 +317,8 @@ public class TaulaCSV extends Contenidor {
      * @param indexItem <code>int</code> indexItem de l'item
      * @param atribut <code>String</code> nom de l'atribut
      * @return <code>String</code> del valor de l'atribut
-     * @throws InterruptedException
-     * @throws IllegalArgumentException
-     * @throws IllegalStateException
+     * @throws IllegalArgumentException l'atribut seleccionat no existeix a la taula i/o l'index no existeix
+     * @throws IllegalStateException la taula no s'ha inicialitzat
      */
     public String obtenirValorAtribut(int indexItem, String atribut) throws IllegalStateException, IllegalArgumentException
     {
