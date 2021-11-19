@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 public class Joc2 {
     public static void main(String[] args) throws IOException, InterruptedException {
-
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV taula_items = lector.llegirCSV("./domini/tests/jocs_de_proves/joc2/items.csv");
         ConjuntItems items = new ConjuntItems("Series", taula_items);

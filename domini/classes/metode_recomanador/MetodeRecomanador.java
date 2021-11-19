@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Classe base pels mètodes recomanadors.
- * Guarda usuaris, items i valoracions. Genera valoracions per usuaris donats.
+ * Guarda usuaris, items i valoracions. Genera recomanacions per usuaris donats.
  * @author edgar.moreno
  */
 public abstract class MetodeRecomanador {

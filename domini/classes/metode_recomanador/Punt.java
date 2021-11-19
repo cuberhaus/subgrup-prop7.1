@@ -34,7 +34,7 @@ public class Punt extends ArrayList<Double> {
 
     /**
      * @param a punt a restar
-     * @throws IllegalArgumentException  si les dimensions dels dos punts no concorden.
+     * @throws IllegalArgumentException si les dimensions dels dos punts no concorden.
      */
     public void resta(Punt a) throws IllegalArgumentException {
         if (a.obtenirDimensio() != obtenirDimensio()) {

@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ConjuntPuntsTest {
-
+    double delta = 1e-5;
     @Test
     public void getDimensio() {
         ConjuntPunts conjunt = new ConjuntPunts();
@@ -39,7 +39,7 @@ public class ConjuntPuntsTest {
         q.add(1.);
         q.add(0.);
         conjunt.add(q);
-        assertEquals(1. , conjunt.get(1).get(0), 0.000001);
+        assertEquals(1. , conjunt.get(1).get(0), delta);
     }
     @Test(expected = IllegalArgumentException.class)
     public void addThrows() {
@@ -61,8 +61,8 @@ public class ConjuntPuntsTest {
         conjunt.add(p);
 
         Punt baricentre = conjunt.obtenirBaricentre();
-        assertEquals(2., baricentre.get(0), 0.000001);
-        assertEquals(3., baricentre.get(1), 0.000001);
+        assertEquals(2., baricentre.get(0), delta);
+        assertEquals(3., baricentre.get(1), delta);
 
         Punt q = new Punt();
         q.add(-1.);
@@ -70,14 +70,14 @@ public class ConjuntPuntsTest {
         conjunt.add(q);
 
         baricentre = conjunt.obtenirBaricentre();
-        assertEquals(0.5, baricentre.get(0), 0.000001);
-        assertEquals(8.5, baricentre.get(1), 0.000001);
+        assertEquals(0.5, baricentre.get(0), delta);
+        assertEquals(8.5, baricentre.get(1), delta);
 
         conjunt.remove(1);
 
         baricentre = conjunt.obtenirBaricentre();
-        assertEquals(2., baricentre.get(0), 0.000001);
-        assertEquals(3., baricentre.get(1), 0.000001);
+        assertEquals(2., baricentre.get(0), delta);
+        assertEquals(3., baricentre.get(1), delta);
     }
 
 }

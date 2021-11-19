@@ -1,7 +1,8 @@
 package domini.classes;
+
 /**
  * Representa una parella d'<code>Objectes</code> de qualssevol classes.
- * S'ordena pel primer element i per tant ha de ser <code>Comparable</code>
+ * Perquè sigui comparable els dos objectes han d'extendre <code>Comparable</code>
  * @author edgar.moreno
  */
 public class Pair<X extends Comparable<X>,Y extends Comparable<Y>> implements Comparable<Pair<X,Y>> {

@@ -76,7 +76,9 @@ public class Joc1 {
             totalIDCG2 += recomanacionsContent.calculaIdealDiscountedCumulativeGain(valoracions_unk, Q);
             totalNDCG2 += recomanacionsContent.obteDiscountedCumulativeGain()/recomanacionsContent.obteIdealDiscountedCumulativeGain();
         }
-        System.out.println(totalDCG/q + " " + totalIDCG/q + " " + totalNDCG/q);
-        System.out.println(totalDCG2/q + " " + totalIDCG2/q + " " + totalNDCG2/q);
+        System.out.println("Recomanador colaboratiu:\nDGC mitja: " + totalDCG/q + ", IDCG mitja: " + totalIDCG/q +
+                ", NDCG mitja: " + totalNDCG/q);
+        System.out.println("Recomanador per contingut:\nDGC mitja: " + totalDCG2/q + ", IDCG mitja: " + totalIDCG2/q +
+                ", NDCG mitja: " + totalNDCG2/q);
     }
 }
