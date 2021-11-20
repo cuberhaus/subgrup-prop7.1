@@ -178,8 +178,8 @@ public class DriverUsuari {
             double valor = UtilitatsDeLectura.llegirDouble();
             Valoracio valoracio = new Valoracio(valor,usuari,item);
             usuari.afegirValoracio(valoracio);
-            usuari.esborraValoracio(item);
-            UtilitatsDEscriptura.imprimirValoracionsUsuari(usuari.obtenirValoracions());
+
+            UtilitatsDEscriptura.imprimirValoracio(usuari.obtenirValoracio(item));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -211,6 +211,19 @@ public class DriverUsuari {
         UtilitatsDEscriptura.imprimirUsuari(usuari2);
     }
 
+    public static void testHashCode() throws Exception {
+        System.out.println("Testejant HashCode.");
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
+
+        if (usuari.hashCode() == usuari2.hashCode()) {
+            System.out.println("Els dos usuaris son iguals");
+        }
+        else {
+            System.out.println("Els dos usuaris son diferents");
+        }
+    }
+
     public static void main(String[] args)  {
         System.out.println("Driver per la classe Item");
         String consulta = "\n0 - Sortir\n" +
@@ -228,11 +241,12 @@ public class DriverUsuari {
                 "12 - Test ObtenirValoracio\n" +
                 "13 - Test Equals\n" +
                 "14 - Test CompareTo\n" +
-                "15 - Test Copy\n";
-        String err = "Valor invàlid: introdueix un enter entre 0 i 12";
+                "15 - Test Copy\n" +
+                "16 - Test HashCode\n";
+        String err = "Valor invàlid: introdueix un enter entre 0 i 16";
         while(true){
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 15);
+                int i = consola.llegeixEnter(consulta, err, 0, 16);
                 switch (i) {
                     case 0:
                         return;
@@ -280,6 +294,9 @@ public class DriverUsuari {
                         break;
                     case 15:
                         testCopy();
+                        break;
+                    case 16:
+                        testHashCode();
                         break;
                 }
             }

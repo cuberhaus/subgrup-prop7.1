@@ -30,47 +30,146 @@ public class DriverValoracio {
 
     public static void testObtenirItem() throws Exception {
         System.out.println("Test obtenir item");
+
+        double valor = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+
+        Id id = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
+        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+
+        Valoracio valoracio = new Valoracio(valor, usuari, item);
+        UtilitatsDEscriptura.imprimirItem(valoracio.obtenirItem());
     }
 
     public static void testObtenirUsuari() throws Exception {
         System.out.println("Test obtenir Usuari");
+
+        double valor = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+
+        Id id = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
+        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+
+        Valoracio valoracio = new Valoracio(valor, usuari, item);
+        UtilitatsDEscriptura.imprimirUsuari(valoracio.obtenirUsuari());
     }
 
     public static void testObtenirValor() throws Exception {
         System.out.println("Test obtenir valor");
+
+        double valor = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+
+        Id id = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
+        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+
+        Valoracio valoracio = new Valoracio(valor, usuari, item);
+        UtilitatsDEscriptura.imprimirUsuari(valoracio.obtenirUsuari());
     }
 
     private static void testEquals() throws Exception {
         System.out.println("Test equals");
+
+        double valor = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+
+        Id id = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
+        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+
+        Valoracio valoracio = new Valoracio(valor, usuari, item);
+
+        double valor2 = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
+
+        Id id2 = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem2 = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs2 = UtilitatsDeLectura.llegirValorAtributs();
+        Item item2 = new Item(id2, tipusItem2, nom_atributs2, valor_atributs2);
+
+        Valoracio valoracio2 = new Valoracio(valor2, usuari2, item2);
+
+        if (valoracio.equals(valoracio2)) {
+            System.out.println("Les dues valoracions son iguals");
+        }
+        else {
+            System.out.println("Les dues valoracions son diferents");
+        }
     }
 
     private static void testHashCode() throws Exception {
         System.out.println("Testejant hashCode.");
+
+        double valor = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+
+        Id id = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
+        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+
+        Valoracio valoracio = new Valoracio(valor, usuari, item);
+
+        double valor2 = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
+
+        Id id2 = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem2 = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs2 = UtilitatsDeLectura.llegirValorAtributs();
+        Item item2 = new Item(id2, tipusItem2, nom_atributs2, valor_atributs2);
+
+        Valoracio valoracio2 = new Valoracio(valor2, usuari2, item2);
+
+        if (valoracio.hashCode() == valoracio2.hashCode()) {
+            System.out.println("Les dues valoracions son iguals");
+        }
+        else {
+            System.out.println("Les dues valoracions son diferents");
+        }
     }
 
     private static void testCopy() throws Exception {
         System.out.println("Testejant copy.");
+
+        double valor = UtilitatsDeLectura.llegirDouble();
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+
+        Id id = UtilitatsDeLectura.llegirId();
+        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
+        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+
+        Valoracio valoracio = new Valoracio(valor, usuari, item);
+        Valoracio valoracio2 = valoracio.copy();
+
     }
 
     public static void main(String[] args)  {
         System.out.println("Driver per la classe Item");
         String consulta = "\n0 - Sortir\n" +
-                "1 - Test Constructor bàsic\n" +
-                "2 - Test Constructor amb int bool nom i contrasenya\n" +
-                "3 - Test Constructor amb Id\n" +
-                "4 - Test Constructor amb Id nom i contrasenya\n" +
-                "5 - Test ObtenirId\n" +
-                "6 - Test SetActiu\n" +
-                "7 - Test IsActiu\n" +
-                "8 - Test IsContrasenya\n" +
-                "9 - Test SetContrasenya\n" +
-                "10 - Test AfegirValoracio\n" +
-                "11 - Test EsborrarValoracio\n" +
-                "12 - Test ObtenirValoracio\n" +
-                "13 - Test Equals\n" +
-                "14 - Test CompareTo\n" +
-                "15 - Test Copy\n";
-        String err = "Valor invàlid: introdueix un enter entre 0 i 12";
+                "1 - Test ConstructoraValorUsuariItem\n" +
+                "2 - Test Obtenir Item\n" +
+                "3 - Test Obtenir Usuari\n" +
+                "4 - Test Obtenir Valor\n" +
+                "5 - Test Equals\n" +
+                "6 - Test HashCode\n" +
+                "7 - Test Copy\n";
+        String err = "Valor invàlid: introdueix un enter entre 0 i 7";
         while(true){
             try {
                 int i = consola.llegeixEnter(consulta, err, 0, 7);

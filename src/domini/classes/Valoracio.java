@@ -40,11 +40,11 @@ public class Valoracio {
         return item;
     }
 
-    /**
-     * Modificadora del paràmetre item
-     *
-     * @param item El paràmetre item pren el nou valor
-     */
+//    /**
+//     * Modificadora del paràmetre item
+//     *
+//     * @param item El paràmetre item pren el nou valor
+//     */
 //    public void setItem(Item item) {
 //        this.item = item;
 //    }
@@ -58,11 +58,11 @@ public class Valoracio {
         return usuari;
     }
 
-    /**
-     * Modificadora del paràmetre usuari
-     *
-     * @param usuari El paràmetre usuari pren el nou valor
-     */
+//    /**
+//     * Modificadora del paràmetre usuari
+//     *
+//     * @param usuari El paràmetre usuari pren el nou valor
+//     */
 //    public void setUsuari(Usuari usuari) {
 //        this.usuari = usuari;
 //    }
@@ -76,11 +76,11 @@ public class Valoracio {
         return valor;
     }
 
-    /**
-     * Modificadora del paràmetre valor
-     *
-     * @param valor El paràmetre valor pren el nou valor
-     */
+//    /**
+//     * Modificadora del paràmetre valor
+//     *
+//     * @param valor El paràmetre valor pren el nou valor
+//     */
 //    public void setValor(double valor) {
 //        this.valor = valor;
 //    }
