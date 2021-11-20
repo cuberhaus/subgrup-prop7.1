@@ -2,6 +2,10 @@ package domini.classes;
 
 import java.util.Objects;
 
+/**
+ * Representa un identificador.
+ * @author maria.prat
+ */
 public class Id implements Comparable<Id> {
     final int valor;
     private boolean actiu;

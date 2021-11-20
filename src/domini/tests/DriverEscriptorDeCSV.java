@@ -19,7 +19,7 @@ public class DriverEscriptorDeCSV {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println("Driver de la clase EscriptorDeCSV");
         String consulta = "\n0 - Sortir\n" +
                 "1 - Test de escriureCSV\n";

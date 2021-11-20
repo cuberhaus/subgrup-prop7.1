@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class ConjuntRecomanacionsTest {
-    double delta = 1e-5;
+    private final double delta = 1e-5;
     @Test
     public void calculaDiscountedCumulativeGain() {
         // Ordre recomanat: 1 2 3 4 5

@@ -113,7 +113,7 @@ public class DriverUsuari {
         }
     }
 
-    public static void testAfegirValoracio() throws Exception {
+    public static void testAfegirValoracio() {
         System.out.println("Testejant afegirValoracio.");
         try {
 
@@ -160,7 +160,7 @@ public class DriverUsuari {
         }
     }
 
-    public static void testObtenirValoracio() throws Exception {
+    public static void testObtenirValoracio() {
         System.out.println("Testejant obtenirValoracio.");
         try {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();

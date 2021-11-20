@@ -2,7 +2,6 @@ import domini.classes.*;
 import domini.classes.csv.TaulaCSV;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.TreeMap;

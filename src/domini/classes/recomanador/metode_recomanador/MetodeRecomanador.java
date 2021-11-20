@@ -10,11 +10,11 @@ import domini.classes.recomanador.ConjuntRecomanacions;
  */
 public abstract class MetodeRecomanador {
     /** Conjunt d'usuaris per defecte **/
-    protected ConjuntUsuaris usuaris;
+    protected final ConjuntUsuaris usuaris;
     /** Conjunt d'items per defecte **/
-    protected ConjuntItems items;
+    protected final ConjuntItems items;
     /** Conjunt de valoracions per defecte **/
-    protected ConjuntValoracions valoracionsPubliques;
+    protected final ConjuntValoracions valoracionsPubliques;
 
     /**
      * Crea un <code>MetodeRecomanador</code> donant un conjunt de dades per defecte.

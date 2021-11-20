@@ -4,8 +4,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class SlopeOneTest {
+    private final double delta = 1e-5;
 
-    double delta = 1e-5;
     @Test
     public void getPrediccio() {
         // 1 2 3 4

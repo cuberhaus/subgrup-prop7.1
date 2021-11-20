@@ -16,7 +16,7 @@ public class DriverLectorDeCSV {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println("Driver per la classe LectorDeCSV");
         String consulta = "\n0 - Sortir\n" +
                 "1 - Llegir CSV\n";

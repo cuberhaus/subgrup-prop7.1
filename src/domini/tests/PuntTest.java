@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PuntTest {
-    double delta = 1e-5;
+    private final double delta = 1e-5;
     @Test
     public void getDimensio() {
         Punt p = new Punt();

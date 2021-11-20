@@ -264,7 +264,7 @@ public class TaulaCSV extends Contenidor {
 
             else {
                 ArrayList<String> resultat = new ArrayList<>(valorsItem.get(i - 1));
-                resultat.remove(index);
+                resultat.remove((int) index);
                 return resultat;
             }
         }

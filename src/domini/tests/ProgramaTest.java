@@ -6,8 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ProgramaTest {
-    Programa p1 = Programa.obtenirInstancia();
-    Programa p2 = Programa.obtenirInstancia();
+    private final Programa p1 = Programa.obtenirInstancia();
+    private final Programa p2 = Programa.obtenirInstancia();
 
     @Test
     public void obtenirInstancia() {

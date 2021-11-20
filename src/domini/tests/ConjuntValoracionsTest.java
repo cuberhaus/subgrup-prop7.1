@@ -8,18 +8,18 @@ import java.util.*;
 public class ConjuntValoracionsTest {
 
     @Test
-    public void afegir() throws InterruptedException, IOException {
+    public void afegir() {
         TaulaCSV taulaCSVratings = new TaulaCSV();
-        ArrayList<String> atributs = new ArrayList<String>(Arrays.asList("userId", "itemId", "rating"));
-        ArrayList<String> valors = new ArrayList<String>(Arrays.asList("1", "10", "5"));
+        ArrayList<String> atributs = new ArrayList<>(Arrays.asList("userId", "itemId", "rating"));
+        ArrayList<String> valors = new ArrayList<>(Arrays.asList("1", "10", "5"));
         taulaCSVratings.afegirConjuntAtributs(atributs);
         taulaCSVratings.afegirConjuntValors(valors);
         ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
         conjuntUsuaris.afegir(taulaCSVratings);
 
         TaulaCSV taulaItems = new TaulaCSV();
-        ArrayList<String> atributs2 = new ArrayList<String>(Arrays.asList("id", "title"));
-        ArrayList<String> valors2 = new ArrayList<String>(Arrays.asList("10", "Pirata"));
+        ArrayList<String> atributs2 = new ArrayList<>(Arrays.asList("id", "title"));
+        ArrayList<String> valors2 = new ArrayList<>(Arrays.asList("10", "Pirata"));
         taulaItems.afegirConjuntAtributs(atributs2);
         taulaItems.afegirConjuntValors(valors2);
         ConjuntItems conjuntItems = new ConjuntItems("pelis",taulaItems);

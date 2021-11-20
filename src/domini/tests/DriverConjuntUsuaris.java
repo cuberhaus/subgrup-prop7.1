@@ -68,7 +68,7 @@ public class DriverConjuntUsuaris {
         }
     }
 
-    public static void testObtenirUsuaris() throws Exception {
+    public static void testObtenirUsuaris() {
         System.out.println("Test esborrar Usuari");
         String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {

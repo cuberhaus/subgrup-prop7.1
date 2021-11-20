@@ -21,9 +21,6 @@ public class Programa {
     /** Conté el conjunt de tipus d'items */
     private Map<TipusItem,TipusItem> tipusItems = new HashMap<>();
 
-//    /** Conté els conjunts de programa */
-//    private ArrayList<conjuntPrograma> conjuntsPrograma;
-
     /**
      * Constructora per defecte de Programa
      */

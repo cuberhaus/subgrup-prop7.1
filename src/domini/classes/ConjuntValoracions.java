@@ -11,7 +11,7 @@ import java.util.TreeMap;
  */
 
 public class ConjuntValoracions {
-    private TreeMap<Pair<Usuari,Item>,Valoracio> valoracions;
+    private final TreeMap<Pair<Usuari,Item>,Valoracio> valoracions;
 
     /** Constructora per defecte
      */
@@ -25,7 +25,7 @@ public class ConjuntValoracions {
      * @param items un conjunt d'items
      * @param usuaris un conjunt d'usuaris
      */
-    public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws InterruptedException {
+    public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) {
         valoracions.eliminarEspaisInnecessaris();
         ArrayList<String> idsUsuaris= valoracions.obtenirValorsAtribut("userId");
         ArrayList<String> idsItems= valoracions.obtenirValorsAtribut("itemId");

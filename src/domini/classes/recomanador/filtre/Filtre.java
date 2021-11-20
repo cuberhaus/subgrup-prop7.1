@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author maria.prat
  */
 public abstract class Filtre {
-    protected ArrayList<String> nomAtributs;
+    protected final ArrayList<String> nomAtributs;
 
     public Filtre(ArrayList<String> nomAtributs) {
         this.nomAtributs = nomAtributs;

@@ -6,7 +6,7 @@ package domini.classes;
 
 public class SessioIniciada extends Sessio{
     /** Conté l'usuari que ha iniciat la sessió */
-    private Usuari usuari = null;
+    private Usuari usuari;
 
     SessioIniciada(Usuari usuari) {
         this.usuari = usuari;

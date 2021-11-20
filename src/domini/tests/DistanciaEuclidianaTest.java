@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
 
 @RunWith(Enclosed.class)
 public class DistanciaEuclidianaTest {

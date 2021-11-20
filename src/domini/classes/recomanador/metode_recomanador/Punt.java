@@ -15,10 +15,6 @@ public class Punt extends ArrayList<Double> {
         return size();
     }
 
-    public Object clone() {
-        return super.clone();
-    }
-
     /**
      * @param a punt a afegir
      * @throws IllegalArgumentException si les dimensions dels dos punts no concorden.

@@ -14,7 +14,7 @@ import java.util.PriorityQueue;
 public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
 
     /** Nombre de clusters que s'utilitzarà com K al K-means **/
-    private int num_clusters;
+    private final int num_clusters;
 
     /** Particions obtingudes de K-Means*/
     private ArrayList<ArrayList<Integer>> particions;

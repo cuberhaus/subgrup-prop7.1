@@ -10,13 +10,13 @@ import java.util.Objects;
 
 public class Valoracio {
     /** Conté el valor de la valoració */
-    private double valor;
+    private final double valor;
 
     /** Conté l'usuari que escriu la valoració */
-    private Usuari usuari;
+    private final Usuari usuari;
 
     /** Conté l'item valorat */
-    private Item item;
+    private final Item item;
 
     /** Constructora donat un valor, un usuari i un item.
      * @param valor representa el valor de la valoració
@@ -40,15 +40,6 @@ public class Valoracio {
         return item;
     }
 
-//    /**
-//     * Modificadora del paràmetre item
-//     *
-//     * @param item El paràmetre item pren el nou valor
-//     */
-//    public void setItem(Item item) {
-//        this.item = item;
-//    }
-
     /**
      * Consultora del usuari
      *
@@ -58,15 +49,6 @@ public class Valoracio {
         return usuari;
     }
 
-//    /**
-//     * Modificadora del paràmetre usuari
-//     *
-//     * @param usuari El paràmetre usuari pren el nou valor
-//     */
-//    public void setUsuari(Usuari usuari) {
-//        this.usuari = usuari;
-//    }
-
     /**
      * Consultora del valor
      *
@@ -75,15 +57,6 @@ public class Valoracio {
     public double obtenirValor() {
         return valor;
     }
-
-//    /**
-//     * Modificadora del paràmetre valor
-//     *
-//     * @param valor El paràmetre valor pren el nou valor
-//     */
-//    public void setValor(double valor) {
-//        this.valor = valor;
-//    }
 
     @Override
     public boolean equals(Object o) {

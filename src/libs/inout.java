@@ -23,7 +23,7 @@ public class inout
 { private final char cr = '\r',  eof = '\uFFFF',
     nl = '\n', sp = ' ';
   private final String EOF = "eof";
-  
+
 
   public inout() { }
 
@@ -379,6 +379,4 @@ public class inout
     }
   }
 }
-
-/********* THE LAST LINE OF THE JAVA TEXT PROGRAM *********/
 

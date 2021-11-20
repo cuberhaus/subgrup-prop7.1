@@ -16,15 +16,13 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     private final Id id;
 
     /** Conté el nom de l'usuari */
-    private String nom = null;
+    private String nom;
 
     /** Conté la contrasenya de l'usuari */
-    private String contrasenya = null;
+    private String contrasenya;
 
     /** Conté el conjunt d'items valorat per l'usuari */
-    private Map<Item,Valoracio> valoracions = new TreeMap<>();
-
-//    private ConjuntUsuari conjuntUsuari;
+    private Map<Item,Valoracio> valoracions;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
      * @param id representa l'id de l'usuari

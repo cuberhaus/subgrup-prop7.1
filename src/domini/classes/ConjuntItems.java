@@ -11,7 +11,7 @@ import java.util.*;
  */
 
 public class ConjuntItems extends ConjuntIdentificat<Item> {
-    TipusItem tipusItem;
+    private final TipusItem tipusItem;
 
     /**
      * Constructora de Conjunt d'items.

@@ -19,7 +19,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      * Afegeix un conjunt de valoracions al Paràmetre implícit a partir de:
      * @param taula Taula amb usuaris
      */
-    public void afegir(TaulaCSV taula) throws InterruptedException {
+    public void afegir(TaulaCSV taula) {
         taula.eliminarEspaisInnecessaris();
 //        elements = new TreeMap<>();
         ArrayList<String> idsUsuaris = taula.obtenirValorsAtribut("userId");
