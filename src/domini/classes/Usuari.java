@@ -78,7 +78,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * Consultora del nom
      * @return El resultat és el valor del paràmetre implícit
      */
-    public String getNom() {
+    public String obtenirNom() {
         return nom;
     }
 
@@ -160,6 +160,10 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      */
     public Valoracio obtenirValoracio(Item item) {
         return valoracions.get(item);
+    }
+
+    public Map<Item, Valoracio> obtenirValoracions() {
+        return valoracions;
     }
 
     /**

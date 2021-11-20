@@ -34,6 +34,19 @@ public class UtilitatsDEscriptura {
         }
     }
 
+
+    public static void imprimirValoracionsUsuari(Map<Item, Valoracio> valoracioMap) {
+        if (valoracioMap.isEmpty()) {
+            System.out.println("No té valoracions");
+        } else {
+            for (Map.Entry<Item, Valoracio> valoracioEntrada : valoracioMap.entrySet()) {
+                System.out.println("Té una valoració de l'ítem "
+                        + valoracioEntrada.getValue().obtenirItem().obtenirId().obtenirValor()
+                        + " feta per l'usuari " + valoracioEntrada.getValue().obtenirUsuari().obtenirId().obtenirValor()
+                        + " amb valor " + valoracioEntrada.getValue().obtenirValor());
+            }
+        }
+    }
     public static void imprimirAtributs(Map<String, ValorAtribut<?>> atributMap) {
         if (atributMap.isEmpty()) {
             System.out.println("No té atributs");
@@ -65,4 +78,14 @@ public class UtilitatsDEscriptura {
         }
         System.out.println("Id amb valor " + id.obtenirValor() + " " + actiu);
     }
+
+    public static void imprimirUsuari(Usuari usuari) {
+        Id id = usuari.obtenirId();
+        String nom = usuari.obtenirNom();
+        Map<Item,Valoracio> valoracions = usuari.obtenirValoracions();
+        System.out.println("Usuari amb nom: " + nom);
+        imprimirId(id);
+        imprimirValoracionsUsuari(valoracions);
+    }
+
 }
