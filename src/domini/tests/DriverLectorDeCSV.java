@@ -5,8 +5,8 @@ import libs.consola;
 import java.io.IOException;
 
 public class DriverLectorDeCSV {
-    public static void testLectorCSV() throws Exception {
-        String ubicacio = UtilitatsDeLectura.llegirUbicacioArxiu();
+    public static void testLectorCSV() {
+        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
             LectorDeCSV lector = new LectorDeCSV();
             TaulaCSV taula = lector.llegirCSV(ubicacio);

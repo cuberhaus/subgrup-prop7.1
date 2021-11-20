@@ -4,15 +4,15 @@ import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
 public class DriverEscriptorDeCSV {
-    public static void testEscriureCSV() throws Exception {
-        String ubicacioIn = UtilitatsDeLectura.llegirUbicacioArxiu();
-        String ubicacio = UtilitatsDeLectura.llegirUbicacioDestiArxiu();
+    public static void testEscriureCSV() {
+        String ubicacioEntrada = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
+        String ubicacioSortida = consola.llegirString("Introdueix la ruta del fitxer de sortida");
         try {
             LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacioIn);
+            TaulaCSV taula = lector.llegirCSV(ubicacioEntrada);
 
             EscriptorDeCSV escriptor = new EscriptorDeCSV();
-            escriptor.escriureCSV(ubicacio, taula);
+            escriptor.escriureCSV(ubicacioSortida, taula);
             System.out.println("S'ha escrit");
         } catch (Exception e) {
             System.out.println(e.getMessage());

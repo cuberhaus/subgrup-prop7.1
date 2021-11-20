@@ -10,8 +10,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class DriverConjuntItems {
-    public static void testConstructorTaula() throws Exception {
-        String ubicacio = UtilitatsDeLectura.llegirUbicacioArxiu();
+    public static void testConstructorTaula() {
+        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
             LectorDeCSV lector = new LectorDeCSV();
             TaulaCSV taula = lector.llegirCSV(ubicacio);

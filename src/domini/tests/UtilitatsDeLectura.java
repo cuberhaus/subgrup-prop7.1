@@ -159,19 +159,6 @@ public class UtilitatsDeLectura {
         }
     }
 
-    public static String llegirUbicacioArxiu() throws Exception {
-        String ruta = obtenirRutaORutaPerDefecte("Ubicacio", "Ubicacio1");
-        try {
-            FileReader lector = new FileReader(ruta);
-            BufferedReader fitxer = new BufferedReader(lector);
-            return fitxer.readLine();
-        } catch (FileNotFoundException e) {
-            throw new Exception((e.getMessage()));
-        } catch (Exception e1) {
-            throw new Exception("Fitxer invàlid.");
-        }
-    }
-
     public static Recomanacio llegirRecomanacio() throws Exception {
         String ruta = obtenirRutaORutaPerDefecte("Recomanacio", "Recomanacio1");
         try {
@@ -197,19 +184,6 @@ public class UtilitatsDeLectura {
             return new Recomanacio(id, seguretat);
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());
-        } catch (Exception e1) {
-            throw new Exception("Fitxer invàlid.");
-        }
-    }
-
-    public static String llegirUbicacioDestiArxiu() throws Exception {
-        String ruta = obtenirRutaORutaPerDefecte("Desti", "Desti1");
-        try {
-            FileReader lector = new FileReader(ruta);
-            BufferedReader fitxer = new BufferedReader(lector);
-            return fitxer.readLine();
-        } catch (FileNotFoundException e) {
-            throw new Exception((e.getMessage()));
         } catch (Exception e1) {
             throw new Exception("Fitxer invàlid.");
         }
