@@ -247,6 +247,7 @@ public class UtilitatsDeLectura {
             int numItems;
             try {
                 numItems = Integer.parseInt(fitxer.readLine());
+                System.out.println("Mi indice es :" + numItems);
             } catch (NumberFormatException e) {
                 throw new Exception("El numero de items no es un int.");
             }
@@ -258,11 +259,8 @@ public class UtilitatsDeLectura {
                     throw new Exception("El numero de items no es un int.");
                 }
 
-                Id id = new Id(nid, true);
                 ArrayList<String> valorValors = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
-                Item item = new Item(id, tipusItem, valorAtributs, valorValors);
-
-                result.put(id, item);
+                result.put(new Id(nid, true), new Item(new Id(nid, true), tipusItem, valorAtributs, valorValors));
             }
 
             return result;
