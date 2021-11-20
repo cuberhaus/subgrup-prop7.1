@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Driver per la classe Usuari
+ * Driver per la classe Valoració
  * @author pol.casacuberta
  */
 
@@ -156,7 +156,8 @@ public class DriverValoracio {
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         Valoracio valoracio2 = valoracio.copy();
-
+        System.out.println("Copia de la valoracio:");
+        UtilitatsDEscriptura.imprimirValoracio(valoracio2);
     }
 
     public static void main(String[] args)  {
