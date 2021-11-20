@@ -235,4 +235,42 @@ public class UtilitatsDeLectura {
             throw new Exception("Fitxer invalid");
         }
     }
+
+    public static TreeMap<Id, Item> llegirMapItems() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("ConjuntItems", "ConjuntItems1");
+        try {
+            TreeMap<Id, Item> result = new TreeMap<>();
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+            ArrayList<String> valorAtributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
+            int numItems;
+            try {
+                numItems = Integer.parseInt(fitxer.readLine());
+            } catch (NumberFormatException e) {
+                throw new Exception("El numero de items no es un int.");
+            }
+            for (int i = 0; i < numItems; ++i) {
+                int nid;
+                try {
+                    nid = Integer.parseInt(fitxer.readLine());
+                } catch (NumberFormatException e) {
+                    throw new Exception("El numero de items no es un int.");
+                }
+
+                Id id = new Id(nid, true);
+                ArrayList<String> valorValors = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
+                Item item = new Item(id, tipusItem, valorAtributs, valorValors);
+
+                result.put(id, item);
+            }
+
+            return result;
+
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invalid");
+        }
+    }
 }

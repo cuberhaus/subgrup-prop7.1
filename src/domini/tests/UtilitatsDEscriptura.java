@@ -2,7 +2,9 @@ import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
 
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Tots.
@@ -86,6 +88,14 @@ public class UtilitatsDEscriptura {
         System.out.println("Usuari amb nom: " + nom);
         imprimirId(id);
         imprimirValoracionsUsuari(valoracions);
+    }
+
+    public static void  imprimirConjuntItems(ConjuntItems conjuntItems) {
+        ArrayList<Item> items = conjuntItems.getItems();
+        UtilitatsDEscriptura.imprimirTipusItem(conjuntItems.obteTipusItem());
+        for (Item item : items) {
+            UtilitatsDEscriptura.imprimirItem(item);
+        }
     }
 
 }
