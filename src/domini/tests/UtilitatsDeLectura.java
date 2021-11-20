@@ -271,4 +271,29 @@ public class UtilitatsDeLectura {
             throw new Exception("Fitxer invalid");
         }
     }
+
+    public static TreeSet<String> llegirTreeSet() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("Atributs", "Atributs1");
+        try {
+            TreeSet<String> tree = new TreeSet<>();
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            int numAtribs;
+            try {
+                numAtribs = Integer.parseInt(fitxer.readLine());
+            } catch (NumberFormatException e) {
+                throw new Exception("El numero d'atributs no es un int.");
+            }
+
+            for (int i = 0; i < numAtribs; ++i) {
+                tree.add(new String(fitxer.readLine()));
+            }
+
+            return tree;
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e1) {
+            throw new Exception("Fitcer invalid");
+        }
+    }
 }
