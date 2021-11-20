@@ -18,11 +18,8 @@ public class DriverLectorDeCSV {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Driver per la classe LectorDeCSV");
-        String consulta = """
-
-                0 - Sortir
-                1 - Llegir CSV
-                """;
+        String consulta = "\n0 - Sortir\n" +
+                "1 - Llegir CSV\n";
         String err = "Valor invàlid: Introdueix un enter entre 0 i 1";
         while(true) {
             try {

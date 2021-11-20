@@ -41,13 +41,10 @@ public class DriverRecomanacio {
 
     public static void main(String[] args) {
         System.out.println("Driver per a la classe Recomanacio");
-        String consulta = """
-
-                0 -Sortir
-                1 - Test Constructora
-                2 - Test Obtenir Id
-                3 - Test Obtenir Rate
-                """;
+        String consulta = "\n0 -Sortir\n" +
+                "1 - Test Constructora\n" +
+                "2 - Test Obtenir Id\n" +
+                "3 - Test Obtenir Rate\n";
         String err = "Valor invalid: introdueix un enter entre 0 i 3";
 
         while (true) {
