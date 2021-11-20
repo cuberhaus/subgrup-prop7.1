@@ -37,6 +37,13 @@ public class UtilitatsDEscriptura {
     }
 
 
+    public static void imprimirValoracio(Valoracio valoracio) {
+        System.out.println("Té una valoració de l'ítem "
+                + valoracio.obtenirItem().obtenirId().obtenirValor()
+                + " feta per l'usuari " + valoracio.obtenirUsuari().obtenirId().obtenirValor()
+                + " amb valor " + valoracio.obtenirValor());
+    }
+
     public static void imprimirValoracionsUsuari(Map<Item, Valoracio> valoracioMap) {
         if (valoracioMap.isEmpty()) {
             System.out.println("No té valoracions");
