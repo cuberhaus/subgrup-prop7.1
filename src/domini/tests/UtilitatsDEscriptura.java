@@ -4,7 +4,6 @@ import domini.classes.atributs.valors.ValorAtribut;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Tots.
@@ -102,6 +101,13 @@ public class UtilitatsDEscriptura {
         UtilitatsDEscriptura.imprimirTipusItem(conjuntItems.obteTipusItem());
         for (Item item : items) {
             UtilitatsDEscriptura.imprimirItem(item);
+        }
+    }
+
+    public static void  imprimirConjuntUsuaris(ConjuntUsuaris conjuntUsuaris) {
+        ArrayList<Usuari> usuaris = conjuntUsuaris.obtenirUsuaris();
+        for (Usuari usuari : usuaris) {
+            UtilitatsDEscriptura.imprimirUsuari(usuari);
         }
     }
 

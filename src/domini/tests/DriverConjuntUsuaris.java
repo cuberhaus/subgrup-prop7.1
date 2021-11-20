@@ -1,4 +1,6 @@
 import domini.classes.*;
+import domini.classes.csv.LectorDeCSV;
+import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
 
@@ -14,15 +16,29 @@ import java.util.Scanner;
 public class DriverConjuntUsuaris {
     public static void testConstructorBasic() {
         System.out.println("Test Constructora bàsica");
+        ConjuntUsuaris conjuntUsuaris;
+        System.out.println("S'ha construit un conjuntUsuaris buit");
     }
 
-    public static void testAfegirTaulaCSV() {
+    public static void testAfegirTaulaCSV() throws Exception {
         System.out.println("Test afegir Taula CSV");
+        String ubicacio = UtilitatsDeLectura.llegirUbicacioArxiu();
+        try {
+            LectorDeCSV lector = new LectorDeCSV();
+            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taula);
+            System.out.println("Conjunt creat");
+            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void esborrarId() {
         System.out.println("Test esborrar amb un Id");
     }
+
     public static void esborrarUsuari() {
         System.out.println("Test esborrar Usuari");
     }

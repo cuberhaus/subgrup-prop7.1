@@ -3,6 +3,7 @@ package domini.classes;
 import domini.classes.csv.TaulaCSV;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -53,4 +54,16 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         return true;
     }
 
+    /**
+     * Consultora que retorna una llista d'usuaris
+     * @return <code>ArrayList<String></code> llista d'usuaris
+     */
+    public ArrayList<Usuari> obtenirUsuaris() {
+        ArrayList<Usuari> usuaris = new ArrayList<>();
+        Set<Id> keys = elements.keySet();
+        for (Id id : keys) {
+            usuaris.add(elements.get(id));
+        }
+        return usuaris;
+    }
 }
