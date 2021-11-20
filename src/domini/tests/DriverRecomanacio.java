@@ -7,7 +7,7 @@ public class DriverRecomanacio {
     public static void testConstructora() {
         try {
             Id id = UtilitatsDeLectura.llegirId();
-            double seguretat = UtilitatsDeLectura.llegirDouble();
+            double seguretat = UtilitatsDeLectura.llegirSeguretat();
             Recomanacio rec = new Recomanacio(id, seguretat);
             System.out.println("S'ha creat la recomanacio");
             rec.imprimir();
@@ -49,7 +49,7 @@ public class DriverRecomanacio {
 
         while (true) {
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 3);
+                int i = consola.llegirInt(consulta, err, 0, 3);
                 switch (i) {
                     case 0:
                         return;

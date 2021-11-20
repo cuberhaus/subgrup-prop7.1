@@ -23,7 +23,7 @@ public class DriverLectorDeCSV {
         String err = "Valor invàlid: Introdueix un enter entre 0 i 1";
         while(true) {
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 1);
+                int i = consola.llegirInt(consulta, err, 0, 1);
                 switch (i) {
                     case 0:
                         return;

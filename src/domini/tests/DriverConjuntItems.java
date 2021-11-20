@@ -15,7 +15,7 @@ public class DriverConjuntItems {
         try {
             LectorDeCSV lector = new LectorDeCSV();
             TaulaCSV taula = lector.llegirCSV(ubicacio);
-            String tipusItem = consola.obtenirString("Introdueix el nom de tipusItem");
+            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
             ConjuntItems conjunt = new ConjuntItems(tipusItem, taula);
             System.out.println("Conjunt creat");
             UtilitatsDEscriptura.imprimirConjuntItems(conjunt);
@@ -79,7 +79,7 @@ public class DriverConjuntItems {
         String err = "Valor invalid: introdueix un enter entre 0 i 4";
         while (true) {
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 4);
+                int i = consola.llegirInt(consulta, err, 0, 4);
                 switch (i) {
                     case 0:
                         return;

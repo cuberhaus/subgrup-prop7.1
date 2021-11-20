@@ -3,11 +3,6 @@ import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
-
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
-
 /**
  * Driver per la classe Usuari
  * @author pol.casacuberta
@@ -99,7 +94,7 @@ public class DriverConjuntUsuaris {
         String err = "Valor invàlid: introdueix un enter entre 0 i 5";
         while(true){
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 5);
+                int i = consola.llegirInt(consulta, err, 0, 5);
                 switch (i) {
                     case 0:
                         return;

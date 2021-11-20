@@ -2,8 +2,6 @@ import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
-import domini.classes.csv.LectorDeCSV;
-import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.metode_recomanador.Recomanacio;
 import libs.consola;
 
@@ -16,7 +14,7 @@ import java.util.*;
 public class UtilitatsDeLectura {
 
     private static String obtenirRutaORutaPerDefecte(String nomObjecte, String nomObjectePerDefecte) {
-        String ruta = consola.obtenirString("Introdueix ruta a " + nomObjecte + " (per defecte - " + nomObjectePerDefecte + "): ");
+        String ruta = consola.llegirString("Introdueix ruta a " + nomObjecte + " (per defecte - " + nomObjectePerDefecte + "): ");
         if (ruta.isEmpty()) ruta = nomObjectePerDefecte;
         return "dades_tests/" + ruta;
     }
@@ -170,26 +168,7 @@ public class UtilitatsDeLectura {
         } catch (FileNotFoundException e) {
             throw new Exception((e.getMessage()));
         } catch (Exception e1) {
-            throw new Exception("Fitxer invalid");
-        }
-    }
-
-    public static double llegirDouble() throws Exception {
-        String ruta = obtenirRutaORutaPerDefecte("double", "double1");
-        try {
-            FileReader lector = new FileReader(ruta);
-            BufferedReader fitxer = new BufferedReader(lector);
-            String linia = fitxer.readLine();
-            try {
-                return Double.parseDouble(linia);
-            } catch (NumberFormatException e1) {
-                throw new Exception("No es un double");
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new Exception(e.getMessage());
-        } catch (Exception e1) {
-            throw new Exception("Fitxer invalid");
+            throw new Exception("Fitxer invàlid.");
         }
     }
 
@@ -219,7 +198,7 @@ public class UtilitatsDeLectura {
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());
         } catch (Exception e1) {
-            throw new Exception("Fitxer invalid");
+            throw new Exception("Fitxer invàlid.");
         }
     }
 
@@ -232,7 +211,7 @@ public class UtilitatsDeLectura {
         } catch (FileNotFoundException e) {
             throw new Exception((e.getMessage()));
         } catch (Exception e1) {
-            throw new Exception("Fitxer invalid");
+            throw new Exception("Fitxer invàlid.");
         }
     }
 
@@ -249,14 +228,14 @@ public class UtilitatsDeLectura {
                 numItems = Integer.parseInt(fitxer.readLine());
                 System.out.println("Mi indice es :" + numItems);
             } catch (NumberFormatException e) {
-                throw new Exception("El numero de items no es un int.");
+                throw new Exception("El nombre d'items no és un enter.");
             }
             for (int i = 0; i < numItems; ++i) {
                 int nid;
                 try {
                     nid = Integer.parseInt(fitxer.readLine());
                 } catch (NumberFormatException e) {
-                    throw new Exception("El numero de items no es un int.");
+                    throw new Exception("El nombre d'items no és un enter.");
                 }
 
                 ArrayList<String> valorValors = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
@@ -268,7 +247,7 @@ public class UtilitatsDeLectura {
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());
         } catch (Exception e1) {
-            throw new Exception("Fitxer invalid");
+            throw new Exception("Fitxer invàlid.");
         }
     }
 
@@ -282,18 +261,37 @@ public class UtilitatsDeLectura {
             try {
                 numAtribs = Integer.parseInt(fitxer.readLine());
             } catch (NumberFormatException e) {
-                throw new Exception("El numero d'atributs no es un int.");
+                throw new Exception("El numero d'atributs no és un enter.");
             }
 
             for (int i = 0; i < numAtribs; ++i) {
-                tree.add(new String(fitxer.readLine()));
+                tree.add(fitxer.readLine());
             }
 
             return tree;
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());
         } catch (Exception e1) {
-            throw new Exception("Fitcer invalid");
+            throw new Exception("Fitxer invàlid.");
+        }
+    }
+
+    public static double llegirSeguretat() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("Seguretat", "Seguretat1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            String linia = fitxer.readLine();
+            try {
+                return Double.parseDouble(linia);
+            } catch (NumberFormatException e1) {
+                throw new Exception("La seguretat d'una recomanació ha de ser un double.");
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invàlid.");
         }
     }
 }

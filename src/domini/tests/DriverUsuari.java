@@ -125,8 +125,8 @@ public class DriverUsuari {
             Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
             UtilitatsDEscriptura.imprimirId(item.obtenirId());
-            System.out.println("Escriu el valor de la valoració.");
-            double valor = UtilitatsDeLectura.llegirDouble();
+            double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                    "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
             usuari.afegirValoracio(valoracio);
             UtilitatsDEscriptura.imprimirValoracionsUsuari(usuari.obtenirValoracions());
@@ -136,7 +136,7 @@ public class DriverUsuari {
         }
     }
 
-    public static void testEsborrarValoracio() throws Exception {
+    public static void testEsborrarValoracio(){
         System.out.println("Testejant esborrarValoracio.");
         try {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
@@ -148,7 +148,8 @@ public class DriverUsuari {
 
             UtilitatsDEscriptura.imprimirId(item.obtenirId());
             System.out.println("Escriu el valor de la valoració.");
-            double valor = UtilitatsDeLectura.llegirDouble();
+            double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                    "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
             usuari.afegirValoracio(valoracio);
             usuari.esborraValoracio(item);
@@ -171,7 +172,8 @@ public class DriverUsuari {
 
             UtilitatsDEscriptura.imprimirId(item.obtenirId());
             System.out.println("Escriu el valor de la valoració.");
-            double valor = UtilitatsDeLectura.llegirDouble();
+            double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                    "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
             usuari.afegirValoracio(valoracio);
 
@@ -242,7 +244,7 @@ public class DriverUsuari {
         String err = "Valor invàlid: introdueix un enter entre 0 i 16";
         while(true){
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 16);
+                int i = consola.llegirInt(consulta, err, 0, 16);
                 switch (i) {
                     case 0:
                         return;

@@ -13,7 +13,7 @@ public class consola {
 
     public consola() {}
 
-    public static int llegeixEnter(String missatgeConsulta, String missatgeError, int valorMin, int valorMax) {
+    public static int llegirInt(String missatgeConsulta, String missatgeError, int valorMin, int valorMax) {
         boolean incorrecte = false;
         while (true) {
             try {
@@ -33,12 +33,32 @@ public class consola {
         }
     }
 
-    public static String obtenirString(String missatgeConsulta) {
+    public static String llegirString(String missatgeConsulta) {
         while (true) {
             try {
                 System.out.println(missatgeConsulta);
                 return lector.readLine();
             } catch (Exception ignored) {
+            }
+        }
+    }
+
+    public static double llegirDouble(String missatgeConsulta, String missatgeError, double valorMin, double valorMax) {
+        boolean incorrecte = false;
+        while (true) {
+            try {
+                if (incorrecte) {
+                    System.out.println(missatgeError);
+                }
+                System.out.println(missatgeConsulta);
+                double entrada = consola.readdouble();
+                if (entrada >= valorMin && entrada <= valorMax) {
+                    return entrada;
+                } else {
+                    incorrecte = true;
+                }
+            } catch (Exception e) {
+                incorrecte = true;
             }
         }
     }

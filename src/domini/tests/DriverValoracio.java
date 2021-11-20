@@ -3,8 +3,6 @@ import libs.consola;
 
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Driver per la classe Valoració
@@ -14,9 +12,11 @@ import java.util.Scanner;
 public class DriverValoracio {
     public static void testConstructorValorUsuariItem() throws Exception {
         System.out.println("TestConstructora");
-        double valor = UtilitatsDeLectura.llegirDouble();
+        double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
+        System.out.println("Id de l'item:");
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
         ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
@@ -31,7 +31,8 @@ public class DriverValoracio {
     public static void testObtenirItem() throws Exception {
         System.out.println("Test obtenir item");
 
-        double valor = UtilitatsDeLectura.llegirDouble();
+        double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
         Id id = UtilitatsDeLectura.llegirId();
@@ -47,7 +48,8 @@ public class DriverValoracio {
     public static void testObtenirUsuari() throws Exception {
         System.out.println("Test obtenir Usuari");
 
-        double valor = UtilitatsDeLectura.llegirDouble();
+        double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
         Id id = UtilitatsDeLectura.llegirId();
@@ -63,7 +65,8 @@ public class DriverValoracio {
     public static void testObtenirValor() throws Exception {
         System.out.println("Test obtenir valor");
 
-        double valor = UtilitatsDeLectura.llegirDouble();
+        double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
         Id id = UtilitatsDeLectura.llegirId();
@@ -79,7 +82,8 @@ public class DriverValoracio {
     private static void testEquals() throws Exception {
         System.out.println("Test equals");
 
-        double valor = UtilitatsDeLectura.llegirDouble();
+        double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
         Id id = UtilitatsDeLectura.llegirId();
@@ -90,7 +94,8 @@ public class DriverValoracio {
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
 
-        double valor2 = UtilitatsDeLectura.llegirDouble();
+        double valor2 = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
 
         Id id2 = UtilitatsDeLectura.llegirId();
@@ -112,7 +117,8 @@ public class DriverValoracio {
     private static void testHashCode() throws Exception {
         System.out.println("Testejant hashCode.");
 
-        double valor = UtilitatsDeLectura.llegirDouble();
+        double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
         Id id = UtilitatsDeLectura.llegirId();
@@ -123,7 +129,8 @@ public class DriverValoracio {
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
 
-        double valor2 = UtilitatsDeLectura.llegirDouble();
+        double valor2 = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
 
         Id id2 = UtilitatsDeLectura.llegirId();
@@ -145,7 +152,8 @@ public class DriverValoracio {
     private static void testCopy() throws Exception {
         System.out.println("Testejant copy.");
 
-        double valor = UtilitatsDeLectura.llegirDouble();
+        double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
+                "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
         Id id = UtilitatsDeLectura.llegirId();
@@ -173,7 +181,7 @@ public class DriverValoracio {
         String err = "Valor invàlid: introdueix un enter entre 0 i 7";
         while(true){
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 7);
+                int i = consola.llegirInt(consulta, err, 0, 7);
                 switch (i) {
                     case 0:
                         return;

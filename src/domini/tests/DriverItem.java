@@ -112,7 +112,7 @@ public class DriverItem {
         String err = "Valor invàlid: introdueix un enter entre 0 i 12";
         while(true){
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 12);
+                int i = consola.llegirInt(consulta, err, 0, 12);
                 switch (i) {
                     case 0:
                         return;
