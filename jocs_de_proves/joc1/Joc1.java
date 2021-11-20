@@ -3,7 +3,7 @@ package jocs_de_proves.joc1;
 import domini.classes.*;
 import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
-import domini.classes.recomanador.metode_recomanador.ConjuntRecomanacions;
+import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 

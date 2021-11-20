@@ -1,5 +1,3 @@
-package domini.tests;
-
 import domini.classes.*;
 import domini.classes.csv.TaulaCSV;
 import org.junit.Test;
@@ -9,12 +7,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.TreeMap;
 
-
-
 public class ConjuntItemsTest {
 
     @Test (expected = InputMismatchException.class)
-    public void testContructoraStringTaulaIdNoInt() throws IOException, InputMismatchException {
+    public void testContructoraStringTaulaIdNoInt() throws InputMismatchException {
         TaulaCSV taula = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("id");
@@ -35,7 +31,7 @@ public class ConjuntItemsTest {
     }
 
     @Test (expected = InputMismatchException.class)
-    public void testContructoraStringTaulaMateixosIds() throws IOException, InputMismatchException {
+    public void testContructoraStringTaulaMateixosIds() throws InputMismatchException {
         TaulaCSV taula = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("id");
@@ -56,7 +52,7 @@ public class ConjuntItemsTest {
     }
 
     @Test
-    public void testContructoraStringTaulaFuncionaBe() throws IOException, InputMismatchException {
+    public void testContructoraStringTaulaFuncionaBe() throws InputMismatchException {
         TaulaCSV taula = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("id");

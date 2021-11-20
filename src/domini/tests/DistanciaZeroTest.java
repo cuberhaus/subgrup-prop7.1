@@ -1,5 +1,3 @@
-package atributs.distancia;
-
 import domini.classes.atributs.distancia.Distancia;
 import domini.classes.atributs.distancia.DistanciaZero;
 import domini.classes.atributs.valors.*;

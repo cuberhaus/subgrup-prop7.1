@@ -1,6 +1,8 @@
 package domini.classes.recomanador.metode_recomanador;
 
 import domini.classes.*;
+import domini.classes.recomanador.ConjuntRecomanacions;
+import domini.classes.recomanador.Recomanacio;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

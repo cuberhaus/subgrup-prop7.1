@@ -1,9 +1,7 @@
-package recomanador.metode_recomanador;
-
 import domini.classes.Id;
 import domini.classes.Pair;
-import domini.classes.recomanador.metode_recomanador.ConjuntRecomanacions;
-import domini.classes.recomanador.metode_recomanador.Recomanacio;
+import domini.classes.recomanador.ConjuntRecomanacions;
+import domini.classes.recomanador.Recomanacio;
 import org.junit.Test;
 
 import java.util.ArrayList;

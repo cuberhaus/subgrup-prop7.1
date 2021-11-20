@@ -1,5 +1,5 @@
 import domini.classes.Id;
-import domini.classes.recomanador.metode_recomanador.Recomanacio;
+import domini.classes.recomanador.Recomanacio;
 import libs.consola;
 
 public class DriverRecomanacio {

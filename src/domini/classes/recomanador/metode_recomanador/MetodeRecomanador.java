@@ -1,6 +1,7 @@
 package domini.classes.recomanador.metode_recomanador;
 
 import domini.classes.*;
+import domini.classes.recomanador.ConjuntRecomanacions;
 
 /**
  * Classe base pels mètodes recomanadors.

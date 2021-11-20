@@ -1,6 +1,7 @@
-package domini.classes.recomanador.metode_recomanador;
+package domini.classes.recomanador;
 
 import domini.classes.Pair;
+import domini.classes.recomanador.Recomanacio;
 
 import java.util.*;
 

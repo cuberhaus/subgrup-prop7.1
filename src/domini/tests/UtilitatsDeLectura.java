@@ -2,7 +2,7 @@ import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
-import domini.classes.recomanador.metode_recomanador.Recomanacio;
+import domini.classes.recomanador.Recomanacio;
 import libs.consola;
 
 import java.io.*;

@@ -1,5 +1,3 @@
-package recomanador.metode_recomanador;
-
 import domini.classes.recomanador.metode_recomanador.ConjuntPunts;
 import domini.classes.recomanador.metode_recomanador.KMeans;
 import domini.classes.recomanador.metode_recomanador.Punt;
