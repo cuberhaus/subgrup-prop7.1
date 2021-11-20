@@ -4,7 +4,9 @@ import domini.classes.TipusItem;
 import domini.classes.Usuari;
 import libs.consola;
 
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Driver per la classe Usuari
@@ -83,8 +85,40 @@ public class DriverUsuari {
         System.out.println("IsActiu: " + b);
     }
 
-    public static void testSetContrasenya() {
+    public static void testIsContrasenya() throws Exception {
+        System.out.println("Testejant isContrasenya.");
+        Id id = UtilitatsDeLectura.llegirId();
+        String nom = "Pablo";
+        Usuari u1 = new Usuari(id);
+
+        System.out.println("Escriu la contrasenya '1234'");
+        String s;
+        Scanner input = new Scanner(System.in);
+        s = input.nextLine();
+        u1.setContrasenya(s);
+
+        System.out.println("IsContrasenya: " + u1.isContrasenya("1234"));
+    }
+
+    public static void testSetContrasenya() throws Exception {
         System.out.println("Testejant setContrasenya.");
+        Id id = UtilitatsDeLectura.llegirId();
+        String nom = "Pablo";
+        Usuari u1 = new Usuari(id);
+        String s,s2;
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Escriu la teva contrasenya:" );
+        s = input.nextLine();
+        System.out.println("Torna a escriure la teva contrasenya:");
+        u1.setContrasenya(s);
+        s2 = input.nextLine();
+        if (u1.isContrasenya(s2)) {
+            System.out.println("Has encertat la contrasenya");
+        }
+        else {
+            System.out.println("T'has equivocat de contrasenya");
+        }
     }
 
     public static void testAfegirValoracio() {
@@ -119,10 +153,10 @@ public class DriverUsuari {
                 "3 - Test Constructor amb Id\n" +
                 "4 - Test Constructor amb Id nom i contrasenya\n" +
                 "5 - Test ObtenirId\n" +
-                "6 - Test ObtenirTipusItem\n" +
-                "7 - Test ObtenirAtributs\n" +
-                "8 - Test ObtenirValoracions\n" +
-                "9 - Test ObtenirDistancia\n" +
+                "6 - Test SetActiu\n" +
+                "7 - Test IsActiu\n" +
+                "8 - Test IsContrasenya\n" +
+                "9 - Test SetContrasenya\n" +
                 "10 - Test AfegirValoracio\n" +
                 "11 - Test EsborrarValoracio\n" +
                 "12 - Test EsborrarAtributs\n";
@@ -149,16 +183,16 @@ public class DriverUsuari {
                         testObtenirId();
                         break;
                     case 6:
-                        testObtenirTipusItem();
+                        testSetActiu();
                         break;
                     case 7:
-                        testObtenirAtributs();
+                        testIsActiu();
                         break;
                     case 8:
-                        testObtenirValoracions();
+                        testIsContrasenya();
                         break;
                     case 9:
-                        testObtenirDistancia();
+                        testSetContrasenya();
                         break;
                     case 10:
                         testAfegirValoracio();
@@ -167,7 +201,6 @@ public class DriverUsuari {
                         testEsborrarValoracio();
                         break;
                     case 12:
-                        testEsborrarAtributs();
                         break;
                 }
             }

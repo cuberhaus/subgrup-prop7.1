@@ -36,6 +36,17 @@ public class UtilitatsDeLectura {
         }
     }
 
+    public static Usuari llegirUsuari() throws Exception {
+        Scanner input = new Scanner(System.in);
+        String contrasenya, nom;
+        System.out.println("Escriu el teu nom:" );
+        nom = input.nextLine();
+        System.out.println("Escriu la teva contrasenya:" );
+        contrasenya = input.nextLine();
+        Id id = llegirId();
+        return new Usuari(id,nom,contrasenya);
+    }
+
     public static TipusItem llegirTipusItem() throws Exception {
         String ruta = obtenirRutaORutaPerDefecte("TipusItem", "TipusItem1");
         try {
