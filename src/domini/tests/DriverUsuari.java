@@ -12,10 +12,6 @@ import java.util.Scanner;
  */
 
 public class DriverUsuari {
-    public static void testConstructorBasic() {
-        System.out.println("Testejant el Constructor bàsic.");
-    }
-
     public static void testConstructorIntBoolNomContra() throws Exception {
         System.out.println("Testejant el Constructor creador d'atributs.");
         Id id = UtilitatsDeLectura.llegirId();
@@ -251,7 +247,7 @@ public class DriverUsuari {
                     case 0:
                         return;
                     case 1:
-                        testConstructorBasic();
+                        testObtenirNom();
                         break;
                     case 2:
                         testConstructorIntBoolNomContra();
@@ -297,6 +293,9 @@ public class DriverUsuari {
                         break;
                     case 16:
                         testHashCode();
+                        break;
+                    case 17:
+                        testSetNom();
                         break;
                 }
             }
