@@ -6,6 +6,7 @@ import libs.consola;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -44,44 +45,45 @@ public class DriverUsuari {
 
     public static void testObtenirNom() throws Exception {
         System.out.println("Testejant obtenirNom.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
+        Usuari u1 = UtilitatsDeLectura.llegirUsuari();
         System.out.println("obtenirNom: " + u1.obtenirNom());
     }
 
     private static void testSetNom() throws Exception {
         System.out.println("Testejant setNom.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
-        u1.setNom("Juanjo");
-        System.out.println("SetNom: " + u1.obtenirNom());
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        Scanner input = new Scanner(System.in);
+        String nouNom;
+        nouNom = input.nextLine();
+        usuari.setContrasenya(nouNom);
+        System.out.println("SetNom: " + usuari.obtenirNom());
     }
 
     private static void testObtenirId() throws Exception {
         System.out.println("Testejant obtenirId.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
-        UtilitatsDEscriptura.imprimirId(u1.obtenirId());
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        UtilitatsDEscriptura.imprimirId(usuari.obtenirId());
     }
 
     private static void testSetActiu() throws Exception {
         System.out.println("Testejant setActiu.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
-        u1.setActiu(false);
-        UtilitatsDEscriptura.imprimirId(u1.obtenirId());
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        Scanner input = new Scanner(System.in);
+        String actiu;
+        actiu = input.nextLine();
+        if (Objects.equals(actiu, "true")) {
+            usuari.setActiu(true);
+        }
+        else if (Objects.equals(actiu, "false")){
+            usuari.setActiu(false);
+        }
+        UtilitatsDEscriptura.imprimirId(usuari.obtenirId());
     }
 
     public static void testIsActiu() throws Exception {
         System.out.println("Testejant isActiu.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
-        boolean b = u1.isActiu();
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        boolean b = usuari.isActiu();
         System.out.println("IsActiu: " + b);
     }
 
@@ -92,8 +94,8 @@ public class DriverUsuari {
         Usuari u1 = new Usuari(id);
 
         System.out.println("Escriu la contrasenya '1234'");
-        String s;
         Scanner input = new Scanner(System.in);
+        String s;
         s = input.nextLine();
         u1.setContrasenya(s);
 
@@ -102,18 +104,15 @@ public class DriverUsuari {
 
     public static void testSetContrasenya() throws Exception {
         System.out.println("Testejant setContrasenya.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
-        String s,s2;
-        Scanner input = new Scanner(System.in);
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        System.out.println("Escriu la teva contrasenya:" );
-        s = input.nextLine();
+        String contrasenya;
+        Scanner input = new Scanner(System.in);
         System.out.println("Torna a escriure la teva contrasenya:");
-        u1.setContrasenya(s);
-        s2 = input.nextLine();
-        if (u1.isContrasenya(s2)) {
+        contrasenya = input.nextLine();
+        usuari.setContrasenya(contrasenya);
+
+        if (usuari.isContrasenya(contrasenya)) {
             System.out.println("Has encertat la contrasenya");
         }
         else {
