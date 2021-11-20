@@ -35,12 +35,57 @@ public class DriverConjuntUsuaris {
         }
     }
 
-    public static void esborrarId() {
+    public static void testEsborrarId() throws Exception {
         System.out.println("Test esborrar amb un Id");
+        String ubicacio = UtilitatsDeLectura.llegirUbicacioArxiu();
+        try {
+            LectorDeCSV lector = new LectorDeCSV();
+            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taula);
+            System.out.println("Conjunt creat");
+            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+            Id id = UtilitatsDeLectura.llegirId();
+            conjuntUsuaris.esborrar(id);
+            System.out.println("Conjunt després de borrar l'usuari desitjat");
+            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public static void esborrarUsuari() {
+    public static void testEsborrarUsuari() throws Exception {
         System.out.println("Test esborrar Usuari");
+        String ubicacio = UtilitatsDeLectura.llegirUbicacioArxiu();
+        try {
+            LectorDeCSV lector = new LectorDeCSV();
+            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taula);
+            System.out.println("Conjunt creat");
+            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+            Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+            conjuntUsuaris.esborrar(usuari);
+            System.out.println("Conjunt després de borrar l'usuari desitjat");
+            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void testObtenirUsuaris() throws Exception {
+        System.out.println("Test esborrar Usuari");
+        String ubicacio = UtilitatsDeLectura.llegirUbicacioArxiu();
+        try {
+            LectorDeCSV lector = new LectorDeCSV();
+            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taula);
+            System.out.println("Conjunt creat");
+            UtilitatsDEscriptura.imprimirArrayDUsuaris(conjuntUsuaris.obtenirUsuaris());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args)  {
@@ -49,11 +94,12 @@ public class DriverConjuntUsuaris {
                 "1 - Test Constructor bàsic\n" +
                 "2 - Test Afegir TaulaCSV\n" +
                 "3 - Test esborra Id\n" +
-                "4 - Test esborrarUsuari\n";
-        String err = "Valor invàlid: introdueix un enter entre 0 i 4";
+                "4 - Test esborrarUsuari\n" +
+                "5 - Test Obtenir Usuaris\n";
+        String err = "Valor invàlid: introdueix un enter entre 0 i 5";
         while(true){
             try {
-                int i = consola.llegeixEnter(consulta, err, 0, 4);
+                int i = consola.llegeixEnter(consulta, err, 0, 5);
                 switch (i) {
                     case 0:
                         return;
@@ -64,10 +110,13 @@ public class DriverConjuntUsuaris {
                         testAfegirTaulaCSV();
                         break;
                     case 3:
-                        esborrarId();
+                        testEsborrarId();
                         break;
                     case 4:
-                        esborrarUsuari();
+                        testEsborrarUsuari();
+                        break;
+                    case 5:
+                        testObtenirUsuaris();
                         break;
                 }
             }

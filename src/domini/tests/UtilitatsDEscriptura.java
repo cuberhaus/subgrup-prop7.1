@@ -111,4 +111,10 @@ public class UtilitatsDEscriptura {
         }
     }
 
+    public static void  imprimirArrayDUsuaris(ArrayList<Usuari> conjuntUsuaris) {
+        for (Usuari usuari : conjuntUsuaris) {
+            UtilitatsDEscriptura.imprimirUsuari(usuari);
+        }
+    }
+
 }
