@@ -21,8 +21,11 @@ public class DriverEscriptorDeCSV {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Driver de la clase EscriptorDeCSV");
-        String consulta = "\n0 - Sortir\n" +
-                "1 - Test de escriureCSV\n";
+        String consulta = """
+
+                0 - Sortir
+                1 - Test de escriureCSV
+                """;
         String err = "Valor invalid: introdueix un enter entre 0 i 1";
         while (true) {
             try {

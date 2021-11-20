@@ -6,7 +6,6 @@ import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
-import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -72,11 +71,14 @@ public class DriverConjuntItems {
 
     public static void main(String[] args) {
         System.out.println("Driver ConjuntItems");
-        String consulta = "\n0 - Sortir\n" +
-                "1 - Test constructora a partir de CSVTable\n" +
-                "2 - Test constructora buida\n" +
-                "3 - Test contructura map\n" +
-                "4 - Test eliminar atributs\n";
+        String consulta = """
+
+                0 - Sortir
+                1 - Test constructora a partir de CSVTable
+                2 - Test constructora buida
+                3 - Test contructura map
+                4 - Test eliminar atributs
+                """;
         String err = "Valor invalid: introdueix un enter entre 0 i 4";
         while (true) {
             try {

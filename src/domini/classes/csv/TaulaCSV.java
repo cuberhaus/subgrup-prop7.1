@@ -13,13 +13,13 @@ import java.util.HashMap;
 public class TaulaCSV extends Contenidor {
 
     /** Variable on guardarem els atributs del objectes que rebem del domini.tests.csv.*/
-    private ArrayList<ArrayList<String>> valorsItem;
+    private final ArrayList<ArrayList<String>> valorsItem;
 
     /** Variable que farem servir per trobar l'índex de l'atribut que volem consultar.*/
-    private HashMap<String, Integer> atributsAIndex;
+    private final HashMap<String, Integer> atributsAIndex;
 
     /** Variable que farem per trobar l'atribut que relaciona el número de columna a consultar.*/
-    private ArrayList<String> indexAAtributs;
+    private final ArrayList<String> indexAAtributs;
 
     /** Variable que representa el número d'atributs de les dades introduïdes */
     private Integer numAtributs;
