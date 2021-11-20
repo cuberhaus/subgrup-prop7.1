@@ -81,7 +81,7 @@ public class UtilitatsDEscriptura {
 
     public static void imprimirId(Id id) {
         String actiu = "actiu";
-        if (!id.isActiu()) {
+        if (!id.esActiu()) {
             actiu = "no actiu";
         }
         System.out.println("Id amb valor " + id.obtenirValor() + " " + actiu);

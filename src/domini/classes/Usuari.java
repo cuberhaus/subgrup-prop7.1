@@ -101,7 +101,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * @param  actiu El paràmetre actiu pren el nou valor
      */
     public void setActiu(boolean actiu) {
-        id.setActiu(actiu);
+        id.assignarActiu(actiu);
     }
 
     /**
@@ -109,7 +109,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * @return El resultat és el valor del paràmetre implícit
      */
     public boolean isActiu() {
-        return id.isActiu();
+        return id.esActiu();
     }
 
     /**

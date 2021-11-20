@@ -15,23 +15,6 @@ public class Id implements Comparable<Id> {
         this.actiu = actiu;
     }
 
-    public int obtenirValor() {
-        return valor;
-    }
-
-    public boolean isActiu() {
-        return actiu;
-    }
-
-    public void setActiu(boolean actiu) {
-        this.actiu = actiu;
-    }
-
-    @Override
-    public int compareTo(Id o) {
-        return Integer.compare(this.valor, o.valor);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,5 +30,22 @@ public class Id implements Comparable<Id> {
 
     public Id copiar() {
         return new Id(valor, actiu);
+    }
+
+    @Override
+    public int compareTo(Id o) {
+        return Integer.compare(this.valor, o.valor);
+    }
+
+    public int obtenirValor() {
+        return valor;
+    }
+
+    public boolean esActiu() {
+        return actiu;
+    }
+
+    public void assignarActiu(boolean actiu) {
+        this.actiu = actiu;
     }
 }
