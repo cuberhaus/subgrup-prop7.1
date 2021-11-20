@@ -83,4 +83,13 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             itemIdentificat.getValue().esborrarAtributs(nomAtributs);
         }
     }
+
+    public ArrayList<Item> getItems() {
+        ArrayList<Item> items = new ArrayList<>();
+        Set<Id> keys = elements.keySet();
+        for (Id id : keys) {
+            items.add(elements.get(id));
+        }
+        return items;
+    }
 }
