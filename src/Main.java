@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException {
 
+
         System.out.println("Amb aquest programa es poden carregar conjunts de dades propis i obtenir recomanacions per usuaris.");
         domini.classes.csv.LectorDeCSV lector = new domini.classes.csv.LectorDeCSV();
         String ubicacio_fitxer_items = libs.consola.llegirString("Indica on es troba el fitxer csv amb els items desitjats.");

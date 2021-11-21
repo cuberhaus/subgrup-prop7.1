@@ -6,4 +6,6 @@ Si executes make run, s'executa el main.
 
 Si executes make Driver+nomDeLaClasseQueVolsTestejar, compiles i executes el driver dessitjat.
 
-Si executes make test, 
+Si executes make NomClasseTest s'executa el UT corresponent.
+
+Si executes make jocX s'executa el joc de prova X.
