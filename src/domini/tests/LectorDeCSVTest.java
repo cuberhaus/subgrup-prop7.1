@@ -28,7 +28,7 @@ public class LectorDeCSVTest {
     @Test(expected = IOException.class)
     public void llegirCSVExcepcioNoExisteixFitxer() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        lector.llegirCSV("rc/domingo/tests/jocs_de_proves/joc1/items.domini.tests.csv");
+        lector.llegirCSV("dades_tests/items_inexistent.csv");
     }
 
 
