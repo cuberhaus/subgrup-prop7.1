@@ -19,7 +19,11 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
     }
 
     public ValorBoolea(String s) {
-        this.valor = Boolean.parseBoolean(s.toLowerCase());
+        if (s == null) {
+            this.valor = null;
+        } else {
+            this.valor = Boolean.parseBoolean(s.toLowerCase());
+        }
     }
 
     @Override
@@ -37,6 +41,9 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
 
 
     public static boolean esBoolea(String s) {
+        if (s == null) {
+            return false;
+        }
         return s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false");
     }
 }
