@@ -97,6 +97,10 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         return true;
     }
 
+    /**
+     * Retorna una copia del ConjuntItems
+     * @return <code>ConjuntItems</code>
+     */
     public ConjuntItems copiar() {
         TreeMap<Id, Item> copiaElements = new TreeMap<>();
         for (Map.Entry<Id, Item> element : elements.entrySet()) {
