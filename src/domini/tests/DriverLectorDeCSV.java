@@ -6,13 +6,13 @@ import java.io.IOException;
 
 public class DriverLectorDeCSV {
     public static void testLectorCSV() {
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             taula.imprimir();
         } catch (IOException e1) {
             System.out.println("Ubicacio no valida");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

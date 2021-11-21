@@ -231,7 +231,7 @@ public class TaulaCSV extends Contenidor {
         else {
             for (String elem : this.obtenirNomsAtributs()) {
                 System.out.print(elem);
-                System.out.print('|');
+                System.out.print(" | ");
             }
 
             System.out.println();

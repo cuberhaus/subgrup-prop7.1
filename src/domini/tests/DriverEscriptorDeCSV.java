@@ -5,11 +5,9 @@ import libs.consola;
 
 public class DriverEscriptorDeCSV {
     public static void testEscriureCSV() {
-        String ubicacioEntrada = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         String ubicacioSortida = consola.llegirString("Introdueix la ruta del fitxer de sortida");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacioEntrada);
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
 
             EscriptorDeCSV escriptor = new EscriptorDeCSV();
             escriptor.escriureCSV(ubicacioSortida, taula);

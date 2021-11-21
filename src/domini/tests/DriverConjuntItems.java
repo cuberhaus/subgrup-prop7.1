@@ -13,7 +13,6 @@ public class DriverConjuntItems {
     public static void testConstructorTaula() throws Exception {
         try {
             TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
-            taula.imprimir();
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
             ConjuntItems conjunt = new ConjuntItems(tipusItem, taula);
             System.out.println("Conjunt creat");
