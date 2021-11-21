@@ -12,19 +12,24 @@ import java.util.*;
  * @author maria.prat
  */
 public class TipusItem {
+    /** Nom del tipus d'ítem. */
     private String nom;
-    /** Relaciona el nom d'un atribut amb el seu tipus. */
+    /** Relaciona els noms dels atributs amb el seu tipus. */
     private Map<String, TipusAtribut> tipusAtributs;
 
+    /**
+     * Constructor d'un TipusItem sense tipus d'atributs donat el seu nom.
+     * @param nom Nom del TipusItem
+     */
     public TipusItem(String nom) {
         this.nom = nom;
         this.tipusAtributs = new TreeMap<>();
     }
 
     /**
-     * Crea un <code>TipusItem</code> amb el nom i el <code>Map<String, TipusAtribut></code> donats.
-     * @param nom <code>String</code> que conté el nom del <code>TipusItem</code>.
-     * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els tipus d'atributs del <code>TipusItem</code>.
+     * Constructor d'un TipusItem donat el nom i el <code>Map<String, TipusAtribut></code> que conté els tipus d'atributs.
+     * @param nom Nom del TipusItem
+     * @param tipusAtributs <code>Map<String, TipusAtribut></code> amb els tipus d'atributs
      */
     public TipusItem(String nom, Map<String, TipusAtribut> tipusAtributs) {
         this.nom = nom;
@@ -32,11 +37,12 @@ public class TipusItem {
     }
 
     /**
-     * Crea un <code>TipusItem</code> donats el nom del <code>TipusItem</code> i un conjunt d'ítems.
-     * Assigna el <code>TipusAtribut</code> per defecte en funció del tipus de cada valor.
-     * @param nomTipusItem <code>String</code> que conté el nom del <code>TipusItem</code>.
+     * Constructor d'un TipusItem donat el nom i un conjunt d'ítems.
+     * Dedueix el <code>TipusAtribut</code> de cada atribut en funció dels valors dels primers 'numCandidats' ítems.
+     * @param nomTipusItem <code>String</code> que conté el nom del TipusItem.
      * @param taulaCSV <code>TaulaCSV<String></code> que conté els ítems.
-     * @param numCandidats Es deduirà el <code>TipusItem</code> a partir dels primers <code>numCandidats</code> ítems.
+     * @param numCandidats Nombre d'ítems que es consideraran per deduir el tipus de cada atribut.
+     * @throws IllegalArgumentException Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
      */
     public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws IllegalArgumentException {
         if (numCandidats < 0) {
@@ -55,7 +61,7 @@ public class TipusItem {
                             taulaCSV.obtenirNomsAtributs().get(i)));
                     TipusAtribut tipusAtributNou = dedueixTipusAtribut(taulaCSV.obtenirValorAtribut(j,
                             taulaCSV.obtenirNomsAtributs().get(i)));
-                    this.tipusAtributs.put(taulaCSV.obtenirNomsAtributs().get(i), trobaTipusAtributMenysRestrictiu(
+                    this.tipusAtributs.put(taulaCSV.obtenirNomsAtributs().get(i), trobaTipusAtribut(
                             tipusAtributActual.obtenirValorAtribut(), tipusAtributNou.obtenirValorAtribut()));
                 } else {
                     this.tipusAtributs.put(taulaCSV.obtenirNomsAtributs().get(i),
@@ -71,6 +77,7 @@ public class TipusItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TipusItem tipusItem = (TipusItem) o;
+        // Dos TipusItem són iguals si tenen el mateix nom i els mateixos tipus d'atributs.
         return nom.equals(tipusItem.nom) && tipusAtributs.equals(tipusItem.tipusAtributs);
     }
 
@@ -79,6 +86,9 @@ public class TipusItem {
         return Objects.hash(nom, tipusAtributs);
     }
 
+    /**
+     * @return Còpia profunda del TipusItem.
+     */
     public TipusItem copiar() {
         Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (Map.Entry<String, TipusAtribut> tipusAtribut : this.tipusAtributs.entrySet()) {
@@ -88,23 +98,23 @@ public class TipusItem {
     }
 
     /**
-     * Assigna el nom del <code>TipusItem</code>.
-     * @param nom <code>String</code> que conté el nom del <code>TipusItem</code>.
+     * Assigna el nom del TipusItem.
+     * @param nom <code>String</code> que conté el nom del TipusItem.
      */
     public void assignarNom(String nom) {
         this.nom = nom;
     }
 
     /**
-     * @return <code>String</code> que conté el nom del <code>TipusItem</code>.
+     * @return <code>String</code> que conté el nom del TipusItem.
      */
     public String obtenirNom() {
         return nom;
     }
 
     /**
-     * Assigna els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
-     * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
+     * Assigna els tipusAtributs d'un TipusItem.
+     * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els tipus d'atributs.
      */
     public void assignarTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
         this.tipusAtributs = tipusAtributs;
@@ -122,25 +132,36 @@ public class TipusItem {
     }
 
     /**
-     * Afegeix el <code>TipusAtribut</code> amb el nom donats als <code>tipusAtributs</code> d'un <code>TipusItem</code>.
-     * Si <code>tipusAtributs</code> ja contenia un tipus d'atribut amb el nom donat, el sobreescriu.
-     * @param nomTipusAtribut Nom del <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
-     *                        <code>TipusItem</code>.
-     * @param tipusAtribut <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
-     *                     <code>TipusItem</code>.
+     * Afegeix el TipusAtribut amb el nom donat als tipus d'atributs d'un TipusItem
+     * Si 'tipusAtributsja' contenia un tipus d'atribut amb el nom donat, el sobreescriu.
+     * @param nomTipusAtribut Nom del TipusAtribut que s'afegirà als 'tipusAtributs' del TipusItem.
+     * @param tipusAtribut TipusAtribut que s'afegirà als 'tipusAtributs' del TipusItem
      */
     public void afegirTipusAtribut(String nomTipusAtribut, TipusAtribut tipusAtribut) {
         this.tipusAtributs.put(nomTipusAtribut, tipusAtribut);
     }
 
+    /**
+     * Esborra els atributs amb els noms donats del TipusItem. Si hi ha un nom que no es correspon amb cap atribut,
+     * s'ignora.
+     * @param nomAtributs Noms dels atributs que s'esborraran del TipusItem
+     */
     public void esborrarAtributs(TreeSet<String> nomAtributs) {
         for (String nomAtribut : nomAtributs) {
             tipusAtributs.remove(nomAtribut);
         }
     }
 
-    private TipusAtribut trobaTipusAtributMenysRestrictiu(ValorAtribut<?> valorAtribut1,
-                                                             ValorAtribut<?> valorAtribut2) throws IllegalArgumentException {
+    /**
+     * @param valorAtribut1 ValorAtribut
+     * @param valorAtribut2 ValorAtribut
+     * @return Retorna el TipusAtribut més restrictiu que admet els dos ValorsAtributs donats. És a dir, el TipusAtribut
+     * tal que els dos valors donats poden ser transformats en valors admesos per aquest.
+     * @throws IllegalArgumentException si no hi ha una relació entre la parella de ValorsAtributs donats i no es pot
+     * trobar un TipusAtribut que els reconegui als dos.
+     */
+    private static TipusAtribut trobaTipusAtribut(ValorAtribut<?> valorAtribut1,
+                                                  ValorAtribut<?> valorAtribut2) throws IllegalArgumentException {
         // Considerem cada cas particularment per a poder definir la distància que li correspon a cada TipusAtribut
         // i assegurar-nos que és compatible amb el ValorAtribut.
         if (valorAtribut1 instanceof ValorBoolea) {
@@ -192,10 +213,14 @@ public class TipusItem {
         } else if (valorAtribut1 instanceof ValorConjuntTextual) {
             return new TipusAtribut(new ValorConjuntTextual(), new DistanciaDiferenciaDeConjunts());
         } else {
-            throw new IllegalArgumentException("No hi ha una relació de restrictivitat definida per la parella de ValorsAtributs donada.");
+            throw new IllegalArgumentException("No hi ha una relació definida per la parella de ValorsAtributs donada.");
         }
     }
 
+    /**
+     * @param s <code>String</code> que conté el valor d'un atribut.
+     * @return TipusAtribut per defecte que admet el valor contingut en 's'.
+     */
     private TipusAtribut dedueixTipusAtribut(String s) {
         try {
             Double.parseDouble(s);
@@ -208,9 +233,8 @@ public class TipusItem {
                 try {
                     Double.parseDouble(primerValor);
                 } catch (NumberFormatException e2) {
-                    // TODO(maria): pensar si volem que aquest mètode pugui llegir conjunts de booleans (caldria iterar
-                    // per tots els elements per assegurar que són tots booleans. L'alternativa és fer el cast més endavant
-                    // si l'usuari ho demana.
+                    // Aquest mètode llegeix els conjunts de booleans com a ValorConjuntCategoric. Si és necessari que
+                    // ho faci, es modificarà més endavant.
                     return new TipusAtribut(new ValorConjuntCategoric(), new DistanciaDiferenciaDeConjunts());
                 }
                 return new TipusAtribut(new ValorConjuntNumeric(), new DistanciaEuclidiana());
