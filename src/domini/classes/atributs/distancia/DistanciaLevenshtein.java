@@ -89,7 +89,7 @@ public class DistanciaLevenshtein extends Distancia {
     }
 
     /**
-     * El factor de normalització d'aquesta distància és el triple de la norma màxima dels valors que tenen aquesta
+     * El factor de normalització d'aquesta distància és el doble de la norma màxima dels valors que tenen aquesta
      * distància. Si la norma màxima és zero, el factor de normalització és 1.0.
      * @return double Factor de normalització de la distància
      */
