@@ -101,7 +101,7 @@ public class DistanciaEuclidiana extends Distancia {
     }
 
     /**
-     * El factor de normalització d'aquesta distància és la norma màxima.
+     * El factor de normalització d'aquesta distància és el doble de la norma màxima.
      * @return double Factor de normalització de la distància
      */
     @Override
@@ -109,6 +109,6 @@ public class DistanciaEuclidiana extends Distancia {
         if (normaMaxima == 0.0) {
             return 1.0;
         }
-        return normaMaxima;
+        return 2.0 * normaMaxima;
     }
 }
