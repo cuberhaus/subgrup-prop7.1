@@ -1,0 +1,10 @@
+3
+Títol
+ValorTextual
+DistanciaLevenshtein
+Autor
+ValorCategoric
+DistanciaDiscreta
+Any
+ValorNumeric
+DistanciaEuclidiana

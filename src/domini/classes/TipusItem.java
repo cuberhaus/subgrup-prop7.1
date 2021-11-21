@@ -34,6 +34,9 @@ public class TipusItem {
      * @param numCandidats Es deduirà el <code>TipusItem</code> a partir dels primers <code>numCandidats</code> ítems.
      */
     public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws IllegalArgumentException {
+        if (numCandidats < 0) {
+            throw new IllegalArgumentException("Es necessita com a mínim un candidat per crear un TipusItem");
+        }
         if (numCandidats > taulaCSV.obtenirNumItems()) {
             throw new IllegalArgumentException("No es poden considerar més candidats que ítems a la taula per deduir" +
                     " el TipusItem.");
@@ -58,11 +61,6 @@ public class TipusItem {
         }
     }
 
-    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV) throws IllegalArgumentException {
-        this(nomTipusItem, taulaCSV, taulaCSV.obtenirNumItems());
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,9 +77,61 @@ public class TipusItem {
     public TipusItem copiar() {
         Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (Map.Entry<String, TipusAtribut> tipusAtribut : this.tipusAtributs.entrySet()) {
-            tipusAtributs.put(tipusAtribut.getKey(), tipusAtribut.getValue().copy());
+            tipusAtributs.put(tipusAtribut.getKey(), tipusAtribut.getValue().copiar());
         }
         return new TipusItem(nom, tipusAtributs);
+    }
+
+    /**
+     * Assigna el nom del <code>TipusItem</code>.
+     * @param nom <code>String</code> que conté el nom del <code>TipusItem</code>.
+     */
+    public void assignarNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @return <code>String</code> que conté el nom del <code>TipusItem</code>.
+     */
+    public String obtenirNom() {
+        return nom;
+    }
+
+    /**
+     * Assigna els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
+     * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
+     */
+    public void assignarTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
+        this.tipusAtributs = tipusAtributs;
+    }
+
+    /**
+     * @return <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
+     */
+    public Map<String, TipusAtribut> obtenirTipusAtributs() {
+        Map<String, TipusAtribut> copiaTipusAtributs = new TreeMap<>();
+        for (Map.Entry<String, TipusAtribut> entrada : tipusAtributs.entrySet()) {
+            copiaTipusAtributs.put(entrada.getKey(), entrada.getValue().copiar());
+        }
+        return copiaTipusAtributs;
+    }
+
+    /**
+     * Afegeix el <code>TipusAtribut</code> amb el nom donats als <code>tipusAtributs</code> d'un <code>TipusItem</code>.
+     * Si <code>tipusAtributs</code> ja contenia un tipus d'atribut amb el nom donat, el sobreescriu.
+     * @param nomTipusAtribut Nom del <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
+     *                        <code>TipusItem</code>.
+     * @param tipusAtribut <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
+     *                     <code>TipusItem</code>.
+     */
+    public void afegirTipusAtribut(String nomTipusAtribut, TipusAtribut tipusAtribut) {
+        this.tipusAtributs.put(nomTipusAtribut, tipusAtribut);
+    }
+
+    public void esborrarAtributs(TreeSet<String> nomAtributs) {
+        for (String nomAtribut : nomAtributs) {
+            tipusAtributs.remove(nomAtribut);
+        }
     }
 
     private TipusAtribut trobaTipusAtributMenysRestrictiu(ValorAtribut<?> valorAtribut1,
@@ -163,79 +213,5 @@ public class TipusItem {
             return new TipusAtribut(new ValorCategoric(), new DistanciaLevenshtein());
         }
         return new TipusAtribut(new ValorNumeric(), new DistanciaEuclidiana());
-    }
-
-    /**
-     * Assigna el nom del <code>TipusItem</code>.
-     * @param nom <code>String</code> que conté el nom del <code>TipusItem</code>.
-     */
-    public void assignarNom(String nom) {
-        this.nom = nom;
-    }
-
-    /**
-     * @return <code>String</code> que conté el nom del <code>TipusItem</code>.
-     */
-    public String obtenirNom() {
-        return nom;
-    }
-
-    /**
-     * Assigna els <code>tipusAtributs</code> d'un <code>TipusItem</code>.
-     * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
-     */
-    public void assignarTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
-        this.tipusAtributs = tipusAtributs;
-    }
-
-    /**
-     * @return <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
-     */
-    public Map<String, TipusAtribut> obtenirTipusAtributs() {
-        Map<String, TipusAtribut> copiaTipusAtributs = new TreeMap<>();
-        for (Map.Entry<String, TipusAtribut> entrada : tipusAtributs.entrySet()) {
-            copiaTipusAtributs.put(entrada.getKey(), entrada.getValue().copy());
-        }
-        return copiaTipusAtributs;
-    }
-
-    /**
-     * Afegeix el <code>TipusAtribut</code> amb el nom donats als <code>tipusAtributs</code> d'un <code>TipusItem</code>.
-     * Si <code>tipusAtributs</code> ja contenia un tipus d'atribut amb el nom donat, el sobreescriu.
-     * @param nomTipusAtribut Nom del <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
-     *                        <code>TipusItem</code>.
-     * @param tipusAtribut <code>TipusAtribut</code> que s'afegirà als <code>tipusAtributs</code> del
-     *                     <code>TipusItem</code>.
-     */
-    public void afegirTipusAtribut(String nomTipusAtribut, TipusAtribut tipusAtribut) {
-        this.tipusAtributs.put(nomTipusAtribut, tipusAtribut);
-    }
-
-    /**
-     * Un conjunt d'atributs és compatible amb un tipus d'ítem si hi ha una bijecció entre el conjunt d'atributs i el
-     * conjunt de tipus d'atributs del tipus d'ítem, de manera que cada atribut es relaciona amb un tipus d'atribut amb
-     * el mateix nom i el mateix TipusAtribut.
-     * @param atributs <code>Map<String, ValorAtribut></code> que relaciona el nom d'un atribut amb el seu <code>ValorAtribut</code>.
-     * @return Retorna cert si els atributs donats són compatibles amb el tipus d'ítem actual i, altrament, retorna fals.
-     */
-    public boolean esCompatible(Map<String, ValorAtribut<?>> atributs) {
-        if (tipusAtributs.size() != atributs.size()) {
-            return false;
-        }
-        for (Map.Entry<String, ValorAtribut<?>> atribut : atributs.entrySet()) {
-            if (!tipusAtributs.containsKey(atribut.getKey())) {
-                return false;
-            }
-            if (tipusAtributs.get(atribut.getKey()).obtenirValorAtribut().getClass() != atribut.getValue().getClass()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void esborrarAtributs(TreeSet<String> nomAtributs) {
-        for (String nomAtribut : nomAtributs) {
-            tipusAtributs.remove(nomAtribut);
-        }
     }
 }

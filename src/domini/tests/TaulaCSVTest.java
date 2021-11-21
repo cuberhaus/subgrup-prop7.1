@@ -265,47 +265,6 @@ public class TaulaCSVTest {
         tauleta.imprimir();
     }
 
-    //Si no s'ha incialitzat excepcio
-    @Test(expected = IllegalStateException.class)
-    public void obtenirValorsDeItemSeleccionatExepcioTaulaNoInicialitzada() throws IllegalStateException {
-        TaulaCSV tauleta = new TaulaCSV();
-        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat("hola", "adios");
-    }
-
-    //Si no existeix un atribut amb aquell nom, excepcio
-    @Test(expected = IllegalArgumentException.class)
-    public void obtenirValorsDeItemSeleccionatExcepcioSiNoExisteixAtribut() throws IllegalArgumentException, IllegalStateException {
-        TaulaCSV tauleta = new TaulaCSV();
-        ArrayList<String> atributs = new ArrayList<>();
-        atributs.add("edad");
-        atributs.add("genere");
-        tauleta.afegirConjuntAtributs(atributs);
-
-        System.out.println("Arribo");
-        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat("hola", "adios");
-    }
-
-    //Si no s'ha inicialitzat la taula excepcio
-    @Test(expected = IllegalStateException.class)
-    public void testObtenirValorsDeItemSeleccionatExcepcioSiTaulaNoInicialitzada() throws IllegalStateException {
-        TaulaCSV tauleta = new TaulaCSV();
-        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat(1, "adios");
-    }
-
-    //Si l'index no té atribut, excepcio
-    @Test(expected = IllegalArgumentException.class)
-    public void testObtenirValorsDeItemSeleccionatExcepcioSiIndexNoCorresponAtribut() throws IllegalStateException, IllegalArgumentException {
-        TaulaCSV tauleta = new TaulaCSV();
-        ArrayList<String> atributs = new ArrayList<>();
-        atributs.add("edad");
-        atributs.add("genere");
-        tauleta.afegirConjuntAtributs(atributs);
-
-        System.out.println("Arribo");
-        tauleta.obtenirValorsDeItemSeleccionatAmbValorSeleccionat(3, "hola");
-
-    }
-
     //Si no estan els atributs inicialitzats, excepcio
     @Test(expected = IllegalStateException.class)
     public void obtenirValorAtributItemExcepcioSiTaulaNoInicialitzada() throws IllegalStateException {

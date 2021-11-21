@@ -37,9 +37,6 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         assignarAtributs(nomAtributs, valors);
         actualitzarFactorNormalitzacioAtributs();
         this.valoracions = new TreeMap<>();
-        if (!tipusItem.esCompatible(atributs)) {
-            throw new IllegalArgumentException("Els atributs i el tipus d'ítem donats no són compatibles.");
-        }
     }
 
     @Override

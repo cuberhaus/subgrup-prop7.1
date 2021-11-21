@@ -11,7 +11,7 @@ public class DriverEscriptorDeCSV {
     public static void testEscriureCSV() {
         String ubicacioSortida = consola.llegirString("Introdueix la ruta del fitxer de sortida");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
 
             EscriptorDeCSV escriptor = new EscriptorDeCSV();
             escriptor.escriureCSV(ubicacioSortida, taula);
