@@ -1,47 +1,16 @@
-# Command line instructions
+Casacuberta Gil, Pol
 
+Moreno Martínez, Edgar
 
-## Git global setup
+Prat Colomer, Maria
 
-git config --global user.name "name"
+Vega Gallego, Pablo
 
-git config --global user.email "name.surname@est.fib.upc.edu"
+pol.casacuberta@estudiantat.upc.edu
 
-## Create a new repository
+edgar.moreno.martinez@estudiantat.upc.edu
 
-git clone https://gitlab.fib.upc.edu/grau-prop/subgrup-prop7-1.git
+maria.prat@estudiantat.upc.edu
 
-cd subgrup-prop7-1
-
-touch README.md
-
-git add README.md
-
-git commit -m "add README"
-
-git push -u origin master
-
-## Existing folder
-
-cd existing_folder
-
-git init
-
-git remote add origin https://gitlab.fib.upc.edu/grau-prop/subgrup-prop7-1.git
-
-git add .
-
-git commit -m "Initial commit"
-
-git push -u origin master
-
-## Existing Git repository
-
-cd existing_repo
-
-git remote add origin https://gitlab.fib.upc.edu/grau-prop/subgrup-prop7-1.git
-
-git push -u origin --all
-
-git push -u origin --tags
+pablo.vega.gallego@estudiantat.upc.edu
 

@@ -17,8 +17,8 @@ public class DriverLectorDeCSV {
     public static void testLectorCSV() {
         try {
             LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(consola.llegirString("Introdueix la ubicacio del csv"));
-            taula.imprimir();
+            TaulaCSV mockTaula = lector.llegirCSV(consola.llegirString("Introdueix la ubicacio del csv"));
+            mockTaula.imprimir();
         } catch (IOException e1) {
             System.out.println("Ubicacio no valida");
         } catch (Exception e) {
@@ -30,8 +30,8 @@ public class DriverLectorDeCSV {
         try {
             String ubicacio = consola.llegirString("Introduir ubicacio de la taula");
             LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
-            ArrayList<ArrayList<String>> contingutTaula = taula.obtenirTaula();
+            TaulaCSV mockTaula = lector.llegirCSV(ubicacio);
+            ArrayList<ArrayList<String>> contingutTaula = mockTaula.obtenirTaula();
 
             FileReader lectorFitxer = new FileReader(ubicacio);
             BufferedReader fitxer = new BufferedReader(lectorFitxer);
