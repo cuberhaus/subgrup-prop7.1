@@ -1,5 +1,5 @@
-id,Títol,Autor
-1,Los endemoniados,Fiódor Dostoievski
-2,Los hermano Karamazov,Fiódor Dostoievski
-3,Middlemarch,George Eliot
-4,El hombre invisible,Ralph Ellison
+id,Títol,Autor,Any
+1,Los endemoniados,Fiódor Dostoievski,
+2,Los hermano Karamazov,Fiódor Dostoievski,1987
+3,Middlemarch,George Eliot,1978
+4,El hombre invisible,Ralph Ellison,1234

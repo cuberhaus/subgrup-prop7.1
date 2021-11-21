@@ -39,11 +39,23 @@ public class DriverLectorDeCSV {
             String row;
             ArrayList<ArrayList<String>> comparar = new ArrayList<>();
             while ((row = fitxer.readLine()) != null) {
+                row = row + ' ';
                 String[] fila = row.split(",", 0);
+
                 ArrayList<String> afila = new ArrayList<>();
                 for (String elem : fila) {
                     afila.add(elem);
                 }
+
+                String ultima = afila.get(afila.size() - 1);
+                StringBuffer pasos = new StringBuffer(ultima);
+                pasos.deleteCharAt(pasos.length()-1);
+
+                String result = pasos.toString();
+                afila.remove(afila.size() - 1);
+                afila.add(result);
+
+
                 comparar.add(new ArrayList<>(afila));
                 afila.clear();
             }
