@@ -18,7 +18,7 @@ public class DriverConjuntUsuaris {
     public static void testAfegirTaulaCSV() {
         System.out.println("Test afegir Taula CSV");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV2"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
@@ -31,7 +31,7 @@ public class DriverConjuntUsuaris {
     public static void testEsborrarId() {
         System.out.println("Test esborrar amb un Id");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV2"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
@@ -48,7 +48,7 @@ public class DriverConjuntUsuaris {
     public static void testEsborrarUsuari() {
         System.out.println("Test esborrar Usuari");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV2"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
@@ -65,7 +65,7 @@ public class DriverConjuntUsuaris {
     public static void testObtenirUsuaris() {
         System.out.println("Test esborrar Usuari");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV2"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
