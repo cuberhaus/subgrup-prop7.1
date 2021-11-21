@@ -1,4 +1,6 @@
 import domini.classes.*;
+import domini.classes.csv.TaulaCSV;
+import domini.classes.recomanador.metode_recomanador.Punt;
 import libs.consola;
 
 
@@ -41,14 +43,6 @@ public class DriverUsuari {
         System.out.println("Testejant obtenirNom.");
         Usuari u1 = UtilitatsDeLectura.llegirUsuari();
         System.out.println("obtenirNom: " + u1.obtenirNom());
-    }
-
-    private static void testSetNom() throws Exception {
-        System.out.println("Testejant setNom.");
-        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-        String nouNom = consola.llegirString("Escriu el nom de l'usuari:");
-        usuari.setContrasenya(nouNom);
-        System.out.println("SetNom: " + usuari.obtenirNom());
     }
 
     private static void testObtenirId() throws Exception {
@@ -206,6 +200,26 @@ public class DriverUsuari {
         }
     }
 
+    private static void testSetNom() throws Exception {
+        System.out.println("Testejant setNom.");
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        String nouNom = consola.llegirString("Escriu el nom de l'usuari:");
+        usuari.setContrasenya(nouNom);
+        System.out.println("SetNom: " + usuari.obtenirNom());
+    }
+
+    public static void testTransformaAPunt() throws Exception {
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
+        String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
+        ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+        Punt punt = usuari.transformaAPunt(conjuntItems);
+        for (double elem: punt) {
+            System.out.println(elem);
+        }
+    }
+
     public static void main(String[] args)  {
         System.out.println("Driver per la classe Item");
         String consulta = "\n0 - Sortir\n" +
@@ -224,11 +238,13 @@ public class DriverUsuari {
                 "13 - Test Equals\n" +
                 "14 - Test CompareTo\n" +
                 "15 - Test Copy\n" +
-                "16 - Test HashCode\n";
-        String err = "Valor invàlid: introdueix un enter entre 0 i 16";
+                "16 - Test HashCode\n" +
+                "17 - Test setNom\n" +
+                "18 - Test Transforma a punt\n";
+        String err = "Valor invàlid: introdueix un enter entre 0 i 18";
         while(true){
             try {
-                int i = consola.llegirInt(consulta, err, 0, 16);
+                int i = consola.llegirInt(consulta, err, 0, 18);
                 switch (i) {
                     case 0:
                         return;
@@ -282,6 +298,9 @@ public class DriverUsuari {
                         break;
                     case 17:
                         testSetNom();
+                        break;
+                    case 18:
+                        testTransformaAPunt();
                         break;
                 }
             }
