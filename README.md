@@ -16,3 +16,8 @@ maria.prat@estudiantat.upc.edu
 
 pablo.vega.gallego@estudiantat.upc.edu
 
+maria.prat.colomer@gmail.com
+
+mariaprat21@gmail.com
+
+48213850+EdgarMM19@users.noreply.github.com

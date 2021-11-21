@@ -8,7 +8,9 @@ import java.util.Arrays;
  * @author maria.prat
  */
 public class ValorConjuntNumeric extends ValorConjunt<Double> {
-
+    /**
+     * Constructor d'un ValorConjuntNumeric amb valor nul.
+     */
     public ValorConjuntNumeric() {
         this.valor = null;
     }
@@ -36,6 +38,10 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
         }
     }
 
+    /**
+     * Constructor amb una String.
+     * @param s <code>bString</code> que conté els valors que s'assignaran a aquest atribut separats pel símbol ';'
+     */
     public ValorConjuntNumeric(String s) {
         if (s == null) {
             this.valor = null;
@@ -53,6 +59,9 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
         }
     }
 
+    /**
+     * @return Còpia del ValorConjuntNumeric.
+     */
     @Override
     public ValorConjuntNumeric copiar() {
         return new ValorConjuntNumeric(valor);

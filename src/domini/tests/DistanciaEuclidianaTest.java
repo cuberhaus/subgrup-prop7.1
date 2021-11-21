@@ -12,6 +12,10 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe DistanciaEuclidiana
+ */
+
 @RunWith(Enclosed.class)
 public class DistanciaEuclidianaTest {
 

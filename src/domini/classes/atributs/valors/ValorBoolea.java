@@ -5,19 +5,25 @@ package domini.classes.atributs.valors;
  * @author maria.prat
  */
 public class ValorBoolea extends ValorAtribut<Boolean> {
-
+    /**
+     * Constructor d'un ValorBooleà amb valor nul.
+     */
     public ValorBoolea() {
         this.valor = null;
     }
 
     /**
-     * Constructor amb el valor booleà.
+     * Constructor amb un booleà.
      * @param valor <code>Boolean</code> que conté el valor d'aquest atribut.
      */
     public ValorBoolea(Boolean valor) {
         this.valor = valor;
     }
 
+    /**
+     * Constructor d'un ValorBooleà amb una String que conté un booleà.
+     * @param s <code>String</code> que conté el valor d'aquest atribut.
+     */
     public ValorBoolea(String s) {
         if (s == null || s.isEmpty()) {
             this.valor = null;
@@ -26,6 +32,9 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
         }
     }
 
+    /**
+     * @return Còpia del ValorBoolea.
+     */
     @Override
     public ValorBoolea copiar() {
         return new ValorBoolea(valor);
@@ -39,7 +48,10 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
         return valor;
     }
 
-
+    /**
+     * @param s <code>String</code> que conté un valor
+     * @return Cert si s'ha pogut obtenir un valor booleà de la String donada. Altrament, retorna fals.
+     */
     public static boolean esBoolea(String s) {
         if (s == null) {
             return false;

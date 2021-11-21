@@ -11,6 +11,10 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe DistanciaLevenshtein
+ */
+
 @RunWith(Enclosed.class)
 public class DistanciaLevenshteinTest {
 

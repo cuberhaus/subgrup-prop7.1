@@ -1,0 +1,4 @@
+Conté la documentació del projecte.
+DiagramaDeCasosDUs.jpg
+DissenyIRelacioDeClasses.pdf
+index.txt

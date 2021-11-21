@@ -157,7 +157,6 @@ public class TaulaCSVTest {
         valors.add("20");
         tauleta.afegirConjuntValors(valors);
 
-        System.out.println("Arribo");
         tauleta.obtenirItem(1);
     }
 
@@ -175,7 +174,6 @@ public class TaulaCSVTest {
         valors.add("20");
         tauleta.afegirConjuntValors(valors);
 
-        System.out.println("Arribo");
         ArrayList<String> compara = tauleta.obtenirItem(0);
         assertEquals(valors, compara);
     }
@@ -286,7 +284,6 @@ public class TaulaCSVTest {
         valors.add("20");
         tauleta.afegirConjuntValors(valors);
 
-        System.out.println("Arribo");
         tauleta.obtenirValorAtribut(1, "hola");
     }
 
@@ -304,7 +301,6 @@ public class TaulaCSVTest {
         valors.add("20");
         tauleta.afegirConjuntValors(valors);
 
-        System.out.println("Arribo");
         tauleta.obtenirValorAtribut(3, "genere");
     }
 }

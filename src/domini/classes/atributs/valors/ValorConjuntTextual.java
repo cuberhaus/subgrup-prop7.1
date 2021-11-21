@@ -7,7 +7,9 @@ import java.util.ArrayList;
  * @author maria.prat
  */
 public class ValorConjuntTextual extends ValorConjunt<String> {
-
+    /**
+     * Constructor d'un ValorConjuntTextual amb valor nul.
+     */
     public ValorConjuntTextual() {
         this.valor = null;
     }
@@ -20,6 +22,10 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         this.valor = valor;
     }
 
+    /**
+     * Constructor amb una String.
+     * @param s <code>String</code> que conté els valors que s'assignaran a aquest atribut separats pel símbol ';'
+     */
     public ValorConjuntTextual(String s) {
         if (s == null) {
             this.valor = null;
@@ -31,6 +37,10 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         }
     }
 
+    /**
+     * Constructor amb un conjunt de Strings.
+     * @param valors <code>String[]</code> que conté els valors que s'assignaran a aquest atribut.
+     */
     public ValorConjuntTextual(String[] valors) {
         if (valors == null) {
             this.valor = null;
@@ -42,6 +52,9 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         }
     }
 
+    /**
+     * @return Còpia del ValorConjuntTextual.
+     */
     @Override
     public ValorConjuntTextual copiar() {
         return new ValorConjuntTextual(valor);

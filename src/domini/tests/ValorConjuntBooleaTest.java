@@ -10,6 +10,10 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit tests de la classe ValorConjuntBoolea
+ */
+
 @RunWith(Enclosed.class)
 public class ValorConjuntBooleaTest {
     @RunWith(Parameterized.class)

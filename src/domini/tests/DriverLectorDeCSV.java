@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Driver per la classe LectorDeCSV
+ */
+
 public class DriverLectorDeCSV {
     public static void testLectorCSV() {
         try {

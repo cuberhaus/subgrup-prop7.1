@@ -9,14 +9,23 @@ import domini.classes.atributs.valors.ValorNumeric;
  * @author maria.prat
  */
 public class DistanciaEuclidiana extends Distancia {
-    private double normaMinima = Double.POSITIVE_INFINITY;
+    /**
+     * Norma màxima dels valors amb aquesta distància.
+     */
     private double normaMaxima = 0.0;
 
+    /**
+     * @return Còpia de la Distància.
+     */
     @Override
     public Distancia copiar() {
         return new DistanciaEuclidiana();
     }
 
+    /**
+     * @param valorAtribut Valor d'un atribut
+     * @return Cert si la distància admet el valor donat. Altrament, fals.
+     */
     @Override
     public boolean admet(ValorAtribut<?> valorAtribut) {
         if (valorAtribut == null) {
@@ -25,6 +34,12 @@ public class DistanciaEuclidiana extends Distancia {
         return valorAtribut instanceof ValorNumeric || valorAtribut instanceof ValorConjuntNumeric;
     }
 
+    /**
+     * @param valor1 Valor del primer atribut
+     * @param valor2 Valor del segon atribut
+     * @return <code>double</code> que conté el valor de la distància entre els dos valors donats.
+     * @throws IllegalArgumentException si els dos valors són de subclasses diferents o si la distància no els admet.
+     */
     @Override
     public double obtenir(ValorAtribut<?> valor1, ValorAtribut<?> valor2) throws IllegalArgumentException {
         if (!(valor1.getClass().equals(valor2.getClass()))) {
@@ -51,6 +66,12 @@ public class DistanciaEuclidiana extends Distancia {
         }
     }
 
+    /**
+     * La norma d'un ValorAtribut es defineix com la distància entre el ValorAtribut i el ValorAtribut amb valor zero.
+     * @param valor Valor d'un atribut
+     * @return <code>double</code> que conté la norma del ValorAtribut donat.
+     * @throws IllegalArgumentException si el valor és nul o si la distància no l'admet.
+     */
     public double obtenirNorma(ValorAtribut<?> valor) throws IllegalArgumentException {
         if (valor == null) {
             throw new IllegalArgumentException("No es pot obtenir la norma d'un ValorAtribut nul.");
@@ -66,20 +87,28 @@ public class DistanciaEuclidiana extends Distancia {
         }
     }
 
+    /**
+     * Actualitza el factor de normalització de la distància donat un nou valor.
+     * @param valor Valor d'un atribut
+     * @throws IllegalArgumentException si el valor donat és nul
+     */
     @Override
     public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
         if (valor == null) {
             throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
         }
-        normaMinima = Math.min(obtenirNorma(valor), normaMinima);
         normaMaxima = Math.max(obtenirNorma(valor), normaMaxima);
     }
 
+    /**
+     * El factor de normalització d'aquesta distància és el doble de la norma màxima.
+     * @return double Factor de normalització de la distància
+     */
     @Override
     public double obtenirFactorDeNormalitzacio() {
-        if (normaMaxima == Double.POSITIVE_INFINITY || normaMaxima == normaMinima) {
+        if (normaMaxima == 0.0) {
             return 1.0;
         }
-        return normaMaxima - normaMinima;
+        return 2.0 * normaMaxima;
     }
 }

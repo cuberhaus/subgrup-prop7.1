@@ -14,6 +14,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit tests de la classe ValorConjuntCategoric
+ */
+
 @RunWith(Enclosed.class)
 public class ValorConjuntCategoricTest {
     @RunWith(Parameterized.class)

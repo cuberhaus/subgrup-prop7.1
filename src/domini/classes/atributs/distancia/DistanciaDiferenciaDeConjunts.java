@@ -8,16 +8,27 @@ import java.util.Set;
 
 /**
  * Representa la distància de diferència de conjunts entre dos atributs conjunts.
+ * Aquesta distància es defineix com la mida de la unió dels dos conjunts menys la mida de la seva intersecció.
  * @author maria.prat
  */
 public class DistanciaDiferenciaDeConjunts extends Distancia {
+    /**
+     * Norma màxima dels valors amb aquesta distància.
+     */
     private double normaMaxima = 0.0;
 
+    /**
+     * @return Còpia de la Distància.
+     */
     @Override
     public Distancia copiar() {
         return new DistanciaDiferenciaDeConjunts();
     }
 
+    /**
+     * @param valorAtribut Valor d'un atribut
+     * @return Cert si la distància admet el valor donat. Altrament, fals.
+     */
     @Override
     public boolean admet(ValorAtribut<?> valorAtribut) {
         if (valorAtribut == null) {
@@ -26,6 +37,12 @@ public class DistanciaDiferenciaDeConjunts extends Distancia {
         return valorAtribut instanceof ValorConjunt;
     }
 
+    /**
+     * @param valor1 Valor del primer atribut
+     * @param valor2 Valor del segon atribut
+     * @return <code>double</code> que conté el valor de la distància entre els dos valors donats.
+     * @throws IllegalArgumentException si els dos valors són de subclasses diferents o si la distància no els admet.
+     */
     @Override
     public double obtenir(ValorAtribut<?> valor1, ValorAtribut<?> valor2) throws IllegalArgumentException {
         if (!(valor1.getClass().equals(valor2.getClass()))) {
@@ -43,6 +60,11 @@ public class DistanciaDiferenciaDeConjunts extends Distancia {
         return union.size() - intersection.size();
     }
 
+    /**
+     * Actualitza el factor de normalització de la distància donat un nou valor.
+     * @param valor Valor d'un atribut
+     * @throws IllegalArgumentException si el valor donat és nul
+     */
     @Override
     public void actualitzarFactorDeNormalitzacio(ValorAtribut<?> valor) {
         if (valor == null) {
@@ -51,6 +73,11 @@ public class DistanciaDiferenciaDeConjunts extends Distancia {
         normaMaxima = Math.max(normaMaxima, ((ValorConjunt<?>) valor).obtenirValor().size());
     }
 
+    /**
+     * El factor de normalització d'aquesta distància és el doble de la norma màxima dels valors que tenen aquesta
+     * distància. Si la norma màxima és zero, el factor de normalització és 1.0.
+     * @return double Factor de normalització de la distància
+     */
     @Override
     public double obtenirFactorDeNormalitzacio() {
         if (normaMaxima == 0.0) {

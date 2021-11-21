@@ -5,7 +5,9 @@ package domini.classes.atributs.valors;
  * @author maria.prat
  */
 public class ValorNumeric extends ValorAtribut<Double> {
-
+    /**
+     * Constructor d'un ValorNumèric amb valor nul.
+     */
     public ValorNumeric() {
         this.valor = null;
     }
@@ -18,6 +20,9 @@ public class ValorNumeric extends ValorAtribut<Double> {
         this.valor = valor;
     }
 
+    /**
+     * @return Còpia del ValorNumeric.
+     */
     @Override
     public ValorNumeric copiar() {
         return new ValorNumeric(valor);
