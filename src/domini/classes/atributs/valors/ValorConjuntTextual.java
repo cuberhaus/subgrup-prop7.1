@@ -20,19 +20,26 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         this.valor = valor;
     }
 
-    /**
-     * Constructor amb un conjunt de <code>Strings</code>.
-     * @param valors <code>String[]</code> que conté els valors que s'assignaran a aquest atribut.
-     */
-    public ValorConjuntTextual(String[] valors) {
-        this.valor = new ArrayList<>();
-        for (String valor : valors) {
-            this.valor.add(new ValorTextual(valor));
+    public ValorConjuntTextual(String s) {
+        if (s == null) {
+            this.valor = null;
+        } else {
+            this.valor = new ArrayList<>();
+            for (String valor : s.split(";")) {
+                this.valor.add(new ValorCategoric(valor));
+            }
         }
     }
 
-    public ValorConjuntTextual(String s) {
-        this(s.split(";"));
+    public ValorConjuntTextual(String[] valors) {
+        if (valors == null) {
+            this.valor = null;
+        } else {
+            this.valor = new ArrayList<>();
+            for (String valor : valors) {
+                this.valor.add(new ValorCategoric(valor));
+            }
+        }
     }
 
     @Override
