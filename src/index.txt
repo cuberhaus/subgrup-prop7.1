@@ -1,0 +1,3 @@
+Carpeta principal del codi, on trobem el codi font de les classes, tests i llibreries implementades pels membres del grup.
+-domini/
+-libs/

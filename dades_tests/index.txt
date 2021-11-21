@@ -1,0 +1,22 @@
+En aquest directori, emmagatzemem valors per defecte per tal de poder realitzar els tests dels drivers amb una mostra
+valida i funcional. Cadascun dels fitxers mostra uns valors arbitraris per a facilitar la comprovacio de les classes.
+-ConjuntItems1
+-Id1
+-Id2
+-Item1
+-Item2
+-item.csv
+-MockTaulaCSV1
+-NomAtributs1
+-NomAtributs2
+-ratings
+-ratings.test.unknown.csv
+-Recomanacio1
+-Seguretat1
+-TaulaCSV1
+-TaulaCSV2
+-TipusAtribut1
+-TipusAtributs1
+-TipusItem1
+-TreeSet1
+-ValorsAtributs1
