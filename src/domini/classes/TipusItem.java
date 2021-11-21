@@ -26,10 +26,6 @@ public class TipusItem {
         this.tipusAtributs = tipusAtributs;
     }
 
-    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV) throws IllegalArgumentException {
-        this(nomTipusItem, taulaCSV, taulaCSV.obtenirNumItems());
-    }
-
     /**
      * Crea un <code>TipusItem</code> donats el nom del <code>TipusItem</code> i un conjunt d'ítems.
      * Assigna el <code>TipusAtribut</code> per defecte en funció del tipus de cada valor.
@@ -60,6 +56,10 @@ public class TipusItem {
                 }
             }
         }
+    }
+
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV) throws IllegalArgumentException {
+        this(nomTipusItem, taulaCSV, taulaCSV.obtenirNumItems());
     }
 
 
@@ -231,10 +231,6 @@ public class TipusItem {
             }
         }
         return true;
-    }
-
-    public boolean conteAtributs(ArrayList<String> nomAtributs) {
-        return tipusAtributs.keySet().containsAll(nomAtributs);
     }
 
     public void esborrarAtributs(TreeSet<String> nomAtributs) {
