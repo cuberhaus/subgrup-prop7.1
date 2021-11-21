@@ -35,7 +35,7 @@ public class KNN {
             if (pq.size() < k) {
                 pq.add(new Pair<>(-distance, iter));
             }
-            else if(!pq.isEmpty() && -pq.poll().x > distance) {
+            else if(!pq.isEmpty() && -pq.peek().x > distance) {
                 pq.remove();
                 pq.add(new Pair<>(-distance,iter));
             }
