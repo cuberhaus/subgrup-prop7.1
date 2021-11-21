@@ -135,7 +135,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         if (valoracions.containsKey(valoracio.obtenirItem())) {
             return false;
         }
-        valoracions.put(valoracio.obtenirItem(),valoracio);
+        valoracions.put(valoracio.obtenirItem(), valoracio);
         return true;
     }
 
@@ -200,6 +200,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         Usuari usuari = (Usuari) o;
         return id.equals(usuari.id);
     }
+
     /**
      * Calcula un codi de hash idèntic per als usuaris amb el mateix id,
      * altrament retorna un hash diferent.
@@ -214,12 +215,8 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         return id.compareTo(o.id);
     }
 
-    public Usuari copy() {
-        Map<Item, Valoracio> valoracions = new TreeMap<>();
-        for (Map.Entry<Item, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
-            valoracions.put(valoracioEntry.getKey().copiar(), valoracioEntry.getValue().copy());
-        }
-        return new Usuari(id.copiar(), nom, contrasenya, valoracions);
+    public Usuari copiar() {
+        return new Usuari(this.id.copiar(), this.nom, this.contrasenya, new TreeMap<>());
     }
 }
 

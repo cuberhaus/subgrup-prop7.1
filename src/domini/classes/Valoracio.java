@@ -37,7 +37,7 @@ public class Valoracio {
      * @return El resultat és l'item del paràmetre implícit
      */
     public Item obtenirItem() {
-        return item;
+        return item.copiar();
     }
 
     /**
@@ -71,7 +71,7 @@ public class Valoracio {
         return Objects.hash(usuari, item);
     }
 
-    public Valoracio copy() {
-        return new Valoracio(valor, usuari.copy(), item.copiar());
+    public Valoracio copiar() {
+        return new Valoracio(valor, usuari.copiar(), item.copiar());
     }
 }

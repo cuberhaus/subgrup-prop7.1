@@ -139,22 +139,33 @@ public class UtilitatsDeLectura {
         try {
             FileReader lector = new FileReader(ruta);
             BufferedReader fitxer = new BufferedReader(lector);
-            Id id = UtilitatsDeLectura.llegirId();
-            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
+            int valor = Integer.parseInt(fitxer.readLine());
+            boolean actiu = Boolean.parseBoolean(fitxer.readLine());
+            Id id = new Id(valor, actiu);
+            String nomTipusItem = fitxer.readLine();
+            int numTipusAtributs = Integer.parseInt(fitxer.readLine());
+            Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+            for (int i = 0; i < numTipusAtributs; ++i) {
+                String nomTipusAtribut = fitxer.readLine();
+                String valorAtribut = fitxer.readLine();
+                String distancia = fitxer.readLine();
+                tipusAtributs.put(nomTipusAtribut, new TipusAtribut(valorAtributDesDelNom(valorAtribut),
+                        distanciaDesDelNom(distancia)));
+            }
+            TipusItem tipusItem = new TipusItem(nomTipusItem, tipusAtributs);
             ArrayList<String> nomAtributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
             ArrayList<String> valorAtributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
             Item item = new Item(id, tipusItem, nomAtributs, valorAtributs);
             Map<Usuari, Valoracio> valoracions;
             int numValoracions = Integer.parseInt(fitxer.readLine());
             for (int i = 0; i < numValoracions; ++i) {
-                // TODO(maria): afegir stubs
                 Usuari usuari = new Usuari(new Id(Integer.parseInt(fitxer.readLine()), true));
                 new Valoracio(Double.parseDouble(fitxer.readLine()), usuari, item);
             }
             return item;
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());
-        } catch (Exception e) {
+        } catch (Exception e1) {
             throw new Exception("Fitxer invàlid.");
         }
     }
@@ -200,7 +211,7 @@ public class UtilitatsDeLectura {
             int numItems;
             try {
                 numItems = Integer.parseInt(fitxer.readLine());
-                System.out.println("Mi indice es :" + numItems);
+                System.out.println("El meu índex es :" + numItems);
             } catch (NumberFormatException e) {
                 throw new Exception("El nombre d'items no és un enter.");
             }
@@ -226,7 +237,7 @@ public class UtilitatsDeLectura {
     }
 
     public static TreeSet<String> llegirTreeSet() throws Exception {
-        String ruta = obtenirRutaORutaPerDefecte("Atributs", "Atributs1");
+        String ruta = obtenirRutaORutaPerDefecte("TreeSet", "TreeSet1");
         try {
             TreeSet<String> tree = new TreeSet<>();
             FileReader lector = new FileReader(ruta);
@@ -235,13 +246,11 @@ public class UtilitatsDeLectura {
             try {
                 numAtribs = Integer.parseInt(fitxer.readLine());
             } catch (NumberFormatException e) {
-                throw new Exception("El numero d'atributs no és un enter.");
+                throw new Exception("El numero d'elements no és un enter.");
             }
-
             for (int i = 0; i < numAtribs; ++i) {
                 tree.add(fitxer.readLine());
             }
-
             return tree;
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());

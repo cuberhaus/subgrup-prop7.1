@@ -59,8 +59,8 @@ public class DriverConjuntItems {
             System.out.println("S'ha creat la instancia");
             UtilitatsDEscriptura.imprimirConjuntItems(conjunt);
 
-            TreeSet<String> atriibuts = UtilitatsDeLectura.llegirTreeSet();
-            conjunt.esborrarAtributs(atriibuts);
+            TreeSet<String> atributs = UtilitatsDeLectura.llegirTreeSet();
+            conjunt.esborrarAtributs(atributs);
             UtilitatsDEscriptura.imprimirConjuntItems(conjunt);
 
         } catch (Exception e) {

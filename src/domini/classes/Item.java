@@ -3,10 +3,7 @@ package domini.classes;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
 
-import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Representa un ítem.
@@ -46,7 +43,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     }
 
     public Item copiar() {
-        return new Item(this.obtenirId(), this.obtenirTipusItem(), this.obtenirAtributs(), this.obtenirValoracions());
+        return new Item(this.obtenirId(), this.obtenirTipusItem(), this.obtenirAtributs(), new TreeMap<>());
     }
 
     @Override
@@ -71,7 +68,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     public Map<Usuari, Valoracio> obtenirValoracions() {
         Map<Usuari, Valoracio> valoracions = new TreeMap<>();
         for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
-            valoracions.put(valoracioEntry.getKey().copy(), valoracioEntry.getValue().copy());
+            valoracions.put(valoracioEntry.getKey().copiar(), valoracioEntry.getValue().copiar());
         }
         return valoracions;
     }
@@ -82,6 +79,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * tipus.
      */
     public double obtenirDistancia(Item item) throws IllegalArgumentException {
+        if (item == null) {
+            throw new IllegalArgumentException("No es pot calcular la distància entre dos ítems quan un d'ells es nul");
+        }
         if (!tipusItem.equals(item.tipusItem)) {
             throw new IllegalArgumentException("No es pot calcular la distància entre dos ítems de TipusItems diferents.");
         }
@@ -94,26 +94,21 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         return distancia;
     }
 
-    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+    public void afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
         if (valoracio == null) {
             throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
         }
         if (!this.equals(valoracio.obtenirItem())) {
             throw new IllegalArgumentException("No es pot afegir a un ítem una valoració d'un altre ítem.");
         }
-        if (valoracions.containsKey(valoracio.obtenirUsuari())) {
-            return false;
-        }
         valoracions.put(valoracio.obtenirUsuari(), valoracio);
-        return true;
     }
 
-    public boolean esborrarValoracio(Usuari usuari) {
-        if (usuari == null || !valoracions.containsKey(usuari)) {
-            return false;
+    public void esborrarAtributs(TreeSet<String> nomAtributs) {
+        tipusItem.esborrarAtributs(nomAtributs);
+        for (String nomAtribut : nomAtributs) {
+            atributs.remove(nomAtribut);
         }
-        valoracions.remove(usuari);
-        return true;
     }
 
     private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException {
@@ -155,16 +150,22 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
-    public void esborrarAtributs(TreeSet<String> nomAtributs) {
-        tipusItem.esborrarAtributs(nomAtributs);
-        for (String nomAtribut : nomAtributs) {
-            atributs.remove(nomAtribut);
-        }
-    }
-
     private void actualitzarFactorNormalitzacioAtributs() {
         for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return id.equals(item.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

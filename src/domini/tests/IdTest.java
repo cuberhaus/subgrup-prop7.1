@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 
 public class IdTest {
 
-    private final static double delta = 1e-10;
-
     @Test
     public void equals_HauriaDeRetornarCert_Quan_IdsIguals() {
         Id id1 = new Id(0, true);

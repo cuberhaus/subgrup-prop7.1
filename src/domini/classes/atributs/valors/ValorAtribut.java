@@ -11,18 +11,18 @@ public abstract class ValorAtribut<T> {
 
     public abstract T getValor();
 
+    public abstract ValorAtribut<?> copy();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ValorAtribut<?> that = (ValorAtribut<?>) o;
-        return valor.equals(that.valor);
+        return Objects.equals(valor, that.valor);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(valor);
     }
-
-    public abstract ValorAtribut<?> copy();
 }

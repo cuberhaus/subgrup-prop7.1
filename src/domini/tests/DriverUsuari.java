@@ -205,7 +205,7 @@ public class DriverUsuari {
     public static void testCopy() throws Exception {
         System.out.println("Testejant Copy.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-        Usuari usuari2 = usuari.copy();
+        Usuari usuari2 = usuari.copiar();
         UtilitatsDEscriptura.imprimirUsuari(usuari2);
     }
 

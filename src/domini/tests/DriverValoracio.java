@@ -163,7 +163,7 @@ public class DriverValoracio {
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
-        Valoracio valoracio2 = valoracio.copy();
+        Valoracio valoracio2 = valoracio.copiar();
         System.out.println("Copia de la valoracio:");
         UtilitatsDEscriptura.imprimirValoracio(valoracio2);
     }

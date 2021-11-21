@@ -3,6 +3,8 @@ package domini.classes.atributs;
 import domini.classes.atributs.distancia.Distancia;
 import domini.classes.atributs.valors.ValorAtribut;
 
+import java.util.Objects;
+
 /**
  * Representa el tipus d'un atribut.
  * @author maria.prat
@@ -26,5 +28,18 @@ public class TipusAtribut {
 
     public TipusAtribut copy() {
         return new TipusAtribut(valorAtribut.copy(), distancia.copy());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TipusAtribut that = (TipusAtribut) o;
+        return valorAtribut.equals(that.valorAtribut) && distancia.equals(that.distancia);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(valorAtribut, distancia);
     }
 }

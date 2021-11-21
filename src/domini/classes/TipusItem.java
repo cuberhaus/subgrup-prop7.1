@@ -5,10 +5,7 @@ import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 import domini.classes.csv.TaulaCSV;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Representa un tipus d'ítem.
@@ -230,5 +227,18 @@ public class TipusItem {
             tipusAtributs.put(tipusAtribut.getKey(), tipusAtribut.getValue().copy());
         }
         return new TipusItem(nom, tipusAtributs);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TipusItem tipusItem = (TipusItem) o;
+        return nom.equals(tipusItem.nom) && tipusAtributs.equals(tipusItem.tipusAtributs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nom, tipusAtributs);
     }
 }
