@@ -108,8 +108,8 @@ public class ConjuntRecomanacions {
         discountedCumulativeGain = 0.;
         for(int i = 0; i < Math.min(conjuntRecomanacions.size(), p); ++i) {
             double rel = 0;
-            if (id_to_valoracio.containsKey(conjuntRecomanacions.get(i).obtenirId()))
-                rel = id_to_valoracio.get(conjuntRecomanacions.get(i).obtenirId());
+            if (id_to_valoracio.containsKey(conjuntRecomanacions.get(i).obtenirId().obtenirValor()))
+                rel = id_to_valoracio.get(conjuntRecomanacions.get(i).obtenirId().obtenirValor());
             discountedCumulativeGain += (Math.pow(2,rel)-1)/log2(i+2);
         }
         return discountedCumulativeGain;
