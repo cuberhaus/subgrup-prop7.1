@@ -26,14 +26,31 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
      * @param valors <code>double[]</code> que conté els valors que s'assignaran a aquest atribut.
      */
     public ValorConjuntNumeric(double[] valors) {
-        this.valor = new ArrayList<>();
-        for (double valor : valors) {
-            this.valor.add(new ValorNumeric(valor));
+        if (valors == null) {
+            this.valor = null;
+        } else {
+            this.valor = new ArrayList<>();
+            for (double valor : valors) {
+                this.valor.add(new ValorNumeric(valor));
+            }
         }
     }
 
     public ValorConjuntNumeric(String s) {
-        this(Arrays.stream(s.split(";")).mapToDouble(Double::parseDouble).toArray());
+        if (s == null) {
+            this.valor = null;
+        } else if (s.isEmpty()){
+            this.valor = new ArrayList<>();
+        } else {
+            this.valor = new ArrayList<>();
+            for (String valor : s.split(";")) {
+                if (valor.isEmpty()) {
+                    this.valor.add(new ValorNumeric());
+                } else {
+                    this.valor.add(new ValorNumeric(Double.parseDouble(valor)));
+                }
+            }
+        }
     }
 
     @Override
