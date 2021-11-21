@@ -62,12 +62,12 @@ public class DriverLectorDeCSV {
 
             if(comparar.equals(contingutTaula)) {
                 System.out.println("Contingut original: " + comparar);
-                System.out.println("Contingut de la taula " + contingutTaula);
+                System.out.println("Contingut de la taula: " + contingutTaula);
                 System.out.println("El contingut de la taula es el mateix al dessitjat");
             }
 
             else {
-                System.out.println("mal Pablo");
+                System.out.println("Hi ha un error a la implentacio");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
