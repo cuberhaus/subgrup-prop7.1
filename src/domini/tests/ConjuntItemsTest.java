@@ -94,7 +94,7 @@ public class ConjuntItemsTest {
         objecte2.add("vermell");
         taula.afegirConjuntValors(objecte2);
 
-        TipusItem tipusItem = new TipusItem("peli", taula);
+        TipusItem tipusItem = new TipusItem("peli", taula, taula.obtenirNumItems());
         Id id1 = new Id(1, true);
         Id id2 = new Id(2, true);
         Item item1 = new Item(id1, tipusItem, atributs, objecte1);

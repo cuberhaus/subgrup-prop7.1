@@ -106,8 +106,8 @@ public class UtilitatsDeLectura {
         }
     }
 
-    public static ArrayList<String> llegirNomAtributs() throws Exception {
-        String ruta = obtenirRutaORutaPerDefecte("NomAtributs", "NomAtributs1");
+    public static ArrayList<String> llegirNomAtributs(String nomAtributs2) throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("NomAtributs", nomAtributs2);
         try {
             FileReader lector = new FileReader(ruta);
             BufferedReader fitxer = new BufferedReader(lector);
@@ -278,22 +278,15 @@ public class UtilitatsDeLectura {
         }
     }
 
-    public static ArrayList<ArrayList<String>> llegirTaulaCSV() throws Exception {
-        String ruta = obtenirRutaORutaPerDefecte("TaulaCSV", "TaulaCSV1");
+    public static ArrayList<ArrayList<String>> llegirTaulaCSV(String taulaPerDefecte) throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("TaulaCSV", taulaPerDefecte);
         try {
             FileReader lector = new FileReader(ruta);
             BufferedReader fitxer = new BufferedReader(lector);
             ArrayList<ArrayList<String>> taula = new ArrayList<>();
-
             String row;
             while ((row = fitxer.readLine()) != null) {
-                String[] fila = row.split(",", 0);
-                ArrayList<String> afila = new ArrayList<>();
-                for (String elem : fila) {
-                    afila.add(elem);
-                }
-                taula.add(new ArrayList<>(afila));
-                afila.clear();
+                taula.add(new ArrayList<>(new ArrayList<>(Arrays.asList(row.split(",", -1)))));
             }
             return taula;
         } catch (FileNotFoundException e) {
@@ -301,6 +294,42 @@ public class UtilitatsDeLectura {
         } catch (Exception e1) {
             throw new Exception("Fitxer invàlid.");
         }
+    }
 
+    public static Map<String, TipusAtribut> llegirTipusAtributs() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("TipusAtributs", "TipusAtributs1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            int numTipusAtributs = Integer.parseInt(fitxer.readLine());
+            Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+            for (int i = 0; i < numTipusAtributs; ++i) {
+                String nomTipusAtribut = fitxer.readLine();
+                String valorAtribut = fitxer.readLine();
+                String distancia = fitxer.readLine();
+                tipusAtributs.put(nomTipusAtribut, new TipusAtribut(valorAtributDesDelNom(valorAtribut),
+                        distanciaDesDelNom(distancia)));
+            }
+            return tipusAtributs;
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invàlid.");
+        }
+    }
+
+    public static TipusAtribut llegirTipusAtribut() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("TipusAtribut", "TipusAtribut1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            String valorAtribut = fitxer.readLine();
+            String distancia = fitxer.readLine();
+            return new TipusAtribut(valorAtributDesDelNom(valorAtribut), distanciaDesDelNom(distancia));
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invàlid.");
+        }
     }
 }

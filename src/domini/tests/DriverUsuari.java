@@ -120,7 +120,7 @@ public class DriverUsuari {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Id id = UtilitatsDeLectura.llegirId();
             TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
             ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
             Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -142,7 +142,7 @@ public class DriverUsuari {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Id id = UtilitatsDeLectura.llegirId();
             TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
             ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
             Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -166,7 +166,7 @@ public class DriverUsuari {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Id id = UtilitatsDeLectura.llegirId();
             TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
             ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
             Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 

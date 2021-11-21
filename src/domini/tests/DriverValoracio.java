@@ -19,7 +19,7 @@ public class DriverValoracio {
         System.out.println("Id de l'item:");
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -37,7 +37,7 @@ public class DriverValoracio {
 
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -54,7 +54,7 @@ public class DriverValoracio {
 
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -71,7 +71,7 @@ public class DriverValoracio {
 
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -88,7 +88,7 @@ public class DriverValoracio {
 
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -100,7 +100,7 @@ public class DriverValoracio {
 
         Id id2 = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem2 = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs2 = UtilitatsDeLectura.llegirValorAtributs();
         Item item2 = new Item(id2, tipusItem2, nom_atributs2, valor_atributs2);
 
@@ -123,7 +123,7 @@ public class DriverValoracio {
 
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 
@@ -135,7 +135,7 @@ public class DriverValoracio {
 
         Id id2 = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem2 = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs2 = UtilitatsDeLectura.llegirValorAtributs();
         Item item2 = new Item(id2, tipusItem2, nom_atributs2, valor_atributs2);
 
@@ -158,7 +158,7 @@ public class DriverValoracio {
 
         Id id = UtilitatsDeLectura.llegirId();
         TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
         ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
         Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
 

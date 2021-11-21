@@ -70,10 +70,7 @@ public class UtilitatsDEscriptura {
 
     public static void imprimirTipusItem(TipusItem tipusItem) {
         System.out.println("TipusItem amb nom " + tipusItem.obtenirNom());
-        for (Map.Entry<String, TipusAtribut> tipusAtributEntrada : tipusItem.obtenirTipusAtributs().entrySet()) {
-            System.out.print("Té un atribut amb nom " + tipusAtributEntrada.getKey() + " i tipus ");
-            imprimirTipusAtribut(tipusAtributEntrada.getValue());
-        }
+        imprimirTipusAtributs(tipusItem);
     }
 
     public static void imprimirTipusAtribut(TipusAtribut tipusAtribut) {
@@ -132,4 +129,10 @@ public class UtilitatsDEscriptura {
         }
     }
 
+    public static void imprimirTipusAtributs(TipusItem tipusItem) {
+        for (Map.Entry<String, TipusAtribut> tipusAtributEntrada : tipusItem.obtenirTipusAtributs().entrySet()) {
+            System.out.print("Té un atribut amb nom " + tipusAtributEntrada.getKey() + " i tipus ");
+            imprimirTipusAtribut(tipusAtributEntrada.getValue());
+        }
+    }
 }

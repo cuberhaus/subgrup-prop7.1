@@ -14,7 +14,7 @@ public class DriverItem {
         try {
             Id id = UtilitatsDeLectura.llegirId();
             TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs();
+            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
             ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
             Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
             System.out.println("S'ha creat l'Item.");
@@ -101,7 +101,7 @@ public class DriverItem {
         try {
             Item item = UtilitatsDeLectura.llegirItem();
             System.out.println("Llegint Id de l'Usuari de la valoració.");
-            TreeSet<String> nomAtributsPerEsborrar = new TreeSet<>(UtilitatsDeLectura.llegirNomAtributs());
+            TreeSet<String> nomAtributsPerEsborrar = new TreeSet<>(UtilitatsDeLectura.llegirNomAtributs("NomAtributs2"));
             item.esborrarAtributs(nomAtributsPerEsborrar);
             System.out.println("S'han esborrat els atributs indicats.");
             UtilitatsDEscriptura.imprimirItem(item);
