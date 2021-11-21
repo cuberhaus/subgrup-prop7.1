@@ -16,16 +16,9 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        System.out.println("Id de l'item:");
-        Id id = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
-
+        Item item = UtilitatsDeLectura.llegirItem();
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         UtilitatsDEscriptura.imprimirValoracio(valoracio);
-
     }
 
     public static void testObtenirItem() throws Exception {
@@ -35,11 +28,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        Id id = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+        Item item = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         UtilitatsDEscriptura.imprimirItem(valoracio.obtenirItem());
@@ -52,11 +41,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        Id id = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+        Item item = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         UtilitatsDEscriptura.imprimirUsuari(valoracio.obtenirUsuari());
@@ -69,11 +54,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        Id id = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+        Item item = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         UtilitatsDEscriptura.imprimirUsuari(valoracio.obtenirUsuari());
@@ -86,11 +67,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        Id id = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+        Item item = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
 
@@ -98,11 +75,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
 
-        Id id2 = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem2 = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs2 = UtilitatsDeLectura.llegirValorAtributs();
-        Item item2 = new Item(id2, tipusItem2, nom_atributs2, valor_atributs2);
+        Item item2 = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio2 = new Valoracio(valor2, usuari2, item2);
 
@@ -121,11 +94,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        Id id = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+        Item item = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
 
@@ -133,11 +102,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
 
-        Id id2 = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem2 = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs2 = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs2 = UtilitatsDeLectura.llegirValorAtributs();
-        Item item2 = new Item(id2, tipusItem2, nom_atributs2, valor_atributs2);
+        Item item2 = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio2 = new Valoracio(valor2, usuari2, item2);
 
@@ -156,11 +121,7 @@ public class DriverValoracio {
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        Id id = UtilitatsDeLectura.llegirId();
-        TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-        ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-        ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-        Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+        Item item = UtilitatsDeLectura.llegirItem();
 
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         Valoracio valoracio2 = valoracio.copiar();
