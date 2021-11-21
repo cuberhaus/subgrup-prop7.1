@@ -27,7 +27,6 @@ public class ProgramaTest {
         p1.iniciarSessio(u1);
         p1.tancarSessio();
         assertFalse(p1.isSessioIniciada());
-        System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
     }
 
     @Test
@@ -37,7 +36,6 @@ public class ProgramaTest {
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
         assertTrue(p1.isSessioIniciada());
-        System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
     }
 
     /**
@@ -49,16 +47,13 @@ public class ProgramaTest {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         assertFalse(p1.isSessioIniciada());
-        System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
 
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.iniciarSessio(u1);
         assertTrue(p1.isSessioIniciada());
-        System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
 
         p1.tancarSessio();
         assertFalse(p1.isSessioIniciada());
-        System.out.println("La sessio esta iniciada: " + p1.isSessioIniciada());
     }
 
     @Test
