@@ -11,6 +11,10 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe DistanciaDiferenciaDeConjunts
+ */
+
 @RunWith(Enclosed.class)
 public class DistanciaDiferenciaDeConjuntsTest {
 

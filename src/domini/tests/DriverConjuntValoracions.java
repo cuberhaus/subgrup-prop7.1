@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Driver per la classe Usuari
+ * Driver per la classe ConjuntValoracions
  * @author pol.casacuberta
  */
 

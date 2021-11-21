@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe ConjuntRecomanacions
+ */
+
 public class ConjuntRecomanacionsTest {
     private final double delta = 1e-5;
     @Test

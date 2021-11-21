@@ -3,6 +3,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe SlopeOne
+ */
+
 public class SlopeOneTest {
     private final double delta = 1e-5;
 

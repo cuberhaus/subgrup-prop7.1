@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe Punt
+ */
+
 public class PuntTest {
     private final double delta = 1e-5;
     @Test

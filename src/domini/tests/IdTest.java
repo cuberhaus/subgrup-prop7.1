@@ -3,6 +3,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe Id
+ */
+
 public class IdTest {
 
     @Test

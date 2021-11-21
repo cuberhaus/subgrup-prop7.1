@@ -15,6 +15,10 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit tests de la classe FiltreInclusiu
+ */
+
 @RunWith(Enclosed.class)
 public class FiltreInclusiuTest {
 
