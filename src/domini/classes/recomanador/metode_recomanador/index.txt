@@ -1,9 +1,10 @@
-Contenidor que implementa les funcionalitats dels metodes de recomanacio.
--ConjuntPunts
--KMeans
--KNN
--MetodeRecomanador
--MetodeRecomanadorCollaborative
--MetodeRecomanadorContentBased
--Punt
--SlopeOne
+Conté les classes que implementen el mètode recomanador i altres que el mètode recomanador necessita.
+ConjuntPunts.java
+KMeans.java
+Punt.java
+index.txt
+MetodeRecomanadorCollaborative.java
+MetodeRecomanadorContentBased.java
+MetodeRecomanador.java
+SlopeOne.java
+KNN.java

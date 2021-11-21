@@ -1,3 +1,4 @@
-Implementacions d'algunes funcionalitats per a facilitar el us del terminal.
+Carpeta que conté classes que inclouen mètodes que faciliten la lectura i escriptura a la terminal. S'utilitzen als
+drivers de les classes del projecte.
 -consola
 -inout

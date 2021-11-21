@@ -1,4 +1,5 @@
-Contenidor que implementa les funcionalitats que s'encarreguen de llegir i escriure arxius CSV.
--EscriptorDeCSV
--LectorDeCSV
--TaulaCSV
+Conté les classes que s'encarreguen de llegir i escriure arxius CSV.
+EscriptorDeCSV.java
+index.txt
+LectorDeCSV.java
+TaulaCSV.java

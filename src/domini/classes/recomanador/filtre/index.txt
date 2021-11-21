@@ -1,4 +1,5 @@
-Contenidor que implementa el filtrat.
--Filtre
--FiltreExclusiu
--FiltreInclusiu
+Conté les classes que implementen els filtres del recomanador.
+Filtre.java
+FiltreExclusiu.java
+FiltreInclusiu.java
+index.txt

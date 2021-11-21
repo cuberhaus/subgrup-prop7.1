@@ -1,3 +1,5 @@
-Carpeta principal del codi, on trobem el codi font de les classes, tests i llibreries implementades pels membres del grup.
--domini/
--libs/
+Carpeta principal del codi. Hi trobem la carpeta domini/ que inclou la implementació de la capa de domini del projecte.
+També hi trobem la carpeta libs/, que inclou llibreries que no formen part del projecte però que faciliten la
+implementació dels drivers de les classes del projecte.
+domini/
+libs/

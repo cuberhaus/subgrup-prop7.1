@@ -1,22 +1,23 @@
-En aquest directori, emmagatzemem valors per defecte per tal de poder realitzar els tests dels drivers amb una mostra
-valida i funcional. Cadascun dels fitxers mostra uns valors arbitraris per a facilitar la comprovacio de les classes.
--ConjuntItems1
--Id1
--Id2
--Item1
--Item2
--item.csv
--MockTaulaCSV1
--NomAtributs1
--NomAtributs2
--ratings
--ratings.test.unknown.csv
--Recomanacio1
--Seguretat1
--TaulaCSV1
--TaulaCSV2
--TipusAtribut1
--TipusAtributs1
--TipusItem1
--TreeSet1
--ValorsAtributs1
+Conté els fitxers amb valors de mostra i funcionals que es poden utilitzar als drivers i serveixen com a valors per
+defecte dels drivers. Cadascun dels fitxers mostra uns valors arbitraris per facilitar la comprovació de les classes.
+També serveixen com a documentació dels drivers, per tal de mostrar quins fitxers d'entrada reben els drivers.
+ConjuntItems1
+Id1
+Id2
+index.txt
+Item1
+Item2
+items.csv
+MockTaulaCSV1
+NomAtributs1
+NomAtributs2
+ratings
+ratings.test.unknown.csv
+Recomanacio1
+Seguretat1
+TaulaCSV1
+TipusAtribut1
+TipusAtributs1
+TipusItem1
+TreeSet1
+ValorAtributs1

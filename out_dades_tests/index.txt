@@ -1,3 +1,0 @@
-Carpeta destinada a emmagatzemar els resultats de les operacions de sortida als drivers. En aquest moment només trobem
-un fitxer, que anira be canviant de forma quan el vagis sobreescribint o es podran crear-ne de nous.
--out.csv

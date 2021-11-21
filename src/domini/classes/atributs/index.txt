@@ -1,4 +1,6 @@
-Implementacio de les classes relacionades amb els tipus de dades i calculs entre aquests.
--distancia/
--valors/
--TipusAtribut
+Conté la subcarpeta distancia/ amb les classes que representen distàncies i la subcarpeta valors/ amb les classes que
+representen els valors dels atributs. També conté el fitxer que conté la classe que representa el tipus d'un atribut.
+distancia/
+valors/
+index.txt
+TipusAtribut.java

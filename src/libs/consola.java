@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
+ * Conté funcions estàtiques que faciliten la lectura de tipus bàsics des de la consola.
  * @author maria.prat
  */
 public class consola {

@@ -1,22 +1,24 @@
-Contenidor de la implementació de les classes del programa.
--atributs/
--csv/
--recomanador/
--ConjuntIdentificat
--ConjuntItems
--ConnjuntUsuaris
--ConjuntValoracions
--Contenidor
--ElementIdentificat
--EscriptorDeFitxers
--Id
--Item
--LectorDeFitxers
--Pair
--Programa
--Sessio
--SessioIniciada
--SessioNoIniciada
--TipusItem
--Usuari
--Valoracio
+Conté els fitxers amb la implementació de les classes del projecte. Conté 3 subpackages amb les classes pròpies del
+recomanador, les classes per representar els atributs dels ítems i les classes pel processament d'arxius CSV.
+recomanador/
+atributs/
+csv/
+ConjuntIdentificat.java
+ConjuntItems.java
+ConjuntUsuaris.java
+ConjuntValoracions.java
+Contenidor.java
+ElementIdentificat.java
+EscriptorDeFitxers.java
+Id.java
+index.txt
+Item.java
+LectorDeFitxers.java
+Pair.java
+Programa.java
+Sessio.java
+SessioIniciada.java
+SessioNoIniciada.java
+TipusItem.java
+Usuari.java
+Valoracio.java

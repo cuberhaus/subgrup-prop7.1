@@ -1,7 +1,8 @@
-Classes que implementen la distancies entre "coses".
--Distancia
--DistanciaDiferenciaDeConjunts
--DistanciaDiscreta
--DistanciaEuclidiana
--DistanciaLevensthein
--DistanciaZero
+Conté la classe abstracta Distancia i totes les classes que representen distàncies.
+Distancia.java
+DistanciaDiferenciaDeConjunts.java
+DistanciaDiscreta.java
+DistanciaEuclidiana.java
+DistanciaLevenshtein.java
+DistanciaZero.java
+index.txt
