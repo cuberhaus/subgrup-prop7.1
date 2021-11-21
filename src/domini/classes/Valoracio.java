@@ -58,6 +58,10 @@ public class Valoracio {
         return valor;
     }
 
+    /**
+     * Indica si dos valoracions són iguals.
+     * @return El resultat retorna true si són iguals, altrament retorna false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,11 +70,18 @@ public class Valoracio {
         return usuari.equals(valoracio.usuari) && item.equals(valoracio.item);
     }
 
+    /**
+     * Retorna un codi de hash idéntic per a dos valoracions amb mateix Usuari i Item,
+     * altrament retorna un hash diferent
+     */
     @Override
     public int hashCode() {
         return Objects.hash(usuari, item);
     }
 
+    /**
+     * Retorna una copia de la valoracio del paràmetre implícit
+     */
     public Valoracio copiar() {
         return new Valoracio(valor, usuari.copiar(), item.copiar());
     }
