@@ -50,7 +50,7 @@ public class TaulaCSV extends Contenidor {
         }
         this.afegirConjuntAtributs(taula.get(0));
 
-        for (int i = 0; i < taula.size(); ++i) {
+        for (int i = 1; i < taula.size(); ++i) {
             this.afegirConjuntValors(taula.get(i));
         }
     }
