@@ -15,9 +15,9 @@ public class DriverUsuari {
     public static void testConstructorIntBoolNomContra() throws Exception {
         System.out.println("Testejant el Constructor creador d'atributs.");
         Id id = UtilitatsDeLectura.llegirId();
-        String contrasenya = "1234";
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id.obtenirValor(),true, nom, contrasenya);
+        String nom = consola.llegirString("Escriu el nom de l'usuari:");
+        String contrasenya= consola.llegirString("Escriu la contrasenya de l'usuari:");
+        Usuari u1 = new Usuari(id.obtenirValor(), id.esActiu(), nom, contrasenya);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
 
@@ -27,11 +27,12 @@ public class DriverUsuari {
         Usuari u1 = new Usuari(id);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
+
     public static void testConstructorIdNomContra() throws Exception {
         System.out.println("Testejant el Constructor creador d'atributs.");
         Id id = UtilitatsDeLectura.llegirId();
-        String contrasenya = "1234";
-        String nom = "Pablo";
+        String nom = consola.llegirString("Escriu el nom de l'usuari:");
+        String contrasenya= consola.llegirString("Escriu la contrasenya de l'usuari:");
         Usuari u1 = new Usuari(id,nom,contrasenya);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
@@ -45,9 +46,7 @@ public class DriverUsuari {
     private static void testSetNom() throws Exception {
         System.out.println("Testejant setNom.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-        Scanner input = new Scanner(System.in);
-        String nouNom;
-        nouNom = input.nextLine();
+        String nouNom = consola.llegirString("Escriu el nom de l'usuari:");
         usuari.setContrasenya(nouNom);
         System.out.println("SetNom: " + usuari.obtenirNom());
     }
