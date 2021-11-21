@@ -38,6 +38,23 @@ public class TaulaCSV extends Contenidor {
         numItems = 0;
     }
 
+    public TaulaCSV(ArrayList<ArrayList<String>> taula) {
+        valorsItem = new ArrayList<>();
+        atributsAIndex = new HashMap<>();
+        indexAAtributs = new ArrayList<>();
+        numAtributs = -1;
+        numItems = 0;
+
+        if (taula.size() == 0) {
+            throw new IllegalArgumentException("La taula es buida");
+        }
+        this.afegirConjuntAtributs(taula.get(0));
+
+        for (int i = 0; i < taula.size(); ++i) {
+            this.afegirConjuntValors(taula.get(i));
+        }
+    }
+
     /**
      * Donada una llista d'atributs, els introdueix en la estructura de dades.
      *

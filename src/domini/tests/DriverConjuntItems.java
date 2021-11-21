@@ -10,11 +10,9 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class DriverConjuntItems {
-    public static void testConstructorTaula() {
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
+    public static void testConstructorTaula() throws Exception {
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
             ConjuntItems conjunt = new ConjuntItems(tipusItem, taula);
             System.out.println("Conjunt creat");
