@@ -22,17 +22,17 @@ public class DriverConjuntValoracions {
 
     public static void testAfegirTaulaCSV() throws Exception {
         System.out.println("Test afegir Taula CSV");
-//        String ubicacioRatings = consola.llegirString("Introdueix la ruta del fitxer d'entrada de Ratings");
-//        String ubicacioItems = consola.llegirString("Introdueix la ruta del fitxer d'entrada d'items");
         try {
+            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
             TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
             TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
-            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
-
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
             ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
             conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
             System.out.println("Conjunt creat");
             UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
@@ -44,22 +44,157 @@ public class DriverConjuntValoracions {
 
     public static void testConte() throws Exception {
         System.out.println("Test conte valoracio amb usuari i item donats");
+        try {
+            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taulaRatings);
+            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
+            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
+            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+
+            UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
+
+            Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+            Item item = UtilitatsDeLectura.llegirItem();
+            if (conjuntValoracions.conte(usuari,item)) {
+                System.out.println("La valoració amb usuari, i item donats, existeix dins el conjunt");
+            }
+            else {
+                System.out.println("La valoració amb usuari, i item donats, no existeix dins el conjunt");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void testObte() throws Exception {
         System.out.println("Test obte valoracio amb usuari i item donats");
+        try {
+            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taulaRatings);
+            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
+            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
+            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+
+            UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
+
+            Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+            Item item = UtilitatsDeLectura.llegirItem();
+
+            UtilitatsDEscriptura.imprimirValoracio(conjuntValoracions.obte(usuari,item));
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void testEsborrarAmbUsuariItem() throws Exception {
         System.out.println("Test esborra valoracio amb usuari i item donats");
+
+        try {
+            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taulaRatings);
+            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
+            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
+            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+
+            UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
+
+            Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+            Item item = UtilitatsDeLectura.llegirItem();
+            conjuntValoracions.esborrar(usuari,item);
+
+            if (conjuntValoracions.conte(usuari,item)) {
+                System.out.println("La valoració amb usuari, i item donats, existeix dins el conjunt");
+            }
+            else {
+                System.out.println("La valoració amb usuari, i item donats, no existeix dins el conjunt");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void testEsborrarValoracio() throws Exception {
         System.out.println("Test esborra valoracio donada una valoracio");
+
+        try {
+            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taulaRatings);
+            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
+            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
+            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+
+            UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
+
+            Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+            Item item = UtilitatsDeLectura.llegirItem();
+
+            Valoracio valoracio = new Valoracio(4,usuari,item);
+
+            conjuntValoracions.esborrar(valoracio);
+
+            if (conjuntValoracions.conte(usuari,item)) {
+                System.out.println("La valoració amb usuari, i item donats, existeix dins el conjunt");
+            }
+            else {
+                System.out.println("La valoració amb usuari, i item donats, no existeix dins el conjunt");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void testObteTotesValoracions() throws Exception {
         System.out.println("Test obte totes les valoracions");
+
+        try {
+            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+            conjuntUsuaris.afegir(taulaRatings);
+            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
+            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
+            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+
+            UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
+
+            Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+            Item item = UtilitatsDeLectura.llegirItem();
+
+            UtilitatsDEscriptura.imprimirTreeMapValoracions(conjuntValoracions.obteTotesValoracions());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args)  {

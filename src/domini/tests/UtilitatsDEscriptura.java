@@ -126,6 +126,18 @@ public class UtilitatsDEscriptura {
         }
     }
 
+    public static void  imprimirTreeMapValoracions(TreeMap<Pair<Usuari,Item>,Valoracio> conjuntValoracions) {
+        ArrayList<Valoracio> arrayValoracions = new ArrayList<>();
+        Set<Pair<Usuari, Item>> keys = conjuntValoracions.keySet();
+        for (Pair<Usuari, Item> id : keys) {
+            arrayValoracions.add(conjuntValoracions.get(id));
+        }
+
+        for (Valoracio valoracio : arrayValoracions) {
+            UtilitatsDEscriptura.imprimirValoracio(valoracio);
+        }
+    }
+
     public static void  imprimirArrayDUsuaris(ArrayList<Usuari> conjuntUsuaris) {
         for (Usuari usuari : conjuntUsuaris) {
             UtilitatsDEscriptura.imprimirUsuari(usuari);
