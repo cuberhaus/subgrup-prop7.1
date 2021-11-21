@@ -1,0 +1,22 @@
+Contenidor de la implementació de les classes del programa.
+-atributs/
+-csv/
+-recomanador/
+-ConjuntIdentificat
+-ConjuntItems
+-ConnjuntUsuaris
+-ConjuntValoracions
+-Contenidor
+-ElementIdentificat
+-EscriptorDeFitxers
+-Id
+-Item
+-LectorDeFitxers
+-Pair
+-Programa
+-Sessio
+-SessioIniciada
+-SessioNoIniciada
+-TipusItem
+-Usuari
+-Valoracio

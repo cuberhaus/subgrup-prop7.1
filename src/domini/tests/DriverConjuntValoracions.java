@@ -206,7 +206,7 @@ public class DriverConjuntValoracions {
                 "4 - Test obte\n" +
                 "5 - Test esborrar amb usuari i item\n" +
                 "6 - Test esborrar valoracio\n" +
-                "7 - Test test obte totes les valoracions\n";
+                "7 - Test obte totes les valoracions\n";
         String err = "Valor invàlid: introdueix un enter entre 0 i 7";
         while(true){
             try {

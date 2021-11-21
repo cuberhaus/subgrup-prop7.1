@@ -1,0 +1,8 @@
+Contenidor que implementa el sistema recomanador.
+-filtre/
+-metode_recomanador/
+-ConjuntRecomanacions
+-Recomanacio
+-Recomanador
+-RecomanadorCollaborative
+-RecomanadorContentBased

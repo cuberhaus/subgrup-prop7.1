@@ -1,0 +1,4 @@
+Contenidor que implementa el filtrat.
+-Filtre
+-FiltreExclusiu
+-FiltreInclusiu

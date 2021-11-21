@@ -15,9 +15,9 @@ public class DriverUsuari {
     public static void testConstructorIntBoolNomContra() throws Exception {
         System.out.println("Testejant el Constructor creador d'atributs.");
         Id id = UtilitatsDeLectura.llegirId();
-        String contrasenya = "1234";
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id.obtenirValor(),true, nom, contrasenya);
+        String nom = consola.llegirString("Escriu el nom de l'usuari:");
+        String contrasenya= consola.llegirString("Escriu la contrasenya de l'usuari:");
+        Usuari u1 = new Usuari(id.obtenirValor(), id.esActiu(), nom, contrasenya);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
 
@@ -27,11 +27,12 @@ public class DriverUsuari {
         Usuari u1 = new Usuari(id);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
+
     public static void testConstructorIdNomContra() throws Exception {
         System.out.println("Testejant el Constructor creador d'atributs.");
         Id id = UtilitatsDeLectura.llegirId();
-        String contrasenya = "1234";
-        String nom = "Pablo";
+        String nom = consola.llegirString("Escriu el nom de l'usuari:");
+        String contrasenya= consola.llegirString("Escriu la contrasenya de l'usuari:");
         Usuari u1 = new Usuari(id,nom,contrasenya);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
@@ -45,9 +46,7 @@ public class DriverUsuari {
     private static void testSetNom() throws Exception {
         System.out.println("Testejant setNom.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-        Scanner input = new Scanner(System.in);
-        String nouNom;
-        nouNom = input.nextLine();
+        String nouNom = consola.llegirString("Escriu el nom de l'usuari:");
         usuari.setContrasenya(nouNom);
         System.out.println("SetNom: " + usuari.obtenirNom());
     }
@@ -61,9 +60,8 @@ public class DriverUsuari {
     private static void testSetActiu() throws Exception {
         System.out.println("Testejant setActiu.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-        Scanner input = new Scanner(System.in);
-        String actiu;
-        actiu = input.nextLine();
+
+        String actiu = consola.llegirString("Escriu 'true' o 'false'");
         if (Objects.equals(actiu, "true")) {
             usuari.setActiu(true);
         }
@@ -82,34 +80,25 @@ public class DriverUsuari {
 
     public static void testIsContrasenya() throws Exception {
         System.out.println("Testejant isContrasenya.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        System.out.println("Escriu la contrasenya '1234'");
-        Scanner input = new Scanner(System.in);
-        String s;
-        s = input.nextLine();
-        u1.setContrasenya(s);
-
-        System.out.println("IsContrasenya: " + u1.isContrasenya("1234"));
+        String contrasenya = consola.llegirString("Reescriu la contrasenya:");
+        usuari.setContrasenya(contrasenya);
+        System.out.println("IsContrasenya: " + usuari.isContrasenya(contrasenya));
     }
 
     public static void testSetContrasenya() throws Exception {
         System.out.println("Testejant setContrasenya.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        String contrasenya;
-        Scanner input = new Scanner(System.in);
-        System.out.println("Torna a escriure la teva contrasenya:");
-        contrasenya = input.nextLine();
+        String contrasenya = consola.llegirString("Reescriu la contrasenya:");
         usuari.setContrasenya(contrasenya);
 
         if (usuari.isContrasenya(contrasenya)) {
-            System.out.println("Has encertat la contrasenya");
+            System.out.println("La contrasenya s'ha canviat correctament");
         }
         else {
-            System.out.println("T'has equivocat de contrasenya");
+            System.out.println("La contrasenya no s'ha canviat correctament");
         }
     }
 
@@ -118,13 +107,8 @@ public class DriverUsuari {
         try {
 
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-            Id id = UtilitatsDeLectura.llegirId();
-            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-            ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-            Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+            Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirId(item.obtenirId());
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
@@ -140,19 +124,14 @@ public class DriverUsuari {
         System.out.println("Testejant esborrarValoracio.");
         try {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-            Id id = UtilitatsDeLectura.llegirId();
-            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-            ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-            Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+            Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirId(item.obtenirId());
-            System.out.println("Escriu el valor de la valoració.");
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
             usuari.afegirValoracio(valoracio);
             usuari.esborraValoracio(item);
+            System.out.println("La valoració de l'usuari s'ha esborrat");
             UtilitatsDEscriptura.imprimirValoracionsUsuari(usuari.obtenirValoracions());
 
         } catch (Exception e) {
@@ -164,14 +143,8 @@ public class DriverUsuari {
         System.out.println("Testejant obtenirValoracio.");
         try {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-            Id id = UtilitatsDeLectura.llegirId();
-            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-            ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-            Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+            Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirId(item.obtenirId());
-            System.out.println("Escriu el valor de la valoració.");
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
@@ -200,6 +173,17 @@ public class DriverUsuari {
     public static void testCompareTo() throws Exception {
         System.out.println("Testejant CompareTo.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
+        int compare = usuari.compareTo(usuari2);
+        if (compare < 0) {
+            System.out.println("Usuari 1 es mes petit que l'usuari dos");
+        }
+        else if (compare > 0) {
+            System.out.println("Usuari 1 es mes gran que l'usuari dos");
+        }
+        else {
+            System.out.println("Usuari 1 i Usuari 2 son iguals");
+        }
     }
 
     public static void testCopy() throws Exception {

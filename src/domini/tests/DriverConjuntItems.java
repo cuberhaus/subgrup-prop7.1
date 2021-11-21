@@ -16,9 +16,9 @@ import java.util.TreeSet;
 public class DriverConjuntItems {
     public static void testConstructorTaula() {
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
+            TaulaCSV mockTaula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-            ConjuntItems conjunt = new ConjuntItems(tipusItem, taula);
+            ConjuntItems conjunt = new ConjuntItems(tipusItem, mockTaula);
             System.out.println("Conjunt creat");
             UtilitatsDEscriptura.imprimirConjuntItems(conjunt);
         } catch (Exception e) {

@@ -1,0 +1,4 @@
+Carpeta on trobem el contenidor principal del codi del programa i un altre contenidor dels tests fets servir per
+verificar el funcionament esperat de les classes.
+-classes/
+-tests/
