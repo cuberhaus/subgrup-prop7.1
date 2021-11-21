@@ -16,6 +16,11 @@ public class TipusItem {
     /** Relaciona el nom d'un atribut amb el seu tipus. */
     private Map<String, TipusAtribut> tipusAtributs;
 
+    public TipusItem(String nom) {
+        this.nom = nom;
+        this.tipusAtributs = new TreeMap<>();
+    }
+
     /**
      * Crea un <code>TipusItem</code> amb el nom i el <code>Map<String, TipusAtribut></code> donats.
      * @param nom <code>String</code> que conté el nom del <code>TipusItem</code>.

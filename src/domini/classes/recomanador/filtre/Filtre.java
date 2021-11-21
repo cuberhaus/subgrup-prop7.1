@@ -19,5 +19,5 @@ public abstract class Filtre {
         return nomAtributs;
     }
 
-    public abstract ConjuntItems filtrar(ConjuntItems conjuntItems);
+    public abstract void filtrar(ConjuntItems conjuntItems);
 }

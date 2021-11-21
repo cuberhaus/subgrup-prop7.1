@@ -96,7 +96,7 @@ public class UtilitatsDEscriptura {
     }
 
     public static void  imprimirConjuntItems(ConjuntItems conjuntItems) {
-        ArrayList<Item> items = conjuntItems.obtenirItems();
+        ArrayList<Item> items = (ArrayList<Item>) conjuntItems.obtenirTotsElsElements().values();
         UtilitatsDEscriptura.imprimirTipusItem(conjuntItems.obteTipusItem());
         for (Item item : items) {
             UtilitatsDEscriptura.imprimirItem(item);

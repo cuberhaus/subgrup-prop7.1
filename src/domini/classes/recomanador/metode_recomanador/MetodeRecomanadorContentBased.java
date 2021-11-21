@@ -35,15 +35,15 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
     /**
      * Genera recomanacions per l'usuari donat.
      * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
-     * @param valoracions_usuari Valoracions en les que es basaran les recomanacions.
+     * @param valoracionsUsuari Valoracions en les que es basaran les recomanacions.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
         TreeMap<Id, Double> valor_item = new TreeMap<>();
         KNN knn = new KNN(conjuntRecomanable.obtenirTotsElsElements().values().toArray(new Item[0]));
-        for (Valoracio val : valoracions_usuari.obteTotesValoracions().values()) {
+        for (Valoracio val : valoracionsUsuari.obteTotesValoracions().values()) {
             if (val.obtenirValor() > minimaValoracioConsiderada) {
                 // TODO: agafo tants veins com recomanacions volem, no te perque ser la millor eleccio
                 ArrayList<Item> veins = knn.obtenirVeins(val.obtenirItem(), numRecomanacions);

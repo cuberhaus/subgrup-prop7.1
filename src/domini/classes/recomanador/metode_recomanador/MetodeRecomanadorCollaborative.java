@@ -69,13 +69,13 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
     /**
      * Genera recomanacions per l'usuari donat.
      * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
-     * @param valoracions_usuari Valoracions en les que es basaran les recomanacions.
+     * @param valoracionsUsuari Valoracions en les que es basaran les recomanacions.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades. Si l'usuari no estava als usuaris inicials
      *          retorna null.
      */
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracions_usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
         int posicio_usuari = -1;
 
         for(int i = 0; i < ids.size(); ++i) {
@@ -94,7 +94,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
         }
 
         ConjuntItems items_usables = new ConjuntItems(conjuntRecomanable.obteTipusItem());
-        for (Valoracio val : valoracions_usuari.obteTotesValoracions().values()) {
+        for (Valoracio val : valoracionsUsuari.obteTotesValoracions().values()) {
             items_usables.afegir(val.obtenirItem());
         }
         for (Item item : conjuntRecomanable.obtenirTotsElsElements().values()) {

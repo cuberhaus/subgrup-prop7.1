@@ -11,7 +11,7 @@ import java.util.*;
  */
 
 public class ConjuntItems extends ConjuntIdentificat<Item> {
-    private final TipusItem tipusItem;
+    protected TipusItem tipusItem;
 
     /**
      * Constructora de Conjunt d'items.
@@ -75,16 +75,33 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
-    /**
-     * Getter que retorna una llista de items
-     * @return <code>ArrayList<String></code> llista de items
-     */
-    public ArrayList<Item> obtenirItems() {
-        ArrayList<Item> items = new ArrayList<>();
-        Set<Id> keys = elements.keySet();
-        for (Id id : keys) {
-            items.add(elements.get(id));
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConjuntItems that = (ConjuntItems) o;
+        if (!tipusItem.equals(that.tipusItem)) {
+            return false;
         }
-        return items;
+        if (elements.size() != that.elements.size()) {
+            return false;
+        }
+        for (Map.Entry<Id, Item> element : elements.entrySet()) {
+            if (!that.conte(element.getKey())) {
+                return false;
+            }
+            if (!that.obtenir(element.getKey()).equals(element.getValue())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ConjuntItems copiar() {
+        TreeMap<Id, Item> copiaElements = new TreeMap<>();
+        for (Map.Entry<Id, Item> element : elements.entrySet()) {
+            copiaElements.put(element.getKey().copiar(), element.getValue().copiar());
+        }
+        return new ConjuntItems(tipusItem.copiar(), copiaElements);
     }
 }

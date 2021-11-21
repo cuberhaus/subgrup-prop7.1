@@ -3,6 +3,7 @@ package domini.classes.recomanador.filtre;
 import domini.classes.ConjuntItems;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -15,13 +16,10 @@ public class FiltreExclusiu extends Filtre{
     }
 
     @Override
-    public ConjuntItems filtrar(ConjuntItems conjuntItems) throws IllegalArgumentException {
+    public void filtrar(ConjuntItems conjuntItems) throws IllegalArgumentException {
         if (conjuntItems == null) {
             throw new IllegalArgumentException("No es pot filtrar un ConjuntItems nul.");
         }
-        ConjuntItems conjuntItemsFiltrat = new ConjuntItems(conjuntItems.obteTipusItem(), conjuntItems.obtenirTotsElsElements());
-        TreeSet<String> nomAtributsFiltrats = new TreeSet<>(conjuntItems.obteTipusItem().obtenirTipusAtributs().keySet());
-        conjuntItemsFiltrat.esborrarAtributs(nomAtributsFiltrats);
-        return conjuntItemsFiltrat;
+        conjuntItems.esborrarAtributs(new TreeSet<>(nomAtributs));
     }
 }

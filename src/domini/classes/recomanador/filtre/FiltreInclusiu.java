@@ -15,14 +15,12 @@ public class FiltreInclusiu extends Filtre {
     }
 
     @Override
-    public ConjuntItems filtrar(ConjuntItems conjuntItems) throws IllegalArgumentException {
+    public void filtrar(ConjuntItems conjuntItems) throws IllegalArgumentException {
         if (conjuntItems == null) {
             throw new IllegalArgumentException("No es pot filtrar un ConjuntItems nul.");
         }
-        ConjuntItems conjuntItemsFiltrat = new ConjuntItems(conjuntItems.obteTipusItem(), conjuntItems.obtenirTotsElsElements());
         TreeSet<String> nomAtributsFiltrats = new TreeSet<>(conjuntItems.obteTipusItem().obtenirTipusAtributs().keySet());
         nomAtributs.forEach(nomAtributsFiltrats::remove);
-        conjuntItemsFiltrat.esborrarAtributs(nomAtributsFiltrats);
-        return conjuntItemsFiltrat;
+        conjuntItems.esborrarAtributs(nomAtributsFiltrats);
     }
 }

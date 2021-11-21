@@ -9,9 +9,10 @@ import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBas
 public class RecomanadorContentBased extends Recomanador {
     public RecomanadorContentBased(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracionsPubliques, Filtre filtre) {
         this.usuaris = usuaris;
-        this.items = items;
+        this.items = items.copiar();
+        filtre.filtrar(this.items);
         this.valoracionsPubliques = valoracionsPubliques;
         this.filtre = filtre;
-        this.metodeRecomanador = new MetodeRecomanadorContentBased(usuaris, filtre.filtrar(items), valoracionsPubliques);
+        this.metodeRecomanador = new MetodeRecomanadorContentBased(usuaris, this.items, valoracionsPubliques);
     }
 }
