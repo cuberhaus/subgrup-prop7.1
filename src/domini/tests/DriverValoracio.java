@@ -23,60 +23,46 @@ public class DriverValoracio {
 
     public static void testObtenirItem() throws Exception {
         System.out.println("Test obtenir item");
-
         double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-
         Item item = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         UtilitatsDEscriptura.imprimirItem(valoracio.obtenirItem());
     }
 
     public static void testObtenirUsuari() throws Exception {
         System.out.println("Test obtenir Usuari");
-
         double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-
         Item item = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         UtilitatsDEscriptura.imprimirUsuari(valoracio.obtenirUsuari());
     }
 
     public static void testObtenirValor() throws Exception {
         System.out.println("Test obtenir valor");
-
         double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-
         Item item = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio = new Valoracio(valor, usuari, item);
-        UtilitatsDEscriptura.imprimirUsuari(valoracio.obtenirUsuari());
+        System.out.println("El valor de la valoracio es: " + valoracio.obtenirValor());
     }
 
     private static void testEquals() throws Exception {
         System.out.println("Test equals");
-
         double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-
         Item item = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio = new Valoracio(valor, usuari, item);
 
         double valor2 = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
-
         Item item2 = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio2 = new Valoracio(valor2, usuari2, item2);
 
         if (valoracio.equals(valoracio2)) {
@@ -89,21 +75,16 @@ public class DriverValoracio {
 
     private static void testHashCode() throws Exception {
         System.out.println("Testejant hashCode.");
-
         double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-
         Item item = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio = new Valoracio(valor, usuari, item);
 
         double valor2 = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
-
         Item item2 = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio2 = new Valoracio(valor2, usuari2, item2);
 
         if (valoracio.hashCode() == valoracio2.hashCode()) {
@@ -116,13 +97,10 @@ public class DriverValoracio {
 
     private static void testCopy() throws Exception {
         System.out.println("Testejant copy.");
-
         double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                 "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-
         Item item = UtilitatsDeLectura.llegirItem();
-
         Valoracio valoracio = new Valoracio(valor, usuari, item);
         Valoracio valoracio2 = valoracio.copiar();
         System.out.println("Copia de la valoracio:");
