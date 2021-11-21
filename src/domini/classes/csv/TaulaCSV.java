@@ -53,6 +53,7 @@ public class TaulaCSV extends Contenidor {
         for (int i = 1; i < taula.size(); ++i) {
             this.afegirConjuntValors(taula.get(i));
         }
+        eliminarEspaisInnecessaris();
     }
 
     /**
@@ -343,7 +344,7 @@ public class TaulaCSV extends Contenidor {
         }
 
         else if (!this.atributsAIndex.containsKey(atribut)) {
-            throw new IllegalArgumentException("L'atribut seleccionat no existeix");
+            throw new IllegalArgumentException("L'atribut " + atribut + " no existeix");
         }
 
         else if (indexItem < 0 || numItems <= indexItem) {
