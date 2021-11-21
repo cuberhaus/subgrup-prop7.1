@@ -227,4 +227,3 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         return new Usuari(this.id.copiar(), this.nom, this.contrasenya, new TreeMap<>());
     }
 }
-
