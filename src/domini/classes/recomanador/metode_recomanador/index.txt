@@ -1,0 +1,9 @@
+Contenidor que implementa les funcionalitats dels metodes de recomanacio.
+-ConjuntPunts
+-KMeans
+-KNN
+-MetodeRecomanador
+-MetodeRecomanadorCollaborative
+-MetodeRecomanadorContentBased
+-Punt
+-SlopeOne

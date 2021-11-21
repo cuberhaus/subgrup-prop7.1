@@ -1,0 +1,3 @@
+Implementacions d'algunes funcionalitats per a facilitar el us del terminal.
+-consola
+-inout

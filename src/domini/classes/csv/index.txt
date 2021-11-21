@@ -1,0 +1,4 @@
+Contenidor que implementa les funcionalitats que s'encarreguen de llegir i escriure arxius CSV.
+-EscriptorDeCSV
+-LectorDeCSV
+-TaulaCSV

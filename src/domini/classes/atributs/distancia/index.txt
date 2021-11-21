@@ -1,0 +1,7 @@
+Classes que implementen la distancies entre "coses".
+-Distancia
+-DistanciaDiferenciaDeConjunts
+-DistanciaDiscreta
+-DistanciaEuclidiana
+-DistanciaLevensthein
+-DistanciaZero
