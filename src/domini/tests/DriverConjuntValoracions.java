@@ -22,12 +22,11 @@ public class DriverConjuntValoracions {
 
     public static void testAfegirTaulaCSV() throws Exception {
         System.out.println("Test afegir Taula CSV");
-        String ubicacioRatings = consola.llegirString("Introdueix la ruta del fitxer d'entrada de Ratings");
-        String ubicacioItems = consola.llegirString("Introdueix la ruta del fitxer d'entrada d'items");
+//        String ubicacioRatings = consola.llegirString("Introdueix la ruta del fitxer d'entrada de Ratings");
+//        String ubicacioItems = consola.llegirString("Introdueix la ruta del fitxer d'entrada d'items");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taulaRatings = lector.llegirCSV(ubicacioRatings);
-            TaulaCSV taulaItems = lector.llegirCSV(ubicacioItems);
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
@@ -36,7 +35,7 @@ public class DriverConjuntValoracions {
             ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
             conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
             System.out.println("Conjunt creat");
-//            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntValoracions);
+            UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -4,6 +4,8 @@ import domini.classes.atributs.valors.ValorAtribut;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * @author Tots.
@@ -108,6 +110,19 @@ public class UtilitatsDEscriptura {
         ArrayList<Usuari> usuaris = conjuntUsuaris.obtenirUsuaris();
         for (Usuari usuari : usuaris) {
             UtilitatsDEscriptura.imprimirUsuari(usuari);
+        }
+    }
+
+    public static void  imprimirConjuntValoracions(ConjuntValoracions conjuntValoracions) {
+        TreeMap<Pair<Usuari,Item>,Valoracio> valoracions = conjuntValoracions.obteTotesValoracions();
+        ArrayList<Valoracio> arrayValoracions = new ArrayList<>();
+        Set<Pair<Usuari, Item>> keys = valoracions.keySet();
+        for (Pair<Usuari, Item> id : keys) {
+            arrayValoracions.add(valoracions.get(id));
+        }
+
+        for (Valoracio valoracio : arrayValoracions) {
+            UtilitatsDEscriptura.imprimirValoracio(valoracio);
         }
     }
 
