@@ -1,0 +1,3 @@
+Conté la documentació del projecte.
+diagramaCasosUs.jpg
+dissenyDeClasses.pdf
