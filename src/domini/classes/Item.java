@@ -12,9 +12,26 @@ import java.util.*;
 public class Item implements Comparable<Item>, ElementIdentificat {
     private final Id id;
     private final TipusItem tipusItem;
+    /**
+     * Conté els valors dels atributs de l'Item.
+     * Relaciona el nom dels atributs amb el seu valor.
+     */
     private Map<String, ValorAtribut<?>> atributs;
+    /**
+     * Conté les valoracions de l'Item.
+     * Relaciona l'Usuari que ha fet la valoració amb la valoració.
+     */
     private Map<Usuari, Valoracio> valoracions;
 
+    /**
+     * Constructor d'un ítem amb conjunt de valoracions buit.
+     * @param id <code>Id</code> que conté l'identificador de l'ítem.
+     * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
+     * @param atributs <code>Map<String, ValorAtribut<?>></code> que relaciona els noms dels atributs de l'Item amb el
+     *                 seu valor.
+     * @param valoracions <code>Map<Usuari, Valoracio></code> que relacions els Usuaris que han fet les valoracions de
+     *                    l'Item amb la valoració.
+     */
     public Item(Id id, TipusItem tipusItem, Map<String, ValorAtribut<?>> atributs, Map<Usuari, Valoracio> valoracions) {
         this.id = id;
         this.tipusItem = tipusItem;
@@ -24,12 +41,13 @@ public class Item implements Comparable<Item>, ElementIdentificat {
 
     /**
      * Constructor d'un ítem amb conjunt de valoracions buit.
+     * Actualitza els factors de normalització del TipusItem de l'ítem.
      * @param id <code>Id</code> que conté l'identificador de l'ítem.
      * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
-     * @param nomAtributs <code>ArrayList<String></code> que conté els noms dels atributs els valors dels quals es troben a <code>valors</code>.
+     * @param nomAtributs <code>ArrayList<String></code> que conté els noms dels atributs els valors dels quals es
+     *                    troben a <code>valors</code>.
      * @param valors <code>ArrayList<String></code> que conté els valors de l'ítem en forma de String.
-     * @throws IllegalArgumentException llançada si el <code>TipusItem</code> i el <code>Map<String, ValorAtribut></code>
-     * donats no són compatibles.
+     * @throws IllegalArgumentException si els valors donats no són compatibles amb el TipusItem.
      */
     public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
         this.id = id;
@@ -44,6 +62,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
+        // Dos ítems són iguals si tenen identificadors iguals.
         return id.equals(item.id);
     }
 
@@ -52,6 +71,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         return Objects.hash(id);
     }
 
+    /**
+     * @return Còpia profunda de l'Item sense valoracions, ja que no es pot copiar l'estructura de valoracions.
+     */
     public Item copiar() {
         return new Item(this.obtenirId(), this.obtenirTipusItem(), this.obtenirAtributs(), new TreeMap<>());
     }
@@ -61,12 +83,22 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         return id.compareTo(o.id);
     }
 
+    /**
+     * @return Còpia de l'identificador de l'Item.
+     */
     public Id obtenirId() { return id.copiar(); }
 
+    /**
+     * @return Còpia del TipusItem de l'Item.
+     */
     public TipusItem obtenirTipusItem() {
         return tipusItem.copiar();
     }
 
+    /**
+     * @return Còpia profunda del <code>Map<String, ValorAtribut<?>></code> que relaciona els noms dels atributs de
+     * l'Item amb el seu valor.
+     */
     public Map<String, ValorAtribut<?>> obtenirAtributs() {
         Map<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for (Map.Entry<String, ValorAtribut<?>> valorAtributEntry : this.atributs.entrySet()) {
@@ -75,6 +107,10 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         return atributs;
     }
 
+    /**
+     * @return Còpia profunda del <code>Map<Usuari, Valoracio></code> que relaciona els Usuaris que han fet les
+     * valoracions de l'Item amb la valoració.
+     */
     public Map<Usuari, Valoracio> obtenirValoracions() {
         Map<Usuari, Valoracio> valoracions = new TreeMap<>();
         for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
@@ -84,9 +120,13 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     }
 
     /**
-     * @param item <code>Item</code> que conté l'ítem amb el qual es vol calcular la distància.
-     * @return <code>double</code> que conté la distància entre l'ítem actual i l'ítem donat si els ítem són del mateix
+     * La distància entre dos Items es defineix com la suma de les distàncies normalitzades entre tots els atributs dels
+     * Items, que han de ser del mateix tipus. La normalització es fa per evitar que un atribut tingui més importància
+     * que un altre.
+     * @param item Item amb el qual es vol calcular la distància.
+     * @return <code>double</code> que conté la distància entre l'ítem actual i l'ítem donat, si els ítem són del mateix
      * tipus.
+     * @throws IllegalArgumentException si l'Item donat és nul o els Items no són del mateix TipusItem.
      */
     public double obtenirDistancia(Item item) throws IllegalArgumentException {
         if (item == null) {
@@ -104,6 +144,10 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         return distancia;
     }
 
+    /**
+     * @param valoracio Valoració que s'afegeix a les valoracions de l'Item.
+     * @throws IllegalArgumentException Si la valoració donada és nul·la o l'ha feta un Item diferent a l'actual.
+     */
     public void afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
         if (valoracio == null) {
             throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
@@ -114,6 +158,11 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         valoracions.put(valoracio.obtenirUsuari(), valoracio);
     }
 
+    /**
+     * Esborra els atributs amb els noms donats del TipusItem de l'ítem i dels atributs de l'ítem. Si un dels noms donats
+     * no es correspon amb cap atribut, s'ignora.
+     * @param nomAtributs Conjunt de Strings que conté noms d'atributs.
+     */
     public void esborrarAtributs(TreeSet<String> nomAtributs) {
         tipusItem.esborrarAtributs(nomAtributs);
         for (String nomAtribut : nomAtributs) {
@@ -121,6 +170,13 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
+    /**
+     * @param valorAtribut ValorAtribut del tipus que es vol crear
+     * @param s <code>String</code> que conté el valor de l'atribut
+     * @return <code>ValorAtribut</code> de la mateixa subclasse que 'valorAtribut' i amb el valor que conté 's'
+     * @throws IllegalArgumentException Si no es pot llegir el valor de la classe donada de la String donada o si no es
+     * reconeix la subclasse de 'valorAtribut'.
+     */
     private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException {
         if (valorAtribut instanceof ValorBoolea) {
             return new ValorBoolea(Boolean.parseBoolean(s));
@@ -143,6 +199,12 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
+    /**
+     * Assigna els noms i valors d'atributs donats als atributs de l'Item.
+     * @param nomAtributs Noms dels atributs
+     * @param valors Valors dels atributs guardats com Strings
+     * @throws IllegalArgumentException Si els noms i valors donats no són compatibles amb el TipusItem de l'Item.
+     */
     private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
         if (tipusItem.obtenirTipusAtributs().size() != nomAtributs.size() ||
                 tipusItem.obtenirTipusAtributs().size() != valors.size()) {
@@ -160,6 +222,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
+    /**
+     * Actualitza els factors de normalització de tots els TipusAtributs del TipusItem de l'Item.
+     */
     private void actualitzarFactorNormalitzacioAtributs() {
         for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
