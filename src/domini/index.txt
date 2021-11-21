@@ -1,4 +1,4 @@
-Carpeta on trobem el contenidor principal del codi del programa i un altre contenidor dels tests fets servir per
-verificar el funcionament esperat de les classes.
--classes/
--tests/
+Carpeta de la capa de domini del projecte, hi trobem la carpeta classes/ amb el codi de les classes del projecte i la
+carpeta tests/ amb els tests del projecte.
+classes/
+tests/

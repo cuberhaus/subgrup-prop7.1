@@ -1,8 +1,10 @@
-Contenidor que implementa el sistema recomanador.
--filtre/
--metode_recomanador/
--ConjuntRecomanacions
--Recomanacio
--Recomanador
--RecomanadorCollaborative
--RecomanadorContentBased
+Carpeta que conté les classes que implementen el recomanador del projecte. Té una subcarpeta filtre/ amb les classes
+dels filtres i una subcarpeta metode_recomanador/ amb les classes del mètode que utilitza el recomanador.
+filtre/
+metode_recomanador/
+ConjuntRecomanacions.java
+index.txt
+Recomanacio.java
+Recomanador.java
+RecomanadorCollaborative.java
+RecomanadorContentBased.java

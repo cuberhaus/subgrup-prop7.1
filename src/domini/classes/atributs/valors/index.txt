@@ -1,11 +1,14 @@
-Contenidor que implementa els diferents tipus de dades que fem servir al programa.
--ValorAtribut
--ValorBoolea
--ValorCategoric
--ValorConjunt
--ValorConjuntBoolea
--ValorConjuntCategoric
--ValorConjuntNumeric
--ValorConjuntTextual
--ValorNumeric
--ValorTextual
+Conté la classe abstracta ValorAtribut i totes les classes que representen valors d'atributs. Hi ha valor d'atributs
+simples i valors atributs que representen conjunts. Aquests últims implementen la classe abstracta ValorConjunt (que
+al seu torn implementa la classe abstracta ValorAtribut) i els fitxers que els contenen comencen per 'ValorConjunt'.
+index.txt
+ValorAtribut.java
+ValorBoolea.java
+ValorCategoric.java
+ValorConjunt.java
+ValorConjuntBoolea.java
+ValorConjuntCategoric.java
+ValorConjuntNumeric.java
+ValorConjuntTextual.java
+ValorNumeric.java
+ValorTextual.java
