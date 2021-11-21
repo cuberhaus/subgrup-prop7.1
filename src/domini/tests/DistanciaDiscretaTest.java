@@ -5,6 +5,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de la classe DistanciaDiscreta
+ */
+
 public class DistanciaDiscretaTest {
 
     private final static double delta = 1e-10;

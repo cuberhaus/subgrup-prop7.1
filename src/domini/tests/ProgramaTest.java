@@ -5,6 +5,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests de les classes Programa, Sessio, SessioIniciada i SesssioNoIniciada
+ */
+
 public class ProgramaTest {
     private final Programa p1 = Programa.obtenirInstancia();
     private final Programa p2 = Programa.obtenirInstancia();

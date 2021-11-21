@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Unit tests de la classe KMeans
+ */
 
 public class KMeansTest {
 

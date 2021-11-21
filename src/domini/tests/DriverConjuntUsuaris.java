@@ -4,7 +4,7 @@ import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
 /**
- * Driver per la classe Usuari
+ * Driver per la classe ConjuntUsuaris
  * @author pol.casacuberta
  */
 

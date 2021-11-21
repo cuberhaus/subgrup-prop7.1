@@ -13,6 +13,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit tests de la classe ValorConjuntNumeric
+ */
+
 @RunWith(Enclosed.class)
 public class ValorConjuntTextualTest {
     @RunWith(Parameterized.class)

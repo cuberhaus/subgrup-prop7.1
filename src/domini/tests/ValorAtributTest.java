@@ -10,6 +10,10 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
+/**
+ * Unit tests de la classe ValorAtribut
+ */
+
 public class ValorAtributTest {
     @RunWith(Parameterized.class)
     public static class ParametrizedCopiarTest {
