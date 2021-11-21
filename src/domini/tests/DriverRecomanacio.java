@@ -31,7 +31,7 @@ public class DriverRecomanacio {
     public static void testObteSeguretat() {
         try {
             Recomanacio rec = UtilitatsDeLectura.llegirRecomanacio();
-            double seguretat = rec.obtenirRate();
+            double seguretat = rec.obtenirSeguretat();
             System.out.println("Seguretat: " + seguretat);
 
         } catch (Exception e) {
