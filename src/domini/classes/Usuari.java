@@ -210,11 +210,19 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
         return Objects.hash(id);
     }
 
+    /**
+     * Retorna un enter negatiu quan l'usuari passat per paràmetre és major que el paràmetre implícit.
+     * Retorna un 0 si son iguals
+     * Retorna un enter positiu si l'usuari passat per paràmetre és menor que el paràmetre implícit
+     */
     @Override
     public int compareTo(Usuari o) {
         return id.compareTo(o.id);
     }
 
+    /**
+     * Retorna una copia de l'usuari del paràmetre implícit
+     */
     public Usuari copiar() {
         return new Usuari(this.id.copiar(), this.nom, this.contrasenya, new TreeMap<>());
     }
