@@ -27,9 +27,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * Constructor d'un ítem amb conjunt de valoracions buit.
      * @param id <code>Id</code> que conté l'identificador de l'ítem.
      * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
-     * @param atributs <code>Map<String, ValorAtribut<?>></code> que relaciona els noms dels atributs de l'Item amb el
+     * @param atributs <code>Map&lt;String, ValorAtribut&lt;?&gt; &gt; </code> que relaciona els noms dels atributs de l'Item amb el
      *                 seu valor.
-     * @param valoracions <code>Map<Usuari, Valoracio></code> que relacions els Usuaris que han fet les valoracions de
+     * @param valoracions <code>Map&lt;Usuari, Valoracio&gt;</code> que relacions els Usuaris que han fet les valoracions de
      *                    l'Item amb la valoració.
      */
     public Item(Id id, TipusItem tipusItem, Map<String, ValorAtribut<?>> atributs, Map<Usuari, Valoracio> valoracions) {
@@ -44,9 +44,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * Actualitza els factors de normalització del TipusItem de l'ítem.
      * @param id <code>Id</code> que conté l'identificador de l'ítem.
      * @param tipusItem <code>TipusItem</code> que conté el tipus de l'ítem.
-     * @param nomAtributs <code>ArrayList<String></code> que conté els noms dels atributs els valors dels quals es
+     * @param nomAtributs <code>ArrayList&lt;String&gt;</code> que conté els noms dels atributs els valors dels quals es
      *                    troben a <code>valors</code>.
-     * @param valors <code>ArrayList<String></code> que conté els valors de l'ítem en forma de String.
+     * @param valors <code>ArrayList&lt;String&gt;</code> que conté els valors de l'ítem en forma de String.
      * @throws IllegalArgumentException si els valors donats no són compatibles amb el TipusItem.
      */
     public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
@@ -96,7 +96,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     }
 
     /**
-     * @return Còpia profunda del <code>Map<String, ValorAtribut<?>></code> que relaciona els noms dels atributs de
+     * @return Còpia profunda del <code>Map&lt;String, ValorAtribut&lt;?&gt;&gt;</code> que relaciona els noms dels atributs de
      * l'Item amb el seu valor.
      */
     public Map<String, ValorAtribut<?>> obtenirAtributs() {
@@ -108,7 +108,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     }
 
     /**
-     * @return Còpia profunda del <code>Map<Usuari, Valoracio></code> que relaciona els Usuaris que han fet les
+     * @return Còpia profunda del <code>Map&lt;Usuari, Valoracio&gt;</code> que relaciona els Usuaris que han fet les
      * valoracions de l'Item amb la valoració.
      */
     public Map<Usuari, Valoracio> obtenirValoracions() {

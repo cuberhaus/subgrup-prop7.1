@@ -27,9 +27,9 @@ public class TipusItem {
     }
 
     /**
-     * Constructor d'un TipusItem donat el nom i el <code>Map<String, TipusAtribut></code> que conté els tipus d'atributs.
+     * Constructor d'un TipusItem donat el nom i el <code>Map&lt;String, TipusAtribut&gt;</code> que conte els tipus d'atributs.
      * @param nom Nom del TipusItem
-     * @param tipusAtributs <code>Map<String, TipusAtribut></code> amb els tipus d'atributs
+     * @param tipusAtributs <code>Map&lt;String, TipusAtribut&gt;</code> amb els tipus d'atributs
      */
     public TipusItem(String nom, Map<String, TipusAtribut> tipusAtributs) {
         this.nom = nom;
@@ -40,7 +40,7 @@ public class TipusItem {
      * Constructor d'un TipusItem donat el nom i un conjunt d'ítems.
      * Dedueix el <code>TipusAtribut</code> de cada atribut en funció dels valors dels primers 'numCandidats' ítems.
      * @param nomTipusItem <code>String</code> que conté el nom del TipusItem.
-     * @param taulaCSV <code>TaulaCSV<String></code> que conté els ítems.
+     * @param taulaCSV <code>TaulaCSV</code> que conté els ítems.
      * @param numCandidats Nombre d'ítems que es consideraran per deduir el tipus de cada atribut.
      * @throws IllegalArgumentException Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
      */
@@ -114,14 +114,14 @@ public class TipusItem {
 
     /**
      * Assigna els tipusAtributs d'un TipusItem.
-     * @param tipusAtributs <code>Map<String, TipusAtribut></code> que conté els tipus d'atributs.
+     * @param tipusAtributs <code>Map&lt;String, TipusAtribut&gt;</code> que conte els tipus d'atributs.
      */
     public void assignarTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
         this.tipusAtributs = tipusAtributs;
     }
 
     /**
-     * @return <code>Map<String, TipusAtribut></code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
+     * @return <code>Map&lt;String, TipusAtribut&gt;</code> que conte els <code>tipusAtributs</code> del <code>TipusItem</code>.
      */
     public Map<String, TipusAtribut> obtenirTipusAtributs() {
         Map<String, TipusAtribut> copiaTipusAtributs = new TreeMap<>();

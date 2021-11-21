@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"domini.classes"},{"l":"domini.classes.atributs"},{"l":"domini.classes.atributs.distancia"},{"l":"domini.classes.atributs.valors"},{"l":"domini.classes.csv"},{"l":"domini.classes.recomanador"},{"l":"domini.classes.recomanador.filtre"},{"l":"domini.classes.recomanador.metode_recomanador"},{"l":"libs"}]

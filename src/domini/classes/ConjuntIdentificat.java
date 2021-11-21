@@ -39,7 +39,7 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
     }
 
     /**
-     * @return Tots els elements del conjunt identificat en un <code>TreeMap<Id, T></code> que relaciona cada
+     * @return Tots els elements del conjunt identificat en un <code>TreeMap(Id, T)</code> que relaciona cada
      * identificador amb el seu element.
      */
     public TreeMap<Id, T> obtenirTotsElsElements() { return elements; }

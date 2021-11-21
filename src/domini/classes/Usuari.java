@@ -124,6 +124,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * Afegeix una valoració al conjunt de valoracions.
      * Retorna true si s'ha afegit correctament, retorna false si ja hi era
      * @param  valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
+     * @return c
      */
     public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
         if (valoracio == null) {
@@ -143,6 +144,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * Esborra una valoració del conjunt de valoracions.
      * Retorna true si s'ha esborrat correctament, retorna false si no hi era
      * @param  item la valoració amb l'item s'ha esborrat del conjunt, si hi era.
+     * @return c
      */
     public boolean esborraValoracio(Item item) {
         if (item == null || !valoracions.containsKey(item)) {
@@ -154,6 +156,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
 
     /**
      * Consultora d'una valoració feta per l'usuari a l'item passat com a parametre
+     * @param item c
      * @return El resultat és el valor del paràmetre implícit o null si no existeix
      */
     public Valoracio obtenirValoracio(Item item) {
@@ -184,6 +187,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     /**
      * Retorna true si la contrasenya passada com a paràmetre es igual a la del paràmetre implícit
      * @param  contrasenya El paràmetre contrasenya pren el nou valor.
+     * @return boolean
      */
     public boolean isContrasenya(String contrasenya) {
         return Objects.equals(this.contrasenya, contrasenya);
@@ -222,6 +226,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
 
     /**
      * Retorna una copia de l'usuari del paràmetre implícit
+     * @return usuari
      */
     public Usuari copiar() {
         return new Usuari(this.id.copiar(), this.nom, this.contrasenya, new TreeMap<>());

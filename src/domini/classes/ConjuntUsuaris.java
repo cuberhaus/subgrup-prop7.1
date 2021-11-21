@@ -56,7 +56,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
 
     /**
      * Consultora que retorna una llista d'usuaris
-     * @return <code>ArrayList<String></code> llista d'usuaris
+     * @return <code>ArrayList &lt;String&gt;</code> llista d'usuaris
      */
     public ArrayList<Usuari> obtenirUsuaris() {
         ArrayList<Usuari> usuaris = new ArrayList<>();

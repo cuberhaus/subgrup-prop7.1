@@ -40,7 +40,7 @@ public class TaulaCSV extends Contenidor {
 
     /**
      * Constructora partint d'un contingut.
-     * @param taula <code>ArrayList<ArrayList<String>></code> que conté tot el contingut de la taula.
+     * @param taula ArrayList que conté tot el contingut de la taula.
      */
     public TaulaCSV(ArrayList<ArrayList<String>> taula) {
         valorsItem = new ArrayList<>();
