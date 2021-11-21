@@ -1,4 +1,4 @@
-Conté la documentació del projecte.
+Conte la documentacio del projecte.
 DiagramaDeCasosDUs.jpg
 DiagramaEstatic.pdf
 DissenyIRelacioDeClasses.pdf

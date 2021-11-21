@@ -1,4 +1,4 @@
-Conté la classe abstracta Distancia i totes les classes que representen distàncies.
+Conte la classe abstracta Distancia i totes les classes que representen distancies.
 Distancia.java
 DistanciaDiferenciaDeConjunts.java
 DistanciaDiscreta.java

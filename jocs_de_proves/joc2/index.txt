@@ -1,4 +1,4 @@
-Conté el joc de prova 2.
+Conte el joc de prova 2.
 index.txt
 items.csv
 Joc2.java

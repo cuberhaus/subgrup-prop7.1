@@ -1,4 +1,4 @@
-Conté el joc de prova 1.
+Conte el joc de prova 1.
 index.txt
 inputqueries.txt
 items.csv

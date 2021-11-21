@@ -1,4 +1,4 @@
-Conté el README.md del projecte, la carpeta amb el codi font, la carpeta amb els jocs de proves i la carpeta amb les
+Conte el README.md del projecte, la carpeta amb el codi font, la carpeta amb els jocs de proves i la carpeta amb les
 dades utilitzades pels tests (drivers).
 dades_tests/
 jocs_de_proves/

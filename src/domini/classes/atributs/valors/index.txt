@@ -1,5 +1,5 @@
-Conté la classe abstracta ValorAtribut i totes les classes que representen valors d'atributs. Hi ha valor d'atributs
-simples i valors atributs que representen conjunts. Aquests últims implementen la classe abstracta ValorConjunt (que
+Conte la classe abstracta ValorAtribut i totes les classes que representen valors d'atributs. Hi ha valor d'atributs
+simples i valors atributs que representen conjunts. Aquests ultims implementen la classe abstracta ValorConjunt (que
 al seu torn implementa la classe abstracta ValorAtribut) i els fitxers que els contenen comencen per 'ValorConjunt'.
 index.txt
 ValorAtribut.java

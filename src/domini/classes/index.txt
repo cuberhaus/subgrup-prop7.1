@@ -1,5 +1,5 @@
-Conté els fitxers amb la implementació de les classes del projecte. Conté 3 subpackages amb les classes pròpies del
-recomanador, les classes per representar els atributs dels ítems i les classes pel processament d'arxius CSV.
+Conte els fitxers amb la implementacio de les classes del projecte. Conte 3 subpackages amb les classes propies del
+recomanador, les classes per representar els atributs dels items i les classes pel processament d'arxius CSV.
 recomanador/
 atributs/
 csv/

@@ -1,4 +1,4 @@
-Carpeta que conté els drivers de les classes del projecte i els tests unitaris (JUnit). Els fitxers que contenen drivers
+Carpeta que conte els drivers de les classes del projecte i els tests unitaris (JUnit). Els fitxers que contenen drivers
 comencen en 'Driver' i els fitxers que contenen tests unitaris acaben en 'Test'.
 ConjuntItemsTest.java
 ConjuntPuntsTest.java

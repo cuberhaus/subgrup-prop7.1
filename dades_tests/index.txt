@@ -1,6 +1,6 @@
-Conté els fitxers amb valors de mostra i funcionals que es poden utilitzar als drivers i serveixen com a valors per
-defecte dels drivers. Cadascun dels fitxers mostra uns valors arbitraris per facilitar la comprovació de les classes.
-També serveixen com a documentació dels drivers, per tal de mostrar quins fitxers d'entrada reben els drivers.
+Conte els fitxers amb valors de mostra i funcionals que es poden utilitzar als drivers i serveixen com a valors per
+defecte dels drivers. Cadascun dels fitxers mostra uns valors arbitraris per facilitar la comprovacio de les classes.
+Tambe serveixen com a documentacio dels drivers, per tal de mostrar quins fitxers d'entrada reben els drivers.
 ConjuntItems1
 Id1
 Id2
