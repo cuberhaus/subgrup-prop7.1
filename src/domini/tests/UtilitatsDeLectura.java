@@ -283,8 +283,6 @@ public class UtilitatsDeLectura {
         try {
             FileReader lector = new FileReader(ruta);
             BufferedReader fitxer = new BufferedReader(lector);
-            ArrayList<String> atributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
-            String sNumeroItems = fitxer.readLine();
             ArrayList<ArrayList<String>> taula = new ArrayList<>();
 
             String row;
@@ -297,7 +295,6 @@ public class UtilitatsDeLectura {
                 taula.add(new ArrayList<>(afila));
                 afila.clear();
             }
-
             return taula;
         } catch (FileNotFoundException e) {
             throw new Exception(e.getMessage());
