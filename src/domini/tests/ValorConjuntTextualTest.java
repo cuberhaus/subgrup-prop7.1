@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Unit tests de la classe ValorConjuntNumeric
+ * Unit tests de la classe ValorConjuntTextual
  */
 
 @RunWith(Enclosed.class)
