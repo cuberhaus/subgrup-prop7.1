@@ -11,8 +11,8 @@ public class DistanciaZeroTest {
     private final static DistanciaZero distanciaZero = new DistanciaZero();
 
     @Test
-    public void copy_HauriaDeRetornarCopia() {
-        Distancia copia = distanciaZero.copy();
+    public void copiar_HauriaDeRetornarCopia() {
+        Distancia copia = distanciaZero.copiar();
         assertNotSame(copia, distanciaZero);
         assertEquals(copia, distanciaZero);
     }

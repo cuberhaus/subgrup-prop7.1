@@ -35,16 +35,16 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         this(s.split(";"));
     }
 
+    @Override
+    public ValorConjuntTextual copiar() {
+        return new ValorConjuntTextual(valor);
+    }
+
     /**
      * @return <code>ArrayList<ValorAtribut<String></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<String>> obtenirValor() {
         return valor;
-    }
-
-    @Override
-    public ValorConjuntTextual copiar() {
-        return new ValorConjuntTextual(valor);
     }
 }

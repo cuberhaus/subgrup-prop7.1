@@ -14,7 +14,7 @@ public class DistanciaDiferenciaDeConjunts extends Distancia {
     private double normaMaxima = 0.0;
 
     @Override
-    public Distancia copy() {
+    public Distancia copiar() {
         return new DistanciaDiferenciaDeConjunts();
     }
 

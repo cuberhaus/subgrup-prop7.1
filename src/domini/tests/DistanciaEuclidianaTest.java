@@ -20,8 +20,8 @@ public class DistanciaEuclidianaTest {
 
     public static class NonParametrizedDistanciaEuclidianaTest {
         @Test
-        public void copy_HauriaDeRetornarCopia() {
-            Distancia copia = distanciaEuclidiana.copy();
+        public void copiar_HauriaDeRetornarCopia() {
+            Distancia copia = distanciaEuclidiana.copiar();
             assertNotSame(copia, distanciaEuclidiana);
             assertEquals(copia, distanciaEuclidiana);
         }

@@ -40,6 +40,6 @@ public class TipusAtribut {
     }
 
     public TipusAtribut copy() {
-        return new TipusAtribut(valorAtribut.copiar(), distancia.copy());
+        return new TipusAtribut(valorAtribut.copiar(), distancia.copiar());
     }
 }

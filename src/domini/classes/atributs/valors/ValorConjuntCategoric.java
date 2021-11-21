@@ -35,16 +35,16 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
         this(s.split(";"));
     }
 
+    @Override
+    public ValorConjuntCategoric copiar() {
+        return new ValorConjuntCategoric(valor);
+    }
+
     /**
      * @return <code>ArrayList<ValorAtribut<String></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<String>> obtenirValor() {
         return valor;
-    }
-
-    @Override
-    public ValorConjuntCategoric copiar() {
-        return new ValorConjuntCategoric(valor);
     }
 }

@@ -8,7 +8,7 @@ import domini.classes.atributs.valors.*;
  */
 public class DistanciaDiscreta extends Distancia {
     @Override
-    public Distancia copy() {
+    public Distancia copiar() {
         return new DistanciaDiscreta();
     }
 

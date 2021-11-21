@@ -10,7 +10,7 @@ public abstract class Distancia {
     /**
      * @return <code>Distancia</code> que és una còpia del <code>Distancia</code> actual.
      */
-    public abstract Distancia copy();
+    public abstract Distancia copiar();
 
     @Override
     public boolean equals(Object obj) {
