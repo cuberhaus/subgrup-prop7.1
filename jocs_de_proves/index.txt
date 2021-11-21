@@ -1,3 +1,3 @@
-En aquest directori podem trobar la ubicacio dels jocs de prova que hem fet servir.
--joc1/
--joc2/
+Conté els jocs de prova del projecte.
+joc1/
+joc2/
