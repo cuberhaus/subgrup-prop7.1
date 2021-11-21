@@ -1,0 +1,11 @@
+Contenidor que implementa els diferents tipus de dades que fem servir al programa.
+-ValorAtribut
+-ValorBoolea
+-ValorCategoric
+-ValorConjunt
+-ValorConjuntBoolea
+-ValorConjuntCategoric
+-ValorConjuntNumeric
+-ValorConjuntTextual
+-ValorNumeric
+-ValorTextual

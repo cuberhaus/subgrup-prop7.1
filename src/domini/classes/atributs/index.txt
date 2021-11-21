@@ -1,0 +1,4 @@
+Implementacio de les classes relacionades amb els tipus de dades i calculs entre aquests.
+-distancia/
+-valors/
+-TipusAtribut
