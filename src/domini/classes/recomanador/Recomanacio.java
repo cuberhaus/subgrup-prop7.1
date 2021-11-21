@@ -25,10 +25,10 @@ public class Recomanacio implements Comparable<Recomanacio>{
 
     /**
      * Retorna la id del ítem de la valoració.
-     * @return <code>int</code>
+     * @return <code>Id</code>
      */
-    public int obtenirId() {
-        return this.id.obtenirValor();
+    public Id obtenirId() {
+        return this.id;
     }
 
     /**

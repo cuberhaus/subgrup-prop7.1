@@ -25,9 +25,8 @@ public class DriverRecomanacio {
     public static void testObteId() {
         try {
             Recomanacio rec = UtilitatsDeLectura.llegirRecomanacio();
-            int id = rec.obtenirId();
+            int id = rec.obtenirId().obtenirValor();
             System.out.println("Id: " + id);
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

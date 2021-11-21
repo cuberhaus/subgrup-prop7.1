@@ -1,4 +1,5 @@
 Carpeta de la capa de domini del projecte, hi trobem la carpeta classes/ amb el codi de les classes del projecte i la
-carpeta tests/ amb els tests del projecte.
+carpeta tests/ amb els tests del projecte. També hi ha el main interactiu
 classes/
 tests/
+Main.java
