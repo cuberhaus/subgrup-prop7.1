@@ -81,7 +81,7 @@ public class Valoracio {
 
     /**
      * Retorna una copia de la valoracio del paràmetre implícit
-     * @return val
+     * @return Copia del paràmetre implícit
      */
     public Valoracio copiar() {
         return new Valoracio(valor, usuari.copiar(), item.copiar());

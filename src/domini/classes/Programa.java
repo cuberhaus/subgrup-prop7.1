@@ -66,7 +66,7 @@ public class Programa {
 
     /**
      * Canvia l'estat de la sessió a SessioTancada
-     * @param sessio c
+     * @param sessio estat de la sessio
      */
     public void cambiarEstat(Sessio sessio) {
         this.sessio = sessio;
@@ -88,10 +88,20 @@ public class Programa {
         return sessio.obtenirUsuariSessioIniciada();
     }
 
+    /**
+     * Consultora dona true si l'usuari passat com a parametre existeix en el conjunt
+     * @param usuari usuari
+     * @return booleà
+     */
     public boolean conteUsuari(Usuari usuari) {
         return conjuntUsuaris.conte(usuari.obtenirId());
     }
 
+    /**
+     * Consultora obté l'usuari amb l'id passat com a paràmetre
+     * @param idUsuari id de l'usuari
+     * @return Usuari amb l'id desitjat
+     */
     public Usuari obtenirUsuari(Id idUsuari) {
         return conjuntUsuaris.obtenir(idUsuari);
     }
