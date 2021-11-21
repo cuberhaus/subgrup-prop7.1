@@ -8,7 +8,9 @@ import java.util.Arrays;
  * @author maria.prat
  */
 public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
-
+    /**
+     * Constructor d'un ValorConjuntBoolea amb valor nul.
+     */
     public ValorConjuntBoolea() {
         this.valor = null;
     }
@@ -22,7 +24,7 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
     }
 
     /**
-     * Constructor amb un conjunt de <code>booleans</code>.
+     * Constructor amb un conjunt de booleans.
      * @param valors <code>boolean[]</code> que conté els valors que s'assignaran a aquest atribut.
      */
     public ValorConjuntBoolea(boolean[] valors) {
@@ -36,7 +38,10 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
         }
     }
 
-
+    /**
+     * Constructor amb una String.
+     * @param s <code>bString</code> que conté els valors que s'assignaran a aquest atribut separats pel símbol ';'
+     */
     public ValorConjuntBoolea(String s) {
         if (s == null) {
             this.valor = null;
@@ -50,6 +55,9 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
         }
     }
 
+    /**
+     * @return Còpia del ValorConjuntBoolea.
+     */
     @Override
     public ValorConjuntBoolea copiar() {
         return new ValorConjuntBoolea(valor);

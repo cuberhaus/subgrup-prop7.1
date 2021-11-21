@@ -9,6 +9,9 @@ import java.util.Objects;
 public abstract class ValorAtribut<T> {
     protected T valor;
 
+    /**
+     * @return Còpia del ValorAtribut.
+     */
     public abstract ValorAtribut<?> copiar();
 
     @Override
@@ -24,5 +27,8 @@ public abstract class ValorAtribut<T> {
         return Objects.hash(valor);
     }
 
+    /**
+     * @return Valor del ValorAtribut.
+     */
     public abstract T obtenirValor();
 }

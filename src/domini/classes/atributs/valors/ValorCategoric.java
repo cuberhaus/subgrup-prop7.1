@@ -5,7 +5,9 @@ package domini.classes.atributs.valors;
  * @author maria.prat
  */
 public class ValorCategoric extends ValorAtribut<String> {
-
+    /**
+     * Constructor d'un ValorCategoric amb valor nul.
+     */
     public ValorCategoric() {
         this.valor = null;
     }
@@ -18,6 +20,9 @@ public class ValorCategoric extends ValorAtribut<String> {
         this.valor = valor;
     }
 
+    /**
+     * @return Còpia del ValorCategoric.
+     */
     @Override
     public ValorCategoric copiar() {
         return new ValorCategoric(valor);

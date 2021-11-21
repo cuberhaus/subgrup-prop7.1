@@ -19,6 +19,7 @@ public abstract class ValorConjunt<T> extends ValorAtribut<ArrayList<ValorAtribu
         if (this.obtenirValor() == null || that.obtenirValor() == null) {
             return false;
         }
+        // Dos ValorConjunt són iguals si tenen el mateix nombre d'elements i tots els elements són iguals.
         if (this.obtenirValor().size() != that.obtenirValor().size()) {
             return false;
         }
