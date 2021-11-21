@@ -38,6 +38,10 @@ public class TaulaCSV extends Contenidor {
         numItems = 0;
     }
 
+    /**
+     * Constructora partint d'un contingut.
+     * @param taula <code>ArrayList<ArrayList<String>></code> que conté tot el contingut de la taula.
+     */
     public TaulaCSV(ArrayList<ArrayList<String>> taula) {
         valorsItem = new ArrayList<>();
         atributsAIndex = new HashMap<>();
