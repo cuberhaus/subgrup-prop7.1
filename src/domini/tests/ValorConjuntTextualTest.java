@@ -1,7 +1,6 @@
 import domini.classes.atributs.valors.ValorAtribut;
-import domini.classes.atributs.valors.ValorCategoric;
-import domini.classes.atributs.valors.ValorConjuntCategoric;
 import domini.classes.atributs.valors.ValorTextual;
+import domini.classes.atributs.valors.ValorConjuntTextual;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -15,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Enclosed.class)
-public class ValorConjuntCategoricTest {
+public class ValorConjuntTextualTest {
     @RunWith(Parameterized.class)
     public static class ParametrizedConstructorStringTest {
         private final String valor;
@@ -30,16 +29,18 @@ public class ValorConjuntCategoricTest {
         public static Collection<Object[]> dades() {
             return Arrays.asList(new Object[][]{
                     {null, null},
-                    {"", new ArrayList<ValorAtribut<String>>(List.of(new ValorCategoric("")))},
+                    {"", new ArrayList<ValorAtribut<String>>(List.of(new ValorTextual("")))},
                     {"a;b;c;;abc;", new ArrayList<ValorAtribut<String>>(Arrays.asList(
-                            new ValorCategoric("a"), new ValorCategoric("b"), new ValorCategoric("c"), new ValorCategoric(""),
-                            new ValorCategoric("abc")))}
+                            new ValorTextual("a"), new ValorTextual("b"), new ValorTextual("c"), new ValorTextual(""),
+                            new ValorTextual("abc")))}
             });
         }
 
         @Test
-        public void constructorAmbString_HauriaDeCrearValorConjuntCategoric() {
-            assertEquals(new ValorConjuntCategoric(valor), new ValorConjuntCategoric(esperat));
+        public void constructorAmbString_HauriaDeCrearValorConjuntTextual() {
+            System.out.println(new ValorConjuntTextual(valor).obtenirValor().toString());
+            System.out.println(new ValorConjuntTextual(esperat).obtenirValor().toString());
+            assertEquals(new ValorConjuntTextual(valor), new ValorConjuntTextual(esperat));
         }
     }
 
@@ -59,14 +60,14 @@ public class ValorConjuntCategoricTest {
                     {null, null},
                     {new String[]{}, new ArrayList<ValorAtribut<String>>()},
                     {new String[]{"a", "b", "c", "abc"}, new ArrayList<ValorAtribut<String>>(Arrays.asList(
-                            new ValorCategoric("a"), new ValorCategoric("b"), new ValorCategoric("c"),
-                            new ValorCategoric("abc")))}
+                            new ValorTextual("a"), new ValorTextual("b"), new ValorTextual("c"),
+                            new ValorTextual("abc")))}
             });
         }
 
         @Test
-        public void constructorAmbString_HauriaDeCrearValorConjuntCategoric() {
-            assertEquals(new ValorConjuntCategoric(valor), new ValorConjuntCategoric(esperat));
+        public void constructorAmbString_HauriaDeCrearValorConjuntTextual() {
+            assertEquals(new ValorConjuntTextual(valor), new ValorConjuntTextual(esperat));
         }
     }
 }

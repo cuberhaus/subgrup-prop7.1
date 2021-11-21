@@ -26,7 +26,7 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         } else {
             this.valor = new ArrayList<>();
             for (String valor : s.split(";")) {
-                this.valor.add(new ValorCategoric(valor));
+                this.valor.add(new ValorTextual(valor));
             }
         }
     }
@@ -37,7 +37,7 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         } else {
             this.valor = new ArrayList<>();
             for (String valor : valors) {
-                this.valor.add(new ValorCategoric(valor));
+                this.valor.add(new ValorTextual(valor));
             }
         }
     }

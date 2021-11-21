@@ -53,7 +53,7 @@ public class ValorConjuntNumericTest {
         @Parameterized.Parameters(name = "{index}: constructor amb Array de doubles")
         public static Collection<Object[]> dades() {
             return Arrays.asList(new Object[][]{
-                    {null,},
+                    {null, null},
                     {new double[]{}, new ArrayList<ValorAtribut<Double>>()},
                     {new double[]{0.0, 1.111, -11.0}, new ArrayList<ValorAtribut<Double>>(Arrays.asList(
                             new ValorNumeric(0.0), new ValorNumeric(1.111), new ValorNumeric(-11.0)))}
@@ -62,8 +62,6 @@ public class ValorConjuntNumericTest {
 
         @Test
         public void constructorAmbString_HauriaDeCrearValorConjuntNumeric() {
-            System.out.println(new ValorConjuntNumeric(valor).obtenirValor().toString());
-            System.out.println(new ValorConjuntNumeric(esperat).obtenirValor().toString());
             assertEquals(new ValorConjuntNumeric(valor), new ValorConjuntNumeric(esperat));
         }
     }
