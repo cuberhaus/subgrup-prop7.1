@@ -107,13 +107,8 @@ public class DriverUsuari {
         try {
 
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-            Id id = UtilitatsDeLectura.llegirId();
-            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-            ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-            Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+            Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirId(item.obtenirId());
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
@@ -129,19 +124,14 @@ public class DriverUsuari {
         System.out.println("Testejant esborrarValoracio.");
         try {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-            Id id = UtilitatsDeLectura.llegirId();
-            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-            ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-            Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+            Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirId(item.obtenirId());
-            System.out.println("Escriu el valor de la valoració.");
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
             usuari.afegirValoracio(valoracio);
             usuari.esborraValoracio(item);
+            System.out.println("La valoració de l'usuari s'ha esborrat");
             UtilitatsDEscriptura.imprimirValoracionsUsuari(usuari.obtenirValoracions());
 
         } catch (Exception e) {
@@ -153,14 +143,8 @@ public class DriverUsuari {
         System.out.println("Testejant obtenirValoracio.");
         try {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-            Id id = UtilitatsDeLectura.llegirId();
-            TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
-            ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
-            Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
+            Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirId(item.obtenirId());
-            System.out.println("Escriu el valor de la valoració.");
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
             Valoracio valoracio = new Valoracio(valor,usuari,item);
@@ -189,6 +173,17 @@ public class DriverUsuari {
     public static void testCompareTo() throws Exception {
         System.out.println("Testejant CompareTo.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
+        Usuari usuari2 = UtilitatsDeLectura.llegirUsuari();
+        int compare = usuari.compareTo(usuari2);
+        if (compare < 0) {
+            System.out.println("Usuari 1 es mes petit que l'usuari dos");
+        }
+        else if (compare > 0) {
+            System.out.println("Usuari 1 es mes gran que l'usuari dos");
+        }
+        else {
+            System.out.println("Usuari 1 i Usuari 2 son iguals");
+        }
     }
 
     public static void testCopy() throws Exception {
