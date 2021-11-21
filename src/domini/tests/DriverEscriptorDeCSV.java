@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.csv.EscriptorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import libs.consola;

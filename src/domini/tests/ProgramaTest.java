@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.Id;
 import domini.classes.Programa;
 import domini.classes.Usuari;

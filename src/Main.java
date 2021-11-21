@@ -1,5 +1,3 @@
-package src;
-
 import domini.classes.Id;
 
 import java.io.IOException;

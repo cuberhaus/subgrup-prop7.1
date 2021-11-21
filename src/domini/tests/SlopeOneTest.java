@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.recomanador.metode_recomanador.SlopeOne;
 import org.junit.Test;
 

@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.*;
 import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.metode_recomanador.Punt;

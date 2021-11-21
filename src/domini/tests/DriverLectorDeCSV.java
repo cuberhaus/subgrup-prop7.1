@@ -1,12 +1,8 @@
+package domini.tests;
+
 import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import libs.consola;
-
-/**
- * Driver de la classe LectorDeCSV
- * @author pablo.vega
- */
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,8 +11,8 @@ import java.util.Arrays;
 
 /**
  * Driver per la classe LectorDeCSV
+ * @author pablo.vega
  */
-
 public class DriverLectorDeCSV {
     public static void testLectorCSV() {
         try {
@@ -46,13 +42,10 @@ public class DriverLectorDeCSV {
                 row = row + ' ';
                 String[] fila = row.split(",", 0);
 
-                ArrayList<String> afila = new ArrayList<>();
-                for (String elem : fila) {
-                    afila.add(elem);
-                }
+                ArrayList<String> afila = new ArrayList<>(Arrays.asList(fila));
 
                 String ultima = afila.get(afila.size() - 1);
-                StringBuffer pasos = new StringBuffer(ultima);
+                StringBuilder pasos = new StringBuilder(ultima);
                 pasos.deleteCharAt(pasos.length()-1);
 
                 String result = pasos.toString();

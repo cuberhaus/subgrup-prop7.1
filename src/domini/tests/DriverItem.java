@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.*;
 import libs.consola;
 

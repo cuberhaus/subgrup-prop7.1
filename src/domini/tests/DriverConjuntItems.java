@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.ConjuntItems;
 import domini.classes.Id;
 import domini.classes.Item;

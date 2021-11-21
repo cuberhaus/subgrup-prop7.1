@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.DistanciaLevenshtein;

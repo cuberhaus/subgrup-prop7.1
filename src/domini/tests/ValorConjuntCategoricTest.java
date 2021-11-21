@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.atributs.valors.ValorCategoric;
 import domini.classes.atributs.valors.ValorConjuntCategoric;

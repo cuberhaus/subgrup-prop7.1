@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.atributs.valors.ValorTextual;
 import domini.classes.atributs.valors.ValorConjuntTextual;

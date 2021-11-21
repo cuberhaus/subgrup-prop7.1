@@ -1,3 +1,5 @@
+package domini.tests;
+
 import domini.classes.Id;
 import domini.classes.Pair;
 import domini.classes.recomanador.ConjuntRecomanacions;

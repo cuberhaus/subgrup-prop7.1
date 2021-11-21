@@ -1,18 +1,16 @@
-import domini.classes.*;
-import domini.classes.ConjuntItems;
+package domini.tests;
+
 import domini.classes.Id;
 import domini.classes.Item;
 import domini.classes.TipusItem;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
-import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.metode_recomanador.KNN;
 import libs.consola;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
  * Driver per la classe KNN
@@ -26,7 +24,7 @@ public class DriverKNN {
         try {
             String consulta = "Introdueix el valor desitjat pel nou ítem";
             double val = consola.llegirDouble(consulta, "", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            domini.classes.atributs.valors.ValorAtribut atribut = new domini.classes.atributs.valors.ValorNumeric(val);
+            ValorAtribut<Double> atribut = new domini.classes.atributs.valors.ValorNumeric(val);
             TreeMap<String, ValorAtribut<?>> mapa = new TreeMap<>();
             mapa.put("escalar", atribut);
             items.add(new Item(new Id(items.size(), true), tipusItem, mapa, null));
@@ -40,7 +38,7 @@ public class DriverKNN {
         try {
             String consulta = "Introdueix el valor desitjat pel item:";
             double val = consola.llegirDouble(consulta, "", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            domini.classes.atributs.valors.ValorAtribut atribut = new domini.classes.atributs.valors.ValorNumeric(val);
+            ValorAtribut<Double> atribut = new domini.classes.atributs.valors.ValorNumeric(val);
             TreeMap<String, ValorAtribut<?>> mapa = new TreeMap<>();
             mapa.put("escalar", atribut);
             Item buscat = new Item(new Id(items.size(), true), tipusItem, mapa, null);
