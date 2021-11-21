@@ -6,13 +6,18 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
+/**
+ * JUnit de la classe LectorDeCSV
+ * @author pablo.vega
+ */
+
 public class LectorDeCSVTest {
 
     //La taula llegida té tots els atributs i tots els items
     @Test
     public void llegirCSV() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV tauleta = lector.llegirCSV("src/domini/tests/jocs_de_proves/joc1/items.csv");
+        TaulaCSV tauleta = lector.llegirCSV("dades_tests/items.csv");
         int tamanyItems = tauleta.obtenirNumItems();
         int tamanyAtributs = tauleta.obtenirNumAtributs();
         assertEquals(25, tamanyAtributs);

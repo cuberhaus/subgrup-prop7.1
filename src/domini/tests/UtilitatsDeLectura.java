@@ -277,4 +277,32 @@ public class UtilitatsDeLectura {
             throw new Exception("Fitxer invàlid.");
         }
     }
+
+    public static ArrayList<ArrayList<String>> llegirTaulaCSV() throws Exception {
+        String ruta = obtenirRutaORutaPerDefecte("TaulaCSV", "TaulaCSV1");
+        try {
+            FileReader lector = new FileReader(ruta);
+            BufferedReader fitxer = new BufferedReader(lector);
+            ArrayList<String> atributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
+            String sNumeroItems = fitxer.readLine();
+            int numeroItems;
+            try {
+                numeroItems = Integer.parseInt(sNumeroItems);
+            } catch (NumberFormatException e) {
+                throw new Exception("El numero de items no es un int");
+            }
+            ArrayList<ArrayList<String>> taula = new ArrayList<>();
+            taula.add(atributs);
+            for (int i = 0; i < numeroItems; ++i) {
+                taula.add(new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0))));
+            }
+
+            return taula;
+        } catch (FileNotFoundException e) {
+            throw new Exception(e.getMessage());
+        } catch (Exception e1) {
+            throw new Exception("Fitxer invàlid.");
+        }
+
+    }
 }

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.TreeMap;
 
+/**
+ * JUnit de la classe ConjuntItems
+ * @author pablo.vega
+ */
+
 public class ConjuntItemsTest {
 
     @Test (expected = InputMismatchException.class)

@@ -4,6 +4,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
+/**
+ * JUnit de la classe TaulaCSV
+ * @author pablo.vega
+ */
+
 public class TaulaCSVTest {
 
     //Probem que no podem assignar dos cops els atributs a la taula

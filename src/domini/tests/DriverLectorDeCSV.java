@@ -2,17 +2,23 @@ import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
+/**
+ * Driver de la classe LectorDeCSV
+ * @author pablo.vega
+ */
+
 import java.io.IOException;
 
 public class DriverLectorDeCSV {
     public static void testLectorCSV() {
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
             LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            TaulaCSV taula = lector.llegirCSV(consola.llegirString("Introdueix la ubicacio del csv"));
             taula.imprimir();
         } catch (IOException e1) {
             System.out.println("Ubicacio no valida");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

@@ -2,6 +2,11 @@ import domini.classes.Id;
 import domini.classes.recomanador.Recomanacio;
 import libs.consola;
 
+/**
+ * Driver de la classe Recomanacio
+ * @author pablo.vega
+ */
+
 public class DriverRecomanacio {
 
     public static void testConstructora() {
