@@ -22,17 +22,17 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
         this.valor = Boolean.parseBoolean(s.toLowerCase());
     }
 
+    @Override
+    public ValorBoolea copiar() {
+        return new ValorBoolea(valor);
+    }
+
     /**
      * @return <code>boolean</code> que conté el valor d'aquest atribut.
      */
     @Override
     public Boolean obtenirValor() {
         return valor;
-    }
-
-    @Override
-    public ValorBoolea copiar() {
-        return new ValorBoolea(valor);
     }
 
 

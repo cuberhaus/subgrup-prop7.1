@@ -18,16 +18,16 @@ public class ValorCategoric extends ValorAtribut<String> {
         this.valor = valor;
     }
 
+    @Override
+    public ValorCategoric copiar() {
+        return new ValorCategoric(valor);
+    }
+
     /**
      * @return <code>String</code> que conté el valor d'aquest atribut.
      */
     @Override
     public String obtenirValor() {
         return valor;
-    }
-
-    @Override
-    public ValorCategoric copiar() {
-        return new ValorCategoric(valor);
     }
 }

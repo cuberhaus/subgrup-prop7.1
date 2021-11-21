@@ -19,8 +19,8 @@ public class DistanciaLevenshteinTest {
 
     public static class NonParametrizedDistanciaLevenshteinTest {
         @Test
-        public void copy_HauriaDeRetornarCopia() {
-            Distancia copia = distanciaLevenshtein.copy();
+        public void copiar_HauriaDeRetornarCopia() {
+            Distancia copia = distanciaLevenshtein.copiar();
             assertNotSame(copia, distanciaLevenshtein);
             assertEquals(copia, distanciaLevenshtein);
         }

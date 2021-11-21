@@ -44,16 +44,16 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
         this((Boolean[]) Arrays.stream(s.split(";")).map(Boolean::parseBoolean).toArray());
     }
 
+    @Override
+    public ValorConjuntBoolea copiar() {
+        return new ValorConjuntBoolea(valor);
+    }
+
     /**
      * @return <code>ArrayList<ValorAtribut<Boolean></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<Boolean>> obtenirValor() {
         return valor;
-    }
-
-    @Override
-    public ValorConjuntBoolea copiar() {
-        return new ValorConjuntBoolea(valor);
     }
 }

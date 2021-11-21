@@ -19,8 +19,8 @@ public class DistanciaDiferenciaDeConjuntsTest {
 
     public static class NonParametrizedDistanciaDiferenciaDeConjuntsTest {
         @Test
-        public void copy_HauriaDeRetornarCopia() {
-            Distancia copia = distanciaDiferenciaDeConjunts.copy();
+        public void copiar_HauriaDeRetornarCopia() {
+            Distancia copia = distanciaDiferenciaDeConjunts.copiar();
             assertNotSame(copia, distanciaDiferenciaDeConjunts);
             assertEquals(copia, distanciaDiferenciaDeConjunts);
         }

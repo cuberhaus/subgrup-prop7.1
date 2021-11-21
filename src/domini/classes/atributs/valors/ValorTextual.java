@@ -18,16 +18,16 @@ public class ValorTextual extends ValorAtribut<String> {
         this.valor = valor;
     }
 
+    @Override
+    public ValorTextual copiar() {
+        return new ValorTextual(valor);
+    }
+
     /**
      * @return <code>String</code> que conté el valor d'aquest atribut.
      */
     @Override
     public String obtenirValor() {
         return valor;
-    }
-
-    @Override
-    public ValorTextual copiar() {
-        return new ValorTextual(valor);
     }
 }

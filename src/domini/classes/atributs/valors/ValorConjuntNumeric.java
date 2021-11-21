@@ -36,17 +36,17 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
         this(Arrays.stream(s.split(";")).mapToDouble(Double::parseDouble).toArray());
     }
 
+    @Override
+    public ValorConjuntNumeric copiar() {
+        return new ValorConjuntNumeric(valor);
+    }
+
     /**
      * @return <code>ArrayList<ValorAtribut<Double></code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<Double>> obtenirValor() {
         return valor;
-    }
-
-    @Override
-    public ValorConjuntNumeric copiar() {
-        return new ValorConjuntNumeric(valor);
     }
 
 }
