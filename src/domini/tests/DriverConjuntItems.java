@@ -2,12 +2,16 @@ import domini.classes.ConjuntItems;
 import domini.classes.Id;
 import domini.classes.Item;
 import domini.classes.TipusItem;
-import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import libs.consola;
 
 import java.util.TreeMap;
 import java.util.TreeSet;
+
+/**
+ * Driver de la classe ConjuntItems
+ * @author pablo.vega
+ */
 
 public class DriverConjuntItems {
     public static void testConstructorTaula() throws Exception {

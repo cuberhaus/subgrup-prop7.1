@@ -1,7 +1,11 @@
 import domini.classes.csv.EscriptorDeCSV;
-import domini.classes.csv.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import libs.consola;
+
+/**
+ * Driver de la classe EscriptorDeCSV
+ * @author pablo.vega
+ */
 
 public class DriverEscriptorDeCSV {
     public static void testEscriureCSV() {
