@@ -38,8 +38,6 @@ public class ValorConjuntTextualTest {
 
         @Test
         public void constructorAmbString_HauriaDeCrearValorConjuntTextual() {
-            System.out.println(new ValorConjuntTextual(valor).obtenirValor().toString());
-            System.out.println(new ValorConjuntTextual(esperat).obtenirValor().toString());
             assertEquals(new ValorConjuntTextual(valor), new ValorConjuntTextual(esperat));
         }
     }

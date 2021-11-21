@@ -26,7 +26,7 @@ public class ValorBooleaTest {
         public static Collection<Object[]> dades() {
             return Arrays.asList(new Object[][]{
                     {null, null},
-                    {"", false},
+                    {"", null},
                     {"true", true},
                     {"TRUE", true},
                     {"True", true},
