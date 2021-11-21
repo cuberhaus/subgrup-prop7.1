@@ -8,7 +8,7 @@ public class SessioIniciada extends Sessio{
     /** Conté l'usuari que ha iniciat la sessió */
     private Usuari usuari;
 
-    SessioIniciada(Usuari usuari) {
+    public SessioIniciada(Usuari usuari) {
         this.usuari = usuari;
     }
 

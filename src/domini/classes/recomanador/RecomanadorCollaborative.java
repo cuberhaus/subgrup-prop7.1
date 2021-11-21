@@ -7,6 +7,9 @@ import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 
+/**
+ * @author maria.prat
+ */
 public class RecomanadorCollaborative extends Recomanador {
     public RecomanadorCollaborative(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracionsPubliques, Filtre filtre) {
         this.usuaris = usuaris;

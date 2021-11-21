@@ -6,6 +6,9 @@ import domini.classes.ConjuntValoracions;
 import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 
+/**
+ * @author maria.prat
+ */
 public class RecomanadorContentBased extends Recomanador {
     public RecomanadorContentBased(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracionsPubliques, Filtre filtre) {
         this.usuaris = usuaris;

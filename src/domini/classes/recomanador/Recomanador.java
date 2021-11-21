@@ -6,6 +6,9 @@ import domini.classes.ConjuntValoracions;
 import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanador;
 
+/**
+ * @author maria.prat
+ */
 public abstract class Recomanador {
     protected ConjuntUsuaris usuaris;
     protected ConjuntItems items;
