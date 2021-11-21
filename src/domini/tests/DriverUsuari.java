@@ -60,9 +60,8 @@ public class DriverUsuari {
     private static void testSetActiu() throws Exception {
         System.out.println("Testejant setActiu.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-        Scanner input = new Scanner(System.in);
-        String actiu;
-        actiu = input.nextLine();
+
+        String actiu = consola.llegirString("Escriu 'true' o 'false'");
         if (Objects.equals(actiu, "true")) {
             usuari.setActiu(true);
         }
@@ -81,34 +80,25 @@ public class DriverUsuari {
 
     public static void testIsContrasenya() throws Exception {
         System.out.println("Testejant isContrasenya.");
-        Id id = UtilitatsDeLectura.llegirId();
-        String nom = "Pablo";
-        Usuari u1 = new Usuari(id);
+        Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        System.out.println("Escriu la contrasenya '1234'");
-        Scanner input = new Scanner(System.in);
-        String s;
-        s = input.nextLine();
-        u1.setContrasenya(s);
-
-        System.out.println("IsContrasenya: " + u1.isContrasenya("1234"));
+        String contrasenya = consola.llegirString("Reescriu la contrasenya:");
+        usuari.setContrasenya(contrasenya);
+        System.out.println("IsContrasenya: " + usuari.isContrasenya(contrasenya));
     }
 
     public static void testSetContrasenya() throws Exception {
         System.out.println("Testejant setContrasenya.");
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
 
-        String contrasenya;
-        Scanner input = new Scanner(System.in);
-        System.out.println("Torna a escriure la teva contrasenya:");
-        contrasenya = input.nextLine();
+        String contrasenya = consola.llegirString("Reescriu la contrasenya:");
         usuari.setContrasenya(contrasenya);
 
         if (usuari.isContrasenya(contrasenya)) {
-            System.out.println("Has encertat la contrasenya");
+            System.out.println("La contrasenya s'ha canviat correctament");
         }
         else {
-            System.out.println("T'has equivocat de contrasenya");
+            System.out.println("La contrasenya no s'ha canviat correctament");
         }
     }
 
