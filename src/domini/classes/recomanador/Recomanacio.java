@@ -35,7 +35,7 @@ public class Recomanacio implements Comparable<Recomanacio>{
      * Obté el rate de la valoració.
      * @return <code>double</code>
      */
-    public double obtenirRate() {
+    public double obtenirSeguretat() {
         return this.seguretat;
     }
 
@@ -50,7 +50,7 @@ public class Recomanacio implements Comparable<Recomanacio>{
 
     @Override
     public int compareTo(Recomanacio o) {
-        return Double.compare(this.obtenirRate(), o.obtenirRate());
+        return Double.compare(this.obtenirSeguretat(), o.obtenirSeguretat());
     }
 }
 

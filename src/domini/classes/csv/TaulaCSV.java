@@ -336,6 +336,9 @@ public class TaulaCSV extends Contenidor {
 
     }
 
+    /**
+     * Elimina els espais del principi i del final de la taula;
+     */
     public void eliminarEspaisInnecessaris() {
         if (!estaInicialitzada()) {
             throw new IllegalStateException("La taula no ha estat inicialitzada.");
@@ -356,14 +359,12 @@ public class TaulaCSV extends Contenidor {
     }
 
     /**
-     * Is initialized boolean.
-     *
-     * @return the boolean
+     * Retorna si la taula és inicialitzada.
+     * @return <code>boolean</code>.
      */
     public boolean estaInicialitzada() {
         return numAtributs != -1;
     }
-
     public int obtenirNumItems() {
         return numItems;
     }

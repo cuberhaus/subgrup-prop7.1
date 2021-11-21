@@ -88,7 +88,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * Getter que retorna una llista de items
      * @return <code>ArrayList<String></code> llista de items
      */
-    public ArrayList<Item> getItems() {
+    public ArrayList<Item> obtenirItems() {
         ArrayList<Item> items = new ArrayList<>();
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {
