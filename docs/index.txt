@@ -1,4 +1,5 @@
 Conté la documentació del projecte.
 DiagramaDeCasosDUs.jpg
+DiagramaEstatic.pdf
 DissenyIRelacioDeClasses.pdf
 index.txt
