@@ -285,16 +285,17 @@ public class UtilitatsDeLectura {
             BufferedReader fitxer = new BufferedReader(lector);
             ArrayList<String> atributs = new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0)));
             String sNumeroItems = fitxer.readLine();
-            int numeroItems;
-            try {
-                numeroItems = Integer.parseInt(sNumeroItems);
-            } catch (NumberFormatException e) {
-                throw new Exception("El numero de items no es un int");
-            }
             ArrayList<ArrayList<String>> taula = new ArrayList<>();
-            taula.add(atributs);
-            for (int i = 0; i < numeroItems; ++i) {
-                taula.add(new ArrayList<>(Arrays.asList(fitxer.readLine().split(",", 0))));
+
+            String row;
+            while ((row = fitxer.readLine()) != null) {
+                String[] fila = row.split(",", 0);
+                ArrayList<String> afila = new ArrayList<>();
+                for (String elem : fila) {
+                    afila.add(elem);
+                }
+                taula.add(new ArrayList<>(afila));
+                afila.clear();
             }
 
             return taula;
