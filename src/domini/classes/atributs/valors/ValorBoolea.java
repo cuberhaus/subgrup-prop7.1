@@ -19,7 +19,7 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
     }
 
     public ValorBoolea(String s) {
-        if (s == null) {
+        if (s == null || s.isEmpty()) {
             this.valor = null;
         } else {
             this.valor = Boolean.parseBoolean(s.toLowerCase());

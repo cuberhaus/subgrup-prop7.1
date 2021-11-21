@@ -26,22 +26,28 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
      * @param valors <code>boolean[]</code> que conté els valors que s'assignaran a aquest atribut.
      */
     public ValorConjuntBoolea(boolean[] valors) {
-        this.valor = new ArrayList<>();
-        for (boolean valor : valors) {
-            this.valor.add(new ValorBoolea(valor));
-        }
-    }
-
-    public ValorConjuntBoolea(Boolean[] valors) {
-        this.valor = new ArrayList<>();
-        for (Boolean valor : valors) {
-            this.valor.add(new ValorBoolea(valor));
+        if (valors == null) {
+            this.valor = null;
+        } else {
+            this.valor = new ArrayList<>();
+            for (boolean valor : valors) {
+                this.valor.add(new ValorBoolea(valor));
+            }
         }
     }
 
 
     public ValorConjuntBoolea(String s) {
-        this((Boolean[]) Arrays.stream(s.split(";")).map(Boolean::parseBoolean).toArray());
+        if (s == null) {
+            this.valor = null;
+        } else if (s.isEmpty()) {
+            this.valor = new ArrayList<>();
+        } else {
+            this.valor = new ArrayList<>();
+            for (String valor : s.split(";")) {
+                this.valor.add(new ValorBoolea(valor));
+            }
+        }
     }
 
     @Override
