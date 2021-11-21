@@ -17,17 +17,16 @@ public class DriverConjuntValoracions {
     public static void testConstructorBasic() {
         System.out.println("Test Constructora bàsica");
         ConjuntValoracions conjuntValoracions;
-        System.out.println("S'ha construit un conjuntUsuaris buit");
+        System.out.println("S'ha construit un conjuntValoracions buit");
     }
 
     public static void testAfegirTaulaCSV() throws Exception {
         System.out.println("Test afegir Taula CSV");
-        String ubicacioRatings = consola.llegirString("Introdueix la ruta del fitxer d'entrada de Ratings");
-        String ubicacioItems = consola.llegirString("Introdueix la ruta del fitxer d'entrada d'items");
+//        String ubicacioRatings = consola.llegirString("Introdueix la ruta del fitxer d'entrada de Ratings");
+//        String ubicacioItems = consola.llegirString("Introdueix la ruta del fitxer d'entrada d'items");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taulaRatings = lector.llegirCSV(ubicacioRatings);
-            TaulaCSV taulaItems = lector.llegirCSV(ubicacioItems);
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
@@ -36,64 +35,31 @@ public class DriverConjuntValoracions {
             ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
             conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
             System.out.println("Conjunt creat");
-//            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntValoracions);
+            UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void testEsborrarId() throws Exception {
-        System.out.println("Test esborrar amb un Id");
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
-        try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taula);
-            System.out.println("Conjunt creat");
-            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
-            Id id = UtilitatsDeLectura.llegirId();
-            conjuntUsuaris.esborrar(id);
-            System.out.println("Conjunt després de borrar l'usuari desitjat");
-            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public static void testConte() throws Exception {
+        System.out.println("Test conte valoracio amb usuari i item donats");
     }
 
-    public static void testEsborrarUsuari() throws Exception {
-        System.out.println("Test esborrar Usuari");
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
-        try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taula);
-            System.out.println("Conjunt creat");
-            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
-            Usuari usuari = UtilitatsDeLectura.llegirUsuari();
-            conjuntUsuaris.esborrar(usuari);
-            System.out.println("Conjunt després de borrar l'usuari desitjat");
-            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public static void testObte() throws Exception {
+        System.out.println("Test obte valoracio amb usuari i item donats");
     }
 
-    public static void testObtenirUsuaris() throws Exception {
-        System.out.println("Test esborrar Usuari");
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
-        try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taula);
-            System.out.println("Conjunt creat");
-            UtilitatsDEscriptura.imprimirArrayDUsuaris(conjuntUsuaris.obtenirUsuaris());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public static void testEsborrarAmbUsuariItem() throws Exception {
+        System.out.println("Test esborra valoracio amb usuari i item donats");
+    }
+
+    public static void testEsborrarValoracio() throws Exception {
+        System.out.println("Test esborra valoracio donada una valoracio");
+    }
+
+    public static void testObteTotesValoracions() throws Exception {
+        System.out.println("Test obte totes les valoracions");
     }
 
     public static void main(String[] args)  {
@@ -101,13 +67,15 @@ public class DriverConjuntValoracions {
         String consulta = "\n0 - Sortir\n" +
                 "1 - Test Constructor bàsic\n" +
                 "2 - Test Afegir TaulaCSV\n" +
-                "3 - Test esborra Id\n" +
-                "4 - Test esborrarUsuari\n" +
-                "5 - Test Obtenir Usuaris\n";
-        String err = "Valor invàlid: introdueix un enter entre 0 i 5";
+                "3 - Test Conte\n" +
+                "4 - Test obte\n" +
+                "5 - Test esborrar amb usuari i item\n" +
+                "6 - Test esborrar valoracio\n" +
+                "7 - Test test obte totes les valoracions\n";
+        String err = "Valor invàlid: introdueix un enter entre 0 i 7";
         while(true){
             try {
-                int i = consola.llegirInt(consulta, err, 0, 5);
+                int i = consola.llegirInt(consulta, err, 0, 7);
                 switch (i) {
                     case 0:
                         return;
@@ -118,13 +86,19 @@ public class DriverConjuntValoracions {
                         testAfegirTaulaCSV();
                         break;
                     case 3:
-                        testEsborrarId();
+                        testConte();
                         break;
                     case 4:
-                        testEsborrarUsuari();
+                        testObte();
                         break;
                     case 5:
-                        testObtenirUsuaris();
+                        testEsborrarAmbUsuariItem();
+                        break;
+                    case 6:
+                        testEsborrarValoracio();
+                        break;
+                    case 7:
+                        testObteTotesValoracions();
                         break;
                 }
             }

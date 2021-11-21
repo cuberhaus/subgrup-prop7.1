@@ -213,6 +213,7 @@ public class TaulaCSV extends Contenidor {
         }
 
         else {
+            eliminarEspaisInnecessaris();
             ArrayList<ArrayList<String>> resultat = new ArrayList<>();
             resultat.add(this.obtenirNomsAtributs());
             resultat.addAll(valorsItem);
