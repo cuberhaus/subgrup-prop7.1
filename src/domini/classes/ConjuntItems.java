@@ -21,7 +21,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      */
     public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws InputMismatchException {
         taula.eliminarEspaisInnecessaris();
-        tipusItem = new TipusItem(nomTipusItem, taula);
+        tipusItem = new TipusItem(nomTipusItem, taula, taula.obtenirNumItems());
 
         elements = new TreeMap<>();
         int id;

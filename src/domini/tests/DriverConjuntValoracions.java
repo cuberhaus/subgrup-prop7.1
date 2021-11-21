@@ -20,13 +20,13 @@ public class DriverConjuntValoracions {
         System.out.println("S'ha construit un conjuntValoracions buit");
     }
 
-    public static void testAfegirTaulaCSV() throws Exception {
+    public static void testAfegirTaulaCSV() {
         System.out.println("Test afegir Taula CSV");
         try {
             System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
@@ -42,13 +42,13 @@ public class DriverConjuntValoracions {
         }
     }
 
-    public static void testConte() throws Exception {
+    public static void testConte() {
         System.out.println("Test conte valoracio amb usuari i item donats");
         try {
             System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
@@ -72,13 +72,13 @@ public class DriverConjuntValoracions {
         }
     }
 
-    public static void testObte() throws Exception {
+    public static void testObte() {
         System.out.println("Test obte valoracio amb usuari i item donats");
         try {
             System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
@@ -99,14 +99,14 @@ public class DriverConjuntValoracions {
         }
     }
 
-    public static void testEsborrarAmbUsuariItem() throws Exception {
+    public static void testEsborrarAmbUsuariItem() {
         System.out.println("Test esborra valoracio amb usuari i item donats");
 
         try {
             System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
@@ -133,14 +133,14 @@ public class DriverConjuntValoracions {
         }
     }
 
-    public static void testEsborrarValoracio() throws Exception {
+    public static void testEsborrarValoracio() {
         System.out.println("Test esborra valoracio donada una valoracio");
 
         try {
             System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
@@ -170,14 +170,14 @@ public class DriverConjuntValoracions {
         }
     }
 
-    public static void testObteTotesValoracions() throws Exception {
+    public static void testObteTotesValoracions() {
         System.out.println("Test obte totes les valoracions");
 
         try {
             System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
+            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taulaRatings);
             String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");

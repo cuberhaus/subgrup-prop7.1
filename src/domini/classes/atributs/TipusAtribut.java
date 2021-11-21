@@ -39,7 +39,7 @@ public class TipusAtribut {
         return distancia;
     }
 
-    public TipusAtribut copy() {
+    public TipusAtribut copiar() {
         return new TipusAtribut(valorAtribut.copiar(), distancia.copiar());
     }
 }

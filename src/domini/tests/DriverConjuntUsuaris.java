@@ -17,10 +17,8 @@ public class DriverConjuntUsuaris {
 
     public static void testAfegirTaulaCSV() {
         System.out.println("Test afegir Taula CSV");
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
@@ -32,10 +30,8 @@ public class DriverConjuntUsuaris {
 
     public static void testEsborrarId() {
         System.out.println("Test esborrar amb un Id");
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
@@ -51,10 +47,8 @@ public class DriverConjuntUsuaris {
 
     public static void testEsborrarUsuari() {
         System.out.println("Test esborrar Usuari");
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
@@ -70,10 +64,8 @@ public class DriverConjuntUsuaris {
 
     public static void testObtenirUsuaris() {
         System.out.println("Test esborrar Usuari");
-        String ubicacio = consola.llegirString("Introdueix la ruta del fitxer d'entrada");
         try {
-            LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV taula = lector.llegirCSV(ubicacio);
+            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV());
             ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
             conjuntUsuaris.afegir(taula);
             System.out.println("Conjunt creat");
