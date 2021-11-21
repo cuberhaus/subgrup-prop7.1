@@ -48,12 +48,12 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
      * @return <code>ArrayList<ValorAtribut<Boolean></code> que conté el valor d'aquest atribut.
      */
     @Override
-    public ArrayList<ValorAtribut<Boolean>> getValor() {
+    public ArrayList<ValorAtribut<Boolean>> obtenirValor() {
         return valor;
     }
 
     @Override
-    public ValorConjuntBoolea copy() {
+    public ValorConjuntBoolea copiar() {
         return new ValorConjuntBoolea(valor);
     }
 }

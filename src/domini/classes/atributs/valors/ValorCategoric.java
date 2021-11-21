@@ -22,12 +22,12 @@ public class ValorCategoric extends ValorAtribut<String> {
      * @return <code>String</code> que conté el valor d'aquest atribut.
      */
     @Override
-    public String getValor() {
+    public String obtenirValor() {
         return valor;
     }
 
     @Override
-    public ValorCategoric copy() {
+    public ValorCategoric copiar() {
         return new ValorCategoric(valor);
     }
 }

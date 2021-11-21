@@ -42,6 +42,19 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return id.equals(item.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     public Item copiar() {
         return new Item(this.obtenirId(), this.obtenirTipusItem(), this.obtenirAtributs(), new TreeMap<>());
     }
@@ -60,7 +73,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     public Map<String, ValorAtribut<?>> obtenirAtributs() {
         Map<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for (Map.Entry<String, ValorAtribut<?>> valorAtributEntry : this.atributs.entrySet()) {
-            atributs.put(valorAtributEntry.getKey(), valorAtributEntry.getValue().copy());
+            atributs.put(valorAtributEntry.getKey(), valorAtributEntry.getValue().copiar());
         }
         return atributs;
     }
@@ -154,18 +167,5 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         for (Map.Entry<String, TipusAtribut> atribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return id.equals(item.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

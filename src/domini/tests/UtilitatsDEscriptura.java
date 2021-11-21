@@ -61,7 +61,7 @@ public class UtilitatsDEscriptura {
         } else {
             for (Map.Entry<String, ValorAtribut<?>> atributEntrada : atributMap.entrySet()) {
                 System.out.println("Té un atribut amb nom " + atributEntrada.getKey() + " i valor "
-                        + atributEntrada.getValue().getValor().toString());
+                        + atributEntrada.getValue().obtenirValor().toString());
             }
         }
     }

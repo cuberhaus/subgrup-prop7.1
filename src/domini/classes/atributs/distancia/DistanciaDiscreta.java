@@ -29,7 +29,7 @@ public class DistanciaDiscreta extends Distancia {
         if (!admet(valor1)) {
             throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
-        if (valor1.getValor().equals(valor2.getValor())) {
+        if (valor1.obtenirValor().equals(valor2.obtenirValor())) {
             return 0.0d;
         } else {
             return 1.0d;

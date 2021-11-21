@@ -34,8 +34,8 @@ public class DistanciaDiferenciaDeConjunts extends Distancia {
         if (!admet(valor1)) {
             throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
-        Set<ValorAtribut<?>> set1 = new HashSet<>(((ValorConjunt<?>) valor1).getValor());
-        Set<ValorAtribut<?>> set2 = new HashSet<>(((ValorConjunt<?>) valor2).getValor());
+        Set<ValorAtribut<?>> set1 = new HashSet<>(((ValorConjunt<?>) valor1).obtenirValor());
+        Set<ValorAtribut<?>> set2 = new HashSet<>(((ValorConjunt<?>) valor2).obtenirValor());
         Set<ValorAtribut<?>> union = new HashSet<>(set1);
         union.addAll(set2);
         Set<ValorAtribut<?>> intersection = new HashSet<>(set1);
@@ -48,7 +48,7 @@ public class DistanciaDiferenciaDeConjunts extends Distancia {
         if (valor == null) {
             throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
         }
-        normaMaxima = Math.max(normaMaxima, ((ValorConjunt<?>) valor).getValor().size());
+        normaMaxima = Math.max(normaMaxima, ((ValorConjunt<?>) valor).obtenirValor().size());
     }
 
     @Override

@@ -18,18 +18,6 @@ public class TipusAtribut {
         this.distancia = distancia;
     }
 
-    public ValorAtribut<?> obtenirValorAtribut() {
-        return valorAtribut;
-    }
-
-    public Distancia obtenirDistancia() {
-        return distancia;
-    }
-
-    public TipusAtribut copy() {
-        return new TipusAtribut(valorAtribut.copy(), distancia.copy());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,5 +29,17 @@ public class TipusAtribut {
     @Override
     public int hashCode() {
         return Objects.hash(valorAtribut, distancia);
+    }
+
+    public ValorAtribut<?> obtenirValorAtribut() {
+        return valorAtribut;
+    }
+
+    public Distancia obtenirDistancia() {
+        return distancia;
+    }
+
+    public TipusAtribut copy() {
+        return new TipusAtribut(valorAtribut.copiar(), distancia.copy());
     }
 }

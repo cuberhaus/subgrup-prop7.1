@@ -34,18 +34,18 @@ public class DistanciaEuclidiana extends Distancia {
             throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
         if (valor1 instanceof ValorNumeric) {
-            return Math.abs(((ValorNumeric) valor1).getValor() - ((ValorNumeric) valor2).getValor());
+            return Math.abs(((ValorNumeric) valor1).obtenirValor() - ((ValorNumeric) valor2).obtenirValor());
         } else {
             ValorConjuntNumeric valorConjuntNumeric1 = (ValorConjuntNumeric) valor1;
             ValorConjuntNumeric valorConjuntNumeric2 = (ValorConjuntNumeric) valor2;
-            if (valorConjuntNumeric1.getValor().size() != valorConjuntNumeric2.getValor().size()) {
+            if (valorConjuntNumeric1.obtenirValor().size() != valorConjuntNumeric2.obtenirValor().size()) {
                 throw new IllegalArgumentException("No es pot calcular la distància euclidiana entre dos " +
                         "ValorConjuntNumerics de mides diferents");
             }
             double distancia = 0.0;
-            for (int i = 0; i < valorConjuntNumeric1.getValor().size(); ++i) {
-                distancia += Math.pow(valorConjuntNumeric1.getValor().get(i).getValor()
-                        - valorConjuntNumeric2.getValor().get(i).getValor(), 2);
+            for (int i = 0; i < valorConjuntNumeric1.obtenirValor().size(); ++i) {
+                distancia += Math.pow(valorConjuntNumeric1.obtenirValor().get(i).obtenirValor()
+                        - valorConjuntNumeric2.obtenirValor().get(i).obtenirValor(), 2);
             }
             return Math.sqrt(distancia);
         }
@@ -61,7 +61,7 @@ public class DistanciaEuclidiana extends Distancia {
         if (valor instanceof ValorNumeric) {
             return obtenir(new ValorNumeric(0.0), valor);
         } else {
-            double[] zero = new double[((ValorConjuntNumeric)valor).getValor().size()];
+            double[] zero = new double[((ValorConjuntNumeric)valor).obtenirValor().size()];
             return obtenir(new ValorConjuntNumeric(zero), valor);
         }
     }

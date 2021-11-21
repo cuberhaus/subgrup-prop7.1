@@ -31,8 +31,8 @@ public class DistanciaLevenshtein extends Distancia {
             throw new IllegalArgumentException("La distància no admet el tipus dels ValorAtributs donats.");
         }
 
-        int m = ((String) valor1.getValor()).length();
-        int n = ((String) valor2.getValor()).length();
+        int m = ((String) valor1.obtenirValor()).length();
+        int n = ((String) valor2.obtenirValor()).length();
 
         double[] u = new double[n + 1];
         double[] v = new double[n + 1];
@@ -47,7 +47,7 @@ public class DistanciaLevenshtein extends Distancia {
                 double costEsborrat = u[j + 1] + 1;
                 double costInsercio = v[j] + 1;
                 double costSubstitucio = u[j];
-                if (((String)valor1.getValor()).charAt(i) != ((String)valor2.getValor()).charAt(j)) {
+                if (((String)valor1.obtenirValor()).charAt(i) != ((String)valor2.obtenirValor()).charAt(j)) {
                     costSubstitucio += 1;
                 }
                 v[j + 1] = Math.min(costSubstitucio, Math.min(costEsborrat, costInsercio));
@@ -64,7 +64,7 @@ public class DistanciaLevenshtein extends Distancia {
         if (valor == null) {
             throw new IllegalArgumentException("No es pot actualitzar el factor de normalització amb un valor nul.");
         }
-        normaMaxima = Math.max(normaMaxima, ((String) valor.getValor()).length());
+        normaMaxima = Math.max(normaMaxima, ((String) valor.obtenirValor()).length());
     }
 
     @Override

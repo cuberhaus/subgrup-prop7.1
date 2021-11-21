@@ -62,6 +62,28 @@ public class TipusItem {
         }
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TipusItem tipusItem = (TipusItem) o;
+        return nom.equals(tipusItem.nom) && tipusAtributs.equals(tipusItem.tipusAtributs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nom, tipusAtributs);
+    }
+
+    public TipusItem copiar() {
+        Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+        for (Map.Entry<String, TipusAtribut> tipusAtribut : this.tipusAtributs.entrySet()) {
+            tipusAtributs.put(tipusAtribut.getKey(), tipusAtribut.getValue().copy());
+        }
+        return new TipusItem(nom, tipusAtributs);
+    }
+
     private TipusAtribut trobaTipusAtributMenysRestrictiu(ValorAtribut<?> valorAtribut1,
                                                              ValorAtribut<?> valorAtribut2) throws IllegalArgumentException {
         // Considerem cada cas particularment per a poder definir la distància que li correspon a cada TipusAtribut
@@ -219,26 +241,5 @@ public class TipusItem {
         for (String nomAtribut : nomAtributs) {
             tipusAtributs.remove(nomAtribut);
         }
-    }
-
-    public TipusItem copiar() {
-        Map<String, TipusAtribut> tipusAtributs = new TreeMap<>();
-        for (Map.Entry<String, TipusAtribut> tipusAtribut : this.tipusAtributs.entrySet()) {
-            tipusAtributs.put(tipusAtribut.getKey(), tipusAtribut.getValue().copy());
-        }
-        return new TipusItem(nom, tipusAtributs);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TipusItem tipusItem = (TipusItem) o;
-        return nom.equals(tipusItem.nom) && tipusAtributs.equals(tipusItem.tipusAtributs);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nom, tipusAtributs);
     }
 }

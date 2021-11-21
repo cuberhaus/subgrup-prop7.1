@@ -9,9 +9,9 @@ import java.util.Objects;
 public abstract class ValorAtribut<T> {
     protected T valor;
 
-    public abstract T getValor();
+    public abstract T obtenirValor();
 
-    public abstract ValorAtribut<?> copy();
+    public abstract ValorAtribut<?> copiar();
 
     @Override
     public boolean equals(Object o) {

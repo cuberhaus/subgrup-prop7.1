@@ -22,12 +22,12 @@ public class ValorNumeric extends ValorAtribut<Double> {
      * @return <code>Double</code> que conté el valor d'aquest atribut.
      */
     @Override
-    public Double getValor() {
+    public Double obtenirValor() {
         return valor;
     }
 
     @Override
-    public ValorNumeric copy() {
+    public ValorNumeric copiar() {
         return new ValorNumeric(valor);
     }
 }

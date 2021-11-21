@@ -39,12 +39,12 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
      * @return <code>ArrayList<ValorAtribut<String></code> que conté el valor d'aquest atribut.
      */
     @Override
-    public ArrayList<ValorAtribut<String>> getValor() {
+    public ArrayList<ValorAtribut<String>> obtenirValor() {
         return valor;
     }
 
     @Override
-    public ValorConjuntCategoric copy() {
+    public ValorConjuntCategoric copiar() {
         return new ValorConjuntCategoric(valor);
     }
 }

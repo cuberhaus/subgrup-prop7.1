@@ -40,12 +40,12 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
      * @return <code>ArrayList<ValorAtribut<Double></code> que conté el valor d'aquest atribut.
      */
     @Override
-    public ArrayList<ValorAtribut<Double>> getValor() {
+    public ArrayList<ValorAtribut<Double>> obtenirValor() {
         return valor;
     }
 
     @Override
-    public ValorConjuntNumeric copy() {
+    public ValorConjuntNumeric copiar() {
         return new ValorConjuntNumeric(valor);
     }
 

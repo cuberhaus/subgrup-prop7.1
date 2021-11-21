@@ -39,12 +39,12 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
      * @return <code>ArrayList<ValorAtribut<String></code> que conté el valor d'aquest atribut.
      */
     @Override
-    public ArrayList<ValorAtribut<String>> getValor() {
+    public ArrayList<ValorAtribut<String>> obtenirValor() {
         return valor;
     }
 
     @Override
-    public ValorConjuntTextual copy() {
+    public ValorConjuntTextual copiar() {
         return new ValorConjuntTextual(valor);
     }
 }
