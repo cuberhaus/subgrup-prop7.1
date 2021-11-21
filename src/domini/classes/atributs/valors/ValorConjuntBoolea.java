@@ -17,7 +17,7 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
 
     /**
      * Constructor amb el conjunt booleà.
-     * @param valor <code>ArrayList<ValorAtribut<Boolean></code> que conté el valor d'aquest atribut.
+     * @param valor <code>ArrayList&lt;ValorAtribut&lt;Boolean&gt;&gt;</code> que conte el valor d'aquest atribut.
      */
     public ValorConjuntBoolea(ArrayList<ValorAtribut<Boolean>> valor) {
         this.valor = valor;
@@ -64,7 +64,7 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
     }
 
     /**
-     * @return <code>ArrayList<ValorAtribut<Boolean></code> que conté el valor d'aquest atribut.
+     * @return <code>ArrayList&lt;ValorAtribut&lt;Boolean&gt;&gt;</code> que conté el valor d'aquest atribut.
      */
     @Override
     public ArrayList<ValorAtribut<Boolean>> obtenirValor() {

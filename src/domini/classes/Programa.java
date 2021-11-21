@@ -30,6 +30,7 @@ public class Programa {
     /**
      * Constructora de Programa
      * Crea una instància única de Programa
+     * @return <code>Programa</code>
      */
     public static Programa obtenirInstancia() {
         if (instancia_unica == null) {
@@ -65,6 +66,7 @@ public class Programa {
 
     /**
      * Canvia l'estat de la sessió a SessioTancada
+     * @param sessio c
      */
     public void cambiarEstat(Sessio sessio) {
         this.sessio = sessio;
@@ -72,6 +74,7 @@ public class Programa {
 
     /**
      * Retorna true si la sessio està iniciada.
+     * @return <code>boolean</code>
      */
     public boolean isSessioIniciada() {
         return sessio.isSessioIniciada();
@@ -79,6 +82,7 @@ public class Programa {
 
     /**
      * Retorna l'usuari amb la sessio iniciada.
+     * @return Usuari
      */
     public Usuari obtenirUsuariSessioIniciada() {
         return sessio.obtenirUsuariSessioIniciada();
@@ -104,6 +108,7 @@ public class Programa {
      * Afegeix un tipus d'item al conjunt de tipus d'items.
      * Retorna true si s'ha afegit correctament, retorna false si ja hi era
      * @param  tipusItem el paràmetre s'ha afegit al conjunt si no hi era abans.
+     * @return boolean
      */
     public boolean afegirTipusItem(TipusItem tipusItem) {
         if (tipusItems.containsKey(tipusItem)) {

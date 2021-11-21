@@ -96,7 +96,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     }
 
     /**
-     * @return Còpia profunda del <code>Map<String, ValorAtribut<?>></code> que relaciona els noms dels atributs de
+     * @return Còpia profunda del <code>Map&lt;String, ValorAtribut&lt;?&gt;&gt;</code> que relaciona els noms dels atributs de
      * l'Item amb el seu valor.
      */
     public Map<String, ValorAtribut<?>> obtenirAtributs() {
@@ -108,7 +108,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     }
 
     /**
-     * @return Còpia profunda del <code>Map<Usuari, Valoracio></code> que relaciona els Usuaris que han fet les
+     * @return Còpia profunda del <code>Map&lt;Usuari, Valoracio&gt;</code> que relaciona els Usuaris que han fet les
      * valoracions de l'Item amb la valoració.
      */
     public Map<Usuari, Valoracio> obtenirValoracions() {

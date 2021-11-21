@@ -36,7 +36,7 @@ public class ConjuntRecomanacions {
 
     /**
      * Constructora a partir d'un conjunt de recomanacions.
-     * @param recs <code>ArrayList<ArrayList<Recomanacio>></code> recs és el conjunt de recomanacions.
+     * @param recs <code>ArrayList&lt;ArrayList&lt;Recomanacio&gt;&gt;</code> recs és el conjunt de recomanacions.
      */
     public ConjuntRecomanacions(ArrayList<Recomanacio> recs) {
         this.conjuntRecomanacions = new ArrayList<>(recs);
@@ -63,7 +63,7 @@ public class ConjuntRecomanacions {
 
     /**
      * Retorna el conjunt ordenat.
-     * @return <code>ArrayList<Recomanacio></code>
+     * @return <code>ArrayList&lt;Recomanacio&gt;</code>
      */
     public ArrayList<Recomanacio> obtenirConjuntRecomanacions() {
         return new ArrayList<>(this.conjuntRecomanacions);
@@ -79,6 +79,7 @@ public class ConjuntRecomanacions {
     }
 
     /**
+     * @param a numero
      * @return log_2(a)
      */
     private static double log2(double a){
