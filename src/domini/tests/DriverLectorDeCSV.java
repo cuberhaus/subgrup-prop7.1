@@ -39,23 +39,35 @@ public class DriverLectorDeCSV {
             String row;
             ArrayList<ArrayList<String>> comparar = new ArrayList<>();
             while ((row = fitxer.readLine()) != null) {
+                row = row + ' ';
                 String[] fila = row.split(",", 0);
+
                 ArrayList<String> afila = new ArrayList<>();
                 for (String elem : fila) {
                     afila.add(elem);
                 }
+
+                String ultima = afila.get(afila.size() - 1);
+                StringBuffer pasos = new StringBuffer(ultima);
+                pasos.deleteCharAt(pasos.length()-1);
+
+                String result = pasos.toString();
+                afila.remove(afila.size() - 1);
+                afila.add(result);
+
+
                 comparar.add(new ArrayList<>(afila));
                 afila.clear();
             }
 
             if(comparar.equals(contingutTaula)) {
                 System.out.println("Contingut original: " + comparar);
-                System.out.println("Contingut de la taula " + contingutTaula);
+                System.out.println("Contingut de la taula: " + contingutTaula);
                 System.out.println("El contingut de la taula es el mateix al dessitjat");
             }
 
             else {
-                System.out.println("mal Pablo");
+                System.out.println("Hi ha un error a la implentacio");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
