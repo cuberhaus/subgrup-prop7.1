@@ -30,14 +30,14 @@ public class ValorConjuntCategoricTest {
             return Arrays.asList(new Object[][]{
                     {null, null},
                     {"", new ArrayList<ValorAtribut<String>>(List.of(new ValorCategoric("")))},
-                    {"a;b;c;abc", new ArrayList<ValorAtribut<String>>(Arrays.asList(
+                    {"a;b;c;abc;", new ArrayList<ValorAtribut<String>>(Arrays.asList(
                             new ValorCategoric("a"), new ValorCategoric("b"), new ValorCategoric("c"),
-                            new ValorCategoric("abc")))}
+                            new ValorCategoric("abc"), new ValorCategoric()))}
             });
         }
 
         @Test
-        public void constructorAmbString_HauriaDeCrearValorBoolea() {
+        public void constructorAmbString_HauriaDeCrearValorConjuntCategoric() {
             assertEquals(new ValorConjuntCategoric(valor), new ValorConjuntCategoric(esperat));
         }
     }
@@ -64,7 +64,7 @@ public class ValorConjuntCategoricTest {
         }
 
         @Test
-        public void constructorAmbString_HauriaDeCrearValorBoolea() {
+        public void constructorAmbString_HauriaDeCrearValorConjuntCategoric() {
             assertEquals(new ValorConjuntCategoric(valor), new ValorConjuntCategoric(esperat));
         }
     }
