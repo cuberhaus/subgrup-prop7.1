@@ -16,7 +16,7 @@ public class DriverItem {
         try {
             Id id = UtilitatsDeLectura.llegirId();
             TipusItem tipusItem = UtilitatsDeLectura.llegirTipusItem();
-            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs2");
+            ArrayList<String> nom_atributs = UtilitatsDeLectura.llegirNomAtributs("NomAtributs1");
             ArrayList<String> valor_atributs = UtilitatsDeLectura.llegirValorAtributs();
             Item item = new Item(id, tipusItem, nom_atributs, valor_atributs);
             System.out.println("S'ha creat l'Item.");

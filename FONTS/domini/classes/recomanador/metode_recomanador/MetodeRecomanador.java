@@ -3,6 +3,9 @@ package domini.classes.recomanador.metode_recomanador;
 import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * Classe base pels mètodes recomanadors.
  * Guarda usuaris, items i valoracions. Genera recomanacions per usuaris donats.
@@ -63,7 +66,7 @@ public abstract class MetodeRecomanador {
      */
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) {
         ConjuntValoracions valoracions_usuari = new ConjuntValoracions();
-        for (var x : valoracionsPubliques.obteTotesValoracions().entrySet()) {
+        for (Map.Entry<Pair<Usuari, Item>, Valoracio> x : valoracionsPubliques.obteTotesValoracions().entrySet()) {
             if (x.getKey().x.equals(usuari)) {
                 valoracions_usuari.afegir(x.getValue());
             }

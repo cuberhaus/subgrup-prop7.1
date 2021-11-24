@@ -13,18 +13,18 @@ import java.util.ArrayList;
 public class Joc2 {
     public static void main(String[] args) throws IOException, InterruptedException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV taulaItems = lector.llegirCSV("./jocs_de_proves/joc2/items.csv");
+        TaulaCSV taulaItems = lector.llegirCSV("../EXE/jocs_de_proves/joc2/items.csv");
         ConjuntItems items = new ConjuntItems("Series", taulaItems);
         ConjuntUsuaris usuaris = new ConjuntUsuaris();
 
         LectorDeCSV lector2 = new LectorDeCSV();
-        TaulaCSV taulaValoracions = lector2.llegirCSV("./jocs_de_proves/joc2/ratings.test.known.csv");
+        TaulaCSV taulaValoracions = lector2.llegirCSV("../EXE/jocs_de_proves/joc2/ratings.test.known.csv");
         usuaris.afegir(taulaValoracions);
         ConjuntValoracions valoracions = new ConjuntValoracions();
         valoracions.afegir(taulaValoracions, items, usuaris);
 
         LectorDeCSV lector3 = new LectorDeCSV();
-        TaulaCSV taulaValoracionsUn = lector3.llegirCSV("./jocs_de_proves/joc2/ratings.test.unknown.csv");
+        TaulaCSV taulaValoracionsUn = lector3.llegirCSV("../EXE/jocs_de_proves/joc2/ratings.test.unknown.csv");
         ConjuntValoracions unknownConjunt = new ConjuntValoracions();
         unknownConjunt.afegir(taulaValoracionsUn, items, usuaris);
 

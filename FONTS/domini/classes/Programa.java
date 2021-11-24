@@ -1,7 +1,6 @@
 package domini.classes;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Representa l'estat del programa.
@@ -19,7 +18,7 @@ public class Programa {
     private ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
 
     /** Conté el conjunt de tipus d'items */
-    private Map<TipusItem,TipusItem> tipusItems = new HashMap<>();
+    private HashSet<TipusItem> tipusItems = new HashSet<>();
 
     /**
      * Constructora per defecte de Programa
@@ -46,7 +45,7 @@ public class Programa {
         sessio = new SessioNoIniciada();
         instancia_unica = null;
         conjuntUsuaris = new ConjuntUsuaris();
-        tipusItems = new HashMap<>();
+        tipusItems = new HashSet<>();
     }
 
     /**
@@ -121,10 +120,10 @@ public class Programa {
      * @return boolean
      */
     public boolean afegirTipusItem(TipusItem tipusItem) {
-        if (tipusItems.containsKey(tipusItem)) {
+        if (tipusItems.contains(tipusItem)) {
             return false;
         }
-        tipusItems.put(tipusItem,tipusItem);
+        tipusItems.add(tipusItem);
         return true;
     }
 

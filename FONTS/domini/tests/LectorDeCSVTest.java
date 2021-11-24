@@ -19,7 +19,7 @@ public class LectorDeCSVTest {
     @Test
     public void llegirCSV() throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV tauleta = lector.llegirCSV("dades_tests/items.csv");
+        TaulaCSV tauleta = lector.llegirCSV("../EXE/dades_tests/items.csv");
         int tamanyItems = tauleta.obtenirNumItems();
         int tamanyAtributs = tauleta.obtenirNumAtributs();
         assertEquals(25, tamanyAtributs);

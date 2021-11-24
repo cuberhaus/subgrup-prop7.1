@@ -8,13 +8,13 @@ JOC2=../EXE/jocs_de_proves/joc2/Joc2.class
 $(MAIN): $(SOURCES)
 	@mkdir -p ../EXE
 	@javac -d ../EXE -sourcepath . ./Main.java
-	@javac -sourcepath ../EXE:jocs_de_proves ../EXE/jocs_de_proves/joc1/Joc1.java
-	@javac -sourcepath ../EXE:jocs_de_proves ../EXE/jocs_de_proves/joc2/Joc2.java
+	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc1/Joc1.java
+	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc2/Joc2.java
 
 clean:
-	rm -rf ../EXE/*.class
+	rm -rf ../EXE/domini
+	rm -rf ../EXE/Main.class
 
-# Compiles and executes a driver
 .SILENT:
 Driver%:
 	@mkdir -p ../EXE
@@ -23,8 +23,12 @@ Driver%:
 
 .SILENT:
 %Test:
-	@javac -d ../EXE -sourcepath . -cp lib/junit-4.12.jar ./domini/tests/*.java
-	-java -cp ../EXE:lib/* org.junit.runner.JUnitCore domini.tests.$@
+	@javac -d ../EXE -sourcepath . -cp lib/junit-4.12.jar ../FONTS/domini/tests/*.java
+	# -java -cp bin:lib/* org.junit.runner.JUnitCore domini.tests.$@
+
+
+	# @javac -d ../EXE -sourcepath . -cp lib/junit-4.12.jar ./domini/tests/*.java
+	#-java -cp ../EXE:lib/* org.junit.runner.JUnitCore domini.tests.$@
 
 # Running the project requires Main.class to exist
 .SILENT:

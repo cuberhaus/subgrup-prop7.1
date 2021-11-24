@@ -122,7 +122,7 @@ public class ConjuntRecomanacions {
      */
     public double calculaIdealDiscountedCumulativeGain(ArrayList<Pair<Integer,Double>> valoracions, int p) {
         PriorityQueue<Double> pq = new PriorityQueue<>();
-        for (var x : valoracions) {
+        for (Pair<Integer,Double> x : valoracions) {
             if (pq.size() < p) {
                 pq.add(x.y);
             }

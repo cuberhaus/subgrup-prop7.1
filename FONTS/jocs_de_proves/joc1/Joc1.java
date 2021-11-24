@@ -15,24 +15,24 @@ import java.util.Scanner;
 public class Joc1 {
     public static void main(String[] args) throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV taula_items = lector.llegirCSV("./jocs_de_proves/joc1/items.csv");
+        TaulaCSV taula_items = lector.llegirCSV("../EXE/jocs_de_proves/joc1/items.csv");
         ConjuntItems items = new ConjuntItems("pelis", taula_items);
         ConjuntUsuaris usuaris = new ConjuntUsuaris();
 
         LectorDeCSV lector2 = new LectorDeCSV();
-        TaulaCSV taula_valoracions = lector2.llegirCSV("./jocs_de_proves/joc1/ratings.test.known.csv");
+        TaulaCSV taula_valoracions = lector2.llegirCSV("../EXE/jocs_de_proves/joc1/ratings.test.known.csv");
         usuaris.afegir(taula_valoracions);
         ConjuntValoracions valoracions = new ConjuntValoracions();
         valoracions.afegir(taula_valoracions, items, usuaris);
 
         LectorDeCSV lector3 = new LectorDeCSV();
-        TaulaCSV taula_valoracions_un = lector3.llegirCSV("./jocs_de_proves/joc1/ratings.test.unknown.csv");
+        TaulaCSV taula_valoracions_un = lector3.llegirCSV("../EXE/jocs_de_proves/joc1/ratings.test.unknown.csv");
         ConjuntValoracions unknown_conjunt = new ConjuntValoracions();
         unknown_conjunt.afegir(taula_valoracions_un, items, usuaris);
 
         MetodeRecomanadorCollaborative recomanadorCollaborative = new MetodeRecomanadorCollaborative(usuaris, items, valoracions);
         MetodeRecomanadorContentBased recomanadorContentBased = new MetodeRecomanadorContentBased(usuaris, items, valoracions);
-        File inputQueries = new File("./jocs_de_proves/joc1/inputqueries.txt");
+        File inputQueries = new File("../EXE/jocs_de_proves/joc1/inputqueries.txt");
 
         Scanner inputQueriesReader = new Scanner(inputQueries);
         int q = inputQueriesReader.nextInt();
