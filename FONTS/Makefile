@@ -13,7 +13,10 @@ $(MAIN): $(SOURCES)
 
 clean:
 	rm -rf ../EXE/domini
+	rm -rf ../EXE/libs
 	rm -rf ../EXE/Main.class
+	rm -rf ../EXE/jocs_de_proves/joc1/Joc1.class
+	rm -rf ../EXE/jocs_de_proves/joc2/Joc2.class
 
 .SILENT:
 Driver%:
@@ -24,11 +27,7 @@ Driver%:
 .SILENT:
 %Test:
 	@javac -d ../EXE -sourcepath . -cp lib/junit-4.12.jar ../FONTS/domini/tests/*.java
-	# -java -cp bin:lib/* org.junit.runner.JUnitCore domini.tests.$@
-
-
-	# @javac -d ../EXE -sourcepath . -cp lib/junit-4.12.jar ./domini/tests/*.java
-	#-java -cp ../EXE:lib/* org.junit.runner.JUnitCore domini.tests.$@
+	-java -cp ../EXE:lib/* org.junit.runner.JUnitCore domini.tests.$@
 
 # Running the project requires Main.class to exist
 .SILENT:
