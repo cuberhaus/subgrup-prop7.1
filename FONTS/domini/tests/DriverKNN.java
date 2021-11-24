@@ -1,10 +1,8 @@
 package domini.tests;
 
-import domini.classes.Id;
-import domini.classes.Item;
-import domini.classes.TipusItem;
+import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
-import domini.classes.atributs.valors.ValorAtribut;
+import domini.classes.atributs.valors.*;
 import domini.classes.recomanador.metode_recomanador.KNN;
 import libs.consola;
 
@@ -24,7 +22,7 @@ public class DriverKNN {
         try {
             String consulta = "Introdueix el valor desitjat pel nou ítem";
             double val = consola.llegirDouble(consulta, "", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            ValorAtribut<Double> atribut = new domini.classes.atributs.valors.ValorNumeric(val);
+            ValorNumeric atribut = new domini.classes.atributs.valors.ValorNumeric(val);
             TreeMap<String, ValorAtribut<?>> mapa = new TreeMap<>();
             mapa.put("escalar", atribut);
             items.add(new Item(new Id(items.size(), true), tipusItem, mapa, null));

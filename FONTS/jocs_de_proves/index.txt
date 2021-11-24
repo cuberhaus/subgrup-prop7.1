@@ -1,3 +1,3 @@
-Conte els jocs de prova del projecte.
+Conte els jocs de prova del projecte. A cada subdirectori hi ha la classe amb el mateix nom.
 joc1/
 joc2/

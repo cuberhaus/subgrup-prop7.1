@@ -1,4 +1,4 @@
-Carpeta que conté classes que inclouen mètodes que faciliten la lectura i escriptura a la terminal. S'utilitzen als
+Carpeta que conte classes que inclouen metodes que faciliten la lectura i escriptura a la terminal. S'utilitzen als
 drivers de les classes del projecte.
--consola
--inout
+consola
+inout

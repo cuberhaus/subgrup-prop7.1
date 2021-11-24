@@ -85,7 +85,7 @@ public class SlopeOne {
                 continue;
             }
             ratings_usables++;
-            suma_desviacions += calculaDesviacio(item, i);
+            suma_desviacions += desviacio;
             mitjana += valoracions[usuari][i];
         }
         mitjana /= ratings_usables;
