@@ -18,7 +18,7 @@ public class UtilitatsDeLectura {
     private static String obtenirRutaORutaPerDefecte(String nomObjecte, String nomObjectePerDefecte) {
         String ruta = consola.llegirString("Introdueix ruta a " + nomObjecte + " (per defecte - " + nomObjectePerDefecte + "): ");
         if (ruta.isEmpty()) ruta = nomObjectePerDefecte;
-        return "../EXE/dades_tests/" + ruta;
+        return "EXE/dades_tests/" + ruta;
     }
 
     public static Id llegirId() throws Exception {
