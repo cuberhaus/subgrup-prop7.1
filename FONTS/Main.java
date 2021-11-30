@@ -1,4 +1,6 @@
 import domini.classes.Id;
+import domini.classes.csv.TaulaCSV;
+import gestorDeDisc.classes.LectorDeCSV;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,23 +12,23 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         System.out.println("Amb aquest programa es poden carregar conjunts de dades propis i obtenir recomanacions per usuaris.");
-        domini.classes.csv.LectorDeCSV lector = new domini.classes.csv.LectorDeCSV();
+        LectorDeCSV lector = new LectorDeCSV();
         String ubicacio_fitxer_items = libs.consola.llegirString("Indica on es troba el fitxer csv amb els items desitjats.");
-        domini.classes.csv.TaulaCSV taula_items = lector.llegirCSV(ubicacio_fitxer_items);
+        domini.classes.csv.TaulaCSV taula_items = new TaulaCSV(lector.llegirCSV(ubicacio_fitxer_items));
         domini.classes.ConjuntItems items = new domini.classes.ConjuntItems("Series", taula_items);
 
         domini.classes.ConjuntUsuaris usuaris = new domini.classes.ConjuntUsuaris();
 
-        domini.classes.csv.LectorDeCSV lector2 = new domini.classes.csv.LectorDeCSV();
+        LectorDeCSV lector2 = new LectorDeCSV();
         String ubicacio_val_publiques = libs.consola.llegirString("Indica on es troba el fitxer csv amb les valoracions publiques.");
-        domini.classes.csv.TaulaCSV taula_valoracions = lector2.llegirCSV(ubicacio_val_publiques);
+        domini.classes.csv.TaulaCSV taula_valoracions = new TaulaCSV(lector2.llegirCSV(ubicacio_val_publiques));
         usuaris.afegir(taula_valoracions);
         domini.classes.ConjuntValoracions valoracions = new domini.classes.ConjuntValoracions();
         valoracions.afegir(taula_valoracions, items, usuaris);
 
-        domini.classes.csv.LectorDeCSV lector3 = new domini.classes.csv.LectorDeCSV();
+        LectorDeCSV lector3 = new LectorDeCSV();
         String ubicacio_val_privades = libs.consola.llegirString("Indica on es troba el fitxer csv amb les valoracions privades.");
-        domini.classes.csv.TaulaCSV taula_valoracions_un = lector3.llegirCSV(ubicacio_val_privades);
+        domini.classes.csv.TaulaCSV taula_valoracions_un = new TaulaCSV(lector3.llegirCSV(ubicacio_val_privades));
         domini.classes.ConjuntValoracions unknownConjunt = new domini.classes.ConjuntValoracions();
         unknownConjunt.afegir(taula_valoracions_un, items, usuaris);
 

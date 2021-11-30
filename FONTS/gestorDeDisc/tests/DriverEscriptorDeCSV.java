@@ -1,8 +1,10 @@
-package domini.tests;
+package gestorDeDisc.tests;
 
-import domini.classes.csv.EscriptorDeCSV;
-import domini.classes.csv.TaulaCSV;
+import domini.tests.UtilitatsDeLectura;
+import gestorDeDisc.classes.EscriptorDeCSV;
 import libs.consola;
+
+import java.util.ArrayList;
 
 /**
  * Driver de la classe EscriptorDeCSV
@@ -13,7 +15,7 @@ public class DriverEscriptorDeCSV {
     public static void testEscriureCSV() {
         String ubicacioSortida = consola.llegirString("Introdueix la ruta del fitxer de sortida");
         try {
-            TaulaCSV mockTaula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
+            ArrayList<ArrayList<String>> mockTaula = UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1");
             EscriptorDeCSV escriptor = new EscriptorDeCSV();
             escriptor.escriureCSV(ubicacioSortida, mockTaula);
             System.out.println("S'ha escrit");

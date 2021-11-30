@@ -1,7 +1,7 @@
 package jocs_de_proves.joc2;
 
 import domini.classes.*;
-import domini.classes.csv.LectorDeCSV;
+import gestorDeDisc.classes.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
@@ -13,18 +13,18 @@ import java.util.ArrayList;
 public class Joc2 {
     public static void main(String[] args) throws IOException, InterruptedException {
         LectorDeCSV lector = new LectorDeCSV();
-        TaulaCSV taulaItems = lector.llegirCSV("../EXE/jocs_de_proves/joc2/items.csv");
+        TaulaCSV taulaItems = new TaulaCSV(lector.llegirCSV("../EXE/jocs_de_proves/joc2/items.csv"));
         ConjuntItems items = new ConjuntItems("Series", taulaItems);
         ConjuntUsuaris usuaris = new ConjuntUsuaris();
 
         LectorDeCSV lector2 = new LectorDeCSV();
-        TaulaCSV taulaValoracions = lector2.llegirCSV("../EXE/jocs_de_proves/joc2/ratings.test.known.csv");
+        TaulaCSV taulaValoracions = new TaulaCSV(lector2.llegirCSV("../EXE/jocs_de_proves/joc2/ratings.test.known.csv"));
         usuaris.afegir(taulaValoracions);
         ConjuntValoracions valoracions = new ConjuntValoracions();
         valoracions.afegir(taulaValoracions, items, usuaris);
 
         LectorDeCSV lector3 = new LectorDeCSV();
-        TaulaCSV taulaValoracionsUn = lector3.llegirCSV("../EXE/jocs_de_proves/joc2/ratings.test.unknown.csv");
+        TaulaCSV taulaValoracionsUn = new TaulaCSV(lector3.llegirCSV("../EXE/jocs_de_proves/joc2/ratings.test.unknown.csv"));
         ConjuntValoracions unknownConjunt = new ConjuntValoracions();
         unknownConjunt.afegir(taulaValoracionsUn, items, usuaris);
 

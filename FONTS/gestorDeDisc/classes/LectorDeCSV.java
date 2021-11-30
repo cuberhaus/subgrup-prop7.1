@@ -1,7 +1,4 @@
-package domini.classes.csv;
-
-import domini.classes.Contenidor;
-import domini.classes.LectorDeFitxers;
+package gestorDeDisc.classes;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,13 +11,8 @@ import java.util.Arrays;
  * @author pablo.vega
  */
 
-public class LectorDeCSV extends LectorDeFitxers {
+public class LectorDeCSV {
     public LectorDeCSV() {}
-
-    @Override
-    public Contenidor lectorDeFitxers(String ubicacio) throws IOException {
-        return this.llegirCSV(ubicacio);
-    }
 
     /**
      * Funció que donat un pathname, et retorna la taula amb el contingut del CSV
@@ -28,8 +20,8 @@ public class LectorDeCSV extends LectorDeFitxers {
      * @return <code>Taula</code> amb el contingut de lal CSV
      * @throws IOException si no existeix el ftixer llença exepcio
      */
-    public TaulaCSV llegirCSV(String ubicacio) throws IOException {
-        TaulaCSV tabla = new TaulaCSV();
+    public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
+        ArrayList<ArrayList<String>> tabla = new ArrayList<>();
 
         BufferedReader csvReader = new BufferedReader(new FileReader(ubicacio));
         String fila;
@@ -37,7 +29,7 @@ public class LectorDeCSV extends LectorDeFitxers {
         ArrayList<String> atributs = new ArrayList<>();
         if ((fila = csvReader.readLine()) != null) {
             atributs.addAll(Arrays.asList(fila.split(",")));
-            tabla.afegirConjuntAtributs(atributs);
+            tabla.add(new ArrayList<>(atributs));
         }
 
         ArrayList<String> valors = new ArrayList<>();
@@ -94,7 +86,7 @@ public class LectorDeCSV extends LectorDeFitxers {
                 ++index;
             }
 
-            tabla.afegirConjuntValors(temporal);
+            tabla.add(new ArrayList<>(temporal));
             valors.clear();
         }
 

@@ -1,15 +1,10 @@
-package domini.tests;
+package gestorDeDisc.tests;
 
-import domini.classes.csv.LectorDeCSV;
-import domini.classes.csv.TaulaCSV;
+import gestorDeDisc.classes.LectorDeCSV;
 import libs.consola;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Driver per la classe LectorDeCSV
@@ -19,9 +14,14 @@ public class DriverLectorDeCSV {
     public static void testLectorCSV() {
         try {
             LectorDeCSV lector = new LectorDeCSV();
-            TaulaCSV mockTaula = lector.llegirCSV(
+            ArrayList<ArrayList<String>> mockTaula = lector.llegirCSV(
                     consola.llegirString("Introdueix la ubicacio del csv (i.e. ../EXE/dades_tests/items.csv):"));
-            mockTaula.imprimir();
+            for (ArrayList<String> fila : mockTaula) {
+                for (String valor : fila) {
+                    System.out.print(" | " + valor + " | ");
+                }
+                System.out.println();
+            }
         } catch (IOException e1) {
             System.out.println("Ubicacio no valida");
         } catch (Exception e) {
