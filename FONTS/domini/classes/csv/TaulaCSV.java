@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 /**
  * Representa un tipus de dades en el que emmagatzarem les dades llegides del CSV.
- *
  * @author pablo.vega
  */
 public class TaulaCSV extends Contenidor {

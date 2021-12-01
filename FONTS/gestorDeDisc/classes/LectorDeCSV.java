@@ -17,7 +17,7 @@ public class LectorDeCSV {
     /**
      * Funció que donat un pathname, et retorna la taula amb el contingut del CSV
      * @param ubicacio <code>String</code> pathname amb la ubicació de l'arxiu.
-     * @return <code>Taula</code> amb el contingut de lal CSV
+     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> amb el contingut de lal CSV
      * @throws IOException si no existeix el ftixer llença exepcio
      */
     public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {

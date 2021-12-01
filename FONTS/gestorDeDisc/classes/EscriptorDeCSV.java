@@ -13,7 +13,7 @@ public class EscriptorDeCSV {
     /**
      * Funció que donat un pathaname i una taula, emmagatzema el contingut en un fitxer.
      * @param ubicacio <code>String</code> pathname que conté la ubicació de l'arxiu.
-     * @param taula <code>Taula</code> tabla que és un conjunt de valors
+     * @param tauleta <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> tabla que és un conjunt de valors
      * @throws IOException si no existeix el fitxer, llença exepcio
      */
     public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> tauleta) throws IOException {
