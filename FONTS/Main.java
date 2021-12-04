@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author edgar.moreno
  */
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
         System.out.println("Amb aquest programa es poden carregar conjunts de dades propis i obtenir recomanacions per usuaris.");
         LectorDeCSV lector = new LectorDeCSV();

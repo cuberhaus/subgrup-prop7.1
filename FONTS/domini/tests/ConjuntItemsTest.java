@@ -15,8 +15,8 @@ import java.util.TreeMap;
 
 public class ConjuntItemsTest {
 
-    @Test (expected = InputMismatchException.class)
-    public void testContructoraStringTaulaIdNoInt() throws InputMismatchException {
+    @Test (expected = Exception.class)
+    public void testContructoraStringTaulaIdNoInt() throws Exception {
         TaulaCSV taula = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("id");
@@ -36,8 +36,8 @@ public class ConjuntItemsTest {
         ConjuntItems conjunt = new ConjuntItems("pelis", taula);
     }
 
-    @Test (expected = InputMismatchException.class)
-    public void testContructoraStringTaulaMateixosIds() throws InputMismatchException {
+    @Test (expected = Exception.class)
+    public void testContructoraStringTaulaMateixosIds() throws Exception {
         TaulaCSV taula = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("id");
@@ -58,7 +58,7 @@ public class ConjuntItemsTest {
     }
 
     @Test
-    public void testContructoraStringTaulaFuncionaBe() throws InputMismatchException {
+    public void testContructoraStringTaulaFuncionaBe() throws Exception {
         TaulaCSV taula = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("id");
@@ -79,7 +79,7 @@ public class ConjuntItemsTest {
     }
 
     @Test
-    public void testConstructorTipusItemTreeMap() {
+    public void testConstructorTipusItemTreeMap() throws Exception {
         TaulaCSV taula = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("id");

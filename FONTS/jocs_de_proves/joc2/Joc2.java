@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Joc2 {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV taulaItems = new TaulaCSV(lector.llegirCSV("../EXE/jocs_de_proves/joc2/items.csv"));
         ConjuntItems items = new ConjuntItems("Series", taulaItems);

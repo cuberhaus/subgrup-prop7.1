@@ -17,16 +17,16 @@ public class EscriptorDeCSV {
      * @throws IOException si no existeix el fitxer, llença exepcio
      */
     public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> tauleta) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(ubicacio));
-        for (ArrayList<String> elem1 : tauleta) {
+        BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio));
+        for (ArrayList<String> fila : tauleta) {
             boolean primer = true;
-            for (String elem2 : elem1) {
-                if (!primer) bw.write(',');
-                bw.write(elem2);
+            for (String contingut : fila) {
+                if (!primer) fitxer.write(',');
+                fitxer.write(contingut);
                 primer = false;
             }
-            bw.write('\n');
+            fitxer.write('\n');
         }
-        bw.close();
+        fitxer.close();
     }
 }

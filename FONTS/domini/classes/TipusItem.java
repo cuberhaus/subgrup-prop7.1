@@ -44,7 +44,7 @@ public class TipusItem {
      * @param numCandidats Nombre d'ítems que es consideraran per deduir el tipus de cada atribut.
      * @throws IllegalArgumentException Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
      */
-    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws IllegalArgumentException {
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws Exception {
         if (numCandidats < 0) {
             throw new IllegalArgumentException("Es necessita com a mínim un candidat per crear un TipusItem");
         }

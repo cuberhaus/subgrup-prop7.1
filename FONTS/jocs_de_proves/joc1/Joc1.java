@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Joc1 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV taula_items = new TaulaCSV(lector.llegirCSV("../EXE/jocs_de_proves/joc1/items.csv"));
         ConjuntItems items = new ConjuntItems("pelis", taula_items);

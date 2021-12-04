@@ -17,7 +17,7 @@ public class LectorDeCSVTest {
 
     //La taula llegida té tots els atributs i tots els items
     @Test
-    public void llegirCSV() throws IOException {
+    public void llegirCSV() throws Exception {
         LectorDeCSV lector = new LectorDeCSV();
         TaulaCSV tauleta = new TaulaCSV(lector.llegirCSV("../EXE/dades_tests/items.csv"));
         int tamanyItems = tauleta.obtenirNumItems();

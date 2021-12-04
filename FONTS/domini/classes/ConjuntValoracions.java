@@ -25,7 +25,7 @@ public class ConjuntValoracions {
      * @param items un conjunt d'items
      * @param usuaris un conjunt d'usuaris
      */
-    public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) {
+    public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws Exception {
         valoracions.eliminarEspaisInnecessaris();
         ArrayList<String> idsUsuaris= valoracions.obtenirValorsAtribut("userId");
         ArrayList<String> idsItems= valoracions.obtenirValorsAtribut("itemId");

@@ -23,17 +23,17 @@ public class LectorDeCSV {
     public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
         ArrayList<ArrayList<String>> tabla = new ArrayList<>();
 
-        BufferedReader csvReader = new BufferedReader(new FileReader(ubicacio));
+        BufferedReader fitxer = new BufferedReader(new FileReader(ubicacio));
         String fila;
 
         ArrayList<String> atributs = new ArrayList<>();
-        if ((fila = csvReader.readLine()) != null) {
+        if ((fila = fitxer.readLine()) != null) {
             atributs.addAll(Arrays.asList(fila.split(",")));
             tabla.add(new ArrayList<>(atributs));
         }
 
         ArrayList<String> valors = new ArrayList<>();
-        while ((fila = csvReader.readLine()) != null) {
+        while ((fila = fitxer.readLine()) != null) {
             fila = fila + ' ';
             char[] caracters = fila.toCharArray();
             boolean cometes = true;
@@ -91,7 +91,7 @@ public class LectorDeCSV {
         }
 
         atributs.clear();
-        csvReader.close();
+        fitxer.close();
         return tabla;
     }
 }
