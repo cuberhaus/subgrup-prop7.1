@@ -1,0 +1,6 @@
+Carpeta on trobem els executables del codi junt amb els tests, drivers i jocs d'assaig.
+A dins hi trobem la carpeta dades_tests/ en la que emmagatzemem dades per a facilitar testejar
+el codi.
+També hi trobem la carpeta jocs_de_proves on trobem els jocs de prova del projecte
+dades_tests/
+jocs_de_proves/

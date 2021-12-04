@@ -1,5 +1,0 @@
-Conte la documentacio del projecte.
-DiagramaDeCasosDUs.jpg
-DiagramaEstatic.pdf
-DissenyIRelacioDeClasses.pdf
-index.txt

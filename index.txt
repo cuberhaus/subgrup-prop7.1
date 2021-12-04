@@ -1,7 +1,7 @@
-Conte el README.md del projecte, la carpeta amb el codi font, la carpeta amb els jocs de proves i la carpeta amb les
-dades utilitzades pels tests (drivers).
-dades_tests/
-jocs_de_proves/
-src/
+Conte el README.md del projecte, la carpeta amb el codi font (FONTS), la carpeta on hi ha els executables (despres de
+crear-los) i els jocs de proves (EXE) i la carpeta amb la documentacio (DOCS).
+DOCS/
+EXE/
+FONTS/
 index.txt
 README.md
