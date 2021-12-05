@@ -1,39 +1,32 @@
 package presentacio.controladors;
 
-import presentacio.vistes.VistaGestioConjunts;
-import presentacio.vistes.VistaGestioValoracions;
+import domini.classes.TipusItem;
+import domini.controladors.ControladorDomini;
+import presentacio.vistes.MenuPrincipal;
 
+import java.awt.*;
+
+/**
+ * @author maria.prat
+ */
 public class ControladorPresentacio {
-    private ControladorGestioUsuari controladorGestioUsuari;
-    private ControladorGestioPrograma controladorGestioPrograma;
-    private VistaGestioConjunts vistaGestioConjunts;
-    private VistaGestioValoracions vistaGestioValoracions;
+
+    private final ControladorDomini controladorDomini;
 
     public ControladorPresentacio() {
-        vistaGestioConjunts = new VistaGestioConjunts();
-        controladorGestioPrograma = new ControladorGestioPrograma(this);
-        controladorGestioUsuari = new ControladorGestioUsuari(this);
-        vistaGestioValoracions = new VistaGestioValoracions();
+        controladorDomini = new ControladorDomini();
+        inicialitzarControladorPresentacio();
     }
 
-    public void aPantallaInici() {
-        controladorGestioUsuari.setVisible(false);
-        controladorGestioPrograma.aGestioPrograma();
+    public void inicialitzarControladorPresentacio() {
+        MenuPrincipal menuPrincipal = new MenuPrincipal("Menu Principal", this);
+        menuPrincipal.setVisible(true);
     }
 
-    public void aGestioUsuari() {
-       controladorGestioPrograma.setVisible(false);
-       controladorGestioUsuari.aGestioUsuari();
-    }
-    public void aGestioConjunts() {
-
-    }
-    public void aGestioValoracions () {
-
+    public TipusItem[] obtenirTipusItemsCarregats() {
+        // TODO: implementar
+        return new TipusItem[]{new TipusItem("Llibres"), new TipusItem("Música"), new TipusItem("Tipus d'item amb un nom molt llarg")};
     }
 
-    public static void main(String[] args) {
-        ControladorPresentacio controladorPresentacio = new ControladorPresentacio();
-        controladorPresentacio.aPantallaInici();
-    }
+    // Aquí afegirem totes les crides al controlador del domini (i només això)
 }
