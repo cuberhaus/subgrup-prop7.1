@@ -1,6 +1,6 @@
-package gestorDeDisc.tests;
+package persistencia.tests;
 
-import gestorDeDisc.classes.LectorDeCSV;
+import persistencia.classes.LectorDeCSV;
 import libs.consola;
 
 import java.io.IOException;

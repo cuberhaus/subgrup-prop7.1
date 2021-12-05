@@ -1,13 +1,12 @@
 package jocs_de_proves.joc2;
 
 import domini.classes.*;
-import gestorDeDisc.classes.LectorDeCSV;
+import persistencia.classes.LectorDeCSV;
 import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Joc2 {

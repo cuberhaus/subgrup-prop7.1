@@ -1,4 +1,4 @@
-package gestorDeDisc.classes;
+package persistencia.classes;
 
 import java.io.*;
 import java.util.ArrayList;

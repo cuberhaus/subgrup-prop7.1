@@ -1,19 +1,22 @@
-package presentacio;
+package presentacio.vistes;
 
-import javax.naming.ldap.Control;
+import presentacio.controladors.ControladorPresentacio;
+
 import javax.swing.*;
 import java.awt.event.*;
 
-public class VistaGestioPrograma extends JDialog {
+public class VistaGestioUsuari extends JDialog {
     private JPanel contentPane;
     private JButton buttonCancel;
-    private JButton gestionaUsuarisButton;
-    private JButton gestioDeConjuntsButton;
-    private JButton gestioDeValoracionsButton;
+    private JTextField idField;
+    private JPasswordField passwordField;
+    private JTextField nomfield;
+    private JButton menuInicioButton;
 
-    public VistaGestioPrograma(ControladorPresentacio controladorPresentacio) {
+    public VistaGestioUsuari(ControladorPresentacio controladorPresentacio) {
         setContentPane(contentPane);
         setModal(true);
+
 
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -36,28 +39,12 @@ public class VistaGestioPrograma extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        gestionaUsuarisButton.addActionListener(new ActionListener() {
+        menuInicioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // aGestioUsuaris
-                controladorPresentacio.aGestioUsuari();
+                controladorPresentacio.aPantallaInici();
             }
         });
-
-        gestioDeConjuntsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // aGestioDeConjunts
-            }
-        });
-
-        gestioDeValoracionsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
     }
 
     private void onOK() {

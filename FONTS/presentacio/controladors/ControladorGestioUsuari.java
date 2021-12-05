@@ -1,4 +1,6 @@
-package presentacio;
+package presentacio.controladors;
+
+import presentacio.vistes.VistaGestioUsuari;
 
 public class ControladorGestioUsuari {
     private VistaGestioUsuari vistaGestioUsuari;
