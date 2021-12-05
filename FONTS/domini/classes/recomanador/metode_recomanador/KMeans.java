@@ -10,11 +10,10 @@ import java.util.Random;
  */
 public class KMeans {
     private final int k;
-    private final int n_punts;
+    private final int numPunts;
     private final ConjuntPunts[] particions;
-    private final int[] conjunt_del_punt;
+    private final int[] conjuntDelPunt;
     private final ConjuntPunts punts;
-    private final Punt[] baricentres;
 
     /**
      * Inicialitza l'algorisme amb el conjunt de punts desitjat.
@@ -24,10 +23,9 @@ public class KMeans {
     public KMeans(ConjuntPunts punts, int k) {
         this.k = k;
         this.punts = punts;
-        n_punts = punts.obtenirNumPunts();
+        numPunts = punts.obtenirNumPunts();
         particions = new ConjuntPunts[k];
-        conjunt_del_punt = new int[n_punts];
-        baricentres = new Punt[k];
+        conjuntDelPunt = new int[numPunts];
         inicialitzarEnOrdre();
     }
 
@@ -36,60 +34,59 @@ public class KMeans {
      */
     public ArrayList<ArrayList<Integer>> getParticions() {
         processa();
-        ArrayList<ArrayList<Integer>> id_parts = new ArrayList<>(k);
+        ArrayList<ArrayList<Integer>> idParts = new ArrayList<>(k);
         for (int i = 0; i < k; ++i) {
-            id_parts.add(new ArrayList<>(particions[i].keySet()));
+            idParts.add(new ArrayList<>(particions[i].keySet()));
         }
-        return id_parts;
+        return idParts;
     }
 
     private void inicialitzarAleatori() {
-        Arrays.fill(conjunt_del_punt, -1);
+        Arrays.fill(conjuntDelPunt, -1);
         Random r = new Random();
         for (int i = 0; i < k; ++i)
         {
             particions[i] = new ConjuntPunts();
             int center;
             do {
-                center = r.nextInt(n_punts);
-            } while (conjunt_del_punt[center] != -1);
-            conjunt_del_punt[center] = i;
+                center = r.nextInt(numPunts);
+            } while (conjuntDelPunt[center] != -1);
+            conjuntDelPunt[center] = i;
             particions[i].put(center, punts.get(center));
         }
-        guardaBaricentres();
-        for (int i = 0; i < n_punts; ++i) {
-            if (conjunt_del_punt[i] == -1) {
-                int nou_conjunt = buscaBaricentreProper(i);
-                conjunt_del_punt[i] = nou_conjunt;
-                particions[nou_conjunt].put(i, punts.get(i));
+        Punt[] baricentres = generaBaricentres();
+        for (int i = 0; i < numPunts; ++i) {
+            if (conjuntDelPunt[i] == -1) {
+                int nouConjunt = buscaBaricentreProper(i, baricentres);
+                conjuntDelPunt[i] = nouConjunt;
+                particions[nouConjunt].put(i, punts.get(i));
             }
         }
     }
 
     private void inicialitzarEnOrdre() {
-        Arrays.fill(conjunt_del_punt, -1);
-        Random r = new Random();
+        Arrays.fill(conjuntDelPunt, -1);
         for (int i = 0; i < k; ++i)
         {
             particions[i] = new ConjuntPunts();
-            conjunt_del_punt[i] = i;
+            conjuntDelPunt[i] = i;
             particions[i].put(i, punts.get(i));
         }
-        guardaBaricentres();
-        for (int i = 0; i < n_punts; ++i) {
-            if (conjunt_del_punt[i] == -1) {
-                int nou_conjunt = buscaBaricentreProper(i);
-                conjunt_del_punt[i] = nou_conjunt;
-                particions[nou_conjunt].put(i, punts.get(i));
+        Punt[] baricentres = generaBaricentres();
+        for (int i = 0; i < numPunts; ++i) {
+            if (conjuntDelPunt[i] == -1) {
+                int nouConjunt = buscaBaricentreProper(i, baricentres);
+                conjuntDelPunt[i] = nouConjunt;
+                particions[nouConjunt].put(i, punts.get(i));
             }
         }
     }
     // TODO: inicialitzacio no aleatoria?
 
-    private void canviaDeConjunt(int punt, int nou_conjunt) {
-        particions[conjunt_del_punt[punt]].remove(punt);
-        conjunt_del_punt[punt] = nou_conjunt;
-        particions[nou_conjunt].put(punt, punts.get(punt));
+    private void canviaDeConjunt(int punt, int nouConjunt) {
+        particions[conjuntDelPunt[punt]].remove(punt);
+        conjuntDelPunt[punt] = nouConjunt;
+        particions[nouConjunt].put(punt, punts.get(punt));
     }
     private void processa() {
         while(iteracio());
@@ -97,35 +94,37 @@ public class KMeans {
 
     private boolean iteracio() {
         boolean canvi = false;
-        guardaBaricentres();
-        for (int i = 0; i < n_punts; ++i) {
-            int nou_conjunt = buscaBaricentreProper(i);
-            if (nou_conjunt != conjunt_del_punt[i]) {
+        Punt[] baricentres = generaBaricentres();
+        for (int i = 0; i < numPunts; ++i) {
+            int nouConjunt = buscaBaricentreProper(i, baricentres);
+            if (nouConjunt != conjuntDelPunt[i]) {
                 canvi = true;
-                canviaDeConjunt(i, nou_conjunt);
+                canviaDeConjunt(i, nouConjunt);
             }
         }
         return canvi;
     }
 
-    private int buscaBaricentreProper(int id) {
+    private int buscaBaricentreProper(int id, Punt[] baricentres) {
         Punt punt = punts.get(id);
         double distancia = punt.distancia(baricentres[0]);
         int conjunt = 0;
         for (int i = 1; i < k; ++i) {
-            double nova_dist = punt.distancia(baricentres[i]);
-            if (nova_dist < distancia){
+            double novaDist = punt.distancia(baricentres[i]);
+            if (novaDist < distancia){
                 conjunt = i;
-                distancia = nova_dist;
+                distancia = novaDist;
             }
         }
         return conjunt;
     }
 
-    private void guardaBaricentres() {
+    private Punt[] generaBaricentres() {
+        Punt[] baricentres = new Punt[k];
         for (int i = 0; i < k; ++i) {
             if (particions[i].obtenirNumPunts() != 0)
                 baricentres[i] = particions[i].obtenirBaricentre();
         }
+        return baricentres;
     }
 }

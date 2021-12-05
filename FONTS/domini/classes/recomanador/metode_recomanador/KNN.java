@@ -4,6 +4,7 @@ import domini.classes.Item;
 import domini.classes.Pair;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -29,22 +30,22 @@ public class KNN {
      * @return els k items més propers al donat.
      */
     public ArrayList<Item> obtenirVeins(Item item, int k) {
-        PriorityQueue<Pair<Double, Item>> pq = new PriorityQueue<>();
+        PriorityQueue<Pair<Double, Item>> pq = new PriorityQueue<>(Collections.reverseOrder());
         for (Item iter : items) {
             double distance = item.obtenirDistancia(iter);
             if (pq.size() < k) {
-                pq.add(new Pair<>(-distance, iter));
+                pq.add(new Pair<>(distance, iter));
             }
-            else if(!pq.isEmpty() && -pq.peek().x > distance) {
+            else if(!pq.isEmpty() && pq.peek().x > distance) {
                 pq.remove();
-                pq.add(new Pair<>(-distance,iter));
+                pq.add(new Pair<>(distance,iter));
             }
         }
-        ArrayList<Item> result_items = new ArrayList<>();
+        ArrayList<Item> resultItems = new ArrayList<>();
         while (!pq.isEmpty()) {
             Pair<Double, Item> top = pq.poll();
-            result_items.add(top.y);
+            resultItems.add(top.y);
         }
-        return result_items;
+        return resultItems;
     }
 }

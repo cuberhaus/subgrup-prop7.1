@@ -65,13 +65,13 @@ public abstract class MetodeRecomanador {
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) {
-        ConjuntValoracions valoracions_usuari = new ConjuntValoracions();
+        ConjuntValoracions valoracionsUsuari = new ConjuntValoracions();
         for (Map.Entry<Pair<Usuari, Item>, Valoracio> x : valoracionsPubliques.obteTotesValoracions().entrySet()) {
             if (x.getKey().x.equals(usuari)) {
-                valoracions_usuari.afegir(x.getValue());
+                valoracionsUsuari.afegir(x.getValue());
             }
         }
-        return obteRecomanacions(usuari, valoracions_usuari, numRecomanacions);
+        return obteRecomanacions(usuari, valoracionsUsuari, numRecomanacions);
     }
 
     /**
