@@ -1,3 +1,4 @@
 Conte els jocs de prova del projecte.
 joc1/
 joc2/
+joc3/

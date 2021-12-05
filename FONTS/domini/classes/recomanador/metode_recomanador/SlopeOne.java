@@ -9,9 +9,9 @@ import java.util.Arrays;
  */
 public class SlopeOne {
     /** Numero de usuaris processats */
-    private final int num_usuaris;
+    private final int numUsuaris;
     /** Numero de valoracions processades */
-    private final int num_valoracions;
+    private final int numValoracions;
 
     /** Valoracions reals dels usuaris, <code>valoracions[i][j]</code> conté la valoració de l'usuari i a l'item j */
     private final Double[][] valoracions;
@@ -25,27 +25,27 @@ public class SlopeOne {
      *                    Si la valoració no es coneguda hi ha un valor de <code>null</code>.
      */
     public SlopeOne(Double[][] valoracions) {
-        num_usuaris = valoracions.length;
-        num_valoracions = valoracions[0].length;
+        numUsuaris = valoracions.length;
+        numValoracions = valoracions[0].length;
         this.valoracions = valoracions;
-        prediccions = new Double[num_usuaris][num_valoracions];
+        prediccions = new Double[numUsuaris][numValoracions];
         for (Double[] x : prediccions) {
             Arrays.fill(x, null);
         }
-        desviacions = new Double[num_valoracions][num_valoracions];
+        desviacions = new Double[numValoracions][numValoracions];
         calculaDesviacions();
     }
 
     private void calculaDesviacions() {
-        for (int i = 0; i < num_valoracions; ++i)
-            for (int j = 0; j < num_valoracions; ++j)
+        for (int i = 0; i < numValoracions; ++i)
+            for (int j = 0; j < numValoracions; ++j)
                 desviacions[i][j] = calculaDesviacio(i,j);
     }
 
     private double calculaDesviacio(int j, int i) {
         int cardinal = 0;
         double suma = 0;
-        for (int k = 0; k < num_usuaris; ++k) {
+        for (int k = 0; k < numUsuaris; ++k) {
             if (valoracions[k][j] != null && valoracions[k][i] != null) {
                 ++cardinal;
                 suma += valoracions[k][j] - valoracions[k][i];
@@ -59,8 +59,8 @@ public class SlopeOne {
      * @return una matriu de num_usuaris x num_items amb totes les prediccions.
      */
     public Double[][] getTotesPrediccions() {
-        for (int i = 0; i < num_usuaris; ++i)
-            for (int j = 0; j < num_valoracions; ++j)
+        for (int i = 0; i < numUsuaris; ++i)
+            for (int j = 0; j < numValoracions; ++j)
                 getPrediccio(i,j);
         return prediccions;
     }
@@ -75,22 +75,22 @@ public class SlopeOne {
             return prediccions[usuari][item];
         prediccions[usuari][item] = 0.;
         double mitjana = 0;
-        double suma_desviacions = 0;
-        double ratings_usables = 0;
-        for (int i = 0; i < num_valoracions; ++i) {
+        double sumaDesviacions = 0;
+        double ratingsUsables = 0;
+        for (int i = 0; i < numValoracions; ++i) {
             if (i == item) continue;
             if (valoracions[usuari][i] == null) continue;
             double desviacio = desviacions[item][i];
             if (Double.isNaN(desviacio)) {
                 continue;
             }
-            ratings_usables++;
-            suma_desviacions += desviacio;
+            ratingsUsables++;
+            sumaDesviacions += desviacio;
             mitjana += valoracions[usuari][i];
         }
-        mitjana /= ratings_usables;
-        suma_desviacions /= ratings_usables;
-        return prediccions[usuari][item] = mitjana + suma_desviacions;
+        mitjana /= ratingsUsables;
+        sumaDesviacions /= ratingsUsables;
+        return prediccions[usuari][item] = mitjana + sumaDesviacions;
     }
 
 

@@ -2,7 +2,6 @@ Conte el joc de prova 1.
 index.txt
 inputqueries.txt
 items.csv
-Joc1.java
 ratings.test.known.csv
 ratings.test.unknown.csv
 readme.txt

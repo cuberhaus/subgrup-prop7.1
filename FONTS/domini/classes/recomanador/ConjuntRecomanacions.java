@@ -101,15 +101,15 @@ public class ConjuntRecomanacions {
      */
     public double calculaDiscountedCumulativeGain(ArrayList<Pair<Integer,Double>> valoracions, int p) {
         ordena();
-        Map<Integer,Double> id_to_valoracio = new HashMap<>();
+        Map<Integer,Double> idAValoracio = new HashMap<>();
         for(Pair<Integer,Double> x : valoracions) {
-            id_to_valoracio.put(x.x, x.y);
+            idAValoracio.put(x.x, x.y);
         }
         discountedCumulativeGain = 0.;
         for(int i = 0; i < Math.min(conjuntRecomanacions.size(), p); ++i) {
             double rel = 0;
-            if (id_to_valoracio.containsKey(conjuntRecomanacions.get(i).obtenirId().obtenirValor()))
-                rel = id_to_valoracio.get(conjuntRecomanacions.get(i).obtenirId().obtenirValor());
+            if (idAValoracio.containsKey(conjuntRecomanacions.get(i).obtenirId().obtenirValor()))
+                rel = idAValoracio.get(conjuntRecomanacions.get(i).obtenirId().obtenirValor());
             discountedCumulativeGain += (Math.pow(2,rel)-1)/log2(i+2);
         }
         return discountedCumulativeGain;
@@ -131,11 +131,11 @@ public class ConjuntRecomanacions {
                 pq.add(x.y);
             }
         }
-        Double[] top_val = pq.toArray(new Double[0]);
-        Arrays.sort(top_val, Collections.reverseOrder());
+        Double[] millorsValoracions = pq.toArray(new Double[0]);
+        Arrays.sort(millorsValoracions, Collections.reverseOrder());
         idealDiscountedCumulativeGain = 0.;
-        for(int i = 0; i < top_val.length; ++i) {
-            double rel = top_val[i];
+        for(int i = 0; i < millorsValoracions.length; ++i) {
+            double rel = millorsValoracions[i];
             idealDiscountedCumulativeGain += (Math.pow(2,rel)-1)/log2(i+2);
         }
         return idealDiscountedCumulativeGain;
