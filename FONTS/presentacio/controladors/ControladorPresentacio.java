@@ -17,6 +17,7 @@ public class ControladorPresentacio {
     }
 
     public void aPantallaInici() {
+        // TODO: Afegir tota la resta de controladors com a no visibles
         controladorGestioUsuari.setVisible(false);
         controladorGestioPrograma.aGestioPrograma();
     }
