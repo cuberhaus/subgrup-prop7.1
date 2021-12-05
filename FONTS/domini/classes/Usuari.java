@@ -22,7 +22,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     private String contrasenya;
 
     /** Conté el conjunt d'items valorat per l'usuari */
-    private Map<Item,Valoracio> valoracions;
+    private final Map<Item,Valoracio> valoracions;
 
     /** Constructora donat un id, un estat "actiu", un nom i una contrasenya.
      * @param id representa l'id de l'usuari

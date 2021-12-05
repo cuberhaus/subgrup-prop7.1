@@ -1,14 +1,14 @@
-package controladors;
+package domini.controladors;
 
-import gestorDeDisc.classes.EscriptorDeCSV;
-import gestorDeDisc.classes.LectorDeCSV;
+import persistencia.classes.EscriptorDeCSV;
+import persistencia.classes.LectorDeCSV;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 /** Classe que representa el controlador de domini - gestor de disc */
-public class ControladorDominiDisc {
-    public ControladorDominiDisc() {}
+public class ControladorDomini {
+    public ControladorDomini() {}
 
     /**
      * Funció que donada la ubicació de l'arxiu CSV, et retorna el contingut en forma de llista.

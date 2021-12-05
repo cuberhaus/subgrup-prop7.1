@@ -1,14 +1,14 @@
-package presentacio;
+package presentacio.vistes;
 
 import javax.swing.*;
 import java.awt.event.*;
 
-public class VistaGestioConjunts extends JDialog {
+public class VistaGestioValoracions extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
 
-    public VistaGestioConjunts() {
+    public VistaGestioValoracions() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -52,7 +52,7 @@ public class VistaGestioConjunts extends JDialog {
     }
 
     public static void main(String[] args) {
-        VistaGestioConjunts dialog = new VistaGestioConjunts();
+        VistaGestioValoracions dialog = new VistaGestioValoracions();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

@@ -1,8 +1,7 @@
 import domini.classes.Id;
 import domini.classes.csv.TaulaCSV;
-import gestorDeDisc.classes.LectorDeCSV;
+import persistencia.classes.LectorDeCSV;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

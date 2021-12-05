@@ -1,7 +1,7 @@
-package gestorDeDisc.tests;
+package persistencia.tests;
 
 import domini.tests.UtilitatsDeLectura;
-import gestorDeDisc.classes.EscriptorDeCSV;
+import persistencia.classes.EscriptorDeCSV;
 import libs.consola;
 
 import java.util.ArrayList;
