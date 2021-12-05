@@ -2,7 +2,7 @@ package domini.tests;
 
 import domini.classes.*;
 import domini.classes.csv.TaulaCSV;
-import libs.consola;
+import utilitats.consola;
 
 /**
  * Driver per la classe ConjuntValoracions

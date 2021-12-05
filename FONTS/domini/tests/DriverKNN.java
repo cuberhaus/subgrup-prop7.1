@@ -4,7 +4,7 @@ import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
 import domini.classes.recomanador.metode_recomanador.KNN;
-import libs.consola;
+import utilitats.consola;
 
 import java.util.ArrayList;
 import java.util.Map;

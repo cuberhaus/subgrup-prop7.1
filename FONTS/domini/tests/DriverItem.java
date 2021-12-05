@@ -1,7 +1,7 @@
 package domini.tests;
 
 import domini.classes.*;
-import libs.consola;
+import utilitats.consola;
 
 import java.util.ArrayList;
 import java.util.TreeSet;

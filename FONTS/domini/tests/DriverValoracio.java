@@ -1,10 +1,7 @@
 package domini.tests;
 
 import domini.classes.*;
-import libs.consola;
-
-
-import java.util.ArrayList;
+import utilitats.consola;
 
 /**
  * Driver per la classe Valoració
