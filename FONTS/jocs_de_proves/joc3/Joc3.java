@@ -6,7 +6,7 @@ import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorHibrid;
-import gestorDeDisc.classes.LectorDeCSV;
+import persistencia.classes.LectorDeCSV;
 
 import java.io.File;
 import java.util.ArrayList;
