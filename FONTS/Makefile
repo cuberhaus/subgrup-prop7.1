@@ -2,6 +2,7 @@ SOURCES=$(shell find . -name '*.java')
 MAIN=../EXE/Main.class
 JOC1=../EXE/jocs_de_proves/joc1/Joc1.class
 JOC2=../EXE/jocs_de_proves/joc2/Joc2.class
+JOC2=../EXE/jocs_de_proves/joc3/Joc3.class
 
 # Default target: called with just make
 # Creates the directory if needed
@@ -10,6 +11,7 @@ $(MAIN): $(SOURCES)
 	@javac -d ../EXE -sourcepath . ./Main.java
 	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc1/Joc1.java
 	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc2/Joc2.java
+	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc3/Joc3.java
 
 clean:
 	rm -rf ../EXE/domini
@@ -17,6 +19,7 @@ clean:
 	rm -rf ../EXE/Main.class
 	rm -rf ../EXE/jocs_de_proves/joc1/Joc1.class
 	rm -rf ../EXE/jocs_de_proves/joc2/Joc2.class
+	rm -rf ../EXE/jocs_de_proves/joc3/Joc3.class
 
 .SILENT:
 Driver%:
@@ -41,3 +44,7 @@ joc1: $(JOC1)
 .SILENT:
 joc2: $(JOC2)
 	-java -cp ../EXE jocs_de_proves.joc2.Joc2
+
+.SILENT:
+joc3: $(JOC3)
+	-java -cp ../EXE jocs_de_proves.joc3.Joc3

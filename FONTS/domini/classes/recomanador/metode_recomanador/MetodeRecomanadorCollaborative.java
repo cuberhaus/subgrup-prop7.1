@@ -14,13 +14,13 @@ import java.util.PriorityQueue;
 public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
 
     /** Nombre de clusters que s'utilitzarà com K al K-means **/
-    private final int num_clusters;
+    private final int numClusters;
 
     /** Particions obtingudes de K-Means*/
     private ArrayList<ArrayList<Integer>> particions;
 
     /** Particio de cada usuari **/
-    private Integer[] particio_de_usuari;
+    private Integer[] particioUsuari;
 
     /** Id's per conectar particions i items */
     private final ArrayList<Id> ids;
@@ -30,17 +30,17 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      * Per defecte el nombre de clusters per K-Means es 5.
      * @param usuaris pot ser buit
      * @param items pot ser buit
-     * @param valoracions_publiques pot ser buit
+     * @param valoracionsPubliques pot ser buit
      */
-    public MetodeRecomanadorCollaborative(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracions_publiques) {
-        super(usuaris, items, valoracions_publiques);
-        num_clusters = Math.min(5, usuaris.mida());
+    public MetodeRecomanadorCollaborative(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracionsPubliques) {
+        super(usuaris, items, valoracionsPubliques);
+        numClusters = Math.min(5, usuaris.mida());
         ids = new ArrayList<>();
         calculaParticions();
     }
-    public MetodeRecomanadorCollaborative(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracions_publiques, int num_clusters) {
-        super(usuaris, items, valoracions_publiques);
-        this.num_clusters = num_clusters;
+    public MetodeRecomanadorCollaborative(ConjuntUsuaris usuaris, ConjuntItems items, ConjuntValoracions valoracionsPubliques, int numClusters) {
+        super(usuaris, items, valoracionsPubliques);
+        this.numClusters = numClusters;
         ids = new ArrayList<>();
         calculaParticions();
     }
@@ -49,23 +49,58 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      * Precalcula els clusters per poder servir queries més ràpidament.
      */
     private void calculaParticions() {
-        ConjuntPunts punts_usuaris = new ConjuntPunts();
-        for (Usuari it_usu : usuaris.obtenirTotsElsElements().values()) {
-            punts_usuaris.add(it_usu.transformaAPunt(items));
-            ids.add(it_usu.obtenirId());
+        ConjuntPunts puntsUsuaris = new ConjuntPunts();
+        for (Usuari iterUsu : usuaris.obtenirTotsElsElements().values()) {
+            puntsUsuaris.add(iterUsu.transformaAPunt(items));
+            ids.add(iterUsu.obtenirId());
         }
 
         // Amb el algorisme KMeans obtenim el cluster del usuari a qui hem de recomanar.
-        KMeans kMeans = new KMeans(punts_usuaris, num_clusters);
+        KMeans kMeans = new KMeans(puntsUsuaris, numClusters);
         particions = kMeans.getParticions();
-        particio_de_usuari = new Integer[usuaris.mida()];
-        for (int i = 0; i < num_clusters; ++i) {
+        particioUsuari = new Integer[usuaris.mida()];
+        for (int i = 0; i < numClusters; ++i) {
             for (int x : particions.get(i)) {
-                particio_de_usuari[x] = i;
+                particioUsuari[x] = i;
             }
         }
     }
 
+    private int buscaPosicioUsuari(Usuari usuari) {
+        int posicioUsuari = -1;
+
+        for(int i = 0; i < ids.size(); ++i) {
+            if (ids.get(i).equals(usuari.obtenirId()))
+                posicioUsuari = i;
+        }
+        return posicioUsuari;
+    }
+    private ConjuntItems obteConjuntItemsUsables(ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari) {
+        ConjuntItems itemsUsables = new ConjuntItems(conjuntRecomanable.obteTipusItem());
+        for (Valoracio val : valoracionsUsuari.obteTotesValoracions().values()) {
+            itemsUsables.afegir(val.obtenirItem());
+        }
+        for (Item item : conjuntRecomanable.obtenirTotsElsElements().values()) {
+            itemsUsables.afegir(item);
+        }
+        return itemsUsables;
+    }
+
+    private Double[][] generaTaulaValoracions(ArrayList<Integer> particioUsuari, Item[] items) {
+        int numUsuaris = particioUsuari.size();
+        int numItems = items.length;
+        Double[][] valoracions = new Double[numUsuaris][numItems];
+        for (int i = 0; i < numUsuaris; ++i) {
+            Usuari usuariIt = usuaris.obtenir(ids.get(particioUsuari.get(i)));
+            for (int j = 0; j < numItems; ++j) {
+                if (valoracionsPubliques.conte(usuariIt, items[j]))
+                    valoracions[i][j] = valoracionsPubliques.obte(usuariIt, items[j]).obtenirValor();
+                else
+                    valoracions[i][j] = null;
+            }
+        }
+        return valoracions;
+    }
     /**
      * Genera recomanacions per l'usuari donat.
      * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
@@ -76,63 +111,47 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      */
     @Override
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
-        int posicio_usuari = -1;
 
-        for(int i = 0; i < ids.size(); ++i) {
-            if (ids.get(i).equals(usuari.obtenirId()))
-                posicio_usuari = i;
-        }
-        if (posicio_usuari == -1)
+        int posicioUsuari = buscaPosicioUsuari(usuari);
+
+        if (posicioUsuari == -1)
             return null;
 
-        ArrayList<Integer> particio_usuari = particions.get(particio_de_usuari[posicio_usuari]);
+        ArrayList<Integer> particioUsuari = particions.get(this.particioUsuari[posicioUsuari]);
 
-        int posicio_a_la_particio = 0;
-        for (int i = 0; i < particio_usuari.size(); ++i) {
-            if (particio_usuari.get(i) == posicio_usuari)
-                posicio_a_la_particio = i;
+        int posicioALaParticio = 0;
+        for (int i = 0; i < particioUsuari.size(); ++i) {
+            if (particioUsuari.get(i) == posicioUsuari)
+                posicioALaParticio = i;
         }
 
-        ConjuntItems items_usables = new ConjuntItems(conjuntRecomanable.obteTipusItem());
-        for (Valoracio val : valoracionsUsuari.obteTotesValoracions().values()) {
-            items_usables.afegir(val.obtenirItem());
-        }
-        for (Item item : conjuntRecomanable.obtenirTotsElsElements().values()) {
-            items_usables.afegir(item);
-        }
+        ConjuntItems itemsUsables = obteConjuntItemsUsables(conjuntRecomanable, valoracionsUsuari);
 
-        int num_usuaris = particio_usuari.size();
-        int num_items = items_usables.mida();
+        int numItems = itemsUsables.mida();
 
-        Double[][] valoracions = new Double[num_usuaris][num_items];
-        Item[] items_slope1 = items_usables.obtenirTotsElsElements().values().toArray(new Item[0]);
-        ArrayList<Integer> posicions_recomanables = new ArrayList<>();
+        Item[] itemsSlope1 = itemsUsables.obtenirTotsElsElements().values().toArray(new Item[0]);
+        ArrayList<Integer> posicionsRecomanables = new ArrayList<>();
 
-        for (int i = 0; i < num_items; ++i) {
-            if (conjuntRecomanable.conte(items_slope1[i].obtenirId())) {
-                posicions_recomanables.add(i);
+        for (int i = 0; i < numItems; ++i) {
+            if (conjuntRecomanable.conte(itemsSlope1[i].obtenirId())) {
+                posicionsRecomanables.add(i);
             }
         }
 
-        for (int i = 0; i < num_usuaris; ++i) {
-            Usuari usuari_it = usuaris.obtenir(ids.get(particio_usuari.get(i)));
-            for (int j = 0; j < num_items; ++j) {
-                if (valoracionsPubliques.conte(usuari_it, items_slope1[j]))
-                    valoracions[i][j] = valoracionsPubliques.obte(usuari_it, items_slope1[j]).obtenirValor();
-                else
-                    valoracions[i][j] = null;
-            }
-        }
+        Double[][] valoracions = generaTaulaValoracions(particioUsuari, itemsSlope1);
 
         SlopeOne slopeOne = new SlopeOne(valoracions);
 
         PriorityQueue<Pair<Double,Item>> pq = new PriorityQueue<>();
-        for (Integer posicio_recomanable : posicions_recomanables) {
-            pq.add(new Pair<>(slopeOne.getPrediccio(posicio_a_la_particio, posicio_recomanable), items_slope1[posicio_recomanable]));
-        }
-
-        while (pq.size() > numRecomanacions) {
-            pq.remove();
+        for (Integer posicioRecomanable : posicionsRecomanables) {
+            double valorPrediccio = slopeOne.getPrediccio(posicioALaParticio, posicioRecomanable);
+            if (pq.size() < numRecomanacions) {
+                pq.add(new Pair<>(valorPrediccio, itemsSlope1[posicioRecomanable]));
+            }
+            else if(!pq.isEmpty() && pq.peek().x < valorPrediccio) {
+                pq.remove();
+                pq.add(new Pair<>(valorPrediccio, itemsSlope1[posicioRecomanable]));
+            }
         }
 
         ConjuntRecomanacions res = new ConjuntRecomanacions();

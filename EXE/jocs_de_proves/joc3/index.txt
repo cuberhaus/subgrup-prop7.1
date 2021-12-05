@@ -1,5 +1,6 @@
-Conte el joc de prova 2.
+Conte el joc de prova 3.
 index.txt
+inputqueries.txt
 items.csv
 ratings.test.known.csv
 ratings.test.unknown.csv

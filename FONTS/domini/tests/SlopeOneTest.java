@@ -3,6 +3,11 @@ package domini.tests;
 import domini.classes.recomanador.metode_recomanador.SlopeOne;
 import org.junit.Test;
 
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,6 +16,13 @@ import static org.junit.Assert.*;
 
 public class SlopeOneTest {
     private final double delta = 1e-5;
+    private final int generadorRNG = 12345678;
+    private final int modulRNG = 100000007;
+    private int numeroActual = 1;
+
+    private int seguentNumero() {
+        return numeroActual = (numeroActual * generadorRNG)%modulRNG;
+    }
 
     @Test
     public void getPrediccio() {
@@ -83,6 +95,25 @@ public class SlopeOneTest {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 4; ++j)
                 assertEquals(i+1, slopeOne4.getPrediccio(i, j), delta);
+        }
+    }
+    @Test
+    public void casGranPrecomputat() throws IOException {
+
+        Double[][] valoracions = new Double[100][100];
+        for (int i = 0; i < 100; ++i) {
+            for (int j = 0; j < 100; ++j) {
+                valoracions[i][j] = (double) ((seguentNumero() % 10 + 10) % 10);
+            }
+        }
+        SlopeOne slopeOne = new SlopeOne(valoracions);
+        File prediccionsGuardades = new File("../EXE/dades_tests/outputSlopeOneTest");
+        Scanner prediccionsGuardadesReader = new Scanner(prediccionsGuardades);
+        for (int i = 0; i < 100; ++i) {
+            for (int j = 0; j < 100; ++j) {
+                String nextDouble = prediccionsGuardadesReader.next();
+                assertEquals(slopeOne.getPrediccio(i,j), Double.parseDouble(nextDouble), delta);
+            }
         }
     }
 
