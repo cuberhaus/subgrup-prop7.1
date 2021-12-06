@@ -15,7 +15,7 @@ keyboard and disk files. The present version runs on
 Macintosh, Unix, and Windows 95 systems.
 */
 
-package libs;
+package utilitats;
 
 import java.io.*;
 

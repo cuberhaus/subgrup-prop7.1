@@ -41,7 +41,7 @@ public class VistaGestioPrograma extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // aGestioUsuaris
-                controladorPresentacio.aGestioUsuari();
+//                controladorPresentacio.aGestioUsuari();
             }
         });
 

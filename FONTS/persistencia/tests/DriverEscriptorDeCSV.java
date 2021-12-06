@@ -2,7 +2,7 @@ package persistencia.tests;
 
 import domini.tests.UtilitatsDeLectura;
 import persistencia.classes.EscriptorDeCSV;
-import libs.consola;
+import utilitats.consola;
 
 import java.util.ArrayList;
 

@@ -42,7 +42,7 @@ public class VistaGestioUsuari extends JDialog {
         menuInicioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controladorPresentacio.aPantallaInici();
+//                controladorPresentacio.aPantallaInici();
             }
         });
     }

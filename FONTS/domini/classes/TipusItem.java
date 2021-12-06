@@ -243,4 +243,8 @@ public class TipusItem {
         }
         return new TipusAtribut(new ValorNumeric(), new DistanciaEuclidiana());
     }
+
+    public String toString() {
+        return obtenirNom();
+    }
 }

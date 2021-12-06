@@ -3,7 +3,7 @@ package domini.tests;
 import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.csv.TaulaCSV;
-import libs.consola;
+import utilitats.consola;
 
 import java.util.ArrayList;
 import java.util.Map;

@@ -3,12 +3,10 @@ package domini.tests;
 import domini.classes.*;
 import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.metode_recomanador.Punt;
-import libs.consola;
+import utilitats.consola;
 
 
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Driver per la classe Usuari

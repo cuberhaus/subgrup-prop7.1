@@ -5,7 +5,7 @@ import domini.classes.Id;
 import domini.classes.Item;
 import domini.classes.TipusItem;
 import domini.classes.csv.TaulaCSV;
-import libs.consola;
+import utilitats.consola;
 
 import java.util.TreeMap;
 import java.util.TreeSet;

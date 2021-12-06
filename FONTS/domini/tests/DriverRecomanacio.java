@@ -2,7 +2,7 @@ package domini.tests;
 
 import domini.classes.Id;
 import domini.classes.recomanador.Recomanacio;
-import libs.consola;
+import utilitats.consola;
 
 /**
  * Driver de la classe Recomanacio

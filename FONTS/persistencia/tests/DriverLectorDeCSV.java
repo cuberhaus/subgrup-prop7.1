@@ -1,7 +1,7 @@
 package persistencia.tests;
 
 import persistencia.classes.LectorDeCSV;
-import libs.consola;
+import utilitats.consola;
 
 import java.io.IOException;
 import java.util.ArrayList;
