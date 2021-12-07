@@ -119,7 +119,7 @@ public class MenuPrincipal extends JFrame {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", new JPanel());
         menuPestanyes.add("Ítems", new JPanel());
-        menuPestanyes.add("Usuaris", new JPanel());
+        menuPestanyes.add("Usuaris", new GestioUsuari());
         menuPestanyes.add("Valoracions", new JPanel());
         menuPestanyes.add("Recomanacions", new JPanel());
     }
