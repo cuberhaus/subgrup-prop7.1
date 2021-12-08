@@ -8,6 +8,10 @@ import java.io.File;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
+/**
+ * @author pol.casacuberta
+ */
+
 public class GestioValoracions extends JPanel {
     public GestioValoracions() {
         this.inicialitzarGestioValoracions();

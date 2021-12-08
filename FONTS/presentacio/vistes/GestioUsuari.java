@@ -5,6 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author pol.casacuberta
+ */
+
 public class GestioUsuari extends JPanel {
 
     public GestioUsuari() {
