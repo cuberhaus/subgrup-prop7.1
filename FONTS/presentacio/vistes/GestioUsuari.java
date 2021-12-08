@@ -99,19 +99,19 @@ public class GestioUsuari extends JPanel {
 
         JLabel nomLabel = new JLabel("Nom: ");
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         this.add(nomLabel,gridBagConstraints);
 
         JTextField nomText = new JTextField();
-        idText.setColumns(10);
-        idText.addActionListener(new ActionListener() {
+        nomText.setColumns(10);
+        nomText.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Al pitjar enter fa una acció
             }
         });
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        this.add(idText,gridBagConstraints);
+        gridBagConstraints.gridy = 6;
+        this.add(nomText,gridBagConstraints);
     }
 }
