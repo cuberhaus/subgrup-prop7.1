@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import static javax.swing.JFileChooser.APPROVE_OPTION;
+
 public class GestioValoracions extends JPanel {
     public GestioValoracions() {
         this.inicialitzarGestioValoracions();
@@ -120,8 +122,10 @@ public class GestioValoracions extends JPanel {
                 // TODO: logica
                 JDialog pathDialog = new JDialog();
                 int returnVal = jFileChooser.showOpenDialog(pathDialog);
-                File pathConjuntVal = jFileChooser.getSelectedFile();
-                System.out.println(pathConjuntVal.getAbsolutePath());
+                if (returnVal == APPROVE_OPTION) {
+                    File pathConjuntVal = jFileChooser.getSelectedFile();
+                    System.out.println(pathConjuntVal.getAbsolutePath());
+                }
             }
         });
         gridBagConstraints.gridx = 0;
