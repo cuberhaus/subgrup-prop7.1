@@ -1,6 +1,7 @@
 package presentacio.vistes;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,8 +12,11 @@ public class GestioUsuari extends JPanel {
     }
 
     public void inicialitzarGestioUsuari() {
-        JFrame frame = new JFrame();
-//        frame.add();
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        this.setLayout(gridBagLayout);
+
+
         JButton afegirUsuari = new JButton("Afegir Usuari");
         afegirUsuari.addActionListener(new ActionListener() {
             @Override
@@ -20,7 +24,10 @@ public class GestioUsuari extends JPanel {
                 // TODO: logica d'afegir Usuari
             }
         });
-        this.add(afegirUsuari);
+        gridBagConstraints.insets = new Insets(10,10,10,10);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        this.add(afegirUsuari,gridBagConstraints);
 
         JButton eliminarUsuari = new JButton("Eliminar Usuari");
         eliminarUsuari.addActionListener(new ActionListener() {
@@ -29,7 +36,9 @@ public class GestioUsuari extends JPanel {
                 // TODO: logica d'eliminar Usuari
             }
         });
-        this.add(eliminarUsuari);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        this.add(eliminarUsuari,gridBagConstraints);
 
         JButton iniciarSessio = new JButton("Iniciar Sessió");
         iniciarSessio.addActionListener(new ActionListener() {
@@ -38,7 +47,9 @@ public class GestioUsuari extends JPanel {
                 // TODO: logica d'iniciar sessio
             }
         });
-        this.add(iniciarSessio);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        this.add(iniciarSessio,gridBagConstraints);
 
         JButton tancarSessio = new JButton("Tancar Sessió");
         tancarSessio.addActionListener(new ActionListener() {
@@ -47,17 +58,24 @@ public class GestioUsuari extends JPanel {
                 // TODO: logica de tancar sessio
             }
         });
-        this.add(tancarSessio);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        this.add(tancarSessio,gridBagConstraints);
 
         JLabel idLabel = new JLabel("Id: ");
-        this.add(idLabel);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        this.add(idLabel,gridBagConstraints);
         JTextField idText = new JTextField();
+        idText.setColumns(10);
         idText.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Al pitjar enter fa una acció
             }
         });
-        this.add(idText);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        this.add(idText,gridBagConstraints);
     }
 }
