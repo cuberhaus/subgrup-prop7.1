@@ -15,6 +15,7 @@ public class MenuTipusItem extends JPanel {
 
     private ControladorPresentacio controladorPresentacio;
     private TipusItem tipusItemSeleccionat;
+    private JLabel textItemSeleccionat;
 
     private JPanel panellSeleccionarTipusItem;
     private JPanel panellMostrarTipusItemSeleccionat;
@@ -29,7 +30,6 @@ public class MenuTipusItem extends JPanel {
         JLabel text = new JLabel("Quin tipus d'ítem vols que et recomani?");
         text.setFont(new Font("Sans", Font.PLAIN, 20));
         text.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // text.setPreferredSize(new Dimension(-1, Pantalla.altura / 4));
         this.add(Box.createVerticalGlue());
         this.add(text);
         this.add(Box.createVerticalGlue());
@@ -50,6 +50,11 @@ public class MenuTipusItem extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tipusItemSeleccionat = (TipusItem) tipusItemsComboBox.getSelectedItem();
+                if (tipusItemSeleccionat == null) {
+                    textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                } else {
+                    textItemSeleccionat.setText(tipusItemSeleccionat.obtenirNom());
+                }
             }
         });
         panellSeleccionarTipusItem.add(carrega);
@@ -68,14 +73,14 @@ public class MenuTipusItem extends JPanel {
         JLabel text = new JLabel("Tipus d'ítem seleccionat:");
         text.setFont(new Font("Sans", Font.BOLD, 16));
         informacio.add(text);
-        JLabel textTipusItemSeleccionat = new JLabel();
+        textItemSeleccionat = new JLabel();
         if (tipusItemSeleccionat == null) {
-            textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+            textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
         } else {
-            textTipusItemSeleccionat.setText(tipusItemSeleccionat.obtenirNom());
+            textItemSeleccionat.setText(tipusItemSeleccionat.obtenirNom());
         }
-        textTipusItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));
-        informacio.add(textTipusItemSeleccionat);
+        textItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));
+        informacio.add(textItemSeleccionat);
         panellMostrarTipusItemSeleccionat.add(informacio);
         JButton botoVeureTipusItem = new JButton("Veu el tipus d'ítem seleccionat");
         botoVeureTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
