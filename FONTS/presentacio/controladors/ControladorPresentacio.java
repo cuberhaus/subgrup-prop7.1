@@ -26,7 +26,6 @@ public class ControladorPresentacio {
     public TipusItem[] obtenirTipusItemsCarregats() {
         // TODO: implementar
         return new TipusItem[]{new TipusItem("Llibres"), new TipusItem("Música"), new TipusItem("Tipus d'item amb un nom molt llarg")};
+        //return new TipusItem[]{};
     }
-
-    // Aquí afegirem totes les crides al controlador del domini (i només això)
 }
