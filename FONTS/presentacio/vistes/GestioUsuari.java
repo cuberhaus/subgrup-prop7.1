@@ -11,6 +11,17 @@ import java.awt.event.ActionListener;
 
 public class GestioUsuari extends JPanel {
 
+    private JButton afegirUsuari;
+    private JButton eliminarUsuari;
+    private JButton iniciarSessio;
+    private JButton tancarSessio;
+    private JLabel idLabel;
+    private JTextField idText;
+    private JLabel contrasenyaLabel;
+    private JPasswordField contrasenyaText;
+    private JLabel nomLabel;
+    private JTextField nomText;
+
     public GestioUsuari() {
         this.inicialitzarGestioUsuari();
     }
@@ -20,21 +31,19 @@ public class GestioUsuari extends JPanel {
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         this.setLayout(gridBagLayout);
 
-
-        JButton afegirUsuari = new JButton("Afegir Usuari");
+        afegirUsuari = new JButton("Afegir Usuari");
         afegirUsuari.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: logica d'afegir Usuari
             }
         });
-        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que
-        // els elements no estiguin massa junts
+        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         this.add(afegirUsuari,gridBagConstraints);
 
-        JButton eliminarUsuari = new JButton("Eliminar Usuari");
+        eliminarUsuari = new JButton("Eliminar Usuari");
         eliminarUsuari.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,7 +54,7 @@ public class GestioUsuari extends JPanel {
         gridBagConstraints.gridy = 1;
         this.add(eliminarUsuari,gridBagConstraints);
 
-        JButton iniciarSessio = new JButton("Iniciar Sessió");
+        iniciarSessio = new JButton("Iniciar Sessió");
         iniciarSessio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +65,7 @@ public class GestioUsuari extends JPanel {
         gridBagConstraints.gridy = 2;
         this.add(iniciarSessio,gridBagConstraints);
 
-        JButton tancarSessio = new JButton("Tancar Sessió");
+        tancarSessio = new JButton("Tancar Sessió");
         tancarSessio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,12 +76,12 @@ public class GestioUsuari extends JPanel {
         gridBagConstraints.gridy = 3;
         this.add(tancarSessio,gridBagConstraints);
 
-        JLabel idLabel = new JLabel("Id: ");
+        idLabel = new JLabel("Id: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         this.add(idLabel,gridBagConstraints);
 
-        JTextField idText = new JTextField();
+        idText = new JTextField();
         idText.setColumns(10);
         idText.addActionListener(new ActionListener() {
             @Override
@@ -84,12 +93,12 @@ public class GestioUsuari extends JPanel {
         gridBagConstraints.gridy = 4;
         this.add(idText,gridBagConstraints);
 
-        JLabel contrasenyaLabel = new JLabel("Contrasenya: ");
+        contrasenyaLabel = new JLabel("Contrasenya: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         this.add(contrasenyaLabel,gridBagConstraints);
 
-        JPasswordField contrasenyaText = new JPasswordField();
+        contrasenyaText = new JPasswordField();
         contrasenyaText.setColumns(10);
         contrasenyaText.addActionListener(new ActionListener() {
             @Override
@@ -101,12 +110,12 @@ public class GestioUsuari extends JPanel {
         gridBagConstraints.gridy = 5;
         this.add(contrasenyaText,gridBagConstraints);
 
-        JLabel nomLabel = new JLabel("Nom: ");
+        nomLabel = new JLabel("Nom: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         this.add(nomLabel,gridBagConstraints);
 
-        JTextField nomText = new JTextField();
+        nomText = new JTextField();
         nomText.setColumns(10);
         nomText.addActionListener(new ActionListener() {
             @Override
