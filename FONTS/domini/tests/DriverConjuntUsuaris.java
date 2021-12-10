@@ -10,6 +10,21 @@ import utilitats.consola;
  */
 
 public class DriverConjuntUsuaris {
+    /**
+     * Retorna un conjunt d'usuaris donada una taula per defecte
+     * @param taulaPerDefecte Taula per defecte
+     * @return Retorna un Conjunt d'usuaris
+     * @throws Exception No s'ha pogut crear el conjunt
+     */
+    public static ConjuntUsuaris creaConjuntUsuaris(String taulaPerDefecte) throws Exception {
+        TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV(taulaPerDefecte));
+        ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+        conjuntUsuaris.afegir(taula);
+        System.out.println("Conjunt creat");
+        UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+        return conjuntUsuaris;
+    }
+
     public static void testConstructorBasic() {
         System.out.println("Test Constructora bàsica");
         ConjuntUsuaris conjuntUsuaris;
@@ -19,24 +34,18 @@ public class DriverConjuntUsuaris {
     public static void testAfegirTaulaCSV() {
         System.out.println("Test afegir Taula CSV");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taula);
-            System.out.println("Conjunt creat");
-            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+            ConjuntUsuaris conjuntUsuaris = creaConjuntUsuaris("ratings");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
+
     public static void testEsborrarId() {
         System.out.println("Test esborrar amb un Id");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taula);
-            System.out.println("Conjunt creat");
-            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+            ConjuntUsuaris conjuntUsuaris = creaConjuntUsuaris("ratings");
+
             Id id = UtilitatsDeLectura.llegirId();
             conjuntUsuaris.esborrar(id);
             System.out.println("Conjunt després de borrar l'usuari desitjat");
@@ -49,11 +58,8 @@ public class DriverConjuntUsuaris {
     public static void testEsborrarUsuari() {
         System.out.println("Test esborrar Usuari");
         try {
-            TaulaCSV taula = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taula);
-            System.out.println("Conjunt creat");
-            UtilitatsDEscriptura.imprimirConjuntUsuaris(conjuntUsuaris);
+            ConjuntUsuaris conjuntUsuaris = creaConjuntUsuaris("ratings");
+
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             conjuntUsuaris.esborrar(usuari);
             System.out.println("Conjunt després de borrar l'usuari desitjat");
