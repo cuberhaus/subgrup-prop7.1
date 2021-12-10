@@ -13,22 +13,35 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
  */
 
 public class GestioValoracions extends JPanel {
+    private GridBagLayout gridBagLayout;
+    private GridBagConstraints gridBagConstraints;
+    private JLabel usuariIdLabel;
+    private JTextField usuariIdText;
+    private JLabel itemIdLabel;
+    private JTextField itemIdText;
+    private JLabel valorLabel;
+    private JTextField valorText;
+    private JButton creaValoracio;
+    private JButton esborraValoracio;
+    private JButton editaValoracio;
+    private JFileChooser jFileChooser;
+    private JButton conjuntDeValoracionsButton;
+
     public GestioValoracions() {
         this.inicialitzarGestioValoracions();
     }
     public void inicialitzarGestioValoracions() {
-        GridBagLayout gridBagLayout = new GridBagLayout();
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagLayout = new GridBagLayout();
+        gridBagConstraints = new GridBagConstraints();
         this.setLayout(gridBagLayout);
 
-
-        JLabel usuariIdLabel = new JLabel("Id Usuari: ");
-        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que
+        usuariIdLabel = new JLabel("Id Usuari: ");
+        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         this.add(usuariIdLabel,gridBagConstraints);
 
-        JTextField usuariIdText = new JTextField();
+        usuariIdText = new JTextField();
         usuariIdText.setColumns(10);
         usuariIdText.addActionListener(new ActionListener() {
             @Override
@@ -40,12 +53,12 @@ public class GestioValoracions extends JPanel {
         gridBagConstraints.gridy = 0;
         this.add(usuariIdText,gridBagConstraints);
 
-        JLabel itemIdLabel = new JLabel("Id Item: ");
+        itemIdLabel = new JLabel("Id Item: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         this.add(itemIdLabel,gridBagConstraints);
 
-        JTextField itemIdText = new JTextField();
+        itemIdText = new JTextField();
         itemIdText.setColumns(10);
         itemIdText.addActionListener(new ActionListener() {
             @Override
@@ -58,14 +71,14 @@ public class GestioValoracions extends JPanel {
         this.add(itemIdText,gridBagConstraints);
 
 
-        JLabel valorLabel = new JLabel("Valor: ");
+        valorLabel = new JLabel("Valor: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        this.add(itemIdLabel,gridBagConstraints);
+        this.add(valorLabel,gridBagConstraints);
 
-        JTextField valorText = new JTextField();
-        itemIdText.setColumns(10);
-        itemIdText.addActionListener(new ActionListener() {
+        valorText = new JTextField();
+        valorText.setColumns(10);
+        valorText.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Al pitjar enter fa una acció
@@ -73,9 +86,9 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        this.add(itemIdText,gridBagConstraints);
+        this.add(valorText,gridBagConstraints);
 
-        JButton creaValoracio = new JButton("Crea Valoració");
+        creaValoracio = new JButton("Crea Valoració");
         creaValoracio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,7 +99,7 @@ public class GestioValoracions extends JPanel {
         gridBagConstraints.gridy = 3;
         this.add(creaValoracio,gridBagConstraints);
 
-        JButton esborraValoracio = new JButton("Esborra valoració");
+        esborraValoracio = new JButton("Esborra valoració");
         creaValoracio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,7 +110,7 @@ public class GestioValoracions extends JPanel {
         gridBagConstraints.gridy = 4;
         this.add(esborraValoracio,gridBagConstraints);
 
-        JButton editaValoracio = new JButton("Edita valoració");
+        editaValoracio = new JButton("Edita valoració");
         editaValoracio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,7 +121,7 @@ public class GestioValoracions extends JPanel {
         gridBagConstraints.gridy = 5;
         this.add(editaValoracio,gridBagConstraints);
 
-        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser = new JFileChooser();
         jFileChooser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,10 +129,9 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-//        this.add(jFileChooser,gridBagConstraints);
 
 
-        JButton conjuntDeValoracionsButton = new JButton("Carrega conjunt de valoracions");
+        conjuntDeValoracionsButton = new JButton("Carrega conjunt de valoracions");
         conjuntDeValoracionsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
