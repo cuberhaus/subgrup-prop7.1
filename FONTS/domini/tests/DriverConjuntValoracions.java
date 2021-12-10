@@ -10,6 +10,22 @@ import utilitats.consola;
  */
 
 public class DriverConjuntValoracions {
+
+    private static ConjuntValoracions creaConjuntValoracions() throws Exception {
+        System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
+        TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
+        System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
+        TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
+        ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
+        conjuntUsuaris.afegir(taulaRatings);
+        String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
+        ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+
+        ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
+        conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+        return conjuntValoracions;
+    }
+
     public static void testConstructorBasic() {
         System.out.println("Test Constructora bàsica");
         ConjuntValoracions conjuntValoracions;
@@ -19,17 +35,7 @@ public class DriverConjuntValoracions {
     public static void testAfegirTaulaCSV() {
         System.out.println("Test afegir Taula CSV");
         try {
-            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taulaRatings);
-            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
-
-            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
-            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+            ConjuntValoracions conjuntValoracions = creaConjuntValoracions();
             System.out.println("Conjunt creat");
             UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
@@ -41,17 +47,7 @@ public class DriverConjuntValoracions {
     public static void testConte() {
         System.out.println("Test conte valoracio amb usuari i item donats");
         try {
-            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taulaRatings);
-            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
-
-            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
-            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+            ConjuntValoracions conjuntValoracions = creaConjuntValoracions();
 
             UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
@@ -71,17 +67,7 @@ public class DriverConjuntValoracions {
     public static void testObte() {
         System.out.println("Test obte valoracio amb usuari i item donats");
         try {
-            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taulaRatings);
-            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
-
-            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
-            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+            ConjuntValoracions conjuntValoracions = creaConjuntValoracions();
 
             UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
@@ -99,17 +85,7 @@ public class DriverConjuntValoracions {
         System.out.println("Test esborra valoracio amb usuari i item donats");
 
         try {
-            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taulaRatings);
-            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
-
-            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
-            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+            ConjuntValoracions conjuntValoracions = creaConjuntValoracions();
 
             UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
@@ -133,17 +109,7 @@ public class DriverConjuntValoracions {
         System.out.println("Test esborra valoracio donada una valoracio");
 
         try {
-            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taulaRatings);
-            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
-
-            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
-            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+            ConjuntValoracions conjuntValoracions = creaConjuntValoracions();
 
             UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
@@ -170,17 +136,7 @@ public class DriverConjuntValoracions {
         System.out.println("Test obte totes les valoracions");
 
         try {
-            System.out.println("Introdueix la ruta del fitxer d'entrada de Ratings");
-            TaulaCSV taulaRatings = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("ratings"));
-            System.out.println("Introdueix la ruta del fitxer d'entrada d'items");
-            TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
-            ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
-            conjuntUsuaris.afegir(taulaRatings);
-            String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-            ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
-
-            ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
-            conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+            ConjuntValoracions conjuntValoracions = creaConjuntValoracions();
 
             UtilitatsDEscriptura.imprimirConjuntValoracions(conjuntValoracions);
 
