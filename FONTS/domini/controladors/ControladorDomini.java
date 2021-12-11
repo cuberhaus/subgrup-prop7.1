@@ -47,5 +47,6 @@ public class ControladorDomini {
      * @param contrasenya contrasenya de l'usuari
      */
     public void iniciarSessio(int idSessio, String contrasenya) {
+        // TODO: add logic
     }
 }

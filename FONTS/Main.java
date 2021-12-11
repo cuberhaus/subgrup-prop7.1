@@ -5,6 +5,6 @@ import presentacio.controladors.ControladorPresentacio;
  */
 public class Main {
     public static void main(String[] args) {
-        new ControladorPresentacio();
+        ControladorPresentacio.obtenirInstancia();
     }
 }

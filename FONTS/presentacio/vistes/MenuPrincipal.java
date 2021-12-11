@@ -16,13 +16,16 @@ public class MenuPrincipal extends JFrame {
     private JMenuBar menuBarra;
     private JTabbedPane menuPestanyes;
     private final MenuTipusItem menuTipusItem;
+    private GestioValoracions gestioValoracions;
+    private GestioUsuari gestioUsuari;
 
-    public MenuPrincipal(String nom, ControladorPresentacio controladorPresentacio) {
+    public MenuPrincipal(String nom) {
         super();
         setTitle(nom);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
 
+        ControladorPresentacio controladorPresentacio = ControladorPresentacio.obtenirInstancia();
         menuTipusItem = new MenuTipusItem(controladorPresentacio);
 
         inicialitzarMenuBarra();
@@ -60,8 +63,10 @@ public class MenuPrincipal extends JFrame {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", menuTipusItem);
         menuPestanyes.add("Ítems", new JPanel());
-        menuPestanyes.add("Usuaris", new GestioUsuari());
-        menuPestanyes.add("Valoracions", new GestioValoracions());
+        gestioUsuari = new GestioUsuari();
+        menuPestanyes.add("Usuaris", gestioUsuari);
+        gestioValoracions = new GestioValoracions();
+        menuPestanyes.add("Valoracions", gestioValoracions);
         menuPestanyes.add("Recomanacions", new JPanel());
     }
 }

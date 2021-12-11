@@ -5,19 +5,27 @@ import domini.controladors.ControladorDomini;
 import presentacio.vistes.MenuPrincipal;
 
 /**
- * @author maria.prat
+ * @author maria.prat i pol.casacuberta
  */
 public class ControladorPresentacio {
 
-    private final ControladorDomini controladorDomini;
+    private static ControladorDomini controladorDomini;
+    private static ControladorPresentacio instanciaUnica = null;
 
-    public ControladorPresentacio() {
-        controladorDomini = new ControladorDomini();
-        inicialitzarControladorPresentacio();
+    private ControladorPresentacio() {
     }
 
-    public void inicialitzarControladorPresentacio() {
-        MenuPrincipal menuPrincipal = new MenuPrincipal("Menu Principal", this);
+    public static ControladorPresentacio obtenirInstancia() {
+        if (instanciaUnica == null) {
+            instanciaUnica = new ControladorPresentacio();
+            controladorDomini = new ControladorDomini();
+            inicialitzarControladorPresentacio();
+        }
+        return instanciaUnica;
+    }
+
+    public static void inicialitzarControladorPresentacio() {
+        MenuPrincipal menuPrincipal = new MenuPrincipal("Menu Principal");
         menuPrincipal.setVisible(true);
     }
 
