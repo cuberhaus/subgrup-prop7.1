@@ -24,7 +24,7 @@ public class GestioUsuari extends JPanel {
     private JLabel nomLabel;
     private JTextField nomText;
 
-    private ControladorGestioUsuari controladorGestioUsuari;
+    private final ControladorGestioUsuari controladorGestioUsuari;
 
     public GestioUsuari() {
         controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();

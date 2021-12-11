@@ -1,12 +1,11 @@
 package presentacio.vistes;
 
-import domini.classes.TipusItem;
+import presentacio.controladors.ControladorGestioUsuari;
 import presentacio.controladors.ControladorPresentacio;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author maria.prat
@@ -16,10 +15,8 @@ public class MenuPrincipal extends JFrame {
     private JMenuBar menuBarra;
     private JTabbedPane menuPestanyes;
     private final MenuTipusItem menuTipusItem;
-    private GestioValoracions gestioValoracions;
-    private GestioUsuari gestioUsuari;
 
-    public MenuPrincipal(String nom) {
+    public MenuPrincipal(String nom, ControladorGestioUsuari controladorGestioUsuari) {
         super();
         setTitle(nom);
 
@@ -29,7 +26,7 @@ public class MenuPrincipal extends JFrame {
         menuTipusItem = new MenuTipusItem(controladorPresentacio);
 
         inicialitzarMenuBarra();
-        inicialitzarMenuPestanyes();
+        inicialitzarMenuPestanyes(controladorGestioUsuari);
 
         panellPrincipal.add(menuBarra, BorderLayout.NORTH);
         panellPrincipal.add(menuPestanyes, BorderLayout.CENTER);
@@ -59,13 +56,12 @@ public class MenuPrincipal extends JFrame {
         menuBarra.add(Box.createHorizontalGlue());
     }
 
-    private void inicialitzarMenuPestanyes() {
+    private void inicialitzarMenuPestanyes(ControladorGestioUsuari controladorGestioUsuari) {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", menuTipusItem);
         menuPestanyes.add("Ítems", new JPanel());
-        gestioUsuari = new GestioUsuari();
-        menuPestanyes.add("Usuaris", gestioUsuari);
-        gestioValoracions = new GestioValoracions();
+        menuPestanyes.add("Usuaris", controladorGestioUsuari.getGestioUsuari());
+        GestioValoracions gestioValoracions = new GestioValoracions();
         menuPestanyes.add("Valoracions", gestioValoracions);
         menuPestanyes.add("Recomanacions", new JPanel());
     }
