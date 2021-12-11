@@ -1,5 +1,7 @@
 package presentacio.vistes;
 
+import presentacio.controladors.ControladorGestioValoracions;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,8 +29,11 @@ public class GestioValoracions extends JPanel {
     private JFileChooser jFileChooser;
     private JButton conjuntDeValoracionsButton;
 
+    private ControladorGestioValoracions controladorGestioValoracions = null;
+
     public GestioValoracions() {
         this.inicialitzarGestioValoracions();
+        controladorGestioValoracions = ControladorGestioValoracions.obtenirInstancia();
     }
 
     public void inicialitzarGestioValoracions() {
