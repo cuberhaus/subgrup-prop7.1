@@ -1,5 +1,9 @@
 package presentacio.vistes;
 
+import domini.controladors.ControladorDomini;
+import presentacio.controladors.ControladorGestioUsuari;
+import presentacio.controladors.ControladorPresentacio;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +25,8 @@ public class GestioUsuari extends JPanel {
     private JPasswordField contrasenyaText;
     private JLabel nomLabel;
     private JTextField nomText;
+
+    ControladorGestioUsuari controladorGestioUsuari = new ControladorGestioUsuari();
 
     public GestioUsuari() {
         this.inicialitzarGestioUsuari();
@@ -58,7 +64,7 @@ public class GestioUsuari extends JPanel {
         iniciarSessio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: logica d'iniciar sessio
+                controladorGestioUsuari.iniciarSessio(Integer.parseInt(idText.getText()), String.valueOf(contrasenyaText.getPassword()));
             }
         });
         gridBagConstraints.gridx = 0;

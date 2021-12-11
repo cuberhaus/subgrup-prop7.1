@@ -30,16 +30,17 @@ public class GestioValoracions extends JPanel {
     public GestioValoracions() {
         this.inicialitzarGestioValoracions();
     }
+
     public void inicialitzarGestioValoracions() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         this.setLayout(gridBagLayout);
 
         usuariIdLabel = new JLabel("Id Usuari: ");
-        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding
+        gridBagConstraints.insets = new Insets(10, 10, 10, 10); // Afegeix padding
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        this.add(usuariIdLabel,gridBagConstraints);
+        this.add(usuariIdLabel, gridBagConstraints);
 
         usuariIdText = new JTextField();
         usuariIdText.setColumns(10);
@@ -51,12 +52,12 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        this.add(usuariIdText,gridBagConstraints);
+        this.add(usuariIdText, gridBagConstraints);
 
         itemIdLabel = new JLabel("Id Item: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        this.add(itemIdLabel,gridBagConstraints);
+        this.add(itemIdLabel, gridBagConstraints);
 
         itemIdText = new JTextField();
         itemIdText.setColumns(10);
@@ -68,13 +69,13 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        this.add(itemIdText,gridBagConstraints);
+        this.add(itemIdText, gridBagConstraints);
 
 
         valorLabel = new JLabel("Valor: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        this.add(valorLabel,gridBagConstraints);
+        this.add(valorLabel, gridBagConstraints);
 
         valorText = new JTextField();
         valorText.setColumns(10);
@@ -86,7 +87,7 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        this.add(valorText,gridBagConstraints);
+        this.add(valorText, gridBagConstraints);
 
         creaValoracio = new JButton("Crea Valoració");
         creaValoracio.addActionListener(new ActionListener() {
@@ -97,7 +98,7 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        this.add(creaValoracio,gridBagConstraints);
+        this.add(creaValoracio, gridBagConstraints);
 
         esborraValoracio = new JButton("Esborra valoració");
         creaValoracio.addActionListener(new ActionListener() {
@@ -108,7 +109,7 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        this.add(esborraValoracio,gridBagConstraints);
+        this.add(esborraValoracio, gridBagConstraints);
 
         editaValoracio = new JButton("Edita valoració");
         editaValoracio.addActionListener(new ActionListener() {
@@ -119,7 +120,7 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        this.add(editaValoracio,gridBagConstraints);
+        this.add(editaValoracio, gridBagConstraints);
 
         jFileChooser = new JFileChooser();
         jFileChooser.addActionListener(new ActionListener() {
@@ -146,6 +147,6 @@ public class GestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        this.add(conjuntDeValoracionsButton,gridBagConstraints);
+        this.add(conjuntDeValoracionsButton, gridBagConstraints);
     }
 }

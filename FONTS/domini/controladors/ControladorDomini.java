@@ -31,4 +31,21 @@ public class ControladorDomini {
         EscriptorDeCSV escriptor = new EscriptorDeCSV();
         escriptor.escriureCSV(ubicacio, taula);
     }
+
+    /**
+     * Obté l'id de l'usuari que ha iniciat la sessió
+     * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
+     */
+    public int obtenirSessio() {
+        // TODO: add logic
+        return 0;
+    }
+
+    /**
+     * Inicia sessió amb l'usuari de id idSessio si la contrasenya és correcte
+     * @param idSessio id de l'usuari que inicia la sessió
+     * @param contrasenya contrasenya de l'usuari
+     */
+    public void iniciarSessio(int idSessio, String contrasenya) {
+    }
 }
