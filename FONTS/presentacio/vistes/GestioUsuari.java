@@ -23,6 +23,8 @@ public class GestioUsuari extends JPanel {
     private JPasswordField contrasenyaText;
     private JLabel nomLabel;
     private JTextField nomText;
+    private GridBagLayout gridBagLayout;
+    private GridBagConstraints gridBagConstraints;
 
     private final ControladorGestioUsuari controladorGestioUsuari;
 
@@ -32,32 +34,32 @@ public class GestioUsuari extends JPanel {
     }
 
     public void inicialitzarGestioUsuari() {
-        GridBagLayout gridBagLayout = new GridBagLayout();
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagLayout = new GridBagLayout();
+        gridBagConstraints = new GridBagConstraints();
         this.setLayout(gridBagLayout);
 
         afegirUsuari = new JButton("Afegir Usuari");
         afegirUsuari.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: logica d'afegir Usuari
+                controladorGestioUsuari.afegirUsuari(idText.getText(), String.valueOf(contrasenyaText.getPassword()), nomText.getText());
             }
         });
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        this.add(afegirUsuari,gridBagConstraints);
+        this.add(afegirUsuari, gridBagConstraints);
 
-        eliminarUsuari = new JButton("Eliminar Usuari");
+        eliminarUsuari = new JButton("Esborrar Usuari");
         eliminarUsuari.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: logica d'eliminar Usuari
+                controladorGestioUsuari.esborrarUsuari(idText.getText());
             }
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        this.add(eliminarUsuari,gridBagConstraints);
+        this.add(eliminarUsuari, gridBagConstraints);
 
         iniciarSessio = new JButton("Iniciar Sessió");
         iniciarSessio.addActionListener(new ActionListener() {
@@ -68,23 +70,23 @@ public class GestioUsuari extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        this.add(iniciarSessio,gridBagConstraints);
+        this.add(iniciarSessio, gridBagConstraints);
 
         tancarSessio = new JButton("Tancar Sessió");
         tancarSessio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: logica de tancar sessio
+                controladorGestioUsuari.tancarSessio();
             }
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        this.add(tancarSessio,gridBagConstraints);
+        this.add(tancarSessio, gridBagConstraints);
 
         idLabel = new JLabel("Id: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        this.add(idLabel,gridBagConstraints);
+        this.add(idLabel, gridBagConstraints);
 
         idText = new JTextField();
         idText.setColumns(10);
@@ -96,12 +98,12 @@ public class GestioUsuari extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        this.add(idText,gridBagConstraints);
+        this.add(idText, gridBagConstraints);
 
         contrasenyaLabel = new JLabel("Contrasenya: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        this.add(contrasenyaLabel,gridBagConstraints);
+        this.add(contrasenyaLabel, gridBagConstraints);
 
         contrasenyaText = new JPasswordField();
         contrasenyaText.setColumns(10);
@@ -113,12 +115,12 @@ public class GestioUsuari extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
-        this.add(contrasenyaText,gridBagConstraints);
+        this.add(contrasenyaText, gridBagConstraints);
 
         nomLabel = new JLabel("Nom: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        this.add(nomLabel,gridBagConstraints);
+        this.add(nomLabel, gridBagConstraints);
 
         nomText = new JTextField();
         nomText.setColumns(10);
@@ -130,6 +132,6 @@ public class GestioUsuari extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
-        this.add(nomText,gridBagConstraints);
+        this.add(nomText, gridBagConstraints);
     }
 }

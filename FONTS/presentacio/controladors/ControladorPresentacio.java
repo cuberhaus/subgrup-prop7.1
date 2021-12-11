@@ -2,7 +2,6 @@ package presentacio.controladors;
 
 import domini.classes.TipusItem;
 import domini.controladors.ControladorDomini;
-import presentacio.vistes.MenuPrincipal;
 
 /**
  * @author maria.prat i pol.casacuberta
@@ -40,5 +39,21 @@ public class ControladorPresentacio {
 
     public void iniciarSessio(int idSessio, String contrasenya) {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
+    }
+
+    public boolean existeixUsuari(int id) {
+        return controladorDomini.existeixUsuari(id);
+    }
+
+    public void afegirUsuari(String id, String contrasenya, String nom) {
+        controladorDomini.afegirUsuari(id,contrasenya,nom);
+    }
+
+    public void esborrarUsuari(String id) {
+        controladorDomini.esborrarUsuari(id);
+    }
+
+    public void tancarSessio() {
+        controladorDomini.tancarSessio();
     }
 }

@@ -49,4 +49,31 @@ public class ControladorDomini {
     public void iniciarSessio(int idSessio, String contrasenya) {
         // TODO: add logic
     }
+
+    public boolean existeixUsuari(int id) {
+        //TODO:
+        return false;
+    }
+
+    /**
+     * Afegeix un Usuari, falta donar un paràmetre del conjunt on es vol afegir aquest usuari
+     * @param id
+     * @param contrasenya
+     * @param nom
+     */
+    public void afegirUsuari(String id, String contrasenya, String nom) {
+    }
+
+    /**
+     * Esborra usuari, falta parametre del conjunt
+     * @param id
+     */
+    public void esborrarUsuari(String id) {
+    }
+
+    /**
+     * Tanca la sessio de programa
+     */
+    public void tancarSessio() {
+    }
 }
