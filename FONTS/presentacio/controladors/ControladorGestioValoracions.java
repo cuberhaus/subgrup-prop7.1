@@ -25,14 +25,25 @@ public class ControladorGestioValoracions {
         return instanciaUnica;
     }
 
-    public boolean idIsValid(String id) {
+    public boolean idUsuariIsValid(String id) {
         if (id == null || id.equals("")) {
-            System.out.println("Id text is empty");
-            JOptionPane.showMessageDialog(gestioValoracions,"Id text està buit");
+            JOptionPane.showMessageDialog(gestioValoracions,"L'id d'Usuari està buit");
             return false;
         }
         else if (!id.matches("-?\\d+")){
-            JOptionPane.showMessageDialog(gestioValoracions,"L'id no és un numero natural");
+            JOptionPane.showMessageDialog(gestioValoracions,"L'id d'Usuari no és un numero natural");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean idItemIsValid(String id) {
+        if (id == null || id.equals("")) {
+            JOptionPane.showMessageDialog(gestioValoracions,"L'id d'item està buit");
+            return false;
+        }
+        else if (!id.matches("-?\\d+")){
+            JOptionPane.showMessageDialog(gestioValoracions,"L'id d'item no és un numero natural");
             return false;
         }
         return true;
@@ -43,7 +54,7 @@ public class ControladorGestioValoracions {
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
-        if (idIsValid(usuariId) && idIsValid(itemId)) {
+        if (idUsuariIsValid(usuariId) && idItemIsValid(itemId)) {
             if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
                 controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
             } else {
@@ -53,13 +64,13 @@ public class ControladorGestioValoracions {
     }
 
     public void esborraValoracio(String usuariId, String itemId) {
-        if (idIsValid(usuariId) && idIsValid(itemId)) {
+        if (idUsuariIsValid(usuariId) && idItemIsValid(itemId)) {
             controladorPresentacio.esborraValoracio(usuariId, itemId);
         }
     }
 
     public void editaValoracio(String usuariId, String itemId, String valor) {
-        if (idIsValid(usuariId) && idIsValid(itemId)) {
+        if (idUsuariIsValid(usuariId) && idItemIsValid(itemId)) {
             if (controladorPresentacio.existeixValoracio(usuariId,itemId)) {
                 controladorPresentacio.editarValoracio(usuariId,itemId,valor);
             }

@@ -106,7 +106,7 @@ public class GestioValoracions extends JPanel {
         this.add(creaValoracio, gridBagConstraints);
 
         esborraValoracio = new JButton("Esborra valoració");
-        creaValoracio.addActionListener(new ActionListener() {
+        esborraValoracio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controladorGestioValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText());
