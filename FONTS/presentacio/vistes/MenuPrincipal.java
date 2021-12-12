@@ -60,7 +60,11 @@ public class MenuPrincipal extends JFrame {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", menuTipusItem);
         menuPestanyes.add("Ítems", new JPanel());
+        GestioUsuari gestioUsuari = new GestioUsuari();
+        // passant el controlador funciona
         menuPestanyes.add("Usuaris", controladorGestioUsuari.getGestioUsuari());
+        // creant una altre instancia de gestioValoracions també
+        // idea alternativa, fer que les vistes siguin un singleton també per assegurar-nos que son la mateixa instancia
         GestioValoracions gestioValoracions = new GestioValoracions();
         menuPestanyes.add("Valoracions", gestioValoracions);
         menuPestanyes.add("Recomanacions", new JPanel());
