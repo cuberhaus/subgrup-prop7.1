@@ -72,4 +72,8 @@ public class ControladorPresentacio {
     public void editarValoracio(String usuariId, String itemId, String valor) {
         controladorDomini.editarValoracio(usuariId,itemId,valor);
     }
+
+    public void carregaConjuntValoracions(String pathAbsolut) {
+        controladorDomini.carregaConjuntValoracions(pathAbsolut);
+    }
 }

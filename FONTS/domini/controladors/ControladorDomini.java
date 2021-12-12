@@ -96,4 +96,8 @@ public class ControladorDomini {
     public void editarValoracio(String usuariId, String itemId, String valor) {
         //TODO:
     }
+
+    public void carregaConjuntValoracions(String pathAbsolut) {
+        //TODO:
+    }
 }

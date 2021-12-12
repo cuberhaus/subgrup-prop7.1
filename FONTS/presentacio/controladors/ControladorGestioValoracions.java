@@ -80,4 +80,9 @@ public class ControladorGestioValoracions {
 
         }
     }
+
+    public void carregaConjuntValoracions(String pathAbsolut) {
+        //TODO: comprovar que l'arxiu donat té el format correcte
+        controladorPresentacio.carregaConjuntValoracions(pathAbsolut);
+    }
 }

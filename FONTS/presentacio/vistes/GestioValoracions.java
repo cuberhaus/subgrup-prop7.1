@@ -147,6 +147,7 @@ public class GestioValoracions extends JPanel {
                 if (returnVal == APPROVE_OPTION) {
                     File pathConjuntVal = jFileChooser.getSelectedFile();
                     System.out.println(pathConjuntVal.getAbsolutePath());
+                    controladorGestioValoracions.carregaConjuntValoracions(pathConjuntVal.getAbsolutePath());
                 }
             }
         });
