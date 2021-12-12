@@ -62,6 +62,7 @@ public class ControladorDomini {
      * @param nom
      */
     public void afegirUsuari(String id, String contrasenya, String nom) {
+        //TODO:
     }
 
     /**
@@ -69,24 +70,30 @@ public class ControladorDomini {
      * @param id
      */
     public void esborrarUsuari(String id) {
+        //TODO:
     }
 
     /**
      * Tanca la sessio de programa
      */
     public void tancarSessio() {
+        //TODO:
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
+        //TODO:
     }
 
     public boolean existeixValoracio(String usuariId, String itemId) {
+        //TODO:
         return false;
     }
 
     public void esborraValoracio(String usuariId, String itemId) {
+        //TODO:
     }
 
     public void editarValoracio(String usuariId, String itemId, String valor) {
+        //TODO:
     }
 }
