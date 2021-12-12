@@ -56,4 +56,20 @@ public class ControladorPresentacio {
     public void tancarSessio() {
         controladorDomini.tancarSessio();
     }
+
+    public void afegirValoracio(String usuariId, String itemId, String valor) {
+        controladorDomini.afegirValoracio(usuariId,itemId,valor);
+    }
+
+    public boolean existeixValoracio(String usuariId, String itemId) {
+        return controladorDomini.existeixValoracio(usuariId,itemId);
+    }
+
+    public void esborraValoracio(String usuariId, String itemId) {
+        controladorDomini.esborraValoracio(usuariId,itemId);
+    }
+
+    public void editarValoracio(String usuariId, String itemId, String valor) {
+        controladorDomini.editarValoracio(usuariId,itemId,valor);
+    }
 }

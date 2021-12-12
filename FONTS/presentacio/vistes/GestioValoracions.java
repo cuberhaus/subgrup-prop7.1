@@ -98,7 +98,7 @@ public class GestioValoracions extends JPanel {
         creaValoracio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: logica
+                controladorGestioValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -109,7 +109,7 @@ public class GestioValoracions extends JPanel {
         creaValoracio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: logica
+                controladorGestioValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -120,7 +120,7 @@ public class GestioValoracions extends JPanel {
         editaValoracio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: logica
+                controladorGestioValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
             }
         });
         gridBagConstraints.gridx = 0;

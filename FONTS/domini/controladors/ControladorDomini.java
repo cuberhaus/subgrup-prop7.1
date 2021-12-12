@@ -76,4 +76,17 @@ public class ControladorDomini {
      */
     public void tancarSessio() {
     }
+
+    public void afegirValoracio(String usuariId, String itemId, String valor) {
+    }
+
+    public boolean existeixValoracio(String usuariId, String itemId) {
+        return false;
+    }
+
+    public void esborraValoracio(String usuariId, String itemId) {
+    }
+
+    public void editarValoracio(String usuariId, String itemId, String valor) {
+    }
 }
