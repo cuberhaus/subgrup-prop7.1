@@ -133,9 +133,6 @@ public class GestioValoracions extends JPanel {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-
 
         conjuntDeValoracionsButton = new JButton("Carrega conjunt de valoracions");
         conjuntDeValoracionsButton.addActionListener(new ActionListener() {

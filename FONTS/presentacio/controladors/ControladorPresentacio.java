@@ -80,4 +80,8 @@ public class ControladorPresentacio {
     public String[] obtenirLlistaConjunts() {
         return controladorDomini.obtenirLlistaConjunts();
     }
+
+    public void exportarConjuntDades(String pathConjunt) {
+        controladorDomini.exportarConjuntDades(pathConjunt);
+    }
 }
