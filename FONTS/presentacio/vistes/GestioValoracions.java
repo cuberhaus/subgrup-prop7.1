@@ -4,8 +4,6 @@ import presentacio.controladors.ControladorGestioValoracions;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
@@ -49,11 +47,8 @@ public class GestioValoracions extends JPanel {
 
         usuariIdText = new JTextField();
         usuariIdText.setColumns(10);
-        usuariIdText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Al pitjar enter fa una acció
-            }
+        usuariIdText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -66,11 +61,8 @@ public class GestioValoracions extends JPanel {
 
         itemIdText = new JTextField();
         itemIdText.setColumns(10);
-        itemIdText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Al pitjar enter fa una acció
-            }
+        itemIdText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -84,68 +76,44 @@ public class GestioValoracions extends JPanel {
 
         valorText = new JTextField();
         valorText.setColumns(10);
-        valorText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Al pitjar enter fa una acció
-            }
+        valorText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         this.add(valorText, gridBagConstraints);
 
         creaValoracio = new JButton("Crea Valoració");
-        creaValoracio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorGestioValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
-            }
-        });
+        creaValoracio.addActionListener(e -> controladorGestioValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         this.add(creaValoracio, gridBagConstraints);
 
         esborraValoracio = new JButton("Esborra valoració");
-        esborraValoracio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorGestioValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText());
-            }
-        });
+        esborraValoracio.addActionListener(e -> controladorGestioValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         this.add(esborraValoracio, gridBagConstraints);
 
         editaValoracio = new JButton("Edita valoració");
-        editaValoracio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorGestioValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
-            }
-        });
+        editaValoracio.addActionListener(e -> controladorGestioValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         this.add(editaValoracio, gridBagConstraints);
 
         jFileChooser = new JFileChooser();
-        jFileChooser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
+        jFileChooser.addActionListener(e -> {
         });
 
         conjuntDeValoracionsButton = new JButton("Carrega conjunt de valoracions");
-        conjuntDeValoracionsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: logica
-                JDialog pathDialog = new JDialog();
-                int returnVal = jFileChooser.showOpenDialog(pathDialog);
-                if (returnVal == APPROVE_OPTION) {
-                    File pathConjuntVal = jFileChooser.getSelectedFile();
-                    System.out.println(pathConjuntVal.getAbsolutePath());
-                    controladorGestioValoracions.carregaConjuntValoracions(pathConjuntVal.getAbsolutePath());
-                }
+        conjuntDeValoracionsButton.addActionListener(e -> {
+            // TODO: logica
+            JDialog pathDialog = new JDialog();
+            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
+            if (estatJfile == APPROVE_OPTION) {
+                File pathConjuntVal = jFileChooser.getSelectedFile();
+                System.out.println(pathConjuntVal.getAbsolutePath());
+                controladorGestioValoracions.carregaConjuntValoracions(pathConjuntVal.getAbsolutePath());
             }
         });
         gridBagConstraints.gridx = 0;

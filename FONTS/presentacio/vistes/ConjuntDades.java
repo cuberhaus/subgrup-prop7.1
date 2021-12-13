@@ -4,8 +4,6 @@ import presentacio.controladors.ControladorConjuntDades;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
@@ -50,10 +48,7 @@ public class ConjuntDades extends JPanel {
 
 
         jFileChooser = new JFileChooser();
-        jFileChooser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
+        jFileChooser.addActionListener(e -> {
         });
 
         gridBagConstraints.gridx = 0;
