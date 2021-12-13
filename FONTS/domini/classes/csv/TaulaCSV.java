@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
  * Representa un tipus de dades en el que emmagatzarem les dades llegides del CSV.
  * @author pablo.vega
  */
-public class TaulaCSV extends Contenidor {
+public class TaulaCSV {
 
     /** Variable on guardarem els atributs del objectes que rebem del domini.tests.csv.*/
     private final ArrayList<ArrayList<String>> valorsItem;

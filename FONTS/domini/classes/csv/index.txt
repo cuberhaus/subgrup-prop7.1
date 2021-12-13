@@ -1,5 +1,3 @@
-Conte les classes que s'encarreguen de llegir i escriure arxius CSV.
-EscriptorDeCSV.java
+Conte les classes que s'encarreguen d'emmagatzemar el contingut de la lectura del CSV.
 index.txt
-LectorDeCSV.java
 TaulaCSV.java
