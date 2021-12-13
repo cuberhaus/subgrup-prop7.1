@@ -108,4 +108,7 @@ public class ControladorDomini {
     public void exportarConjuntDades(String pathConjunt) {
 
     }
+
+    public void esborraConjunt(String conjuntaEsborrar) {
+    }
 }

@@ -72,6 +72,10 @@ public class ConjuntDades extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         esborrarConjuntButton = new JButton("Esborrar conjunt");
+        esborrarConjuntButton.addActionListener(e-> {
+            String conjuntaEsborrar = (String) seleccionarConjuntCombo.getSelectedItem();
+            controladorConjuntDades.esborraConjunt(conjuntaEsborrar);
+        });
         this.add(esborrarConjuntButton, gridBagConstraints);
     }
 }

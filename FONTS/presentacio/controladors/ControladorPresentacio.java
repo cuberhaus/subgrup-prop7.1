@@ -84,4 +84,12 @@ public class ControladorPresentacio {
     public void exportarConjuntDades(String pathConjunt) {
         controladorDomini.exportarConjuntDades(pathConjunt);
     }
+
+    public void esborrarConjunt(String conjuntaEsborrar) {
+        controladorDomini.esborrarConjunt(conjuntaEsborrar);
+    }
+
+    public void esborraConjunt(String conjuntaEsborrar) {
+        controladorDomini.esborraConjunt(conjuntaEsborrar);
+    }
 }

@@ -25,4 +25,8 @@ public class ControladorConjuntDades {
     public void exportarConjuntDades(String pathConjunt) {
         controladorPresentacio.exportarConjuntDades(pathConjunt);
     }
+
+    public void esborraConjunt(String conjuntaEsborrar) {
+        controladorPresentacio.esborraConjunt(conjuntaEsborrar);
+    }
 }
