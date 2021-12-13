@@ -76,4 +76,8 @@ public class ControladorPresentacio {
     public void carregaConjuntValoracions(String pathAbsolut) {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
     }
+
+    public String[] obtenirLlistaConjunts() {
+        return controladorDomini.obtenirLlistaConjunts();
+    }
 }

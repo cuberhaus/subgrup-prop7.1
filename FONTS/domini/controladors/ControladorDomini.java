@@ -100,4 +100,8 @@ public class ControladorDomini {
     public void carregaConjuntValoracions(String pathAbsolut) {
         //TODO:
     }
+
+    public String[] obtenirLlistaConjunts() {
+        return new String[0];
+    }
 }

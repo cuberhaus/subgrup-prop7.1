@@ -64,6 +64,8 @@ public class MenuPrincipal extends JFrame {
         // idea alternativa, fer que les vistes siguin un singleton també per assegurar-nos que son la mateixa instancia
         GestioValoracions gestioValoracions = new GestioValoracions();
         menuPestanyes.add("Valoracions", gestioValoracions);
+        ConjuntDades conjuntDades = new ConjuntDades();
+        menuPestanyes.add("Conjunt de dades", conjuntDades);
         menuPestanyes.add("Recomanacions", new JPanel());
     }
 }
