@@ -1,6 +1,5 @@
 package presentacio.vistes;
 
-import presentacio.controladors.ControladorGestioUsuari;
 import presentacio.controladors.ControladorPresentacio;
 
 import javax.swing.*;
@@ -16,7 +15,7 @@ public class MenuPrincipal extends JFrame {
     private JTabbedPane menuPestanyes;
     private final MenuTipusItem menuTipusItem;
 
-    public MenuPrincipal(String nom, ControladorGestioUsuari controladorGestioUsuari) {
+    public MenuPrincipal(String nom) {
         super();
         setTitle(nom);
 
@@ -26,7 +25,7 @@ public class MenuPrincipal extends JFrame {
         menuTipusItem = new MenuTipusItem(controladorPresentacio);
 
         inicialitzarMenuBarra();
-        inicialitzarMenuPestanyes(controladorGestioUsuari);
+        inicialitzarMenuPestanyes();
 
         panellPrincipal.add(menuBarra, BorderLayout.NORTH);
         panellPrincipal.add(menuPestanyes, BorderLayout.CENTER);
@@ -56,14 +55,12 @@ public class MenuPrincipal extends JFrame {
         menuBarra.add(Box.createHorizontalGlue());
     }
 
-    private void inicialitzarMenuPestanyes(ControladorGestioUsuari controladorGestioUsuari) {
+    private void inicialitzarMenuPestanyes() {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", menuTipusItem);
         menuPestanyes.add("Ítems", new JPanel());
         GestioUsuari gestioUsuari = new GestioUsuari();
-        // passant el controlador funciona
-        menuPestanyes.add("Usuaris", controladorGestioUsuari.getGestioUsuari());
-        // creant una altre instancia de gestioValoracions també
+        menuPestanyes.add("Usuaris", gestioUsuari);
         // idea alternativa, fer que les vistes siguin un singleton també per assegurar-nos que son la mateixa instancia
         GestioValoracions gestioValoracions = new GestioValoracions();
         menuPestanyes.add("Valoracions", gestioValoracions);

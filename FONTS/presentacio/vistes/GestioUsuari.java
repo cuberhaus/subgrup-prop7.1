@@ -4,8 +4,6 @@ import presentacio.controladors.ControladorGestioUsuari;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author pol.casacuberta
@@ -39,46 +37,26 @@ public class GestioUsuari extends JPanel {
         this.setLayout(gridBagLayout);
 
         afegirUsuari = new JButton("Afegir Usuari");
-        afegirUsuari.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorGestioUsuari.afegirUsuari(idText.getText(), String.valueOf(contrasenyaText.getPassword()), nomText.getText());
-            }
-        });
+        afegirUsuari.addActionListener(e -> controladorGestioUsuari.afegirUsuari(idText.getText(), String.valueOf(contrasenyaText.getPassword()), nomText.getText()));
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         this.add(afegirUsuari, gridBagConstraints);
 
         eliminarUsuari = new JButton("Esborrar Usuari");
-        eliminarUsuari.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorGestioUsuari.esborrarUsuari(idText.getText());
-            }
-        });
+        eliminarUsuari.addActionListener(e -> controladorGestioUsuari.esborrarUsuari(idText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         this.add(eliminarUsuari, gridBagConstraints);
 
         iniciarSessio = new JButton("Iniciar Sessió");
-        iniciarSessio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorGestioUsuari.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()));
-            }
-        });
+        iniciarSessio.addActionListener(e -> controladorGestioUsuari.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword())));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         this.add(iniciarSessio, gridBagConstraints);
 
         tancarSessio = new JButton("Tancar Sessió");
-        tancarSessio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controladorGestioUsuari.tancarSessio();
-            }
-        });
+        tancarSessio.addActionListener(e -> controladorGestioUsuari.tancarSessio());
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         this.add(tancarSessio, gridBagConstraints);
@@ -90,11 +68,8 @@ public class GestioUsuari extends JPanel {
 
         idText = new JTextField();
         idText.setColumns(10);
-        idText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Al pitjar enter fa una acció
-            }
+        idText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -107,11 +82,8 @@ public class GestioUsuari extends JPanel {
 
         contrasenyaText = new JPasswordField();
         contrasenyaText.setColumns(10);
-        contrasenyaText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Al pitjar enter fa una acció
-            }
+        contrasenyaText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -124,11 +96,8 @@ public class GestioUsuari extends JPanel {
 
         nomText = new JTextField();
         nomText.setColumns(10);
-        nomText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Al pitjar enter fa una acció
-            }
+        nomText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
