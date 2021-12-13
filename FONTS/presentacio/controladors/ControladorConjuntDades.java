@@ -21,4 +21,12 @@ public class ControladorConjuntDades {
     public String[] obtenirLlistaConjunts() {
         return controladorPresentacio.obtenirLlistaConjunts();
     }
+
+    public void exportarConjuntDades(String pathConjunt) {
+        controladorPresentacio.exportarConjuntDades(pathConjunt);
+    }
+
+    public void esborraConjunt(String conjuntaEsborrar) {
+        controladorPresentacio.esborraConjunt(conjuntaEsborrar);
+    }
 }

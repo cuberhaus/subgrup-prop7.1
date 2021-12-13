@@ -34,11 +34,11 @@ public class GestioUsuari extends JPanel {
     public void inicialitzarGestioUsuari() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
         this.setLayout(gridBagLayout);
 
         afegirUsuari = new JButton("Afegir Usuari");
         afegirUsuari.addActionListener(e -> controladorGestioUsuari.afegirUsuari(idText.getText(), String.valueOf(contrasenyaText.getPassword()), nomText.getText()));
-        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         this.add(afegirUsuari, gridBagConstraints);
