@@ -24,6 +24,7 @@ public class ConjuntValoracions {
      * @param valoracions Una taula de valoracions
      * @param items un conjunt d'items
      * @param usuaris un conjunt d'usuaris
+     * @throws Exception no s'ha pogut eliminar els espais
      */
     public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws Exception {
         valoracions.eliminarEspaisInnecessaris();

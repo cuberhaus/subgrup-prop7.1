@@ -18,6 +18,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     /**
      * Afegeix un conjunt de valoracions al Paràmetre implícit a partir de:
      * @param taula Taula amb usuaris
+     * @throws Exception no s'ha pogut eliminar els espais
      */
     public void afegir(TaulaCSV taula) throws Exception {
         taula.eliminarEspaisInnecessaris();

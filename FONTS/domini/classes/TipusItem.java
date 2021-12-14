@@ -42,7 +42,7 @@ public class TipusItem {
      * @param nomTipusItem <code>String</code> que conté el nom del TipusItem.
      * @param taulaCSV <code>TaulaCSV</code> que conté els ítems.
      * @param numCandidats Nombre d'ítems que es consideraran per deduir el tipus de cada atribut.
-     * @throws IllegalArgumentException Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
+     * @throws Exception Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
      */
     public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws Exception {
         if (numCandidats < 0) {
