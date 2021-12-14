@@ -134,19 +134,4 @@ public class Programa {
     public void esborraUsuari(Usuari usuari) {
         conjuntUsuaris.esborrar(usuari);
     }
-
-//    /**
-//     * Afegeix un conjunt de Programa al conjunt de conjunts de programa
-//     * Retorna true si s'ha afegit correctament, retorna false si ja hi era
-//     * @param  ConjuntPrograma el paràmetre s'ha afegit al conjunt si no hi era abans.
-//     */
-//    public void afegirConjuntPrograma(ConjuntPrograma) {
-//    }
-//    /**
-//     * Esborra un conjunt de Programa del conjunt de conjunts de programa.
-//     * Retorna true si s'ha esborrat correctament, retorna false si no hi era
-//     * @param  ConjuntPrograma el conjunt de Programa s'ha esborrat del conjunt, si hi era.
-//     */
-//    public void esborrarConjuntPrograma(ConjuntPrograma) {
-//    }
 }
