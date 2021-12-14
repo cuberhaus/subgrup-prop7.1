@@ -1,6 +1,5 @@
 package presentacio.vistes;
 
-import domini.classes.TipusItem;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -9,6 +8,9 @@ import java.io.File;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
+/**
+ * @author maria.prat
+ */
 public class MenuTipusItem extends JPanel {
 
     private static final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
@@ -17,7 +19,7 @@ public class MenuTipusItem extends JPanel {
     private static ControladorMenuTipusItem controladorMenuTipusItem;
     private static MenuTipusItem instancia;
 
-    private static TipusItem tipusItemSeleccionat;
+    private static String nomTipusItemSeleccionat;
 
     private static JLabel textItemSeleccionat;
     private static JButton botoVeureTipusItem;
@@ -90,22 +92,34 @@ public class MenuTipusItem extends JPanel {
 
     private static void inicialitzarPanellSeleccionarTipusItem() {
         panellSeleccionarTipusItem = new JPanel(new FlowLayout());
-        JComboBox<TipusItem> tipusItemsComboBox = new JComboBox<>(controladorMenuTipusItem.obtenirTipusItemsCarregats());
-        tipusItemsComboBox.setPrototypeDisplayValue(new TipusItem(kPrototipNomTipusItem));
+        JComboBox<String> tipusItemsComboBox = new JComboBox<>(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
+        tipusItemsComboBox.setPrototypeDisplayValue(kPrototipNomTipusItem);
         tipusItemsComboBox.setSelectedIndex(-1);
         panellSeleccionarTipusItem.add(tipusItemsComboBox);
         JButton selecciona = new JButton("Selecciona");
         selecciona.addActionListener(e -> {
-            tipusItemSeleccionat = (TipusItem) tipusItemsComboBox.getSelectedItem();
-            if (tipusItemSeleccionat == null) {
+            nomTipusItemSeleccionat = (String) tipusItemsComboBox.getSelectedItem();
+            if (nomTipusItemSeleccionat == null) {
                 textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
             } else {
-                textItemSeleccionat.setText(tipusItemSeleccionat.obtenirNom());
+                textItemSeleccionat.setText(nomTipusItemSeleccionat);
                 botoVeureTipusItem.setEnabled(true);
             }
         });
         panellSeleccionarTipusItem.add(selecciona);
+        JButton esborra = new JButton("Esborra");
+        esborra.addActionListener(e -> {
+            if (nomTipusItemSeleccionat == null) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            } else {
+                controladorMenuTipusItem.esborrarTipusItem(nomTipusItemSeleccionat);
+                nomTipusItemSeleccionat = null;
+                textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                botoVeureTipusItem.setEnabled(false);
+            }
+        });
+        panellSeleccionarTipusItem.add(esborra);
         panellSeleccionarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
@@ -123,11 +137,11 @@ public class MenuTipusItem extends JPanel {
         botoVeureTipusItem.addActionListener(actionEvent -> mostrarTipusItemSeleccionat());
 
         textItemSeleccionat = new JLabel();
-        if (tipusItemSeleccionat == null) {
+        if (nomTipusItemSeleccionat == null) {
             textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
             botoVeureTipusItem.setEnabled(false);
         } else {
-            textItemSeleccionat.setText(tipusItemSeleccionat.obtenirNom());
+            textItemSeleccionat.setText(nomTipusItemSeleccionat);
             botoVeureTipusItem.setEnabled(true);
         }
         textItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));

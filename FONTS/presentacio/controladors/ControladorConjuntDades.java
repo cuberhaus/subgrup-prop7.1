@@ -32,6 +32,6 @@ public class ControladorConjuntDades {
     }
 
     public void esborraConjunt(String conjuntaEsborrar) {
-        controladorPresentacio.esborraConjunt(conjuntaEsborrar);
+        controladorPresentacio.esborrarConjunt(conjuntaEsborrar);
     }
 }

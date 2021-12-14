@@ -1,7 +1,8 @@
 package presentacio.controladors;
 
-import domini.classes.TipusItem;
 import domini.controladors.ControladorDomini;
+
+import java.util.Map;
 
 /**
  * Classe que representa el controlador de presentació
@@ -29,10 +30,8 @@ public class ControladorPresentacio {
         return instanciaUnica;
     }
 
-    public TipusItem[] obtenirTipusItemsCarregats() {
-        // TODO: implementar
-        return new TipusItem[]{new TipusItem("Llibres"), new TipusItem("Música"), new TipusItem("Tipus d'item amb un nom molt llarg")};
-        //return new TipusItem[]{};
+    public String[] obtenirNomsTipusItemsCarregats() {
+        return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
 
     public int obtenirSessio() {
@@ -87,7 +86,19 @@ public class ControladorPresentacio {
         controladorDomini.exportarConjuntDades(pathConjunt);
     }
 
-    public void esborraConjunt(String conjuntaEsborrar) {
+    public void esborrarConjunt(String conjuntaEsborrar) {
         controladorDomini.esborraConjunt(conjuntaEsborrar);
+    }
+
+    public boolean afegirTipusItem(String nom, Map<String, String> valorsAtributs, Map<String, String> distanciesAtributs) {
+        return controladorDomini.afegirTipusItem(nom, valorsAtributs, distanciesAtributs);
+    }
+
+    public boolean carregarTipusItem(String rutaAbsoluta) {
+        return controladorDomini.carregarTipusItem(rutaAbsoluta);
+    }
+
+    public void esborrarTipusItem(String nomTipusItem) {
+        controladorDomini.esborrarTipusItem(nomTipusItem);
     }
 }

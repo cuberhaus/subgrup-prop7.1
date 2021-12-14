@@ -5,6 +5,7 @@ import persistencia.classes.LectorDeCSV;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /** Classe que representa el controlador de domini - gestor de disc */
 public class ControladorDomini {
@@ -106,9 +107,28 @@ public class ControladorDomini {
     }
 
     public void exportarConjuntDades(String pathConjunt) {
-
     }
 
     public void esborraConjunt(String conjuntaEsborrar) {
+    }
+
+    public boolean carregarTipusItem(String rutaAbsoluta) {
+        // TODO
+        return false;
+    }
+
+    public boolean afegirTipusItem(String nom, Map<String, String> valorsAtributs, Map<String, String> distanciesAtributs) {
+        // TODO
+        // Pot o retornar true/false o llançar excepció. Si llança excepció crec que és millor perquè podem detectar
+        // si no funciona perquè ja n'hi ha un amb el mateix nom o si no funciona per algun altre motiu.
+        return false;
+    }
+
+    public String[] obtenirNomsTipusItemsCarregats() {
+        // TODO
+        return new String[0];
+    }
+
+    public void esborrarTipusItem(String nomTipusItem) {
     }
 }
