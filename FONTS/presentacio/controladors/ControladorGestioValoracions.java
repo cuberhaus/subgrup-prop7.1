@@ -21,7 +21,7 @@ public class ControladorGestioValoracions {
         if (instanciaUnica == null){
             instanciaUnica = new ControladorGestioValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            gestioValoracions = new GestioValoracions();
+            gestioValoracions = GestioValoracions.obtenirInstancia();
         }
         return instanciaUnica;
     }

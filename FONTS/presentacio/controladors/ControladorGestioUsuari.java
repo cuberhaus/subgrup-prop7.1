@@ -17,15 +17,11 @@ public class ControladorGestioUsuari {
     private ControladorGestioUsuari() {
     }
 
-    public GestioUsuari getGestioUsuari() {
-        return gestioUsuari;
-    }
-
     public static ControladorGestioUsuari obtenirInstancia(){
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorGestioUsuari();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            gestioUsuari = new GestioUsuari();
+            gestioUsuari = GestioUsuari.obtenirInstancia();
         }
         return instanciaUnica;
     }
