@@ -1,6 +1,6 @@
 package presentacio.vistes;
 
-import presentacio.controladors.ControladorPresentacio;
+import presentacio.controladors.ControladorMenuPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,18 +11,19 @@ import java.awt.event.ActionEvent;
  */
 public class MenuPrincipal extends JFrame {
 
+    private final ControladorMenuPrincipal controladorMenuPrincipal;
     private JMenuBar menuBarra;
     private JTabbedPane menuPestanyes;
-    private final MenuTipusItem menuTipusItem;
 
-    public MenuPrincipal(String nom) {
-        super();
-        setTitle(nom);
+    public MenuPrincipal() {
+        this.inicialitzarMenuPrincipal();
+        controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
+    }
+
+    private void inicialitzarMenuPrincipal() {
+        setTitle("Menu Principal");
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
-
-        ControladorPresentacio controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-        menuTipusItem = new MenuTipusItem(controladorPresentacio);
 
         inicialitzarMenuBarra();
         inicialitzarMenuPestanyes();
@@ -57,15 +58,11 @@ public class MenuPrincipal extends JFrame {
 
     private void inicialitzarMenuPestanyes() {
         menuPestanyes = new JTabbedPane();
-        menuPestanyes.add("Tipus d'ítem", menuTipusItem);
+        menuPestanyes.add("Tipus d'ítem", new MenuTipusItem());
         menuPestanyes.add("Ítems", new JPanel());
-        GestioUsuari gestioUsuari = new GestioUsuari();
-        menuPestanyes.add("Usuaris", gestioUsuari);
-        // idea alternativa, fer que les vistes siguin un singleton també per assegurar-nos que son la mateixa instancia
-        GestioValoracions gestioValoracions = new GestioValoracions();
-        menuPestanyes.add("Valoracions", gestioValoracions);
-        ConjuntDades conjuntDades = new ConjuntDades();
-        menuPestanyes.add("Conjunt de dades", conjuntDades);
+        menuPestanyes.add("Usuaris", GestioUsuari.obtenirInstancia());
+        menuPestanyes.add("Valoracions", GestioValoracions.obtenirInstancia());
+        menuPestanyes.add("Conjunt de dades", ConjuntDades.obtenirInstancia());
         menuPestanyes.add("Recomanacions", new JPanel());
     }
 }

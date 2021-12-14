@@ -13,6 +13,7 @@ public class ControladorPresentacio {
     private static ControladorPresentacio instanciaUnica = null;
     private static ControladorGestioUsuari controladorGestioUsuari;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
+    private static ControladorMenuTipusItem controladorMenuTipusItem;
 
     private ControladorPresentacio() {
     }
@@ -21,9 +22,9 @@ public class ControladorPresentacio {
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorPresentacio();
             controladorDomini = new ControladorDomini();
-            controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
             controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
-            controladorMenuPrincipal.inicialitzarControladorMenuPrincipal();
+            controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
+            controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         }
         return instanciaUnica;
     }
