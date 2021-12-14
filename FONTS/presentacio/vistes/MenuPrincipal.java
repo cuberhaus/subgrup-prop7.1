@@ -11,17 +11,25 @@ import java.awt.event.ActionEvent;
  */
 public class MenuPrincipal extends JFrame {
 
-    private final ControladorMenuPrincipal controladorMenuPrincipal;
-    private JMenuBar menuBarra;
-    private JTabbedPane menuPestanyes;
+    private static MenuPrincipal instancia;
+    private static ControladorMenuPrincipal controladorMenuPrincipal;
+    private static JMenuBar menuBarra;
+    private static JTabbedPane menuPestanyes;
 
-    public MenuPrincipal() {
-        this.inicialitzarMenuPrincipal();
-        controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
+    private MenuPrincipal() {
     }
 
-    private void inicialitzarMenuPrincipal() {
-        setTitle("Menu Principal");
+    public static MenuPrincipal obtenirInstancia() {
+        if (instancia == null) {
+            instancia = new MenuPrincipal();
+            controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
+            inicialitzarMenuPrincipal();
+        }
+        return instancia;
+    }
+
+    private static void inicialitzarMenuPrincipal() {
+        instancia.setTitle("Menu Principal");
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
 
@@ -31,14 +39,14 @@ public class MenuPrincipal extends JFrame {
         panellPrincipal.add(menuBarra, BorderLayout.NORTH);
         panellPrincipal.add(menuPestanyes, BorderLayout.CENTER);
 
-        add(panellPrincipal);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(Pantalla.centreHoritzontal(3 * Pantalla.amplada / 4),
+        instancia.add(panellPrincipal);
+        instancia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        instancia.setBounds(Pantalla.centreHoritzontal(3 * Pantalla.amplada / 4),
                 Pantalla.centreVertical(3 * Pantalla.altura / 4),
                 3 * Pantalla.amplada / 4, 3 * Pantalla.altura / 4);
     }
 
-    private void inicialitzarMenuBarra() {
+    private static void inicialitzarMenuBarra() {
         menuBarra = new JMenuBar();
         JMenu informacio = new JMenu("Sobre el recomanador");
 
@@ -56,9 +64,9 @@ public class MenuPrincipal extends JFrame {
         menuBarra.add(Box.createHorizontalGlue());
     }
 
-    private void inicialitzarMenuPestanyes() {
+    private static void inicialitzarMenuPestanyes() {
         menuPestanyes = new JTabbedPane();
-        menuPestanyes.add("Tipus d'ítem", new MenuTipusItem());
+        menuPestanyes.add("Tipus d'ítem", MenuTipusItem.obtenirInstancia());
         menuPestanyes.add("Ítems", new JPanel());
         menuPestanyes.add("Usuaris", GestioUsuari.obtenirInstancia());
         menuPestanyes.add("Valoracions", GestioValoracions.obtenirInstancia());

@@ -5,34 +5,42 @@ import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 public class MenuTipusItem extends JPanel {
 
-    private final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
-    private final String kMissatgeTipusItemNoSeleccionat = "No s'ha escollit cap tipus d'ítem";
+    private static final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
+    private static final String kMissatgeTipusItemNoSeleccionat = "No s'ha escollit cap tipus d'ítem";
 
-    private final ControladorMenuTipusItem controladorMenuTipusItem;
-    private TipusItem tipusItemSeleccionat;
+    private static ControladorMenuTipusItem controladorMenuTipusItem;
+    private static MenuTipusItem instancia;
 
-    private JLabel textItemSeleccionat;
-    private JButton botoVeureTipusItem;
+    private static TipusItem tipusItemSeleccionat;
 
-    private JPanel panellAfegirTipusItem;
-    private JPanel panellSeleccionarTipusItem;
-    private JPanel panellMostrarTipusItemSeleccionat;
+    private static JLabel textItemSeleccionat;
+    private static JButton botoVeureTipusItem;
 
-    public MenuTipusItem(){
-        controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        inicialitzarMenuTipusItem();
+    private static JPanel panellAfegirTipusItem;
+    private static JPanel panellSeleccionarTipusItem;
+    private static JPanel panellMostrarTipusItemSeleccionat;
+
+    private MenuTipusItem() {
     }
 
-    private void inicialitzarMenuTipusItem(){
+    public static MenuTipusItem obtenirInstancia() {
+        if (instancia == null) {
+            instancia = new MenuTipusItem();
+            controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
+            inicialitzarMenuTipusItem();
+        }
+        return instancia;
+    }
+
+    private static void inicialitzarMenuTipusItem(){
+        instancia.setLayout(new BoxLayout(instancia, BoxLayout.Y_AXIS));
+
         JLabel titol = new JLabel("Quin tipus d'ítem vols que et recomani?");
         titol.setFont(new Font("Sans", Font.PLAIN, 20));
         titol.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -41,21 +49,21 @@ public class MenuTipusItem extends JPanel {
         descripcio.setFont(new Font("Sans", Font.PLAIN, 14));
         descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        this.add(Box.createVerticalGlue());
-        this.add(titol);
-        this.add(Box.createVerticalStrut(10));
-        this.add(descripcio);
-        this.add(Box.createVerticalGlue());
+        instancia.add(Box.createVerticalGlue());
+        instancia.add(titol);
+        instancia.add(Box.createVerticalStrut(10));
+        instancia.add(descripcio);
+        instancia.add(Box.createVerticalGlue());
         inicialitzarPanellAfegirTipusItem();
-        this.add(panellAfegirTipusItem);
+        instancia.add(panellAfegirTipusItem);
         inicialitzarPanellSeleccionarTipusItem();
-        this.add(panellSeleccionarTipusItem);
+        instancia.add(panellSeleccionarTipusItem);
         inicialitzarPanellMostrarTipusItemSeleccionat();
-        this.add(panellMostrarTipusItemSeleccionat);
-        this.add(Box.createVerticalGlue());
+        instancia.add(panellMostrarTipusItemSeleccionat);
+        instancia.add(Box.createVerticalGlue());
     }
 
-    private void inicialitzarPanellAfegirTipusItem() {
+    private static void inicialitzarPanellAfegirTipusItem() {
         panellAfegirTipusItem = new JPanel(new FlowLayout());
         JButton botoCrearTipusItem = new JButton("Crea un nou tipus d'ítem");
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -75,12 +83,12 @@ public class MenuTipusItem extends JPanel {
         panellAfegirTipusItem.add(botoCarregarTipusItem);
     }
 
-    private void crearTipusItem() {
+    private static void crearTipusItem() {
         DialegCrearTipusItem dialegCrearTipusItem = new DialegCrearTipusItem();
         dialegCrearTipusItem.setVisible(true);
     }
 
-    private void inicialitzarPanellSeleccionarTipusItem() {
+    private static void inicialitzarPanellSeleccionarTipusItem() {
         panellSeleccionarTipusItem = new JPanel(new FlowLayout());
         JComboBox<TipusItem> tipusItemsComboBox = new JComboBox<>(controladorMenuTipusItem.obtenirTipusItemsCarregats());
         tipusItemsComboBox.setPrototypeDisplayValue(new TipusItem(kPrototipNomTipusItem));
@@ -101,7 +109,7 @@ public class MenuTipusItem extends JPanel {
         panellSeleccionarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
-    private void inicialitzarPanellMostrarTipusItemSeleccionat() {
+    private static void inicialitzarPanellMostrarTipusItemSeleccionat() {
         panellMostrarTipusItemSeleccionat = new JPanel();
         panellMostrarTipusItemSeleccionat.setLayout(new BoxLayout(panellMostrarTipusItemSeleccionat, BoxLayout.Y_AXIS));
 
@@ -129,7 +137,7 @@ public class MenuTipusItem extends JPanel {
         panellMostrarTipusItemSeleccionat.add(botoVeureTipusItem);
     }
 
-    private void mostrarTipusItemSeleccionat() {
+    private static void mostrarTipusItemSeleccionat() {
         DialegMostrarTipusItem dialegMostrarTipusItem = new DialegMostrarTipusItem();
         dialegMostrarTipusItem.setVisible(true);
     }

@@ -19,7 +19,7 @@ public class ControladorMenuPrincipal {
         if (instancia == null) {
             instancia = new ControladorMenuPrincipal();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            menuPrincipal = new MenuPrincipal();
+            menuPrincipal = MenuPrincipal.obtenirInstancia();
             menuPrincipal.setVisible(true);
         }
         return instancia;
