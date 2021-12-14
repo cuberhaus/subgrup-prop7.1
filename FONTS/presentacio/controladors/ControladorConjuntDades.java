@@ -1,5 +1,7 @@
 package presentacio.controladors;
 
+import presentacio.vistes.ConjuntDades;
+
 /**
  * Classe que representa el controlador que gestiona els conjunts de dades
  * @author pol.casacuberta
@@ -7,6 +9,7 @@ package presentacio.controladors;
 public class ControladorConjuntDades {
     private static ControladorConjuntDades instanciaUnica;
     private static ControladorPresentacio controladorPresentacio;
+    private static ConjuntDades conjuntDades;
 
     private ControladorConjuntDades() {
     }
@@ -15,6 +18,7 @@ public class ControladorConjuntDades {
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorConjuntDades();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+            conjuntDades = ConjuntDades.obtenirInstancia();
         }
         return instanciaUnica;
     }
