@@ -57,9 +57,9 @@ public class ControladorDomini {
 
     /**
      * Afegeix un Usuari, falta donar un paràmetre del conjunt on es vol afegir aquest usuari
-     * @param id
-     * @param contrasenya
-     * @param nom
+     * @param id id del usuari
+     * @param contrasenya contrasenya del usuari
+     * @param nom nom del usuari
      */
     public void afegirUsuari(String id, String contrasenya, String nom) {
         //TODO:
@@ -67,7 +67,7 @@ public class ControladorDomini {
 
     /**
      * Esborra usuari, falta parametre del conjunt
-     * @param id
+     * @param id id del usuari
      */
     public void esborrarUsuari(String id) {
         //TODO:
