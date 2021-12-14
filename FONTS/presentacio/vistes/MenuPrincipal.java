@@ -1,7 +1,6 @@
 package presentacio.vistes;
 
 import presentacio.controladors.ControladorMenuPrincipal;
-import presentacio.controladors.ControladorPresentacio;
 
 import javax.swing.*;
 import java.awt.*;

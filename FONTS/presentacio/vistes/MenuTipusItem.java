@@ -2,12 +2,14 @@ package presentacio.vistes;
 
 import domini.classes.TipusItem;
 import presentacio.controladors.ControladorMenuTipusItem;
-import presentacio.controladors.ControladorPresentacio;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
+import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 public class MenuTipusItem extends JPanel {
 
@@ -55,15 +57,27 @@ public class MenuTipusItem extends JPanel {
 
     private void inicialitzarPanellAfegirTipusItem() {
         panellAfegirTipusItem = new JPanel(new FlowLayout());
-        JButton botoAfegirTipusItem = new JButton("Afegeix un nou tipus d'ítem");
-        botoAfegirTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoAfegirTipusItem.addActionListener(actionEvent -> afegirTipusItem());
-        panellAfegirTipusItem.add(botoAfegirTipusItem);
+        JButton botoCrearTipusItem = new JButton("Crea un nou tipus d'ítem");
+        botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoCrearTipusItem.addActionListener(actionEvent -> crearTipusItem());
+        panellAfegirTipusItem.add(botoCrearTipusItem);
+        JButton botoCarregarTipusItem = new JButton("Carrega un nou tipus d'ítem");
+        botoCarregarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoCarregarTipusItem.addActionListener(e -> {
+            JDialog dialegFitxer = new JDialog();
+            JFileChooser selectorFitxer = new JFileChooser();
+            int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
+            if (estatSelectorFitxer == APPROVE_OPTION) {
+                File rutaFitxer = selectorFitxer.getSelectedFile();
+                controladorMenuTipusItem.carregaTipusItem(rutaFitxer.getAbsolutePath());
+            }
+        });
+        panellAfegirTipusItem.add(botoCarregarTipusItem);
     }
 
-    private void afegirTipusItem() {
-        DialegAfegirTipusItem dialegAfegirTipusItem = new DialegAfegirTipusItem();
-        dialegAfegirTipusItem.setVisible(true);
+    private void crearTipusItem() {
+        DialegCrearTipusItem dialegCrearTipusItem = new DialegCrearTipusItem();
+        dialegCrearTipusItem.setVisible(true);
     }
 
     private void inicialitzarPanellSeleccionarTipusItem() {
@@ -73,17 +87,14 @@ public class MenuTipusItem extends JPanel {
         tipusItemsComboBox.setSelectedIndex(-1);
         panellSeleccionarTipusItem.add(tipusItemsComboBox);
         JButton selecciona = new JButton("Selecciona");
-        selecciona.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tipusItemSeleccionat = (TipusItem) tipusItemsComboBox.getSelectedItem();
-                if (tipusItemSeleccionat == null) {
-                    textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
-                    botoVeureTipusItem.setEnabled(false);
-                } else {
-                    textItemSeleccionat.setText(tipusItemSeleccionat.obtenirNom());
-                    botoVeureTipusItem.setEnabled(true);
-                }
+        selecciona.addActionListener(e -> {
+            tipusItemSeleccionat = (TipusItem) tipusItemsComboBox.getSelectedItem();
+            if (tipusItemSeleccionat == null) {
+                textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                botoVeureTipusItem.setEnabled(false);
+            } else {
+                textItemSeleccionat.setText(tipusItemSeleccionat.obtenirNom());
+                botoVeureTipusItem.setEnabled(true);
             }
         });
         panellSeleccionarTipusItem.add(selecciona);

@@ -3,21 +3,22 @@ package presentacio.vistes;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author maria.prat
  */
-public class DialegMostrarTipusItem extends JDialog {
+public class DialegCrearTipusItem extends JDialog {
 
     private final ControladorMenuTipusItem controladorMenuTipusItem;
 
     // TODO: afegir editar TipusItem
 
-    public DialegMostrarTipusItem() {
-        super(null, ModalityType.APPLICATION_MODAL);
+    public DialegCrearTipusItem() {
+        super(null, Dialog.ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         setBounds(Pantalla.centreHoritzontal(Pantalla.amplada / 2), Pantalla.centreVertical(Pantalla.altura / 2),
                 Pantalla.amplada / 4, Pantalla.altura / 4);
-        setTitle("Mostrar tipus d'ítem");
+        setTitle("Crea un nou tipus d'ítem");
     }
 }

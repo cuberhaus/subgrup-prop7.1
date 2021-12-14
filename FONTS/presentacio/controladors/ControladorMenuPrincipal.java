@@ -2,8 +2,6 @@ package presentacio.controladors;
 
 import presentacio.vistes.MenuPrincipal;
 
-import java.awt.*;
-
 /**
  * Classe que representa el controlador del Menu principal
  * @author pol.casacuberta i maria.prat

@@ -1,7 +1,6 @@
 package presentacio.controladors;
 
 import domini.classes.TipusItem;
-import presentacio.vistes.MenuPrincipal;
 
 /**
  * @author maria.prat
@@ -24,5 +23,8 @@ public class ControladorMenuTipusItem {
 
     public TipusItem[] obtenirTipusItemsCarregats() {
         return controladorPresentacio.obtenirTipusItemsCarregats();
+    }
+
+    public void carregaTipusItem(String rutaAbsoluta) {
     }
 }
