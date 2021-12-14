@@ -21,7 +21,6 @@ public class ControladorGestioValoracions {
             instanciaUnica = new ControladorGestioValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             gestioValoracions = new GestioValoracions();
-            System.out.println("1a creacion");
         }
         return instanciaUnica;
     }
