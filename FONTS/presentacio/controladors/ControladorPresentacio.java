@@ -4,6 +4,7 @@ import domini.classes.TipusItem;
 import domini.controladors.ControladorDomini;
 
 /**
+ * Classe que representa el controlador de presentació
  * @author maria.prat i pol.casacuberta
  */
 public class ControladorPresentacio {

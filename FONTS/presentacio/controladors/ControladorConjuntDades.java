@@ -1,6 +1,7 @@
 package presentacio.controladors;
 
 /**
+ * Classe que representa el controlador que gestiona els conjunts de dades
  * @author pol.casacuberta
  */
 public class ControladorConjuntDades {

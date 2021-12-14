@@ -5,6 +5,7 @@ import presentacio.vistes.GestioUsuari;
 import javax.swing.*;
 
 /**
+ * Classe que representa el controlador que gestiona els usuaris
  * @author pol.casacuberta
  */
 

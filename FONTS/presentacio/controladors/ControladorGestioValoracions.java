@@ -5,6 +5,7 @@ import presentacio.vistes.GestioValoracions;
 import javax.swing.*;
 
 /**
+ * Classe que representa el Controlador que gestiona les valoracions
  * @author pol.casacuberta
  */
 

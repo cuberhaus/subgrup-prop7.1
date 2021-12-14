@@ -3,6 +3,7 @@ package presentacio.controladors;
 import presentacio.vistes.MenuPrincipal;
 
 /**
+ * Classe que representa el controlador del Menu principal
  * @author pol.casacuberta
  */
 
