@@ -61,13 +61,9 @@ public class MenuPrincipal extends JFrame {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", new MenuTipusItem());
         menuPestanyes.add("Ítems", new JPanel());
-        GestioUsuari gestioUsuari = new GestioUsuari();
-        menuPestanyes.add("Usuaris", gestioUsuari);
-        // idea alternativa, fer que les vistes siguin un singleton també per assegurar-nos que son la mateixa instancia
-        GestioValoracions gestioValoracions = new GestioValoracions();
-        menuPestanyes.add("Valoracions", gestioValoracions);
-        ConjuntDades conjuntDades = new ConjuntDades();
-        menuPestanyes.add("Conjunt de dades", conjuntDades);
+        menuPestanyes.add("Usuaris", GestioUsuari.obtenirInstancia());
+        menuPestanyes.add("Valoracions", GestioValoracions.obtenirInstancia());
+        menuPestanyes.add("Conjunt de dades", ConjuntDades.obtenirInstancia());
         menuPestanyes.add("Recomanacions", new JPanel());
     }
 }
