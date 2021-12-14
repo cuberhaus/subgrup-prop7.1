@@ -2,26 +2,28 @@ package presentacio.controladors;
 
 import presentacio.vistes.MenuPrincipal;
 
+import java.awt.*;
+
 /**
  * Classe que representa el controlador del Menu principal
- * @author pol.casacuberta
+ * @author pol.casacuberta i maria.prat
  */
 
 public class ControladorMenuPrincipal {
-    private static ControladorMenuPrincipal instanciaUnica = null;
-    private MenuPrincipal menuPrincipal;
+    private static ControladorPresentacio controladorPresentacio;
+    private static ControladorMenuPrincipal instancia;
+    private static MenuPrincipal menuPrincipal;
 
     private ControladorMenuPrincipal () {
     }
 
     public static ControladorMenuPrincipal obtenirInstancia() {
-        if (instanciaUnica == null) {
-            instanciaUnica = new ControladorMenuPrincipal();
+        if (instancia == null) {
+            instancia = new ControladorMenuPrincipal();
+            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+            menuPrincipal = new MenuPrincipal();
+            menuPrincipal.setVisible(true);
         }
-        return instanciaUnica;
-    }
-    public void inicialitzarControladorMenuPrincipal() {
-        menuPrincipal = new MenuPrincipal("Menu Principal");
-        menuPrincipal.setVisible(true);
+        return instancia;
     }
 }

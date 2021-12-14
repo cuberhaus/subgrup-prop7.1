@@ -1,22 +1,20 @@
 package presentacio.vistes;
 
 import domini.classes.TipusItem;
+import presentacio.controladors.ControladorMenuTipusItem;
 import presentacio.controladors.ControladorPresentacio;
 
-import javax.naming.InvalidNameException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.Date;
 
 public class MenuTipusItem extends JPanel {
 
     private final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
     private final String kMissatgeTipusItemNoSeleccionat = "No s'ha escollit cap tipus d'ítem";
 
-    private ControladorPresentacio controladorPresentacio;
+    private final ControladorMenuTipusItem controladorMenuTipusItem;
     private TipusItem tipusItemSeleccionat;
 
     private JLabel textItemSeleccionat;
@@ -26,8 +24,8 @@ public class MenuTipusItem extends JPanel {
     private JPanel panellSeleccionarTipusItem;
     private JPanel panellMostrarTipusItemSeleccionat;
 
-    public MenuTipusItem(ControladorPresentacio controladorPresentacio){
-        this.controladorPresentacio = controladorPresentacio;
+    public MenuTipusItem(){
+        controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         inicialitzarMenuTipusItem();
     }
@@ -64,13 +62,13 @@ public class MenuTipusItem extends JPanel {
     }
 
     private void afegirTipusItem() {
-        DialegAfegirTipusItem dialegAfegirTipusItem = new DialegAfegirTipusItem(controladorPresentacio);
+        DialegAfegirTipusItem dialegAfegirTipusItem = new DialegAfegirTipusItem();
         dialegAfegirTipusItem.setVisible(true);
     }
 
     private void inicialitzarPanellSeleccionarTipusItem() {
         panellSeleccionarTipusItem = new JPanel(new FlowLayout());
-        JComboBox<TipusItem> tipusItemsComboBox = new JComboBox<>(controladorPresentacio.obtenirTipusItemsCarregats());
+        JComboBox<TipusItem> tipusItemsComboBox = new JComboBox<>(controladorMenuTipusItem.obtenirTipusItemsCarregats());
         tipusItemsComboBox.setPrototypeDisplayValue(new TipusItem(kPrototipNomTipusItem));
         tipusItemsComboBox.setSelectedIndex(-1);
         panellSeleccionarTipusItem.add(tipusItemsComboBox);
@@ -121,7 +119,7 @@ public class MenuTipusItem extends JPanel {
     }
 
     private void mostrarTipusItemSeleccionat() {
-        DialegMostrarTipusItem dialegMostrarTipusItem = new DialegMostrarTipusItem(controladorPresentacio);
+        DialegMostrarTipusItem dialegMostrarTipusItem = new DialegMostrarTipusItem();
         dialegMostrarTipusItem.setVisible(true);
     }
 }
