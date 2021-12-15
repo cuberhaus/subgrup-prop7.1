@@ -8,9 +8,7 @@ import persistencia.classes.LectorDeCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Classe que representa el controlador de domini
@@ -167,7 +165,7 @@ public class ControladorDomini {
         return new HashMap<>();
     }
 
-    public boolean isSessioIniciada() {
+    public boolean sessioIniciada() {
         //TODO
         return false;
     }
@@ -262,5 +260,34 @@ public class ControladorDomini {
         // relaciona el nom de l'atribut anterior amb el nou (es a dir permet canviar el nom del tipus d'atribut)
         // es una mica horrible perque ha de passar per tots els items per canviar, crec
         // si el nou atribut no té nom ("") vol dir que s'ha eliminat
+    }
+
+    public Set<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        // TODO
+        // retorna conjunt d'ids d'items recomanats
+        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
+        // i el filtre que li passa
+        return new HashSet<>();
+    }
+
+    public Set<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        // TODO
+        // retorna conjunt d'ids d'items recomanats
+        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
+        // i el filtre que li passa
+        return new HashSet<>();
+    }
+
+    public Set<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        // TODO
+        // retorna conjunt d'ids d'items recomanats
+        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
+        // i el filtre que li passa
+        return new HashSet<>();
+    }
+
+    public double avaluarRecomanacio() {
+        // TODO
+        return 0.0;
     }
 }

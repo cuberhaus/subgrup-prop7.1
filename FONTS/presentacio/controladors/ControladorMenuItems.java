@@ -3,7 +3,9 @@ package presentacio.controladors;
 import presentacio.vistes.VistaMenuItems;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ControladorMenuItems {
 
@@ -56,5 +58,25 @@ public class ControladorMenuItems {
 
     public void esborrarTotsElsItems() {
         controladorPresentacio.esborrarTotsElsItems();
+    }
+
+    public boolean sessioIniciada() {
+        return controladorPresentacio.sessioIniciada();
+    }
+
+    public Set<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorPresentacio.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
+    }
+
+    public Set<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorPresentacio.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
+    }
+
+    public Set<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorPresentacio.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
+    }
+
+    public double avaluarRecomanacio() {
+        return controladorPresentacio.avaluarRecomanacio();
     }
 }

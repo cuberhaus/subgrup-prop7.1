@@ -4,6 +4,7 @@ import domini.controladors.ControladorDomini;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Classe que representa el controlador de presentació
@@ -111,8 +112,8 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
 
-    public boolean isSessioIniciada() {
-        return controladorDomini.isSessioIniciada();
+    public boolean sessioIniciada() {
+        return controladorDomini.sessioIniciada();
     }
 
     public String obtenirNomTipusItemSeleccionat() {
@@ -165,5 +166,21 @@ public class ControladorPresentacio {
 
     public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
         controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
+    }
+
+    public Set<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorDomini.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
+    }
+
+    public Set<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorDomini.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
+    }
+
+    public Set<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorDomini.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
+    }
+
+    public double avaluarRecomanacio() {
+        return controladorDomini.avaluarRecomanacio();
     }
 }

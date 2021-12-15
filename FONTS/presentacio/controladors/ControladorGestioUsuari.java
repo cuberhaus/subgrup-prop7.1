@@ -41,7 +41,7 @@ public class ControladorGestioUsuari {
     }
 
     public boolean iniciarSessio(String id, String contrasenya) {
-        boolean sessioIniciada = controladorPresentacio.isSessioIniciada();
+        boolean sessioIniciada = controladorPresentacio.sessioIniciada();
         if(idIsValid(id)) {
             if (sessioIniciada) {
                 if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
