@@ -84,6 +84,6 @@ public class ControladorMenuUsuaris {
     }
 
     public void esborraConjuntUsuaris() {
-        controladorPresentacio.esborraConjuntUsuaris();
+        controladorPresentacio.esborrarConjuntUsuaris();
     }
 }

@@ -68,7 +68,7 @@ public class ControladorPresentacio {
         return controladorDomini.existeixValoracio(usuariId,itemId);
     }
 
-    public void esborraValoracio(String usuariId, String itemId) {
+    public void esborrarValoracio(String usuariId, String itemId) {
         controladorDomini.esborraValoracio(usuariId,itemId);
     }
 
@@ -76,7 +76,7 @@ public class ControladorPresentacio {
         controladorDomini.editarValoracio(usuariId,itemId,valor);
     }
 
-    public void carregaConjuntValoracions(String pathAbsolut) {
+    public void carregarConjuntValoracions(String pathAbsolut) {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
     }
 
@@ -88,7 +88,7 @@ public class ControladorPresentacio {
         controladorDomini.exportarConjuntDades(pathConjunt);
     }
 
-    public void esborrarConjunt(String conjuntaEsborrar) {
+    public void esborrarConjuntDades(String conjuntaEsborrar) {
         controladorDomini.esborraConjunt(conjuntaEsborrar);
     }
 
@@ -120,7 +120,7 @@ public class ControladorPresentacio {
         controladorDomini.exportarConjuntDadesUsuari(absolutePath);
     }
 
-    public void esborraConjuntUsuaris() {
+    public void esborrarConjuntUsuaris() {
         controladorDomini.esborraConjuntUsuaris();
     }
 
@@ -176,15 +176,15 @@ public class ControladorPresentacio {
         controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
     }
 
-    public Set<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         return controladorDomini.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
-    public Set<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         return controladorDomini.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
-    public Set<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         return controladorDomini.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 

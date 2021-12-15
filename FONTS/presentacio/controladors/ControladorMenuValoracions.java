@@ -63,7 +63,7 @@ public class ControladorMenuValoracions {
 
     public void esborraValoracio(String usuariId, String itemId) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-            controladorPresentacio.esborraValoracio(usuariId, itemId);
+            controladorPresentacio.esborrarValoracio(usuariId, itemId);
         }
     }
 
@@ -81,7 +81,7 @@ public class ControladorMenuValoracions {
 
     public void carregaConjuntValoracions(String pathAbsolut) {
         //TODO: comprovar que l'arxiu donat té el format correcte
-        controladorPresentacio.carregaConjuntValoracions(pathAbsolut);
+        controladorPresentacio.carregarConjuntValoracions(pathAbsolut);
     }
 
     public void esborrarTotesLesValoracions() {
