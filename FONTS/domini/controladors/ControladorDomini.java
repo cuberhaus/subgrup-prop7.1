@@ -167,4 +167,28 @@ public class ControladorDomini {
         //TODO
         return false;
     }
+
+    public String obtenirNomTipusItemSeleccionat() {
+        // TODO
+        // Retorna null si no hi ha cap tipus item seleccionat
+        return null;
+    }
+
+    public void esborrarTipusItemSeleccionat() {
+        // TODO
+        // el posa a null
+    }
+
+    public void seleccionarTipusItem(String nomTipusItem) {
+        // TODO
+        // marca com a tipus item seleccionat el que te aquest nom
+        // en principi esta carregat, si cal gestionar excepcions poseume un todo a la vista please
+    }
+
+    public ArrayList<Map<String, String>> obtenirItems() {
+        // TODO
+        // retorna una llista d'items
+        // cada item es un map amb el nom de l'atribut i el seu valor
+        return new ArrayList<>();
+    }
 }

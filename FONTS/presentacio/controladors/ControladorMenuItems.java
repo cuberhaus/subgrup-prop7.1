@@ -2,6 +2,9 @@ package presentacio.controladors;
 
 import presentacio.vistes.VistaMenuItems;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class ControladorMenuItems {
 
     private static ControladorPresentacio controladorPresentacio;
@@ -17,5 +20,9 @@ public class ControladorMenuItems {
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
         }
         return instancia;
+    }
+
+    public ArrayList<Map<String, String>> obtenirItems() {
+        return controladorPresentacio.obtenirItems();
     }
 }

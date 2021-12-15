@@ -19,10 +19,10 @@ public class VistaDialegMostrarTipusItem extends JDialog {
 
     // TODO: afegir editar TipusItem
 
-    public VistaDialegMostrarTipusItem(String nomTipusItem) {
+    public VistaDialegMostrarTipusItem() {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
-        this.nomTipusItem = nomTipusItem;
+        this.nomTipusItem = controladorMenuTipusItem.obtenirNomTipusItemSeleccionat();
         inicialitzarDialegMostrarTipusItem();
     }
 

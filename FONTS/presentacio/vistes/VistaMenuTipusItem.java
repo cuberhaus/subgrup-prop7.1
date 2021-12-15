@@ -19,8 +19,6 @@ public class VistaMenuTipusItem extends JPanel {
     private static ControladorMenuTipusItem controladorMenuTipusItem;
     private static VistaMenuTipusItem instancia;
 
-    private static String nomTipusItemSeleccionat;
-
     private static JLabel textItemSeleccionat;
     private static JButton botoVeureTipusItem;
     private static JButton botoEditarTipusItem;
@@ -100,13 +98,13 @@ public class VistaMenuTipusItem extends JPanel {
         panellSeleccionarTipusItem.add(tipusItemsComboBox);
         JButton selecciona = new JButton("Selecciona");
         selecciona.addActionListener(e -> {
-            nomTipusItemSeleccionat = (String) tipusItemsComboBox.getSelectedItem();
-            if (nomTipusItemSeleccionat == null) {
+            controladorMenuTipusItem.seleccionarTipusItem((String) tipusItemsComboBox.getSelectedItem());
+            if (controladorMenuTipusItem.obtenirNomTipusItemSeleccionat() == null) {
                 textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
                 botoEditarTipusItem.setEnabled(false);
             } else {
-                textItemSeleccionat.setText(nomTipusItemSeleccionat);
+                textItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
                 botoVeureTipusItem.setEnabled(true);
                 botoEditarTipusItem.setEnabled(true);
             }
@@ -114,11 +112,10 @@ public class VistaMenuTipusItem extends JPanel {
         panellSeleccionarTipusItem.add(selecciona);
         JButton esborra = new JButton("Esborra");
         esborra.addActionListener(e -> {
-            if (nomTipusItemSeleccionat == null) {
+            if (controladorMenuTipusItem.obtenirNomTipusItemSeleccionat() == null) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                controladorMenuTipusItem.esborrarTipusItem(nomTipusItemSeleccionat);
-                nomTipusItemSeleccionat = null;
+                controladorMenuTipusItem.esborrarTipusItemSeleccionat();
                 textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
                 botoEditarTipusItem.setEnabled(false);
@@ -148,12 +145,12 @@ public class VistaMenuTipusItem extends JPanel {
         botoEditarTipusItem.addActionListener(actionEvent -> editarTipusItemSeleccionat());
 
         textItemSeleccionat = new JLabel();
-        if (nomTipusItemSeleccionat == null) {
+        if (controladorMenuTipusItem.obtenirNomTipusItemSeleccionat() == null) {
             textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
             botoVeureTipusItem.setEnabled(false);
             botoEditarTipusItem.setEnabled(false);
         } else {
-            textItemSeleccionat.setText(nomTipusItemSeleccionat);
+            textItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
             botoVeureTipusItem.setEnabled(true);
             botoEditarTipusItem.setEnabled(true);
         }
@@ -168,12 +165,12 @@ public class VistaMenuTipusItem extends JPanel {
     }
 
     private static void mostrarTipusItemSeleccionat() {
-        VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem(nomTipusItemSeleccionat);
+        VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem();
         vistaDialegMostrarTipusItem.setVisible(true);
     }
 
     private static void editarTipusItemSeleccionat() {
-        VistaDialegEditarTipusItem vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem(nomTipusItemSeleccionat);
+        VistaDialegEditarTipusItem vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
         vistaDialegEditarTipusItem.setVisible(true);
     }
 }

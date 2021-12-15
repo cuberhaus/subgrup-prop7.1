@@ -79,4 +79,16 @@ public class ControladorMenuTipusItem {
         return test;
         //return controladorPresentacio.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
+
+    public String obtenirNomTipusItemSeleccionat() {
+        return controladorPresentacio.obtenirNomTipusItemSeleccionat();
+    }
+
+    public void esborrarTipusItemSeleccionat() {
+        controladorPresentacio.esborrarTipusItemSeleccionat();
+    }
+
+    public void seleccionarTipusItem(String nomTipusItem) {
+        controladorPresentacio.seleccionarTipusItem(nomTipusItem);
+    }
 }

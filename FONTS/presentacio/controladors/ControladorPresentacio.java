@@ -114,4 +114,20 @@ public class ControladorPresentacio {
     public boolean isSessioIniciada() {
         return controladorDomini.isSessioIniciada();
     }
+
+    public String obtenirNomTipusItemSeleccionat() {
+        return controladorDomini.obtenirNomTipusItemSeleccionat();
+    }
+
+    public void esborrarTipusItemSeleccionat() {
+        controladorDomini.esborrarTipusItemSeleccionat();
+    }
+
+    public void seleccionarTipusItem(String nomTipusItem) {
+        controladorDomini.seleccionarTipusItem(nomTipusItem);
+    }
+
+    public ArrayList<Map<String, String>> obtenirItems() {
+        return controladorDomini.obtenirItems();
+    }
 }
