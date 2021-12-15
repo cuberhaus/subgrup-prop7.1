@@ -1,16 +1,35 @@
 package domini.controladors;
 
+import domini.classes.ConjuntUsuaris;
+import domini.classes.Id;
+import domini.classes.Usuari;
 import persistencia.classes.EscriptorDeCSV;
 import persistencia.classes.LectorDeCSV;
+import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Classe que representa el controlador de domini - gestor de disc */
+/** Classe que representa el controlador de domini*/
 public class ControladorDomini {
-    public ControladorDomini() {}
+
+    private static ControladorDomini instancia;
+    private final ControladorPersistencia controladorPersistencia;
+
+    ConjuntUsuaris usuaris;
+    private ControladorDomini() {
+        controladorPersistencia = ControladorPersistencia.obtenirInstancia();
+        usuaris = new ConjuntUsuaris();
+    }
+
+    public static ControladorDomini obtenirInstancia() {
+        if (instancia == null) {
+            instancia = new ControladorDomini();
+        }
+        return instancia;
+    }
 
     /**
      * Funció que donada la ubicació de l'arxiu CSV, et retorna el contingut en forma de llista.
@@ -53,8 +72,8 @@ public class ControladorDomini {
     }
 
     public boolean existeixUsuari(int id) {
-        //TODO:
-        return false;
+        Id id_bo = new Id(id, true);
+        return usuaris.conte(id_bo) && usuaris.obtenir(id_bo).isActiu();
     }
 
     /**
@@ -63,16 +82,16 @@ public class ControladorDomini {
      * @param contrasenya contrasenya del usuari
      * @param nom nom del usuari
      */
-    public void afegirUsuari(String id, String contrasenya, String nom) {
-        //TODO:
+    public void afegirUsuari(int id, String contrasenya, String nom) {
+        usuaris.afegir(new Usuari(new Id(id, true), nom, contrasenya));
     }
 
     /**
      * Esborra usuari, falta parametre del conjunt
      * @param id id del usuari
      */
-    public void esborrarUsuari(String id) {
-        //TODO:
+    public void esborrarUsuari(int id) {
+        usuaris.esborrar(new Id(id, true));
     }
 
     /**
@@ -103,8 +122,8 @@ public class ControladorDomini {
         //TODO:
     }
 
-    public String[] obtenirLlistaConjunts() {
-        return new String[0];
+    public ArrayList<String> obtenirLlistaConjunts() {
+        return null;
     }
 
     public void exportarConjuntDades(String pathConjunt) {
@@ -125,9 +144,9 @@ public class ControladorDomini {
         return false;
     }
 
-    public String[] obtenirNomsTipusItemsCarregats() {
-        // TODO
-        return new String[0];
+    /** Retorna els noms dels conjunts d'items coneguts**/
+    public ArrayList<String> obtenirNomsTipusItemsCarregats() {
+        return controladorPersistencia.obtenirNomsConjunts();
     }
 
     public void esborrarTipusItem(String nomTipusItem) {
