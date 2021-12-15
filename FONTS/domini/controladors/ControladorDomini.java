@@ -177,6 +177,8 @@ public class ControladorDomini {
 
     public void esborraConjuntUsuaris() {
         //TODO
+    }
+
     public String obtenirNomTipusItemSeleccionat() {
         // TODO
         // Retorna null si no hi ha cap tipus item seleccionat
