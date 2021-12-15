@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -128,7 +129,23 @@ public class VistaMenuValoracions extends JPanel {
         instancia.add(esborraValoracio, gridBagConstraints);
 
         editaValoracio = new JButton("Edita valoració");
-        editaValoracio.addActionListener(e -> controladorMenuValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
+        editaValoracio.addActionListener(e -> {
+            //TODO implementar vistaDialegEditarValoracio
+            if (!controladorMenuValoracions.existeixTipusItemSeleccionat()) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            } else {
+                String idItem = JOptionPane.showInputDialog(instancia,
+                        "Introdueix l'identificador de l'ítem valorat que vols editar:");
+                String idUsuari = JOptionPane.showInputDialog(instancia, "Introdueix l'identificador de l'usuari que ha valorat l'ítem");
+                if (controladorMenuValoracions.existeixValoracio(idUsuari,idItem)) {
+                    JOptionPane.showMessageDialog(instancia, "L'identificador de la valoracio no és vàlid.");
+                } else {
+//                    VistaDialegEditarValoracio vistaDialegEditarValoracio = new VistaDialegEditarValoracio(idItem, idUsuari);
+//                    vistaDialegEditarValoracio.setVisible(true);
+                }
+            }
+            controladorMenuValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText())
+        });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         instancia.add(editaValoracio, gridBagConstraints);

@@ -95,4 +95,8 @@ public class ControladorMenuValoracions {
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         return controladorPresentacio.obtenirValoracions();
     }
+
+    public boolean existeixValoracio(String idUsuari, String idItem) {
+        return controladorPresentacio.existeixValoracio(idUsuari,idItem);
+    }
 }
