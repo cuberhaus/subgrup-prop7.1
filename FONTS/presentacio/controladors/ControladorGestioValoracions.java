@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import presentacio.vistes.VistaGestioValoracions;
+import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
 
@@ -12,7 +12,7 @@ import javax.swing.*;
 public class ControladorGestioValoracions {
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorGestioValoracions instanciaUnica;
-    private static VistaGestioValoracions vistaGestioValoracions;
+    private static VistaMenuValoracions vistaMenuValoracions;
 
     private ControladorGestioValoracions() {
     }
@@ -21,18 +21,18 @@ public class ControladorGestioValoracions {
         if (instanciaUnica == null){
             instanciaUnica = new ControladorGestioValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            vistaGestioValoracions = VistaGestioValoracions.obtenirInstancia();
+            vistaMenuValoracions = VistaMenuValoracions.obtenirInstancia();
         }
         return instanciaUnica;
     }
 
     public boolean idUsuariIsValid(String id) {
         if (id == null || id.equals("")) {
-            JOptionPane.showMessageDialog(vistaGestioValoracions,"L'id d'Usuari està buit");
+            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'Usuari està buit");
             return false;
         }
         else if (!id.matches("-?\\d+")){
-            JOptionPane.showMessageDialog(vistaGestioValoracions,"L'id d'Usuari no és un numero natural");
+            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'Usuari no és un numero natural");
             return false;
         }
         return true;
@@ -40,18 +40,18 @@ public class ControladorGestioValoracions {
 
     public boolean idItemIsValid(String id) {
         if (id == null || id.equals("")) {
-            JOptionPane.showMessageDialog(vistaGestioValoracions,"L'id d'item està buit");
+            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'item està buit");
             return false;
         }
         else if (!id.matches("-?\\d+")){
-            JOptionPane.showMessageDialog(vistaGestioValoracions,"L'id d'item no és un numero natural");
+            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'item no és un numero natural");
             return false;
         }
         return true;
     }
 
-    public VistaGestioValoracions getGestioValoracions() {
-        return vistaGestioValoracions;
+    public VistaMenuValoracions getGestioValoracions() {
+        return vistaMenuValoracions;
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
@@ -59,7 +59,7 @@ public class ControladorGestioValoracions {
             if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
                 controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
             } else {
-                JOptionPane.showMessageDialog(vistaGestioValoracions, "La valoració ja existeix");
+                JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració ja existeix");
             }
         }
     }
@@ -76,7 +76,7 @@ public class ControladorGestioValoracions {
                 controladorPresentacio.editarValoracio(usuariId,itemId,valor);
             }
             else {
-                JOptionPane.showMessageDialog(vistaGestioValoracions,"La valoració no existeix");
+                JOptionPane.showMessageDialog(vistaMenuValoracions,"La valoració no existeix");
             }
 
         }

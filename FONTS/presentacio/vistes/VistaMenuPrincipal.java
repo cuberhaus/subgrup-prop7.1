@@ -67,10 +67,10 @@ public class VistaMenuPrincipal extends JFrame {
     private static void inicialitzarMenuPestanyes() {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", VistaMenuTipusItem.obtenirInstancia());
-        menuPestanyes.add("Ítems", new JPanel());
-        menuPestanyes.add("Usuaris", VistaGestioUsuari.obtenirInstancia());
-        menuPestanyes.add("Valoracions", VistaGestioValoracions.obtenirInstancia());
-        menuPestanyes.add("Conjunt de dades", VistaConjuntDades.obtenirInstancia());
+        menuPestanyes.add("Ítems", VistaMenuItems.obtenirInstancia());
+        menuPestanyes.add("Usuaris", VistaMenuUsuaris.obtenirInstancia());
+        menuPestanyes.add("Valoracions", VistaMenuValoracions.obtenirInstancia());
+        menuPestanyes.add("Conjunt de dades", VistaMenuConjuntsDades.obtenirInstancia());
         menuPestanyes.add("Recomanacions", new JPanel());
     }
 }

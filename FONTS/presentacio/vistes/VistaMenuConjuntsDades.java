@@ -12,8 +12,8 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
  * @author pol.casacuberta
  */
 
-public class VistaConjuntDades extends JPanel {
-    private static VistaConjuntDades instancia;
+public class VistaMenuConjuntsDades extends JPanel {
+    private static VistaMenuConjuntsDades instancia;
 
     private static ControladorConjuntDades controladorConjuntDades = null;
     private static GridBagLayout gridBagLayout;
@@ -25,19 +25,19 @@ public class VistaConjuntDades extends JPanel {
     private static JButton esborrarConjuntButton;
     private static JFileChooser jFileChooser;
 
-    private VistaConjuntDades() {
+    private VistaMenuConjuntsDades() {
     }
 
-    public static VistaConjuntDades obtenirInstancia() {
+    public static VistaMenuConjuntsDades obtenirInstancia() {
         if (instancia == null) {
-            instancia = new VistaConjuntDades();
+            instancia = new VistaMenuConjuntsDades();
             controladorConjuntDades = ControladorConjuntDades.obtenirInstancia();
-            inicialitzarConjuntDades();
+            inicialitzarConjuntsDades();
         }
         return instancia;
     }
 
-    public static void inicialitzarConjuntDades() {
+    public static void inicialitzarConjuntsDades() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
