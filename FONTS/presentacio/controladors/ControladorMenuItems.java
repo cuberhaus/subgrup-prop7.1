@@ -63,20 +63,4 @@ public class ControladorMenuItems {
     public boolean sessioIniciada() {
         return controladorPresentacio.sessioIniciada();
     }
-
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
-        return controladorPresentacio.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
-    }
-
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
-        return controladorPresentacio.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
-    }
-
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
-        return controladorPresentacio.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
-    }
-
-    public double avaluarRecomanacio() {
-        return controladorPresentacio.avaluarRecomanacio();
-    }
 }
