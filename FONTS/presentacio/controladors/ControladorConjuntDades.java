@@ -8,17 +8,17 @@ import presentacio.vistes.ConjuntDades;
  */
 public class ControladorConjuntDades {
     private static ControladorConjuntDades instanciaUnica;
-    private static ControladorPresentacio controladorPresentacio;
-    private static ConjuntDades conjuntDades;
+    private ControladorPresentacio controladorPresentacio;
+    private ConjuntDades conjuntDades;
 
     private ControladorConjuntDades() {
+        controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+        conjuntDades = ConjuntDades.obtenirInstancia();
     }
 
     public static ControladorConjuntDades obtenirInstancia() {
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorConjuntDades();
-            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            conjuntDades = ConjuntDades.obtenirInstancia();
         }
         return instanciaUnica;
     }

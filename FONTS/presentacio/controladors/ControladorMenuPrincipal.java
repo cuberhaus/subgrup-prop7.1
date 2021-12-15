@@ -8,19 +8,19 @@ import presentacio.vistes.MenuPrincipal;
  */
 
 public class ControladorMenuPrincipal {
-    private static ControladorPresentacio controladorPresentacio;
+    private ControladorPresentacio controladorPresentacio;
     private static ControladorMenuPrincipal instancia;
-    private static MenuPrincipal menuPrincipal;
+    private MenuPrincipal menuPrincipal;
 
     private ControladorMenuPrincipal () {
+        controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+        menuPrincipal = MenuPrincipal.obtenirInstancia();
+        menuPrincipal.setVisible(true);
     }
 
     public static ControladorMenuPrincipal obtenirInstancia() {
         if (instancia == null) {
             instancia = new ControladorMenuPrincipal();
-            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            menuPrincipal = MenuPrincipal.obtenirInstancia();
-            menuPrincipal.setVisible(true);
         }
         return instancia;
     }

@@ -10,6 +10,7 @@ import java.util.Map;
 
 /** Classe que representa el controlador de domini - gestor de disc */
 public class ControladorDomini {
+    // TODO: fer-lo estàtic
     public ControladorDomini() {}
 
     /**
