@@ -81,7 +81,13 @@ public class ControladorDomini {
     }
 
     /**
+<<<<<<< HEAD
+     * Afegeix un Usuari, falta donar un paràmetre del conjunt on es vol afegir aquest usuari
+=======
      * Afegeix un Usuari que encara no existeix.
+     * @param id id del usuari
+     * @param contrasenya contrasenya del usuari
+>>>>>>> refs/remotes/origin/master
      * @param nom nom del usuari
      * @param contrasenya contrasenya del usuari
      */
@@ -171,12 +177,14 @@ public class ControladorDomini {
         return false;
     }
 
+<<<<<<< HEAD
     public void exportarConjuntDadesUsuari(String absolutePath) {
         //TODO
     }
 
     public void esborraConjuntUsuaris() {
         //TODO
+=======
     public String obtenirNomTipusItemSeleccionat() {
         // TODO
         // Retorna null si no hi ha cap tipus item seleccionat
@@ -267,5 +275,6 @@ public class ControladorDomini {
         // relaciona el nom de l'atribut anterior amb el nou (es a dir permet canviar el nom del tipus d'atribut)
         // es una mica horrible perque ha de passar per tots els items per canviar, crec
         // si el nou atribut no té nom ("") vol dir que s'ha eliminat
+>>>>>>> refs/remotes/origin/master
     }
 }

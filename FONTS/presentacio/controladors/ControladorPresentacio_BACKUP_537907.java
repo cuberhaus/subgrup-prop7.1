@@ -115,14 +115,14 @@ public class ControladorPresentacio {
         return controladorDomini.isSessioIniciada();
     }
 
+<<<<<<< HEAD
     public void exportarConjuntDadesUsuari(String absolutePath) {
         controladorDomini.exportarConjuntDadesUsuari(absolutePath);
     }
 
     public void esborraConjuntUsuaris() {
         controladorDomini.esborraConjuntUsuaris();
-    }
-
+=======
     public String obtenirNomTipusItemSeleccionat() {
         return controladorDomini.obtenirNomTipusItemSeleccionat();
     }
@@ -173,5 +173,6 @@ public class ControladorPresentacio {
 
     public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
         controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
+>>>>>>> refs/remotes/origin/master
     }
 }

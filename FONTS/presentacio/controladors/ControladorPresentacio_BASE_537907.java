@@ -47,8 +47,8 @@ public class ControladorPresentacio {
         return controladorDomini.existeixUsuari(id);
     }
 
-    public void afegirUsuari(String nom, String contrasenya) {
-        controladorDomini.afegirUsuari(nom,contrasenya);
+    public void afegirUsuari(int id, String contrasenya, String nom) {
+        controladorDomini.afegirUsuari(id,contrasenya,nom);
     }
 
     public void esborrarUsuari(int id) {
@@ -113,65 +113,5 @@ public class ControladorPresentacio {
 
     public boolean isSessioIniciada() {
         return controladorDomini.isSessioIniciada();
-    }
-
-    public void exportarConjuntDadesUsuari(String absolutePath) {
-        controladorDomini.exportarConjuntDadesUsuari(absolutePath);
-    }
-
-    public void esborraConjuntUsuaris() {
-        controladorDomini.esborraConjuntUsuaris();
-    }
-
-    public String obtenirNomTipusItemSeleccionat() {
-        return controladorDomini.obtenirNomTipusItemSeleccionat();
-    }
-
-    public void esborrarTipusItemSeleccionat() {
-        controladorDomini.esborrarTipusItemSeleccionat();
-    }
-
-    public void seleccionarTipusItem(String nomTipusItem) {
-        controladorDomini.seleccionarTipusItem(nomTipusItem);
-    }
-
-    public ArrayList<ArrayList<String>> obtenirItems() {
-        return controladorDomini.obtenirItems();
-    }
-
-    public ArrayList<String> obtenirNomAtributsTipusItemSeleccionat() {
-        return controladorDomini.obtenirNomsAtributsTipusItemSeleccionat();
-    }
-
-    public boolean existeixTipusItemSeleccionat() {
-        return controladorDomini.existeixTipusItemSeleccionat();
-    }
-
-    public boolean afegirItem(Map<String, String> valorsAtributs) {
-        return controladorDomini.afegirItem(valorsAtributs);
-    }
-
-    public boolean esborrarItem(String id) {
-        return controladorDomini.esborrarItem(id);
-    }
-
-    public Map<String, String> obtenirItem(String id) {
-        return controladorDomini.obtenirItem(id);
-    }
-
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
-        return controladorDomini.editarItem(id, valorsAtributs);
-    }
-
-    public void carregarConjuntItems(String rutaAbsoluta) {
-        controladorDomini.carregarConjuntItems(rutaAbsoluta);
-    }
-
-    public void esborrarTotsElsItems() {
-        controladorDomini.esborrarTotsElsItems();
-    }
-
-    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
-        controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
     }
 }

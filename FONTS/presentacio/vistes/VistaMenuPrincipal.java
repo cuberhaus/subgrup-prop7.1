@@ -70,7 +70,6 @@ public class VistaMenuPrincipal extends JFrame {
         menuPestanyes.add("Ítems", VistaMenuItems.obtenirInstancia());
         menuPestanyes.add("Usuaris", VistaMenuUsuaris.obtenirInstancia());
         menuPestanyes.add("Valoracions", VistaMenuValoracions.obtenirInstancia());
-        menuPestanyes.add("Conjunt de dades", VistaMenuConjuntsDades.obtenirInstancia());
         menuPestanyes.add("Recomanacions", new JPanel());
     }
 }
