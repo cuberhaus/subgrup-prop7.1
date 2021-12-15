@@ -144,7 +144,7 @@ public class VistaMenuValoracions extends JPanel {
 //                    vistaDialegEditarValoracio.setVisible(true);
                 }
             }
-            controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText())
+            controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
