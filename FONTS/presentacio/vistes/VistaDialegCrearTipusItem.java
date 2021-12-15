@@ -10,22 +10,22 @@ import java.util.Map;
 /**
  * @author maria.prat
  */
-public class DialegCrearTipusItem extends JDialog {
+public class VistaDialegCrearTipusItem extends JDialog {
 
     private final ControladorMenuTipusItem controladorMenuTipusItem;
     private JPanel panellLlistaTipusAtributs;
     private JPanel panellCrearTipusItem;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public DialegCrearTipusItem() {
+    public VistaDialegCrearTipusItem() {
         super(null, Dialog.ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         inicialitzarDialegCrearTipusItem();
     }
 
     private void inicialitzarDialegCrearTipusItem() {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
-                5 * Pantalla.amplada / 8, Pantalla.altura / 2);
+        setBounds(VistaPantalla.centreHoritzontal( 5 * VistaPantalla.amplada / 8), VistaPantalla.centreVertical(VistaPantalla.altura / 2),
+                5 * VistaPantalla.amplada / 8, VistaPantalla.altura / 2);
         setTitle("Crea un nou tipus d'ítem");
         inicialitzarPanellCrearTipusItem();
     }

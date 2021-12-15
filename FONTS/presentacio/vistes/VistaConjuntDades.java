@@ -12,8 +12,8 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
  * @author pol.casacuberta
  */
 
-public class ConjuntDades extends JPanel {
-    private static ConjuntDades instanciaUnica;
+public class VistaConjuntDades extends JPanel {
+    private static VistaConjuntDades instanciaUnica;
 
     private static ControladorConjuntDades controladorConjuntDades = null;
     private static GridBagLayout gridBagLayout;
@@ -25,12 +25,12 @@ public class ConjuntDades extends JPanel {
     private static JButton esborrarConjuntButton;
     private static JFileChooser jFileChooser;
 
-    private ConjuntDades() {
+    private VistaConjuntDades() {
     }
 
-    public static ConjuntDades obtenirInstancia() {
+    public static VistaConjuntDades obtenirInstancia() {
         if (instanciaUnica == null) {
-            instanciaUnica = new ConjuntDades();
+            instanciaUnica = new VistaConjuntDades();
             controladorConjuntDades = ControladorConjuntDades.obtenirInstancia();
             inicialitzarConjuntDades();
         }

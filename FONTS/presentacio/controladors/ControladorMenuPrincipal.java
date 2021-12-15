@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import presentacio.vistes.MenuPrincipal;
+import presentacio.vistes.VistaMenuPrincipal;
 
 /**
  * Classe que representa el controlador del Menu principal
@@ -10,7 +10,7 @@ import presentacio.vistes.MenuPrincipal;
 public class ControladorMenuPrincipal {
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuPrincipal instancia;
-    private static MenuPrincipal menuPrincipal;
+    private static VistaMenuPrincipal vistaMenuPrincipal;
 
     private ControladorMenuPrincipal () {
     }
@@ -19,8 +19,8 @@ public class ControladorMenuPrincipal {
         if (instancia == null) {
             instancia = new ControladorMenuPrincipal();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            menuPrincipal = MenuPrincipal.obtenirInstancia();
-            menuPrincipal.setVisible(true);
+            vistaMenuPrincipal = VistaMenuPrincipal.obtenirInstancia();
+            vistaMenuPrincipal.setVisible(true);
         }
         return instancia;
     }

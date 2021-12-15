@@ -3,14 +3,11 @@ package presentacio.vistes;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author maria.prat
  */
-public class DialegEditarTipusItem extends JDialog {
+public class VistaDialegEditarTipusItem extends JDialog {
 
     private final ControladorMenuTipusItem controladorMenuTipusItem;
     private final String nomTipusItem;
@@ -20,7 +17,7 @@ public class DialegEditarTipusItem extends JDialog {
 
     // TODO: afegir editar TipusItem
 
-    public DialegEditarTipusItem(String nomTipusItem) {
+    public VistaDialegEditarTipusItem(String nomTipusItem) {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = nomTipusItem;
@@ -28,9 +25,9 @@ public class DialegEditarTipusItem extends JDialog {
     }
 
     private void inicialitzarDialegMostrarTipusItem() {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8),
-                Pantalla.centreVertical(Pantalla.altura / 2),
-                5 * Pantalla.amplada / 8, Pantalla.altura / 2);
+        setBounds(VistaPantalla.centreHoritzontal( 5 * VistaPantalla.amplada / 8),
+                VistaPantalla.centreVertical(VistaPantalla.altura / 2),
+                5 * VistaPantalla.amplada / 8, VistaPantalla.altura / 2);
         setTitle("Editar tipus d'ítem");
     }
 }

@@ -11,13 +11,13 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
 /**
  * @author maria.prat
  */
-public class MenuTipusItem extends JPanel {
+public class VistaMenuTipusItem extends JPanel {
 
     private static final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
     private static final String kMissatgeTipusItemNoSeleccionat = "No s'ha escollit cap tipus d'ítem";
 
     private static ControladorMenuTipusItem controladorMenuTipusItem;
-    private static MenuTipusItem instancia;
+    private static VistaMenuTipusItem instancia;
 
     private static String nomTipusItemSeleccionat;
 
@@ -29,12 +29,12 @@ public class MenuTipusItem extends JPanel {
     private static JPanel panellSeleccionarTipusItem;
     private static JPanel panellMostrarTipusItemSeleccionat;
 
-    private MenuTipusItem() {
+    private VistaMenuTipusItem() {
     }
 
-    public static MenuTipusItem obtenirInstancia() {
+    public static VistaMenuTipusItem obtenirInstancia() {
         if (instancia == null) {
-            instancia = new MenuTipusItem();
+            instancia = new VistaMenuTipusItem();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
             inicialitzarMenuTipusItem();
         }
@@ -88,8 +88,8 @@ public class MenuTipusItem extends JPanel {
     }
 
     private static void crearTipusItem() {
-        DialegCrearTipusItem dialegCrearTipusItem = new DialegCrearTipusItem();
-        dialegCrearTipusItem.setVisible(true);
+        VistaDialegCrearTipusItem vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
+        vistaDialegCrearTipusItem.setVisible(true);
     }
 
     private static void inicialitzarPanellSeleccionarTipusItem() {
@@ -168,12 +168,12 @@ public class MenuTipusItem extends JPanel {
     }
 
     private static void mostrarTipusItemSeleccionat() {
-        DialegMostrarTipusItem dialegMostrarTipusItem = new DialegMostrarTipusItem(nomTipusItemSeleccionat);
-        dialegMostrarTipusItem.setVisible(true);
+        VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem(nomTipusItemSeleccionat);
+        vistaDialegMostrarTipusItem.setVisible(true);
     }
 
     private static void editarTipusItemSeleccionat() {
-        DialegEditarTipusItem dialegEditarTipusItem = new DialegEditarTipusItem(nomTipusItemSeleccionat);
-        dialegEditarTipusItem.setVisible(true);
+        VistaDialegEditarTipusItem vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem(nomTipusItemSeleccionat);
+        vistaDialegEditarTipusItem.setVisible(true);
     }
 }
