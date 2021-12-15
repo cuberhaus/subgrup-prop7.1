@@ -23,6 +23,7 @@ public class MenuTipusItem extends JPanel {
 
     private static JLabel textItemSeleccionat;
     private static JButton botoVeureTipusItem;
+    private static JButton botoEditarTipusItem;
 
     private static JPanel panellAfegirTipusItem;
     private static JPanel panellSeleccionarTipusItem;
@@ -63,6 +64,7 @@ public class MenuTipusItem extends JPanel {
         inicialitzarPanellMostrarTipusItemSeleccionat();
         instancia.add(panellMostrarTipusItemSeleccionat);
         instancia.add(Box.createVerticalGlue());
+        // TODO: afegir editar tipus item seleccionat
     }
 
     private static void inicialitzarPanellAfegirTipusItem() {
@@ -102,9 +104,11 @@ public class MenuTipusItem extends JPanel {
             if (nomTipusItemSeleccionat == null) {
                 textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
+                botoEditarTipusItem.setEnabled(false);
             } else {
                 textItemSeleccionat.setText(nomTipusItemSeleccionat);
                 botoVeureTipusItem.setEnabled(true);
+                botoEditarTipusItem.setEnabled(true);
             }
         });
         panellSeleccionarTipusItem.add(selecciona);
@@ -117,6 +121,7 @@ public class MenuTipusItem extends JPanel {
                 nomTipusItemSeleccionat = null;
                 textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
+                botoEditarTipusItem.setEnabled(false);
             }
         });
         panellSeleccionarTipusItem.add(esborra);
@@ -132,27 +137,43 @@ public class MenuTipusItem extends JPanel {
         text.setFont(new Font("Sans", Font.BOLD, 16));
         informacio.add(text);
 
+        JPanel botons = new JPanel(new FlowLayout());
+
         botoVeureTipusItem = new JButton("Mostra el tipus d'ítem seleccionat");
         botoVeureTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoVeureTipusItem.addActionListener(actionEvent -> mostrarTipusItemSeleccionat());
+
+        botoEditarTipusItem = new JButton("Edita el tipus d'ítem seleccionat");
+        botoEditarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoEditarTipusItem.addActionListener(actionEvent -> editarTipusItemSeleccionat());
 
         textItemSeleccionat = new JLabel();
         if (nomTipusItemSeleccionat == null) {
             textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
             botoVeureTipusItem.setEnabled(false);
+            botoEditarTipusItem.setEnabled(false);
         } else {
             textItemSeleccionat.setText(nomTipusItemSeleccionat);
             botoVeureTipusItem.setEnabled(true);
+            botoEditarTipusItem.setEnabled(true);
         }
         textItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));
         informacio.add(textItemSeleccionat);
         panellMostrarTipusItemSeleccionat.add(informacio);
 
-        panellMostrarTipusItemSeleccionat.add(botoVeureTipusItem);
+        botons.add(botoVeureTipusItem);
+        botons.add(botoEditarTipusItem);
+
+        panellMostrarTipusItemSeleccionat.add(botons);
     }
 
     private static void mostrarTipusItemSeleccionat() {
-        DialegMostrarTipusItem dialegMostrarTipusItem = new DialegMostrarTipusItem();
+        DialegMostrarTipusItem dialegMostrarTipusItem = new DialegMostrarTipusItem(nomTipusItemSeleccionat);
         dialegMostrarTipusItem.setVisible(true);
+    }
+
+    private static void editarTipusItemSeleccionat() {
+        DialegEditarTipusItem dialegEditarTipusItem = new DialegEditarTipusItem(nomTipusItemSeleccionat);
+        dialegEditarTipusItem.setVisible(true);
     }
 }

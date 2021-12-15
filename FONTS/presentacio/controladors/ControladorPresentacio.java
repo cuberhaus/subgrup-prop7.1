@@ -90,8 +90,8 @@ public class ControladorPresentacio {
         controladorDomini.esborraConjunt(conjuntaEsborrar);
     }
 
-    public boolean afegirTipusItem(String nom, Map<String, String> valorsAtributs, Map<String, String> distanciesAtributs) {
-        return controladorDomini.afegirTipusItem(nom, valorsAtributs, distanciesAtributs);
+    public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
+        return controladorDomini.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
     }
 
     public boolean carregarTipusItem(String rutaAbsoluta) {
@@ -100,5 +100,13 @@ public class ControladorPresentacio {
 
     public void esborrarTipusItem(String nomTipusItem) {
         controladorDomini.esborrarTipusItem(nomTipusItem);
+    }
+
+    public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
+        return controladorDomini.obtenirValorsTipusAtributs(nomTipusItem);
+    }
+
+    public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
+        return controladorDomini.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
 }

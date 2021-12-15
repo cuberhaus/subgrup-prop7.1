@@ -3,6 +3,7 @@ package presentacio.controladors;
 import presentacio.vistes.MenuTipusItem;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,14 +31,15 @@ public class ControladorMenuTipusItem {
         //return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public boolean afegirTipusItem(String nom, Map<String, String> valorsAtributs, Map<String, String> distanciesAtributs) {
+    public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs,
+                                   Map<String, String> distanciesTipusAtributs) {
         // TODO: esborrar sortida
         System.out.println("Afegint TipusItem");
         System.out.println(nom);
-        System.out.println(valorsAtributs.toString());
-        System.out.println(distanciesAtributs.toString());
+        System.out.println(valorsTipusAtributs.toString());
+        System.out.println(distanciesTipusAtributs.toString());
         System.out.println("******************");
-        return controladorPresentacio.afegirTipusItem(nom, valorsAtributs, distanciesAtributs);
+        return controladorPresentacio.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
     }
 
     public void carregaTipusItem(String rutaAbsoluta) {
@@ -56,5 +58,19 @@ public class ControladorMenuTipusItem {
         System.out.println(nomTipusItem);
         System.out.println("******************");
         controladorPresentacio.esborrarTipusItem(nomTipusItem);
+    }
+
+    public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
+        Map<String, String> test = new HashMap<>();
+        test.put("Autor", "Booleà");
+        return test;
+        //return controladorPresentacio.obtenirValorsTipusAtributs(nomTipusItem);
+    }
+
+    public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
+        Map<String, String> test = new HashMap<>();
+        test.put("Autor", "Discreta");
+        return test;
+        //return controladorPresentacio.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
 }

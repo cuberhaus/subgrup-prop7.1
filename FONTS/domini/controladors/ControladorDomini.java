@@ -5,6 +5,7 @@ import persistencia.classes.LectorDeCSV;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /** Classe que representa el controlador de domini - gestor de disc */
@@ -117,7 +118,7 @@ public class ControladorDomini {
         return false;
     }
 
-    public boolean afegirTipusItem(String nom, Map<String, String> valorsAtributs, Map<String, String> distanciesAtributs) {
+    public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
         // TODO
         // Pot o retornar true/false o llançar excepció. Si llança excepció crec que és millor perquè podem detectar
         // si no funciona perquè ja n'hi ha un amb el mateix nom o si no funciona per algun altre motiu.
@@ -130,5 +131,16 @@ public class ControladorDomini {
     }
 
     public void esborrarTipusItem(String nomTipusItem) {
+        // TODO
+    }
+
+    public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
+        // TODO
+        return new HashMap<>();
+    }
+
+    public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
+        // TODO
+        return new HashMap<>();
     }
 }

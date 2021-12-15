@@ -4,7 +4,6 @@ import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +55,6 @@ public class DialegCrearTipusItem extends JDialog {
         panellTipusAtributs.add(botoAfegirTipusAtribut);
         panellCrearTipusItem.add(panellTipusAtributs);
 
-        // TODO: afegir boto esborrar tipus atribut
         panellLlistaTipusAtributs = new JPanel();
         panellLlistaTipusAtributs.setLayout(new BoxLayout(panellLlistaTipusAtributs, BoxLayout.Y_AXIS));
 
