@@ -5,6 +5,7 @@ import presentacio.controladors.ControladorMenuTipusItem;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -100,7 +101,12 @@ public class VistaMenuTipusItem extends JPanel {
         panellSeleccionarTipusItem.add(tipusItemsComboBox);
         JButton selecciona = new JButton("Selecciona");
         selecciona.addActionListener(e -> {
-            controladorMenuTipusItem.seleccionarTipusItem((String) tipusItemsComboBox.getSelectedItem());
+            try {
+                controladorMenuTipusItem.seleccionarTipusItem((String) tipusItemsComboBox.getSelectedItem());
+            } catch (IOException ex) {
+                // TODO: catch throw
+                ex.printStackTrace();
+            }
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);

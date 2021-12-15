@@ -2,6 +2,7 @@ package presentacio.controladors;
 
 import domini.controladors.ControladorDomini;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -132,7 +133,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) {
+    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 

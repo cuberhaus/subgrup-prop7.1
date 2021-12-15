@@ -1,8 +1,6 @@
 package domini.controladors;
 
-import domini.classes.Id;
-import domini.classes.Programa;
-import domini.classes.Usuari;
+import domini.classes.*;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -17,7 +15,12 @@ public class ControladorDomini {
     private static ControladorDomini instancia;
     private final ControladorPersistencia controladorPersistencia;
 
-    Programa estat_programa;
+    private final Programa estat_programa;
+    private int ultimIdUsat = 0;
+    private String nomTipusItemActual = null;
+    private ConjuntValoracions valoracionsTipusItemActual = null;
+    private ConjuntItems itemsActuals = null;
+
     private ControladorDomini() {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
         estat_programa = Programa.obtenirInstancia();
@@ -36,7 +39,7 @@ public class ControladorDomini {
      * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV
      * @throws IOException s'ha produït un error en la lectura
      */
-    /*public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
+   /* public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
         return lector.llegirCSV(ubicacio);
     }*/
@@ -75,13 +78,21 @@ public class ControladorDomini {
         return estat_programa.conteUsuari(id_bo)&& estat_programa.obtenirUsuari(id_bo).isActiu();
     }
 
+
+    private Id obteIdDisponible() {
+        while (estat_programa.conteUsuari(new Id(ultimIdUsat, true))) {
+            ultimIdUsat++;
+        }
+        return new Id(ultimIdUsat, true);
+    }
     /**
      * Afegeix un Usuari que encara no existeix.
      * @param nom nom del usuari
      * @param contrasenya contrasenya del usuari
      */
     public void afegirUsuari(String nom, String contrasenya) {
-        //TODO:
+        Id id = obteIdDisponible();
+        estat_programa.afegirUsuari(new Usuari(id, nom, contrasenya));
     }
 
     /**
@@ -121,7 +132,7 @@ public class ControladorDomini {
     }
 
     public ArrayList<String> obtenirLlistaConjunts() {
-        return null;
+        return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
     public void exportarConjuntDades(String pathConjunt) {
@@ -144,7 +155,7 @@ public class ControladorDomini {
 
     /** Retorna els noms dels conjunts d'items coneguts**/
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
-        return new ArrayList<>();
+        return controladorPersistencia.obtenirTotsTipusItems();
     }
 
     public void esborrarTipusItem(String nomTipusItem) {
@@ -175,9 +186,8 @@ public class ControladorDomini {
     }
 
     public String obtenirNomTipusItemSeleccionat() {
-        // TODO
         // Retorna null si no hi ha cap tipus item seleccionat
-        return null;
+        return nomTipusItemActual;
     }
 
     public void esborrarTipusItemSeleccionat() {
@@ -185,10 +195,15 @@ public class ControladorDomini {
         // el posa a null
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) {
+    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
         // TODO
         // marca com a tipus item seleccionat el que te aquest nom
         // en principi esta carregat, si cal gestionar excepcions poseume un todo a la vista please
+
+        if (nomTipusItemActual != null) {
+            // TODO ha de guardar lanterior
+        }
+        ArrayList<ArrayList<String>> tipus_item_raw = controladorPersistencia.obtenirTipusItem(nomTipusItem);
     }
 
     public ArrayList<ArrayList<String>> obtenirItems() {
