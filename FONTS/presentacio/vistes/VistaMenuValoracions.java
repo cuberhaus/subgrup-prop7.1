@@ -56,7 +56,7 @@ public class VistaMenuValoracions extends JPanel {
         // TODO: potser cal un JScrollPane per la taula
         DefaultTableModel llistaValoracionsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 1);
         llistaValoracions = new JTable(llistaValoracionsTableModel);
-        ArrayList<ArrayList<String>> valoracions = controladorGestioValoracions.obtenirValoracions();
+        ArrayList<ArrayList<String>> valoracions = controladorMenuValoracions.obtenirValoracions();
         for (ArrayList<String> valoracio : valoracions) {
             llistaValoracionsTableModel.addRow(valoracio.toArray());
         }
