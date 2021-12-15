@@ -10,18 +10,18 @@ import javax.swing.*;
  */
 
 public class ControladorGestioUsuari {
-    private ControladorPresentacio controladorPresentacio;
+    private static ControladorPresentacio controladorPresentacio;
     private static ControladorGestioUsuari instanciaUnica;
-    private GestioUsuari gestioUsuari;
+    private static GestioUsuari gestioUsuari;
 
     private ControladorGestioUsuari() {
-        controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-        gestioUsuari = GestioUsuari.obtenirInstancia();
     }
 
     public static ControladorGestioUsuari obtenirInstancia(){
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorGestioUsuari();
+            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+            gestioUsuari = GestioUsuari.obtenirInstancia();
         }
         return instanciaUnica;
     }

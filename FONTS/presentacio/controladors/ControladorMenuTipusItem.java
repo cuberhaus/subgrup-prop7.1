@@ -1,5 +1,8 @@
 package presentacio.controladors;
 
+import presentacio.vistes.MenuTipusItem;
+
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,16 +11,17 @@ import java.util.Map;
  */
 public class ControladorMenuTipusItem {
 
-    private ControladorPresentacio controladorPresentacio;
+    private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuTipusItem instancia;
+    private static MenuTipusItem menuTipusItem;
 
     private ControladorMenuTipusItem () {
-        controladorPresentacio = ControladorPresentacio.obtenirInstancia();
     }
 
     public static ControladorMenuTipusItem obtenirInstancia() {
         if (instancia == null) {
             instancia = new ControladorMenuTipusItem();
+            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
         }
         return instancia;
     }
@@ -38,12 +42,15 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
     }
 
-    public boolean carregarTipusItem(String rutaAbsoluta) {
+    public void carregaTipusItem(String rutaAbsoluta) {
         // TODO: esborrar sortida
         System.out.println("Carregant TipusItem");
         System.out.println(rutaAbsoluta);
         System.out.println("******************");
-        return controladorPresentacio.carregarTipusItem(rutaAbsoluta);
+        if (!controladorPresentacio.carregarTipusItem(rutaAbsoluta)) {
+            JOptionPane.showMessageDialog(menuTipusItem,
+                    "No es pot llegir un tipus d'ítem del fitxer seleccionat.");
+        }
     }
 
     public void esborrarTipusItem(String nomTipusItem) {

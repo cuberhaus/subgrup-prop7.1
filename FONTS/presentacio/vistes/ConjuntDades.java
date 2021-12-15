@@ -13,46 +13,46 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
  */
 
 public class ConjuntDades extends JPanel {
-    private static ConjuntDades instancia;
+    private static ConjuntDades instanciaUnica;
 
-    private ControladorConjuntDades controladorConjuntDades = null;
-    private GridBagLayout gridBagLayout;
-    private GridBagConstraints gridBagConstraints;
-    private JLabel seleccionarConjuntLabel;
-    private JButton exportarConjuntDades;
-    private JComboBox<String> seleccionarConjuntCombo;
-    private JButton preprocessarCDButton;
-    private JButton esborrarConjuntButton;
-    private JFileChooser jFileChooser;
+    private static ControladorConjuntDades controladorConjuntDades = null;
+    private static GridBagLayout gridBagLayout;
+    private static GridBagConstraints gridBagConstraints;
+    private static JLabel seleccionarConjuntLabel;
+    private static JButton exportarConjuntDades;
+    private static JComboBox<String> seleccionarConjuntCombo;
+    private static JButton preprocessarCDButton;
+    private static JButton esborrarConjuntButton;
+    private static JFileChooser jFileChooser;
 
     private ConjuntDades() {
-        controladorConjuntDades = ControladorConjuntDades.obtenirInstancia();
-        inicialitzarConjuntDades();
     }
 
     public static ConjuntDades obtenirInstancia() {
-        if (instancia == null) {
-            instancia = new ConjuntDades();
+        if (instanciaUnica == null) {
+            instanciaUnica = new ConjuntDades();
+            controladorConjuntDades = ControladorConjuntDades.obtenirInstancia();
+            inicialitzarConjuntDades();
         }
-        return instancia;
+        return instanciaUnica;
     }
 
-    public void inicialitzarConjuntDades() {
+    public static void inicialitzarConjuntDades() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
-        instancia.setLayout(gridBagLayout);
+        instanciaUnica.setLayout(gridBagLayout);
 
         seleccionarConjuntLabel = new JLabel("Selecciona el conjunt");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        instancia.add(seleccionarConjuntLabel, gridBagConstraints);
+        instanciaUnica.add(seleccionarConjuntLabel, gridBagConstraints);
 
         String[] opcions = controladorConjuntDades.obtenirLlistaConjunts();
         seleccionarConjuntCombo = new JComboBox<>(opcions);
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        instancia.add(seleccionarConjuntCombo,gridBagConstraints);
+        instanciaUnica.add(seleccionarConjuntCombo,gridBagConstraints);
 
 
         jFileChooser = new JFileChooser();
@@ -70,12 +70,12 @@ public class ConjuntDades extends JPanel {
                 controladorConjuntDades.exportarConjuntDades(pathConjunt.getAbsolutePath());
             }
         });
-        instancia.add(exportarConjuntDades,gridBagConstraints);
+        instanciaUnica.add(exportarConjuntDades,gridBagConstraints);
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         preprocessarCDButton = new JButton("Preprocessar conjunt");
-        instancia.add(preprocessarCDButton, gridBagConstraints);
+        instanciaUnica.add(preprocessarCDButton, gridBagConstraints);
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -84,6 +84,6 @@ public class ConjuntDades extends JPanel {
             String conjuntaEsborrar = (String) seleccionarConjuntCombo.getSelectedItem();
             controladorConjuntDades.esborraConjunt(conjuntaEsborrar);
         });
-        instancia.add(esborrarConjuntButton, gridBagConstraints);
+        instanciaUnica.add(esborrarConjuntButton, gridBagConstraints);
     }
 }

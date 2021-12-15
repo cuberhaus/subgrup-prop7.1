@@ -10,24 +10,24 @@ import java.util.Map;
  */
 public class ControladorPresentacio {
 
-    private ControladorDomini controladorDomini;
-    private static ControladorPresentacio instancia;
-    private ControladorGestioUsuari controladorGestioUsuari;
-    private ControladorMenuPrincipal controladorMenuPrincipal;
-    private ControladorMenuTipusItem controladorMenuTipusItem;
+    private static ControladorDomini controladorDomini;
+    private static ControladorPresentacio instanciaUnica = null;
+    private static ControladorGestioUsuari controladorGestioUsuari;
+    private static ControladorMenuPrincipal controladorMenuPrincipal;
+    private static ControladorMenuTipusItem controladorMenuTipusItem;
 
     private ControladorPresentacio() {
-        controladorDomini = new ControladorDomini();
-        controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
-        controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
-        controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
     }
 
     public static ControladorPresentacio obtenirInstancia() {
-        if (instancia == null) {
-            instancia = new ControladorPresentacio();
+        if (instanciaUnica == null) {
+            instanciaUnica = new ControladorPresentacio();
+            controladorDomini = new ControladorDomini();
+            controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
+            controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
+            controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         }
-        return instancia;
+        return instanciaUnica;
     }
 
     public String[] obtenirNomsTipusItemsCarregats() {

@@ -10,20 +10,20 @@ import javax.swing.*;
  */
 
 public class ControladorGestioValoracions {
-    private ControladorPresentacio controladorPresentacio;
-    private static ControladorGestioValoracions instancia;
-    private GestioValoracions gestioValoracions;
+    private static ControladorPresentacio controladorPresentacio;
+    private static ControladorGestioValoracions instanciaUnica;
+    private static GestioValoracions gestioValoracions;
 
     private ControladorGestioValoracions() {
-        controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-        gestioValoracions = GestioValoracions.obtenirInstancia();
     }
 
     public static ControladorGestioValoracions obtenirInstancia() {
-        if (instancia == null){
-            instancia = new ControladorGestioValoracions();
+        if (instanciaUnica == null){
+            instanciaUnica = new ControladorGestioValoracions();
+            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+            gestioValoracions = GestioValoracions.obtenirInstancia();
         }
-        return instancia;
+        return instanciaUnica;
     }
 
     public boolean idUsuariIsValid(String id) {
