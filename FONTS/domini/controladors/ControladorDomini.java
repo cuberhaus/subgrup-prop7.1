@@ -123,7 +123,7 @@ public class ControladorDomini {
     }
 
     public ArrayList<String> obtenirLlistaConjunts() {
-        return null;
+        return controladorPersistencia.obtenirNomsConjunts();
     }
 
     public void exportarConjuntDades(String pathConjunt) {
