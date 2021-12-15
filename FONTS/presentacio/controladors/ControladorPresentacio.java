@@ -117,7 +117,7 @@ public class ControladorPresentacio {
         return controladorDomini.sessioIniciada();
     }
 
-    public void exportarConjuntDadesUsuari(String absolutePath) {
+    public void exportarConjuntUsuaris(String absolutePath) {
         controladorDomini.exportarConjuntDadesUsuari(absolutePath);
     }
 

@@ -61,13 +61,13 @@ public class ControladorMenuValoracions {
         }
     }
 
-    public void esborraValoracio(String usuariId, String itemId) {
+    public void esborrarValoracio(String usuariId, String itemId) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             controladorPresentacio.esborrarValoracio(usuariId, itemId);
         }
     }
 
-    public void editaValoracio(String usuariId, String itemId, String valor) {
+    public void editarValoracio(String usuariId, String itemId, String valor) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             if (controladorPresentacio.existeixValoracio(usuariId,itemId)) {
                 controladorPresentacio.editarValoracio(usuariId,itemId,valor);
@@ -79,9 +79,9 @@ public class ControladorMenuValoracions {
         }
     }
 
-    public void carregaConjuntValoracions(String pathAbsolut) {
+    public void carregarConjuntValoracions(String rutaAbsoluta) {
         //TODO: comprovar que l'arxiu donat té el format correcte
-        controladorPresentacio.carregarConjuntValoracions(pathAbsolut);
+        controladorPresentacio.carregarConjuntValoracions(rutaAbsoluta);
     }
 
     public void esborrarTotesLesValoracions() {

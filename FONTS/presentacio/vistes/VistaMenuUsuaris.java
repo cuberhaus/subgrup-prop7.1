@@ -153,7 +153,7 @@ public class VistaMenuUsuaris extends JPanel {
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if(estatJfile == APPROVE_OPTION) {
                 File pathConjunt = jFileChooser.getSelectedFile();
-                controladorMenuUsuaris.exportarConjuntDadesUsuari(pathConjunt.getAbsolutePath());
+                controladorMenuUsuaris.exportarConjuntUsuaris(pathConjunt.getAbsolutePath());
             }
         });
         instancia.add(exportarConjuntDades,gridBagConstraints);
@@ -164,7 +164,7 @@ public class VistaMenuUsuaris extends JPanel {
         esborrarConjuntButton.addActionListener(e-> {
             int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar tots els usuaris", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
             if (resposta == 0) {
-                controladorMenuUsuaris.esborraConjuntUsuaris();
+                controladorMenuUsuaris.esborrarConjuntUsuaris();
                 JOptionPane.showMessageDialog(instancia, "S'han esborrat els usuaris amb èxit");
             }
         });

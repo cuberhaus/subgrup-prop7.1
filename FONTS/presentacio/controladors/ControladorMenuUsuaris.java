@@ -12,19 +12,19 @@ import javax.swing.*;
 public class ControladorMenuUsuaris {
 
     private static ControladorPresentacio controladorPresentacio;
-    private static ControladorMenuUsuaris instanciaUnica;
+    private static ControladorMenuUsuaris instancia;
     private static VistaMenuUsuaris vistaMenuUsuaris;
 
     private ControladorMenuUsuaris() {
     }
 
     public static ControladorMenuUsuaris obtenirInstancia(){
-        if (instanciaUnica == null) {
-            instanciaUnica = new ControladorMenuUsuaris();
+        if (instancia == null) {
+            instancia = new ControladorMenuUsuaris();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuUsuaris = VistaMenuUsuaris.obtenirInstancia();
         }
-        return instanciaUnica;
+        return instancia;
     }
 
     public boolean idEsValid(String id) {
@@ -79,11 +79,11 @@ public class ControladorMenuUsuaris {
         controladorPresentacio.tancarSessio();
     }
 
-    public void exportarConjuntDadesUsuari(String absolutePath) {
-        controladorPresentacio.exportarConjuntDadesUsuari(absolutePath);
+    public void exportarConjuntUsuaris(String absolutePath) {
+        controladorPresentacio.exportarConjuntUsuaris(absolutePath);
     }
 
-    public void esborraConjuntUsuaris() {
+    public void esborrarConjuntUsuaris() {
         controladorPresentacio.esborrarConjuntUsuaris();
     }
 }
