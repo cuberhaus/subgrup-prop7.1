@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import presentacio.vistes.MenuTipusItem;
+import presentacio.vistes.VistaMenuTipusItem;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class ControladorMenuTipusItem {
 
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuTipusItem instancia;
-    private static MenuTipusItem menuTipusItem;
+    private static VistaMenuTipusItem vistaMenuTipusItem;
 
     private ControladorMenuTipusItem () {
     }
@@ -48,7 +48,7 @@ public class ControladorMenuTipusItem {
         System.out.println(rutaAbsoluta);
         System.out.println("******************");
         if (!controladorPresentacio.carregarTipusItem(rutaAbsoluta)) {
-            JOptionPane.showMessageDialog(menuTipusItem,
+            JOptionPane.showMessageDialog(vistaMenuTipusItem,
                     "No es pot llegir un tipus d'ítem del fitxer seleccionat.");
         }
     }

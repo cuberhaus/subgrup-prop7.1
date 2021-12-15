@@ -4,13 +4,14 @@ import presentacio.controladors.ControladorGestioUsuari;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * @author pol.casacuberta
  */
 
-public class GestioUsuari extends JPanel {
-    private static GestioUsuari instanciaUnica;
+public class VistaGestioUsuari extends JPanel {
+    private static VistaGestioUsuari instanciaUnica;
 
     private static JButton afegirUsuari;
     private static JButton eliminarUsuari;
@@ -24,15 +25,17 @@ public class GestioUsuari extends JPanel {
     private static JTextField nomText;
     private static GridBagLayout gridBagLayout;
     private static GridBagConstraints gridBagConstraints;
+    private static JLabel usuariActiuLabel;
+    private static JLabel usuariActiuInfo;
 
     private static ControladorGestioUsuari controladorGestioUsuari;
 
-    private GestioUsuari() {
+    private VistaGestioUsuari() {
     }
 
-    public static GestioUsuari obtenirInstancia() {
+    public static VistaGestioUsuari obtenirInstancia() {
         if (instanciaUnica == null) {
-            instanciaUnica = new GestioUsuari();
+            instanciaUnica = new VistaGestioUsuari();
             controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
             inicialitzarGestioUsuari();
         }
@@ -44,6 +47,16 @@ public class GestioUsuari extends JPanel {
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
         instanciaUnica.setLayout(gridBagLayout);
+
+        usuariActiuLabel = new JLabel("Usuari actiu:");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        instanciaUnica.add(usuariActiuLabel, gridBagConstraints);
+
+        usuariActiuInfo = new JLabel("Sessio no iniciada");
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        instanciaUnica.add(usuariActiuInfo, gridBagConstraints);
 
         afegirUsuari = new JButton("Afegir Usuari");
         afegirUsuari.addActionListener(e -> controladorGestioUsuari.afegirUsuari(idText.getText(), String.valueOf(contrasenyaText.getPassword()), nomText.getText()));
@@ -58,13 +71,23 @@ public class GestioUsuari extends JPanel {
         instanciaUnica.add(eliminarUsuari, gridBagConstraints);
 
         iniciarSessio = new JButton("Iniciar Sessió");
-        iniciarSessio.addActionListener(e -> controladorGestioUsuari.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword())));
+        iniciarSessio.addActionListener(e -> {
+            if (controladorGestioUsuari.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
+                usuariActiuInfo.setText(idText.getText());
+            }
+            else {
+                usuariActiuInfo.setText("Sessio no iniciada");
+            }
+        });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         instanciaUnica.add(iniciarSessio, gridBagConstraints);
 
         tancarSessio = new JButton("Tancar Sessió");
-        tancarSessio.addActionListener(e -> controladorGestioUsuari.tancarSessio());
+        tancarSessio.addActionListener(e -> {
+            controladorGestioUsuari.tancarSessio();
+            usuariActiuInfo.setText("Sessio no iniciada");
+        });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         instanciaUnica.add(tancarSessio, gridBagConstraints);

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @author maria.prat
  */
-public class DialegMostrarTipusItem extends JDialog {
+public class VistaDialegMostrarTipusItem extends JDialog {
 
     private final ControladorMenuTipusItem controladorMenuTipusItem;
     private final String nomTipusItem;
@@ -19,7 +19,7 @@ public class DialegMostrarTipusItem extends JDialog {
 
     // TODO: afegir editar TipusItem
 
-    public DialegMostrarTipusItem(String nomTipusItem) {
+    public VistaDialegMostrarTipusItem(String nomTipusItem) {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = nomTipusItem;
@@ -27,9 +27,9 @@ public class DialegMostrarTipusItem extends JDialog {
     }
 
     private void inicialitzarDialegMostrarTipusItem() {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8),
-                Pantalla.centreVertical(Pantalla.altura / 2),
-                5 * Pantalla.amplada / 8, Pantalla.altura / 2);
+        setBounds(VistaPantalla.centreHoritzontal( 5 * VistaPantalla.amplada / 8),
+                VistaPantalla.centreVertical(VistaPantalla.altura / 2),
+                5 * VistaPantalla.amplada / 8, VistaPantalla.altura / 2);
         setTitle("Mostrar tipus d'ítem");
         inicialitzarPanellMostrarTipusItem();
     }

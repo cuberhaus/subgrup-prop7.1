@@ -9,19 +9,19 @@ import java.awt.event.ActionEvent;
 /**
  * @author maria.prat
  */
-public class MenuPrincipal extends JFrame {
+public class VistaMenuPrincipal extends JFrame {
 
-    private static MenuPrincipal instancia;
+    private static VistaMenuPrincipal instancia;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
     private static JMenuBar menuBarra;
     private static JTabbedPane menuPestanyes;
 
-    private MenuPrincipal() {
+    private VistaMenuPrincipal() {
     }
 
-    public static MenuPrincipal obtenirInstancia() {
+    public static VistaMenuPrincipal obtenirInstancia() {
         if (instancia == null) {
-            instancia = new MenuPrincipal();
+            instancia = new VistaMenuPrincipal();
             controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
             inicialitzarMenuPrincipal();
         }
@@ -41,9 +41,9 @@ public class MenuPrincipal extends JFrame {
 
         instancia.add(panellPrincipal);
         instancia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        instancia.setBounds(Pantalla.centreHoritzontal(3 * Pantalla.amplada / 4),
-                Pantalla.centreVertical(3 * Pantalla.altura / 4),
-                3 * Pantalla.amplada / 4, 3 * Pantalla.altura / 4);
+        instancia.setBounds(VistaPantalla.centreHoritzontal(3 * VistaPantalla.amplada / 4),
+                VistaPantalla.centreVertical(3 * VistaPantalla.altura / 4),
+                3 * VistaPantalla.amplada / 4, 3 * VistaPantalla.altura / 4);
     }
 
     private static void inicialitzarMenuBarra() {
@@ -56,7 +56,7 @@ public class MenuPrincipal extends JFrame {
         informacio.add(new JMenuItem(new AbstractAction("Autors") {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new DialegAutors().setVisible(true);
+                new VistaDialegAutors().setVisible(true);
             }
         }));
 
@@ -66,11 +66,11 @@ public class MenuPrincipal extends JFrame {
 
     private static void inicialitzarMenuPestanyes() {
         menuPestanyes = new JTabbedPane();
-        menuPestanyes.add("Tipus d'ítem", MenuTipusItem.obtenirInstancia());
+        menuPestanyes.add("Tipus d'ítem", VistaMenuTipusItem.obtenirInstancia());
         menuPestanyes.add("Ítems", new JPanel());
-        menuPestanyes.add("Usuaris", GestioUsuari.obtenirInstancia());
-        menuPestanyes.add("Valoracions", GestioValoracions.obtenirInstancia());
-        menuPestanyes.add("Conjunt de dades", ConjuntDades.obtenirInstancia());
+        menuPestanyes.add("Usuaris", VistaGestioUsuari.obtenirInstancia());
+        menuPestanyes.add("Valoracions", VistaGestioValoracions.obtenirInstancia());
+        menuPestanyes.add("Conjunt de dades", VistaConjuntDades.obtenirInstancia());
         menuPestanyes.add("Recomanacions", new JPanel());
     }
 }
