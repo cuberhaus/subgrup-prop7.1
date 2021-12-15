@@ -42,12 +42,12 @@ public class VistaMenuUsuaris extends JPanel {
         if (instancia == null) {
             instancia = new VistaMenuUsuaris();
             controladorMenuUsuaris = ControladorMenuUsuaris.obtenirInstancia();
-            inicialitzarGestioUsuari();
+            inicialitzarMenuUsuaris();
         }
         return instancia;
     }
 
-    private static void inicialitzarGestioUsuari() {
+    private static void inicialitzarMenuUsuaris() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts

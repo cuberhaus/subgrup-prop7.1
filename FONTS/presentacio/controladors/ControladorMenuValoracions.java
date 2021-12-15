@@ -51,10 +51,6 @@ public class ControladorMenuValoracions {
         return true;
     }
 
-    public VistaMenuValoracions getGestioValoracions() {
-        return vistaMenuValoracions;
-    }
-
     public void afegirValoracio(String usuariId, String itemId, String valor) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
