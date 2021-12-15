@@ -1,10 +1,12 @@
 package presentacio.vistes;
 
-import presentacio.controladors.ControladorGestioValoracions;
+import presentacio.controladors.ControladorMenuValoracions;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -29,7 +31,8 @@ public class VistaMenuValoracions extends JPanel {
     private static JFileChooser jFileChooser;
     private static JButton conjuntDeValoracionsButton;
 
-    private static ControladorGestioValoracions controladorGestioValoracions = null;
+    private static ControladorMenuValoracions controladorMenuValoracions;
+    private static JTable llistaValoracions;
 
     private VistaMenuValoracions() {
     }
@@ -37,13 +40,33 @@ public class VistaMenuValoracions extends JPanel {
     public static VistaMenuValoracions obtenirInstancia() {
         if (instancia == null) {
             instancia = new VistaMenuValoracions();
-            inicialitzarGestioValoracions();
-            controladorGestioValoracions = ControladorGestioValoracions.obtenirInstancia();
+            controladorMenuValoracions = ControladorMenuValoracions.obtenirInstancia();
+            inicialitzarMenuValoracions();
+            inicialitzarLlistaValoracions();
         }
         return instancia;
     }
 
-    private static void inicialitzarGestioValoracions() {
+    private static void inicialitzarLlistaValoracions() {
+        ArrayList<String> nomsColumnes = new ArrayList<>();
+        nomsColumnes.add("userId");
+        nomsColumnes.add("itemId");
+        nomsColumnes.add("ratings");
+        // TODO: revisar que això està bé i que l'ordre de les columnes i els atributs és el mateix
+        // TODO: potser cal un JScrollPane per la taula
+        DefaultTableModel llistaValoracionsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 1);
+        llistaValoracions = new JTable(llistaValoracionsTableModel);
+        ArrayList<ArrayList<String>> valoracions = controladorMenuValoracions.obtenirValoracions();
+        for (ArrayList<String> valoracio : valoracions) {
+            llistaValoracionsTableModel.addRow(valoracio.toArray());
+        }
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+
+        instancia.add(llistaValoracions, gridBagConstraints);
+    }
+
+    private static void inicialitzarMenuValoracions() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         instancia.setLayout(gridBagLayout);
@@ -93,19 +116,19 @@ public class VistaMenuValoracions extends JPanel {
         instancia.add(valorText, gridBagConstraints);
 
         creaValoracio = new JButton("Crea Valoració");
-        creaValoracio.addActionListener(e -> controladorGestioValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText()));
+        creaValoracio.addActionListener(e -> controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         instancia.add(creaValoracio, gridBagConstraints);
 
         esborraValoracio = new JButton("Esborra valoració");
-        esborraValoracio.addActionListener(e -> controladorGestioValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText()));
+        esborraValoracio.addActionListener(e -> controladorMenuValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         instancia.add(esborraValoracio, gridBagConstraints);
 
         editaValoracio = new JButton("Edita valoració");
-        editaValoracio.addActionListener(e -> controladorGestioValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
+        editaValoracio.addActionListener(e -> controladorMenuValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         instancia.add(editaValoracio, gridBagConstraints);
@@ -122,11 +145,28 @@ public class VistaMenuValoracions extends JPanel {
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjuntVal = jFileChooser.getSelectedFile();
                 System.out.println(pathConjuntVal.getAbsolutePath());
-                controladorGestioValoracions.carregaConjuntValoracions(pathConjuntVal.getAbsolutePath());
+                controladorMenuValoracions.carregaConjuntValoracions(pathConjuntVal.getAbsolutePath());
             }
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         instancia.add(conjuntDeValoracionsButton, gridBagConstraints);
+
+        JButton esborrarTotesLesValoracions = new JButton("Esborra totes les valoracions");
+        esborrarTotesLesValoracions.addActionListener(e-> {
+            if (!controladorMenuValoracions.existeixTipusItemSeleccionat()) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            }
+            else {
+                int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar totes les valoracions", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
+                if (resposta == 0) {
+                    controladorMenuValoracions.esborrarTotesLesValoracions();
+                    JOptionPane.showMessageDialog(instancia, "S'han esborrat les valoracions amb èxit");
+                }
+            }
+        });
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        instancia.add(esborrarTotesLesValoracions, gridBagConstraints);
     }
 }

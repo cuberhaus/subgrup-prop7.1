@@ -3,27 +3,28 @@ package presentacio.controladors;
 import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * Classe que representa el controlador que gestiona les valoracions
  * @author pol.casacuberta
  */
 
-public class ControladorGestioValoracions {
+public class ControladorMenuValoracions {
     private static ControladorPresentacio controladorPresentacio;
-    private static ControladorGestioValoracions instanciaUnica;
+    private static ControladorMenuValoracions instancia;
     private static VistaMenuValoracions vistaMenuValoracions;
 
-    private ControladorGestioValoracions() {
+    private ControladorMenuValoracions() {
     }
 
-    public static ControladorGestioValoracions obtenirInstancia() {
-        if (instanciaUnica == null){
-            instanciaUnica = new ControladorGestioValoracions();
+    public static ControladorMenuValoracions obtenirInstancia() {
+        if (instancia == null){
+            instancia = new ControladorMenuValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuValoracions = VistaMenuValoracions.obtenirInstancia();
         }
-        return instanciaUnica;
+        return instancia;
     }
 
     public boolean idUsuariEsValid(String id) {
@@ -50,10 +51,6 @@ public class ControladorGestioValoracions {
         return true;
     }
 
-    public VistaMenuValoracions getGestioValoracions() {
-        return vistaMenuValoracions;
-    }
-
     public void afegirValoracio(String usuariId, String itemId, String valor) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
@@ -66,7 +63,7 @@ public class ControladorGestioValoracions {
 
     public void esborraValoracio(String usuariId, String itemId) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-            controladorPresentacio.esborraValoracio(usuariId, itemId);
+            controladorPresentacio.esborrarValoracio(usuariId, itemId);
         }
     }
 
@@ -84,6 +81,18 @@ public class ControladorGestioValoracions {
 
     public void carregaConjuntValoracions(String pathAbsolut) {
         //TODO: comprovar que l'arxiu donat té el format correcte
-        controladorPresentacio.carregaConjuntValoracions(pathAbsolut);
+        controladorPresentacio.carregarConjuntValoracions(pathAbsolut);
+    }
+
+    public void esborrarTotesLesValoracions() {
+        controladorPresentacio.esborrarTotesLesValoracions();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        return controladorPresentacio.existeixTipusItemSeleccionat();
+    }
+
+    public ArrayList<ArrayList<String>> obtenirValoracions() {
+        return controladorPresentacio.obtenirValoracions();
     }
 }

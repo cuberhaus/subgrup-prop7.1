@@ -9,18 +9,18 @@ import javax.swing.*;
  * @author pol.casacuberta
  */
 
-public class ControladorGestioUsuari {
+public class ControladorMenuUsuaris {
 
     private static ControladorPresentacio controladorPresentacio;
-    private static ControladorGestioUsuari instanciaUnica;
+    private static ControladorMenuUsuaris instanciaUnica;
     private static VistaMenuUsuaris vistaMenuUsuaris;
 
-    private ControladorGestioUsuari() {
+    private ControladorMenuUsuaris() {
     }
 
-    public static ControladorGestioUsuari obtenirInstancia(){
+    public static ControladorMenuUsuaris obtenirInstancia(){
         if (instanciaUnica == null) {
-            instanciaUnica = new ControladorGestioUsuari();
+            instanciaUnica = new ControladorMenuUsuaris();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuUsuaris = VistaMenuUsuaris.obtenirInstancia();
         }
@@ -84,6 +84,6 @@ public class ControladorGestioUsuari {
     }
 
     public void esborraConjuntUsuaris() {
-        controladorPresentacio.esborraConjuntUsuaris();
+        controladorPresentacio.esborrarConjuntUsuaris();
     }
 }

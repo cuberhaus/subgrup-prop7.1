@@ -281,32 +281,41 @@ public class ControladorDomini {
         // si el nou atribut no té nom ("") vol dir que s'ha eliminat
     }
 
-    public Set<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
-        return new HashSet<>();
+        return new ArrayList<>();
     }
 
-    public Set<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
-        return new HashSet<>();
+        return new ArrayList<>();
     }
 
-    public Set<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
-        return new HashSet<>();
+        return new ArrayList<>();
     }
 
     public double avaluarRecomanacio() {
         // TODO
         return 0.0;
+    }
+
+    public void esborrarTotesLesValoracions() {
+        //TODO
+    }
+
+    public ArrayList<ArrayList<String>> obtenirValoracions() {
+        //TODO
+        return new ArrayList<>();
     }
 }

@@ -1,11 +1,10 @@
 package presentacio.vistes;
 
-import presentacio.controladors.ControladorGestioUsuari;
+import presentacio.controladors.ControladorMenuUsuaris;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -31,7 +30,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static JLabel usuariActiuLabel;
     private static JLabel usuariActiuInfo;
 
-    private static ControladorGestioUsuari controladorGestioUsuari;
+    private static ControladorMenuUsuaris controladorMenuUsuaris;
     private static JFileChooser jFileChooser;
     private static JButton exportarConjuntDades;
     private static JButton esborrarConjuntButton;
@@ -42,13 +41,13 @@ public class VistaMenuUsuaris extends JPanel {
     public static VistaMenuUsuaris obtenirInstancia() {
         if (instancia == null) {
             instancia = new VistaMenuUsuaris();
-            controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
-            inicialitzarGestioUsuari();
+            controladorMenuUsuaris = ControladorMenuUsuaris.obtenirInstancia();
+            inicialitzarMenuUsuaris();
         }
         return instancia;
     }
 
-    private static void inicialitzarGestioUsuari() {
+    private static void inicialitzarMenuUsuaris() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
@@ -108,21 +107,21 @@ public class VistaMenuUsuaris extends JPanel {
 
         afegirUsuari = new JButton("Afegir Usuari");
         afegirUsuari.addActionListener(e -> {
-            controladorGestioUsuari.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
+            controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         instancia.add(afegirUsuari, gridBagConstraints);
 
         eliminarUsuari = new JButton("Esborrar Usuari");
-        eliminarUsuari.addActionListener(e -> controladorGestioUsuari.esborrarUsuari(idText.getText()));
+        eliminarUsuari.addActionListener(e -> controladorMenuUsuaris.esborrarUsuari(idText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         instancia.add(eliminarUsuari, gridBagConstraints);
 
         iniciarSessio = new JButton("Iniciar Sessió");
         iniciarSessio.addActionListener(e -> {
-            if (controladorGestioUsuari.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
+            if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
                 usuariActiuInfo.setText(idText.getText());
             }
             else {
@@ -135,7 +134,7 @@ public class VistaMenuUsuaris extends JPanel {
 
         tancarSessio = new JButton("Tancar Sessió");
         tancarSessio.addActionListener(e -> {
-            controladorGestioUsuari.tancarSessio();
+            controladorMenuUsuaris.tancarSessio();
             usuariActiuInfo.setText("Sessio no iniciada");
         });
         gridBagConstraints.gridx = 0;
@@ -148,22 +147,26 @@ public class VistaMenuUsuaris extends JPanel {
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
-        exportarConjuntDades = new JButton("Exportar conjunt");
+        exportarConjuntDades = new JButton("Exportar Usuaris");
         exportarConjuntDades.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if(estatJfile == APPROVE_OPTION) {
                 File pathConjunt = jFileChooser.getSelectedFile();
-                controladorGestioUsuari.exportarConjuntDadesUsuari(pathConjunt.getAbsolutePath());
+                controladorMenuUsuaris.exportarConjuntDadesUsuari(pathConjunt.getAbsolutePath());
             }
         });
         instancia.add(exportarConjuntDades,gridBagConstraints);
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
-        esborrarConjuntButton = new JButton("Esborrar conjunt");
+        esborrarConjuntButton = new JButton("Esborrar tots els usuaris");
         esborrarConjuntButton.addActionListener(e-> {
-            controladorGestioUsuari.esborraConjuntUsuaris();
+            int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar tots els usuaris", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
+            if (resposta == 0) {
+                controladorMenuUsuaris.esborraConjuntUsuaris();
+                JOptionPane.showMessageDialog(instancia, "S'han esborrat els usuaris amb èxit");
+            }
         });
         instancia.add(esborrarConjuntButton, gridBagConstraints);
     }

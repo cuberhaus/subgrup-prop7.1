@@ -64,15 +64,15 @@ public class ControladorMenuItems {
         return controladorPresentacio.sessioIniciada();
     }
 
-    public Set<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         return controladorPresentacio.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
-    public Set<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         return controladorPresentacio.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
-    public Set<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
         return controladorPresentacio.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 
