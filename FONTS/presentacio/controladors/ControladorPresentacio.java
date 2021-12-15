@@ -142,4 +142,28 @@ public class ControladorPresentacio {
     public boolean afegirItem(Map<String, String> valorsAtributs) {
         return controladorDomini.afegirItem(valorsAtributs);
     }
+
+    public boolean esborrarItem(String id) {
+        return controladorDomini.esborrarItem(id);
+    }
+
+    public Map<String, String> obtenirItem(String id) {
+        return controladorDomini.obtenirItem(id);
+    }
+
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
+        return controladorDomini.editarItem(id, valorsAtributs);
+    }
+
+    public void carregarConjuntItems(String rutaAbsoluta) {
+        controladorDomini.carregarConjuntItems(rutaAbsoluta);
+    }
+
+    public void esborrarTotsElsItems() {
+        controladorDomini.esborrarTotsElsItems();
+    }
+
+    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
+        controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
+    }
 }

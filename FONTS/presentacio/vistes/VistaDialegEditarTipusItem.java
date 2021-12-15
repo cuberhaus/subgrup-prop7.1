@@ -3,6 +3,8 @@ package presentacio.vistes;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author maria.prat
@@ -29,5 +31,7 @@ public class VistaDialegEditarTipusItem extends JDialog {
                 VistaPantalla.centreVertical(VistaPantalla.altura / 2),
                 5 * VistaPantalla.amplada / 8, VistaPantalla.altura / 2);
         setTitle("Editar tipus d'ítem");
+        // TODO: implementar
+        controladorMenuTipusItem.editarTipusItem(new HashMap<>());
     }
 }

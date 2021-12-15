@@ -96,4 +96,8 @@ public class ControladorMenuTipusItem {
     public boolean existeixTipusItemSeleccionat() {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
+
+    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
+        controladorPresentacio.editarTipusItem(relacioNomsTipusAtributs);
+    }
 }

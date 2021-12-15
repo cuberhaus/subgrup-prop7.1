@@ -37,4 +37,24 @@ public class ControladorMenuItems {
     public boolean afegirItem(Map<String, String> valorsAtributs) {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
+
+    public boolean esborrarItem(String id) {
+        return controladorPresentacio.esborrarItem(id);
+    }
+
+    public Map<String, String> obtenirItem(String id) {
+        return controladorPresentacio.obtenirItem(id);
+    }
+
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
+        return controladorPresentacio.editarItem(id, valorsAtributs);
+    }
+
+    public void carregarConjuntItems(String rutaAbsoluta) {
+        controladorPresentacio.carregarConjuntItems(rutaAbsoluta);
+    }
+
+    public void esborrarTotsElsItems() {
+        controladorPresentacio.esborrarTotsElsItems();
+    }
 }

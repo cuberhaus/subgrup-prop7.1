@@ -80,6 +80,7 @@ public class VistaMenuTipusItem extends JPanel {
             if (estatSelectorFitxer == APPROVE_OPTION) {
                 File rutaFitxer = selectorFitxer.getSelectedFile();
                 controladorMenuTipusItem.carregaTipusItem(rutaFitxer.getAbsolutePath());
+                // TODO: afegir missatge d'error
             }
         });
         panellAfegirTipusItem.add(botoCarregarTipusItem);
