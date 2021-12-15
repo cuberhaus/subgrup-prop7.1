@@ -189,10 +189,30 @@ public class ControladorDomini {
         // en principi esta carregat, si cal gestionar excepcions poseume un todo a la vista please
     }
 
-    public ArrayList<Map<String, String>> obtenirItems() {
+    public ArrayList<ArrayList<String>> obtenirItems() {
         // TODO
         // retorna una llista d'items
-        // cada item es un map amb el nom de l'atribut i el seu valor
+        // cada item es una arraylist amb els atributs
+        // la primera columna ha de tenir l'id de l'item
         return new ArrayList<>();
+    }
+
+    public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
+        // TODO
+        return new ArrayList<>();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        // TODO
+        // retorna true si hi ha un tipus item seleccionat
+        return true;
+    }
+
+    public boolean afegirItem(Map<String, String> valorsAtributs) {
+        // TODO
+        // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
+        // hi ha un tipus d'ítem seleccionat
+        // retorna false si no s'ha pogut fer i cert si tot esta be
+        return false;
     }
 }

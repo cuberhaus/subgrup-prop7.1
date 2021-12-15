@@ -22,7 +22,19 @@ public class ControladorMenuItems {
         return instancia;
     }
 
-    public ArrayList<Map<String, String>> obtenirItems() {
+    public ArrayList<ArrayList<String>> obtenirItems() {
         return controladorPresentacio.obtenirItems();
+    }
+
+    public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
+        return controladorPresentacio.obtenirNomAtributsTipusItemSeleccionat();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        return controladorPresentacio.existeixTipusItemSeleccionat();
+    }
+
+    public boolean afegirItem(Map<String, String> valorsAtributs) {
+        return controladorPresentacio.afegirItem(valorsAtributs);
     }
 }

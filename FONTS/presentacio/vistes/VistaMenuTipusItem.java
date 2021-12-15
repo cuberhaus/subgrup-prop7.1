@@ -92,14 +92,15 @@ public class VistaMenuTipusItem extends JPanel {
 
     private static void inicialitzarPanellSeleccionarTipusItem() {
         panellSeleccionarTipusItem = new JPanel(new FlowLayout());
-        JComboBox<String> tipusItemsComboBox = new JComboBox<>(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
+        JComboBox<String> tipusItemsComboBox = new JComboBox<>(
+                controladorMenuTipusItem.obtenirNomsTipusItemsCarregats().toArray(new String[0]));
         tipusItemsComboBox.setPrototypeDisplayValue(kPrototipNomTipusItem);
         tipusItemsComboBox.setSelectedIndex(-1);
         panellSeleccionarTipusItem.add(tipusItemsComboBox);
         JButton selecciona = new JButton("Selecciona");
         selecciona.addActionListener(e -> {
             controladorMenuTipusItem.seleccionarTipusItem((String) tipusItemsComboBox.getSelectedItem());
-            if (controladorMenuTipusItem.obtenirNomTipusItemSeleccionat() == null) {
+            if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
                 botoEditarTipusItem.setEnabled(false);
@@ -112,7 +113,7 @@ public class VistaMenuTipusItem extends JPanel {
         panellSeleccionarTipusItem.add(selecciona);
         JButton esborra = new JButton("Esborra");
         esborra.addActionListener(e -> {
-            if (controladorMenuTipusItem.obtenirNomTipusItemSeleccionat() == null) {
+            if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
                 controladorMenuTipusItem.esborrarTipusItemSeleccionat();
@@ -145,7 +146,7 @@ public class VistaMenuTipusItem extends JPanel {
         botoEditarTipusItem.addActionListener(actionEvent -> editarTipusItemSeleccionat());
 
         textItemSeleccionat = new JLabel();
-        if (controladorMenuTipusItem.obtenirNomTipusItemSeleccionat() == null) {
+        if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
             textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
             botoVeureTipusItem.setEnabled(false);
             botoEditarTipusItem.setEnabled(false);

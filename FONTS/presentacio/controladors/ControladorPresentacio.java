@@ -127,7 +127,19 @@ public class ControladorPresentacio {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 
-    public ArrayList<Map<String, String>> obtenirItems() {
+    public ArrayList<ArrayList<String>> obtenirItems() {
         return controladorDomini.obtenirItems();
+    }
+
+    public ArrayList<String> obtenirNomAtributsTipusItemSeleccionat() {
+        return controladorDomini.obtenirNomsAtributsTipusItemSeleccionat();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        return controladorDomini.existeixTipusItemSeleccionat();
+    }
+
+    public boolean afegirItem(Map<String, String> valorsAtributs) {
+        return controladorDomini.afegirItem(valorsAtributs);
     }
 }

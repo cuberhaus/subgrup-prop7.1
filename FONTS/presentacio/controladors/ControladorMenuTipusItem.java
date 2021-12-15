@@ -6,6 +6,8 @@ import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,9 +34,8 @@ public class ControladorMenuTipusItem {
         return instancia;
     }
 
-    public String[] obtenirNomsTipusItemsCarregats() {
-        return new String[]{"a", "b"};
-        //return controladorPresentacio.obtenirNomsTipusItemsCarregats();
+    public ArrayList<String> obtenirNomsTipusItemsCarregats() {
+        return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
     public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs,
@@ -90,5 +91,9 @@ public class ControladorMenuTipusItem {
 
     public void seleccionarTipusItem(String nomTipusItem) {
         controladorPresentacio.seleccionarTipusItem(nomTipusItem);
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 }
