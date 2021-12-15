@@ -2,16 +2,24 @@ package domini.controladors;
 
 import persistencia.classes.EscriptorDeCSV;
 import persistencia.classes.LectorDeCSV;
+import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Classe que representa el controlador de domini - gestor de disc */
+/** Classe que representa el controlador de domini*/
 public class ControladorDomini {
-    // TODO: fer-lo estàtic
-    public ControladorDomini() {}
+
+    private static ControladorDomini instancia;
+    private ControladorDomini() {}
+    public static ControladorDomini obtenirInstancia() {
+        if (instancia == null) {
+            instancia = new ControladorDomini();
+        }
+        return instancia;
+    }
 
     /**
      * Funció que donada la ubicació de l'arxiu CSV, et retorna el contingut en forma de llista.
@@ -104,7 +112,7 @@ public class ControladorDomini {
         //TODO:
     }
 
-    public String[] obtenirLlistaConjunts() {
+    public ArrayList<String> obtenirLlistaConjunts() {
         return new String[0];
     }
 
@@ -126,9 +134,9 @@ public class ControladorDomini {
         return false;
     }
 
-    public String[] obtenirNomsTipusItemsCarregats() {
+    public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         // TODO
-        return new String[0];
+        return new ArrayList<>();
     }
 
     public void esborrarTipusItem(String nomTipusItem) {
