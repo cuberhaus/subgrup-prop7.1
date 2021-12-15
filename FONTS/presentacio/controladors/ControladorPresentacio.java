@@ -109,4 +109,8 @@ public class ControladorPresentacio {
     public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
         return controladorDomini.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
+
+    public boolean isSessioIniciada() {
+        return controladorDomini.isSessioIniciada();
+    }
 }

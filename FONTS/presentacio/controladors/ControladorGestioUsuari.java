@@ -10,6 +10,7 @@ import javax.swing.*;
  */
 
 public class ControladorGestioUsuari {
+
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorGestioUsuari instanciaUnica;
     private static GestioUsuari gestioUsuari;
@@ -39,12 +40,13 @@ public class ControladorGestioUsuari {
         return true;
     }
 
-    public void iniciarSessio(String id, String contrasenya) {
-        int idSessio = controladorPresentacio.obtenirSessio();
+    public boolean iniciarSessio(String id, String contrasenya) {
+        boolean sessioIniciada = controladorPresentacio.isSessioIniciada();
         if(idIsValid(id)) {
-            if (idSessio == 0) {
+            if (sessioIniciada) {
                 if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
                     controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
+                    return true;
                 }
                 else {
                     JOptionPane.showMessageDialog(gestioUsuari,"L'usuari no existeix");
@@ -55,6 +57,7 @@ public class ControladorGestioUsuari {
                 JOptionPane.showMessageDialog(gestioUsuari,"Has de tancar la sessió abans d'obrir-ne un altre");
             }
         }
+        return false;
     }
 
     public void afegirUsuari(String id, String contrasenya, String nom) {

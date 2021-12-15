@@ -143,4 +143,9 @@ public class ControladorDomini {
         // TODO
         return new HashMap<>();
     }
+
+    public boolean isSessioIniciada() {
+        //TODO
+        return false;
+    }
 }
