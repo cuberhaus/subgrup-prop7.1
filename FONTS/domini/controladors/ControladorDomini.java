@@ -168,4 +168,96 @@ public class ControladorDomini {
         //TODO
         return false;
     }
+
+    public String obtenirNomTipusItemSeleccionat() {
+        // TODO
+        // Retorna null si no hi ha cap tipus item seleccionat
+        return null;
+    }
+
+    public void esborrarTipusItemSeleccionat() {
+        // TODO
+        // el posa a null
+    }
+
+    public void seleccionarTipusItem(String nomTipusItem) {
+        // TODO
+        // marca com a tipus item seleccionat el que te aquest nom
+        // en principi esta carregat, si cal gestionar excepcions poseume un todo a la vista please
+    }
+
+    public ArrayList<ArrayList<String>> obtenirItems() {
+        // TODO
+        // retorna una llista d'items
+        // cada item es una arraylist amb els atributs
+        // la primera columna ha de tenir l'id de l'item
+        return new ArrayList<>();
+    }
+
+    public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
+        // TODO
+        return new ArrayList<>();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        // TODO
+        // retorna true si hi ha un tipus item seleccionat
+        return true;
+    }
+
+    public boolean afegirItem(Map<String, String> valorsAtributs) {
+        // TODO
+        // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
+        // hi ha un tipus d'ítem seleccionat pero millor comprovar
+        // retorna false si no s'ha pogut fer i cert si tot esta be
+        return false;
+    }
+
+    public boolean esborrarItem(String id) {
+        // TODO
+        // Esborra l'ítem amb aquest id
+        // hi ha un tipus d'ítem seleccionat pero millor comprovar
+        // l'item es del tipus d'ítem seleccionat
+        // retorna fals si es invalid o no s'ha pogut esborrar
+        // pot ser una paraula, un numero, estar buit, etc
+        return false;
+    }
+
+    public Map<String, String> obtenirItem(String id) {
+        // TODO
+        // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
+        // hi ha un tipus d'ítem seleccionat pero millor comprovar
+        // l'item es del tipus d'ítem seleccionat
+        // retorna null si l'id no es valid
+        return new HashMap<>();
+    }
+
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
+        // TODO
+        // edita l'item amb l'id donat amb els valors donats
+        // valorsAtribut es un mapa del nom de l'atribut al nou valor
+        // hi ha un tipus d'ítem seleccionat pero millor comprovar
+        // l'item es del tipus d'ítem seleccionat
+        // existeix un item amb aquest id pero millor comprovar
+        // retorna true si tot be i retorna fals si alguna cosa no funcioa
+        return false;
+    }
+
+    public void carregarConjuntItems(String rutaAbsoluta) {
+        // TODO
+        // carrega un conjunt d'items
+    }
+
+    public void esborrarTotsElsItems() {
+        // TODO
+        // hi ha un tipus d'ítem seleccionat pero millor comprovar
+        // esborra tots els items del tipus d'ítem seleccionat
+    }
+
+    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
+        // TODO
+        // relaciona el nom de l'atribut anterior amb el nou (es a dir permet canviar el nom del tipus d'atribut)
+        // es una mica horrible perque ha de passar per tots els items per canviar, crec
+        // si el nou atribut no té nom ("") vol dir que s'ha eliminat
+    }
 }
