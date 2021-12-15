@@ -60,7 +60,7 @@ public class ControladorGestioUsuari {
     public void afegirUsuari(String id, String contrasenya, String nom) {
         if (idIsValid(id)) {
             if(!controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                controladorPresentacio.afegirUsuari(id,contrasenya,nom);
+                controladorPresentacio.afegirUsuari(Integer.parseInt(id),contrasenya,nom);
             }
             else {
                 JOptionPane.showMessageDialog(gestioUsuari,"L'usuari ja existeix");
@@ -71,7 +71,7 @@ public class ControladorGestioUsuari {
     public void esborrarUsuari(String id) {
         if(idIsValid(id)) {
             if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                controladorPresentacio.esborrarUsuari(id);
+                controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
             }
             else {
                 JOptionPane.showMessageDialog(gestioUsuari,"L'usuari no existeix");
