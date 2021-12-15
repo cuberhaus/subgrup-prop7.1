@@ -298,4 +298,9 @@ public class ControladorDomini {
     public void esborrarTotesLesValoracions() {
         //TODO
     }
+
+    public ArrayList<ArrayList<String>> obtenirValoracions() {
+        //TODO
+        return new ArrayList<>();
+    }
 }

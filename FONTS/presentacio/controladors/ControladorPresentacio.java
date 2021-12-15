@@ -195,4 +195,8 @@ public class ControladorPresentacio {
     public void esborrarTotesLesValoracions() {
         controladorDomini.esborrarTotesLesValoracions();
     }
+
+    public ArrayList<ArrayList<String>> obtenirValoracions() {
+        return controladorDomini.obtenirValoracions();
+    }
 }

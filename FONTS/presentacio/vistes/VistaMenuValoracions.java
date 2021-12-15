@@ -3,8 +3,10 @@ package presentacio.vistes;
 import presentacio.controladors.ControladorGestioValoracions;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -29,6 +31,7 @@ public class VistaMenuValoracions extends JPanel {
     private static JFileChooser jFileChooser;
     private static JButton conjuntDeValoracionsButton;
 
+    private static JTable llistaValoracions;
     private static ControladorGestioValoracions controladorGestioValoracions = null;
 
     private VistaMenuValoracions() {
@@ -37,10 +40,30 @@ public class VistaMenuValoracions extends JPanel {
     public static VistaMenuValoracions obtenirInstancia() {
         if (instancia == null) {
             instancia = new VistaMenuValoracions();
-            inicialitzarGestioValoracions();
             controladorGestioValoracions = ControladorGestioValoracions.obtenirInstancia();
+            inicialitzarGestioValoracions();
+            inicialitzarLlistaValoracions();
         }
         return instancia;
+    }
+
+    private static void inicialitzarLlistaValoracions() {
+        ArrayList<String> nomsColumnes = new ArrayList<>();
+        nomsColumnes.add("userId");
+        nomsColumnes.add("itemId");
+        nomsColumnes.add("ratings");
+        // TODO: revisar que això està bé i que l'ordre de les columnes i els atributs és el mateix
+        // TODO: potser cal un JScrollPane per la taula
+        DefaultTableModel llistaValoracionsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 1);
+        llistaValoracions = new JTable(llistaValoracionsTableModel);
+        ArrayList<ArrayList<String>> valoracions = controladorGestioValoracions.obtenirValoracions();
+        for (ArrayList<String> valoracio : valoracions) {
+            llistaValoracionsTableModel.addRow(valoracio.toArray());
+        }
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+
+        instancia.add(llistaValoracions, gridBagConstraints);
     }
 
     private static void inicialitzarGestioValoracions() {
