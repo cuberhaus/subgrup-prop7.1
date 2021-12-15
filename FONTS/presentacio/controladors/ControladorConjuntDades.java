@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import presentacio.vistes.ConjuntDades;
+import presentacio.vistes.VistaConjuntDades;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ControladorConjuntDades {
     private static ControladorConjuntDades instanciaUnica;
     private static ControladorPresentacio controladorPresentacio;
-    private static ConjuntDades conjuntDades;
+    private static VistaConjuntDades vistaConjuntDades;
 
     private ControladorConjuntDades() {
     }
@@ -20,7 +20,7 @@ public class ControladorConjuntDades {
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorConjuntDades();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            conjuntDades = ConjuntDades.obtenirInstancia();
+            vistaConjuntDades = VistaConjuntDades.obtenirInstancia();
         }
         return instanciaUnica;
     }

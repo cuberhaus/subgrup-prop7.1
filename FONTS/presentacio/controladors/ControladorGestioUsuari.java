@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import presentacio.vistes.GestioUsuari;
+import presentacio.vistes.VistaGestioUsuari;
 
 import javax.swing.*;
 
@@ -13,7 +13,7 @@ public class ControladorGestioUsuari {
 
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorGestioUsuari instanciaUnica;
-    private static GestioUsuari gestioUsuari;
+    private static VistaGestioUsuari vistaGestioUsuari;
 
     private ControladorGestioUsuari() {
     }
@@ -22,7 +22,7 @@ public class ControladorGestioUsuari {
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorGestioUsuari();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            gestioUsuari = GestioUsuari.obtenirInstancia();
+            vistaGestioUsuari = VistaGestioUsuari.obtenirInstancia();
         }
         return instanciaUnica;
     }
@@ -30,11 +30,11 @@ public class ControladorGestioUsuari {
     public boolean idIsValid(String id) {
         if (id == null || id.equals("")) {
             System.out.println("Id text is empty");
-            JOptionPane.showMessageDialog(gestioUsuari,"Id text està buit");
+            JOptionPane.showMessageDialog(vistaGestioUsuari,"Id text està buit");
             return false;
         }
         else if (!id.matches("-?\\d+")){
-            JOptionPane.showMessageDialog(gestioUsuari,"L'id no és un numero natural");
+            JOptionPane.showMessageDialog(vistaGestioUsuari,"L'id no és un numero natural");
             return false;
         }
         return true;
@@ -49,12 +49,12 @@ public class ControladorGestioUsuari {
                     return true;
                 }
                 else {
-                    JOptionPane.showMessageDialog(gestioUsuari,"L'usuari no existeix");
+                    JOptionPane.showMessageDialog(vistaGestioUsuari,"L'usuari no existeix");
                 }
             }
             else {
                 System.out.println("Has de tancar la sessió abans d'obrir-ne un altre");
-                JOptionPane.showMessageDialog(gestioUsuari,"Has de tancar la sessió abans d'obrir-ne un altre");
+                JOptionPane.showMessageDialog(vistaGestioUsuari,"Has de tancar la sessió abans d'obrir-ne un altre");
             }
         }
         return false;
@@ -66,7 +66,7 @@ public class ControladorGestioUsuari {
                 controladorPresentacio.afegirUsuari(Integer.parseInt(id),contrasenya,nom);
             }
             else {
-                JOptionPane.showMessageDialog(gestioUsuari,"L'usuari ja existeix");
+                JOptionPane.showMessageDialog(vistaGestioUsuari,"L'usuari ja existeix");
             }
         }
     }
@@ -77,7 +77,7 @@ public class ControladorGestioUsuari {
                 controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
             }
             else {
-                JOptionPane.showMessageDialog(gestioUsuari,"L'usuari no existeix");
+                JOptionPane.showMessageDialog(vistaGestioUsuari,"L'usuari no existeix");
             }
         }
     }

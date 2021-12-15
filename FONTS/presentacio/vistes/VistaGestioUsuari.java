@@ -10,8 +10,8 @@ import java.util.Objects;
  * @author pol.casacuberta
  */
 
-public class GestioUsuari extends JPanel {
-    private static GestioUsuari instanciaUnica;
+public class VistaGestioUsuari extends JPanel {
+    private static VistaGestioUsuari instanciaUnica;
 
     private static JButton afegirUsuari;
     private static JButton eliminarUsuari;
@@ -30,12 +30,12 @@ public class GestioUsuari extends JPanel {
 
     private static ControladorGestioUsuari controladorGestioUsuari;
 
-    private GestioUsuari() {
+    private VistaGestioUsuari() {
     }
 
-    public static GestioUsuari obtenirInstancia() {
+    public static VistaGestioUsuari obtenirInstancia() {
         if (instanciaUnica == null) {
-            instanciaUnica = new GestioUsuari();
+            instanciaUnica = new VistaGestioUsuari();
             controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
             inicialitzarGestioUsuari();
         }

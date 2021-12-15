@@ -12,8 +12,8 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
  * @author pol.casacuberta
  */
 
-public class GestioValoracions extends JPanel {
-    private static GestioValoracions instanciaUnica;
+public class VistaGestioValoracions extends JPanel {
+    private static VistaGestioValoracions instanciaUnica;
 
     private static GridBagLayout gridBagLayout;
     private static GridBagConstraints gridBagConstraints;
@@ -31,12 +31,12 @@ public class GestioValoracions extends JPanel {
 
     private static ControladorGestioValoracions controladorGestioValoracions = null;
 
-    private GestioValoracions() {
+    private VistaGestioValoracions() {
     }
 
-    public static GestioValoracions obtenirInstancia() {
+    public static VistaGestioValoracions obtenirInstancia() {
         if (instanciaUnica == null) {
-            instanciaUnica = new GestioValoracions();
+            instanciaUnica = new VistaGestioValoracions();
             inicialitzarGestioValoracions();
             controladorGestioValoracions = ControladorGestioValoracions.obtenirInstancia();
         }
