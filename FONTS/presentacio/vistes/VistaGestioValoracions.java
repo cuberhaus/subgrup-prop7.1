@@ -13,7 +13,7 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
  */
 
 public class VistaGestioValoracions extends JPanel {
-    private static VistaGestioValoracions instanciaUnica;
+    private static VistaGestioValoracions instancia;
 
     private static GridBagLayout gridBagLayout;
     private static GridBagConstraints gridBagConstraints;
@@ -35,24 +35,24 @@ public class VistaGestioValoracions extends JPanel {
     }
 
     public static VistaGestioValoracions obtenirInstancia() {
-        if (instanciaUnica == null) {
-            instanciaUnica = new VistaGestioValoracions();
+        if (instancia == null) {
+            instancia = new VistaGestioValoracions();
             inicialitzarGestioValoracions();
             controladorGestioValoracions = ControladorGestioValoracions.obtenirInstancia();
         }
-        return instanciaUnica;
+        return instancia;
     }
 
     public static void inicialitzarGestioValoracions() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
-        instanciaUnica.setLayout(gridBagLayout);
+        instancia.setLayout(gridBagLayout);
 
         usuariIdLabel = new JLabel("Id Usuari: ");
         gridBagConstraints.insets = new Insets(10, 10, 10, 10); // Afegeix padding
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        instanciaUnica.add(usuariIdLabel, gridBagConstraints);
+        instancia.add(usuariIdLabel, gridBagConstraints);
 
         usuariIdText = new JTextField();
         usuariIdText.setColumns(10);
@@ -61,12 +61,12 @@ public class VistaGestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        instanciaUnica.add(usuariIdText, gridBagConstraints);
+        instancia.add(usuariIdText, gridBagConstraints);
 
         itemIdLabel = new JLabel("Id Item: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        instanciaUnica.add(itemIdLabel, gridBagConstraints);
+        instancia.add(itemIdLabel, gridBagConstraints);
 
         itemIdText = new JTextField();
         itemIdText.setColumns(10);
@@ -75,13 +75,13 @@ public class VistaGestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        instanciaUnica.add(itemIdText, gridBagConstraints);
+        instancia.add(itemIdText, gridBagConstraints);
 
 
         valorLabel = new JLabel("Valor: ");
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        instanciaUnica.add(valorLabel, gridBagConstraints);
+        instancia.add(valorLabel, gridBagConstraints);
 
         valorText = new JTextField();
         valorText.setColumns(10);
@@ -90,25 +90,25 @@ public class VistaGestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        instanciaUnica.add(valorText, gridBagConstraints);
+        instancia.add(valorText, gridBagConstraints);
 
         creaValoracio = new JButton("Crea Valoració");
         creaValoracio.addActionListener(e -> controladorGestioValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        instanciaUnica.add(creaValoracio, gridBagConstraints);
+        instancia.add(creaValoracio, gridBagConstraints);
 
         esborraValoracio = new JButton("Esborra valoració");
         esborraValoracio.addActionListener(e -> controladorGestioValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        instanciaUnica.add(esborraValoracio, gridBagConstraints);
+        instancia.add(esborraValoracio, gridBagConstraints);
 
         editaValoracio = new JButton("Edita valoració");
         editaValoracio.addActionListener(e -> controladorGestioValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        instanciaUnica.add(editaValoracio, gridBagConstraints);
+        instancia.add(editaValoracio, gridBagConstraints);
 
         jFileChooser = new JFileChooser();
         jFileChooser.addActionListener(e -> {
@@ -127,6 +127,6 @@ public class VistaGestioValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        instanciaUnica.add(conjuntDeValoracionsButton, gridBagConstraints);
+        instancia.add(conjuntDeValoracionsButton, gridBagConstraints);
     }
 }
