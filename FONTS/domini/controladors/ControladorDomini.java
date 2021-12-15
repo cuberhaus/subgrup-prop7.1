@@ -103,7 +103,7 @@ public class ControladorDomini {
         //TODO:
     }
 
-    public String[] obtenirLlistaConjunts() {
+    public ArrayList<String> obtenirLlistaConjunts() {
         return new String[0];
     }
 
@@ -125,9 +125,9 @@ public class ControladorDomini {
         return false;
     }
 
-    public String[] obtenirNomsTipusItemsCarregats() {
+    public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         // TODO
-        return new String[0];
+        return new ArrayList<>();
     }
 
     public void esborrarTipusItem(String nomTipusItem) {
