@@ -21,8 +21,8 @@ public class VistaDialegEditarItem extends JDialog {
     }
 
     private void inicialitzarDialegEditarItem(String id, Map<String, String> atributs) {
-        setBounds(VistaPantalla.centreHoritzontal( 5 * VistaPantalla.amplada / 8), VistaPantalla.centreVertical(VistaPantalla.altura / 2),
-                5 * VistaPantalla.amplada / 8, VistaPantalla.altura / 2);
+        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
+                5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Edita un ítem");
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());

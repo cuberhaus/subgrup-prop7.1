@@ -41,9 +41,9 @@ public class VistaMenuPrincipal extends JFrame {
 
         instancia.add(panellPrincipal);
         instancia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        instancia.setBounds(VistaPantalla.centreHoritzontal(3 * VistaPantalla.amplada / 4),
-                VistaPantalla.centreVertical(3 * VistaPantalla.altura / 4),
-                3 * VistaPantalla.amplada / 4, 3 * VistaPantalla.altura / 4);
+        instancia.setBounds(Pantalla.centreHoritzontal(3 * Pantalla.amplada / 4),
+                Pantalla.centreVertical(3 * Pantalla.altura / 4),
+                3 * Pantalla.amplada / 4, 3 * Pantalla.altura / 4);
     }
 
     private static void inicialitzarMenuBarra() {
