@@ -48,7 +48,7 @@ public class ConjuntDades extends JPanel {
         gridBagConstraints.gridy = 0;
         instanciaUnica.add(seleccionarConjuntLabel, gridBagConstraints);
 
-        String[] opcions = controladorConjuntDades.obtenirLlistaConjunts();
+        String[] opcions = controladorConjuntDades.obtenirLlistaConjunts().toArray(new String[0]);
         seleccionarConjuntCombo = new JComboBox<>(opcions);
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
