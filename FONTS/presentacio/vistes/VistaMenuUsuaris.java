@@ -9,8 +9,8 @@ import java.awt.*;
  * @author pol.casacuberta
  */
 
-public class VistaGestioUsuari extends JPanel {
-    private static VistaGestioUsuari instancia;
+public class VistaMenuUsuaris extends JPanel {
+    private static VistaMenuUsuaris instancia;
 
     private static JButton afegirUsuari;
     private static JButton eliminarUsuari;
@@ -29,12 +29,12 @@ public class VistaGestioUsuari extends JPanel {
 
     private static ControladorGestioUsuari controladorGestioUsuari;
 
-    private VistaGestioUsuari() {
+    private VistaMenuUsuaris() {
     }
 
-    public static VistaGestioUsuari obtenirInstancia() {
+    public static VistaMenuUsuaris obtenirInstancia() {
         if (instancia == null) {
-            instancia = new VistaGestioUsuari();
+            instancia = new VistaMenuUsuaris();
             controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
             inicialitzarGestioUsuari();
         }

@@ -1,5 +1,8 @@
 package presentacio.controladors;
 
+import presentacio.vistes.VistaDialegCrearTipusItem;
+import presentacio.vistes.VistaDialegEditarTipusItem;
+import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
 import javax.swing.*;
@@ -14,6 +17,9 @@ public class ControladorMenuTipusItem {
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuTipusItem instancia;
     private static VistaMenuTipusItem vistaMenuTipusItem;
+    private static VistaDialegCrearTipusItem vistaDialegCrearTipusItem;
+    private static VistaDialegEditarTipusItem vistaDialegEditarTipusItem;
+    private static VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem;
 
     private ControladorMenuTipusItem () {
     }
