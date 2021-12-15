@@ -33,10 +33,12 @@ public class ControladorPersistencia {
         File carpetaItems = direccioCarpetaItems.toFile();
         File[] fitxersItems = carpetaItems.listFiles();
         ArrayList<String> noms = new ArrayList<>();
-        for (File fitxersItem : fitxersItems) {
-            String[] nomPartit = fitxersItem.getName().split("\\.");
-            noms.add(nomPartit[0]);
-            System.out.println();
+        if (fitxersItems != null) {
+            for (File fitxersItem : fitxersItems) {
+                String[] nomPartit = fitxersItem.getName().split("\\.");
+                noms.add(nomPartit[0]);
+                System.out.println();
+            }
         }
         return noms;
     }
