@@ -86,4 +86,12 @@ public class ControladorGestioValoracions {
         //TODO: comprovar que l'arxiu donat té el format correcte
         controladorPresentacio.carregaConjuntValoracions(pathAbsolut);
     }
+
+    public void esborrarTotesLesValoracions() {
+        controladorPresentacio.esborrarTotesLesValoracions();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        return controladorPresentacio.existeixTipusItemSeleccionat();
+    }
 }

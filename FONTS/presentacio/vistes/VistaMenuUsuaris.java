@@ -148,7 +148,7 @@ public class VistaMenuUsuaris extends JPanel {
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
-        exportarConjuntDades = new JButton("Exportar conjunt");
+        exportarConjuntDades = new JButton("Exportar Usuaris");
         exportarConjuntDades.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
@@ -161,7 +161,7 @@ public class VistaMenuUsuaris extends JPanel {
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
-        esborrarConjuntButton = new JButton("Esborrar conjunt");
+        esborrarConjuntButton = new JButton("Esborrar tots els usuaris");
         esborrarConjuntButton.addActionListener(e-> {
             controladorGestioUsuari.esborraConjuntUsuaris();
         });

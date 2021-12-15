@@ -294,4 +294,8 @@ public class ControladorDomini {
         // TODO
         return 0.0;
     }
+
+    public void esborrarTotesLesValoracions() {
+        //TODO
+    }
 }

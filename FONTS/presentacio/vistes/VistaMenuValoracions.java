@@ -128,5 +128,22 @@ public class VistaMenuValoracions extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         instancia.add(conjuntDeValoracionsButton, gridBagConstraints);
+
+        JButton esborrarTotesLesValoracions = new JButton("Esborra totes les valoracions");
+        esborrarTotesLesValoracions.addActionListener(e-> {
+            if (!controladorGestioValoracions.existeixTipusItemSeleccionat()) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            }
+            else {
+                int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar totes les valoracions", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
+                if (resposta == 0) {
+                    controladorGestioValoracions.esborrarTotesLesValoracions();
+                    JOptionPane.showMessageDialog(instancia, "S'han esborrat les valoracions amb èxit");
+                }
+            }
+        });
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        instancia.add(esborrarTotesLesValoracions, gridBagConstraints);
     }
 }

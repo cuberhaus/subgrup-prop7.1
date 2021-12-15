@@ -191,4 +191,8 @@ public class ControladorPresentacio {
     public double avaluarRecomanacio() {
         return controladorDomini.avaluarRecomanacio();
     }
+
+    public void esborrarTotesLesValoracions() {
+        controladorDomini.esborrarTotesLesValoracions();
+    }
 }
