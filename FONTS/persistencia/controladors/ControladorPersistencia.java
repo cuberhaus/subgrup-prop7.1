@@ -10,11 +10,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+
+/**
+ * Controlador per la capa de Persistència.
+ * @author edgar.moreno && pablo.vega
+ */
 public class ControladorPersistencia {
 
     private final Path direccioCarpetaItems = Paths.get("..", "EXE", "dades");
     private final Path direccioCarpetaUsuaris = Paths.get("..", "EXE", "usuaris");
     private final Path direccioCarpetaValoracions = Paths.get("..", "EXE", "valoracions");
+
     private static ControladorPersistencia instancia;
     private final EscriptorDeCSV escriptor;
     private final LectorDeCSV lector;
@@ -29,6 +35,7 @@ public class ControladorPersistencia {
         }
         return instancia;
     }
+
     public ArrayList<String> obtenirNomsConjunts() {
         File carpetaItems = direccioCarpetaItems.toFile();
         File[] fitxersItems = carpetaItems.listFiles();

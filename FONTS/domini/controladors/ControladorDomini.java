@@ -12,13 +12,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Classe que representa el controlador de domini*/
+/**
+ * Classe que representa el controlador de domini
+ * @author edgar.moreno && pablo.vega
+ */
 public class ControladorDomini {
 
     private static ControladorDomini instancia;
     private final ControladorPersistencia controladorPersistencia;
 
     ConjuntUsuaris usuaris;
+
     private ControladorDomini() {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
         usuaris = new ConjuntUsuaris();
@@ -37,10 +41,10 @@ public class ControladorDomini {
      * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV
      * @throws IOException s'ha produït un error en la lectura
      */
-    public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
+    /*public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
         LectorDeCSV lector = new LectorDeCSV();
         return lector.llegirCSV(ubicacio);
-    }
+    }*/
 
     /**
      * Funció que donada la ubicació on es vol escriure el CSV i el seu contingut, escriu el fitxer.
@@ -48,10 +52,10 @@ public class ControladorDomini {
      * @param taula <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV a escriure.
      * @throws IOException s'ha produït un error en l'escriptura
      */
-    public void escriptorCSV(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
+    /*public void escriptorCSV(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
         EscriptorDeCSV escriptor = new EscriptorDeCSV();
         escriptor.escriureCSV(ubicacio, taula);
-    }
+    }*/
 
     /**
      * Obté l'id de l'usuari que ha iniciat la sessió
@@ -77,7 +81,7 @@ public class ControladorDomini {
     }
 
     /**
-     * Afegeix un Usuari, falta donar un paràmetre del conjunt on es vol afegir aquest usuari
+     * Afegeix un Usuari que encara no existeix.
      * @param id id del usuari
      * @param contrasenya contrasenya del usuari
      * @param nom nom del usuari
