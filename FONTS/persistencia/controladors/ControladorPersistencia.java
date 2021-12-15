@@ -1,13 +1,23 @@
 package persistencia.controladors;
 
+import domini.controladors.ControladorDomini;
+
 import java.util.ArrayList;
 
 public class ControladorPersistencia {
-    public ControladorPersistencia() {}
 
+    private static ControladorPersistencia instancia;
+    private ControladorPersistencia() {}
+    public static ControladorPersistencia obtenirInstancia() {
+        if (instancia == null) {
+            instancia = new ControladorPersistencia();
+        }
+        return instancia;
+    }
     public ArrayList<String> obtenirNomsConjunts() {
         return null;
     }
+
     public void guardarConjuntItems(ArrayList<ArrayList<String>> conjunt, String nom) {
     }
     public ArrayList<String> obtenirConjuntItems(String nom) {
