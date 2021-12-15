@@ -6,7 +6,7 @@ import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -89,7 +89,7 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) {
+    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
         controladorPresentacio.seleccionarTipusItem(nomTipusItem);
     }
 

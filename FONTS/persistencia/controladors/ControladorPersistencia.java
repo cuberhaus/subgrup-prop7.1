@@ -74,14 +74,12 @@ public class ControladorPersistencia {
         else if (Files.exists(obteCapsaleraTipusItem(nom))) {
             obteCapsaleraTipusItem(nom).toFile().delete();
         }
-        EscriptorDeCSV escriptorDeCSV = new EscriptorDeCSV();
-        escriptorDeCSV.escriureCSV(obteCapsaleraTipusItem(nom).toString(), tipus_item);
+        escriptor.escriureCSV(obteCapsaleraTipusItem(nom).toString(), tipus_item);
     }
     public ArrayList<ArrayList<String>> obtenirTipusItem(String nom) throws IOException {
-        LectorDeCSV lectorCSV = new LectorDeCSV();
         if(!Files.exists(obteCapsaleraTipusItem(nom)))
             return null;
-        return lectorCSV.llegirCSV(obteCapsaleraTipusItem(nom).toString());
+        return lector.llegirCSV(obteCapsaleraTipusItem(nom).toString());
     }
 
     public void borrarTipusItem(String nom) {
@@ -112,15 +110,13 @@ public class ControladorPersistencia {
         if (Files.exists(path)) {
             path.toFile().delete();
         }
-        EscriptorDeCSV escriptorDeCSV = new EscriptorDeCSV();
-        escriptorDeCSV.escriureCSV(path.toString(), conjunt);
+        escriptor.escriureCSV(path.toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntItems(String tipusItem, String nom) throws IOException {
         nom += ".csv";
-        LectorDeCSV lectorCSV = new LectorDeCSV();
         if(!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom)))
             return null;
-        return lectorCSV.llegirCSV(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom).toString());
+        return lector.llegirCSV(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom).toString());
     }
     public void borrarConjuntItems( String tipusItem, String nom) throws IOException {
         nom += ".csv";
@@ -158,11 +154,9 @@ public class ControladorPersistencia {
     }
 
     public ArrayList<ArrayList<String>> llegirCSVQualsevol(String ubicacio) throws IOException {
-        LectorDeCSV lector = new LectorDeCSV();
         return lector.llegirCSV(ubicacio);
     }
     public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
-        EscriptorDeCSV escriptor = new EscriptorDeCSV();
         escriptor.escriureCSV(ubicacio, taula);
     }
 }
