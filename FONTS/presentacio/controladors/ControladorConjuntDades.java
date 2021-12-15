@@ -2,6 +2,8 @@ package presentacio.controladors;
 
 import presentacio.vistes.VistaConjuntDades;
 
+import java.util.ArrayList;
+
 /**
  * Classe que representa el controlador que gestiona els conjunts de dades
  * @author pol.casacuberta
@@ -23,7 +25,7 @@ public class ControladorConjuntDades {
         return instanciaUnica;
     }
 
-    public String[] obtenirLlistaConjunts() {
+    public ArrayList<String> obtenirLlistaConjunts() {
         return controladorPresentacio.obtenirLlistaConjunts();
     }
 

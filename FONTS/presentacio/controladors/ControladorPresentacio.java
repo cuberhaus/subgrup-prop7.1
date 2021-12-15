@@ -2,6 +2,7 @@ package presentacio.controladors;
 
 import domini.controladors.ControladorDomini;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -22,7 +23,7 @@ public class ControladorPresentacio {
     public static ControladorPresentacio obtenirInstancia() {
         if (instanciaUnica == null) {
             instanciaUnica = new ControladorPresentacio();
-            controladorDomini = new ControladorDomini();
+            controladorDomini = ControladorDomini.obtenirInstancia();
             controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
             controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
@@ -30,7 +31,7 @@ public class ControladorPresentacio {
         return instanciaUnica;
     }
 
-    public String[] obtenirNomsTipusItemsCarregats() {
+    public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
 
@@ -46,11 +47,11 @@ public class ControladorPresentacio {
         return controladorDomini.existeixUsuari(id);
     }
 
-    public void afegirUsuari(String id, String contrasenya, String nom) {
+    public void afegirUsuari(int id, String contrasenya, String nom) {
         controladorDomini.afegirUsuari(id,contrasenya,nom);
     }
 
-    public void esborrarUsuari(String id) {
+    public void esborrarUsuari(int id) {
         controladorDomini.esborrarUsuari(id);
     }
 
@@ -78,7 +79,7 @@ public class ControladorPresentacio {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
     }
 
-    public String[] obtenirLlistaConjunts() {
+    public ArrayList<String> obtenirLlistaConjunts() {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
