@@ -144,7 +144,7 @@ public class ControladorDomini {
 
     /** Retorna els noms dels conjunts d'items coneguts**/
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
-        return null;
+        return new ArrayList<>();
     }
 
     public void esborrarTipusItem(String nomTipusItem) {
