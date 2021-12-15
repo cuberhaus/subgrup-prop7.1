@@ -3,6 +3,7 @@ package presentacio.controladors;
 import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * Classe que representa el controlador que gestiona les valoracions
@@ -11,19 +12,19 @@ import javax.swing.*;
 
 public class ControladorMenuValoracions {
     private static ControladorPresentacio controladorPresentacio;
-    private static ControladorMenuValoracions instanciaUnica;
+    private static ControladorMenuValoracions instancia;
     private static VistaMenuValoracions vistaMenuValoracions;
 
     private ControladorMenuValoracions() {
     }
 
     public static ControladorMenuValoracions obtenirInstancia() {
-        if (instanciaUnica == null){
-            instanciaUnica = new ControladorMenuValoracions();
+        if (instancia == null){
+            instancia = new ControladorMenuValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuValoracions = VistaMenuValoracions.obtenirInstancia();
         }
-        return instanciaUnica;
+        return instancia;
     }
 
     public boolean idUsuariEsValid(String id) {
@@ -85,5 +86,17 @@ public class ControladorMenuValoracions {
     public void carregaConjuntValoracions(String pathAbsolut) {
         //TODO: comprovar que l'arxiu donat té el format correcte
         controladorPresentacio.carregaConjuntValoracions(pathAbsolut);
+    }
+
+    public void esborrarTotesLesValoracions() {
+        controladorPresentacio.esborrarTotesLesValoracions();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        return controladorPresentacio.existeixTipusItemSeleccionat();
+    }
+
+    public ArrayList<ArrayList<String>> obtenirValoracions() {
+        return controladorPresentacio.obtenirValoracions();
     }
 }
