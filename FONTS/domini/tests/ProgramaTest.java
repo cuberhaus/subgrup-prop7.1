@@ -96,8 +96,8 @@ public class ProgramaTest {
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         Usuari u2 = new Usuari(5,true,"Marta","4321");
         p1.afegirUsuari(u1);
-        assertTrue(p1.conteUsuari(u1));
-        assertFalse(p1.conteUsuari(u2));
+        assertTrue(p1.conteUsuari(u1.obtenirId()));
+        assertFalse(p1.conteUsuari(u2.obtenirId()));
     }
 
     @Test
@@ -117,8 +117,8 @@ public class ProgramaTest {
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         Usuari u2 = new Usuari(5,true,"Marta","4321");
         p1.afegirUsuari(u1);
-        assertTrue(p1.conteUsuari(u1));
-        assertFalse(p1.conteUsuari(u2));
+        assertTrue(p1.conteUsuari(u1.obtenirId()));
+        assertFalse(p1.conteUsuari(u2.obtenirId()));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class ProgramaTest {
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3,true,"Pol","1234");
         p1.afegirUsuari(u1);
-        p1.esborraUsuari(u1);
+        p1.esborraUsuari(u1.obtenirId());
 
         Usuari u2 = p1.obtenirUsuari(new Id(3,true));
         assertFalse(u2.isActiu());

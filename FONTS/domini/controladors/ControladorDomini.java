@@ -1,10 +1,8 @@
 package domini.controladors;
 
-import domini.classes.ConjuntUsuaris;
 import domini.classes.Id;
+import domini.classes.Programa;
 import domini.classes.Usuari;
-import persistencia.classes.EscriptorDeCSV;
-import persistencia.classes.LectorDeCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -19,11 +17,10 @@ public class ControladorDomini {
     private static ControladorDomini instancia;
     private final ControladorPersistencia controladorPersistencia;
 
-    ConjuntUsuaris usuaris;
-
+    Programa estat_programa;
     private ControladorDomini() {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
-        usuaris = new ConjuntUsuaris();
+        estat_programa = Programa.obtenirInstancia();
     }
 
     public static ControladorDomini obtenirInstancia() {
@@ -50,7 +47,7 @@ public class ControladorDomini {
      * @param taula <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV a escriure.
      * @throws IOException s'ha produït un error en l'escriptura
      */
-    /*public void escriptorCSV(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
+    /*public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
         EscriptorDeCSV escriptor = new EscriptorDeCSV();
         escriptor.escriureCSV(ubicacio, taula);
     }*/
@@ -75,17 +72,16 @@ public class ControladorDomini {
 
     public boolean existeixUsuari(int id) {
         Id id_bo = new Id(id, true);
-        return usuaris.conte(id_bo) && usuaris.obtenir(id_bo).isActiu();
+        return estat_programa.conteUsuari(id_bo)&& estat_programa.obtenirUsuari(id_bo).isActiu();
     }
 
     /**
      * Afegeix un Usuari que encara no existeix.
-     * @param id id del usuari
-     * @param contrasenya contrasenya del usuari
      * @param nom nom del usuari
+     * @param contrasenya contrasenya del usuari
      */
-    public void afegirUsuari(int id, String contrasenya, String nom) {
-        usuaris.afegir(new Usuari(new Id(id, true), nom, contrasenya));
+    public void afegirUsuari(String nom, String contrasenya) {
+        //TODO:
     }
 
     /**
@@ -93,7 +89,7 @@ public class ControladorDomini {
      * @param id id del usuari
      */
     public void esborrarUsuari(int id) {
-        usuaris.esborrar(new Id(id, true));
+        estat_programa.esborraUsuari(new Id(id, true));
     }
 
     /**
@@ -125,7 +121,7 @@ public class ControladorDomini {
     }
 
     public ArrayList<String> obtenirLlistaConjunts() {
-        return controladorPersistencia.obtenirNomsConjunts();
+        return null;
     }
 
     public void exportarConjuntDades(String pathConjunt) {
@@ -148,7 +144,7 @@ public class ControladorDomini {
 
     /** Retorna els noms dels conjunts d'items coneguts**/
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
-        return controladorPersistencia.obtenirNomsConjunts();
+        return null;
     }
 
     public void esborrarTipusItem(String nomTipusItem) {
@@ -168,6 +164,14 @@ public class ControladorDomini {
     public boolean sessioIniciada() {
         //TODO
         return false;
+    }
+
+    public void exportarConjuntDadesUsuari(String absolutePath) {
+        //TODO
+    }
+
+    public void esborraConjuntUsuaris() {
+        //TODO
     }
 
     public String obtenirNomTipusItemSeleccionat() {

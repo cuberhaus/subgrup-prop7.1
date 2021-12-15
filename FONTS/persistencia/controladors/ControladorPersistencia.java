@@ -17,16 +17,27 @@ import java.util.ArrayList;
  */
 public class ControladorPersistencia {
 
-    private final Path direccioCarpetaItems = Paths.get("..", "EXE", "dades");
-    private final Path direccioCarpetaUsuaris = Paths.get("..", "EXE", "usuaris");
-    private final Path direccioCarpetaValoracions = Paths.get("..", "EXE", "valoracions");
+    private final Path direccioCarpetaItems = Paths.get("..", "EXE", "dades", "items");
+    private final Path direccioCarpetaUsuaris = Paths.get("..", "EXE", "dades", "usuaris");
+    private final Path direccioCarpetaValoracions = Paths.get("..", "EXE", "dades", "valoracions");
 
     private static ControladorPersistencia instancia;
     private final EscriptorDeCSV escriptor;
     private final LectorDeCSV lector;
+
     private ControladorPersistencia() {
         escriptor = new EscriptorDeCSV();
         lector = new LectorDeCSV();
+    }
+
+    private boolean borraDirectori(File directoriABorrar) {
+        File[] contingut = directoriABorrar.listFiles();
+        if (contingut != null) {
+            for (File file : contingut) {
+                borraDirectori(file);
+            }
+        }
+        return directoriABorrar.delete();
     }
 
     public static ControladorPersistencia obtenirInstancia() {
@@ -36,32 +47,86 @@ public class ControladorPersistencia {
         return instancia;
     }
 
-    public ArrayList<String> obtenirNomsConjunts() {
+    public ArrayList<String> obtenirTotsTipusItems() {
         File carpetaItems = direccioCarpetaItems.toFile();
         File[] fitxersItems = carpetaItems.listFiles();
         ArrayList<String> noms = new ArrayList<>();
         if (fitxersItems != null) {
             for (File fitxersItem : fitxersItems) {
-                String[] nomPartit = fitxersItem.getName().split("\\.");
-                noms.add(nomPartit[0]);
-                System.out.println();
+                String nom = fitxersItem.getName();
+                noms.add(nom);
             }
         }
         return noms;
     }
 
-    private String obtePathConjuntItems(String nom) {
-        return direccioCarpetaItems + "/" + nom;
+    private Path obteCarpetaTipusItem(String nom) {
+        return Paths.get(direccioCarpetaItems.toString(), nom);
     }
-    public void guardarConjuntItems(ArrayList<ArrayList<String>> conjunt, String nom) throws IOException {
-        escriptor.escriureCSV(obtePathConjuntItems(nom), conjunt);
+    private Path obteCapsaleraTipusItem(String nom) {
+        return Paths.get(direccioCarpetaItems.toString(),nom, "capsalera.csv");
     }
-    public ArrayList<ArrayList<String>> obtenirConjuntItems(String nom) throws IOException {
-        return lector.llegirCSV(obtePathConjuntItems(nom));
+    public void guardarTipusItem(ArrayList<ArrayList<String>> tipus_item, String nom) throws IOException {
+        Path path = obteCarpetaTipusItem(nom);
+        if (!Files.exists(path)) {
+            Files.createDirectory(path);
+        }
+        else if (Files.exists(obteCapsaleraTipusItem(nom))) {
+            obteCapsaleraTipusItem(nom).toFile().delete();
+        }
+        EscriptorDeCSV escriptorDeCSV = new EscriptorDeCSV();
+        escriptorDeCSV.escriureCSV(obteCapsaleraTipusItem(nom).toString(), tipus_item);
     }
-    public void borrarConjuntItems(String nom) throws IOException {
-        Path conjunt = Paths.get(obtePathConjuntItems(nom));
-        Files.delete(conjunt);
+    public ArrayList<ArrayList<String>> obtenirTipusItem(String nom) throws IOException {
+        LectorDeCSV lectorCSV = new LectorDeCSV();
+        if(!Files.exists(obteCapsaleraTipusItem(nom)))
+            return null;
+        return lectorCSV.llegirCSV(obteCapsaleraTipusItem(nom).toString());
+    }
+
+    public void borrarTipusItem(String nom) {
+        if (Files.exists(obteCarpetaTipusItem(nom))) {
+            borraDirectori(obteCarpetaTipusItem(nom).toFile());
+        }
+    }
+
+    public ArrayList<String> obtenirConjuntsItem(String tipusItem) {
+        File carpetaConjunts = obteCarpetaTipusItem(tipusItem).toFile();
+        File[] fitxersItems = carpetaConjunts.listFiles();
+        ArrayList<String> noms = new ArrayList<>();
+        if (fitxersItems != null) {
+            for (File fitxersItem : fitxersItems) {
+                String nom = fitxersItem.getName();
+                if (!nom.equals("capsalera.csv")) {
+                    String[] nomSeparat = nom.split("\\.");
+                    noms.add(nomSeparat[0]);
+                }
+            }
+        }
+        return noms;
+    }
+
+    public void guardarConjuntItems(ArrayList<ArrayList<String>> conjunt, String tipusItem, String nom) throws IOException {
+        nom += ".csv";
+        Path path = Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom);
+        if (Files.exists(path)) {
+            path.toFile().delete();
+        }
+        EscriptorDeCSV escriptorDeCSV = new EscriptorDeCSV();
+        escriptorDeCSV.escriureCSV(path.toString(), conjunt);
+    }
+    public ArrayList<ArrayList<String>> obtenirConjuntItems(String tipusItem, String nom) throws IOException {
+        nom += ".csv";
+        LectorDeCSV lectorCSV = new LectorDeCSV();
+        if(!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom)))
+            return null;
+        return lectorCSV.llegirCSV(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom).toString());
+    }
+    public void borrarConjuntItems( String tipusItem, String nom) throws IOException {
+        nom += ".csv";
+        if (Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom))) {
+            borraDirectori(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom).toFile());
+        }
     }
 
     private String obtePathConjuntUsuaris(String nom) {
@@ -92,4 +157,12 @@ public class ControladorPersistencia {
         Files.delete(conjunt);
     }
 
+    public ArrayList<ArrayList<String>> llegirCSVQualsevol(String ubicacio) throws IOException {
+        LectorDeCSV lector = new LectorDeCSV();
+        return lector.llegirCSV(ubicacio);
+    }
+    public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
+        EscriptorDeCSV escriptor = new EscriptorDeCSV();
+        escriptor.escriureCSV(ubicacio, taula);
+    }
 }

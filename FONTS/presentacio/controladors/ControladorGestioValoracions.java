@@ -26,7 +26,7 @@ public class ControladorGestioValoracions {
         return instanciaUnica;
     }
 
-    public boolean idUsuariIsValid(String id) {
+    public boolean idUsuariEsValid(String id) {
         if (id == null || id.equals("")) {
             JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'Usuari està buit");
             return false;
@@ -38,7 +38,7 @@ public class ControladorGestioValoracions {
         return true;
     }
 
-    public boolean idItemIsValid(String id) {
+    public boolean idItemEsValid(String id) {
         if (id == null || id.equals("")) {
             JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'item està buit");
             return false;
@@ -55,7 +55,7 @@ public class ControladorGestioValoracions {
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
-        if (idUsuariIsValid(usuariId) && idItemIsValid(itemId)) {
+        if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
                 controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
             } else {
@@ -65,13 +65,13 @@ public class ControladorGestioValoracions {
     }
 
     public void esborraValoracio(String usuariId, String itemId) {
-        if (idUsuariIsValid(usuariId) && idItemIsValid(itemId)) {
+        if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             controladorPresentacio.esborraValoracio(usuariId, itemId);
         }
     }
 
     public void editaValoracio(String usuariId, String itemId, String valor) {
-        if (idUsuariIsValid(usuariId) && idItemIsValid(itemId)) {
+        if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             if (controladorPresentacio.existeixValoracio(usuariId,itemId)) {
                 controladorPresentacio.editarValoracio(usuariId,itemId,valor);
             }
