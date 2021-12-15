@@ -89,11 +89,11 @@ public class Programa {
 
     /**
      * Consultora dona true si l'usuari passat com a parametre existeix en el conjunt
-     * @param usuari usuari
+     * @param id id
      * @return booleà
      */
-    public boolean conteUsuari(Usuari usuari) {
-        return conjuntUsuaris.conte(usuari.obtenirId());
+    public boolean conteUsuari(Id id) {
+        return conjuntUsuaris.conte(id);
     }
 
     /**
@@ -129,9 +129,9 @@ public class Programa {
 
     /**
      * Marca com a no actiu un usuari del conjunt d'usuaris.
-     * @param usuari el paràmetre s'ha marcat com a no actiu.
+     * @param id el paràmetre s'ha marcat com a no actiu.
      */
-    public void esborraUsuari(Usuari usuari) {
-        conjuntUsuaris.esborrar(usuari);
+    public void esborraUsuari(Id id) {
+        conjuntUsuaris.esborrar(id);
     }
 }
