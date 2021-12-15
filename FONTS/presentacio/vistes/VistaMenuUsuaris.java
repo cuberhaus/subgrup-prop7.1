@@ -4,6 +4,10 @@ import presentacio.controladors.ControladorGestioUsuari;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+
+import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 /**
  * @author pol.casacuberta
@@ -28,6 +32,9 @@ public class VistaMenuUsuaris extends JPanel {
     private static JLabel usuariActiuInfo;
 
     private static ControladorGestioUsuari controladorGestioUsuari;
+    private static JFileChooser jFileChooser;
+    private static JButton exportarConjuntDades;
+    private static JButton esborrarConjuntButton;
 
     private VistaMenuUsuaris() {
     }
@@ -41,7 +48,7 @@ public class VistaMenuUsuaris extends JPanel {
         return instancia;
     }
 
-    public static void inicialitzarGestioUsuari() {
+    private static void inicialitzarGestioUsuari() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
@@ -49,24 +56,68 @@ public class VistaMenuUsuaris extends JPanel {
 
         usuariActiuLabel = new JLabel("Usuari actiu:");
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 0;
         instancia.add(usuariActiuLabel, gridBagConstraints);
 
         usuariActiuInfo = new JLabel("Sessio no iniciada");
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 0;
         instancia.add(usuariActiuInfo, gridBagConstraints);
 
-        afegirUsuari = new JButton("Afegir Usuari");
-        afegirUsuari.addActionListener(e -> controladorGestioUsuari.afegirUsuari(idText.getText(), String.valueOf(contrasenyaText.getPassword()), nomText.getText()));
+        nomLabel = new JLabel("Nom: ");
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
+        instancia.add(nomLabel, gridBagConstraints);
+
+        nomText = new JTextField();
+        nomText.setColumns(10);
+        nomText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
+        });
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        instancia.add(nomText, gridBagConstraints);
+
+        idLabel = new JLabel("Id: ");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        instancia.add(idLabel, gridBagConstraints);
+
+        idText = new JTextField();
+        idText.setColumns(10);
+        idText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
+        });
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        instancia.add(idText, gridBagConstraints);
+
+        contrasenyaLabel = new JLabel("Contrasenya: ");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        instancia.add(contrasenyaLabel, gridBagConstraints);
+
+        contrasenyaText = new JPasswordField();
+        contrasenyaText.setColumns(10);
+        contrasenyaText.addActionListener(e -> {
+            // Al pitjar enter fa una acció
+        });
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        instancia.add(contrasenyaText, gridBagConstraints);
+
+        afegirUsuari = new JButton("Afegir Usuari");
+        afegirUsuari.addActionListener(e -> {
+            controladorGestioUsuari.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
+        });
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
         instancia.add(afegirUsuari, gridBagConstraints);
 
         eliminarUsuari = new JButton("Esborrar Usuari");
         eliminarUsuari.addActionListener(e -> controladorGestioUsuari.esborrarUsuari(idText.getText()));
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 5;
         instancia.add(eliminarUsuari, gridBagConstraints);
 
         iniciarSessio = new JButton("Iniciar Sessió");
@@ -79,7 +130,7 @@ public class VistaMenuUsuaris extends JPanel {
             }
         });
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 6;
         instancia.add(iniciarSessio, gridBagConstraints);
 
         tancarSessio = new JButton("Tancar Sessió");
@@ -88,49 +139,32 @@ public class VistaMenuUsuaris extends JPanel {
             usuariActiuInfo.setText("Sessio no iniciada");
         });
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 7;
         instancia.add(tancarSessio, gridBagConstraints);
 
-        idLabel = new JLabel("Id: ");
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        instancia.add(idLabel, gridBagConstraints);
-
-        idText = new JTextField();
-        idText.setColumns(10);
-        idText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
+        jFileChooser = new JFileChooser();
+        jFileChooser.addActionListener(e -> {
         });
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        instancia.add(idText, gridBagConstraints);
 
-        contrasenyaLabel = new JLabel("Contrasenya: ");
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        instancia.add(contrasenyaLabel, gridBagConstraints);
-
-        contrasenyaText = new JPasswordField();
-        contrasenyaText.setColumns(10);
-        contrasenyaText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
+        gridBagConstraints.gridy = 8;
+        exportarConjuntDades = new JButton("Exportar conjunt");
+        exportarConjuntDades.addActionListener(e -> {
+            JDialog pathDialog = new JDialog();
+            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
+            if(estatJfile == APPROVE_OPTION) {
+                File pathConjunt = jFileChooser.getSelectedFile();
+                controladorGestioUsuari.exportarConjuntDadesUsuari(pathConjunt.getAbsolutePath());
+            }
         });
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        instancia.add(contrasenyaText, gridBagConstraints);
+        instancia.add(exportarConjuntDades,gridBagConstraints);
 
-        nomLabel = new JLabel("Nom: ");
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        instancia.add(nomLabel, gridBagConstraints);
-
-        nomText = new JTextField();
-        nomText.setColumns(10);
-        nomText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
+        gridBagConstraints.gridy = 9;
+        esborrarConjuntButton = new JButton("Esborrar conjunt");
+        esborrarConjuntButton.addActionListener(e-> {
+            controladorGestioUsuari.esborraConjuntUsuaris();
         });
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        instancia.add(nomText, gridBagConstraints);
+        instancia.add(esborrarConjuntButton, gridBagConstraints);
     }
 }

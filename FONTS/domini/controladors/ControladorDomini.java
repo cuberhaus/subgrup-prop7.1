@@ -78,12 +78,11 @@ public class ControladorDomini {
 
     /**
      * Afegeix un Usuari, falta donar un paràmetre del conjunt on es vol afegir aquest usuari
-     * @param id id del usuari
-     * @param contrasenya contrasenya del usuari
      * @param nom nom del usuari
+     * @param contrasenya contrasenya del usuari
      */
-    public void afegirUsuari(int id, String contrasenya, String nom) {
-        usuaris.afegir(new Usuari(new Id(id, true), nom, contrasenya));
+    public void afegirUsuari(String nom, String contrasenya) {
+        //TODO:
     }
 
     /**
@@ -166,5 +165,13 @@ public class ControladorDomini {
     public boolean isSessioIniciada() {
         //TODO
         return false;
+    }
+
+    public void exportarConjuntDadesUsuari(String absolutePath) {
+        //TODO
+    }
+
+    public void esborraConjuntUsuaris() {
+        //TODO
     }
 }

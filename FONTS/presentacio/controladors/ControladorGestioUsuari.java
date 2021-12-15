@@ -27,7 +27,7 @@ public class ControladorGestioUsuari {
         return instanciaUnica;
     }
 
-    public boolean idIsValid(String id) {
+    public boolean idEsValid(String id) {
         if (id == null || id.equals("")) {
             System.out.println("Id text is empty");
             JOptionPane.showMessageDialog(vistaMenuUsuaris,"Id text està buit");
@@ -42,7 +42,7 @@ public class ControladorGestioUsuari {
 
     public boolean iniciarSessio(String id, String contrasenya) {
         boolean sessioIniciada = controladorPresentacio.isSessioIniciada();
-        if(idIsValid(id)) {
+        if(idEsValid(id)) {
             if (sessioIniciada) {
                 if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
                     controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
@@ -60,19 +60,12 @@ public class ControladorGestioUsuari {
         return false;
     }
 
-    public void afegirUsuari(String id, String contrasenya, String nom) {
-        if (idIsValid(id)) {
-            if(!controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                controladorPresentacio.afegirUsuari(Integer.parseInt(id),contrasenya,nom);
-            }
-            else {
-                JOptionPane.showMessageDialog(vistaMenuUsuaris,"L'usuari ja existeix");
-            }
-        }
+    public void afegirUsuari(String nom, String contrasenya) {
+        controladorPresentacio.afegirUsuari(nom,contrasenya);
     }
 
     public void esborrarUsuari(String id) {
-        if(idIsValid(id)) {
+        if(idEsValid(id)) {
             if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
                 controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
             }
@@ -84,5 +77,13 @@ public class ControladorGestioUsuari {
 
     public void tancarSessio() {
         controladorPresentacio.tancarSessio();
+    }
+
+    public void exportarConjuntDadesUsuari(String absolutePath) {
+        controladorPresentacio.exportarConjuntDadesUsuari(absolutePath);
+    }
+
+    public void esborraConjuntUsuaris() {
+        controladorPresentacio.esborraConjuntUsuaris();
     }
 }

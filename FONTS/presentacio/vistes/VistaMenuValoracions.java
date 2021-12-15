@@ -43,7 +43,7 @@ public class VistaMenuValoracions extends JPanel {
         return instancia;
     }
 
-    public static void inicialitzarGestioValoracions() {
+    private static void inicialitzarGestioValoracions() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         instancia.setLayout(gridBagLayout);

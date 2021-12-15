@@ -47,8 +47,8 @@ public class ControladorPresentacio {
         return controladorDomini.existeixUsuari(id);
     }
 
-    public void afegirUsuari(int id, String contrasenya, String nom) {
-        controladorDomini.afegirUsuari(id,contrasenya,nom);
+    public void afegirUsuari(String nom, String contrasenya) {
+        controladorDomini.afegirUsuari(nom,contrasenya);
     }
 
     public void esborrarUsuari(int id) {
@@ -113,5 +113,13 @@ public class ControladorPresentacio {
 
     public boolean isSessioIniciada() {
         return controladorDomini.isSessioIniciada();
+    }
+
+    public void exportarConjuntDadesUsuari(String absolutePath) {
+        controladorDomini.exportarConjuntDadesUsuari(absolutePath);
+    }
+
+    public void esborraConjuntUsuaris() {
+        controladorDomini.esborraConjuntUsuaris();
     }
 }
