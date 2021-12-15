@@ -12,7 +12,7 @@ public class Programa {
     private Sessio sessio = new SessioNoIniciada();
 
     /** Conté l'única instància de Programa */
-    private static Programa instanciaUnica = null;
+    private static Programa instancia = null;
 
     /** Conté el conjunt d'usuaris */
     private ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
@@ -32,10 +32,10 @@ public class Programa {
      * @return <code>Programa</code>
      */
     public static Programa obtenirInstancia() {
-        if (instanciaUnica == null) {
-            instanciaUnica = new Programa();
+        if (instancia == null) {
+            instancia = new Programa();
         }
-        return instanciaUnica;
+        return instancia;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Programa {
      */
     public void reset() {
         sessio = new SessioNoIniciada();
-        instanciaUnica = null;
+        instancia = null;
         conjuntUsuaris = new ConjuntUsuaris();
         tipusItems = new HashSet<>();
     }
