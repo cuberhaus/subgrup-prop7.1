@@ -1,6 +1,6 @@
 package presentacio.vistes;
 
-import presentacio.controladors.ControladorGestioValoracions;
+import presentacio.controladors.ControladorMenuValoracions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +29,7 @@ public class VistaMenuValoracions extends JPanel {
     private static JFileChooser jFileChooser;
     private static JButton conjuntDeValoracionsButton;
 
-    private static ControladorGestioValoracions controladorGestioValoracions = null;
+    private static ControladorMenuValoracions controladorMenuValoracions = null;
 
     private VistaMenuValoracions() {
     }
@@ -38,7 +38,7 @@ public class VistaMenuValoracions extends JPanel {
         if (instancia == null) {
             instancia = new VistaMenuValoracions();
             inicialitzarGestioValoracions();
-            controladorGestioValoracions = ControladorGestioValoracions.obtenirInstancia();
+            controladorMenuValoracions = ControladorMenuValoracions.obtenirInstancia();
         }
         return instancia;
     }
@@ -93,19 +93,19 @@ public class VistaMenuValoracions extends JPanel {
         instancia.add(valorText, gridBagConstraints);
 
         creaValoracio = new JButton("Crea Valoració");
-        creaValoracio.addActionListener(e -> controladorGestioValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText()));
+        creaValoracio.addActionListener(e -> controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         instancia.add(creaValoracio, gridBagConstraints);
 
         esborraValoracio = new JButton("Esborra valoració");
-        esborraValoracio.addActionListener(e -> controladorGestioValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText()));
+        esborraValoracio.addActionListener(e -> controladorMenuValoracions.esborraValoracio(usuariIdText.getText(), itemIdText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         instancia.add(esborraValoracio, gridBagConstraints);
 
         editaValoracio = new JButton("Edita valoració");
-        editaValoracio.addActionListener(e -> controladorGestioValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
+        editaValoracio.addActionListener(e -> controladorMenuValoracions.editaValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         instancia.add(editaValoracio, gridBagConstraints);
@@ -122,7 +122,7 @@ public class VistaMenuValoracions extends JPanel {
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjuntVal = jFileChooser.getSelectedFile();
                 System.out.println(pathConjuntVal.getAbsolutePath());
-                controladorGestioValoracions.carregaConjuntValoracions(pathConjuntVal.getAbsolutePath());
+                controladorMenuValoracions.carregaConjuntValoracions(pathConjuntVal.getAbsolutePath());
             }
         });
         gridBagConstraints.gridx = 0;

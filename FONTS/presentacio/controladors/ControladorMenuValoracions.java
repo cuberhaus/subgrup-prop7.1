@@ -9,17 +9,17 @@ import javax.swing.*;
  * @author pol.casacuberta
  */
 
-public class ControladorGestioValoracions {
+public class ControladorMenuValoracions {
     private static ControladorPresentacio controladorPresentacio;
-    private static ControladorGestioValoracions instanciaUnica;
+    private static ControladorMenuValoracions instanciaUnica;
     private static VistaMenuValoracions vistaMenuValoracions;
 
-    private ControladorGestioValoracions() {
+    private ControladorMenuValoracions() {
     }
 
-    public static ControladorGestioValoracions obtenirInstancia() {
+    public static ControladorMenuValoracions obtenirInstancia() {
         if (instanciaUnica == null){
-            instanciaUnica = new ControladorGestioValoracions();
+            instanciaUnica = new ControladorMenuValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuValoracions = VistaMenuValoracions.obtenirInstancia();
         }

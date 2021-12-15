@@ -13,8 +13,8 @@ import java.util.Set;
 public class ControladorPresentacio {
 
     private static ControladorDomini controladorDomini;
-    private static ControladorPresentacio instanciaUnica = null;
-    private static ControladorGestioUsuari controladorGestioUsuari;
+    private static ControladorPresentacio instancia;
+    private static ControladorMenuUsuaris controladorMenuUsuaris;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
     private static ControladorMenuTipusItem controladorMenuTipusItem;
 
@@ -22,14 +22,14 @@ public class ControladorPresentacio {
     }
 
     public static ControladorPresentacio obtenirInstancia() {
-        if (instanciaUnica == null) {
-            instanciaUnica = new ControladorPresentacio();
+        if (instancia == null) {
+            instancia = new ControladorPresentacio();
             controladorDomini = ControladorDomini.obtenirInstancia();
             controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
-            controladorGestioUsuari = ControladorGestioUsuari.obtenirInstancia();
+            controladorMenuUsuaris = ControladorMenuUsuaris.obtenirInstancia();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         }
-        return instanciaUnica;
+        return instancia;
     }
 
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
