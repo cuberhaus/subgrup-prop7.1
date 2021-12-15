@@ -1,9 +1,9 @@
 Contingut de la carpeta:
--Capa Presentació.pdf -> diagrama de classes de la capa de presentació.
+-Capa Presentacio.pdf -> diagrama de classes de la capa de presentacio.
 -Capa Domini.pdf -> diagrama de classes de la capa de domini.
--Capa Persistència -> diagrama de classes de la capa de persistència.
+-Capa Persistencia -> diagrama de classes de la capa de persistencia.
 -Disseny de classes.pdf -> diagrama de classes de les 3 capes conjuntes.
 
-El fitxer _.pdf, conté la part de breu descripció de les estructures de dades i algorismes utilitzats per implementar
-les funcions principals del programa; i la breu descripció d'atributs i mètodes de cada classe. S'ha redactat una breu
-explicació de cada classe, una mica de motivació d'aquesta i el motiu de la creació.
+El fitxer _.pdf, conte la part de breu descripcio de les estructures de dades i algorismes utilitzats per implementar
+les funcions principals del programa; i la breu descripcio d'atributs i metodes de cada classe. S'ha redactat una breu
+explicacio de cada classe, una mica de motivacio d'aquesta i el motiu de la creacio.
