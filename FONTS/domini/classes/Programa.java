@@ -23,7 +23,7 @@ public class Programa {
     private ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
 
     /**
-     * Conté el conjunt de tipus d'items
+     * Conté el conjunt de tipus d'ítems
      */
     private HashSet<TipusItem> tipusItems = new HashSet<>();
 
@@ -129,7 +129,7 @@ public class Programa {
     }
 
     /**
-     * Afegeix un tipus d'item al conjunt de tipus d'items.
+     * Afegeix un tipus d'ítem al conjunt de tipus d'ítems.
      * Retorna true si s'ha afegit correctament, retorna false si ja hi era
      *
      * @param tipusItem el paràmetre s'ha afegit al conjunt si no hi era abans.

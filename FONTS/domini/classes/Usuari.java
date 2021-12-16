@@ -18,7 +18,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      */
     private final Id id;
     /**
-     * Conté el conjunt d'items valorat per l'usuari
+     * Conté el conjunt d'ítems valorat per l'usuari
      */
     private final Map<Item, Valoracio> valoracions;
     /**
@@ -177,7 +177,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     }
 
     /**
-     * Consultora d'una valoració feta per l'usuari a l'item passat com a parametre
+     * Consultora d'una valoració feta per l'usuari a l'ítem passat com a paràmetre
      *
      * @param item item valorat
      * @return El resultat és el valor del paràmetre implícit o null si no existeix
@@ -191,8 +191,8 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     }
 
     /**
-     * Donat un conjunt d'items es retorna un punt de dimensio el cardinal del conjunt on cada coordenada correspon
-     * a la valoració d'un item per l'usuari. Si l'usuari no ha valorat l'ítem es marca amb un -1.
+     * Donat un conjunt d'ítems es retorna un punt de dimensió el cardinal del conjunt on cada coordenada correspon
+     * a la valoració d'un item per l'usuari. Si l'usuari no ha valorat l'ítem, es marca amb un -1.
      *
      * @param conjuntItems Items considerats per la conversió a punt.
      * @return El <code>Punt</code> corresponent a l'usuari.
@@ -209,7 +209,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     }
 
     /**
-     * Retorna true si la contrasenya passada com a paràmetre es igual a la del paràmetre implícit
+     * Retorna true si la contrasenya passada com a paràmetre és igual a la del paràmetre implícit
      *
      * @param contrasenya El paràmetre contrasenya pren el nou valor.
      * @return booleà retornat
@@ -242,7 +242,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
 
     /**
      * Retorna un enter negatiu quan l'usuari passat per paràmetre és major que el paràmetre implícit.
-     * Retorna un 0 si son iguals
+     * Retorna un 0 si són iguals
      * Retorna un enter positiu si l'usuari passat per paràmetre és menor que el paràmetre implícit
      */
     @Override
@@ -251,7 +251,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     }
 
     /**
-     * Retorna una copia de l'usuari del paràmetre implícit
+     * Retorna una còpia de l'usuari del paràmetre implícit
      *
      * @return usuari copiat
      */

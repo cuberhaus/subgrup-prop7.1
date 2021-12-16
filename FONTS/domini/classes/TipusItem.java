@@ -27,7 +27,7 @@ public class TipusItem {
     }
 
     /**
-     * Constructor d'un TipusItem donat el nom i el <code>Map&lt;String, TipusAtribut&gt;</code> que conte els tipus d'atributs.
+     * Constructor d'un TipusItem donat el nom i el <code>Map&lt;String, TipusAtribut&gt;</code> que conté els tipus d'atributs.
      * @param nom Nom del TipusItem
      * @param tipusAtributs <code>Map&lt;String, TipusAtribut&gt;</code> amb els tipus d'atributs
      */
@@ -114,14 +114,14 @@ public class TipusItem {
 
     /**
      * Assigna els tipusAtributs d'un TipusItem.
-     * @param tipusAtributs <code>Map&lt;String, TipusAtribut&gt;</code> que conte els tipus d'atributs.
+     * @param tipusAtributs <code>Map&lt;String, TipusAtribut&gt;</code> que conté els tipus d'atributs.
      */
     public void assignarTipusAtributs(Map<String, TipusAtribut> tipusAtributs) {
         this.tipusAtributs = tipusAtributs;
     }
 
     /**
-     * @return <code>Map&lt;String, TipusAtribut&gt;</code> que conte els <code>tipusAtributs</code> del <code>TipusItem</code>.
+     * @return <code>Map&lt;String, TipusAtribut&gt;</code> que conté els <code>tipusAtributs</code> del <code>TipusItem</code>.
      */
     public Map<String, TipusAtribut> obtenirTipusAtributs() {
         Map<String, TipusAtribut> copiaTipusAtributs = new TreeMap<>();
@@ -133,7 +133,7 @@ public class TipusItem {
 
     /**
      * Afegeix el TipusAtribut amb el nom donat als tipus d'atributs d'un TipusItem
-     * Si 'tipusAtributsja' contenia un tipus d'atribut amb el nom donat, el sobreescriu.
+     * Si 'tipusAtributs' ja contenia un tipus d'atribut amb el nom donat, el sobreescriu.
      * @param nomTipusAtribut Nom del TipusAtribut que s'afegirà als 'tipusAtributs' del TipusItem.
      * @param tipusAtribut TipusAtribut que s'afegirà als 'tipusAtributs' del TipusItem
      */

@@ -6,7 +6,7 @@ import domini.classes.csv.TaulaCSV;
 import java.util.*;
 
 /**
- * Classe que representa un conjunt d'items
+ * Classe que representa un conjunt d'ítems
  * @author pablo.vega
  */
 
@@ -14,10 +14,10 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
     protected TipusItem tipusItem;
 
     /**
-     * Constructora de Conjunt d'items.
-     * @param nomTipusItem <code>String</code> nom del tipus d'item.
+     * Constructora de Conjunt d'ítems.
+     * @param nomTipusItem <code>String</code> nom del tipus d'ítem.
      * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
-     * @throws Exception si id no es correcte o l'item creat ja es al conjunt.
+     * @throws Exception si id no és correcte o l'ítem creat ja és al conjunt.
      */
     public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws Exception {
         taula.eliminarEspaisInnecessaris();
@@ -41,8 +41,8 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
     }
 
     /**
-     * Creacio d'un conjunt d'items buit.
-     * @param tipusItem <code>TipusItem</code> el tipus d'item dels objectes.
+     * Creació d'un conjunt d'ítems buit.
+     * @param tipusItem <code>TipusItem</code> el tipus d'ítem dels objectes.
      */
     public ConjuntItems(TipusItem tipusItem) {
         this.tipusItem = tipusItem;
@@ -50,9 +50,9 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
     }
 
     /**
-     * Creacio d'un conjunt d'items a partir d'un TipusItem i un contenidor de Id-Item
-     * @param tipusItem <code>TipusItem</code> del tipus d'item de tot el conjunt.
-     * @param elements <code>TreeMap&lt;Id, Item&gt;</code> conte la relacio id-item
+     * Creació d'un conjunt d'ítems a partir d'un TipusItem i un contenidor de Id-Item
+     * @param tipusItem <code>TipusItem</code> del tipus d'ítem de tot el conjunt.
+     * @param elements <code>TreeMap&lt;Id, Item&gt;</code> conte la relació id-item
      */
     public ConjuntItems(TipusItem tipusItem, TreeMap<Id, Item> elements) {
         this.tipusItem = tipusItem;

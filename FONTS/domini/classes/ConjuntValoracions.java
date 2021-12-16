@@ -25,7 +25,7 @@ public class ConjuntValoracions {
      * Afegeix un conjunt de valoracions al Paràmetre implícit a partir de:
      *
      * @param valoracions Una taula de valoracions
-     * @param items       un conjunt d'items
+     * @param items       un conjunt d'ítems
      * @param usuaris     un conjunt d'usuaris
      * @throws Exception no s'ha pogut eliminar els espais
      */
@@ -73,7 +73,7 @@ public class ConjuntValoracions {
      * Retorna la valoració anterior amb el mateix usuari i item o null si no existia.
      *
      * @param valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
-     * @return Valoracio anterior
+     * @return Valoració anterior
      */
     public Valoracio afegir(Valoracio valoracio) {
         return valoracions.put(new Pair<>(valoracio.obtenirUsuari(), valoracio.obtenirItem()), valoracio);
@@ -84,7 +84,7 @@ public class ConjuntValoracions {
      *
      * @param usuari usuari que fa la valoració
      * @param item   item valorat
-     * @return Valoracio esborrada
+     * @return Valoració esborrada
      */
     public Valoracio esborrar(Usuari usuari, Item item) {
         return valoracions.remove(new Pair<>(usuari, item));

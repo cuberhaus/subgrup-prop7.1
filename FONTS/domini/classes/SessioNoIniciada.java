@@ -10,7 +10,7 @@ public class SessioNoIniciada extends Sessio {
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
      *
-     * @throws IllegalStateException si l'estat es sessioNoIniciada
+     * @throws IllegalStateException si l'estat és sessioNoIniciada
      */
     @Override
     public void tancarSessio(Programa programa) throws IllegalStateException {
@@ -39,7 +39,7 @@ public class SessioNoIniciada extends Sessio {
     /**
      * Retorna l'usuari amb la sessio iniciada.
      *
-     * @throws IllegalStateException si l'estat es sessioNoIniciada
+     * @throws IllegalStateException si l'estat és sessioNoIniciada
      */
     @Override
     public Usuari obtenirUsuariSessioIniciada() throws IllegalStateException {
