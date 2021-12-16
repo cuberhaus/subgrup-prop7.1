@@ -66,7 +66,7 @@ public class Programa {
     /**
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
      *
-     * @param usuari Usuari amb el qual iniciem la sessio.
+     * @param usuari Usuari amb el qual iniciem la sessió.
      */
     public void iniciarSessio(Usuari usuari) {
         sessio.iniciarSessio(this, usuari);
@@ -75,14 +75,14 @@ public class Programa {
     /**
      * Canvia l'estat de la sessió a SessioTancada
      *
-     * @param sessio estat de la sessio
+     * @param sessio estat de la sessió
      */
     public void cambiarEstat(Sessio sessio) {
         this.sessio = sessio;
     }
 
     /**
-     * Retorna true si la sessio està iniciada.
+     * Retorna true si la sessió està iniciada.
      *
      * @return <code>boolean</code>
      */
@@ -91,7 +91,7 @@ public class Programa {
     }
 
     /**
-     * Retorna l'usuari amb la sessio iniciada.
+     * Retorna l'usuari amb la sessió iniciada.
      *
      * @return Usuari
      */
@@ -100,7 +100,7 @@ public class Programa {
     }
 
     /**
-     * Consultora dona true si l'usuari passat com a parametre existeix en el conjunt
+     * Consultora dona true si l'usuari passat com a paràmetre existeix en el conjunt
      *
      * @param id id
      * @return booleà
