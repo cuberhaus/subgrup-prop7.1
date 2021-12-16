@@ -13,16 +13,16 @@ public class SlopeOne {
     /** Numero de valoracions processades */
     private final int numValoracions;
 
-    /** Valoracions reals dels usuaris, <code>valoracions[i][j]</code> conté la valoració de l'usuari i a l'item j */
+    /** Valoracions reals dels usuaris, <code>valoracions[i][j]</code> conté la valoració de l'usuari i a l'ítem j */
     private final Double[][] valoracions;
-    /** Prediccions de l'algorisme, <code>prediccions[i][j]</code> conté la predicció de l'usuari i a l'item j */
+    /** Prediccions de l'algorisme, <code>prediccions[i][j]</code> conté la predicció de l'usuari i a l'ítem j */
     private final Double[][] prediccions;
-    /** Desviacions entre ítems, <code>desviacions[i][j]</code> conté la desviació de l'item i respecte el j */
+    /** Desviacions entre ítems, <code>desviacions[i][j]</code> conté la desviació de l'ítem i respecte al j */
     private final Double[][] desviacions;
 
     /**
-     * @param valoracions Matriu rectangular. <code>prediccions[i][j]</code> conté la predicció de l'usuari a l'item j
-     *                    Si la valoració no es coneguda hi ha un valor de <code>null</code>.
+     * @param valoracions Matriu rectangular. <code>prediccions[i][j]</code> conté la predicció de l'usuari a l'ítem j
+     *                    Si la valoració no és coneguda, hi ha un valor de <code>null</code>.
      */
     public SlopeOne(Double[][] valoracions) {
         numUsuaris = valoracions.length;
@@ -68,7 +68,7 @@ public class SlopeOne {
     /**
      * @param usuari un nombre 0..num_usuaris-1 que correspon al mateix ordre que a l'entrada inicial.
      * @param item un nombre 0..num_items-1 que correspon al mateix ordre que a l'entrada inicial.
-     * @return la predicció del usuari al item
+     * @return la predicció de l'usuari a l'ítem
      */
     public double getPrediccio(int usuari, int item) {
         if (prediccions[usuari][item] != null)

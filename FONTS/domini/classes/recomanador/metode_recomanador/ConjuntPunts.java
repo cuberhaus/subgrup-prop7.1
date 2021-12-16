@@ -25,7 +25,7 @@ public class ConjuntPunts extends TreeMap<Integer, Punt> {
     }
 
     /**
-     * @return La dimensió dels punts del conjunt o -1 si esta buit.
+     * @return La dimensió dels punts del conjunt o -1 si està buit.
      */
     public int obtenirDimensio() {
         return dimensio;
@@ -39,7 +39,7 @@ public class ConjuntPunts extends TreeMap<Integer, Punt> {
     }
 
     /**
-     * @return una copia del punt baricentre del conjunt o null si el conjunt es buit.
+     * @return una còpia del punt baricentre del conjunt o null si el conjunt és buit.
      */
     public Punt obtenirBaricentre() { return (Punt) baricentre.clone(); }
 

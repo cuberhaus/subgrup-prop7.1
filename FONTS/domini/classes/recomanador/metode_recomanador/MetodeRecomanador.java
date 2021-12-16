@@ -14,7 +14,7 @@ import java.util.TreeMap;
 public abstract class MetodeRecomanador {
     /** Conjunt d'usuaris per defecte **/
     protected final ConjuntUsuaris usuaris;
-    /** Conjunt d'items per defecte **/
+    /** Conjunt d'ítems per defecte **/
     protected final ConjuntItems items;
     /** Conjunt de valoracions per defecte **/
     protected final ConjuntValoracions valoracionsPubliques;
@@ -45,9 +45,9 @@ public abstract class MetodeRecomanador {
     /**
      * Genera recomanacions per l'usuari donat.
      * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
-     * @param itemsRecomanables Items que es poden recomanar al usuari.
+     * @param itemsRecomanables Items que es poden recomanar a l'usuari.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
-     * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades, extreura les valoracions de les valoracions publiques de l'usuari.
+     * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades, extreurà les valoracions de les valoracions públiques de l'usuari.
      */
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems itemsRecomanables, int numRecomanacions) {
         ConjuntValoracions valoracions = new ConjuntValoracions();
@@ -78,7 +78,7 @@ public abstract class MetodeRecomanador {
      * Genera recomanacions per l'usuari donat. Usa les valoracions generades per l'usuari de les valoracions per defecte.
      * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
      * @param conjuntRecomanable conjunt de <code>Item</code> d'on s'extrauran les recomanacions.
-     * @param valoracionsUsuari valoracions que s'utilitzaran per les recomanacions.
+     * @param valoracionsUsuari valoracions que s'utilitzaran per a les recomanacions.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */

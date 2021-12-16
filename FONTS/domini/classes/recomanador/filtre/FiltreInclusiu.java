@@ -22,7 +22,7 @@ public class FiltreInclusiu extends Filtre {
      * Només conserva el atributs amb els noms del filtre del conjunt d'ítems donat. Si un nom no es correspon amb cap
      * atribut del conjunt, s'ignora.
      * @param conjuntItems Conjunt d'Items per filtrar.
-     * @throws IllegalArgumentException si el conjunt d'items donat és nul.
+     * @throws IllegalArgumentException si el conjunt d'ítems donat és nul.
      */
     @Override
     public void filtrar(ConjuntItems conjuntItems) throws IllegalArgumentException {
