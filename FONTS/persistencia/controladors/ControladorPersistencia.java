@@ -47,7 +47,7 @@ public class ControladorPersistencia {
         return instancia;
     }
 
-    public ArrayList<String> obtenirTotsTipusItems() {
+    public ArrayList<String> obtenirNomsDeTotsElsTipusItems() {
         File carpetaItems = direccioCarpetaItems.toFile();
         File[] fitxersItems = carpetaItems.listFiles();
         ArrayList<String> noms = new ArrayList<>();
