@@ -104,8 +104,8 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
 
-    public boolean sessioIniciada() {
-        return controladorDomini.sessioIniciada();
+    public boolean esSessioIniciada() {
+        return controladorDomini.esSessioIniciada();
     }
 
     public void exportarConjuntUsuaris(String absolutePath) {

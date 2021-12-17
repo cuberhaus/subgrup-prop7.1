@@ -209,7 +209,7 @@ public class ControladorDomini {
         return new HashMap<>();
     }
 
-    public boolean sessioIniciada() {
+    public boolean esSessioIniciada() {
         //TODO
         return false;
     }

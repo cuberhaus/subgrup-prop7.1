@@ -3,9 +3,7 @@ package presentacio.controladors;
 import presentacio.vistes.VistaMenuItems;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class ControladorMenuItems {
 
@@ -61,6 +59,6 @@ public class ControladorMenuItems {
     }
 
     public boolean sessioIniciada() {
-        return controladorPresentacio.sessioIniciada();
+        return controladorPresentacio.esSessioIniciada();
     }
 }
