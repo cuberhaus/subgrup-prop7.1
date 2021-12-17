@@ -109,6 +109,7 @@ public class ControladorPresentacio {
     }
 
     public void exportarConjuntUsuaris(String absolutePath) {
+        //EM POTS ENVIAR LA CARPETA EN COMPTES DE L'ARXIU
         controladorDomini.exportarConjuntDadesUsuari(absolutePath);
     }
 
