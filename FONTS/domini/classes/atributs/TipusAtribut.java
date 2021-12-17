@@ -29,6 +29,10 @@ public class TipusAtribut {
         this.distancia = distancia;
     }
 
+    // TODO: Maria
+    public TipusAtribut(String valor, String distancia) {
+
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

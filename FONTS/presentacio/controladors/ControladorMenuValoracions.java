@@ -77,7 +77,7 @@ public class ControladorMenuValoracions {
         }
     }
 
-    public void carregarConjuntValoracions(String rutaAbsoluta) {
+    public void carregarConjuntValoracions(String rutaAbsoluta) throws Exception {
         //TODO: comprovar que l'arxiu donat té el format correcte
         controladorPresentacio.carregarConjuntValoracions(rutaAbsoluta);
     }
