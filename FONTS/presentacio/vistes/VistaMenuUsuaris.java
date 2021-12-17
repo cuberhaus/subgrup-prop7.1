@@ -3,9 +3,12 @@ package presentacio.vistes;
 import presentacio.controladors.ControladorMenuUsuaris;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -35,6 +38,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static JFileChooser jFileChooser;
     private static JButton exportarConjuntDades;
     private static JButton esborrarConjuntButton;
+    private static JTable llistaUsuaris;
 
     private VistaMenuUsuaris() {
     }
@@ -44,8 +48,43 @@ public class VistaMenuUsuaris extends JPanel {
             instancia = new VistaMenuUsuaris();
             controladorMenuUsuaris = ControladorMenuUsuaris.obtenirInstancia();
             inicialitzarMenuUsuaris();
+            inicialitzarLlistaUsuaris();
         }
         return instancia;
+    }
+
+    private static void inicialitzarLlistaUsuaris() {
+        ArrayList<String> nomsColumnes = new ArrayList<>();
+        nomsColumnes.add("nom");
+        nomsColumnes.add("userid");
+        nomsColumnes.add("esActiu");
+        // TODO: revisar que això està bé i que l'ordre de les columnes i els atributs és el mateix
+        // TODO: potser cal un JScrollPane per la taula
+        DefaultTableModel llistaValoracionsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
+        llistaUsuaris = new JTable(llistaValoracionsTableModel);
+        ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();
+        for (ArrayList<String> usuari : usuaris) {
+            llistaValoracionsTableModel.addRow(usuari.toArray());
+        }
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        instancia.add(llistaUsuaris, gridBagConstraints);
+    }
+
+    private static void actualitzarLlistaUsuaris() {
+        ArrayList<String> nomsColumnes = new ArrayList<>();
+        nomsColumnes.add("nom");
+        nomsColumnes.add("userid");
+        nomsColumnes.add("esActiu");
+        // TODO: revisar que això està bé i que l'ordre de les columnes i els atributs és el mateix
+        // TODO: potser cal un JScrollPane per la taula
+        DefaultTableModel llistaUsuarisTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
+        llistaUsuaris = new JTable(llistaUsuarisTableModel);
+        JTableHeader jTableHeader = llistaUsuaris.getTableHeader();
+        ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();
+        for (ArrayList<String> usuari : usuaris) {
+            llistaUsuarisTableModel.addRow(usuari.toArray());
+        }
     }
 
     private static void inicialitzarMenuUsuaris() {
@@ -110,6 +149,7 @@ public class VistaMenuUsuaris extends JPanel {
         afegirUsuari.addActionListener(e -> {
             try {
                 controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
+                actualitzarLlistaUsuaris();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

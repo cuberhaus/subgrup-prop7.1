@@ -4,6 +4,7 @@ import presentacio.vistes.VistaMenuUsuaris;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Classe que representa el controlador que gestiona els usuaris
@@ -106,5 +107,8 @@ public class ControladorMenuUsuaris {
 
     public void esborrarConjuntUsuaris() {
         controladorPresentacio.esborrarConjuntUsuaris();
+    }
+    public ArrayList<ArrayList<String>> obteUsuaris() {
+        return controladorPresentacio.obteUsuaris();
     }
 }

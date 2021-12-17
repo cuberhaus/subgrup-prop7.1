@@ -184,4 +184,8 @@ public class ControladorPresentacio {
     public void deseleccionarTipusItem() {
         controladorDomini.deseleccionarTipusItem();
     }
+
+    public ArrayList<ArrayList<String>> obteUsuaris() {
+        return controladorDomini.obteUsuaris();
+    }
 }
