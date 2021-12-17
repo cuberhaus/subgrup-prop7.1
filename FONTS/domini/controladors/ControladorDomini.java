@@ -190,6 +190,11 @@ public class ControladorDomini {
     }
 
     // TODO: Pablo
+
+    /**
+     *
+     * @param absolutePath Absolute path to folder where the new file will be created
+     */
     public void exportarConjuntDadesUsuari(String absolutePath) {
         //TODO
     }

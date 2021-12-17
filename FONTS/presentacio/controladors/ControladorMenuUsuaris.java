@@ -72,6 +72,7 @@ public class ControladorMenuUsuaris {
         if (idEsValid(id)) {
             if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
                 controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
+                JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari s'ha esborrat correctament");
             } else {
                 JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
             }

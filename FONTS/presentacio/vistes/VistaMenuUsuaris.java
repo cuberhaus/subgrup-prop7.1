@@ -157,6 +157,7 @@ public class VistaMenuUsuaris extends JPanel {
         exportarConjuntDades = new JButton("Exportar Usuaris");
         exportarConjuntDades.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
+            jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjunt = jFileChooser.getSelectedFile();
