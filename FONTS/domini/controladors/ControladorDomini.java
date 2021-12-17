@@ -146,7 +146,7 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
-    // TODO: ficar pre o no? Ara mateix avisar a la maria
+    // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
@@ -159,7 +159,7 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
-    // TODO: ficar pre o no, ara mateix avisar a la maria
+    // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAtributAValorDistancia) throws IOException {
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : nomValorAtributAValorDistancia.entrySet()) {
@@ -189,10 +189,12 @@ public class ControladorDomini {
         return estatPrograma.isSessioIniciada();
     }
 
+    // TODO: Pablo
     public void exportarConjuntDadesUsuari(String absolutePath) {
         //TODO
     }
 
+    // TODO: Pablo
     public void esborraConjuntUsuaris() {
         //TODO
     }
@@ -204,7 +206,7 @@ public class ControladorDomini {
 
     public void esborrarTipusItemSeleccionat() {
         // TODO
-        // el posa a null
+        // el posa a null, guardar canvis fets
     }
 
     public void seleccionarTipusItem(String nomTipusItem) throws IOException {
@@ -218,6 +220,7 @@ public class ControladorDomini {
         ArrayList<ArrayList<String>> tipus_item_raw = controladorPersistencia.obtenirTipusItem(nomTipusItem);
     }
 
+    // TODO: Pablo
     public ArrayList<ArrayList<String>> obtenirItems() {
         // TODO
         // retorna una llista d'items
@@ -226,17 +229,20 @@ public class ControladorDomini {
         return new ArrayList<>();
     }
 
+    // TODO: Pablo
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
         // TODO
         return new ArrayList<>();
     }
 
+    // TODO: Pablo
     public boolean existeixTipusItemSeleccionat() {
         // TODO
         // retorna true si hi ha un tipus item seleccionat
         return true;
     }
 
+    // TODO: Pablo
     public boolean afegirItem(Map<String, String> valorsAtributs) {
         // TODO
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
@@ -245,6 +251,7 @@ public class ControladorDomini {
         return false;
     }
 
+    // TODO: Pablo, s'han de borrar les seves valoracions!!!!
     public boolean esborrarItem(String id) {
         // TODO
         // Esborra l'ítem amb aquest id
@@ -255,6 +262,7 @@ public class ControladorDomini {
         return false;
     }
 
+    // TODO: Pablo, s'han de borrar les seves valoracions!!!!
     public Map<String, String> obtenirItem(String id) {
         // TODO
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
@@ -278,6 +286,7 @@ public class ControladorDomini {
     public void carregarConjuntItems(String rutaAbsoluta) {
         // TODO
         // carrega un conjunt d'items
+        // pero no el selecciona
     }
 
     public void esborrarTotsElsItems() {
