@@ -160,9 +160,9 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAtributAValorDistancia) throws IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
-        for (var fila : nomValorAtributAValorDistancia.entrySet()) {
+        for (var fila : nomAValorAtribut.entrySet()) {
             tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x(), fila.getValue().y()));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
