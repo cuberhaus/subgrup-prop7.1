@@ -64,6 +64,7 @@ public class ControladorMenuUsuaris {
     }
 
     public void afegirUsuari(String nom, String contrasenya) {
+        JOptionPane.showMessageDialog(vistaMenuUsuaris,"S'ha creat l'usuari correctament");
         controladorPresentacio.afegirUsuari(nom, contrasenya);
     }
 
@@ -77,8 +78,13 @@ public class ControladorMenuUsuaris {
         }
     }
 
-    public void tancarSessio() {
-        controladorPresentacio.tancarSessio();
+    public void tancarSessio() throws IllegalStateException{
+        try {
+            controladorPresentacio.tancarSessio();
+        }
+        catch(IllegalStateException e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris,"La sessió ja és tancada");
+        }
     }
 
     public void exportarConjuntUsuaris(String absolutePath) {

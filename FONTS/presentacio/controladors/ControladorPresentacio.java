@@ -56,7 +56,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarUsuari(id);
     }
 
-    public void tancarSessio() {
+    public void tancarSessio() throws IllegalStateException{
         controladorDomini.tancarSessio();
     }
 
