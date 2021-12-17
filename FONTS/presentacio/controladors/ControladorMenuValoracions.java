@@ -54,11 +54,7 @@ public class ControladorMenuValoracions {
         try {
             if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
                 if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
-                    try {
-                        controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
-                    }
+                    controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
                 } else {
                     JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració ja existeix");
                 }
@@ -69,19 +65,27 @@ public class ControladorMenuValoracions {
     }
 
     public void esborrarValoracio(String usuariId, String itemId) throws Exception {
-        if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-            controladorPresentacio.esborrarValoracio(usuariId, itemId);
+        try {
+            if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
+                controladorPresentacio.esborrarValoracio(usuariId, itemId);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
         }
     }
 
     public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
-        if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-            if (controladorPresentacio.existeixValoracio(usuariId, itemId)) {
-                controladorPresentacio.editarValoracio(usuariId, itemId, valor);
-            } else {
-                JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració no existeix");
-            }
+        try {
+            if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
+                if (controladorPresentacio.existeixValoracio(usuariId, itemId)) {
+                    controladorPresentacio.editarValoracio(usuariId, itemId, valor);
+                } else {
+                    JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració no existeix");
+                }
 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
         }
     }
 
@@ -91,7 +95,11 @@ public class ControladorMenuValoracions {
     }
 
     public void esborrarTotesLesValoracions() {
-        controladorPresentacio.esborrarTotesLesValoracions();
+        try {
+            controladorPresentacio.esborrarTotesLesValoracions();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
+        }
     }
 
     public boolean existeixTipusItemSeleccionat() {
@@ -103,6 +111,12 @@ public class ControladorMenuValoracions {
     }
 
     public boolean existeixValoracio(String idUsuari, String idItem) throws Exception {
-        return controladorPresentacio.existeixValoracio(idUsuari, idItem);
+        try {
+            return controladorPresentacio.existeixValoracio(idUsuari, idItem);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
+        }
+        return false;
     }
+
 }
