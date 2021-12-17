@@ -97,8 +97,7 @@ public class ControladorPresentacio {
         return controladorDomini.esSessioIniciada();
     }
 
-    public void exportarConjuntUsuaris(String absolutePath) {
-        //EM POTS ENVIAR LA CARPETA EN COMPTES DE L'ARXIU
+    public void exportarConjuntUsuaris(String absolutePath) throws IOException {
         controladorDomini.exportarConjuntDadesUsuari(absolutePath);
     }
 
