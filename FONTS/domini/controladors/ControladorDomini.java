@@ -36,28 +36,6 @@ public class ControladorDomini {
     }
 
     /**
-     * Funció que donada la ubicació de l'arxiu CSV, et retorna el contingut en forma de llista.
-     * @param ubicacio <code>String</code> que conté la ubicació de l'arxiu.
-     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV
-     * @throws IOException s'ha produït un error en la lectura
-     */
-   /* public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
-        LectorDeCSV lector = new LectorDeCSV();
-        return lector.llegirCSV(ubicacio);
-    }*/
-
-    /**
-     * Funció que donada la ubicació on es vol escriure el CSV i el seu contingut, escriu el fitxer.
-     * @param ubicacio ubicacio <code>String</code> que conté el destí de les dades.
-     * @param taula <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV a escriure.
-     * @throws IOException s'ha produït un error en l'escriptura
-     */
-    /*public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
-        EscriptorDeCSV escriptor = new EscriptorDeCSV();
-        escriptor.escriureCSV(ubicacio, taula);
-    }*/
-
-    /**
      * Obté l'id de l'usuari que ha iniciat la sessió
      * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
      */
@@ -177,25 +155,20 @@ public class ControladorDomini {
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         nomTipusItemActual = nom;
-        estatPrograma.afegirTipusItem(tipus);
+        estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
     // TODO: ficar pre o no, ara mateix avisar a la maria
-    public boolean crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAtributAValorDistancia) throws IOException {
-        // TODO
-        // Pot o retornar true/false o llançar excepció. Si llança excepció crec que és millor perquè podem detectar
-        // si no funciona perquè ja n'hi ha un amb el mateix nom o si no funciona per algun altre motiu.
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAtributAValorDistancia) throws IOException {
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : nomValorAtributAValorDistancia.entrySet()) {
             tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x(), fila.getValue().y()));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         nomTipusItemActual = nom;
-        estatPrograma.afegirTipusItem(tipus);
+        estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(tipus.converteixAArray(), nom);
-        // TODO: aqui estaba edgar
-        return false;
     }
 
     /** Retorna els noms dels conjunts d'items coneguts**/
@@ -203,18 +176,13 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirNomsDeTotsElsTipusItems();
     }
 
-    public void esborrarTipusItem(String nomTipusItem) {
-        // TODO
-    }
-
-    public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
-        // TODO
-        return new HashMap<>();
-    }
-
-    public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
-        // TODO
-        return new HashMap<>();
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
+        TipusItem tipus = estatPrograma.obteTipusItem(nomTipusItemActual);
+        TreeMap<String, Pair<String, String>> valors = new TreeMap<>();
+        for(var x : tipus.obtenirTipusAtributs().entrySet()) {
+            valors.put(x.getKey(), new Pair<>(x.getValue().obtenirValorAtribut().obteNomValor(), x.getValue().obtenirDistancia().obteNomDistancia()));
+        }
+        return valors;
     }
 
     public boolean esSessioIniciada() {

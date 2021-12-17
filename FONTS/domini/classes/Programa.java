@@ -1,6 +1,6 @@
 package domini.classes;
 
-import java.util.HashSet;
+import java.util.TreeMap;
 
 /**
  * Representa l'estat del programa.
@@ -25,7 +25,7 @@ public class Programa {
     /**
      * Conté el conjunt de tipus d'ítems
      */
-    private HashSet<TipusItem> tipusItems = new HashSet<>();
+    private TreeMap<String, TipusItem> tipusItems = new TreeMap<>();
 
     /**
      * Constructora per defecte de Programa
@@ -53,7 +53,7 @@ public class Programa {
         sessio = new SessioNoIniciada();
         instancia = null;
         conjuntUsuaris = new ConjuntUsuaris();
-        tipusItems = new HashSet<>();
+        tipusItems = new TreeMap<>();
     }
 
     /**
@@ -137,16 +137,14 @@ public class Programa {
      * Retorna true si s'ha afegit correctament, retorna false si ja hi era
      *
      * @param tipusItem el paràmetre s'ha afegit al conjunt si no hi era abans.
-     * @return boolean
      */
-    public boolean afegirTipusItem(TipusItem tipusItem) {
-        if (tipusItems.contains(tipusItem)) {
-            return false;
-        }
-        tipusItems.add(tipusItem);
-        return true;
+    public void afegirTipusItem(String nom, TipusItem tipusItem) {
+        tipusItems.put(nom, tipusItem);
     }
 
+    public TipusItem obteTipusItem(String nom) {
+        return tipusItems.get(nom);
+    }
     /**
      * Marca com a no actiu un usuari del conjunt d'usuaris.
      *
