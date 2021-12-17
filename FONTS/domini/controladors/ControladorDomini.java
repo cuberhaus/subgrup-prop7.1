@@ -111,7 +111,7 @@ public class ControladorDomini {
      */
     public void esborrarUsuari(int id) throws Exception {
         Id id1 = new Id(id, true);
-        if (estatPrograma.conteUsuari(id1) || estatPrograma.obtenirUsuari(id1).isActiu()) {
+        if (!estatPrograma.conteUsuari(id1) || !estatPrograma.obtenirUsuari(id1).isActiu()) {
             throw new Exception("L'usuari no existeix");
         }
         else {
