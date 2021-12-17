@@ -59,7 +59,7 @@ public class Programa {
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
      */
-    public void tancarSessio() {
+    public void tancarSessio() throws IllegalStateException{
         sessio.tancarSessio(this);
     }
 
@@ -68,7 +68,7 @@ public class Programa {
      *
      * @param usuari Usuari amb el qual iniciem la sessió.
      */
-    public void iniciarSessio(Usuari usuari) {
+    public void iniciarSessio(Usuari usuari) throws IllegalStateException{
         sessio.iniciarSessio(this, usuari);
     }
 
@@ -95,7 +95,7 @@ public class Programa {
      *
      * @return Usuari
      */
-    public Usuari obtenirUsuariSessioIniciada() {
+    public Usuari obtenirUsuariSessioIniciada() throws IllegalStateException{
         return sessio.obtenirUsuariSessioIniciada();
     }
 

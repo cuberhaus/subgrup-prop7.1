@@ -121,10 +121,14 @@ public class VistaMenuUsuaris extends JPanel {
 
         iniciarSessio = new JButton("Iniciar Sessió");
         iniciarSessio.addActionListener(e -> {
-            if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
-                usuariActiuInfo.setText(idText.getText());
-            } else {
-                usuariActiuInfo.setText("Sessio no iniciada");
+            try {
+                if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
+                    usuariActiuInfo.setText(idText.getText());
+                } else {
+                    usuariActiuInfo.setText("Sessio no iniciada");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
         gridBagConstraints.gridx = 0;

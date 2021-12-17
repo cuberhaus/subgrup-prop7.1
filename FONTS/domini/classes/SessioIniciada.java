@@ -22,7 +22,7 @@ public class SessioIniciada extends Sessio {
      * @throws IllegalStateException si l'estat és sessioNoIniciada
      */
     @Override
-    public void tancarSessio(Programa programa) {
+    public void tancarSessio(Programa programa) throws IllegalStateException {
         usuari = null;
         programa.cambiarEstat(new SessioNoIniciada());
     }
@@ -52,7 +52,7 @@ public class SessioIniciada extends Sessio {
      * @throws IllegalStateException si l'estat és sessioNoIniciada
      */
     @Override
-    public Usuari obtenirUsuariSessioIniciada() {
+    public Usuari obtenirUsuariSessioIniciada() throws IllegalStateException{
         return usuari;
     }
 }
