@@ -1,6 +1,7 @@
 package domini.controladors;
 
 import domini.classes.*;
+import domini.classes.atributs.TipusAtribut;
 import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
@@ -134,8 +135,8 @@ public class ControladorDomini {
         afegirValoracio(usuariId, itemId, valor);
     }
 
-    public void carregaConjuntValoracions(String pathAbsolut) throws Exception {
-        ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(pathAbsolut);
+    public void carregaConjuntValoracions(String rutaAbsolut) throws Exception {
+        ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
         valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
@@ -143,9 +144,19 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
-    public boolean carregarTipusItem(String rutaAbsoluta, String nom) {
-        // TODO
-        return false;
+    // TODO: ficar pre o no?
+    public boolean carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
+        ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
+        TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+        for (var fila : definicio) {
+            tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
+        }
+        TipusItem tipus = new TipusItem(nom, tipusAtributs);
+        nomTipusItemActual = nom;
+        estatPrograma.afegirTipusItem(tipus);
+        seleccionarTipusItem(nom);
+        controladorPersistencia.guardarTipusItem(definicio, nom);
+        return true;
     }
 
     public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
