@@ -40,7 +40,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirSessio();
     }
 
-    public void iniciarSessio(int idSessio, String contrasenya) {
+    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
     }
 
@@ -104,8 +104,8 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
 
-    public boolean sessioIniciada() {
-        return controladorDomini.sessioIniciada();
+    public boolean esSessioIniciada() {
+        return controladorDomini.esSessioIniciada();
     }
 
     public void exportarConjuntUsuaris(String absolutePath) {

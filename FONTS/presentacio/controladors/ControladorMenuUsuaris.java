@@ -40,12 +40,17 @@ public class ControladorMenuUsuaris {
         return true;
     }
 
-    public boolean iniciarSessio(String id, String contrasenya) {
-        boolean sessioIniciada = controladorPresentacio.sessioIniciada();
+    public boolean iniciarSessio(String id, String contrasenya) throws Exception {
+        boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
         if (idEsValid(id)) {
-            if (sessioIniciada) {
+            if (!sessioIniciada) {
                 if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                    controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
+                    try{
+                        controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
+                    }
+                    catch(Exception e){
+                        JOptionPane.showMessageDialog(vistaMenuUsuaris,e);
+                    }
                     return true;
                 } else {
                     JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");

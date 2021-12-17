@@ -62,8 +62,12 @@ public class ControladorDomini {
      * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
      */
     public int obtenirSessio() {
-        // TODO: add logic
-        return 0;
+        if (this.estatPrograma.isSessioIniciada()) return 0;
+        else {
+            Usuari usuari = this.estatPrograma.obtenirUsuariSessioIniciada();
+            Id id = usuari.obtenirId();
+            return id.obtenirValor();
+        }
     }
 
     /**
@@ -71,8 +75,28 @@ public class ControladorDomini {
      * @param idSessio id de l'usuari que inicia la sessió
      * @param contrasenya contrasenya de l'usuari
      */
-    public void iniciarSessio(int idSessio, String contrasenya) {
-        // TODO: add logic
+    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
+        Id idUsuariBuscat = new Id(idSessio, true);
+        if (this.estatPrograma.conteUsuari(idUsuariBuscat)) {
+            Usuari usuariCercat = this.estatPrograma.obtenirUsuari(idUsuariBuscat);
+            Id idUsuariCercat = usuariCercat.obtenirId();
+
+            if (!idUsuariCercat.esActiu()) {
+                throw new Exception("L'usuari existeix pero no es actiu");
+            }
+
+            else if (usuariCercat.isContrasenya(contrasenya)) {
+                this.estatPrograma.iniciarSessio(usuariCercat);
+            }
+
+            else {
+                throw new Exception("La contrasenya es incorrecta");
+            }
+        }
+
+        else {
+            throw new Exception("L'usuari no existeix");
+        }
     }
 
     public boolean existeixUsuari(int id) {
@@ -109,7 +133,7 @@ public class ControladorDomini {
      * Tanca la sessio de programa
      */
     public void tancarSessio() {
-        //TODO:
+        this.estatPrograma.tancarSessio();
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
@@ -193,9 +217,8 @@ public class ControladorDomini {
         return new HashMap<>();
     }
 
-    public boolean sessioIniciada() {
-        //TODO
-        return false;
+    public boolean esSessioIniciada() {
+        return estatPrograma.isSessioIniciada();
     }
 
     public void exportarConjuntDadesUsuari(String absolutePath) {
