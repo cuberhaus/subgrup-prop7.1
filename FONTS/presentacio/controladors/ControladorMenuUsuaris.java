@@ -58,6 +58,7 @@ public class ControladorMenuUsuaris {
             } else {
                 System.out.println("Has de tancar la sessió abans d'obrir-ne un altre");
                 JOptionPane.showMessageDialog(vistaMenuUsuaris, "Has de tancar la sessió abans d'obrir-ne un altre");
+                return true;
             }
         }
         return false;
