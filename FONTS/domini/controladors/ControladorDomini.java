@@ -62,9 +62,9 @@ public class ControladorDomini {
      * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
      */
     public int obtenirSessio() {
-        if (this.estat_programa.isSessioIniciada()) return 0;
+        if (this.estatPrograma.isSessioIniciada()) return 0;
         else {
-            Usuari usuari = this.estat_programa.obtenirUsuariSessioIniciada();
+            Usuari usuari = this.estatPrograma.obtenirUsuariSessioIniciada();
             Id id = usuari.obtenirId();
             return id.obtenirValor();
         }
@@ -77,8 +77,8 @@ public class ControladorDomini {
      */
     public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
         Id idUsuariBuscat = new Id(idSessio, true);
-        if (this.estat_programa.conteUsuari(idUsuariBuscat)) {
-            Usuari usuariCercat = this.estat_programa.obtenirUsuari(idUsuariBuscat);
+        if (this.estatPrograma.conteUsuari(idUsuariBuscat)) {
+            Usuari usuariCercat = this.estatPrograma.obtenirUsuari(idUsuariBuscat);
             Id idUsuariCercat = usuariCercat.obtenirId();
 
             if (!idUsuariCercat.esActiu()) {
@@ -86,7 +86,7 @@ public class ControladorDomini {
             }
 
             else if (usuariCercat.isContrasenya(contrasenya)) {
-                this.estat_programa.iniciarSessio(usuariCercat);
+                this.estatPrograma.iniciarSessio(usuariCercat);
             }
 
             else {
@@ -133,7 +133,7 @@ public class ControladorDomini {
      * Tanca la sessio de programa
      */
     public void tancarSessio() {
-        this.estat_programa.tancarSessio();
+        this.estatPrograma.tancarSessio();
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
