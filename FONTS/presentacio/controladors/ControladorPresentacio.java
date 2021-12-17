@@ -45,7 +45,7 @@ public class ControladorPresentacio {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
     }
 
-    public boolean existeixUsuari(int id) {
+    public boolean existeixUsuari(int id) throws Exception {
         return controladorDomini.existeixUsuari(id);
     }
 
@@ -61,19 +61,19 @@ public class ControladorPresentacio {
         controladorDomini.tancarSessio();
     }
 
-    public void afegirValoracio(String usuariId, String itemId, String valor) {
+    public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
         controladorDomini.afegirValoracio(usuariId,itemId,valor);
     }
 
-    public boolean existeixValoracio(String usuariId, String itemId) {
+    public boolean existeixValoracio(String usuariId, String itemId) throws Exception {
         return controladorDomini.existeixValoracio(usuariId,itemId);
     }
 
-    public void esborrarValoracio(String usuariId, String itemId) {
+    public void esborrarValoracio(String usuariId, String itemId) throws Exception {
         controladorDomini.esborraValoracio(usuariId,itemId);
     }
 
-    public void editarValoracio(String usuariId, String itemId, String valor) {
+    public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
         controladorDomini.editarValoracio(usuariId,itemId,valor);
     }
 

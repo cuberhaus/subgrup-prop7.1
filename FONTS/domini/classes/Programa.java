@@ -115,7 +115,7 @@ public class Programa {
      * @param idUsuari id de l'usuari
      * @return Usuari amb l'id desitjat
      */
-    public Usuari obtenirUsuari(Id idUsuari) {
+    public Usuari obtenirUsuari(Id idUsuari) throws Exception{
         return conjuntUsuaris.obtenir(idUsuari);
     }
 

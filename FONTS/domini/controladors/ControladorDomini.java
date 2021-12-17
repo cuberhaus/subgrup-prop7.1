@@ -77,7 +77,7 @@ public class ControladorDomini {
         }
     }
 
-    public boolean existeixUsuari(int id) {
+    public boolean existeixUsuari(int id) throws Exception {
         Id id_bo = new Id(id, true);
         return estatPrograma.conteUsuari(id_bo)&& estatPrograma.obtenirUsuari(id_bo).isActiu();
     }
@@ -114,25 +114,25 @@ public class ControladorDomini {
         this.estatPrograma.tancarSessio();
     }
 
-    public void afegirValoracio(String usuariId, String itemId, String valor) {
+    public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         valoracionsTipusItemActual.afegir(new Valoracio(Double.parseDouble(valor), us, item));
     }
 
-    public boolean existeixValoracio(String usuariId, String itemId) {
+    public boolean existeixValoracio(String usuariId, String itemId) throws Exception {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         return valoracionsTipusItemActual.conte(us, item);
     }
 
-    public void esborraValoracio(String usuariId, String itemId) {
+    public void esborraValoracio(String usuariId, String itemId) throws Exception {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         valoracionsTipusItemActual.esborrar(valoracionsTipusItemActual.obte(us, item));
     }
 
-    public void editarValoracio(String usuariId, String itemId, String valor) {
+    public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
         esborraValoracio(usuariId, itemId);
         afegirValoracio(usuariId, itemId, valor);
     }

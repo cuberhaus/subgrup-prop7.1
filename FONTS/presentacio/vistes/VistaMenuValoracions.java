@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
@@ -117,13 +116,25 @@ public class VistaMenuValoracions extends JPanel {
         instancia.add(valorText, gridBagConstraints);
 
         creaValoracio = new JButton("Crea Valoració");
-        creaValoracio.addActionListener(e -> controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText()));
+        creaValoracio.addActionListener(e -> {
+            try {
+                controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         instancia.add(creaValoracio, gridBagConstraints);
 
         esborraValoracio = new JButton("Esborra valoració");
-        esborraValoracio.addActionListener(e -> controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText()));
+        esborraValoracio.addActionListener(e -> {
+            try {
+                controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         instancia.add(esborraValoracio, gridBagConstraints);
@@ -137,14 +148,22 @@ public class VistaMenuValoracions extends JPanel {
                 String idItem = JOptionPane.showInputDialog(instancia,
                         "Introdueix l'identificador de l'ítem valorat que vols editar:");
                 String idUsuari = JOptionPane.showInputDialog(instancia, "Introdueix l'identificador de l'usuari que ha valorat l'ítem");
-                if (controladorMenuValoracions.existeixValoracio(idUsuari, idItem)) {
-                    JOptionPane.showMessageDialog(instancia, "L'identificador de la valoracio no és vàlid.");
-                } else {
-//                    VistaDialegEditarValoracio vistaDialegEditarValoracio = new VistaDialegEditarValoracio(idItem, idUsuari);
-//                    vistaDialegEditarValoracio.setVisible(true);
+                try {
+                    if (controladorMenuValoracions.existeixValoracio(idUsuari, idItem)) {
+                        JOptionPane.showMessageDialog(instancia, "L'identificador de la valoracio no és vàlid.");
+                    } else {
+    //                    VistaDialegEditarValoracio vistaDialegEditarValoracio = new VistaDialegEditarValoracio(idItem, idUsuari);
+    //                    vistaDialegEditarValoracio.setVisible(true);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
-            controladorMenuValoracions.editarValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
+            try {
+                controladorMenuValoracions.editarValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -164,10 +183,8 @@ public class VistaMenuValoracions extends JPanel {
                 System.out.println(pathConjuntVal.getAbsolutePath());
                 try {
                     controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
-                } catch (IOException ex) {
-                    // TODO: catch this
-                    ex.printStackTrace();
                 } catch (Exception ex) {
+                    // TODO: catch this
                     ex.printStackTrace();
                 }
             }

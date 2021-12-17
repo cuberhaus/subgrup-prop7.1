@@ -50,23 +50,31 @@ public class ControladorMenuValoracions {
         return true;
     }
 
-    public void afegirValoracio(String usuariId, String itemId, String valor) {
-        if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-            if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
-                controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
-            } else {
-                JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració ja existeix");
+    public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
+        try {
+            if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
+                if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
+                    try {
+                        controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració ja existeix");
+                }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
         }
     }
 
-    public void esborrarValoracio(String usuariId, String itemId) {
+    public void esborrarValoracio(String usuariId, String itemId) throws Exception {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             controladorPresentacio.esborrarValoracio(usuariId, itemId);
         }
     }
 
-    public void editarValoracio(String usuariId, String itemId, String valor) {
+    public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             if (controladorPresentacio.existeixValoracio(usuariId, itemId)) {
                 controladorPresentacio.editarValoracio(usuariId, itemId, valor);
@@ -94,7 +102,7 @@ public class ControladorMenuValoracions {
         return controladorPresentacio.obtenirValoracions();
     }
 
-    public boolean existeixValoracio(String idUsuari, String idItem) {
+    public boolean existeixValoracio(String idUsuari, String idItem) throws Exception {
         return controladorPresentacio.existeixValoracio(idUsuari, idItem);
     }
 }

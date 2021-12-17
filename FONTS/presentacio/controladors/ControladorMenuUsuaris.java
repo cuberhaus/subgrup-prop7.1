@@ -49,7 +49,7 @@ public class ControladorMenuUsuaris {
                         controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
                     }
                     catch(Exception e){
-                        JOptionPane.showMessageDialog(vistaMenuUsuaris,e);
+                        JOptionPane.showMessageDialog(vistaMenuUsuaris,e.getMessage());
                     }
                     return true;
                 } else {
@@ -69,7 +69,7 @@ public class ControladorMenuUsuaris {
         controladorPresentacio.afegirUsuari(nom, contrasenya);
     }
 
-    public void esborrarUsuari(String id) {
+    public void esborrarUsuari(String id) throws Exception {
         if (idEsValid(id)) {
             if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
                 controladorPresentacio.esborrarUsuari(Integer.parseInt(id));

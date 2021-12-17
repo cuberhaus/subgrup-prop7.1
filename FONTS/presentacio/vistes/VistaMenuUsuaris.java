@@ -114,7 +114,13 @@ public class VistaMenuUsuaris extends JPanel {
         instancia.add(afegirUsuari, gridBagConstraints);
 
         eliminarUsuari = new JButton("Esborrar Usuari");
-        eliminarUsuari.addActionListener(e -> controladorMenuUsuaris.esborrarUsuari(idText.getText()));
+        eliminarUsuari.addActionListener(e -> {
+            try {
+                controladorMenuUsuaris.esborrarUsuari(idText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         instancia.add(eliminarUsuari, gridBagConstraints);
