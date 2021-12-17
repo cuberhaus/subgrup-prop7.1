@@ -132,7 +132,7 @@ public class ControladorDomini {
     /**
      * Tanca la sessio de programa
      */
-    public void tancarSessio() {
+    public void tancarSessio() throws IllegalStateException{
         if (!this.estatPrograma.isSessioIniciada()) {
             throw new IllegalStateException();
         }
