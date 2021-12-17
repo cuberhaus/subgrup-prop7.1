@@ -1,10 +1,13 @@
 package domini.tests;
 
-import domini.classes.*;
+import domini.classes.Item;
+import domini.classes.Usuari;
+import domini.classes.Valoracio;
 import utilitats.consola;
 
 /**
  * Driver per la classe Valoració
+ *
  * @author pol.casacuberta
  */
 
@@ -66,8 +69,7 @@ public class DriverValoracio {
 
         if (valoracio.equals(valoracio2)) {
             System.out.println("Les dues valoracions son iguals");
-        }
-        else {
+        } else {
             System.out.println("Les dues valoracions son diferents");
         }
     }
@@ -88,8 +90,7 @@ public class DriverValoracio {
 
         if (valoracio.hashCode() == valoracio2.hashCode()) {
             System.out.println("Les dues valoracions son iguals");
-        }
-        else {
+        } else {
             System.out.println("Les dues valoracions son diferents");
         }
     }
@@ -106,7 +107,7 @@ public class DriverValoracio {
         UtilitatsDEscriptura.imprimirValoracio(valoracio2);
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         System.out.println("Driver per la classe Item");
         String consulta = "\n0 - Sortir\n" +
                 "1 - Test ConstructoraValorUsuariItem\n" +
@@ -117,7 +118,7 @@ public class DriverValoracio {
                 "6 - Test HashCode\n" +
                 "7 - Test Copy\n";
         String err = "Valor invàlid: introdueix un enter entre 0 i 7";
-        while(true){
+        while (true) {
             try {
                 int i = consola.llegirInt(consulta, err, 0, 7);
                 switch (i) {
@@ -145,8 +146,7 @@ public class DriverValoracio {
                         testCopy();
                         break;
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Torna-ho a provar.");
             }
         }

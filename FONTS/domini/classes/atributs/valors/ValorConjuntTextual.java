@@ -16,7 +16,7 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
 
     /**
      * Constructor amb el conjunt textual.
-     * @param valor <code>ArrayList&lt;ValorAtribut&lt;String&gt;&gt;</code> que conte el valor d'aquest atribut.
+     * @param valor <code>ArrayList&lt;ValorAtribut&lt;String&gt;&gt;</code> que conté el valor d'aquest atribut.
      */
     public ValorConjuntTextual(ArrayList<ValorAtribut<String>> valor) {
         this.valor = valor;

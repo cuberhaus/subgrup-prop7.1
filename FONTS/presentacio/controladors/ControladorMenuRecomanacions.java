@@ -2,6 +2,8 @@ package presentacio.controladors;
 
 import presentacio.vistes.VistaMenuRecomanacions;
 
+import java.util.ArrayList;
+
 public class ControladorMenuRecomanacions {
 
     private static ControladorPresentacio controladorPresentacio;
@@ -17,5 +19,29 @@ public class ControladorMenuRecomanacions {
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
         }
         return instancia;
+    }
+
+    public boolean sessioIniciada() {
+        return controladorPresentacio.sessioIniciada();
+    }
+
+    public boolean existeixTipusItemSeleccionat() {
+        return controladorPresentacio.existeixTipusItemSeleccionat();
+    }
+
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorPresentacio.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
+    }
+
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorPresentacio.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
+    }
+
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+        return controladorPresentacio.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
+    }
+
+    public double avaluarRecomanacio() {
+        return controladorPresentacio.avaluarRecomanacio();
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Punt extends ArrayList<Double> {
 
     /**
-     * @return la dimensio del punt
+     * @return la dimensió del punt
      */
     public int obtenirDimensio() {
         return size();

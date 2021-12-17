@@ -24,8 +24,8 @@ public class VistaDialegCrearTipusItem extends JDialog {
     }
 
     private void inicialitzarDialegCrearTipusItem() {
-        setBounds(VistaPantalla.centreHoritzontal( 5 * VistaPantalla.amplada / 8), VistaPantalla.centreVertical(VistaPantalla.altura / 2),
-                5 * VistaPantalla.amplada / 8, VistaPantalla.altura / 2);
+        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
+                5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Crea un nou tipus d'ítem");
         inicialitzarPanellCrearTipusItem();
     }

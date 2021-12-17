@@ -1,23 +1,30 @@
 package domini.classes;
 
-import java.util.*;
+import java.util.HashSet;
 
 /**
  * Representa l'estat del programa.
+ *
  * @author pol.casacuberta
  */
 
 public class Programa {
-    /** Conté l'estat de la sessio */
+    /**
+     * Conté l'única instància de Programa
+     */
+    private static Programa instancia = null;
+    /**
+     * Conté l'estat de la sessio
+     */
     private Sessio sessio = new SessioNoIniciada();
-
-    /** Conté l'única instància de Programa */
-    private static Programa instanciaUnica = null;
-
-    /** Conté el conjunt d'usuaris */
+    /**
+     * Conté el conjunt d'usuaris
+     */
     private ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
 
-    /** Conté el conjunt de tipus d'items */
+    /**
+     * Conté el conjunt de tipus d'ítems
+     */
     private HashSet<TipusItem> tipusItems = new HashSet<>();
 
     /**
@@ -29,13 +36,14 @@ public class Programa {
     /**
      * Constructora de Programa
      * Crea una instància única de Programa
+     *
      * @return <code>Programa</code>
      */
     public static Programa obtenirInstancia() {
-        if (instanciaUnica == null) {
-            instanciaUnica = new Programa();
+        if (instancia == null) {
+            instancia = new Programa();
         }
-        return instanciaUnica;
+        return instancia;
     }
 
     /**
@@ -43,7 +51,7 @@ public class Programa {
      */
     public void reset() {
         sessio = new SessioNoIniciada();
-        instanciaUnica = null;
+        instancia = null;
         conjuntUsuaris = new ConjuntUsuaris();
         tipusItems = new HashSet<>();
     }
@@ -57,7 +65,8 @@ public class Programa {
 
     /**
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
-     * @param usuari Usuari amb el qual iniciem la sessio.
+     *
+     * @param usuari Usuari amb el qual iniciem la sessió.
      */
     public void iniciarSessio(Usuari usuari) {
         sessio.iniciarSessio(this, usuari);
@@ -65,14 +74,16 @@ public class Programa {
 
     /**
      * Canvia l'estat de la sessió a SessioTancada
-     * @param sessio estat de la sessio
+     *
+     * @param sessio estat de la sessió
      */
     public void cambiarEstat(Sessio sessio) {
         this.sessio = sessio;
     }
 
     /**
-     * Retorna true si la sessio està iniciada.
+     * Retorna true si la sessió està iniciada.
+     *
      * @return <code>boolean</code>
      */
     public boolean isSessioIniciada() {
@@ -80,7 +91,8 @@ public class Programa {
     }
 
     /**
-     * Retorna l'usuari amb la sessio iniciada.
+     * Retorna l'usuari amb la sessió iniciada.
+     *
      * @return Usuari
      */
     public Usuari obtenirUsuariSessioIniciada() {
@@ -88,7 +100,8 @@ public class Programa {
     }
 
     /**
-     * Consultora dona true si l'usuari passat com a parametre existeix en el conjunt
+     * Consultora dona true si l'usuari passat com a paràmetre existeix en el conjunt
+     *
      * @param id id
      * @return booleà
      */
@@ -98,6 +111,7 @@ public class Programa {
 
     /**
      * Consultora obté l'usuari amb l'id passat com a paràmetre
+     *
      * @param idUsuari id de l'usuari
      * @return Usuari amb l'id desitjat
      */
@@ -107,16 +121,18 @@ public class Programa {
 
     /**
      * Afegeix un usuari al conjunt d'usuaris.
-     * @param  usuari el paràmetre s'ha afegit al conjunt si no hi era abans.
+     *
+     * @param usuari el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public void afegirUsuari(Usuari usuari) {
         conjuntUsuaris.afegir(usuari);
     }
 
     /**
-     * Afegeix un tipus d'item al conjunt de tipus d'items.
+     * Afegeix un tipus d'ítem al conjunt de tipus d'ítems.
      * Retorna true si s'ha afegit correctament, retorna false si ja hi era
-     * @param  tipusItem el paràmetre s'ha afegit al conjunt si no hi era abans.
+     *
+     * @param tipusItem el paràmetre s'ha afegit al conjunt si no hi era abans.
      * @return boolean
      */
     public boolean afegirTipusItem(TipusItem tipusItem) {
@@ -129,6 +145,7 @@ public class Programa {
 
     /**
      * Marca com a no actiu un usuari del conjunt d'usuaris.
+     *
      * @param id el paràmetre s'ha marcat com a no actiu.
      */
     public void esborraUsuari(Id id) {

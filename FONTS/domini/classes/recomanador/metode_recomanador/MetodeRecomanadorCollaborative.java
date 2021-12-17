@@ -19,7 +19,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
     /** Particions obtingudes de K-Means*/
     private ArrayList<ArrayList<Integer>> particions;
 
-    /** Particio de cada usuari **/
+    /** Partició de cada usuari **/
     private Integer[] particioUsuari;
 
     /** Id's per conectar particions i items */
@@ -55,7 +55,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
             ids.add(iterUsu.obtenirId());
         }
 
-        // Amb el algorisme KMeans obtenim el cluster del usuari a qui hem de recomanar.
+        // Amb l'algorisme KMeans obtenim el cluster del usuari a qui hem de recomanar.
         KMeans kMeans = new KMeans(puntsUsuaris, numClusters);
         particions = kMeans.getParticions();
         particioUsuari = new Integer[usuaris.mida()];

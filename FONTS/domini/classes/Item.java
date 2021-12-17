@@ -146,7 +146,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
 
     /**
      * @param valoracio Valoració que s'afegeix a les valoracions de l'Item.
-     * @throws IllegalArgumentException Si la valoració donada és nul·la o l'ha feta un Item diferent a l'actual.
+     * @throws IllegalArgumentException Si la valoració donada és nul·la o l'ha feta un Item diferent de l'actual.
      */
     public void afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
         if (valoracio == null) {

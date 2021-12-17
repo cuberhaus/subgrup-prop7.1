@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Representa un tipus de dades en el que emmagatzarem les dades llegides del CSV.
+ * Representa un tipus de dades en el que emmagatzemem les dades llegides del CSV.
  * @author pablo.vega
  */
 public class TaulaCSV {
 
-    /** Variable on guardarem els atributs del objectes que rebem del domini.tests.csv.*/
+    /** Variable on guardarem els atributs dels objectes que rebem del domini.tests.csv.*/
     private final ArrayList<ArrayList<String>> valorsItem;
 
     /** Variable que farem servir per trobar l'índex de l'atribut que volem consultar.*/
@@ -19,7 +19,7 @@ public class TaulaCSV {
     /** Variable que farem per trobar l'atribut que relaciona el número de columna a consultar.*/
     private final ArrayList<String> indexAAtributs;
 
-    /** Variable que representa el número d'atributs de les dades introduïdes */
+    /** Variable que representa el nombre d'atributs de les dades introduïdes */
     private Integer numAtributs;
 
     /** Variable que representa la quantitat d'ítems que tenim */
@@ -60,9 +60,9 @@ public class TaulaCSV {
     }
 
     /**
-     * Donada una llista d'atributs, els introdueix en la estructura de dades.
+     * Donada una llista d'atributs, els introdueix en l'estructura de dades.
      *
-     * @param atributs es la llista de atributs que volem tenir.
+     * @param atributs és la llista d'atributs que volem tenir.
      * @throws Exception si la taula ja ha estat inicialitzada amb uns atributs.
      */
     public void afegirConjuntAtributs(ArrayList<String> atributs) throws Exception {
@@ -84,7 +84,7 @@ public class TaulaCSV {
     /**
      * Donada una llista de valors, afegeix els valors al contenidor de valors.
      * @param valors conjunt de valors.
-     * @throws Exception si la taula no té els atributs previament definits o la quantitat de valors de l'ítem
+     * @throws Exception si la taula no té els atributs prèviament definits o la quantitat de valors de l'ítem
      * a afegir no és igual al d'atributs.
      */
     public void afegirConjuntValors(ArrayList<String> valors) throws Exception {
@@ -109,7 +109,7 @@ public class TaulaCSV {
      *
      * @param atribut the atribut
      * @return the valors atribut
-     * @throws Exception els atributs de la taula no han estat inicialitzats o l'atribut dessitjat no es troba a la taula.
+     * @throws Exception els atributs de la taula no han estat inicialitzats o l'atribut desitjat no es troba a la taula.
      */
     public ArrayList<String> obtenirValorsAtribut(String atribut) throws Exception {
         if (numAtributs == -1) {
@@ -155,7 +155,7 @@ public class TaulaCSV {
     }
 
     /**
-     * Retorna els valors de l'item seleccionat.
+     * Retorna els valors de l'ítem seleccionat.
      * @param indexItem the index item
      * @return item
      * @throws Exception no s'han inicialitzat els atributs de la taula o l'índex de l'ítem no existeix.
@@ -179,7 +179,7 @@ public class TaulaCSV {
      * Retorna la llista d'atributs.
      *
      * @return atrib list
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs dessitjats.
+     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats.
      */
     public ArrayList<String> obtenirNomsAtributs() throws Exception {
         if (numAtributs == -1) {
@@ -198,7 +198,7 @@ public class TaulaCSV {
     /**
      * Retorna la llista de tots els valors dels ítems
      * @return valores de todos los items
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs dessitjats.
+     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats.
      */
     public ArrayList<ArrayList<String>> obtenirValorsDeTotsElsItems() throws Exception {
         if (numAtributs == -1) {
@@ -214,7 +214,7 @@ public class TaulaCSV {
      * Retorna el contingut de la taula amb els atributs
      *
      * @return table
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs dessitjats.
+     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats.
      */
     public ArrayList<ArrayList<String>> obtenirTaula() throws Exception {
         if (numAtributs == -1) {
@@ -232,7 +232,7 @@ public class TaulaCSV {
 
     /**
      * Imprimeix el contingut de les dades.
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs dessitjats.
+     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats.
      */
     public void imprimir() throws Exception {
         if (numAtributs == -1) {
@@ -259,11 +259,11 @@ public class TaulaCSV {
 
     /**
      * Donat un item i un atribut et retorna el valor
-     * @param indexItem <code>int</code> indexItem de l'item
+     * @param indexItem <code>int</code> indexItem de l'ítem
      * @param atribut <code>String</code> nom de l'atribut
      * @return <code>String</code> del valor de l'atribut
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs dessitjats, l'atribut no existeix o l'índex
-     * de l'ítemn no existeix.
+     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats, l'atribut no existeix o l'índex
+     * de l'ítem no existeix.
      */
     public String obtenirValorAtribut(int indexItem, String atribut) throws Exception {
         if (numAtributs == -1) {
@@ -284,7 +284,7 @@ public class TaulaCSV {
 
     /**
      * Elimina els espais del principi i del final de la taula;
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs dessitjats.
+     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats.
      */
     public void eliminarEspaisInnecessaris() throws Exception {
         if (!estaInicialitzada()) {

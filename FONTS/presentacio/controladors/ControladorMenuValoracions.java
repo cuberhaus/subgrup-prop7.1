@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Classe que representa el controlador que gestiona les valoracions
+ *
  * @author pol.casacuberta
  */
 
@@ -19,7 +20,7 @@ public class ControladorMenuValoracions {
     }
 
     public static ControladorMenuValoracions obtenirInstancia() {
-        if (instancia == null){
+        if (instancia == null) {
             instancia = new ControladorMenuValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuValoracions = VistaMenuValoracions.obtenirInstancia();
@@ -29,11 +30,10 @@ public class ControladorMenuValoracions {
 
     public boolean idUsuariEsValid(String id) {
         if (id == null || id.equals("")) {
-            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'Usuari està buit");
+            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'Usuari està buit");
             return false;
-        }
-        else if (!id.matches("-?\\d+")){
-            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'Usuari no és un numero natural");
+        } else if (!id.matches("-?\\d+")) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'Usuari no és un numero natural");
             return false;
         }
         return true;
@@ -41,11 +41,10 @@ public class ControladorMenuValoracions {
 
     public boolean idItemEsValid(String id) {
         if (id == null || id.equals("")) {
-            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'item està buit");
+            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'item està buit");
             return false;
-        }
-        else if (!id.matches("-?\\d+")){
-            JOptionPane.showMessageDialog(vistaMenuValoracions,"L'id d'item no és un numero natural");
+        } else if (!id.matches("-?\\d+")) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'item no és un numero natural");
             return false;
         }
         return true;
@@ -61,27 +60,26 @@ public class ControladorMenuValoracions {
         }
     }
 
-    public void esborraValoracio(String usuariId, String itemId) {
+    public void esborrarValoracio(String usuariId, String itemId) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
             controladorPresentacio.esborrarValoracio(usuariId, itemId);
         }
     }
 
-    public void editaValoracio(String usuariId, String itemId, String valor) {
+    public void editarValoracio(String usuariId, String itemId, String valor) {
         if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-            if (controladorPresentacio.existeixValoracio(usuariId,itemId)) {
-                controladorPresentacio.editarValoracio(usuariId,itemId,valor);
-            }
-            else {
-                JOptionPane.showMessageDialog(vistaMenuValoracions,"La valoració no existeix");
+            if (controladorPresentacio.existeixValoracio(usuariId, itemId)) {
+                controladorPresentacio.editarValoracio(usuariId, itemId, valor);
+            } else {
+                JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració no existeix");
             }
 
         }
     }
 
-    public void carregaConjuntValoracions(String pathAbsolut) {
+    public void carregarConjuntValoracions(String rutaAbsoluta) {
         //TODO: comprovar que l'arxiu donat té el format correcte
-        controladorPresentacio.carregarConjuntValoracions(pathAbsolut);
+        controladorPresentacio.carregarConjuntValoracions(rutaAbsoluta);
     }
 
     public void esborrarTotesLesValoracions() {
@@ -94,5 +92,9 @@ public class ControladorMenuValoracions {
 
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         return controladorPresentacio.obtenirValoracions();
+    }
+
+    public boolean existeixValoracio(String idUsuari, String idItem) {
+        return controladorPresentacio.existeixValoracio(idUsuari, idItem);
     }
 }
