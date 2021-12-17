@@ -153,6 +153,20 @@ public class TipusItem {
     }
 
     /**
+     * @return Una fila per cada Atribut, en l'ordre: nom, valor, distancia
+     */
+    public ArrayList<ArrayList<String>> converteixAArray() {
+        ArrayList<ArrayList<String>> out = new ArrayList<>();
+        for (var x : tipusAtributs.entrySet()) {
+            ArrayList<String> fila = new ArrayList<>();
+            fila.add(x.getKey());
+            fila.add(x.getValue().obtenirValorAtribut().obteNomValor());
+            fila.add(x.getValue().obtenirDistancia().obteNomDistancia());
+            out.add(fila);
+        }
+        return out;
+    }
+    /**
      * @param valorAtribut1 ValorAtribut
      * @param valorAtribut2 ValorAtribut
      * @return Retorna el TipusAtribut més restrictiu que admet els dos ValorsAtributs donats. És a dir, el TipusAtribut

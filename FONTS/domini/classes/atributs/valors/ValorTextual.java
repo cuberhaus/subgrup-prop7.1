@@ -28,6 +28,11 @@ public class ValorTextual extends ValorAtribut<String> {
         return new ValorTextual(valor);
     }
 
+    @Override
+    public String obteNomValor() {
+        return "ValorTextual";
+    }
+
     /**
      * @return <code>String</code> que conté el valor d'aquest atribut.
      */

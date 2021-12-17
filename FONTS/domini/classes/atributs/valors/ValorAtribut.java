@@ -14,6 +14,8 @@ public abstract class ValorAtribut<T> {
      */
     public abstract ValorAtribut<?> copiar();
 
+    public abstract String obteNomValor();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

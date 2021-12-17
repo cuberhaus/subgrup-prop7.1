@@ -1,7 +1,6 @@
 package domini.classes.atributs.valors;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Representa el valor compost booleà d'un atribut.
@@ -61,6 +60,11 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
     @Override
     public ValorConjuntBoolea copiar() {
         return new ValorConjuntBoolea(valor);
+    }
+
+    @Override
+    public String obteNomValor() {
+        return "ValorConjuntBoolea";
     }
 
     /**

@@ -25,6 +25,11 @@ public class DistanciaDiferenciaDeConjunts extends Distancia {
         return new DistanciaDiferenciaDeConjunts();
     }
 
+    @Override
+    public String obteNomDistancia() {
+        return "DistanciaDiferenciaDeConjunts";
+    }
+
     /**
      * @param valorAtribut Valor d'un atribut
      * @return Cert si la distància admet el valor donat. Altrament, fals.
