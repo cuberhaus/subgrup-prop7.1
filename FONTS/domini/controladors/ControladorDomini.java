@@ -210,8 +210,7 @@ public class ControladorDomini {
     }
 
     public boolean esSessioIniciada() {
-        //TODO
-        return false;
+        return estatPrograma.isSessioIniciada();
     }
 
     public void exportarConjuntDadesUsuari(String absolutePath) {
