@@ -101,7 +101,7 @@ public class ProgramaTest {
     }
 
     @Test
-    public void obtenirUsuari() {
+    public void obtenirUsuari() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3, true, "Pol", "1234");
@@ -127,7 +127,7 @@ public class ProgramaTest {
     }
 
     @Test
-    public void esborraUsuari() {
+    public void esborraUsuari() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3, true, "Pol", "1234");
