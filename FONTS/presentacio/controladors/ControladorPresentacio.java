@@ -53,7 +53,7 @@ public class ControladorPresentacio {
         controladorDomini.afegirUsuari(nom,contrasenya);
     }
 
-    public void esborrarUsuari(int id) {
+    public void esborrarUsuari(int id) throws Exception {
         controladorDomini.esborrarUsuari(id);
     }
 
