@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class VistaMenuRecomanacions extends JPanel {
+    private static int amplada;
+    private static int altura;
     private static VistaMenuRecomanacions instancia;
     private static ControladorMenuRecomanacions controladorMenuRecomanacions;
     private static JPanel panellSeleccionarMetode;
@@ -15,6 +17,8 @@ public class VistaMenuRecomanacions extends JPanel {
     private static JPanel panellAvaluarRecomanacio;
 
     private VistaMenuRecomanacions() {
+        amplada = this.getWidth();
+        altura = this.getHeight();
     }
 
     public static VistaMenuRecomanacions obtenirInstancia() {
@@ -33,8 +37,7 @@ public class VistaMenuRecomanacions extends JPanel {
         titol.setFont(new Font("Sans", Font.PLAIN, 20));
         titol.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel descripcio = new JLabel("Selecciona quin mètode de recomanació vols que faci servir i quin filtre" +
-                " vols que utilitzi.");
+        JLabel descripcio = new JLabel("Selecciona quin mètode de recomanació i filtre vols que faci servir.");
         descripcio.setFont(new Font("Sans", Font.PLAIN, 14));
         descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -77,7 +80,9 @@ public class VistaMenuRecomanacions extends JPanel {
         panellSeleccionarFiltre = new JPanel();
         panellSeleccionarFiltre.setLayout(new BoxLayout(panellSeleccionarFiltre, BoxLayout.Y_AXIS));
 
+        JPanel panellLlistaAtributs = new JPanel(new FlowLayout());
         JScrollPane panellScroll = new JScrollPane();
+        panellScroll.setPreferredSize(new Dimension(3 * amplada / 4, 3 * altura / 4));
         if (controladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
             ArrayList<String> nomsAtributs = controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat();
             for (String nomsAtribut : nomsAtributs) {
@@ -88,7 +93,8 @@ public class VistaMenuRecomanacions extends JPanel {
             textTipusItemSeleccionat.setAlignmentX(Component.CENTER_ALIGNMENT);
             panellScroll.add(textTipusItemSeleccionat);
         }
-        panellSeleccionarFiltre.add(panellScroll);
+        panellLlistaAtributs.add(panellScroll);
+        panellSeleccionarFiltre.add(panellLlistaAtributs);
     }
 
     private static void inicialitzarPanellMostrarRecomanacio() {

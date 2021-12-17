@@ -30,6 +30,7 @@ public class VistaMenuPrincipal extends JFrame {
 
     private static void inicialitzarMenuPrincipal() {
         instancia.setTitle("Menu Principal");
+        instancia.setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
 
