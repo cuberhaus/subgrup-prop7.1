@@ -1,9 +1,11 @@
 package presentacio.vistes;
 
+import domini.classes.Pair;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,8 +72,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 JOptionPane.showMessageDialog(this, "El tipus d'ítem ha de tenir un nom.");
                 return;
             }
-            Map<String, String> valorsTipusAtributs = new HashMap<>();
-            Map<String, String> distanciesTipusAtributs = new HashMap<>();
+            Map<String, Pair<String, String>> nomAValorAtribut = new HashMap<>();
             for (Component component : panellLlistaTipusAtributs.getComponents()) {
                 JPanel tipusAtribut = (JPanel) component;
                 String nomTipusAtribut = ((JTextField) tipusAtribut.getComponent(1)).getText();
@@ -80,19 +81,19 @@ public class VistaDialegCrearTipusItem extends JDialog {
                             "No pot haver-hi un tipus d'atribut sense nom.");
                     return;
                 }
-                if (valorsTipusAtributs.containsKey(nomTipusAtribut)) {
+                if (nomAValorAtribut.containsKey(nomTipusAtribut)) {
                     JOptionPane.showMessageDialog(this,
                             "No pot haver-hi dos tipus d'atributs amb el mateix nom.");
                     return;
                 }
                 String valorTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(3)).getSelectedItem();
-                valorsTipusAtributs.put(nomTipusAtribut, valorTipusAtribut);
                 String distanciaTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(5)).getSelectedItem();
-                distanciesTipusAtributs.put(nomTipusAtribut, distanciaTipusAtribut);
+                nomAValorAtribut.put(nomTipusAtribut, new Pair<>(valorTipusAtribut, distanciaTipusAtribut));
             }
-            if (!controladorMenuTipusItem.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs)) {
-                JOptionPane.showMessageDialog(this, "Ja hi ha un tipus d'ítem carregat amb aquest nom.");
-                return;
+            try {
+                controladorMenuTipusItem.afegirTipusItem(nom, nomAValorAtribut);
+            } catch (IOException ex) {
+                // TODO (maria): catch
             }
             dispose();
         });

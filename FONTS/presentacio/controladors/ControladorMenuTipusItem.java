@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import domini.classes.Pair;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
@@ -38,33 +39,23 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs,
-                                   Map<String, String> distanciesTipusAtributs) {
+    public void afegirTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IOException {
         // TODO: esborrar sortida
         System.out.println("Afegint TipusItem");
         System.out.println(nom);
-        System.out.println(valorsTipusAtributs.toString());
-        System.out.println(distanciesTipusAtributs.toString());
+        System.out.println(nomValorAAtribut.toString());
         System.out.println("******************");
-        return controladorPresentacio.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
+        // TODO (maria): catch exception
+        controladorPresentacio.afegirTipusItem(nom, nomValorAAtribut);
     }
 
-    public void carregaTipusItem(String rutaAbsoluta) {
+    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
         // TODO: esborrar sortida
         System.out.println("Carregant TipusItem");
         System.out.println(rutaAbsoluta);
         System.out.println("******************");
-        if (!controladorPresentacio.carregarTipusItem(rutaAbsoluta)) {
-            JOptionPane.showMessageDialog(vistaMenuTipusItem,
-                    "No es pot llegir un tipus d'ítem del fitxer seleccionat.");
-        }
-    }
-
-    public void esborrarTipusItem(String nomTipusItem) {
-        System.out.println("Esborrant TipusItem");
-        System.out.println(nomTipusItem);
-        System.out.println("******************");
-        controladorPresentacio.esborrarTipusItem(nomTipusItem);
+        // TODO (maria): catch exception
+        controladorPresentacio.carregarTipusItem(rutaAbsoluta, nom);
     }
 
     public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
@@ -99,5 +90,9 @@ public class ControladorMenuTipusItem {
 
     public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
         controladorPresentacio.editarTipusItem(relacioNomsTipusAtributs);
+    }
+
+    public void deseleccionarTipusItem() {
+        controladorPresentacio.deseleccionarTipusItem();
     }
 }

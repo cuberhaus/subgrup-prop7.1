@@ -160,9 +160,9 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAtributAValorDistancia) throws IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
-        for (var fila : nomValorAtributAValorDistancia.entrySet()) {
+        for (var fila : nomAValorAtribut.entrySet()) {
             tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x(), fila.getValue().y()));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
@@ -207,6 +207,7 @@ public class ControladorDomini {
     public void esborrarTipusItemSeleccionat() {
         // TODO
         // el posa a null, guardar canvis fets
+        // esborra tota la informació i dades relacionades amb aquest tipus item
     }
 
     public void seleccionarTipusItem(String nomTipusItem) throws IOException {
@@ -338,5 +339,10 @@ public class ControladorDomini {
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         //TODO
         return new ArrayList<>();
+    }
+
+    public void deseleccionarTipusItem() {
+        // TODO
+        // posa el tipus item seleccionat a nul
     }
 }

@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import domini.classes.Pair;
 import domini.controladors.ControladorDomini;
 
 import java.io.IOException;
@@ -84,24 +85,12 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
-        return controladorDomini.crearTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
+    public void afegirTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+        controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
-    public boolean carregarTipusItem(String rutaAbsoluta) {
-        return controladorDomini.carregarTipusItem(rutaAbsoluta);
-    }
-
-    public void esborrarTipusItem(String nomTipusItem) {
-        controladorDomini.esborrarTipusItem(nomTipusItem);
-    }
-
-    public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
-        return controladorDomini.obtenirValorsTipusAtributs(nomTipusItem);
-    }
-
-    public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
-        return controladorDomini.obtenirDistanciesTipusAtributs(nomTipusItem);
+    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
+        controladorDomini.carregarTipusItem(rutaAbsoluta, nom);
     }
 
     public boolean esSessioIniciada() {
@@ -191,5 +180,9 @@ public class ControladorPresentacio {
 
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         return controladorDomini.obtenirValoracions();
+    }
+
+    public void deseleccionarTipusItem() {
+        controladorDomini.deseleccionarTipusItem();
     }
 }

@@ -2,6 +2,7 @@ package presentacio.controladors;
 
 import presentacio.vistes.VistaMenuRecomanacions;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class ControladorMenuRecomanacions {
@@ -43,5 +44,13 @@ public class ControladorMenuRecomanacions {
 
     public double avaluarRecomanacio() {
         return controladorPresentacio.avaluarRecomanacio();
+    }
+
+    public ArrayList<String> obtenirNomAtributsTipusItemSeleccionat() {
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No hi ha cap tipus d'ítem seleccionat.");
+            return new ArrayList<>();
+        }
+        return controladorPresentacio.obtenirNomAtributsTipusItemSeleccionat();
     }
 }

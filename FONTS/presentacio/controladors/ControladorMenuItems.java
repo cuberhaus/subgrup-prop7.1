@@ -1,9 +1,15 @@
 package presentacio.controladors;
 
+import presentacio.vistes.VistaDialegCrearItem;
+import presentacio.vistes.VistaDialegEditarItem;
 import presentacio.vistes.VistaMenuItems;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
+
+import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 public class ControladorMenuItems {
 
@@ -38,27 +44,79 @@ public class ControladorMenuItems {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
 
-    public boolean esborrarItem(String id) {
-        return controladorPresentacio.esborrarItem(id);
+    public void esborrarItem() {
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+        } else {
+            String id = JOptionPane.showInputDialog(instancia,
+                    "Introdueix l'identificador de l'ítem que vols esborrar:");
+            if (!controladorPresentacio.esborrarItem(id)) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
+            } else {
+                JOptionPane.showMessageDialog(vistaMenuItems, "L'ítem s'ha esborrat amb èxit.");
+            }
+        }
     }
 
     public Map<String, String> obtenirItem(String id) {
         return controladorPresentacio.obtenirItem(id);
     }
 
+    public void editarItem() {
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+        } else {
+            String id = JOptionPane.showInputDialog(instancia,
+                    "Introdueix l'identificador de l'ítem que vols editar:");
+            Map<String, String> atributs = controladorPresentacio.obtenirItem(id);
+            if (atributs == null) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
+            } else {
+                VistaDialegEditarItem vistaDialegEditarItem = new VistaDialegEditarItem(id, atributs);
+                vistaDialegEditarItem.setVisible(true);
+            }
+        }
+    }
+
     public boolean editarItem(String id, Map<String, String> valorsAtributs) {
         return controladorPresentacio.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems(String rutaAbsoluta) {
-        controladorPresentacio.carregarConjuntItems(rutaAbsoluta);
+    public void carregarConjuntItems() {
+        JDialog dialegFitxer = new JDialog();
+        JFileChooser selectorFitxer = new JFileChooser();
+        int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
+        if (estatSelectorFitxer == APPROVE_OPTION) {
+            File rutaFitxer = selectorFitxer.getSelectedFile();
+            controladorPresentacio.carregarConjuntItems(rutaFitxer.getAbsolutePath());
+            // TODO: afegir missatge d'error
+        }
     }
 
     public void esborrarTotsElsItems() {
-        controladorPresentacio.esborrarTotsElsItems();
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+        } else {
+            int resposta = JOptionPane.showConfirmDialog(vistaMenuItems,
+                    "Segur que vols esborrar tots els ítems?", "Selecciona una opció",
+                    JOptionPane.YES_NO_OPTION);
+            if (resposta == 0) {
+                controladorPresentacio.esborrarTotsElsItems();
+                JOptionPane.showMessageDialog(vistaMenuItems, "S'han esborrat els ítems amb èxit.");
+            }
+        }
     }
 
     public boolean sessioIniciada() {
         return controladorPresentacio.esSessioIniciada();
+    }
+
+    public void crearNouItem() {
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+        } else {
+            VistaDialegCrearItem vistaDialegCrearItem = new VistaDialegCrearItem();
+            vistaDialegCrearItem.setVisible(true);
+        }
     }
 }

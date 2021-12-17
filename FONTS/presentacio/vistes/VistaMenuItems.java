@@ -56,74 +56,30 @@ public class VistaMenuItems extends JPanel {
         menuLateral.add(Box.createVerticalGlue());
         JButton botoCrearItem = new JButton("Crea un nou ítem");
         botoCrearItem.addActionListener(e -> {
-            if (!controladorMenuItems.existeixTipusItemSeleccionat()) {
-                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            } else {
-                VistaDialegCrearItem vistaDialegCrearItem = new VistaDialegCrearItem();
-                vistaDialegCrearItem.setVisible(true);
-            }
+            controladorMenuItems.crearNouItem();
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
         menuLateral.add(botoCrearItem);
         JButton botoEditarItem = new JButton("Edita un ítem");
         botoEditarItem.addActionListener(e -> {
-            if (!controladorMenuItems.existeixTipusItemSeleccionat()) {
-                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            } else {
-                String id = JOptionPane.showInputDialog(instancia,
-                        "Introdueix l'identificador de l'ítem que vols editar:");
-                Map<String, String> atributs = controladorMenuItems.obtenirItem(id);
-                if (atributs == null) {
-                    JOptionPane.showMessageDialog(instancia, "L'identificador introduït no és vàlid.");
-                } else {
-                    VistaDialegEditarItem vistaDialegEditarItem = new VistaDialegEditarItem(id, atributs);
-                    vistaDialegEditarItem.setVisible(true);
-                }
-            }
+            controladorMenuItems.editarItem();
         });
         menuLateral.add(botoEditarItem);
         JButton botoEsborrarItem = new JButton("Esborra un ítem");
         botoEsborrarItem.addActionListener(e -> {
-            if (!controladorMenuItems.existeixTipusItemSeleccionat()) {
-                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            } else {
-                String id = JOptionPane.showInputDialog(instancia,
-                        "Introdueix l'identificador de l'ítem que vols esborrar:");
-                if (!controladorMenuItems.esborrarItem(id)) {
-                    JOptionPane.showMessageDialog(instancia, "L'identificador introduït no és vàlid.");
-                } else {
-                    JOptionPane.showMessageDialog(instancia, "L'ítem s'ha esborrat amb èxit.");
-                }
-            }
+            controladorMenuItems.esborrarItem();
         });
         menuLateral.add(botoEsborrarItem);
 
         JButton botoEsborrarTotsElsItems = new JButton("Esborra tots els ítems");
         botoEsborrarTotsElsItems.addActionListener(e -> {
-            if (!controladorMenuItems.existeixTipusItemSeleccionat()) {
-                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            } else {
-                int resposta = JOptionPane.showConfirmDialog(instancia,
-                        "Segur que vols esborrar tots els ítems?", "Selecciona una opció",
-                        JOptionPane.YES_NO_OPTION);
-                if (resposta == 0) {
-                    controladorMenuItems.esborrarTotsElsItems();
-                    JOptionPane.showMessageDialog(instancia, "S'han esborrat els ítems amb èxit.");
-                }
-            }
+            controladorMenuItems.esborrarTotsElsItems();
         });
         menuLateral.add(botoEsborrarTotsElsItems);
 
         JButton botoCarregarConjuntItems = new JButton("Afegeix ítems des d'un conjunt");
         botoCarregarConjuntItems.addActionListener(e -> {
-            JDialog dialegFitxer = new JDialog();
-            JFileChooser selectorFitxer = new JFileChooser();
-            int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
-            if (estatSelectorFitxer == APPROVE_OPTION) {
-                File rutaFitxer = selectorFitxer.getSelectedFile();
-                controladorMenuItems.carregarConjuntItems(rutaFitxer.getAbsolutePath());
-                // TODO: afegir missatge d'error
-            }
+            controladorMenuItems.carregarConjuntItems();
         });
         // TODO: han de ser del tipus d'ítem seleccionat o que no hi hagi un tipus d'ítem seleccionat
         menuLateral.add(botoCarregarConjuntItems);
