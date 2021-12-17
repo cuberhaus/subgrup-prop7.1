@@ -133,7 +133,12 @@ public class ControladorDomini {
      * Tanca la sessio de programa
      */
     public void tancarSessio() {
-        this.estatPrograma.tancarSessio();
+        if (!this.estatPrograma.isSessioIniciada()) {
+            throw new IllegalStateException();
+        }
+        else {
+            this.estatPrograma.tancarSessio();
+        }
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
