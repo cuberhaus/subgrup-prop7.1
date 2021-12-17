@@ -92,10 +92,9 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
                 usuaris.add(elements.get(id).obtenirNom());
                 usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
                 usuaris.add(elements.get(id).obteContrasenya());
+                resultat.add(new ArrayList<>(usuaris));
+                usuaris.clear();
             }
-
-            resultat.add(new ArrayList<>(usuaris));
-            usuaris.clear();
         }
 
 
