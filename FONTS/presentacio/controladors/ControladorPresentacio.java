@@ -41,7 +41,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirSessio();
     }
 
-    public void iniciarSessio(int idSessio, String contrasenya) {
+    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
     }
 

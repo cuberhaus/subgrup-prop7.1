@@ -40,7 +40,7 @@ public class ControladorMenuUsuaris {
         return true;
     }
 
-    public boolean iniciarSessio(String id, String contrasenya) {
+    public boolean iniciarSessio(String id, String contrasenya) throws Exception {
         boolean sessioIniciada = controladorPresentacio.sessioIniciada();
         if (idEsValid(id)) {
             if (sessioIniciada) {
