@@ -20,7 +20,7 @@ public class VistaMenuTipusItem extends JPanel {
     private static ControladorMenuTipusItem controladorMenuTipusItem;
     private static VistaMenuTipusItem instancia;
 
-    private static JLabel textItemSeleccionat;
+    private static JLabel textTipusItemSeleccionat;
     private static JButton botoVeureTipusItem;
     private static JButton botoEditarTipusItem;
 
@@ -108,25 +108,41 @@ public class VistaMenuTipusItem extends JPanel {
                 ex.printStackTrace();
             }
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
-                textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
                 botoEditarTipusItem.setEnabled(false);
             } else {
-                textItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
+                textTipusItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
                 botoVeureTipusItem.setEnabled(true);
                 botoEditarTipusItem.setEnabled(true);
             }
         });
         panellSeleccionarTipusItem.add(selecciona);
+        JButton deselecciona = new JButton("Deselecciona");
+        deselecciona.addActionListener(e -> {
+            if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            } else {
+                controladorMenuTipusItem.deseleccionarTipusItem();
+                textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                botoVeureTipusItem.setEnabled(false);
+                botoEditarTipusItem.setEnabled(false);
+            }
+        });
+        panellSeleccionarTipusItem.add(deselecciona);
         JButton esborra = new JButton("Esborra");
         esborra.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                controladorMenuTipusItem.esborrarTipusItemSeleccionat();
-                textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
-                botoVeureTipusItem.setEnabled(false);
-                botoEditarTipusItem.setEnabled(false);
+                int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar el tipus d'ítem seleccionat" +
+                        " i totes les seves dades?", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
+                if (resposta == 0) {
+                    controladorMenuTipusItem.esborrarTipusItemSeleccionat();
+                    textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                    botoVeureTipusItem.setEnabled(false);
+                    botoEditarTipusItem.setEnabled(false);
+                }
             }
         });
         panellSeleccionarTipusItem.add(esborra);
@@ -152,18 +168,18 @@ public class VistaMenuTipusItem extends JPanel {
         botoEditarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoEditarTipusItem.addActionListener(actionEvent -> editarTipusItemSeleccionat());
 
-        textItemSeleccionat = new JLabel();
+        textTipusItemSeleccionat = new JLabel();
         if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
-            textItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+            textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
             botoVeureTipusItem.setEnabled(false);
             botoEditarTipusItem.setEnabled(false);
         } else {
-            textItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
+            textTipusItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
             botoVeureTipusItem.setEnabled(true);
             botoEditarTipusItem.setEnabled(true);
         }
-        textItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));
-        informacio.add(textItemSeleccionat);
+        textTipusItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));
+        informacio.add(textTipusItemSeleccionat);
         panellMostrarTipusItemSeleccionat.add(informacio);
 
         botons.add(botoVeureTipusItem);

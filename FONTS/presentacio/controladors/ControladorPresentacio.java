@@ -200,4 +200,8 @@ public class ControladorPresentacio {
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         return controladorDomini.obtenirValoracions();
     }
+
+    public void deseleccionarTipusItem() {
+        controladorDomini.deseleccionarTipusItem();
+    }
 }

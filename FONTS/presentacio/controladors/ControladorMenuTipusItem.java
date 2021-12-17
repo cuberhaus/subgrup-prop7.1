@@ -46,7 +46,11 @@ public class ControladorMenuTipusItem {
         System.out.println(valorsTipusAtributs.toString());
         System.out.println(distanciesTipusAtributs.toString());
         System.out.println("******************");
-        return controladorPresentacio.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
+        if (!controladorPresentacio.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs)) {
+            JOptionPane.showMessageDialog(vistaMenuTipusItem, "Ja hi ha un tipus d'ítem carregat amb aquest nom.");
+            return false;
+        }
+        return true;
     }
 
     public void carregaTipusItem(String rutaAbsoluta) {
@@ -99,5 +103,9 @@ public class ControladorMenuTipusItem {
 
     public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
         controladorPresentacio.editarTipusItem(relacioNomsTipusAtributs);
+    }
+
+    public void deseleccionarTipusItem() {
+        controladorPresentacio.deseleccionarTipusItem();
     }
 }

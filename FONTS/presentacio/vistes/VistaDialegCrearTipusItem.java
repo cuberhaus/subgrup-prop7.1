@@ -91,7 +91,6 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 distanciesTipusAtributs.put(nomTipusAtribut, distanciaTipusAtribut);
             }
             if (!controladorMenuTipusItem.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs)) {
-                JOptionPane.showMessageDialog(this, "Ja hi ha un tipus d'ítem carregat amb aquest nom.");
                 return;
             }
             dispose();

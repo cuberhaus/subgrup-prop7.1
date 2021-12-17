@@ -192,7 +192,7 @@ public class ControladorDomini {
 
     public void esborrarTipusItemSeleccionat() {
         // TODO
-        // el posa a null
+        // esborra tota la informació i dades relacionades amb aquest tipus item
     }
 
     public void seleccionarTipusItem(String nomTipusItem) throws IOException {
@@ -317,5 +317,10 @@ public class ControladorDomini {
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         //TODO
         return new ArrayList<>();
+    }
+
+    public void deseleccionarTipusItem() {
+        // TODO
+        // posa el tipus item seleccionat a nul
     }
 }
