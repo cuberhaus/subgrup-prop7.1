@@ -5,6 +5,7 @@ import presentacio.controladors.ControladorMenuUsuaris;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -134,8 +135,6 @@ public class VistaMenuUsuaris extends JPanel {
             try {
                 if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
                     usuariActiuInfo.setText(idText.getText());
-                } else {
-                    usuariActiuInfo.setText("Sessio no iniciada");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -167,11 +166,15 @@ public class VistaMenuUsuaris extends JPanel {
         exportarConjuntDades = new JButton("Exportar Usuaris");
         exportarConjuntDades.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
-            jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjunt = jFileChooser.getSelectedFile();
-                controladorMenuUsuaris.exportarConjuntUsuaris(pathConjunt.getAbsolutePath());
+                try {
+                    controladorMenuUsuaris.exportarConjuntUsuaris(pathConjunt.getAbsolutePath());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         instancia.add(exportarConjuntDades, gridBagConstraints);

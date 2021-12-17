@@ -3,6 +3,7 @@ package presentacio.controladors;
 import presentacio.vistes.VistaMenuUsuaris;
 
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * Classe que representa el controlador que gestiona els usuaris
@@ -40,26 +41,31 @@ public class ControladorMenuUsuaris {
         return true;
     }
 
+    /**
+     *
+     * @param id id amb el que volem iniciar sessió
+     * @param contrasenya
+     * @return True si la sessió hem pogut iniciar sessió
+     * @throws Exception
+     */
     public boolean iniciarSessio(String id, String contrasenya) throws Exception {
-        boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
-        if (idEsValid(id)) {
-            if (!sessioIniciada) {
-                if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                    try{
+        try {
+            boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
+            if (idEsValid(id)) {
+                if (!sessioIniciada) {
+                    if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
                         controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
+                        return true;
+                    } else {
+                        JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
                     }
-                    catch(Exception e){
-                        JOptionPane.showMessageDialog(vistaMenuUsuaris,e.getMessage());
-                    }
-                    return true;
                 } else {
-                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
+                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "Has de tancar la sessió abans d'obrir-ne un altre");
                 }
-            } else {
-                System.out.println("Has de tancar la sessió abans d'obrir-ne un altre");
-                JOptionPane.showMessageDialog(vistaMenuUsuaris, "Has de tancar la sessió abans d'obrir-ne un altre");
-                return true;
             }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e);
         }
         return false;
     }
@@ -70,13 +76,18 @@ public class ControladorMenuUsuaris {
     }
 
     public void esborrarUsuari(String id) throws Exception {
-        if (idEsValid(id)) {
-            if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
-                JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari s'ha esborrat correctament");
-            } else {
-                JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
+        try {
+            if (idEsValid(id)) {
+                if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
+                    controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
+                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari s'ha esborrat correctament");
+                } else {
+                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
+                }
             }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e);
         }
     }
 
@@ -89,7 +100,7 @@ public class ControladorMenuUsuaris {
         }
     }
 
-    public void exportarConjuntUsuaris(String absolutePath) {
+    public void exportarConjuntUsuaris(String absolutePath) throws IOException {
         controladorPresentacio.exportarConjuntUsuaris(absolutePath);
     }
 
