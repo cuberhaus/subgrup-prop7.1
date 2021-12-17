@@ -49,8 +49,8 @@ public class ControladorPresentacio {
         return controladorDomini.existeixUsuari(id);
     }
 
-    public void afegirUsuari(String nom, String contrasenya) throws Exception {
-        controladorDomini.afegirUsuari(nom,contrasenya);
+    public int afegirUsuari(String nom, String contrasenya) throws Exception {
+        return controladorDomini.afegirUsuari(nom,contrasenya);
     }
 
     public void esborrarUsuari(int id) throws Exception {

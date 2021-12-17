@@ -65,8 +65,8 @@ public class ControladorMenuUsuaris {
     }
 
     public void afegirUsuari(String nom, String contrasenya) throws Exception {
-        JOptionPane.showMessageDialog(vistaMenuUsuaris,"S'ha creat l'usuari correctament");
-        controladorPresentacio.afegirUsuari(nom, contrasenya);
+        int id = controladorPresentacio.afegirUsuari(nom, contrasenya);
+        JOptionPane.showMessageDialog(vistaMenuUsuaris,"S'ha creat correctament l'usuari: " + id);
     }
 
     public void esborrarUsuari(String id) throws Exception {
