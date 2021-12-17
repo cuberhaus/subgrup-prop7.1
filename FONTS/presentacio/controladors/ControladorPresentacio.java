@@ -49,7 +49,7 @@ public class ControladorPresentacio {
         return controladorDomini.existeixUsuari(id);
     }
 
-    public void afegirUsuari(String nom, String contrasenya) {
+    public void afegirUsuari(String nom, String contrasenya) throws Exception {
         controladorDomini.afegirUsuari(nom,contrasenya);
     }
 

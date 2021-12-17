@@ -64,7 +64,7 @@ public class ControladorMenuUsuaris {
         return false;
     }
 
-    public void afegirUsuari(String nom, String contrasenya) {
+    public void afegirUsuari(String nom, String contrasenya) throws Exception {
         JOptionPane.showMessageDialog(vistaMenuUsuaris,"S'ha creat l'usuari correctament");
         controladorPresentacio.afegirUsuari(nom, contrasenya);
     }

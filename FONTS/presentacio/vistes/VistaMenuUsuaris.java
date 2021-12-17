@@ -108,7 +108,11 @@ public class VistaMenuUsuaris extends JPanel {
 
         afegirUsuari = new JButton("Afegir Usuari");
         afegirUsuari.addActionListener(e -> {
-            controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
+            try {
+                controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
