@@ -102,6 +102,24 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         return resultat;
     }
 
+    public ArrayList<ArrayList<String>> obtenirLlistaUsuaris() {
+        ArrayList<ArrayList<String>> resultat = new ArrayList<>();
+        ArrayList<String> usuaris = new ArrayList<>();
+
+        Set<Id> keys = elements.keySet();
+        for (Id id : keys) {
+            usuaris.add(elements.get(id).obtenirNom());
+            usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
+            usuaris.add(String.valueOf(elements.get(id).obtenirId().esActiu()));
+            resultat.add(new ArrayList<>(usuaris));
+            usuaris.clear();
+        }
+
+
+        resultat.add(usuaris);
+        return resultat;
+    }
+
     public void esborrarTotsUsuaris() {
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {

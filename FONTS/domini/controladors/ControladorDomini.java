@@ -362,4 +362,8 @@ public class ControladorDomini {
         // TODO
         // posa el tipus item seleccionat a nul
     }
+
+    public ArrayList<ArrayList<String>> obteUsuaris() {
+        return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
+    }
 }
