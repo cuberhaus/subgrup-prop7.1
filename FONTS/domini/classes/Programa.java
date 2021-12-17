@@ -153,4 +153,6 @@ public class Programa {
     public void esborraUsuari(Id id) {
         conjuntUsuaris.esborrar(id);
     }
+
+    public void esborraTotsUsuaris() {conjuntUsuaris.esborrarTotsUsuaris();}
 }

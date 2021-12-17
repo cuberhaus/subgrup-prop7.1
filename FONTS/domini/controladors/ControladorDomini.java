@@ -213,7 +213,7 @@ public class ControladorDomini {
 
     // TODO: Pablo
     public void esborraConjuntUsuaris() {
-        estatPrograma.obtenirTotsElsUsuaris();
+        estatPrograma.esborraTotsUsuaris();
     }
 
     public String obtenirNomTipusItemSeleccionat() {

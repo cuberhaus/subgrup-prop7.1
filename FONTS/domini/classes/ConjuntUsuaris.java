@@ -88,4 +88,11 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         resultat.add(usuaris);
         return resultat;
     }
+
+    public void esborrarTotsUsuaris() {
+        Set<Id> keys = elements.keySet();
+        for (Id id : keys) {
+            elements.get(id).setActiu(false);
+        }
+    }
 }
