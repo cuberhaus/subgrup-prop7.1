@@ -63,23 +63,23 @@ public class ControladorPersistencia {
     private Path obteCarpetaTipusItem(String nom) {
         return Paths.get(direccioCarpetaItems.toString(), nom);
     }
-    private Path obteCapsaleraTipusItem(String nom) {
-        return Paths.get(direccioCarpetaItems.toString(),nom, "capsalera.csv");
+    private Path obteRutaDefinicioTipusItem(String nom) {
+        return Paths.get(direccioCarpetaItems.toString(),nom, "definicio.csv");
     }
     public void guardarTipusItem(ArrayList<ArrayList<String>> tipus_item, String nom) throws IOException {
         Path path = obteCarpetaTipusItem(nom);
         if (!Files.exists(path)) {
             Files.createDirectory(path);
         }
-        else if (Files.exists(obteCapsaleraTipusItem(nom))) {
-            obteCapsaleraTipusItem(nom).toFile().delete();
+        else if (Files.exists(obteRutaDefinicioTipusItem(nom))) {
+            obteRutaDefinicioTipusItem(nom).toFile().delete();
         }
-        escriptor.escriureCSV(obteCapsaleraTipusItem(nom).toString(), tipus_item);
+        escriptor.escriureCSV(obteRutaDefinicioTipusItem(nom).toString(), tipus_item);
     }
     public ArrayList<ArrayList<String>> obtenirTipusItem(String nom) throws IOException {
-        if(!Files.exists(obteCapsaleraTipusItem(nom)))
+        if(!Files.exists(obteRutaDefinicioTipusItem(nom)))
             return null;
-        return lector.llegirCSV(obteCapsaleraTipusItem(nom).toString());
+        return lector.llegirCSV(obteRutaDefinicioTipusItem(nom).toString());
     }
 
     public void borrarTipusItem(String nom) {
