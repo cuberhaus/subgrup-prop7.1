@@ -94,9 +94,14 @@ public class ControladorDomini {
      * @param nom nom del usuari
      * @param contrasenya contrasenya del usuari
      */
-    public void afegirUsuari(String nom, String contrasenya) {
+    public void afegirUsuari(String nom, String contrasenya) throws Exception {
         Id id = obteIdUsuariDisponible();
-        estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
+        if (estatPrograma.conteUsuari(id) && estatPrograma.obtenirUsuari(id).isActiu()) {
+            throw new Exception("L'usuari ja existeix");
+        }
+        else {
+            estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
+        }
     }
 
     /**
