@@ -8,8 +8,8 @@ import java.util.*;
 
 public class MetodeRecomanadorHibrid extends MetodeRecomanador {
 
-    MetodeRecomanadorCollaborative metodeCollab;
-    MetodeRecomanadorContentBased metodeContent;
+    private MetodeRecomanadorCollaborative metodeCollab;
+    private MetodeRecomanadorContentBased metodeContent;
     /**
      * Crea un <code>MetodeRecomanador</code> donant un conjunt de dades per defecte.
      *
