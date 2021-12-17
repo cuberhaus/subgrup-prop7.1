@@ -7,9 +7,7 @@ import presentacio.vistes.VistaMenuItems;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -110,7 +108,7 @@ public class ControladorMenuItems {
     }
 
     public boolean sessioIniciada() {
-        return controladorPresentacio.sessioIniciada();
+        return controladorPresentacio.esSessioIniciada();
     }
 
     public void crearNouItem() {

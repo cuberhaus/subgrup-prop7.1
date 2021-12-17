@@ -1,7 +1,7 @@
 package domini.classes.atributs;
 
-import domini.classes.atributs.distancia.Distancia;
-import domini.classes.atributs.valors.ValorAtribut;
+import domini.classes.atributs.distancia.*;
+import domini.classes.atributs.valors.*;
 
 import java.util.Objects;
 
@@ -29,6 +29,11 @@ public class TipusAtribut {
         this.distancia = distancia;
     }
 
+    public TipusAtribut(String valor, String distancia) {
+        this.valorAtribut = valorAtributDesDelNom(valor);
+        this.distancia = distanciaDesDelNom(distancia);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,6 +48,43 @@ public class TipusAtribut {
         return Objects.hash(valorAtribut, distancia);
     }
 
+    private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
+        if (Objects.equals(valorAtribut, "ValorBoolea")) {
+            return new ValorBoolea();
+        } else if (Objects.equals(valorAtribut, "ValorCategoric")) {
+            return new ValorCategoric();
+        } else if (Objects.equals(valorAtribut, "ValorNumeric")) {
+            return new ValorNumeric();
+        } else if (Objects.equals(valorAtribut, "ValorTextual")) {
+            return new ValorTextual();
+        } else if (Objects.equals(valorAtribut, "ValorConjuntBoolea")) {
+            return new ValorConjuntBoolea();
+        } else if (Objects.equals(valorAtribut, "ValorConjuntCategoric")) {
+            return new ValorConjuntCategoric();
+        } else if (Objects.equals(valorAtribut, "ValorConjuntNumeric")) {
+            return new ValorConjuntNumeric();
+        } else if (Objects.equals(valorAtribut, "ValorConjuntTextual")) {
+            return new ValorConjuntTextual();
+        } else {
+            throw new IllegalArgumentException("No hi ha cap ValorAtribut reconegut amb aquest nom.");
+        }
+    }
+
+    private static Distancia distanciaDesDelNom(String distancia) throws IllegalArgumentException {
+        if (Objects.equals(distancia, "DistanciaDiferenciaDeConjunts")) {
+            return new DistanciaDiferenciaDeConjunts();
+        } else if (Objects.equals(distancia, "DistanciaDiscreta")) {
+            return new DistanciaDiscreta();
+        } else if (Objects.equals(distancia, "DistanciaEuclidiana")) {
+            return new DistanciaEuclidiana();
+        } else if (Objects.equals(distancia, "DistanciaLevenshtein")) {
+            return new DistanciaLevenshtein();
+        } else if (Objects.equals(distancia, "DistanciaZero")) {
+            return new DistanciaZero();
+        } else {
+            throw new IllegalArgumentException("No hi ha cap Distancia reconeguda amb aquest nom.");
+        }
+    }
     /**
      * @return ValorAtribut del TipusAtribut.
      */

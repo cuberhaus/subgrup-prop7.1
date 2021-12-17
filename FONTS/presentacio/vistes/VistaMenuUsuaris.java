@@ -121,10 +121,14 @@ public class VistaMenuUsuaris extends JPanel {
 
         iniciarSessio = new JButton("Iniciar Sessió");
         iniciarSessio.addActionListener(e -> {
-            if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
-                usuariActiuInfo.setText(idText.getText());
-            } else {
-                usuariActiuInfo.setText("Sessio no iniciada");
+            try {
+                if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
+                    usuariActiuInfo.setText(idText.getText());
+                } else {
+                    usuariActiuInfo.setText("Sessio no iniciada");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
         gridBagConstraints.gridx = 0;
@@ -133,7 +137,11 @@ public class VistaMenuUsuaris extends JPanel {
 
         tancarSessio = new JButton("Tancar Sessió");
         tancarSessio.addActionListener(e -> {
-            controladorMenuUsuaris.tancarSessio();
+            try {
+                controladorMenuUsuaris.tancarSessio();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             usuariActiuInfo.setText("Sessio no iniciada");
         });
         gridBagConstraints.gridx = 0;

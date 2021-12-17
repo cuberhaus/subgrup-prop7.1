@@ -28,6 +28,11 @@ public class ValorCategoric extends ValorAtribut<String> {
         return new ValorCategoric(valor);
     }
 
+    @Override
+    public String obteNomValor() {
+        return "ValorCategoric";
+    }
+
     /**
      * @return <code>String</code> que conté el valor d'aquest atribut.
      */

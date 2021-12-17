@@ -22,6 +22,11 @@ public class DistanciaEuclidiana extends Distancia {
         return new DistanciaEuclidiana();
     }
 
+    @Override
+    public String obteNomDistancia() {
+        return "DistanciaEuclidiana";
+    }
+
     /**
      * @param valorAtribut Valor d'un atribut
      * @return Cert si la distància admet el valor donat. Altrament, fals.

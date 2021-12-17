@@ -60,6 +60,11 @@ public class ValorConjuntCategoric extends ValorConjunt<String> {
         return new ValorConjuntCategoric(valor);
     }
 
+    @Override
+    public String obteNomValor() {
+        return "ValorConjuntCategoric";
+    }
+
     /**
      * @return <code>ArrayList&lt;ValorAtribut&lt;String&gt;&gt;</code> que conté el valor d'aquest atribut.
      */

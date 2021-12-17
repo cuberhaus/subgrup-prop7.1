@@ -5,7 +5,6 @@ import domini.controladors.ControladorDomini;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Classe que representa el controlador de presentació
@@ -37,11 +36,11 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
 
-    public int obtenirSessio() {
+    public int obtenirSessio() throws Exception {
         return controladorDomini.obtenirSessio();
     }
 
-    public void iniciarSessio(int idSessio, String contrasenya) {
+    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
     }
 
@@ -57,7 +56,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarUsuari(id);
     }
 
-    public void tancarSessio() {
+    public void tancarSessio() throws Exception {
         controladorDomini.tancarSessio();
     }
 
@@ -77,7 +76,7 @@ public class ControladorPresentacio {
         controladorDomini.editarValoracio(usuariId,itemId,valor);
     }
 
-    public void carregarConjuntValoracions(String pathAbsolut) {
+    public void carregarConjuntValoracions(String pathAbsolut) throws Exception {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
     }
 
@@ -85,16 +84,8 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void exportarConjuntDades(String pathConjunt) {
-        controladorDomini.exportarConjuntDades(pathConjunt);
-    }
-
-    public void esborrarConjuntDades(String conjuntaEsborrar) {
-        controladorDomini.esborraConjunt(conjuntaEsborrar);
-    }
-
     public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
-        return controladorDomini.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
+        return controladorDomini.crearTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
     }
 
     public boolean carregarTipusItem(String rutaAbsoluta) {
@@ -113,8 +104,8 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirDistanciesTipusAtributs(nomTipusItem);
     }
 
-    public boolean sessioIniciada() {
-        return controladorDomini.sessioIniciada();
+    public boolean esSessioIniciada() {
+        return controladorDomini.esSessioIniciada();
     }
 
     public void exportarConjuntUsuaris(String absolutePath) {

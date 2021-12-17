@@ -28,6 +28,11 @@ public class ValorNumeric extends ValorAtribut<Double> {
         return new ValorNumeric(valor);
     }
 
+    @Override
+    public String obteNomValor() {
+        return "ValorNumeric";
+    }
+
     /**
      * @return <code>Double</code> que conté el valor d'aquest atribut.
      */

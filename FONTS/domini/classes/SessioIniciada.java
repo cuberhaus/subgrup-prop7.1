@@ -19,10 +19,10 @@ public class SessioIniciada extends Sessio {
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
      *
-     * @throws IllegalStateException si l'estat és sessioNoIniciada
+     * @throws Exception si l'estat és sessioNoIniciada
      */
     @Override
-    public void tancarSessio(Programa programa) {
+    public void tancarSessio(Programa programa) throws Exception {
         usuari = null;
         programa.cambiarEstat(new SessioNoIniciada());
     }
@@ -31,11 +31,11 @@ public class SessioIniciada extends Sessio {
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
      *
      * @param usuari Usuari amb el qual iniciem la sessió.
-     * @throws IllegalStateException si l'estat és sessioIniciada
+     * @throws Exception si l'estat és sessioIniciada
      */
     @Override
-    public void iniciarSessio(Programa programa, Usuari usuari) throws IllegalStateException {
-        throw new IllegalStateException("No es pot iniciar sessió sense abans tancar la sessió");
+    public void iniciarSessio(Programa programa, Usuari usuari) throws Exception {
+        throw new Exception("No es pot iniciar sessió sense abans tancar la sessió");
     }
 
     /**
@@ -49,10 +49,10 @@ public class SessioIniciada extends Sessio {
     /**
      * Retorna l'usuari amb la sessió iniciada.
      *
-     * @throws IllegalStateException si l'estat és sessioNoIniciada
+     * @throws Exception si l'estat és sessioNoIniciada
      */
     @Override
-    public Usuari obtenirUsuariSessioIniciada() {
+    public Usuari obtenirUsuariSessioIniciada() throws Exception{
         return usuari;
     }
 }

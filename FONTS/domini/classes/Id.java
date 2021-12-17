@@ -25,7 +25,10 @@ public class Id implements Comparable<Id> {
         this.valor = valor;
         this.actiu = actiu;
     }
-
+    public Id(int valor) {
+        this.valor = valor;
+        this.actiu = true;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

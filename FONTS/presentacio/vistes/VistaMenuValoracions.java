@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
@@ -161,7 +162,14 @@ public class VistaMenuValoracions extends JPanel {
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjuntVal = jFileChooser.getSelectedFile();
                 System.out.println(pathConjuntVal.getAbsolutePath());
-                controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
+                try {
+                    controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
+                } catch (IOException ex) {
+                    // TODO: catch this
+                    ex.printStackTrace();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         gridBagConstraints.gridx = 0;

@@ -23,7 +23,7 @@ public class ControladorMenuRecomanacions {
     }
 
     public boolean sessioIniciada() {
-        return controladorPresentacio.sessioIniciada();
+        return controladorPresentacio.esSessioIniciada();
     }
 
     public boolean existeixTipusItemSeleccionat() {

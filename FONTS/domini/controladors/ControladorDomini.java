@@ -1,6 +1,8 @@
 package domini.controladors;
 
 import domini.classes.*;
+import domini.classes.atributs.TipusAtribut;
+import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -15,7 +17,7 @@ public class ControladorDomini {
     private static ControladorDomini instancia;
     private final ControladorPersistencia controladorPersistencia;
 
-    private final Programa estat_programa;
+    private final Programa estatPrograma;
     private int ultimIdUsat = 0;
     private String nomTipusItemActual = null;
     private ConjuntValoracions valoracionsTipusItemActual = null;
@@ -23,7 +25,7 @@ public class ControladorDomini {
 
     private ControladorDomini() {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
-        estat_programa = Programa.obtenirInstancia();
+        estatPrograma = Programa.obtenirInstancia();
     }
 
     public static ControladorDomini obtenirInstancia() {
@@ -34,34 +36,16 @@ public class ControladorDomini {
     }
 
     /**
-     * Funció que donada la ubicació de l'arxiu CSV, et retorna el contingut en forma de llista.
-     * @param ubicacio <code>String</code> que conté la ubicació de l'arxiu.
-     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV
-     * @throws IOException s'ha produït un error en la lectura
-     */
-   /* public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
-        LectorDeCSV lector = new LectorDeCSV();
-        return lector.llegirCSV(ubicacio);
-    }*/
-
-    /**
-     * Funció que donada la ubicació on es vol escriure el CSV i el seu contingut, escriu el fitxer.
-     * @param ubicacio ubicacio <code>String</code> que conté el destí de les dades.
-     * @param taula <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut del fitxer CSV a escriure.
-     * @throws IOException s'ha produït un error en l'escriptura
-     */
-    /*public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
-        EscriptorDeCSV escriptor = new EscriptorDeCSV();
-        escriptor.escriureCSV(ubicacio, taula);
-    }*/
-
-    /**
      * Obté l'id de l'usuari que ha iniciat la sessió
      * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
      */
-    public int obtenirSessio() {
-        // TODO: add logic
-        return 0;
+    public int obtenirSessio() throws Exception {
+        if (this.estatPrograma.isSessioIniciada()) return 0;
+        else {
+            Usuari usuari = this.estatPrograma.obtenirUsuariSessioIniciada();
+            Id id = usuari.obtenirId();
+            return id.obtenirValor();
+        }
     }
 
     /**
@@ -69,18 +53,38 @@ public class ControladorDomini {
      * @param idSessio id de l'usuari que inicia la sessió
      * @param contrasenya contrasenya de l'usuari
      */
-    public void iniciarSessio(int idSessio, String contrasenya) {
-        // TODO: add logic
+    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
+        Id idUsuariBuscat = new Id(idSessio, true);
+        if (this.estatPrograma.conteUsuari(idUsuariBuscat)) {
+            Usuari usuariCercat = this.estatPrograma.obtenirUsuari(idUsuariBuscat);
+            Id idUsuariCercat = usuariCercat.obtenirId();
+
+            if (!idUsuariCercat.esActiu()) {
+                throw new Exception("L'usuari existeix pero no es actiu");
+            }
+
+            else if (usuariCercat.isContrasenya(contrasenya)) {
+                this.estatPrograma.iniciarSessio(usuariCercat);
+            }
+
+            else {
+                throw new Exception("La contrasenya es incorrecta");
+            }
+        }
+
+        else {
+            throw new Exception("L'usuari no existeix");
+        }
     }
 
     public boolean existeixUsuari(int id) {
         Id id_bo = new Id(id, true);
-        return estat_programa.conteUsuari(id_bo)&& estat_programa.obtenirUsuari(id_bo).isActiu();
+        return estatPrograma.conteUsuari(id_bo)&& estatPrograma.obtenirUsuari(id_bo).isActiu();
     }
 
 
-    private Id obteIdDisponible() {
-        while (estat_programa.conteUsuari(new Id(ultimIdUsat, true))) {
+    private Id obteIdUsuariDisponible() {
+        while (estatPrograma.conteUsuari(new Id(ultimIdUsat, true))) {
             ultimIdUsat++;
         }
         return new Id(ultimIdUsat, true);
@@ -91,8 +95,8 @@ public class ControladorDomini {
      * @param contrasenya contrasenya del usuari
      */
     public void afegirUsuari(String nom, String contrasenya) {
-        Id id = obteIdDisponible();
-        estat_programa.afegirUsuari(new Usuari(id, nom, contrasenya));
+        Id id = obteIdUsuariDisponible();
+        estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
     }
 
     /**
@@ -100,57 +104,71 @@ public class ControladorDomini {
      * @param id id del usuari
      */
     public void esborrarUsuari(int id) {
-        estat_programa.esborraUsuari(new Id(id, true));
+        estatPrograma.esborraUsuari(new Id(id, true));
     }
 
     /**
      * Tanca la sessio de programa
      */
-    public void tancarSessio() {
-        //TODO:
+    public void tancarSessio() throws Exception {
+        this.estatPrograma.tancarSessio();
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
-        //TODO:
+        Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
+        Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
+        valoracionsTipusItemActual.afegir(new Valoracio(Double.parseDouble(valor), us, item));
     }
 
     public boolean existeixValoracio(String usuariId, String itemId) {
-        //TODO:
-        return false;
+        Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
+        Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
+        return valoracionsTipusItemActual.conte(us, item);
     }
 
     public void esborraValoracio(String usuariId, String itemId) {
-        //TODO:
+        Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
+        Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
+        valoracionsTipusItemActual.esborrar(valoracionsTipusItemActual.obte(us, item));
     }
 
     public void editarValoracio(String usuariId, String itemId, String valor) {
-        //TODO:
+        esborraValoracio(usuariId, itemId);
+        afegirValoracio(usuariId, itemId, valor);
     }
 
-    public void carregaConjuntValoracions(String pathAbsolut) {
-        //TODO:
+    public void carregaConjuntValoracions(String rutaAbsolut) throws Exception {
+        ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
+        valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
     public ArrayList<String> obtenirLlistaConjunts() {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
-    public void exportarConjuntDades(String pathConjunt) {
+    // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
+    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
+        ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
+        TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+        for (var fila : definicio) {
+            tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
+        }
+        TipusItem tipus = new TipusItem(nom, tipusAtributs);
+        nomTipusItemActual = nom;
+        estatPrograma.afegirTipusItem(nom, tipus);
+        controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
-    public void esborraConjunt(String conjuntaEsborrar) {
-    }
-
-    public boolean carregarTipusItem(String rutaAbsoluta) {
-        // TODO
-        return false;
-    }
-
-    public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
-        // TODO
-        // Pot o retornar true/false o llançar excepció. Si llança excepció crec que és millor perquè podem detectar
-        // si no funciona perquè ja n'hi ha un amb el mateix nom o si no funciona per algun altre motiu.
-        return false;
+    // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAtributAValorDistancia) throws IOException {
+        TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+        for (var fila : nomValorAtributAValorDistancia.entrySet()) {
+            tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x(), fila.getValue().y()));
+        }
+        TipusItem tipus = new TipusItem(nom, tipusAtributs);
+        nomTipusItemActual = nom;
+        estatPrograma.afegirTipusItem(nom, tipus);
+        controladorPersistencia.guardarTipusItem(tipus.converteixAArray(), nom);
     }
 
     /** Retorna els noms dels conjunts d'items coneguts**/
@@ -158,29 +176,25 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirNomsDeTotsElsTipusItems();
     }
 
-    public void esborrarTipusItem(String nomTipusItem) {
-        // TODO
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
+        TipusItem tipus = estatPrograma.obteTipusItem(nomTipusItemActual);
+        TreeMap<String, Pair<String, String>> valors = new TreeMap<>();
+        for(var x : tipus.obtenirTipusAtributs().entrySet()) {
+            valors.put(x.getKey(), new Pair<>(x.getValue().obtenirValorAtribut().obteNomValor(), x.getValue().obtenirDistancia().obteNomDistancia()));
+        }
+        return valors;
     }
 
-    public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
-        // TODO
-        return new HashMap<>();
+    public boolean esSessioIniciada() {
+        return estatPrograma.isSessioIniciada();
     }
 
-    public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
-        // TODO
-        return new HashMap<>();
-    }
-
-    public boolean sessioIniciada() {
-        //TODO
-        return false;
-    }
-
+    // TODO: Pablo
     public void exportarConjuntDadesUsuari(String absolutePath) {
         //TODO
     }
 
+    // TODO: Pablo
     public void esborraConjuntUsuaris() {
         //TODO
     }
@@ -192,6 +206,7 @@ public class ControladorDomini {
 
     public void esborrarTipusItemSeleccionat() {
         // TODO
+        // el posa a null, guardar canvis fets
         // esborra tota la informació i dades relacionades amb aquest tipus item
     }
 
@@ -206,6 +221,7 @@ public class ControladorDomini {
         ArrayList<ArrayList<String>> tipus_item_raw = controladorPersistencia.obtenirTipusItem(nomTipusItem);
     }
 
+    // TODO: Pablo
     public ArrayList<ArrayList<String>> obtenirItems() {
         // TODO
         // retorna una llista d'items
@@ -214,17 +230,20 @@ public class ControladorDomini {
         return new ArrayList<>();
     }
 
+    // TODO: Pablo
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
         // TODO
         return new ArrayList<>();
     }
 
+    // TODO: Pablo
     public boolean existeixTipusItemSeleccionat() {
         // TODO
         // retorna true si hi ha un tipus item seleccionat
         return true;
     }
 
+    // TODO: Pablo
     public boolean afegirItem(Map<String, String> valorsAtributs) {
         // TODO
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
@@ -233,6 +252,7 @@ public class ControladorDomini {
         return false;
     }
 
+    // TODO: Pablo, s'han de borrar les seves valoracions!!!!
     public boolean esborrarItem(String id) {
         // TODO
         // Esborra l'ítem amb aquest id
@@ -243,6 +263,7 @@ public class ControladorDomini {
         return false;
     }
 
+    // TODO: Pablo, s'han de borrar les seves valoracions!!!!
     public Map<String, String> obtenirItem(String id) {
         // TODO
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
@@ -266,6 +287,7 @@ public class ControladorDomini {
     public void carregarConjuntItems(String rutaAbsoluta) {
         // TODO
         // carrega un conjunt d'items
+        // pero no el selecciona
     }
 
     public void esborrarTotsElsItems() {

@@ -40,12 +40,17 @@ public class ControladorMenuUsuaris {
         return true;
     }
 
-    public boolean iniciarSessio(String id, String contrasenya) {
-        boolean sessioIniciada = controladorPresentacio.sessioIniciada();
+    public boolean iniciarSessio(String id, String contrasenya) throws Exception {
+        boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
         if (idEsValid(id)) {
-            if (sessioIniciada) {
+            if (!sessioIniciada) {
                 if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                    controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
+                    try{
+                        controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
+                    }
+                    catch(Exception e){
+                        JOptionPane.showMessageDialog(vistaMenuUsuaris,e);
+                    }
                     return true;
                 } else {
                     JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
@@ -59,6 +64,7 @@ public class ControladorMenuUsuaris {
     }
 
     public void afegirUsuari(String nom, String contrasenya) {
+        JOptionPane.showMessageDialog(vistaMenuUsuaris,"S'ha creat l'usuari correctament");
         controladorPresentacio.afegirUsuari(nom, contrasenya);
     }
 
@@ -72,8 +78,13 @@ public class ControladorMenuUsuaris {
         }
     }
 
-    public void tancarSessio() {
-        controladorPresentacio.tancarSessio();
+    public void tancarSessio() throws Exception{
+        try {
+            controladorPresentacio.tancarSessio();
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris,"La sessió ja és tancada");
+        }
     }
 
     public void exportarConjuntUsuaris(String absolutePath) {
