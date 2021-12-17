@@ -23,10 +23,10 @@ public class VistaDialegAutors extends JDialog {
         panell.add(text,BorderLayout.CENTER);
 
         pack();
-        setBounds(VistaPantalla.centreHoritzontal(VistaPantalla.amplada / 3),
-                  VistaPantalla.centreVertical(VistaPantalla.altura / 3),
-                VistaPantalla.amplada / 3, VistaPantalla.altura / 3);
-        setLocation(VistaPantalla.centreHoritzontal(this.getWidth()), VistaPantalla.centreVertical(this.getHeight()));
+        setBounds(Pantalla.centreHoritzontal(Pantalla.amplada / 3),
+                  Pantalla.centreVertical(Pantalla.altura / 3),
+                Pantalla.amplada / 3, Pantalla.altura / 3);
+        setLocation(Pantalla.centreHoritzontal(this.getWidth()), Pantalla.centreVertical(this.getHeight()));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         add(panell);

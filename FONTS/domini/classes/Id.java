@@ -44,7 +44,7 @@ public class Id implements Comparable<Id> {
      * @return Còpia de l'identificador.
      */
     public Id copiar() {
-        // Com que 'valor' i 'actiu' són tipus primitius només d'ha de crear un nou Id.
+        // Com que 'valor' i 'actiu' són tipus primitius només s'ha de crear un nou Id.
         return new Id(valor, actiu);
     }
 

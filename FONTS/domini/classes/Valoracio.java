@@ -9,19 +9,27 @@ import java.util.Objects;
  */
 
 public class Valoracio {
-    /** Conté el valor de la valoració */
+    /**
+     * Conté el valor de la valoració
+     */
     private final double valor;
 
-    /** Conté l'usuari que escriu la valoració */
+    /**
+     * Conté l'usuari que escriu la valoració
+     */
     private final Usuari usuari;
 
-    /** Conté l'item valorat */
+    /**
+     * Conté l'ítem valorat
+     */
     private final Item item;
 
-    /** Constructora donat un valor, un usuari i un item.
-     * @param valor representa el valor de la valoració
+    /**
+     * Constructora donat un valor, un usuari i un item.
+     *
+     * @param valor  representa el valor de la valoració
      * @param usuari representa l'usuari que ha fet la valoració
-     * @param item representa l'item valorat
+     * @param item   representa l'ítem valorat
      */
     public Valoracio(double valor, Usuari usuari, Item item) {
         this.valor = valor;
@@ -34,7 +42,7 @@ public class Valoracio {
     /**
      * Consultora del item
      *
-     * @return El resultat és l'item del paràmetre implícit
+     * @return El resultat és l'ítem del paràmetre implícit
      */
     public Item obtenirItem() {
         return item.copiar();
@@ -59,7 +67,8 @@ public class Valoracio {
     }
 
     /**
-     * Indica si dos valoracions són iguals.
+     * Indica si dues valoracions són iguals.
+     *
      * @return El resultat retorna true si són iguals, altrament retorna false.
      */
     @Override
@@ -71,7 +80,7 @@ public class Valoracio {
     }
 
     /**
-     * Retorna un codi de hash idéntic per a dos valoracions amb mateix Usuari i Item,
+     * Retorna un codi de hash idèntic per a dues valoracions amb el mateix Usuari i Item,
      * altrament retorna un hash diferent
      */
     @Override
@@ -80,8 +89,9 @@ public class Valoracio {
     }
 
     /**
-     * Retorna una copia de la valoracio del paràmetre implícit
-     * @return Copia del paràmetre implícit
+     * Retorna una còpia de la valoració del paràmetre implícit
+     *
+     * @return Còpia del paràmetre implícit
      */
     public Valoracio copiar() {
         return new Valoracio(valor, usuari.copiar(), item.copiar());

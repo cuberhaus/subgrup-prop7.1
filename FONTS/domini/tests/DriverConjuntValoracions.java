@@ -6,6 +6,7 @@ import utilitats.consola;
 
 /**
  * Driver per la classe ConjuntValoracions
+ *
  * @author pol.casacuberta
  */
 
@@ -19,10 +20,10 @@ public class DriverConjuntValoracions {
         ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris();
         conjuntUsuaris.afegir(taulaRatings);
         String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-        ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+        ConjuntItems conjuntItems = new ConjuntItems(tipusItem, taulaItems);
 
         ConjuntValoracions conjuntValoracions = new ConjuntValoracions();
-        conjuntValoracions.afegir(taulaRatings,conjuntItems,conjuntUsuaris);
+        conjuntValoracions.afegir(taulaRatings, conjuntItems, conjuntUsuaris);
         return conjuntValoracions;
     }
 
@@ -53,10 +54,9 @@ public class DriverConjuntValoracions {
 
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Item item = UtilitatsDeLectura.llegirItem();
-            if (conjuntValoracions.conte(usuari,item)) {
+            if (conjuntValoracions.conte(usuari, item)) {
                 System.out.println("La valoració amb usuari, i item donats, existeix dins el conjunt");
-            }
-            else {
+            } else {
                 System.out.println("La valoració amb usuari, i item donats, no existeix dins el conjunt");
             }
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class DriverConjuntValoracions {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirValoracio(conjuntValoracions.obte(usuari,item));
+            UtilitatsDEscriptura.imprimirValoracio(conjuntValoracions.obte(usuari, item));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -91,12 +91,11 @@ public class DriverConjuntValoracions {
 
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Item item = UtilitatsDeLectura.llegirItem();
-            conjuntValoracions.esborrar(usuari,item);
+            conjuntValoracions.esborrar(usuari, item);
 
-            if (conjuntValoracions.conte(usuari,item)) {
+            if (conjuntValoracions.conte(usuari, item)) {
                 System.out.println("La valoració amb usuari, i item donats, existeix dins el conjunt");
-            }
-            else {
+            } else {
                 System.out.println("La valoració amb usuari, i item donats, no existeix dins el conjunt");
             }
 
@@ -116,14 +115,13 @@ public class DriverConjuntValoracions {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Item item = UtilitatsDeLectura.llegirItem();
 
-            Valoracio valoracio = new Valoracio(4,usuari,item);
+            Valoracio valoracio = new Valoracio(4, usuari, item);
 
             conjuntValoracions.esborrar(valoracio);
 
-            if (conjuntValoracions.conte(usuari,item)) {
+            if (conjuntValoracions.conte(usuari, item)) {
                 System.out.println("La valoració amb usuari, i item donats, existeix dins el conjunt");
-            }
-            else {
+            } else {
                 System.out.println("La valoració amb usuari, i item donats, no existeix dins el conjunt");
             }
 
@@ -149,7 +147,7 @@ public class DriverConjuntValoracions {
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         System.out.println("Driver per la classe Item");
         String consulta = "\n0 - Sortir\n" +
                 "1 - Test Constructor bàsic\n" +
@@ -160,7 +158,7 @@ public class DriverConjuntValoracions {
                 "6 - Test esborrar valoracio\n" +
                 "7 - Test obte totes les valoracions\n";
         String err = "Valor invàlid: introdueix un enter entre 0 i 7";
-        while(true){
+        while (true) {
             try {
                 int i = consola.llegirInt(consulta, err, 0, 7);
                 switch (i) {
@@ -188,8 +186,7 @@ public class DriverConjuntValoracions {
                         testObteTotesValoracions();
                         break;
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Torna-ho a provar.");
             }
         }

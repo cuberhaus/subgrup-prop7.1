@@ -50,7 +50,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static void inicialitzarMenuUsuaris() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.insets = new Insets(10,10,10,10); // Afegeix padding per a que els elements no estiguin massa junts
+        gridBagConstraints.insets = new Insets(10, 10, 10, 10); // Afegeix padding per a que els elements no estiguin massa junts
         instancia.setLayout(gridBagLayout);
 
         usuariActiuLabel = new JLabel("Usuari actiu:");
@@ -123,8 +123,7 @@ public class VistaMenuUsuaris extends JPanel {
         iniciarSessio.addActionListener(e -> {
             if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
                 usuariActiuInfo.setText(idText.getText());
-            }
-            else {
+            } else {
                 usuariActiuInfo.setText("Sessio no iniciada");
             }
         });
@@ -151,17 +150,17 @@ public class VistaMenuUsuaris extends JPanel {
         exportarConjuntDades.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
-            if(estatJfile == APPROVE_OPTION) {
+            if (estatJfile == APPROVE_OPTION) {
                 File pathConjunt = jFileChooser.getSelectedFile();
                 controladorMenuUsuaris.exportarConjuntUsuaris(pathConjunt.getAbsolutePath());
             }
         });
-        instancia.add(exportarConjuntDades,gridBagConstraints);
+        instancia.add(exportarConjuntDades, gridBagConstraints);
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         esborrarConjuntButton = new JButton("Esborrar tots els usuaris");
-        esborrarConjuntButton.addActionListener(e-> {
+        esborrarConjuntButton.addActionListener(e -> {
             int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar tots els usuaris", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
             if (resposta == 0) {
                 controladorMenuUsuaris.esborrarConjuntUsuaris();

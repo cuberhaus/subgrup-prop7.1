@@ -14,7 +14,7 @@ public class Recomanacio implements Comparable<Recomanacio>{
     private final double seguretat;
 
     /**
-     * Contructora de recomnacio donta un id i un valor de la recomanacio
+     * Contructora de recomanació donat un id i un valor de la recomanació
      * @param id <code>Id</code> id és l'identificador de l'ítem.
      * @param seguretat <code>double</code> rate és el valor de la recomanació.
      */

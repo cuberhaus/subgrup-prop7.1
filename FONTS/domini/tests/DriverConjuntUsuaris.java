@@ -1,17 +1,21 @@
 package domini.tests;
 
-import domini.classes.*;
+import domini.classes.ConjuntUsuaris;
+import domini.classes.Id;
+import domini.classes.Usuari;
 import domini.classes.csv.TaulaCSV;
 import utilitats.consola;
 
 /**
  * Driver per la classe ConjuntUsuaris
+ *
  * @author pol.casacuberta
  */
 
 public class DriverConjuntUsuaris {
     /**
      * Retorna un conjunt d'usuaris donada una taula per defecte
+     *
      * @param taulaPerDefecte Taula per defecte
      * @return Retorna un Conjunt d'usuaris
      * @throws Exception No s'ha pogut crear el conjunt
@@ -82,7 +86,7 @@ public class DriverConjuntUsuaris {
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         System.out.println("Driver per la classe Item");
         String consulta = "\n0 - Sortir\n" +
                 "1 - Test Constructor bàsic\n" +
@@ -91,7 +95,7 @@ public class DriverConjuntUsuaris {
                 "4 - Test esborrarUsuari\n" +
                 "5 - Test Obtenir Usuaris\n";
         String err = "Valor invàlid: introdueix un enter entre 0 i 5";
-        while(true){
+        while (true) {
             try {
                 int i = consola.llegirInt(consulta, err, 0, 5);
                 switch (i) {
@@ -113,8 +117,7 @@ public class DriverConjuntUsuaris {
                         testObtenirUsuaris();
                         break;
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Torna-ho a provar.");
             }
         }

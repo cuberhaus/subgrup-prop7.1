@@ -128,7 +128,23 @@ public class VistaMenuValoracions extends JPanel {
         instancia.add(esborraValoracio, gridBagConstraints);
 
         editaValoracio = new JButton("Edita valoració");
-        editaValoracio.addActionListener(e -> controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText()));
+        editaValoracio.addActionListener(e -> {
+            //TODO implementar vistaDialegEditarValoracio
+            if (!controladorMenuValoracions.existeixTipusItemSeleccionat()) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            } else {
+                String idItem = JOptionPane.showInputDialog(instancia,
+                        "Introdueix l'identificador de l'ítem valorat que vols editar:");
+                String idUsuari = JOptionPane.showInputDialog(instancia, "Introdueix l'identificador de l'usuari que ha valorat l'ítem");
+                if (controladorMenuValoracions.existeixValoracio(idUsuari, idItem)) {
+                    JOptionPane.showMessageDialog(instancia, "L'identificador de la valoracio no és vàlid.");
+                } else {
+//                    VistaDialegEditarValoracio vistaDialegEditarValoracio = new VistaDialegEditarValoracio(idItem, idUsuari);
+//                    vistaDialegEditarValoracio.setVisible(true);
+                }
+            }
+            controladorMenuValoracions.editarValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
+        });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         instancia.add(editaValoracio, gridBagConstraints);
@@ -153,11 +169,10 @@ public class VistaMenuValoracions extends JPanel {
         instancia.add(conjuntDeValoracionsButton, gridBagConstraints);
 
         JButton esborrarTotesLesValoracions = new JButton("Esborra totes les valoracions");
-        esborrarTotesLesValoracions.addActionListener(e-> {
+        esborrarTotesLesValoracions.addActionListener(e -> {
             if (!controladorMenuValoracions.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            }
-            else {
+            } else {
                 int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar totes les valoracions", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
                 if (resposta == 0) {
                     controladorMenuValoracions.esborrarTotesLesValoracions();

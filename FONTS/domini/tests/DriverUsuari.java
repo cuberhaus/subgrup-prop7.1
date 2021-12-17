@@ -5,11 +5,11 @@ import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.metode_recomanador.Punt;
 import utilitats.consola;
 
-
 import java.util.Objects;
 
 /**
  * Driver per la classe Usuari
+ *
  * @author pol.casacuberta
  */
 
@@ -18,7 +18,7 @@ public class DriverUsuari {
         System.out.println("Testejant el Constructor creador d'atributs.");
         Id id = UtilitatsDeLectura.llegirId();
         String nom = consola.llegirString("Escriu el nom de l'usuari:");
-        String contrasenya= consola.llegirString("Escriu la contrasenya de l'usuari:");
+        String contrasenya = consola.llegirString("Escriu la contrasenya de l'usuari:");
         Usuari u1 = new Usuari(id.obtenirValor(), id.esActiu(), nom, contrasenya);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
@@ -34,8 +34,8 @@ public class DriverUsuari {
         System.out.println("Testejant el Constructor creador d'atributs.");
         Id id = UtilitatsDeLectura.llegirId();
         String nom = consola.llegirString("Escriu el nom de l'usuari:");
-        String contrasenya= consola.llegirString("Escriu la contrasenya de l'usuari:");
-        Usuari u1 = new Usuari(id,nom,contrasenya);
+        String contrasenya = consola.llegirString("Escriu la contrasenya de l'usuari:");
+        Usuari u1 = new Usuari(id, nom, contrasenya);
         UtilitatsDEscriptura.imprimirUsuari(u1);
     }
 
@@ -58,8 +58,7 @@ public class DriverUsuari {
         String actiu = consola.llegirString("Escriu 'true' o 'false'");
         if (Objects.equals(actiu, "true")) {
             usuari.setActiu(true);
-        }
-        else if (Objects.equals(actiu, "false")){
+        } else if (Objects.equals(actiu, "false")) {
             usuari.setActiu(false);
         }
         UtilitatsDEscriptura.imprimirId(usuari.obtenirId());
@@ -90,8 +89,7 @@ public class DriverUsuari {
 
         if (usuari.isContrasenya(contrasenya)) {
             System.out.println("La contrasenya s'ha canviat correctament");
-        }
-        else {
+        } else {
             System.out.println("La contrasenya no s'ha canviat correctament");
         }
     }
@@ -105,7 +103,7 @@ public class DriverUsuari {
 
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            Valoracio valoracio = new Valoracio(valor,usuari,item);
+            Valoracio valoracio = new Valoracio(valor, usuari, item);
             usuari.afegirValoracio(valoracio);
             UtilitatsDEscriptura.imprimirValoracionsUsuari(usuari.obtenirValoracions());
 
@@ -114,7 +112,7 @@ public class DriverUsuari {
         }
     }
 
-    public static void testEsborrarValoracio(){
+    public static void testEsborrarValoracio() {
         System.out.println("Testejant esborrarValoracio.");
         try {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
@@ -122,7 +120,7 @@ public class DriverUsuari {
 
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            Valoracio valoracio = new Valoracio(valor,usuari,item);
+            Valoracio valoracio = new Valoracio(valor, usuari, item);
             usuari.afegirValoracio(valoracio);
             usuari.esborraValoracio(item);
             System.out.println("La valoració de l'usuari s'ha esborrat");
@@ -141,7 +139,7 @@ public class DriverUsuari {
 
             double valor = consola.llegirDouble("Introdueix el valor de la valoració.",
                     "El valor introduït no és vàlid.", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-            Valoracio valoracio = new Valoracio(valor,usuari,item);
+            Valoracio valoracio = new Valoracio(valor, usuari, item);
             usuari.afegirValoracio(valoracio);
 
             UtilitatsDEscriptura.imprimirValoracio(usuari.obtenirValoracio(item));
@@ -158,8 +156,7 @@ public class DriverUsuari {
 
         if (usuari.equals(usuari2)) {
             System.out.println("Els dos usuaris son iguals");
-        }
-        else {
+        } else {
             System.out.println("Els dos usuaris son diferents");
         }
     }
@@ -171,11 +168,9 @@ public class DriverUsuari {
         int compare = usuari.compareTo(usuari2);
         if (compare < 0) {
             System.out.println("Usuari 1 es mes petit que l'usuari dos");
-        }
-        else if (compare > 0) {
+        } else if (compare > 0) {
             System.out.println("Usuari 1 es mes gran que l'usuari dos");
-        }
-        else {
+        } else {
             System.out.println("Usuari 1 i Usuari 2 son iguals");
         }
     }
@@ -194,8 +189,7 @@ public class DriverUsuari {
 
         if (usuari.hashCode() == usuari2.hashCode()) {
             System.out.println("Els dos usuaris son iguals");
-        }
-        else {
+        } else {
             System.out.println("Els dos usuaris son diferents");
         }
     }
@@ -212,15 +206,15 @@ public class DriverUsuari {
         Usuari usuari = UtilitatsDeLectura.llegirUsuari();
         TaulaCSV taulaItems = new TaulaCSV(UtilitatsDeLectura.llegirTaulaCSV("TaulaCSV1"));
         String tipusItem = consola.llegirString("Introdueix el nom de tipusItem");
-        ConjuntItems conjuntItems = new ConjuntItems(tipusItem,taulaItems);
+        ConjuntItems conjuntItems = new ConjuntItems(tipusItem, taulaItems);
 
         Punt punt = usuari.transformaAPunt(conjuntItems);
-        for (double elem: punt) {
+        for (double elem : punt) {
             System.out.println(elem);
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         System.out.println("Driver per la classe Item");
         String consulta = "\n0 - Sortir\n" +
                 "1 - Test Constructor bàsic\n" +
@@ -242,7 +236,7 @@ public class DriverUsuari {
                 "17 - Test setNom\n" +
                 "18 - Test Transforma a punt\n";
         String err = "Valor invàlid: introdueix un enter entre 0 i 18";
-        while(true){
+        while (true) {
             try {
                 int i = consola.llegirInt(consulta, err, 0, 18);
                 switch (i) {
@@ -303,8 +297,7 @@ public class DriverUsuari {
                         testTransformaAPunt();
                         break;
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Torna-ho a provar.");
             }
         }
