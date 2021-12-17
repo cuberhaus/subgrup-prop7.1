@@ -86,6 +86,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
 
         ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         resultat.add(usuaris);
+        System.out.println(usuaris);
         return resultat;
     }
 
