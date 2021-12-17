@@ -34,7 +34,6 @@ public class VistaMenuUsuaris extends JPanel {
     private static JFileChooser jFileChooser;
     private static JButton exportarConjuntDades;
     private static JButton esborrarConjuntButton;
-    private static JLabel usuariSeguentIdLabel;
 
     private VistaMenuUsuaris() {
     }
