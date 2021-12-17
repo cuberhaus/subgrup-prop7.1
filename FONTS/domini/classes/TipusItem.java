@@ -78,12 +78,12 @@ public class TipusItem {
         if (o == null || getClass() != o.getClass()) return false;
         TipusItem tipusItem = (TipusItem) o;
         // Dos TipusItem són iguals si tenen el mateix nom i els mateixos tipus d'atributs.
-        return nom.equals(tipusItem.nom) && tipusAtributs.equals(tipusItem.tipusAtributs);
+        return nom.equals(tipusItem.nom);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nom, tipusAtributs);
+        return Objects.hash(nom);
     }
 
     /**

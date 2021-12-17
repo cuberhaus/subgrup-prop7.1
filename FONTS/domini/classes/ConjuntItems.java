@@ -108,4 +108,19 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
         return new ConjuntItems(tipusItem.copiar(), copiaElements);
     }
+
+    @Override
+    /**
+     * Afegeix un item al conjunt d'items
+     * @param element <code>Item</code> a afegir al conjunt
+     */
+    public void afegir(Item element){
+        if (element.obtenirTipusItem() != this.tipusItem) {
+            throw new IllegalArgumentException();
+        }
+
+        else {
+            super.afegir(element);
+        }
+    }
 }
