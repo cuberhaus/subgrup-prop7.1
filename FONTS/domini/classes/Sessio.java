@@ -11,18 +11,18 @@ public abstract class Sessio {
      * Canvia l'estat de la sessió a SessioNoIniciada
      *
      * @param programa Instància de programa
-     * @throws IllegalStateException si l'estat és sessioNoIniciada
+     * @throws Exception si l'estat és sessioNoIniciada
      */
-    abstract void tancarSessio(Programa programa) throws IllegalStateException;
+    abstract void tancarSessio(Programa programa) throws Exception;
 
     /**
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
      *
      * @param usuari   Usuari amb el qual iniciem la sessió.
      * @param programa Instancia de programa
-     * @throws IllegalStateException si l'estat és sessioIniciada
+     * @throws Exception si l'estat és sessioIniciada
      */
-    abstract void iniciarSessio(Programa programa, Usuari usuari) throws IllegalStateException;
+    abstract void iniciarSessio(Programa programa, Usuari usuari) throws Exception;
 
     /**
      * Retorna true si la sessió està iniciada.
@@ -35,7 +35,7 @@ public abstract class Sessio {
      * Retorna l'usuari amb la sessió iniciada.
      *
      * @return Usuari amb sessió iniciada
-     * @throws IllegalStateException si l'estat és sessioNoIniciada
+     * @throws Exception si l'estat és sessioNoIniciada
      */
-    abstract public Usuari obtenirUsuariSessioIniciada() throws IllegalStateException;
+    abstract public Usuari obtenirUsuariSessioIniciada() throws Exception;
 }

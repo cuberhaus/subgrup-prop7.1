@@ -39,7 +39,7 @@ public class ControladorDomini {
      * Obté l'id de l'usuari que ha iniciat la sessió
      * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
      */
-    public int obtenirSessio() {
+    public int obtenirSessio() throws Exception {
         if (this.estatPrograma.isSessioIniciada()) return 0;
         else {
             Usuari usuari = this.estatPrograma.obtenirUsuariSessioIniciada();
@@ -110,7 +110,7 @@ public class ControladorDomini {
     /**
      * Tanca la sessio de programa
      */
-    public void tancarSessio() throws IllegalStateException{
+    public void tancarSessio() throws Exception {
         this.estatPrograma.tancarSessio();
     }
 

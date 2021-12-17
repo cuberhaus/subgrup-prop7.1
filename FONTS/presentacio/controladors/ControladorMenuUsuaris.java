@@ -78,11 +78,11 @@ public class ControladorMenuUsuaris {
         }
     }
 
-    public void tancarSessio() throws IllegalStateException{
+    public void tancarSessio() throws Exception{
         try {
             controladorPresentacio.tancarSessio();
         }
-        catch(IllegalStateException e) {
+        catch(Exception e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris,"La sessió ja és tancada");
         }
     }

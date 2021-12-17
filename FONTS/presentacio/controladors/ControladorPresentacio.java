@@ -36,7 +36,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
 
-    public int obtenirSessio() {
+    public int obtenirSessio() throws Exception {
         return controladorDomini.obtenirSessio();
     }
 
@@ -56,7 +56,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarUsuari(id);
     }
 
-    public void tancarSessio() throws IllegalStateException{
+    public void tancarSessio() throws Exception {
         controladorDomini.tancarSessio();
     }
 

@@ -26,7 +26,7 @@ public class ProgramaTest {
     }
 
     @Test
-    public void tancarSessio() {
+    public void tancarSessio() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3, true, "Pol", "1234");
@@ -36,7 +36,7 @@ public class ProgramaTest {
     }
 
     @Test
-    public void iniciarSessio() {
+    public void iniciarSessio() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3, true, "Pol", "1234");
@@ -49,7 +49,7 @@ public class ProgramaTest {
      * no hem executat cap funció, i després d'iniciar i tancar sessio.
      */
     @Test
-    public void isSessioIniciada() {
+    public void isSessioIniciada() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         assertFalse(p1.isSessioIniciada());
@@ -63,7 +63,7 @@ public class ProgramaTest {
     }
 
     @Test
-    public void obtenirUsuariSessioIniciadaIniciantSessioAbans() {
+    public void obtenirUsuariSessioIniciadaIniciantSessioAbans() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3, true, "Pol", "1234");
@@ -73,14 +73,14 @@ public class ProgramaTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void obtenirUsuariSessioIniciadaDemanantUsuariAbansDiniciarSessio() {
+    public void obtenirUsuariSessioIniciadaDemanantUsuariAbansDiniciarSessio() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u2 = p1.obtenirUsuariSessioIniciada();
     }
 
     @Test(expected = IllegalStateException.class)
-    public void obtenirUsuariSessioIniciadaDespresDeTancarSessio() {
+    public void obtenirUsuariSessioIniciadaDespresDeTancarSessio() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u1 = new Usuari(3, true, "Pol", "1234");

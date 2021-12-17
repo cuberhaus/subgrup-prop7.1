@@ -137,7 +137,11 @@ public class VistaMenuUsuaris extends JPanel {
 
         tancarSessio = new JButton("Tancar Sessió");
         tancarSessio.addActionListener(e -> {
-            controladorMenuUsuaris.tancarSessio();
+            try {
+                controladorMenuUsuaris.tancarSessio();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             usuariActiuInfo.setText("Sessio no iniciada");
         });
         gridBagConstraints.gridx = 0;
