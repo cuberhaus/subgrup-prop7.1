@@ -1,6 +1,7 @@
 package domini.controladors;
 
 import domini.classes.*;
+import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class ControladorDomini {
     private static ControladorDomini instancia;
     private final ControladorPersistencia controladorPersistencia;
 
-    private final Programa estat_programa;
+    private final Programa estatPrograma;
     private int ultimIdUsat = 0;
     private String nomTipusItemActual = null;
     private ConjuntValoracions valoracionsTipusItemActual = null;
@@ -23,7 +24,7 @@ public class ControladorDomini {
 
     private ControladorDomini() {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
-        estat_programa = Programa.obtenirInstancia();
+        estatPrograma = Programa.obtenirInstancia();
     }
 
     public static ControladorDomini obtenirInstancia() {
@@ -75,12 +76,12 @@ public class ControladorDomini {
 
     public boolean existeixUsuari(int id) {
         Id id_bo = new Id(id, true);
-        return estat_programa.conteUsuari(id_bo)&& estat_programa.obtenirUsuari(id_bo).isActiu();
+        return estatPrograma.conteUsuari(id_bo)&& estatPrograma.obtenirUsuari(id_bo).isActiu();
     }
 
 
-    private Id obteIdDisponible() {
-        while (estat_programa.conteUsuari(new Id(ultimIdUsat, true))) {
+    private Id obteIdUsuariDisponible() {
+        while (estatPrograma.conteUsuari(new Id(ultimIdUsat, true))) {
             ultimIdUsat++;
         }
         return new Id(ultimIdUsat, true);
@@ -91,8 +92,8 @@ public class ControladorDomini {
      * @param contrasenya contrasenya del usuari
      */
     public void afegirUsuari(String nom, String contrasenya) {
-        Id id = obteIdDisponible();
-        estat_programa.afegirUsuari(new Usuari(id, nom, contrasenya));
+        Id id = obteIdUsuariDisponible();
+        estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
     }
 
     /**
@@ -100,7 +101,7 @@ public class ControladorDomini {
      * @param id id del usuari
      */
     public void esborrarUsuari(int id) {
-        estat_programa.esborraUsuari(new Id(id, true));
+        estatPrograma.esborraUsuari(new Id(id, true));
     }
 
     /**
@@ -111,37 +112,38 @@ public class ControladorDomini {
     }
 
     public void afegirValoracio(String usuariId, String itemId, String valor) {
-        //TODO:
+        Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
+        Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
+        valoracionsTipusItemActual.afegir(new Valoracio(Double.parseDouble(valor), us, item));
     }
 
     public boolean existeixValoracio(String usuariId, String itemId) {
-        //TODO:
-        return false;
+        Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
+        Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
+        return valoracionsTipusItemActual.conte(us, item);
     }
 
     public void esborraValoracio(String usuariId, String itemId) {
-        //TODO:
+        Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
+        Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
+        valoracionsTipusItemActual.esborrar(valoracionsTipusItemActual.obte(us, item));
     }
 
     public void editarValoracio(String usuariId, String itemId, String valor) {
-        //TODO:
+        esborraValoracio(usuariId, itemId);
+        afegirValoracio(usuariId, itemId, valor);
     }
 
-    public void carregaConjuntValoracions(String pathAbsolut) {
-        //TODO:
+    public void carregaConjuntValoracions(String pathAbsolut) throws Exception {
+        ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(pathAbsolut);
+        valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
     public ArrayList<String> obtenirLlistaConjunts() {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
-    public void exportarConjuntDades(String pathConjunt) {
-    }
-
-    public void esborraConjunt(String conjuntaEsborrar) {
-    }
-
-    public boolean carregarTipusItem(String rutaAbsoluta) {
+    public boolean carregarTipusItem(String rutaAbsoluta, String nom) {
         // TODO
         return false;
     }

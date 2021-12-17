@@ -119,6 +119,10 @@ public class Programa {
         return conjuntUsuaris.obtenir(idUsuari);
     }
 
+    public ConjuntUsuaris obtenirTotsElsUsuaris() {
+        return conjuntUsuaris;
+    }
+
     /**
      * Afegeix un usuari al conjunt d'usuaris.
      *

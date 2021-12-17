@@ -5,7 +5,6 @@ import domini.controladors.ControladorDomini;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Classe que representa el controlador de presentació
@@ -77,20 +76,12 @@ public class ControladorPresentacio {
         controladorDomini.editarValoracio(usuariId,itemId,valor);
     }
 
-    public void carregarConjuntValoracions(String pathAbsolut) {
+    public void carregarConjuntValoracions(String pathAbsolut) throws Exception {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
     }
 
     public ArrayList<String> obtenirLlistaConjunts() {
         return controladorDomini.obtenirLlistaConjunts();
-    }
-
-    public void exportarConjuntDades(String pathConjunt) {
-        controladorDomini.exportarConjuntDades(pathConjunt);
-    }
-
-    public void esborrarConjuntDades(String conjuntaEsborrar) {
-        controladorDomini.esborraConjunt(conjuntaEsborrar);
     }
 
     public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
