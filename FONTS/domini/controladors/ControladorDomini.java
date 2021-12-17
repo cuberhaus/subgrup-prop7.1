@@ -109,8 +109,14 @@ public class ControladorDomini {
      * Esborra usuari, falta parametre del conjunt
      * @param id id del usuari
      */
-    public void esborrarUsuari(int id) {
-        estatPrograma.esborraUsuari(new Id(id, true));
+    public void esborrarUsuari(int id) throws Exception {
+        Id id1 = new Id(id, true);
+        if (!estatPrograma.conteUsuari(id1) || estatPrograma.obtenirUsuari(id1).isActiu()) {
+            throw new Exception("L'usuari no existeix");
+        }
+        else {
+            estatPrograma.esborraUsuari(new Id(id, true));
+        }
     }
 
     /**
