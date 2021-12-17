@@ -2,6 +2,7 @@ package domini.classes;
 
 import domini.classes.csv.TaulaCSV;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
@@ -72,5 +73,19 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             usuaris.add(elements.get(id));
         }
         return usuaris;
+    }
+
+    public ArrayList<ArrayList<String>> obtenirUsuarisActius() {
+        ArrayList<String> usuaris = new ArrayList<>();
+        Set<Id> keys = elements.keySet();
+        for (Id id : keys) {
+            if (id.esActiu()) {
+                usuaris.add(String.valueOf(elements.get(id.obtenirValor())));
+            }
+        }
+
+        ArrayList<ArrayList<String>> resultat = new ArrayList<>();
+        resultat.add(usuaris);
+        return resultat;
     }
 }
