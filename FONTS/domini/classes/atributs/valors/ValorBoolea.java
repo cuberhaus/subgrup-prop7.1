@@ -40,6 +40,11 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
         return new ValorBoolea(valor);
     }
 
+    @Override
+    public String obteNomValor() {
+        return "ValorBoolea";
+    }
+
     /**
      * @return <code>boolean</code> que conté el valor d'aquest atribut.
      */

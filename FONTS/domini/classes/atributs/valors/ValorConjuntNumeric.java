@@ -1,7 +1,6 @@
 package domini.classes.atributs.valors;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Representa el valor compost numèric d'un atribut.
@@ -65,6 +64,11 @@ public class ValorConjuntNumeric extends ValorConjunt<Double> {
     @Override
     public ValorConjuntNumeric copiar() {
         return new ValorConjuntNumeric(valor);
+    }
+
+    @Override
+    public String obteNomValor() {
+        return "ValorConjuntNumeric";
     }
 
     /**

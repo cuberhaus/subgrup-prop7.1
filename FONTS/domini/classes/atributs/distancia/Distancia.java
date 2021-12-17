@@ -12,6 +12,8 @@ public abstract class Distancia {
      */
     public abstract Distancia copiar();
 
+    public abstract String obteNomDistancia();
+
     @Override
     public boolean equals(Object obj) {
         // Dos distàncies són iguals si són instàncies de la mateixa classe.

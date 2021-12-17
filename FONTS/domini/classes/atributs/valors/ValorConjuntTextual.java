@@ -60,6 +60,11 @@ public class ValorConjuntTextual extends ValorConjunt<String> {
         return new ValorConjuntTextual(valor);
     }
 
+    @Override
+    public String obteNomValor() {
+        return "ValorConjuntTextual";
+    }
+
     /**
      * @return <code>ArrayList&lt;ValorAtribut&lt;String&gt;&gt;</code> que conté el valor d'aquest atribut.
      */

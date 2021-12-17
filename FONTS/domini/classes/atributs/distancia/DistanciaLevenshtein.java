@@ -20,6 +20,11 @@ public class DistanciaLevenshtein extends Distancia {
         return new DistanciaLevenshtein();
     }
 
+    @Override
+    public String obteNomDistancia() {
+        return "DistanciaLevenshtein";
+    }
+
     /**
      * @param valorAtribut Valor d'un atribut
      * @return Cert si la distància admet el valor donat. Altrament, fals.

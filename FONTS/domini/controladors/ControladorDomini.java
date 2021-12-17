@@ -144,8 +144,8 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
-    // TODO: ficar pre o no?
-    public boolean carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
+    // TODO: ficar pre o no? Ara mateix avisar a la maria
+    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
@@ -154,15 +154,23 @@ public class ControladorDomini {
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(tipus);
-        seleccionarTipusItem(nom);
         controladorPersistencia.guardarTipusItem(definicio, nom);
-        return true;
     }
 
-    public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
+    // TODO: ficar pre o no, ara mateix avisar a la maria
+    public boolean crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAtributAValorDistancia) throws IOException {
         // TODO
         // Pot o retornar true/false o llançar excepció. Si llança excepció crec que és millor perquè podem detectar
         // si no funciona perquè ja n'hi ha un amb el mateix nom o si no funciona per algun altre motiu.
+        TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+        for (var fila : nomValorAtributAValorDistancia.entrySet()) {
+            tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x(), fila.getValue().y()));
+        }
+        TipusItem tipus = new TipusItem(nom, tipusAtributs);
+        nomTipusItemActual = nom;
+        estatPrograma.afegirTipusItem(tipus);
+        controladorPersistencia.guardarTipusItem(tipus.converteixAArray(), nom);
+        // TODO: aqui estaba edgar
         return false;
     }
 

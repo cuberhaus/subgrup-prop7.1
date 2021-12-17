@@ -15,6 +15,11 @@ public class DistanciaZero extends Distancia {
         return new DistanciaZero();
     }
 
+    @Override
+    public String obteNomDistancia() {
+        return "DistanciaZero";
+    }
+
     /**
      * @param valorAtribut Valor d'un atribut
      * @return Cert si la distància admet el valor donat. Altrament, fals.

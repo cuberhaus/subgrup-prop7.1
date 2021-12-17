@@ -85,7 +85,7 @@ public class ControladorPresentacio {
     }
 
     public boolean afegirTipusItem(String nom, Map<String, String> valorsTipusAtributs, Map<String, String> distanciesTipusAtributs) {
-        return controladorDomini.afegirTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
+        return controladorDomini.crearTipusItem(nom, valorsTipusAtributs, distanciesTipusAtributs);
     }
 
     public boolean carregarTipusItem(String rutaAbsoluta) {
