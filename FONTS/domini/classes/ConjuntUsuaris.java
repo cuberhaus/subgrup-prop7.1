@@ -76,17 +76,30 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     }
 
     public ArrayList<ArrayList<String>> obtenirUsuarisActius() {
+        ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         ArrayList<String> usuaris = new ArrayList<>();
+
+        ArrayList<String> atributs = new ArrayList<>();
+        atributs.add("userId");
+        atributs.add("nom");
+        atributs.add("password");
+
+        resultat.add(atributs);
+
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {
             if (id.esActiu()) {
+                usuaris.add(elements.get(id).obtenirNom());
                 usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
+                usuaris.add(elements.get(id).obteContrasenya());
             }
+
+            resultat.add(new ArrayList<>(usuaris));
+            usuaris.clear();
         }
 
-        ArrayList<ArrayList<String>> resultat = new ArrayList<>();
+
         resultat.add(usuaris);
-        System.out.println(usuaris);
         return resultat;
     }
 
