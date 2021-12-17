@@ -80,7 +80,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {
             if (id.esActiu()) {
-                usuaris.add(String.valueOf(elements.get(id.obtenirValor())));
+                usuaris.add(String.valueOf(elements.get(id)));
             }
         }
 
