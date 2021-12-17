@@ -87,7 +87,7 @@ public class ControladorMenuUsuaris {
             }
         }
         catch (Exception e) {
-            JOptionPane.showMessageDialog(vistaMenuUsuaris, e);
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }
     }
 
