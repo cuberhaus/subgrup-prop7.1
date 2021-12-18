@@ -62,13 +62,12 @@ public class VistaMenuUsuaris extends JPanel {
         nomsColumnes.add("nom");
         nomsColumnes.add("userid");
         nomsColumnes.add("esActiu");
-        // TODO: revisar que això està bé i que l'ordre de les columnes i els atributs és el mateix
-        // TODO: potser cal un JScrollPane per la taula
         llistaUsuarisTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
         ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();
         for (ArrayList<String> usuari : usuaris) {
             llistaUsuarisTableModel.addRow(usuari.toArray());
         }
+        llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount()-1);
         llistaUsuaris = new JTable(llistaUsuarisTableModel);
         jScrollPane = new JScrollPane(llistaUsuaris);
         gridBagConstraints.gridx = 0;
@@ -82,6 +81,7 @@ public class VistaMenuUsuaris extends JPanel {
         for (ArrayList<String> usuari : usuaris) {
             llistaUsuarisTableModel.addRow(usuari.toArray());
         }
+        llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount()-1);
         jScrollPane.revalidate();
     }
 
