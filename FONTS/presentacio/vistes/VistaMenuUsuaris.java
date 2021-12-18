@@ -32,7 +32,6 @@ public class VistaMenuUsuaris extends JPanel {
     private static GridBagConstraints gridBagConstraints;
     private static JLabel usuariActiuLabel;
     private static JLabel usuariActiuInfo;
-
     private static ControladorMenuUsuaris controladorMenuUsuaris;
     private static JFileChooser jFileChooser;
     private static JButton exportarConjuntDades;
