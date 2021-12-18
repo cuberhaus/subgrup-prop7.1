@@ -4,7 +4,6 @@ import presentacio.controladors.ControladorMenuUsuaris;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -236,6 +235,6 @@ public class VistaMenuUsuaris extends JPanel {
 
         borderLayout = new BorderLayout();
         instancia.setLayout(borderLayout);
-        instancia.add(jpanel,BorderLayout.EAST);
+        instancia.add(jpanel,BorderLayout.CENTER);
     }
 }
