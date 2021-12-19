@@ -18,6 +18,24 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         elements = new TreeMap<>();
     }
 
+    //user nom password actiu
+    public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
+        elements = new TreeMap<>();
+        llistaUsuaris.remove(0);
+        llistaUsuaris.remove(llistaUsuaris.size() - 1);
+        for (ArrayList<String> usuari : llistaUsuaris) {
+            String id = usuari.get(1);
+            String nom = usuari.get(0);
+            String password = usuari.get(2);
+            String actiu = usuari.get(3);
+
+            Boolean actiuUsuari = Boolean.parseBoolean(actiu);
+            int idNum = Integer.parseInt(id);
+            Id idUsuari = new Id(idNum, actiuUsuari);
+            elements.put(idUsuari, new Usuari(idUsuari, nom, password));
+        }
+    }
+
     /**
      * Afegeix un conjunt de valoracions al Paràmetre implícit a partir de:
      *

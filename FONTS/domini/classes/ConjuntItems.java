@@ -123,4 +123,17 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             super.afegir(element);
         }
     }
+
+    public ArrayList<ArrayList<String>> converteixAArray() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        ArrayList<String> capsalera = new ArrayList<>();
+        for (var x : tipusItem.obtenirTipusAtributs().entrySet()) {
+            capsalera.add(x.getKey());
+        }
+        res.add(capsalera);
+        for (var x : elements.entrySet()) {
+            res.add(x.getValue().converteixAArray());
+        }
+        return res;
+    }
 }

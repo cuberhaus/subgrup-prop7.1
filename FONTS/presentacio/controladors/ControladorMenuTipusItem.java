@@ -6,10 +6,8 @@ import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -58,29 +56,19 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.carregarTipusItem(rutaAbsoluta, nom);
     }
 
-    public Map<String, String> obtenirValorsTipusAtributs(String nomTipusItem) {
-        Map<String, String> test = new HashMap<>();
-        test.put("Autor", "Booleà");
-        return test;
-        //return controladorPresentacio.obtenirValorsTipusAtributs(nomTipusItem);
-    }
-
-    public Map<String, String> obtenirDistanciesTipusAtributs(String nomTipusItem) {
-        Map<String, String> test = new HashMap<>();
-        test.put("Autor", "Discreta");
-        return test;
-        //return controladorPresentacio.obtenirDistanciesTipusAtributs(nomTipusItem);
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
+        return controladorPresentacio.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
     }
 
     public String obtenirNomTipusItemSeleccionat() {
         return controladorPresentacio.obtenirNomTipusItemSeleccionat();
     }
 
-    public void esborrarTipusItemSeleccionat() {
+    public void esborrarTipusItemSeleccionat() throws IOException {
         controladorPresentacio.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
+    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
         controladorPresentacio.seleccionarTipusItem(nomTipusItem);
     }
 
@@ -92,7 +80,7 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.editarTipusItem(relacioNomsTipusAtributs);
     }
 
-    public void deseleccionarTipusItem() {
+    public void deseleccionarTipusItem() throws IOException {
         controladorPresentacio.deseleccionarTipusItem();
     }
 }

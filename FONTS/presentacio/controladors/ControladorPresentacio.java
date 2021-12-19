@@ -33,6 +33,10 @@ public class ControladorPresentacio {
         return instancia;
     }
 
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
+        return controladorDomini.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
+    }
+
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
@@ -113,7 +117,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
+    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 
@@ -181,11 +185,15 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirValoracions();
     }
 
-    public void deseleccionarTipusItem() {
+    public void deseleccionarTipusItem() throws IOException {
         controladorDomini.deseleccionarTipusItem();
     }
 
     public ArrayList<ArrayList<String>> obteUsuaris() {
         return controladorDomini.obteUsuaris();
+    }
+
+    public void importarUsuaris(String absolutePath) throws Exception{
+        controladorDomini.importarUsuaris(absolutePath);
     }
 }

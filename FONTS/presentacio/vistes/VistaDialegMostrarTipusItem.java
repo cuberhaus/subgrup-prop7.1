@@ -4,6 +4,7 @@ import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -56,11 +57,9 @@ public class VistaDialegMostrarTipusItem extends JDialog {
 
         panellLlistaTipusAtributs = new JPanel();
         panellLlistaTipusAtributs.setLayout(new BoxLayout(panellLlistaTipusAtributs, BoxLayout.Y_AXIS));
-        // TODO: posar asserts o alguna cosa per comprovar que els noms dels tipus d'atributs estan be i que els
-        // valors i les distancies son coherents?
-        Map<String, String> valorsTipusAtributs = controladorMenuTipusItem.obtenirValorsTipusAtributs(nomTipusItem);
-        Map<String, String> distanciesTipusAtributs =
-                controladorMenuTipusItem.obtenirDistanciesTipusAtributs(nomTipusItem);
+        // TODO MARIA utilitzar obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat
+        Map<String, String> valorsTipusAtributs = new HashMap<>();
+        Map<String, String> distanciesTipusAtributs = new HashMap<>();
         for (String nomTipusAtribut : valorsTipusAtributs.keySet()) {
             JPanel tipusAtribut = new JPanel(new FlowLayout());
 
