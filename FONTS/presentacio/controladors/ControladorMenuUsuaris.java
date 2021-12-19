@@ -191,7 +191,7 @@ public class ControladorMenuUsuaris {
      * @param novaContrasenya nova contrasenya de l'usuari
      * @throws Exception No s'ha pogut canviar la contrasenya de l'usuari
      */
-    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
         //TODO: comprovar id es valid
         controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
     }

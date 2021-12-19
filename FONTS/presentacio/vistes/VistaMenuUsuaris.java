@@ -108,7 +108,7 @@ public class VistaMenuUsuaris extends JPanel {
                 ex.printStackTrace();
             }
             try {
-                controladorMenuUsuaris.canviaContrasenyaUsuari(idText.getText(), Arrays.toString(contrasenyaText.getPassword()));
+                controladorMenuUsuaris.canviaContrasenyaUsuari(idText.getText(), contrasenyaText.getPassword());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

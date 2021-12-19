@@ -464,7 +464,7 @@ public class ControladorDomini {
      * @param novaContrasenya es la contrasenya a la que es vol canviar
      * @throws Exception si l'usuari no existeix, retorna excepcio
      */
-    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
         System.out.println("A camviar: " + novaContrasenya);
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
