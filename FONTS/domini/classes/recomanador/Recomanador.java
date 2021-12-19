@@ -3,6 +3,7 @@ package domini.classes.recomanador;
 import domini.classes.ConjuntItems;
 import domini.classes.ConjuntUsuaris;
 import domini.classes.ConjuntValoracions;
+import domini.classes.Usuari;
 import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanador;
 
@@ -17,4 +18,7 @@ public abstract class Recomanador {
     protected ConjuntValoracions valoracionsPubliques;
     protected Filtre filtre;
     protected MetodeRecomanador metodeRecomanador;
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) {
+        return metodeRecomanador.obteRecomanacions(usuari, numRecomanacions);
+    }
 }

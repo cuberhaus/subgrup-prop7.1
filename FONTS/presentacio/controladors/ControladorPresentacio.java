@@ -161,15 +161,15 @@ public class ControladorPresentacio {
         controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
     }
 
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         return controladorDomini.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         return controladorDomini.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         return controladorDomini.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 
@@ -200,7 +200,7 @@ public class ControladorPresentacio {
         return controladorDomini.importarUsuaris(absolutePath);
     }
 
-    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
         controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
     }
 
