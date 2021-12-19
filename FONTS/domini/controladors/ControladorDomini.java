@@ -461,10 +461,11 @@ public class ControladorDomini {
     /**
      * Funcio que canvia la contrasenya d'un usuari
      * @param id es l'id de l'usuari a editar
-     * @param novaContrasenya es la contrasenya a la que es vol canviar
+     * @param novaContrasenyaArray es la contrasenya a la que es vol canviar
      * @throws Exception si l'usuari no existeix, retorna excepcio
      */
-    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenyaArray) throws Exception {
+        String novaContrasenya = String.valueOf(novaContrasenyaArray);
         System.out.println("A camviar: " + novaContrasenya);
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
