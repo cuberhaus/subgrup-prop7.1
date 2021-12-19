@@ -31,6 +31,7 @@ public class VistaDialegMostrarTipusItem extends JDialog {
                 Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Mostrar tipus d'ítem");
+        setResizable(false);
         inicialitzarPanellMostrarTipusItem();
     }
 
