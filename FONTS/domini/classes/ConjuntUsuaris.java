@@ -22,6 +22,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();
         llistaUsuaris.remove(0);
+        llistaUsuaris.remove(llistaUsuaris.size() - 1);
         for (ArrayList<String> usuari : llistaUsuaris) {
             String id = usuari.get(1);
             String nom = usuari.get(0);
