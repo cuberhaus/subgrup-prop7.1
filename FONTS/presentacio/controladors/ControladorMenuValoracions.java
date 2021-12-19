@@ -59,7 +59,7 @@ public class ControladorMenuValoracions {
     public void idUsuariEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
             throw new Exception("Id de l'usuari està buit");
-        } else if (!id.matches("^[0-9]*[1-9]+$|^[1-9]+[0-9]*$")) {
+        } else if (!id.matches("^[0-9]+$")) {
             throw new Exception("L'id d'Usuari no és un numero natural");
         }
     }
@@ -72,7 +72,7 @@ public class ControladorMenuValoracions {
     public void idItemEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
             throw new Exception("Id de l'ítem està buit");
-        } else if (!id.matches("^[0-9]*[1-9]+$|^[1-9]+[0-9]*$")) {
+        } else if (!id.matches("^[0-9]+$")) {
             throw new Exception("L'id d'ítem no és un numero natural");
         }
     }
@@ -141,7 +141,6 @@ public class ControladorMenuValoracions {
      * @throws Exception no s'han pogut carregar les valoracions
      */
     public void carregarConjuntValoracions(String rutaAbsoluta) throws Exception {
-        //TODO: comprovar que l'arxiu donat té el format correcte
         try {
             controladorPresentacio.carregarConjuntValoracions(rutaAbsoluta);
         } catch (Exception e) {

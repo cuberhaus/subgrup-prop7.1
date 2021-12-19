@@ -58,7 +58,7 @@ public class ControladorMenuUsuaris {
     public void idEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
             throw new Exception("Id text està buit");
-        } else if (!id.matches("^[0-9]*[1-9]+$|^[1-9]+[0-9]*$")) {
+        } else if (!id.matches("^[0-9]+$")) {
             throw new Exception("L'id no és un numero natural");
         }
     }
