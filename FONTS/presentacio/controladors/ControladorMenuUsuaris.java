@@ -134,4 +134,13 @@ public class ControladorMenuUsuaris {
             JOptionPane.showMessageDialog(vistaMenuUsuaris,"Aquests usuaris no s'han pogut inicialitzar"+usuarisNoInicialitzats);
        }
     }
+
+    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+        //TODO: comprovar id es valid
+        controladorPresentacio.canviaContrasenyaUsuari(id,novaContrasenya);
+    }
+    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+        //TODO: comprovar id es valid
+        controladorPresentacio.canviaNomUsuari(id,nouNom);
+    }
 }

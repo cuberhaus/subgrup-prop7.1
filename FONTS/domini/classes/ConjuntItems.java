@@ -148,6 +148,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
     public ArrayList<ArrayList<String>> converteixAArray() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         ArrayList<String> capsalera = new ArrayList<>();
+        capsalera.add("id");
         for (var x : tipusItem.obtenirTipusAtributs().entrySet()) {
             capsalera.add(x.getKey());
         }

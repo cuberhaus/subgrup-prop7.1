@@ -22,7 +22,7 @@ public class ControladorPresentacio {
     private ControladorPresentacio() {
     }
 
-    public static ControladorPresentacio obtenirInstancia() {
+    public static ControladorPresentacio obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorPresentacio();
             controladorDomini = ControladorDomini.obtenirInstancia();
@@ -133,7 +133,7 @@ public class ControladorPresentacio {
         return controladorDomini.existeixTipusItemSeleccionat();
     }
 
-    public boolean afegirItem(Map<String, String> valorsAtributs) {
+    public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
         return controladorDomini.afegirItem(valorsAtributs);
     }
 
@@ -195,5 +195,13 @@ public class ControladorPresentacio {
 
     public ArrayList<String> importarUsuaris(String absolutePath) throws Exception{
         return controladorDomini.importarUsuaris(absolutePath);
+    }
+
+    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+        controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
+    }
+
+    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+        controladorDomini.canviaNomUsuari(id,nouNom);
     }
 }

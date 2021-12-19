@@ -1,5 +1,6 @@
 package domini.classes;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
@@ -163,4 +164,8 @@ public class Programa {
     }
 
     public void esborraTotsUsuaris() {conjuntUsuaris.esborrarTotsUsuaris();}
+
+    public ArrayList<String> obteTipusItem() {
+        return new ArrayList<>(tipusItems.keySet());
+    }
 }

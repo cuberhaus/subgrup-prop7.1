@@ -233,6 +233,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
 
     public ArrayList<String> converteixAArray() {
         ArrayList<String> res = new ArrayList<>();
+        res.add(Integer.toString(id.valor));
         for (var x : atributs.entrySet()) {
            res.add(x.getValue().toString());
         }
