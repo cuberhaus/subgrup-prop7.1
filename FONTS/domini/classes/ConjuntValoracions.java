@@ -4,6 +4,7 @@ import domini.classes.csv.TaulaCSV;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -129,5 +130,21 @@ public class ConjuntValoracions {
 
     public void esborraTotesLesValoracions() {
         valoracions.clear();
+    }
+
+    public void esborraValoracionsItem(Id idItem) {
+        Set<Pair<Usuari, Item>> setEntrades = valoracions.keySet();
+
+        ArrayList<Pair<Usuari, Item>> perEsborrar = new ArrayList<>();
+
+        for (Pair<Usuari, Item> entrada : setEntrades) {
+            if(entrada.y.obtenirId().equals(idItem)) {
+                perEsborrar.add(entrada);
+            }
+        }
+
+        for (Pair<Usuari, Item> eliminar : perEsborrar) {
+            valoracions.remove(eliminar);
+        }
     }
 }

@@ -321,22 +321,29 @@ public class ControladorDomini {
     }
 
     // TODO: Pablo, s'han de borrar les seves valoracions!!!!
+    // TODO falta por acabar pero tengo hambre
+    // Esborra l'ítem amb aquest id
+    // hi ha un tipus d'ítem seleccionat pero millor comprovar
+    // l'item es del tipus d'ítem seleccionat
+    // retorna fals si es invalid o no s'ha pogut esborrar
+    // pot ser una paraula, un numero, estar buit, etc
     public boolean esborrarItem(String id) {
-        // TODO
-        // Esborra l'ítem amb aquest id
-        // hi ha un tipus d'ítem seleccionat pero millor comprovar
-        // l'item es del tipus d'ítem seleccionat
-        // retorna fals si es invalid o no s'ha pogut esborrar
-        // pot ser una paraula, un numero, estar buit, etc
-
+        //Comprobacio si id es valid nomes de transformar
+        int idItemABuscar = -1;
         try {
-            int idItemABuscar = Integer.parseInt(id);
+            idItemABuscar = Integer.parseInt(id);
         } catch (NumberFormatException e) {
             return false;
         }
 
-
-        return false;
+        Id idItem = new Id(idItemABuscar, true);
+        if (itemsActuals.conte(idItem)) {
+            itemsActuals.esborrar(idItem);
+            valoracionsTipusItemActual.esborraValoracionsItem(idItem);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Map<String, String> obtenirItem(String id) throws IllegalArgumentException {
