@@ -381,6 +381,8 @@ public class ControladorDomini {
     }
 
     public void deseleccionarTipusItem() throws IOException {
+        // TODO: si no n'hi ha cap de seleccionat retornar una excepció personalitzada per distingir entre
+        //  les dues excepcions i posar-me un todo (maria)
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
         // TODO (edgar): peta perquè valoracionsTipusItemActual es nul
