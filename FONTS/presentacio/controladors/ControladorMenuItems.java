@@ -30,10 +30,16 @@ public class ControladorMenuItems {
     }
 
     public ArrayList<ArrayList<String>> obtenirItems() {
+        if (!existeixTipusItemSeleccionat()) {
+            return new ArrayList<>();
+        }
         return controladorPresentacio.obtenirItems();
     }
 
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
+        if (!existeixTipusItemSeleccionat()) {
+            return new ArrayList<>();
+        }
         return controladorPresentacio.obtenirNomAtributsTipusItemSeleccionat();
     }
 

@@ -93,7 +93,7 @@ public class ControladorPresentacio {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
         controladorDomini.carregarTipusItem(nom, rutaAbsoluta);
     }
 

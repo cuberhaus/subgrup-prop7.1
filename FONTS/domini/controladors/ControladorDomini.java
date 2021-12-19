@@ -34,7 +34,7 @@ public class ControladorDomini {
         estatPrograma = Programa.obtenirInstancia();
         ArrayList<String> llistaTipusItems = controladorPersistencia.obtenirNomsDeTotsElsTipusItems();
         for (String tipusItem : llistaTipusItems) {
-            this.carregarTipusItemLocal(tipusItem);
+            this.carregarTipusItem(tipusItem);
         }
     }
 
@@ -176,27 +176,29 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, IllegalArgumentException {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
-            tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
+            try {
+                tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
+            } catch (Exception e) {
+                throw new Exception();
+            }
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
-        //nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
 
-    public void carregarTipusItemLocal(String nom) throws IOException {
+    public void carregarTipusItem(String nom) throws IOException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.obtenirTipusItem(nom);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
             tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
-        nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
@@ -285,7 +287,7 @@ public class ControladorDomini {
     }
 
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
-        return new ArrayList<String>(estatPrograma.obteTipusItem(nomTipusItemActual).obtenirTipusAtributs().keySet());
+        return new ArrayList<>(estatPrograma.obteTipusItem(nomTipusItemActual).obtenirTipusAtributs().keySet());
     }
 
     public boolean existeixTipusItemSeleccionat() {

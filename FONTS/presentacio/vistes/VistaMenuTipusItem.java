@@ -78,8 +78,8 @@ public class VistaMenuTipusItem extends JPanel {
             try {
                 vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
             } catch (IOException ex) {
-                // TODO: catch
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia,
+                        "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
             }
             vistaDialegCrearTipusItem.setVisible(true);
         });
@@ -96,12 +96,12 @@ public class VistaMenuTipusItem extends JPanel {
                 File rutaFitxer = selectorFitxer.getSelectedFile();
                 try {
                     controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
-                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
+                } catch (Exception e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
                 }
             }
-            JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
         });
         panellAfegirTipusItem.add(botoCarregarTipusItem);
     }
