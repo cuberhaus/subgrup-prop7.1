@@ -208,7 +208,7 @@ public class ControladorDomini {
      * @param absolutePath Absolute path to folder where the new file will be created
      */
     public void exportarConjuntDadesUsuari(String absolutePath) throws IOException {
-        controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisActius());
+        controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV());
     }
 
     // TODO: Pablo
