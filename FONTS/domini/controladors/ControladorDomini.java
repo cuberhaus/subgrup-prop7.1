@@ -434,8 +434,7 @@ public class ControladorDomini {
     }
 
     public double avaluarRecomanacio() {
-        // TODO
-        return 0.0;
+        return recomanacions.obteDiscountedCumulativeGain()/recomanacions.obteIdealDiscountedCumulativeGain();
     }
 
     //Esborrar tal cual
