@@ -403,4 +403,12 @@ public class ControladorDomini {
 
         return idsNoInclosos;
     }
+
+    public void canviaContrassenya(String id, String novaContrassenya) {
+
+    }
+
+    public void canviaNom(String id, String nouNom) {
+
+    }
 }
