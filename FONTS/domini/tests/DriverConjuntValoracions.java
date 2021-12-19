@@ -141,7 +141,7 @@ public class DriverConjuntValoracions {
             Usuari usuari = UtilitatsDeLectura.llegirUsuari();
             Item item = UtilitatsDeLectura.llegirItem();
 
-            UtilitatsDEscriptura.imprimirTreeMapValoracions(conjuntValoracions.obteTotesValoracions());
+            UtilitatsDEscriptura.imprimirTreeMapValoracions(conjuntValoracions.obtenitTotesLesValoracions());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
