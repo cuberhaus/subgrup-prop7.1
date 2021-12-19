@@ -37,22 +37,11 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void afegirTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IOException {
-        // TODO: esborrar sortida
-        System.out.println("Afegint TipusItem");
-        System.out.println(nom);
-        System.out.println(nomValorAAtribut.toString());
-        System.out.println("******************");
-        // TODO (maria): catch exception
-        controladorPresentacio.afegirTipusItem(nom, nomValorAAtribut);
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException {
+        controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
     }
 
     public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
-        // TODO: esborrar sortida
-        System.out.println("Carregant TipusItem");
-        System.out.println(rutaAbsoluta);
-        System.out.println("******************");
-        // TODO (maria): catch exception
         controladorPresentacio.carregarTipusItem(rutaAbsoluta, nom);
     }
 

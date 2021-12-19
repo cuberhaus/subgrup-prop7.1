@@ -11,9 +11,6 @@ public class Pair<X extends Comparable<X>,Y extends Comparable<Y>> implements Co
     /** Segon element de la parella */
     public final Y y;
 
-    public X x() { return x; }
-    public Y y() { return y; }
-
     /**
      * Inicialitza una parella
      * @param x primer element

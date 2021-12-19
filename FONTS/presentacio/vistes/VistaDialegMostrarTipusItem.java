@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import domini.classes.Pair;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -57,10 +58,8 @@ public class VistaDialegMostrarTipusItem extends JDialog {
 
         panellLlistaTipusAtributs = new JPanel();
         panellLlistaTipusAtributs.setLayout(new BoxLayout(panellLlistaTipusAtributs, BoxLayout.Y_AXIS));
-        // TODO MARIA utilitzar obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat
-        Map<String, String> valorsTipusAtributs = new HashMap<>();
-        Map<String, String> distanciesTipusAtributs = new HashMap<>();
-        for (String nomTipusAtribut : valorsTipusAtributs.keySet()) {
+        Map<String, Pair<String, String>> tipusAtributs = controladorMenuTipusItem.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
+        for (String nomTipusAtribut : tipusAtributs.keySet()) {
             JPanel tipusAtribut = new JPanel(new FlowLayout());
 
             tipusAtribut.add(new JLabel("Nom:"));
@@ -73,14 +72,14 @@ public class VistaDialegMostrarTipusItem extends JDialog {
             tipusAtribut.add(new JLabel("Valor:"));
             JComboBox<String> comboBoxValorTipusAtribut = new JComboBox<>(new String[]{"Booleà", "Categòric", "Numèric", "Textual",
                     "Conjunt booleà", "Conjunt categòric", "Conjunt numèric", "Conjunt textual"});
-            comboBoxValorTipusAtribut.setSelectedItem(valorsTipusAtributs.get(nomTipusAtribut));
+            comboBoxValorTipusAtribut.setSelectedItem(tipusAtributs.get(nomTipusAtribut).x);
             comboBoxValorTipusAtribut.setEnabled(false);
             tipusAtribut.add(comboBoxValorTipusAtribut);
 
             tipusAtribut.add(new JLabel("Distància:"));
             JComboBox<String> comboBoxDistanciaTipusAtribut = new JComboBox<>(new String[]{"Diferència de conjunts", "Discreta", "Euclidiana", "Levenshtein",
                     "Zero"});
-            comboBoxDistanciaTipusAtribut.setSelectedItem(distanciesTipusAtributs.get(nomTipusAtribut));
+            comboBoxDistanciaTipusAtribut.setSelectedItem(tipusAtributs.get(nomTipusAtribut).y);
             comboBoxDistanciaTipusAtribut.setEnabled(false);
             tipusAtribut.add(comboBoxDistanciaTipusAtribut);
 

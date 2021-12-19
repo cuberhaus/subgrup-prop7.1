@@ -89,7 +89,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void afegirTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
