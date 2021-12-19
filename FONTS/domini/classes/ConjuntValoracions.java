@@ -126,4 +126,8 @@ public class ConjuntValoracions {
         }
         return res;
     }
+
+    public void esborraTotesLesValoracions() {
+        valoracions.clear();
+    }
 }

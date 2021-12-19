@@ -397,13 +397,16 @@ public class ControladorDomini {
         return 0.0;
     }
 
+    //Esborrar tal cual
     public void esborrarTotesLesValoracions() {
-        //TODO
+        valoracionsTipusItemActual.esborraTotesLesValoracions();
     }
 
+    //Necessita IDUsuari, IDItem, Rating
     public ArrayList<ArrayList<String>> obtenirValoracions() {
-        //TODO
-        return new ArrayList<>();
+        ArrayList<ArrayList<String>> retornaValoracions =  valoracionsTipusItemActual.convertirAArrayList();
+        retornaValoracions.remove(0);
+        return retornaValoracions;
     }
 
     public void deseleccionarTipusItem() throws IOException {
