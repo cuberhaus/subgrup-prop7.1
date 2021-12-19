@@ -232,12 +232,8 @@ public class ControladorDomini {
     }
 
     public void seleccionarTipusItem(String nomTipusItem) throws Exception {
-
         if (nomTipusItemActual != null) {
-            controladorPersistencia.borrarTipusItem(nomTipusItemActual);
-            controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).converteixAArray(), nomTipusItemActual);
-            controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.pasarAArray(), nomTipusItemActual);
-            controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nomTipusItemActual, "basic");
+            deseleccionarTipusItem();
         }
         nomTipusItemActual = nomTipusItem;
         ArrayList<ArrayList<String>> valoracions_raw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
@@ -264,11 +260,8 @@ public class ControladorDomini {
         return new ArrayList<>();
     }
 
-    // TODO: Pablo
     public boolean existeixTipusItemSeleccionat() {
-        // TODO
-        // retorna true si hi ha un tipus item seleccionat
-        return true;
+        return nomTipusItemActual != null;
     }
 
     // TODO: Pablo
@@ -369,9 +362,12 @@ public class ControladorDomini {
         return new ArrayList<>();
     }
 
-    public void deseleccionarTipusItem() {
-        // TODO
-        // posa el tipus item seleccionat a nul
+    public void deseleccionarTipusItem() throws IOException {
+        controladorPersistencia.borrarTipusItem(nomTipusItemActual);
+        controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).converteixAArray(), nomTipusItemActual);
+        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.pasarAArray(), nomTipusItemActual);
+        controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nomTipusItemActual, "basic");
+        nomTipusItemActual = null;
     }
 
     public ArrayList<ArrayList<String>> obteUsuaris() {

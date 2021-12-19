@@ -33,6 +33,10 @@ public class ControladorPresentacio {
         return instancia;
     }
 
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
+        return controladorDomini.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
+    }
+
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
@@ -181,7 +185,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirValoracions();
     }
 
-    public void deseleccionarTipusItem() {
+    public void deseleccionarTipusItem() throws IOException {
         controladorDomini.deseleccionarTipusItem();
     }
 

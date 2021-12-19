@@ -128,7 +128,12 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                controladorMenuTipusItem.deseleccionarTipusItem();
+                try {
+                    controladorMenuTipusItem.deseleccionarTipusItem();
+                } catch (IOException ex) {
+                    // TODO: catchejar
+                    ex.printStackTrace();
+                }
                 textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                 botoVeureTipusItem.setEnabled(false);
                 botoEditarTipusItem.setEnabled(false);
