@@ -113,7 +113,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
+    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 

@@ -6,7 +6,6 @@ import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,11 +75,11 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomTipusItemSeleccionat();
     }
 
-    public void esborrarTipusItemSeleccionat() {
+    public void esborrarTipusItemSeleccionat() throws IOException {
         controladorPresentacio.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
+    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
         controladorPresentacio.seleccionarTipusItem(nomTipusItem);
     }
 

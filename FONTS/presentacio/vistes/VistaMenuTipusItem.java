@@ -108,7 +108,7 @@ public class VistaMenuTipusItem extends JPanel {
         selecciona.addActionListener(e -> {
             try {
                 controladorMenuTipusItem.seleccionarTipusItem((String) tipusItemsComboBox.getSelectedItem());
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 // TODO: catch throw
                 ex.printStackTrace();
             }
@@ -143,7 +143,12 @@ public class VistaMenuTipusItem extends JPanel {
                 int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar el tipus d'ítem seleccionat" +
                         " i totes les seves dades?", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
                 if (resposta == 0) {
-                    controladorMenuTipusItem.esborrarTipusItemSeleccionat();
+                    try {
+                        controladorMenuTipusItem.esborrarTipusItemSeleccionat();
+                    } catch (IOException ex) {
+                        // TODO catch
+                        ex.printStackTrace();
+                    }
                     textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                     botoVeureTipusItem.setEnabled(false);
                     botoEditarTipusItem.setEnabled(false);
