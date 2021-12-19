@@ -55,7 +55,7 @@ public class ControladorMenuUsuaris {
      * @param id id amb el que volem iniciar sessió
      * @param contrasenya contrasenya amb què intentem iniciar la sessió
      * @return True si la sessió hem pogut iniciar sessió
-     * @throws Exception
+     * @throws Exception No s'ha pogut iniciar sessió
      */
     public boolean iniciarSessio(String id, String contrasenya) throws Exception {
         try {
@@ -92,6 +92,11 @@ public class ControladorMenuUsuaris {
         return id;
     }
 
+    /**
+     * Esborra un usuari del conjunt si és actiu i l'id és correcte
+     * @param id id de l'usuari
+     * @throws Exception No s'ha pogut crear l'usuari
+     */
     public void esborrarUsuari(String id) throws Exception {
         try {
             if (idEsValid(id)) {
@@ -108,6 +113,10 @@ public class ControladorMenuUsuaris {
         }
     }
 
+    /**
+     * Tanca la sessió
+     * @throws Exception No s'ha pogut tancar la sessió
+     */
     public void tancarSessio() throws Exception{
         try {
             controladorPresentacio.tancarSessio();
@@ -117,13 +126,26 @@ public class ControladorMenuUsuaris {
         }
     }
 
+    /**
+     * Exporta un conjunt d'usuaris en l'arxiu descrit per absolutePath
+     * @param absolutePath path on es crea l'arxiu
+     * @throws IOException No s'ha pogut exportar l'arxiu
+     */
     public void exportarConjuntUsuaris(String absolutePath) throws IOException {
         controladorPresentacio.exportarConjuntUsuaris(absolutePath);
     }
 
+    /**
+     * Esborra el conjunt d'usuaris
+     */
     public void esborrarConjuntUsuaris() {
         controladorPresentacio.esborrarConjuntUsuaris();
     }
+
+    /**
+     * Retorna tots els usuaris del conjunt d'usuaris
+     * @return Conjunt d'usuaris
+     */
     public ArrayList<ArrayList<String>> obteUsuaris() {
         return controladorPresentacio.obteUsuaris();
     }
