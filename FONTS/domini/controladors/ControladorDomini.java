@@ -404,14 +404,14 @@ public class ControladorDomini {
         return idsNoInclosos;
     }
 
-    public void canviaContrasenya(String id, String novaContrassenya) throws Exception {
+    public void canviaContrasenya(String id, String novaContrasenya) throws Exception {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
             throw new Exception("L'id d'usuari seleccionat no existeix");
         }
 
         else {
-            estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrassenya);
+            estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
         }
     }
 
