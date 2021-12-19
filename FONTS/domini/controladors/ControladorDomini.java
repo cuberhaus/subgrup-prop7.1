@@ -465,6 +465,7 @@ public class ControladorDomini {
      * @throws Exception si l'usuari no existeix, retorna excepcio
      */
     public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+        System.out.println("A camviar: " + novaContrasenya);
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
             throw new Exception("L'id d'usuari seleccionat no existeix");
@@ -472,12 +473,12 @@ public class ControladorDomini {
 
         else {
             if (!novaContrasenya.isBlank()) {
-                System.out.println(estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
+                System.out.println("Abans: " + estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
                 estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
             }
         }
 
-        System.out.println(estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
+        System.out.println("Despres: " + estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
     }
 
     /**
