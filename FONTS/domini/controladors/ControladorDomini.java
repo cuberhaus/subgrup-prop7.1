@@ -324,14 +324,18 @@ public class ControladorDomini {
         return false;
     }
 
-    // TODO: Pablo, s'han de borrar les seves valoracions!!!!
-    public Map<String, String> obtenirItem(String id) {
+    public Map<String, String> obtenirItem(String id) throws IllegalArgumentException {
         // TODO
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // l'item es del tipus d'ítem seleccionat
         // retorna null si l'id no es valid
-        return new HashMap<>();
+        TreeMap<String, String> res = new TreeMap<>();
+        Item item = itemsActuals.obtenir(new Id(Integer.parseInt(id)));
+        for (var x : item.obtenirAtributs().entrySet()) {
+            res.put(x.getKey(), x.getValue().obtenirValor().toString());
+        }
+        return res;
     }
 
     public boolean editarItem(String id, Map<String, String> valorsAtributs) {
