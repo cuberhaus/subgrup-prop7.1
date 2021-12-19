@@ -5,11 +5,8 @@ import presentacio.controladors.ControladorMenuItems;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
-
-import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 public class VistaMenuItems extends JPanel {
     private static VistaMenuItems instancia;
@@ -20,7 +17,7 @@ public class VistaMenuItems extends JPanel {
     private VistaMenuItems() {
     }
 
-    public static VistaMenuItems obtenirInstancia() {
+    public static VistaMenuItems obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuItems();
             controladorMenuItems = ControladorMenuItems.obtenirInstancia();
@@ -56,7 +53,12 @@ public class VistaMenuItems extends JPanel {
         menuLateral.add(Box.createVerticalGlue());
         JButton botoCrearItem = new JButton("Crea un nou ítem");
         botoCrearItem.addActionListener(e -> {
-            controladorMenuItems.crearNouItem();
+            try {
+                controladorMenuItems.crearNouItem();
+            } catch (IOException ex) {
+                // TODO catch
+                ex.printStackTrace();
+            }
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
         menuLateral.add(botoCrearItem);
