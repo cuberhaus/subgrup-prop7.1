@@ -176,12 +176,7 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
-        // TODO (edgar): aixo no hauria de seleccionar el tipus d'ítem, només carregar-lo, per tant no hauria d'importar
-        // si hi ha un tipus d'ítem seleccionat o no
-        // TODO (edgar): no funciona perquè li dono qualsevol arxiu i me l'accepta sense throw exception
-        // l'exception que llança si l'arxiu no es correcte hauria de ser una altra excepció que creem nosaltres
-        // (illegal argument no esta be i io diria que tampco)
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, IllegalArgumentException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
@@ -208,8 +203,6 @@ public class ControladorDomini {
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
-        // TODO (edgar): aixo no hauria de seleccionar el tipus d'ítem, només crear-lo, per tant no hauria d'importar
-        // si hi ha un tipus d'ítem seleccionat o no
         if (estatPrograma.conteTipusItem(nom)) {
             // TODO: crear excepcio
             throw new IllegalArgumentException("Ja existeix aquest tipus item.");
@@ -219,7 +212,7 @@ public class ControladorDomini {
             tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x, fila.getValue().y));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
-        nomTipusItemActual = nom;
+        //nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(tipus.convertirAArrayList(), nom);
     }

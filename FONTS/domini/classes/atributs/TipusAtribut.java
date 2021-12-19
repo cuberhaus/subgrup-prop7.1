@@ -29,7 +29,7 @@ public class TipusAtribut {
         this.distancia = distancia;
     }
 
-    public TipusAtribut(String valor, String distancia) {
+    public TipusAtribut(String valor, String distancia) throws IllegalArgumentException{
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
     }
@@ -48,7 +48,7 @@ public class TipusAtribut {
         return Objects.hash(valorAtribut, distancia);
     }
 
-    private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
+    private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) throws IllegalArgumentException {
         if (Objects.equals(valorAtribut, "ValorBoolea")) {
             return new ValorBoolea();
         } else if (Objects.equals(valorAtribut, "ValorCategoric")) {
