@@ -103,6 +103,7 @@ public class ControladorDomini {
             throw new Exception("L'usuari ja existeix");
         }
         else {
+            if (contrasenya.isBlank()) throw new Exception("La contrasenya es buida o nomes conte espais en buit");
             estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
             return id.obtenirValor();
         }
@@ -411,7 +412,9 @@ public class ControladorDomini {
         }
 
         else {
-            estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
+            if (!novaContrasenya.isBlank()) {
+                estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
+            }
         }
     }
 
@@ -422,7 +425,9 @@ public class ControladorDomini {
         }
 
         else {
-            estatPrograma.obtenirUsuari(idUsuari).setNom(nouNom);
+            if (!nouNom.isBlank()) {
+                estatPrograma.obtenirUsuari(idUsuari).setNom(nouNom);
+            }
         }
     }
 }
