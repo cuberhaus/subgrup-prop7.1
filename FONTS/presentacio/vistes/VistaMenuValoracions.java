@@ -17,6 +17,7 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 public class VistaMenuValoracions extends JPanel {
     private static VistaMenuValoracions instancia;
+    private static ControladorMenuValoracions controladorMenuValoracions;
 
     private static GridBagLayout gridBagLayout;
     private static GridBagConstraints gridBagConstraints;
@@ -31,8 +32,6 @@ public class VistaMenuValoracions extends JPanel {
     private static JButton editaValoracioButton;
     private static JFileChooser jFileChooser;
     private static JButton conjuntDeValoracionsButton;
-
-    private static ControladorMenuValoracions controladorMenuValoracions;
     private static JTable llistaValoracions;
     private static DefaultTableModel llistaValoracionsTableModel;
     private static JScrollPane jScrollPane;
@@ -40,9 +39,18 @@ public class VistaMenuValoracions extends JPanel {
     private static JPanel jpanel;
     private static JButton esborrarTotesLesValoracionsButton;
 
+    /**
+     * Constructora per defecte de VistaMenuUsuaris
+     */
     private VistaMenuValoracions() {
     }
 
+    /**
+     * Constructora de VistaMenuValoracions
+     * Crea una instància única de VistaMenuValoracions
+     * @return <code> ControladorMenuValoracions </code>
+     * @throws IOException No s'ha pogut obtenir la instància de VistaMenuValoracions
+     */
     public static VistaMenuValoracions obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuValoracions();
@@ -53,6 +61,9 @@ public class VistaMenuValoracions extends JPanel {
         return instancia;
     }
 
+    /**
+     * Inicialitza la llista de valoracions
+     */
     private static void inicialitzarLlistaValoracions() {
         ArrayList<String> nomsColumnes = new ArrayList<>();
         nomsColumnes.add("Identificador d'Usuari");
@@ -71,6 +82,31 @@ public class VistaMenuValoracions extends JPanel {
         instancia.add(jScrollPane, BorderLayout.WEST);
     }
 
+    /**
+     * Sobreescriu la taula de valoracions amb el conjunt de valoracions del domini
+     */
+    private static void actualitzarLlistaUsuaris() {
+        llistaValoracionsTableModel.setRowCount(0);
+        ArrayList<ArrayList<String>> usuaris = controladorMenuValoracions.obtenirValoracions();
+        for (ArrayList<String> usuari : usuaris) {
+            llistaValoracionsTableModel.addRow(usuari.toArray());
+        }
+        llistaValoracionsTableModel.removeRow(llistaValoracionsTableModel.getRowCount()-1);
+        jScrollPane.revalidate();
+    }
+
+    /**
+     * Esborra el text de tots els camps de text
+     */
+    private static void clearText() {
+        itemIdText.setText("");
+        usuariIdText.setText("");
+        valorText.setText("");
+    }
+
+    /**
+     * Inicialitza objectes del menu Valoracions
+     */
     private static void inicialitzarMenuValoracions() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();

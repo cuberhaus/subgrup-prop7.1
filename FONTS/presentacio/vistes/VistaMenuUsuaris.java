@@ -55,7 +55,7 @@ public class VistaMenuUsuaris extends JPanel {
      * Crea una instància única de VistaMenuUsuaris
      *
      * @return <code> ControladorMenuUsuaris</code>
-     * @throws IOException No s'ha pogut obtenir la instancia de VistaMenuUsuaris
+     * @throws IOException No s'ha pogut obtenir la instància de VistaMenuUsuaris
      */
     public static VistaMenuUsuaris obtenirInstancia() throws IOException {
         if (instancia == null) {
