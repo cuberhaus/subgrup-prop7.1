@@ -18,7 +18,6 @@ import java.util.TreeMap;
  * @author edgar.moreno && pablo.vega
  */
 public class ControladorDomini {
-
     private static ControladorDomini instancia;
     private final ControladorPersistencia controladorPersistencia;
 
@@ -424,12 +423,22 @@ public class ControladorDomini {
         nomTipusItemActual = null;
     }
 
+    /**
+     * Retorna la llista de tots els usuaris actius i no actius del programa
+     * @return retorna la llista d'usuaris
+     */
     public ArrayList<ArrayList<String>> obteUsuaris() {
         return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
     }
 
-    public ArrayList<String> importarUsuaris(String absolutePath) throws Exception {
-        ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(absolutePath);
+    /**
+     * Carrega un conjunt d'usuaris a partir d'un path
+     * @param ubicacioFitxer la direccio del fitxer a llegir
+     * @return retorna els usuaris que no s'han pogut afegir
+     * @throws Exception si l'usuari ha posat una direccio de fitxer no valida
+     */
+    public ArrayList<String> importarUsuaris(String ubicacioFitxer) throws Exception {
+        ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(ubicacioFitxer);
         ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris(llistaUsuaris);
         ArrayList<Usuari> llista = conjuntUsuaris.obtenirUsuaris();
 
@@ -447,6 +456,12 @@ public class ControladorDomini {
         return idsNoInclosos;
     }
 
+    /**
+     * Funcio que canvia la contrasenya d'un usuari
+     * @param id es l'id de l'usuari a editar
+     * @param novaContrasenya es la contrasenya a la que es vol canviar
+     * @throws Exception si l'usuari no existeix, retorna excepcio
+     */
     public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
@@ -463,6 +478,12 @@ public class ControladorDomini {
         System.out.println(estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
     }
 
+    /**
+     * Funcio que canvia el nom d'un usuari
+     * @param id id de l'usuari
+     * @param nouNom nom a canviar
+     * @throws Exception Si l'usuari no existeix es retorna excepcio
+     */
     public void canviaNomUsuari(String id, String nouNom) throws Exception {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
