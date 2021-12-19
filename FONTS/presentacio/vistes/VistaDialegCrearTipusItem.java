@@ -92,9 +92,15 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 nomAValorAtribut.put(nomTipusAtribut, new Pair<>(valorTipusAtribut, distanciaTipusAtribut));
             }
             try {
-                controladorMenuTipusItem.afegirTipusItem(nom, nomAValorAtribut);
-            } catch (IOException ex) {
-                // TODO (maria): catch
+                controladorMenuTipusItem.crearTipusItem(nom, nomAValorAtribut);
+            } catch (IllegalArgumentException e1) {
+                JOptionPane.showMessageDialog(this,
+                        "Ja existeix un tipus d'ítem amb aquest nom.");
+                return;
+            } catch (IOException e2) {
+                JOptionPane.showMessageDialog(this,
+                        "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
+                return;
             }
             dispose();
         });

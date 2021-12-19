@@ -89,12 +89,12 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void afegirTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
-    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
-        controladorDomini.carregarTipusItem(rutaAbsoluta, nom);
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
+        controladorDomini.carregarTipusItem(nom, rutaAbsoluta);
     }
 
     public boolean esSessioIniciada() {
@@ -195,5 +195,13 @@ public class ControladorPresentacio {
 
     public ArrayList<String> importarUsuaris(String absolutePath) throws Exception{
         return controladorDomini.importarUsuaris(absolutePath);
+    }
+
+    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+        controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
+    }
+
+    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+        controladorDomini.canviaNomUsuari(id,nouNom);
     }
 }

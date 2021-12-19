@@ -70,31 +70,32 @@ public class VistaMenuTipusItem extends JPanel {
         panellAfegirTipusItem = new JPanel(new FlowLayout());
         JButton botoCrearTipusItem = new JButton("Crea un nou tipus d'ítem");
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoCrearTipusItem.addActionListener(actionEvent -> crearTipusItem());
+        botoCrearTipusItem.addActionListener(e -> {
+            VistaDialegCrearTipusItem vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
+            vistaDialegCrearTipusItem.setVisible(true);
+            panellSeleccionarTipusItem.revalidate();
+        });
         panellAfegirTipusItem.add(botoCrearTipusItem);
         JButton botoCarregarTipusItem = new JButton("Carrega un nou tipus d'ítem");
         botoCarregarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoCarregarTipusItem.addActionListener(e -> {
+            String nom = JOptionPane.showInputDialog(instancia,
+                    "Introdueix el nom del tipus d'ítem:");
             JDialog dialegFitxer = new JDialog();
             JFileChooser selectorFitxer = new JFileChooser();
             int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
             if (estatSelectorFitxer == APPROVE_OPTION) {
                 File rutaFitxer = selectorFitxer.getSelectedFile();
-                String nom = "";
-                // TODO (maria): demanar nom
                 try {
-                    controladorMenuTipusItem.carregarTipusItem(rutaFitxer.getAbsolutePath(), nom);
-                } catch (IOException ex) {
-                    // TODO: afegir missatge d'error
+                    controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(instancia,
+                            "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
                 }
             }
+            JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
         });
         panellAfegirTipusItem.add(botoCarregarTipusItem);
-    }
-
-    private static void crearTipusItem() {
-        VistaDialegCrearTipusItem vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
-        vistaDialegCrearTipusItem.setVisible(true);
     }
 
     private static void inicialitzarPanellSeleccionarTipusItem() {
@@ -177,11 +178,17 @@ public class VistaMenuTipusItem extends JPanel {
 
         botoVeureTipusItem = new JButton("Mostra el tipus d'ítem seleccionat");
         botoVeureTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoVeureTipusItem.addActionListener(actionEvent -> mostrarTipusItemSeleccionat());
+        botoVeureTipusItem.addActionListener(e -> {
+            VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem();
+            vistaDialegMostrarTipusItem.setVisible(true);
+        });
 
         botoEditarTipusItem = new JButton("Edita el tipus d'ítem seleccionat");
         botoEditarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoEditarTipusItem.addActionListener(actionEvent -> editarTipusItemSeleccionat());
+        botoEditarTipusItem.addActionListener(e -> {
+            VistaDialegEditarTipusItem vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
+            vistaDialegEditarTipusItem.setVisible(true);
+        });
 
         textTipusItemSeleccionat = new JLabel();
         if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
@@ -201,15 +208,5 @@ public class VistaMenuTipusItem extends JPanel {
         botons.add(botoEditarTipusItem);
 
         panellMostrarTipusItemSeleccionat.add(botons);
-    }
-
-    private static void mostrarTipusItemSeleccionat() {
-        VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem();
-        vistaDialegMostrarTipusItem.setVisible(true);
-    }
-
-    private static void editarTipusItemSeleccionat() {
-        VistaDialegEditarTipusItem vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
-        vistaDialegEditarTipusItem.setVisible(true);
     }
 }

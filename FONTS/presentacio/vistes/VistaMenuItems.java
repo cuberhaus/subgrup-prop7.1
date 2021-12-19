@@ -84,8 +84,7 @@ public class VistaMenuItems extends JPanel {
             try {
                 controladorMenuItems.carregarConjuntItems();
             } catch (Exception ex) {
-                // TODO catchejar
-                ex.printStackTrace();
+                // TODO: catch
             }
         });
         // TODO: han de ser del tipus d'ítem seleccionat o que no hi hagi un tipus d'ítem seleccionat

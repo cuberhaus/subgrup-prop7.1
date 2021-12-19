@@ -8,6 +8,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -42,6 +44,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static BorderLayout borderLayout;
     private static JPanel jpanel;
     private static JButton importarButton;
+    private static JButton editarUsuariButton;
 
     private VistaMenuUsuaris() {
     }
@@ -81,7 +84,11 @@ public class VistaMenuUsuaris extends JPanel {
         llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount()-1);
         jScrollPane.revalidate();
     }
-
+    private static void clearText() {
+        idText.setText("");
+        contrasenyaText.setText("");
+        nomText.setText("");
+    }
     private static void inicialitzarMenuUsuaris() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
@@ -89,6 +96,25 @@ public class VistaMenuUsuaris extends JPanel {
 
         jpanel = new JPanel();
         jpanel.setLayout(gridBagLayout);
+
+        editarUsuariButton = new JButton("Editar");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        jpanel.add(editarUsuariButton, gridBagConstraints);
+        editarUsuariButton.addActionListener(e-> {
+            try {
+                controladorMenuUsuaris.canviaNomUsuari(idText.getText(),nomText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                controladorMenuUsuaris.canviaContrasenyaUsuari(idText.getText(), Arrays.toString(contrasenyaText.getPassword()));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            actualitzarLlistaUsuaris();
+            clearText();
+        });
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -167,6 +193,7 @@ public class VistaMenuUsuaris extends JPanel {
                 int id = controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
                 llistaUsuarisTableModel.addRow(new String[]{nomText.getText(), String.valueOf(id), String.valueOf(true)});
                 jScrollPane.revalidate();
+                clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -180,6 +207,7 @@ public class VistaMenuUsuaris extends JPanel {
             try {
                 controladorMenuUsuaris.esborrarUsuari(idText.getText());
                 actualitzarLlistaUsuaris();
+                clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -193,6 +221,7 @@ public class VistaMenuUsuaris extends JPanel {
             try {
                 if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
                     usuariActiuInfo.setText(idText.getText());
+                    clearText();
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

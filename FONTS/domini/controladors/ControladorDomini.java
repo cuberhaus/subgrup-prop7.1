@@ -2,12 +2,10 @@ package domini.controladors;
 
 import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
-import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,6 +114,7 @@ public class ControladorDomini {
             throw new Exception("L'usuari ja existeix");
         }
         else {
+            if (contrasenya.isBlank()) throw new Exception("La contrasenya es buida o nomes conte espais en buit");
             estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
             return id.obtenirValor();
         }
@@ -175,7 +174,12 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
+        // TODO (edgar): aixo no hauria de seleccionar el tipus d'ítem, només carregar-lo, per tant no hauria d'importar
+        // si hi ha un tipus d'ítem seleccionat o no
+        // TODO (edgar): no funciona perquè li dono qualsevol arxiu i me l'accepta sense throw exception
+        // l'exception que llança si l'arxiu no es correcte hauria de ser una altra excepció que creem nosaltres
+        // (illegal argument no esta be i io diria que tampco)
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
@@ -201,19 +205,21 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
+        // TODO (edgar): aixo no hauria de seleccionar el tipus d'ítem, només crear-lo, per tant no hauria d'importar
+        // si hi ha un tipus d'ítem seleccionat o no
         if (estatPrograma.conteTipusItem(nom)) {
             // TODO: crear excepcio
             throw new IllegalArgumentException("Ja existeix aquest tipus item.");
         }
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : nomAValorAtribut.entrySet()) {
-            tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x(), fila.getValue().y()));
+            tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x, fila.getValue().y));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(nom, tipus);
-        controladorPersistencia.guardarTipusItem(tipus.converteixAArray(), nom);
+        controladorPersistencia.guardarTipusItem(tipus.convertirAArrayList(), nom);
     }
 
     /** Retorna els noms dels conjunts d'items coneguts**/
@@ -233,6 +239,8 @@ public class ControladorDomini {
     public boolean esSessioIniciada() {
         return estatPrograma.isSessioIniciada();
     }
+
+    // TODO: Pablo
 
     /**
      *
@@ -354,6 +362,7 @@ public class ControladorDomini {
     }
 
     public void esborrarTotsElsItems() {
+        // TODO
         itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
 
@@ -404,8 +413,9 @@ public class ControladorDomini {
 
     public void deseleccionarTipusItem() throws IOException {
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
-        controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).converteixAArray(), nomTipusItemActual);
-        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.pasarAArray(), nomTipusItemActual);
+        controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
+        // TODO (edgar): peta perquè valoracionsTipusItemActual es nul
+        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nomTipusItemActual, "basic");
         nomTipusItemActual = null;
     }
@@ -431,5 +441,33 @@ public class ControladorDomini {
         }
 
         return idsNoInclosos;
+    }
+
+    public String canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+        Id idUsuari = new Id(Integer.parseInt(id), true);
+        if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
+            throw new Exception("L'id d'usuari seleccionat no existeix");
+        }
+
+        else {
+            if (!novaContrasenya.isBlank()) {
+                estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
+            }
+        }
+
+        return estatPrograma.obtenirUsuari(idUsuari).obteContrasenya();
+    }
+
+    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+        Id idUsuari = new Id(Integer.parseInt(id), true);
+        if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
+            throw new Exception("L'id d'usuari seleccionat no existeix");
+        }
+
+        else {
+            if (!nouNom.isBlank()) {
+                estatPrograma.obtenirUsuari(idUsuari).setNom(nouNom);
+            }
+        }
     }
 }
