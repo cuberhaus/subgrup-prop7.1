@@ -109,4 +109,19 @@ public class ConjuntValoracions {
     public TreeMap<Pair<Usuari, Item>, Valoracio> obteTotesValoracions() {
         return valoracions;
     }
+
+    /**
+     * @return Retorna UsuariId, ItemId, valoracio
+     */
+    public ArrayList<ArrayList<String>> pasarAArray() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        for(var x : valoracions.entrySet()) {
+            ArrayList<String> fila = new ArrayList<>();
+            fila.add(String.valueOf(x.getKey().x.obtenirId().obtenirValor()));
+            fila.add(String.valueOf(x.getKey().y.obtenirId().obtenirValor()));
+            fila.add(String.valueOf(x.getValue().obtenirValor()));
+            res.add(fila);
+        }
+        return res;
+    }
 }
