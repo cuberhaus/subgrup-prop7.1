@@ -77,7 +77,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
     }
     private ConjuntItems obteConjuntItemsUsables(ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari) {
         ConjuntItems itemsUsables = new ConjuntItems(conjuntRecomanable.obteTipusItem());
-        for (Valoracio val : valoracionsUsuari.obteTotesValoracions().values()) {
+        for (Valoracio val : valoracionsUsuari.obtenitTotesLesValoracions().values()) {
             itemsUsables.afegir(val.obtenirItem());
         }
         for (Item item : conjuntRecomanable.obtenirTotsElsElements().values()) {

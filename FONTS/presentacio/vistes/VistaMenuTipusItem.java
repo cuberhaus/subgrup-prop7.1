@@ -73,29 +73,29 @@ public class VistaMenuTipusItem extends JPanel {
         botoCrearTipusItem.addActionListener(e -> {
             VistaDialegCrearTipusItem vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
             vistaDialegCrearTipusItem.setVisible(true);
+            panellSeleccionarTipusItem.revalidate();
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
         JButton botoCarregarTipusItem = new JButton("Carrega un nou tipus d'ítem");
         botoCarregarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoCarregarTipusItem.addActionListener(e -> {
+            String nom = JOptionPane.showInputDialog(instancia,
+                    "Introdueix el nom del tipus d'ítem:");
             JDialog dialegFitxer = new JDialog();
             JFileChooser selectorFitxer = new JFileChooser();
             int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
             if (estatSelectorFitxer == APPROVE_OPTION) {
                 File rutaFitxer = selectorFitxer.getSelectedFile();
-                String nom = "";
-                // TODO (maria): demanar nom
                 try {
-                    controladorMenuTipusItem.carregarTipusItem(rutaFitxer.getAbsolutePath(), nom);
-                } catch (IOException ex) {
-                    // TODO: afegir missatge d'error
+                    controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(instancia,
+                            "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
                 }
             }
+            JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
         });
         panellAfegirTipusItem.add(botoCarregarTipusItem);
-    }
-
-    private static void crearTipusItem() {
     }
 
     private static void inicialitzarPanellSeleccionarTipusItem() {

@@ -42,7 +42,7 @@ public class Joc2 {
             ConjuntItems itemsRecomanables = new ConjuntItems(items.obteTipusItem());
             ArrayList<Pair<Integer, Double>> valoracionsUnk = new ArrayList<>();
 
-            for (Valoracio val : unknownConjunt.obteTotesValoracions().values()) {
+            for (Valoracio val : unknownConjunt.obtenitTotesLesValoracions().values()) {
                 if (val.obtenirUsuari().equals(us)) {
                     itemsRecomanables.afegir(val.obtenirItem());
                     valoracionsUnk.add(new Pair<>(val.obtenirItem().obtenirId().obtenirValor(), val.obtenirValor()));

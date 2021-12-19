@@ -110,7 +110,7 @@ public class UtilitatsDEscriptura {
     }
 
     public static void  imprimirConjuntValoracions(ConjuntValoracions conjuntValoracions) {
-        TreeMap<Pair<Usuari,Item>,Valoracio> valoracions = conjuntValoracions.obteTotesValoracions();
+        TreeMap<Pair<Usuari,Item>,Valoracio> valoracions = conjuntValoracions.obtenitTotesLesValoracions();
         ArrayList<Valoracio> arrayValoracions = new ArrayList<>();
         Set<Pair<Usuari, Item>> keys = valoracions.keySet();
         for (Pair<Usuari, Item> id : keys) {

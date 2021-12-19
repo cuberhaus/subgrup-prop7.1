@@ -163,7 +163,12 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
+        // TODO (edgar): aixo no hauria de seleccionar el tipus d'ítem, només carregar-lo, per tant no hauria d'importar
+        // si hi ha un tipus d'ítem seleccionat o no
+        // TODO (edgar): no funciona perquè li dono qualsevol arxiu i me l'accepta sense throw exception
+        // l'exception que llança si l'arxiu no es correcte hauria de ser una altra excepció que creem nosaltres
+        // (illegal argument no esta be i io diria que tampco)
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
@@ -177,6 +182,8 @@ public class ControladorDomini {
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
+        // TODO (edgar): aixo no hauria de seleccionar el tipus d'ítem, només crear-lo, per tant no hauria d'importar
+        // si hi ha un tipus d'ítem seleccionat o no
         if (estatPrograma.conteTipusItem(nom)) {
             // TODO: crear excepcio
             throw new IllegalArgumentException("Ja existeix aquest tipus item.");
@@ -188,7 +195,7 @@ public class ControladorDomini {
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(nom, tipus);
-        controladorPersistencia.guardarTipusItem(tipus.converteixAArray(), nom);
+        controladorPersistencia.guardarTipusItem(tipus.convertirAArrayList(), nom);
     }
 
     /** Retorna els noms dels conjunts d'items coneguts**/
@@ -277,7 +284,6 @@ public class ControladorDomini {
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // retorna false si no s'ha pogut fer i cert si tot esta be
-
         return false;
     }
 
@@ -376,8 +382,9 @@ public class ControladorDomini {
 
     public void deseleccionarTipusItem() throws IOException {
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
-        controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).converteixAArray(), nomTipusItemActual);
-        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.pasarAArray(), nomTipusItemActual);
+        controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
+        // TODO (edgar): peta perquè valoracionsTipusItemActual es nul
+        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nomTipusItemActual, "basic");
         nomTipusItemActual = null;
     }

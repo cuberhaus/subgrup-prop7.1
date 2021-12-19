@@ -41,8 +41,8 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
     }
 
-    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
-        controladorPresentacio.carregarTipusItem(rutaAbsoluta, nom);
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
+        controladorPresentacio.carregarTipusItem(nom, rutaAbsoluta);
     }
 
     public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {

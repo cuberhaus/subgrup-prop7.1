@@ -4,7 +4,6 @@ import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Classe base pels mètodes recomanadors.
@@ -51,7 +50,7 @@ public abstract class MetodeRecomanador {
      */
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems itemsRecomanables, int numRecomanacions) {
         ConjuntValoracions valoracions = new ConjuntValoracions();
-        for (Valoracio val : valoracionsPubliques.obteTotesValoracions().values()) {
+        for (Valoracio val : valoracionsPubliques.obtenitTotesLesValoracions().values()) {
             if (val.obtenirUsuari().equals(usuari))
                 valoracions.afegir(val);
         }
@@ -66,7 +65,7 @@ public abstract class MetodeRecomanador {
      */
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) {
         ConjuntValoracions valoracionsUsuari = new ConjuntValoracions();
-        for (Map.Entry<Pair<Usuari, Item>, Valoracio> x : valoracionsPubliques.obteTotesValoracions().entrySet()) {
+        for (Map.Entry<Pair<Usuari, Item>, Valoracio> x : valoracionsPubliques.obtenitTotesLesValoracions().entrySet()) {
             if (x.getKey().x.equals(usuari)) {
                 valoracionsUsuari.afegir(x.getValue());
             }
