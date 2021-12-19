@@ -41,7 +41,7 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
     }
 
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
         controladorPresentacio.carregarTipusItem(nom, rutaAbsoluta);
     }
 

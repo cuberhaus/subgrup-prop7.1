@@ -29,9 +29,13 @@ public class TipusAtribut {
         this.distancia = distancia;
     }
 
-    public TipusAtribut(String valor, String distancia) throws IllegalArgumentException{
+    public TipusAtribut(String valor, String distancia) throws IllegalArgumentException {
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
+        // TODO: crear excepcions pròpies
+        if (this.valorAtribut == null || this.distancia == null) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -48,7 +52,7 @@ public class TipusAtribut {
         return Objects.hash(valorAtribut, distancia);
     }
 
-    private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) throws IllegalArgumentException {
+    private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
         if (Objects.equals(valorAtribut, "ValorBoolea")) {
             return new ValorBoolea();
         } else if (Objects.equals(valorAtribut, "ValorCategoric")) {
@@ -66,11 +70,11 @@ public class TipusAtribut {
         } else if (Objects.equals(valorAtribut, "ValorConjuntTextual")) {
             return new ValorConjuntTextual();
         } else {
-            throw new IllegalArgumentException("No hi ha cap ValorAtribut reconegut amb aquest nom.");
+            return null;
         }
     }
 
-    private static Distancia distanciaDesDelNom(String distancia) throws IllegalArgumentException {
+    private static Distancia distanciaDesDelNom(String distancia) {
         if (Objects.equals(distancia, "DistanciaDiferenciaDeConjunts")) {
             return new DistanciaDiferenciaDeConjunts();
         } else if (Objects.equals(distancia, "DistanciaDiscreta")) {
@@ -82,7 +86,7 @@ public class TipusAtribut {
         } else if (Objects.equals(distancia, "DistanciaZero")) {
             return new DistanciaZero();
         } else {
-            throw new IllegalArgumentException("No hi ha cap Distancia reconeguda amb aquest nom.");
+            return null;
         }
     }
     /**
