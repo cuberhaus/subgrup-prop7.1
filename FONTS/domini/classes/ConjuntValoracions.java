@@ -3,6 +3,7 @@ package domini.classes;
 import domini.classes.csv.TaulaCSV;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.TreeMap;
 
 /**
@@ -13,7 +14,7 @@ import java.util.TreeMap;
 
 public class ConjuntValoracions {
     private final TreeMap<Pair<Usuari, Item>, Valoracio> valoracions;
-
+    private final ArrayList<String> capsalera = new ArrayList<>(Arrays.asList("userId", "itemId", "rating"));
     /**
      * Constructora per defecte
      */
@@ -115,6 +116,7 @@ public class ConjuntValoracions {
      */
     public ArrayList<ArrayList<String>> pasarAArray() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
+        res.add(capsalera);
         for(var x : valoracions.entrySet()) {
             ArrayList<String> fila = new ArrayList<>();
             fila.add(String.valueOf(x.getKey().x.obtenirId().obtenirValor()));

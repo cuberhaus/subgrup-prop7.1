@@ -70,4 +70,5 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
     public boolean esborrar(T element) {
         return elements.remove(element.obtenirId(), element);
     }
+
 }

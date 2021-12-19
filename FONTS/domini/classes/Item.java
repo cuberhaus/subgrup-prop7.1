@@ -230,4 +230,12 @@ public class Item implements Comparable<Item>, ElementIdentificat {
             atribut.getValue().obtenirDistancia().actualitzarFactorDeNormalitzacio(atributs.get(atribut.getKey()));
         }
     }
+
+    public ArrayList<String> converteixAArray() {
+        ArrayList<String> res = new ArrayList<>();
+        for (var x : atributs.entrySet()) {
+           res.add(x.getValue().toString());
+        }
+        return res;
+    }
 }

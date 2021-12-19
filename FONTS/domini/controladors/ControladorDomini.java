@@ -18,7 +18,7 @@ public class ControladorDomini {
     private final ControladorPersistencia controladorPersistencia;
 
     private final Programa estatPrograma;
-    private int ultimIdUsat = 0;
+    private int ultimIdUsat = 1000000;
     private String nomTipusItemActual = null;
     private ConjuntValoracions valoracionsTipusItemActual = null;
     private ConjuntItems itemsActuals = null;
@@ -79,7 +79,7 @@ public class ControladorDomini {
 
     public boolean existeixUsuari(int id) throws Exception {
         Id id_bo = new Id(id, true);
-        return estatPrograma.conteUsuari(id_bo)&& estatPrograma.obtenirUsuari(id_bo).isActiu();
+        return estatPrograma.conteUsuari(id_bo) && estatPrograma.obtenirUsuari(id_bo).isActiu();
     }
 
 
@@ -216,26 +216,37 @@ public class ControladorDomini {
         estatPrograma.esborraTotsUsuaris();
     }
 
+    /**
+     * @return null si no hi ha cap seleccionat
+     */
     public String obtenirNomTipusItemSeleccionat() {
-        // Retorna null si no hi ha cap tipus item seleccionat
         return nomTipusItemActual;
     }
 
     public void esborrarTipusItemSeleccionat() {
-        // TODO
-        // el posa a null, guardar canvis fets
-        // esborra tota la informació i dades relacionades amb aquest tipus item
+        controladorPersistencia.borrarTipusItem(nomTipusItemActual);
+        itemsActuals = null;
+        estatPrograma.esborraTipusItem(nomTipusItemActual);
+        valoracionsTipusItemActual = null;
+        nomTipusItemActual = null;
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws IOException {
-        // TODO
-        // marca com a tipus item seleccionat el que te aquest nom
-        // en principi esta carregat, si cal gestionar excepcions poseume un todo a la vista please
+    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
 
         if (nomTipusItemActual != null) {
-            // TODO ha de guardar lanterior
+            controladorPersistencia.borrarTipusItem(nomTipusItemActual);
+            controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).converteixAArray(), nomTipusItemActual);
+            controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.pasarAArray(), nomTipusItemActual);
+            controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nomTipusItemActual, "basic");
         }
-        ArrayList<ArrayList<String>> tipus_item_raw = controladorPersistencia.obtenirTipusItem(nomTipusItem);
+        nomTipusItemActual = nomTipusItem;
+        ArrayList<ArrayList<String>> valoracions_raw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
+        ArrayList<ArrayList<String>> items_raw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
+        TaulaCSV taulaItems = new TaulaCSV(items_raw);
+        itemsActuals = new ConjuntItems(nomTipusItem, taulaItems);
+        valoracionsTipusItemActual = new ConjuntValoracions();
+        TaulaCSV taula_valoracions = new TaulaCSV(valoracions_raw);
+        valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
     // TODO: Pablo

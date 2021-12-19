@@ -142,6 +142,11 @@ public class Programa {
         tipusItems.put(nom, tipusItem);
     }
 
+
+    public void esborraTipusItem(String nom) {
+        tipusItems.remove(nom);
+    }
+
     public TipusItem obteTipusItem(String nom) {
         return tipusItems.get(nom);
     }
