@@ -8,9 +8,12 @@ import java.awt.*;
  */
 public class VistaDialegAutors extends JDialog {
 
+    // TODO (maria): posar set resize a false pels dialegs
+
     public VistaDialegAutors(){
         super(null, ModalityType.APPLICATION_MODAL);
         setLayout(new BorderLayout());
+        setResizable(false);
 
         JPanel panell = new JPanel(new BorderLayout());
         setTitle("PROP 2020-2021 Q1 - FIB UPC");

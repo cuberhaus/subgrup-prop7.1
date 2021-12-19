@@ -24,6 +24,7 @@ public class VistaDialegEditarItem extends JDialog {
         setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Edita un ítem");
+        setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
         add(panellPrincipal);
