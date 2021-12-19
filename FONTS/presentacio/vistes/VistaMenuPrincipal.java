@@ -5,6 +5,7 @@ import presentacio.controladors.ControladorMenuPrincipal;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 /**
  * @author maria.prat
@@ -19,7 +20,7 @@ public class VistaMenuPrincipal extends JFrame {
     private VistaMenuPrincipal() {
     }
 
-    public static VistaMenuPrincipal obtenirInstancia() {
+    public static VistaMenuPrincipal obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuPrincipal();
             controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
@@ -28,7 +29,7 @@ public class VistaMenuPrincipal extends JFrame {
         return instancia;
     }
 
-    private static void inicialitzarMenuPrincipal() {
+    private static void inicialitzarMenuPrincipal() throws IOException {
         instancia.setTitle("Menu Principal");
         instancia.setResizable(false);
 
@@ -65,7 +66,7 @@ public class VistaMenuPrincipal extends JFrame {
         menuBarra.add(Box.createHorizontalGlue());
     }
 
-    private static void inicialitzarMenuPestanyes() {
+    private static void inicialitzarMenuPestanyes() throws IOException {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", VistaMenuTipusItem.obtenirInstancia());
         menuPestanyes.add("Ítems", VistaMenuItems.obtenirInstancia());

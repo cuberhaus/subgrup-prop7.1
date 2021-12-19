@@ -25,7 +25,7 @@ public class ControladorMenuTipusItem {
     private ControladorMenuTipusItem () {
     }
 
-    public static ControladorMenuTipusItem obtenirInstancia() {
+    public static ControladorMenuTipusItem obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorMenuTipusItem();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();

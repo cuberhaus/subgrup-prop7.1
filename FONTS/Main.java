@@ -1,10 +1,12 @@
 import presentacio.controladors.ControladorPresentacio;
 
+import java.io.IOException;
+
 /**
  * @author maria.prat
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ControladorPresentacio.obtenirInstancia();
     }
 }

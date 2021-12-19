@@ -3,6 +3,7 @@ package presentacio.controladors;
 import presentacio.vistes.VistaMenuRecomanacions;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ControladorMenuRecomanacions {
@@ -14,7 +15,7 @@ public class ControladorMenuRecomanacions {
     private ControladorMenuRecomanacions() {
     }
 
-    public static ControladorMenuRecomanacions obtenirInstancia() {
+    public static ControladorMenuRecomanacions obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorMenuRecomanacions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
