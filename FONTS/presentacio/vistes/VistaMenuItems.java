@@ -64,7 +64,12 @@ public class VistaMenuItems extends JPanel {
         menuLateral.add(botoCrearItem);
         JButton botoEditarItem = new JButton("Edita un ítem");
         botoEditarItem.addActionListener(e -> {
-            controladorMenuItems.editarItem();
+            try {
+                controladorMenuItems.editarItem();
+            } catch (IOException ex) {
+                //TODO: cath
+                ex.printStackTrace();
+            }
         });
         menuLateral.add(botoEditarItem);
         JButton botoEsborrarItem = new JButton("Esborra un ítem");

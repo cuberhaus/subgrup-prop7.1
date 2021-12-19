@@ -32,7 +32,7 @@ public class VistaMenuTipusItem extends JPanel {
     private VistaMenuTipusItem() {
     }
 
-    public static VistaMenuTipusItem obtenirInstancia() {
+    public static VistaMenuTipusItem obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuTipusItem();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
@@ -74,7 +74,13 @@ public class VistaMenuTipusItem extends JPanel {
         JButton botoCrearTipusItem = new JButton("Crea un nou tipus d'ítem");
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoCrearTipusItem.addActionListener(e -> {
-            VistaDialegCrearTipusItem vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
+            VistaDialegCrearTipusItem vistaDialegCrearTipusItem = null;
+            try {
+                vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
+            } catch (IOException ex) {
+                // TODO: catch
+                ex.printStackTrace();
+            }
             vistaDialegCrearTipusItem.setVisible(true);
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
@@ -188,7 +194,13 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem();
+                VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = null;
+                try {
+                    vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem();
+                } catch (IOException ex) {
+                    //TODO: catch
+                    ex.printStackTrace();
+                }
                 vistaDialegMostrarTipusItem.setVisible(true);
             }
         });
@@ -199,7 +211,13 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                VistaDialegEditarTipusItem vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
+                VistaDialegEditarTipusItem vistaDialegEditarTipusItem = null;
+                try {
+                    vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
+                } catch (IOException ex) {
+                    //TODO: catch
+                    ex.printStackTrace();
+                }
                 vistaDialegEditarTipusItem.setVisible(true);
             }
         });

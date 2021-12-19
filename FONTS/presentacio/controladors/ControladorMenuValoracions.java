@@ -3,6 +3,7 @@ package presentacio.controladors;
 import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,7 @@ public class ControladorMenuValoracions {
     private ControladorMenuValoracions() {
     }
 
-    public static ControladorMenuValoracions obtenirInstancia() {
+    public static ControladorMenuValoracions obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorMenuValoracions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();

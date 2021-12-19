@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
@@ -41,7 +42,7 @@ public class VistaMenuValoracions extends JPanel {
     private VistaMenuValoracions() {
     }
 
-    public static VistaMenuValoracions obtenirInstancia() {
+    public static VistaMenuValoracions obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuValoracions();
             controladorMenuValoracions = ControladorMenuValoracions.obtenirInstancia();

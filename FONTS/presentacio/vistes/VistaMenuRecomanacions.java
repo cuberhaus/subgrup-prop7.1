@@ -4,6 +4,7 @@ import presentacio.controladors.ControladorMenuRecomanacions;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class VistaMenuRecomanacions extends JPanel {
@@ -21,7 +22,7 @@ public class VistaMenuRecomanacions extends JPanel {
         altura = this.getHeight();
     }
 
-    public static VistaMenuRecomanacions obtenirInstancia() {
+    public static VistaMenuRecomanacions obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuRecomanacions();
             controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();
