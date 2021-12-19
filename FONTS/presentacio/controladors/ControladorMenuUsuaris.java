@@ -13,9 +13,19 @@ import java.util.ArrayList;
  */
 
 public class ControladorMenuUsuaris {
-
+    /**
+     * Conté el controlador Presentació
+     */
     private static ControladorPresentacio controladorPresentacio;
+
+    /**
+     * Conté l'única instància de ControladorMenuUsuaris
+     */
     private static ControladorMenuUsuaris instancia;
+
+    /**
+     * Conté la vista del menu d'usuaris
+     */
     private static VistaMenuUsuaris vistaMenuUsuaris;
 
     /**
@@ -39,6 +49,12 @@ public class ControladorMenuUsuaris {
         return instancia;
     }
 
+    /**
+     * Comprova que un id es un valor enter
+     *
+     * @param id identificador
+     * @return retorna true si l'identificador és vàlid
+     */
     public boolean idEsValid(String id) {
         if (id == null || id.equals("")) {
             System.out.println("Id text is empty");
@@ -156,7 +172,7 @@ public class ControladorMenuUsuaris {
     }
 
     /**
-     * Importa un conjunt d'usuaris des de un arxiu extern
+     * Importa un conjunt d'usuaris des d'un arxiu extern
      *
      * @param absolutePath path de l'arxiu des d'on s'obtenen les dades
      * @throws Exception No s'ha pogut importar l'arxiu

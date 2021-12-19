@@ -13,13 +13,31 @@ import java.util.ArrayList;
  */
 
 public class ControladorMenuValoracions {
+    /**
+     * Conté el controlador Presentació
+     */
     private static ControladorPresentacio controladorPresentacio;
+    /**
+     * Conté l'única instància del controlador del menu de valoracions
+     */
     private static ControladorMenuValoracions instancia;
+    /**
+     * Conté la vista del menú de valoracions
+     */
     private static VistaMenuValoracions vistaMenuValoracions;
 
+    /**
+     * Constructora per defecte de ControladorMenuValoracions
+     */
     private ControladorMenuValoracions() {
     }
 
+    /**
+     * Constructora de ControladorMenuValoracions
+     * Crea una instància única de ControladorMenuValoracions
+     * @return <code> ControladorMenuUsuaris </code>
+     * @throws IOException No s'ha pogut obtenir la instancia del controlador
+     */
     public static ControladorMenuValoracions obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorMenuValoracions();
@@ -51,6 +69,13 @@ public class ControladorMenuValoracions {
         return true;
     }
 
+    /**
+     *
+     * @param usuariId
+     * @param itemId
+     * @param valor
+     * @throws Exception
+     */
     public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
         try {
             if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
