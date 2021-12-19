@@ -8,8 +8,6 @@ import java.awt.*;
  */
 public class VistaDialegAutors extends JDialog {
 
-    // TODO (maria): posar set resize a false pels dialegs
-
     public VistaDialegAutors(){
         super(null, ModalityType.APPLICATION_MODAL);
         setLayout(new BorderLayout());
