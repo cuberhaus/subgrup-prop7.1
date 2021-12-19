@@ -2,6 +2,8 @@ package presentacio.controladors;
 
 import presentacio.vistes.VistaMenuPrincipal;
 
+import java.io.IOException;
+
 /**
  * Classe que representa el controlador del Menu principal
  * @author pol.casacuberta i maria.prat
@@ -15,7 +17,7 @@ public class ControladorMenuPrincipal {
     private ControladorMenuPrincipal () {
     }
 
-    public static ControladorMenuPrincipal obtenirInstancia() {
+    public static ControladorMenuPrincipal obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorMenuPrincipal();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();

@@ -29,7 +29,7 @@ public class ControladorMenuUsuaris {
      * Crea una instància única de ControladorMenuUsuaris
      * @return <code> ControladorMenuUsuaris </code>
      */
-    public static ControladorMenuUsuaris obtenirInstancia() {
+    public static ControladorMenuUsuaris obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorMenuUsuaris();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();

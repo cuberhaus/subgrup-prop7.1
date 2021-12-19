@@ -4,6 +4,7 @@ import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class VistaDialegEditarItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegEditarItem(String id, Map<String, String> atributs) {
+    public VistaDialegEditarItem(String id, Map<String, String> atributs) throws IOException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegEditarItem(id, atributs);

@@ -49,7 +49,7 @@ public class VistaMenuUsuaris extends JPanel {
     private VistaMenuUsuaris() {
     }
 
-    public static VistaMenuUsuaris obtenirInstancia() {
+    public static VistaMenuUsuaris obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuUsuaris();
             controladorMenuUsuaris = ControladorMenuUsuaris.obtenirInstancia();

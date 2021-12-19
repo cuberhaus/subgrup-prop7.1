@@ -19,7 +19,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
     private JPanel panellCrearTipusItem;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public VistaDialegCrearTipusItem() {
+    public VistaDialegCrearTipusItem() throws IOException {
         super(null, Dialog.ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         inicialitzarDialegCrearTipusItem();

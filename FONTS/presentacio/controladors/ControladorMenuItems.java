@@ -63,7 +63,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.obtenirItem(id);
     }
 
-    public void editarItem() {
+    public void editarItem() throws IOException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {

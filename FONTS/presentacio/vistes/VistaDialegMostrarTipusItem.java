@@ -5,6 +5,7 @@ import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class VistaDialegMostrarTipusItem extends JDialog {
 
     // TODO: afegir editar TipusItem
 
-    public VistaDialegMostrarTipusItem() {
+    public VistaDialegMostrarTipusItem() throws IOException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = controladorMenuTipusItem.obtenirNomTipusItemSeleccionat();
