@@ -114,6 +114,6 @@ public class ControladorMenuUsuaris {
     }
 
     public void importarUsuaris(String absolutePath) throws Exception{
-        controladorPresentacio.importarUsuaris(absolutePath);
+            controladorPresentacio.importarUsuaris(absolutePath);
     }
 }
