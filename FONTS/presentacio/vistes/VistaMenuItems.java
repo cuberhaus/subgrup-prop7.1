@@ -53,7 +53,12 @@ public class VistaMenuItems extends JPanel {
         menuLateral.add(Box.createVerticalGlue());
         JButton botoCrearItem = new JButton("Crea un nou ítem");
         botoCrearItem.addActionListener(e -> {
-            controladorMenuItems.crearNouItem();
+            try {
+                controladorMenuItems.crearNouItem();
+            } catch (IOException ex) {
+                // TODO catch
+                ex.printStackTrace();
+            }
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
         menuLateral.add(botoCrearItem);

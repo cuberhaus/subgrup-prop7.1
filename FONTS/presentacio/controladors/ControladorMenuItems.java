@@ -112,7 +112,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.esSessioIniciada();
     }
 
-    public void crearNouItem() {
+    public void crearNouItem() throws IOException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
