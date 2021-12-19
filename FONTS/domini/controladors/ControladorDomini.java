@@ -407,6 +407,8 @@ public class ControladorDomini {
     }
 
     public void deseleccionarTipusItem() throws IOException {
+        // TODO: si no n'hi ha cap de seleccionat retornar una excepció personalitzada per distingir entre
+        //  les dues excepcions i posar-me un todo (maria)
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
         // TODO (edgar): peta perquè valoracionsTipusItemActual es nul
@@ -438,7 +440,7 @@ public class ControladorDomini {
         return idsNoInclosos;
     }
 
-    public String canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
             throw new Exception("L'id d'usuari seleccionat no existeix");
@@ -452,7 +454,6 @@ public class ControladorDomini {
         }
 
         System.out.println(estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
-        return estatPrograma.obtenirUsuari(idUsuari).obteContrasenya();
     }
 
     public void canviaNomUsuari(String id, String nouNom) throws Exception {
