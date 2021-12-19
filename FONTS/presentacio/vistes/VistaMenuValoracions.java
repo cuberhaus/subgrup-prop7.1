@@ -97,7 +97,7 @@ public class VistaMenuValoracions extends JPanel {
 
         borderLayout = new BorderLayout();
         instancia.setLayout(borderLayout);
-        instancia.add(jpanel,BorderLayout.CENTER);
+        instancia.add(jpanel, BorderLayout.CENTER);
     }
 
     private static void conjuntDeValoracionsButton() {
@@ -125,26 +125,16 @@ public class VistaMenuValoracions extends JPanel {
     private static void editaValoracioButton() {
         editaValoracioButton = new JButton("Edita valoració");
         editaValoracioButton.addActionListener(e -> {
-            //TODO implementar vistaDialegEditarValoracio
-            if (!controladorMenuValoracions.existeixTipusItemSeleccionat()) {
-                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            } else {
-                String idItem = JOptionPane.showInputDialog(instancia,
-                        "Introdueix l'identificador de l'ítem valorat que vols editar:");
-                String idUsuari = JOptionPane.showInputDialog(instancia, "Introdueix l'identificador de l'usuari que ha valorat l'ítem");
-                try {
-                    if (controladorMenuValoracions.existeixValoracio(idUsuari, idItem)) {
-                        JOptionPane.showMessageDialog(instancia, "L'identificador de la valoracio no és vàlid.");
-                    } else {
-    //                    VistaDialegEditarValoracio vistaDialegEditarValoracio = new VistaDialegEditarValoracio(idItem, idUsuari);
-    //                    vistaDialegEditarValoracio.setVisible(true);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
-                }
-            }
             try {
+                if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
+                    if (controladorMenuValoracions.existeixValoracio(usuariIdText.getText(), itemIdText.getText())) {
+                        controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(instancia, "La valoració no existeix");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+                }
                 controladorMenuValoracions.editarValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -159,14 +149,14 @@ public class VistaMenuValoracions extends JPanel {
     private static void esborrarTotesLesValoracionsButton() {
         esborrarTotesLesValoracionsButton = new JButton("Esborra totes les valoracions");
         esborrarTotesLesValoracionsButton.addActionListener(e -> {
-            if (!controladorMenuValoracions.existeixTipusItemSeleccionat()) {
-                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            } else {
+            if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
                 int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar totes les valoracions", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
                 if (resposta == 0) {
                     controladorMenuValoracions.esborrarTotesLesValoracions();
                     JOptionPane.showMessageDialog(instancia, "S'han esborrat les valoracions amb èxit");
                 }
+            } else {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             }
         });
         gridBagConstraints.gridx = 0;
