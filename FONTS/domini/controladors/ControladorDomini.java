@@ -6,6 +6,7 @@ import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -269,6 +270,7 @@ public class ControladorDomini {
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // retorna false si no s'ha pogut fer i cert si tot esta be
+
         return false;
     }
 
@@ -377,8 +379,22 @@ public class ControladorDomini {
         return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
     }
 
-    public void importarUsuaris(String absolutePath) throws Exception{
+    public ArrayList<String> importarUsuaris(String absolutePath) throws Exception {
         ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(absolutePath);
         ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris(llistaUsuaris);
+        ArrayList<Usuari> llista = conjuntUsuaris.obtenirUsuaris();
+
+        ArrayList<String> idsNoInclosos = new ArrayList<>();
+        for (Usuari usuari : llista) {
+            if (!estatPrograma.conteUsuari(usuari.obtenirId())) {
+                estatPrograma.afegirUsuari(usuari);
+            }
+
+            else {
+                idsNoInclosos.add(String.valueOf(usuari.obtenirId().obtenirValor()));
+            }
+        }
+
+        return idsNoInclosos;
     }
 }

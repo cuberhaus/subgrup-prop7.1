@@ -58,9 +58,9 @@ public class VistaMenuUsuaris extends JPanel {
 
     private static void inicialitzarLlistaUsuaris() {
         ArrayList<String> nomsColumnes = new ArrayList<>();
-        nomsColumnes.add("nom");
-        nomsColumnes.add("userid");
-        nomsColumnes.add("esActiu");
+        nomsColumnes.add("Nom");
+        nomsColumnes.add("Identificador d'Usuari");
+        nomsColumnes.add("Actiu");
         llistaUsuarisTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
         ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();
         for (ArrayList<String> usuari : usuaris) {
@@ -102,6 +102,7 @@ public class VistaMenuUsuaris extends JPanel {
                 File pathConjunt = jFileChooser.getSelectedFile();
                 try {
                     controladorMenuUsuaris.importarUsuaris(pathConjunt.getAbsolutePath());
+                    actualitzarLlistaUsuaris();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
