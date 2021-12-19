@@ -103,6 +103,7 @@ public class ControladorDomini {
             throw new Exception("L'usuari ja existeix");
         }
         else {
+            if (contrasenya.isBlank()) throw new Exception("La contrasenya es buida o nomes conte espais en buit");
             estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
             return id.obtenirValor();
         }
@@ -409,5 +410,31 @@ public class ControladorDomini {
         }
 
         return idsNoInclosos;
+    }
+
+    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+        Id idUsuari = new Id(Integer.parseInt(id), true);
+        if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
+            throw new Exception("L'id d'usuari seleccionat no existeix");
+        }
+
+        else {
+            if (!novaContrasenya.isBlank()) {
+                estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
+            }
+        }
+    }
+
+    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+        Id idUsuari = new Id(Integer.parseInt(id), true);
+        if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
+            throw new Exception("L'id d'usuari seleccionat no existeix");
+        }
+
+        else {
+            if (!nouNom.isBlank()) {
+                estatPrograma.obtenirUsuari(idUsuari).setNom(nouNom);
+            }
+        }
     }
 }

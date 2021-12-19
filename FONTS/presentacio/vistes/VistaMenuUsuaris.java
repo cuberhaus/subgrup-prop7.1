@@ -81,7 +81,11 @@ public class VistaMenuUsuaris extends JPanel {
         llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount()-1);
         jScrollPane.revalidate();
     }
-
+    private static void clearText() {
+        idText.setText("");
+        contrasenyaText.setText("");
+        nomText.setText("");
+    }
     private static void inicialitzarMenuUsuaris() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
@@ -167,6 +171,7 @@ public class VistaMenuUsuaris extends JPanel {
                 int id = controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
                 llistaUsuarisTableModel.addRow(new String[]{nomText.getText(), String.valueOf(id), String.valueOf(true)});
                 jScrollPane.revalidate();
+                clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -180,6 +185,7 @@ public class VistaMenuUsuaris extends JPanel {
             try {
                 controladorMenuUsuaris.esborrarUsuari(idText.getText());
                 actualitzarLlistaUsuaris();
+                clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -193,6 +199,7 @@ public class VistaMenuUsuaris extends JPanel {
             try {
                 if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(contrasenyaText.getPassword()))) {
                     usuariActiuInfo.setText(idText.getText());
+                    clearText();
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
