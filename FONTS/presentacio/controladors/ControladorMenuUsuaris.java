@@ -151,7 +151,11 @@ public class ControladorMenuUsuaris {
      * @throws IOException No s'ha pogut exportar l'arxiu
      */
     public void exportarConjuntUsuaris(String absolutePath) throws IOException {
-        controladorPresentacio.exportarConjuntUsuaris(absolutePath);
+        try {
+            controladorPresentacio.exportarConjuntUsuaris(absolutePath);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
+        }
     }
 
     /**
@@ -177,9 +181,13 @@ public class ControladorMenuUsuaris {
      * @throws Exception No s'ha pogut importar l'arxiu
      */
     public void importarUsuaris(String absolutePath) throws Exception {
-        ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
-        if (usuarisNoInicialitzats != null) {
-            JOptionPane.showMessageDialog(vistaMenuUsuaris, "Aquests usuaris no s'han pogut inicialitzar" + usuarisNoInicialitzats);
+        try {
+            ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
+            if (usuarisNoInicialitzats != null) {
+                JOptionPane.showMessageDialog(vistaMenuUsuaris, "Aquests usuaris no s'han pogut inicialitzar" + usuarisNoInicialitzats);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }
     }
 

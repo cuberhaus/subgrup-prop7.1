@@ -39,10 +39,14 @@ public class ControladorMenuValoracions {
      * @throws IOException No s'ha pogut obtenir la instancia del controlador
      */
     public static ControladorMenuValoracions obtenirInstancia() throws IOException {
-        if (instancia == null) {
-            instancia = new ControladorMenuValoracions();
-            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            vistaMenuValoracions = VistaMenuValoracions.obtenirInstancia();
+        try {
+            if (instancia == null) {
+                instancia = new ControladorMenuValoracions();
+                controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+                vistaMenuValoracions = VistaMenuValoracions.obtenirInstancia();
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
         }
         return instancia;
     }
@@ -138,7 +142,11 @@ public class ControladorMenuValoracions {
      */
     public void carregarConjuntValoracions(String rutaAbsoluta) throws Exception {
         //TODO: comprovar que l'arxiu donat té el format correcte
-        controladorPresentacio.carregarConjuntValoracions(rutaAbsoluta);
+        try {
+            controladorPresentacio.carregarConjuntValoracions(rutaAbsoluta);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
+        }
     }
 
     /**
