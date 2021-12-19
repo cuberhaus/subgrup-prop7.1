@@ -4,6 +4,10 @@ import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.csv.TaulaCSV;
+import domini.classes.recomanador.*;
+import domini.classes.recomanador.filtre.Filtre;
+import domini.classes.recomanador.filtre.FiltreExclusiu;
+import domini.classes.recomanador.filtre.FiltreInclusiu;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -27,6 +31,8 @@ public class ControladorDomini {
     private String nomTipusItemActual = null;
     private ConjuntValoracions valoracionsTipusItemActual = null;
     private ConjuntItems itemsActuals = null;
+    private Recomanador recomanador;
+    private ConjuntRecomanacions recomanacions;
 
     private ControladorDomini() throws IOException {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
@@ -334,7 +340,7 @@ public class ControladorDomini {
     }
 
     public Map<String, String> obtenirItem(String id) throws IllegalArgumentException {
-        // TODO
+        // TODO: pèro esta fet
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // l'item es del tipus d'ítem seleccionat
@@ -365,12 +371,9 @@ public class ControladorDomini {
         for (var x : nousItems.obtenirTotsElsElements().entrySet()) {
             itemsActuals.afegir(x.getValue());
         }
-        // carrega un conjunt d'items
-        // pero no el selecciona
     }
 
     public void esborrarTotsElsItems() {
-        // TODO
         itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
 
@@ -381,33 +384,65 @@ public class ControladorDomini {
         // si el nou atribut no té nom ("") vol dir que s'ha eliminat
     }
 
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
-        return new ArrayList<>();
+        Filtre filtre;
+        if (filtreInclusiu) {
+            filtre = new FiltreInclusiu(nomAtributs);
+        }
+        else filtre = new FiltreExclusiu(nomAtributs);
+        recomanador = new RecomanadorCollaborative(estatPrograma.obtenirTotsElsUsuaris(), itemsActuals, valoracionsTipusItemActual, filtre);
+        recomanacions = recomanador.obteRecomanacions(estatPrograma.obtenirUsuariSessioIniciada(), 20);
+        ArrayList<String> res = new ArrayList<>();
+        for (var x : recomanacions.obtenirConjuntRecomanacions()) {
+            res.add(Integer.toString(x.obtenirId().obtenirValor()));
+        }
+        return res;
     }
 
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
-        return new ArrayList<>();
+        Filtre filtre;
+        if (filtreInclusiu) {
+            filtre = new FiltreInclusiu(nomAtributs);
+        }
+        else filtre = new FiltreExclusiu(nomAtributs);
+        recomanador = new RecomanadorContentBased(estatPrograma.obtenirTotsElsUsuaris(), itemsActuals, valoracionsTipusItemActual, filtre);
+        recomanacions = recomanador.obteRecomanacions(estatPrograma.obtenirUsuariSessioIniciada(), 20);
+        ArrayList<String> res = new ArrayList<>();
+        for (var x : recomanacions.obtenirConjuntRecomanacions()) {
+            res.add(Integer.toString(x.obtenirId().obtenirValor()));
+        }
+        return res;
     }
 
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
-        return new ArrayList<>();
+        Filtre filtre;
+        if (filtreInclusiu) {
+            filtre = new FiltreInclusiu(nomAtributs);
+        }
+        else filtre = new FiltreExclusiu(nomAtributs);
+        recomanador = new RecomanadorHibrid(estatPrograma.obtenirTotsElsUsuaris(), itemsActuals, valoracionsTipusItemActual, filtre);
+        recomanacions = recomanador.obteRecomanacions(estatPrograma.obtenirUsuariSessioIniciada(), 20);
+        ArrayList<String> res = new ArrayList<>();
+        for (var x : recomanacions.obtenirConjuntRecomanacions()) {
+            res.add(Integer.toString(x.obtenirId().obtenirValor()));
+        }
+        return res;
     }
 
     public double avaluarRecomanacio() {
-        // TODO
-        return 0.0;
+        return recomanacions.obteDiscountedCumulativeGain()/recomanacions.obteIdealDiscountedCumulativeGain();
     }
 
     //Esborrar tal cual
@@ -427,7 +462,6 @@ public class ControladorDomini {
         //  les dues excepcions i posar-me un todo (maria)
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
-        // TODO (edgar): peta perquè valoracionsTipusItemActual es nul
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nomTipusItemActual, "basic");
         nomTipusItemActual = null;
