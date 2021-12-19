@@ -182,6 +182,9 @@ public class ControladorPresentacio {
     }
 
     public ArrayList<ArrayList<String>> obtenirValoracions() {
+        if (!controladorDomini.existeixTipusItemSeleccionat()) {
+            return new ArrayList<>();
+        }
         return controladorDomini.obtenirValoracions();
     }
 
@@ -197,7 +200,7 @@ public class ControladorPresentacio {
         return controladorDomini.importarUsuaris(absolutePath);
     }
 
-    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
         controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
     }
 
