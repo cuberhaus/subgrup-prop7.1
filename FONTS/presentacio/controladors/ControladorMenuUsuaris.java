@@ -114,6 +114,9 @@ public class ControladorMenuUsuaris {
     }
 
     public void importarUsuaris(String absolutePath) throws Exception{
-            controladorPresentacio.importarUsuaris(absolutePath);
+        ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
+       if (usuarisNoInicialitzats != null) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris,"Aquests usuaris no s'han pogut inicialitzar"+usuarisNoInicialitzats);
+       }
     }
 }
