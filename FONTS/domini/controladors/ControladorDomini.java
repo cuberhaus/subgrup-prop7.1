@@ -367,7 +367,7 @@ public class ControladorDomini {
         return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
     }
 
-    public void importarUsuaris(String absolutePath) {
+    public void importarUsuaris(String absolutePath) throws Exception{
 
     }
 }

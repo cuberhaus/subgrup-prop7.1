@@ -100,7 +100,11 @@ public class VistaMenuUsuaris extends JPanel {
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjunt = jFileChooser.getSelectedFile();
-                controladorMenuUsuaris.importarUsuaris(pathConjunt.getAbsolutePath());
+                try {
+                    controladorMenuUsuaris.importarUsuaris(pathConjunt.getAbsolutePath());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

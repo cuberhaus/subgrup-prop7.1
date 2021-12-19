@@ -189,7 +189,7 @@ public class ControladorPresentacio {
         return controladorDomini.obteUsuaris();
     }
 
-    public void importarUsuaris(String absolutePath) {
+    public void importarUsuaris(String absolutePath) throws Exception{
         controladorDomini.importarUsuaris(absolutePath);
     }
 }
