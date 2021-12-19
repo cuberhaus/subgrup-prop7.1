@@ -2,10 +2,12 @@ package domini.controladors;
 
 import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
+import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -186,7 +188,7 @@ public class ControladorDomini {
             tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
-        nomTipusItemActual = nom;
+        //nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
