@@ -24,6 +24,7 @@ public class VistaDialegCrearItem extends JDialog {
         setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Crea un nou ítem");
+        setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
         add(panellPrincipal);

@@ -18,6 +18,22 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         elements = new TreeMap<>();
     }
 
+    //user nom password actiu
+    public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
+        elements = new TreeMap<>();
+        for (ArrayList<String> usuari : llistaUsuaris) {
+            String id = usuari.get(0);
+            String nom = usuari.get(1);
+            String password = usuari.get(2);
+            String actiu = usuari.get(3);
+
+            Boolean actiuUsuari = Boolean.parseBoolean(actiu);
+            int idNum = Integer.parseInt(id);
+            Id idUsuari = new Id(idNum, actiuUsuari);
+            elements.put(idUsuari, new Usuari(idUsuari, nom, password));
+        }
+    }
+
     /**
      * Afegeix un conjunt de valoracions al Paràmetre implícit a partir de:
      *
@@ -75,7 +91,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         return usuaris;
     }
 
-    public ArrayList<ArrayList<String>> obtenirUsuarisActius() {
+    public ArrayList<ArrayList<String>> obtenirUsuarisCSV() {
         ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         ArrayList<String> usuaris = new ArrayList<>();
 
@@ -83,18 +99,18 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         atributs.add("userId");
         atributs.add("nom");
         atributs.add("password");
+        atributs.add("actiu");
 
         resultat.add(atributs);
 
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {
-            if (id.esActiu()) {
-                usuaris.add(elements.get(id).obtenirNom());
-                usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
-                usuaris.add(elements.get(id).obteContrasenya());
-                resultat.add(new ArrayList<>(usuaris));
-                usuaris.clear();
-            }
+            usuaris.add(elements.get(id).obtenirNom());
+            usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
+            usuaris.add(elements.get(id).obteContrasenya());
+            usuaris.add(String.valueOf(elements.get(id).isActiu()));
+            resultat.add(new ArrayList<>(usuaris));
+            usuaris.clear();
         }
 
 
@@ -114,7 +130,6 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             resultat.add(new ArrayList<>(usuaris));
             usuaris.clear();
         }
-
 
         resultat.add(usuaris);
         return resultat;
