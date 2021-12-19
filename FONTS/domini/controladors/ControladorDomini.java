@@ -468,7 +468,7 @@ public class ControladorDomini {
         String novaContrasenya = String.valueOf(novaContrasenyaArray);
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
-            throw new Exception("L'id d'usuari seleccionat no existeix");
+            throw new Exception("Canvi de contrasenya: L'id d'usuari seleccionat no existeix");
         }
 
         else {
@@ -487,7 +487,7 @@ public class ControladorDomini {
     public void canviaNomUsuari(String id, String nouNom) throws Exception {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
-            throw new Exception("L'id d'usuari seleccionat no existeix");
+            throw new Exception("Canvi de nom: L'id d'usuari seleccionat no existeix");
         }
 
         else {
