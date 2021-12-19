@@ -79,19 +79,39 @@ public class VistaMenuRecomanacions extends JPanel {
     private static void inicialitzarPanellSeleccionarFiltre() {
         panellSeleccionarFiltre = new JPanel();
         panellSeleccionarFiltre.setLayout(new BoxLayout(panellSeleccionarFiltre, BoxLayout.Y_AXIS));
+        JLabel descripcio = new JLabel("Selecciona un filtre pels atributs del tipus d'ítem seleccionat:");
+        descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panellSeleccionarFiltre.add(descripcio);
+
+        // TODO (maria): implementar botons
+        JPanel panellBotonsFiltre = new JPanel(new FlowLayout());
+
+        JButton botoSeleccionarTots = new JButton("Seleccionar tots");
+        botoSeleccionarTots.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoSeleccionarTots.addActionListener(actionEvent -> {});
+        panellBotonsFiltre.add(botoSeleccionarTots);
+
+        JButton botoDeseleccionarTots = new JButton("Deseleccionar tots");
+        botoDeseleccionarTots.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoDeseleccionarTots.addActionListener(actionEvent -> {});
+        panellBotonsFiltre.add(botoDeseleccionarTots);
+
+        panellSeleccionarFiltre.add(panellBotonsFiltre);
 
         JPanel panellLlistaAtributs = new JPanel(new FlowLayout());
-        JScrollPane panellScroll = new JScrollPane();
+        JPanel llistaAtributs = new JPanel();
+        llistaAtributs.setLayout(new BoxLayout(llistaAtributs, BoxLayout.Y_AXIS));
+        JScrollPane panellScroll = new JScrollPane(llistaAtributs);
         panellScroll.setPreferredSize(new Dimension(3 * amplada / 4, 3 * altura / 4));
         if (controladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
             ArrayList<String> nomsAtributs = controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat();
             for (String nomsAtribut : nomsAtributs) {
-                panellScroll.add(new JCheckBox(nomsAtribut));
+                llistaAtributs.add(new JCheckBox(nomsAtribut));
             }
         } else {
             JLabel textTipusItemSeleccionat = new JLabel("No hi ha cap tipus d'ítem seleccionat.");
             textTipusItemSeleccionat.setAlignmentX(Component.CENTER_ALIGNMENT);
-            panellScroll.add(textTipusItemSeleccionat);
+            llistaAtributs.add(textTipusItemSeleccionat);
         }
         panellLlistaAtributs.add(panellScroll);
         panellSeleccionarFiltre.add(panellLlistaAtributs);
