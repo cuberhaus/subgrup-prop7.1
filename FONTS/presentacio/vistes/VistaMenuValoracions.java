@@ -85,9 +85,6 @@ public class VistaMenuValoracions extends JPanel {
 
         usuariIdText = new JTextField();
         usuariIdText.setColumns(10);
-        usuariIdText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
-        });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         jpanel.add(usuariIdText, gridBagConstraints);
@@ -99,9 +96,6 @@ public class VistaMenuValoracions extends JPanel {
 
         itemIdText = new JTextField();
         itemIdText.setColumns(10);
-        itemIdText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
-        });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         jpanel.add(itemIdText, gridBagConstraints);
@@ -114,9 +108,6 @@ public class VistaMenuValoracions extends JPanel {
 
         valorText = new JTextField();
         valorText.setColumns(10);
-        valorText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
-        });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         jpanel.add(valorText, gridBagConstraints);
@@ -127,6 +118,7 @@ public class VistaMenuValoracions extends JPanel {
                 controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -139,6 +131,7 @@ public class VistaMenuValoracions extends JPanel {
                 controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -163,12 +156,14 @@ public class VistaMenuValoracions extends JPanel {
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
                 }
             }
             try {
                 controladorMenuValoracions.editarValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -190,8 +185,8 @@ public class VistaMenuValoracions extends JPanel {
                 try {
                     controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
                 } catch (Exception ex) {
-                    // TODO: catch this
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
                 }
             }
         });
