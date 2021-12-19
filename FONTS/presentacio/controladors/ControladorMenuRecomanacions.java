@@ -31,15 +31,15 @@ public class ControladorMenuRecomanacions {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         return controladorPresentacio.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         return controladorPresentacio.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         return controladorPresentacio.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 
