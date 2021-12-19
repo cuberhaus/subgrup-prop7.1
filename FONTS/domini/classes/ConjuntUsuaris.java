@@ -21,9 +21,10 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     //user nom password actiu
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();
+        llistaUsuaris.remove(0);
         for (ArrayList<String> usuari : llistaUsuaris) {
-            String id = usuari.get(0);
-            String nom = usuari.get(1);
+            String id = usuari.get(1);
+            String nom = usuari.get(0);
             String password = usuari.get(2);
             String actiu = usuari.get(3);
 

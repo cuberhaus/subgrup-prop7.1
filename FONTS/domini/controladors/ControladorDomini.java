@@ -375,6 +375,7 @@ public class ControladorDomini {
     }
 
     public void importarUsuaris(String absolutePath) throws Exception{
-
+        ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(absolutePath);
+        ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris(llistaUsuaris);
     }
 }
