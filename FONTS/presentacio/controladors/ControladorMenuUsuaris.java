@@ -18,9 +18,17 @@ public class ControladorMenuUsuaris {
     private static ControladorMenuUsuaris instancia;
     private static VistaMenuUsuaris vistaMenuUsuaris;
 
+    /**
+     * Constructora per defecte de ControladorMenuUsuaris
+     */
     private ControladorMenuUsuaris() {
     }
 
+    /**
+     * Constructora de ControladorMenuUsuaris
+     * Crea una instància única de ControladorMenuUsuaris
+     * @return <code> ControladorMenuUsuaris </code>
+     */
     public static ControladorMenuUsuaris obtenirInstancia() {
         if (instancia == null) {
             instancia = new ControladorMenuUsuaris();
@@ -43,9 +51,9 @@ public class ControladorMenuUsuaris {
     }
 
     /**
-     *
+     * S'intenta iniciar la sessió amb les dades donades
      * @param id id amb el que volem iniciar sessió
-     * @param contrasenya
+     * @param contrasenya contrasenya amb què intentem iniciar la sessió
      * @return True si la sessió hem pogut iniciar sessió
      * @throws Exception
      */
@@ -71,6 +79,13 @@ public class ControladorMenuUsuaris {
         return false;
     }
 
+    /**
+     * Afegir un Usuari al conjunt
+     * @param nom de l'usuari
+     * @param contrasenya de l'usuari
+     * @return retorna l'id de l'usuari
+     * @throws Exception no s'ha pogut crear l'usuari
+     */
     public int afegirUsuari(String nom, String contrasenya) throws Exception {
         int id = controladorPresentacio.afegirUsuari(nom, contrasenya);
         JOptionPane.showMessageDialog(vistaMenuUsuaris,"S'ha creat correctament l'usuari: " + id);
@@ -114,7 +129,7 @@ public class ControladorMenuUsuaris {
     }
 
     public void importarUsuaris(String absolutePath) throws Exception{
-        ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
+       ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
        if (usuarisNoInicialitzats != null) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris,"Aquests usuaris no s'han pogut inicialitzar"+usuarisNoInicialitzats);
        }
