@@ -79,7 +79,11 @@ public class VistaMenuItems extends JPanel {
 
         JButton botoCarregarConjuntItems = new JButton("Afegeix ítems des d'un conjunt");
         botoCarregarConjuntItems.addActionListener(e -> {
-            controladorMenuItems.carregarConjuntItems();
+            try {
+                controladorMenuItems.carregarConjuntItems();
+            } catch (Exception ex) {
+                // TODO: catch
+            }
         });
         // TODO: han de ser del tipus d'ítem seleccionat o que no hi hagi un tipus d'ítem seleccionat
         menuLateral.add(botoCarregarConjuntItems);

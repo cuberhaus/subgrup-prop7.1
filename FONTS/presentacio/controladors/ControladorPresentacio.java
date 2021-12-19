@@ -89,7 +89,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
@@ -149,7 +149,7 @@ public class ControladorPresentacio {
         return controladorDomini.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems(String rutaAbsoluta) {
+    public void carregarConjuntItems(String rutaAbsoluta) throws Exception {
         controladorDomini.carregarConjuntItems(rutaAbsoluta);
     }
 

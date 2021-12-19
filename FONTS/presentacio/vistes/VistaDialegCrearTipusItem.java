@@ -93,8 +93,10 @@ public class VistaDialegCrearTipusItem extends JDialog {
             }
             try {
                 controladorMenuTipusItem.crearTipusItem(nom, nomAValorAtribut);
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e1) {
                 // TODO (maria): catch
+            } catch (IOException e2) {
+
             }
             dispose();
         });

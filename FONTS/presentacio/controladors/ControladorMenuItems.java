@@ -82,7 +82,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems() {
+    public void carregarConjuntItems() throws Exception {
         JDialog dialegFitxer = new JDialog();
         JFileChooser selectorFitxer = new JFileChooser();
         int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);

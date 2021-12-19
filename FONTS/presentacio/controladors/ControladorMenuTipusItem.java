@@ -37,7 +37,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException, IOException {
         controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
     }
 

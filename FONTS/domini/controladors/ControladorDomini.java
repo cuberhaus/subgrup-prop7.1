@@ -175,7 +175,7 @@ public class ControladorDomini {
     }
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
         if (estatPrograma.conteTipusItem(nom)) {
             // TODO: crear excepcio
             throw new IllegalArgumentException("Ja existeix aquest tipus item.");
