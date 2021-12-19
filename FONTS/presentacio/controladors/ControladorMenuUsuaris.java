@@ -193,7 +193,11 @@ public class ControladorMenuUsuaris {
      */
     public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
         //TODO: comprovar id es valid
-        controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
+        try {
+            controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
+        }
     }
 
     /**
@@ -205,6 +209,10 @@ public class ControladorMenuUsuaris {
      */
     public void canviaNomUsuari(String id, String nouNom) throws Exception {
         //TODO: comprovar id es valid
-        controladorPresentacio.canviaNomUsuari(id, nouNom);
+        try {
+            controladorPresentacio.canviaNomUsuari(id, nouNom);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
+        }
     }
 }

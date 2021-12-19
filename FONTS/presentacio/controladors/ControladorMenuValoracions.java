@@ -170,7 +170,7 @@ public class ControladorMenuValoracions {
      * @param idUsuari identificador d'usuari
      * @param idItem identificador d'ítem
      * @return retorna true si la valoració existeix, altrament, retorna false
-     * @throws Exception
+     * @throws Exception No s'ha pogut consultar el valor
      */
     public boolean existeixValoracio(String idUsuari, String idItem) throws Exception {
         try {
