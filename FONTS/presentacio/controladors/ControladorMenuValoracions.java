@@ -47,26 +47,30 @@ public class ControladorMenuValoracions {
         return instancia;
     }
 
-    public boolean idUsuariEsValid(String id) {
+    /**
+     * Comprova que un id és un valor natural, si no ho és llença una excepció 0 no inclòs
+     * @param id identificador
+     * @throws Exception el id no és vàlid
+     */
+    public void idUsuariEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
-            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'Usuari està buit");
-            return false;
-        } else if (!id.matches("-?\\d+")) {
-            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'Usuari no és un numero natural");
-            return false;
+            throw new Exception("Id de l'usuari està buit");
+        } else if (!id.matches("^[0-9]*[1-9]+$|^[1-9]+[0-9]*$")) {
+            throw new Exception("L'id d'Usuari no és un numero natural");
         }
-        return true;
     }
 
-    public boolean idItemEsValid(String id) {
+    /**
+     * Comprova que un id és un valor natural, si no ho és llença una excepció 0 no inclòs
+     * @param id identificador
+     * @throws Exception el id no és vàlid
+     */
+    public void idItemEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
-            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'item està buit");
-            return false;
-        } else if (!id.matches("-?\\d+")) {
-            JOptionPane.showMessageDialog(vistaMenuValoracions, "L'id d'item no és un numero natural");
-            return false;
+            throw new Exception("Id de l'ítem està buit");
+        } else if (!id.matches("^[0-9]*[1-9]+$|^[1-9]+[0-9]*$")) {
+            throw new Exception("L'id d'ítem no és un numero natural");
         }
-        return true;
     }
 
     /**
@@ -78,12 +82,12 @@ public class ControladorMenuValoracions {
      */
     public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
         try {
-            if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-                if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
-                    controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
-                } else {
-                    JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració ja existeix");
-                }
+            idUsuariEsValid(usuariId);
+            idItemEsValid(itemId);
+            if (!controladorPresentacio.existeixValoracio(usuariId, itemId)) {
+                controladorPresentacio.afegirValoracio(usuariId, itemId, valor);
+            } else {
+                JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració ja existeix");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
@@ -98,9 +102,9 @@ public class ControladorMenuValoracions {
      */
     public void esborrarValoracio(String usuariId, String itemId) throws Exception {
         try {
-            if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-                controladorPresentacio.esborrarValoracio(usuariId, itemId);
-            }
+            idUsuariEsValid(usuariId);
+            idItemEsValid(itemId);
+            controladorPresentacio.esborrarValoracio(usuariId, itemId);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());
         }
@@ -115,13 +119,12 @@ public class ControladorMenuValoracions {
      */
     public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
         try {
-            if (idUsuariEsValid(usuariId) && idItemEsValid(itemId)) {
-                if (controladorPresentacio.existeixValoracio(usuariId, itemId)) {
-                    controladorPresentacio.editarValoracio(usuariId, itemId, valor);
-                } else {
-                    JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració no existeix");
-                }
-
+            idUsuariEsValid(usuariId);
+            idItemEsValid(itemId);
+            if (controladorPresentacio.existeixValoracio(usuariId, itemId)) {
+                controladorPresentacio.editarValoracio(usuariId, itemId, valor);
+            } else {
+                JOptionPane.showMessageDialog(vistaMenuValoracions, "La valoració no existeix");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuValoracions, e.getMessage());

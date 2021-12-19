@@ -191,7 +191,7 @@ public class VistaMenuUsuaris extends JPanel {
         afegirUsuari.addActionListener(e -> {
             try {
                 int id = controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
-                llistaUsuarisTableModel.addRow(new String[]{nomText.getText(), String.valueOf(id), String.valueOf(true)});
+                actualitzarLlistaUsuaris();
                 jScrollPane.revalidate();
                 clearText();
             } catch (Exception ex) {

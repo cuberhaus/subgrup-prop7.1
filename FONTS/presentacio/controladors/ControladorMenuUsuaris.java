@@ -50,21 +50,17 @@ public class ControladorMenuUsuaris {
     }
 
     /**
-     * Comprova que un id es un valor enter
+     * Comprova que un id és un valor natural, si no ho és llença una excepció 0 no inclòs
      *
      * @param id identificador
-     * @return retorna true si l'identificador és vàlid
+     * @throws Exception el id no és vàlid
      */
-    public boolean idEsValid(String id) {
+    public void idEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
-            System.out.println("Id text is empty");
-            JOptionPane.showMessageDialog(vistaMenuUsuaris, "Id text està buit");
-            return false;
-        } else if (!id.matches("-?\\d+")) {
-            JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'id no és un numero natural");
-            return false;
+            throw new Exception("Id text està buit");
+        } else if (!id.matches("^[0-9]*[1-9]+$|^[1-9]+[0-9]*$")) {
+            throw new Exception("L'id no és un numero natural");
         }
-        return true;
     }
 
     /**
@@ -78,17 +74,16 @@ public class ControladorMenuUsuaris {
     public boolean iniciarSessio(String id, String contrasenya) throws Exception {
         try {
             boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
-            if (idEsValid(id)) {
-                if (!sessioIniciada) {
-                    if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                        controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
-                        return true;
-                    } else {
-                        JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
-                    }
+            idEsValid(id);
+            if (!sessioIniciada) {
+                if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
+                    controladorPresentacio.iniciarSessio(Integer.parseInt(id), contrasenya);
+                    return true;
                 } else {
-                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "Has de tancar la sessió abans d'obrir-ne un altre");
+                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
                 }
+            } else {
+                JOptionPane.showMessageDialog(vistaMenuUsuaris, "Has de tancar la sessió abans d'obrir-ne un altre");
             }
 
         } catch (Exception e) {
@@ -106,9 +101,14 @@ public class ControladorMenuUsuaris {
      * @throws Exception no s'ha pogut crear l'usuari
      */
     public int afegirUsuari(String nom, String contrasenya) throws Exception {
-        int id = controladorPresentacio.afegirUsuari(nom, contrasenya);
-        JOptionPane.showMessageDialog(vistaMenuUsuaris, "S'ha creat correctament l'usuari: " + id);
-        return id;
+        try {
+            int id = controladorPresentacio.afegirUsuari(nom, contrasenya);
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, "S'ha creat correctament l'usuari: " + id);
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
+        }
+        return -1;
     }
 
     /**
@@ -119,13 +119,12 @@ public class ControladorMenuUsuaris {
      */
     public void esborrarUsuari(String id) throws Exception {
         try {
-            if (idEsValid(id)) {
-                if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
-                    controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
-                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari s'ha esborrat correctament");
-                } else {
-                    JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
-                }
+            idEsValid(id);
+            if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
+                controladorPresentacio.esborrarUsuari(Integer.parseInt(id));
+                JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari s'ha esborrat correctament");
+            } else {
+                JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
@@ -192,8 +191,8 @@ public class ControladorMenuUsuaris {
      * @throws Exception No s'ha pogut canviar la contrasenya de l'usuari
      */
     public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
-        //TODO: comprovar id es valid
         try {
+            idEsValid(id);
             controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
@@ -208,8 +207,8 @@ public class ControladorMenuUsuaris {
      * @throws Exception No s'ha pogut canviar el nom de l'usuari
      */
     public void canviaNomUsuari(String id, String nouNom) throws Exception {
-        //TODO: comprovar id es valid
         try {
+            idEsValid(id);
             controladorPresentacio.canviaNomUsuari(id, nouNom);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
