@@ -322,6 +322,14 @@ public class ControladorDomini {
         // l'item es del tipus d'ítem seleccionat
         // retorna fals si es invalid o no s'ha pogut esborrar
         // pot ser una paraula, un numero, estar buit, etc
+
+        try {
+            int idItemABuscar = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+
         return false;
     }
 
