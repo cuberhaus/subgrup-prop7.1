@@ -142,6 +142,9 @@ public class Programa {
         tipusItems.put(nom, tipusItem);
     }
 
+    public boolean conteTipusItem(String nom) {
+        return tipusItems.containsKey(nom);
+    }
 
     public void esborraTipusItem(String nom) {
         tipusItems.remove(nom);

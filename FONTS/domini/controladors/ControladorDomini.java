@@ -6,8 +6,10 @@ import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Classe que representa el controlador de domini
@@ -174,6 +176,10 @@ public class ControladorDomini {
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+        if (estatPrograma.conteTipusItem(nom)) {
+            // TODO: crear excepcio
+            throw new IllegalArgumentException("Ja existeix aquest tipus item.");
+        }
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : nomAValorAtribut.entrySet()) {
             tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x(), fila.getValue().y()));
