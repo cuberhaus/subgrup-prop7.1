@@ -404,7 +404,7 @@ public class ControladorDomini {
         return idsNoInclosos;
     }
 
-    public void canviaContrasenya(String id, String novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
             throw new Exception("L'id d'usuari seleccionat no existeix");
@@ -415,7 +415,7 @@ public class ControladorDomini {
         }
     }
 
-    public void canviaNom(String id, String nouNom) throws Exception {
+    public void canviaNomUsuari(String id, String nouNom) throws Exception {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
             throw new Exception("L'id d'usuari seleccionat no existeix");
