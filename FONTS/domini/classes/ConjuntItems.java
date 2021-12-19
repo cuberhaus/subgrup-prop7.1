@@ -40,6 +40,27 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
+    public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws Exception {
+        taula.eliminarEspaisInnecessaris();
+        this.tipusItem = tipusItem;
+
+        elements = new TreeMap<>();
+        int id;
+        for (int i = 0; i < taula.obtenirNumItems(); ++i) {
+            String sid = taula.obtenirValorAtribut(i, "id");
+            try {
+                id = Integer.parseInt(sid);
+            } catch (NumberFormatException e1) {
+                throw new InputMismatchException("L'id no es un integer");
+            }
+            Id identificador = new Id(id, true);
+            if (elements.containsKey(identificador)) {
+                throw new InputMismatchException("L'item creat ja existeix al conjunt");
+            }
+            afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
+        }
+    }
+
     /**
      * Creació d'un conjunt d'ítems buit.
      * @param tipusItem <code>TipusItem</code> el tipus d'ítem dels objectes.

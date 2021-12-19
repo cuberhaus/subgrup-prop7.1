@@ -6,7 +6,10 @@ import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Classe que representa el controlador de domini
@@ -173,6 +176,10 @@ public class ControladorDomini {
 
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
+        if (estatPrograma.conteTipusItem(nom)) {
+            // TODO: crear excepcio
+            throw new IllegalArgumentException("Ja existeix aquest tipus item.");
+        }
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : nomAValorAtribut.entrySet()) {
             tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x, fila.getValue().y));
@@ -211,7 +218,6 @@ public class ControladorDomini {
         controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV());
     }
 
-    // TODO: Pablo
     public void esborraConjuntUsuaris() {
         estatPrograma.esborraTotsUsuaris();
     }
@@ -239,7 +245,7 @@ public class ControladorDomini {
         ArrayList<ArrayList<String>> valoracions_raw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
         ArrayList<ArrayList<String>> items_raw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
         TaulaCSV taulaItems = new TaulaCSV(items_raw);
-        itemsActuals = new ConjuntItems(nomTipusItem, taulaItems);
+        itemsActuals = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
         valoracionsTipusItemActual = new ConjuntValoracions();
         TaulaCSV taula_valoracions = new TaulaCSV(valoracions_raw);
         valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
@@ -270,6 +276,7 @@ public class ControladorDomini {
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // retorna false si no s'ha pogut fer i cert si tot esta be
+
         return false;
     }
 
@@ -305,16 +312,20 @@ public class ControladorDomini {
         return false;
     }
 
-    public void carregarConjuntItems(String rutaAbsoluta) {
-        // TODO
+    public void carregarConjuntItems(String rutaAbsoluta) throws Exception {
+        ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
+        TaulaCSV taulaItems = new TaulaCSV(items);
+        ConjuntItems nousItems = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
+        for (var x : nousItems.obtenirTotsElsElements().entrySet()) {
+            itemsActuals.afegir(x.getValue());
+        }
         // carrega un conjunt d'items
         // pero no el selecciona
     }
 
     public void esborrarTotsElsItems() {
         // TODO
-        // hi ha un tipus d'ítem seleccionat pero millor comprovar
-        // esborra tots els items del tipus d'ítem seleccionat
+        itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
 
     public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
@@ -374,13 +385,22 @@ public class ControladorDomini {
         return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
     }
 
-    public void importarUsuaris(String absolutePath) throws Exception{
+    public ArrayList<String> importarUsuaris(String absolutePath) throws Exception {
         ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(absolutePath);
         ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris(llistaUsuaris);
         ArrayList<Usuari> llista = conjuntUsuaris.obtenirUsuaris();
 
+        ArrayList<String> idsNoInclosos = new ArrayList<>();
         for (Usuari usuari : llista) {
-            estatPrograma.afegirUsuari(usuari);
+            if (!estatPrograma.conteUsuari(usuari.obtenirId())) {
+                estatPrograma.afegirUsuari(usuari);
+            }
+
+            else {
+                idsNoInclosos.add(String.valueOf(usuari.obtenirId().obtenirValor()));
+            }
         }
+
+        return idsNoInclosos;
     }
 }

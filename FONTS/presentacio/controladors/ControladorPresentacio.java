@@ -193,7 +193,7 @@ public class ControladorPresentacio {
         return controladorDomini.obteUsuaris();
     }
 
-    public void importarUsuaris(String absolutePath) throws Exception{
-        controladorDomini.importarUsuaris(absolutePath);
+    public ArrayList<String> importarUsuaris(String absolutePath) throws Exception{
+        return controladorDomini.importarUsuaris(absolutePath);
     }
 }
