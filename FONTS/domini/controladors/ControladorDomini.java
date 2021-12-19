@@ -2,10 +2,12 @@ package domini.controladors;
 
 import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
+import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.csv.TaulaCSV;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,16 +24,21 @@ public class ControladorDomini {
 
     private final Programa estatPrograma;
     private int ultimIdUsat = 1000000;
+    private int ultimIdUsatItem = 0;
     private String nomTipusItemActual = null;
     private ConjuntValoracions valoracionsTipusItemActual = null;
     private ConjuntItems itemsActuals = null;
 
-    private ControladorDomini() {
+    private ControladorDomini() throws IOException {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
         estatPrograma = Programa.obtenirInstancia();
+        ArrayList<String> llistaTipusItems = controladorPersistencia.obtenirNomsDeTotsElsTipusItems();
+        for (String tipusItem : llistaTipusItems) {
+            this.carregarTipusItemLocal(tipusItem);
+        }
     }
 
-    public static ControladorDomini obtenirInstancia() {
+    public static ControladorDomini obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorDomini();
         }
@@ -91,6 +98,12 @@ public class ControladorDomini {
             ultimIdUsat++;
         }
         return new Id(ultimIdUsat, true);
+    }
+    private Id obteIdItemDisponible() {
+        while (itemsActuals.conte(new Id(ultimIdUsatItem, true))) {
+            ultimIdUsatItem++;
+        }
+        return new Id(ultimIdUsatItem, true);
     }
     /**
      * Afegeix un Usuari que encara no existeix.
@@ -174,6 +187,19 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
+
+    public void carregarTipusItemLocal(String nom) throws IOException {
+        ArrayList<ArrayList<String>> definicio = controladorPersistencia.obtenirTipusItem(nom);
+        TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
+        for (var fila : definicio) {
+            tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
+        }
+        TipusItem tipus = new TipusItem(nom, tipusAtributs);
+        nomTipusItemActual = nom;
+        estatPrograma.afegirTipusItem(nom, tipus);
+        controladorPersistencia.guardarTipusItem(definicio, nom);
+    }
+
     // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException {
         if (estatPrograma.conteTipusItem(nom)) {
@@ -192,7 +218,7 @@ public class ControladorDomini {
 
     /** Retorna els noms dels conjunts d'items coneguts**/
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
-        return controladorPersistencia.obtenirNomsDeTotsElsTipusItems();
+        return estatPrograma.obteTipusItem();
     }
 
     public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
@@ -207,8 +233,6 @@ public class ControladorDomini {
     public boolean esSessioIniciada() {
         return estatPrograma.isSessioIniciada();
     }
-
-    // TODO: Pablo
 
     /**
      *
@@ -251,19 +275,14 @@ public class ControladorDomini {
         valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
-    // TODO: Pablo
     public ArrayList<ArrayList<String>> obtenirItems() {
-        // TODO
-        // retorna una llista d'items
-        // cada item es una arraylist amb els atributs
-        // la primera columna ha de tenir l'id de l'item
-        return new ArrayList<>();
+        ArrayList<ArrayList<String>> res = itemsActuals.converteixAArray();
+        res.remove(0);
+        return res;
     }
 
-    // TODO: Pablo
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
-        // TODO
-        return new ArrayList<>();
+        return new ArrayList<String>(estatPrograma.obteTipusItem(nomTipusItemActual).obtenirTipusAtributs().keySet());
     }
 
     public boolean existeixTipusItemSeleccionat() {
@@ -271,13 +290,24 @@ public class ControladorDomini {
     }
 
     // TODO: Pablo
-    public boolean afegirItem(Map<String, String> valorsAtributs) {
+    public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
         // TODO
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // retorna false si no s'ha pogut fer i cert si tot esta be
+        TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
+        TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
+        for(var x : tipusItem.obtenirTipusAtributs().entrySet()) {
+            String valor = valorsAtributs.get(x.getKey());
+            Class<? extends ValorAtribut> clase = x.getValue().obtenirValorAtribut().getClass();
+            Constructor<?> ctor = clase.getConstructor(String.class);
+            Object object = ctor.newInstance(valor);
+            atributs.put(x.getKey(), clase.cast(object));
+        }
+        Item item = new Item(obteIdItemDisponible(), tipusItem, atributs, new HashMap<>());
 
-        return false;
+        itemsActuals.afegir(item);
+        return true;
     }
 
     // TODO: Pablo, s'han de borrar les seves valoracions!!!!
@@ -324,7 +354,6 @@ public class ControladorDomini {
     }
 
     public void esborrarTotsElsItems() {
-        // TODO
         itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
 

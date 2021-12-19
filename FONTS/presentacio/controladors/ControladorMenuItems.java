@@ -6,6 +6,7 @@ import presentacio.vistes.VistaMenuItems;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class ControladorMenuItems {
     private ControladorMenuItems () {
     }
 
-    public static ControladorMenuItems obtenirInstancia() {
+    public static ControladorMenuItems obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorMenuItems();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
@@ -40,7 +41,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public boolean afegirItem(Map<String, String> valorsAtributs) {
+    public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
 
@@ -82,7 +83,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems() {
+    public void carregarConjuntItems() throws Exception {
         JDialog dialegFitxer = new JDialog();
         JFileChooser selectorFitxer = new JFileChooser();
         int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
