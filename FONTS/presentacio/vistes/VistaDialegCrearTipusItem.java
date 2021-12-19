@@ -94,9 +94,13 @@ public class VistaDialegCrearTipusItem extends JDialog {
             try {
                 controladorMenuTipusItem.crearTipusItem(nom, nomAValorAtribut);
             } catch (IllegalArgumentException e1) {
-                // TODO (maria): catch
+                JOptionPane.showMessageDialog(this,
+                        "Ja existeix un tipus d'ítem amb aquest nom.");
+                return;
             } catch (IOException e2) {
-
+                JOptionPane.showMessageDialog(this,
+                        "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
+                return;
             }
             dispose();
         });

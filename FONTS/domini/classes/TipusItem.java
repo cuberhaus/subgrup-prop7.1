@@ -155,7 +155,7 @@ public class TipusItem {
     /**
      * @return Una fila per cada Atribut, en l'ordre: nom, valor, distancia
      */
-    public ArrayList<ArrayList<String>> converteixAArray() {
+    public ArrayList<ArrayList<String>> convertirAArrayList() {
         ArrayList<ArrayList<String>> out = new ArrayList<>();
         for (var x : tipusAtributs.entrySet()) {
             ArrayList<String> fila = new ArrayList<>();

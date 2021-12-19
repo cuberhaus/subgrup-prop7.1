@@ -93,8 +93,8 @@ public class ControladorPresentacio {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
-    public void carregarTipusItem(String rutaAbsoluta, String nom) throws IOException {
-        controladorDomini.carregarTipusItem(rutaAbsoluta, nom);
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException {
+        controladorDomini.carregarTipusItem(nom, rutaAbsoluta);
     }
 
     public boolean esSessioIniciada() {

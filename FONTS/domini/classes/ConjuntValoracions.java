@@ -107,14 +107,14 @@ public class ConjuntValoracions {
      *
      * @return El resultat és el conjunt de valoracions
      */
-    public TreeMap<Pair<Usuari, Item>, Valoracio> obteTotesValoracions() {
+    public TreeMap<Pair<Usuari, Item>, Valoracio> obtenitTotesLesValoracions() {
         return valoracions;
     }
 
     /**
      * @return Retorna UsuariId, ItemId, valoracio
      */
-    public ArrayList<ArrayList<String>> pasarAArray() {
+    public ArrayList<ArrayList<String>> convertirAArrayList() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         res.add(capsalera);
         for(var x : valoracions.entrySet()) {
