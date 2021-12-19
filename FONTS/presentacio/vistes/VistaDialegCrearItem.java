@@ -4,6 +4,7 @@ import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class VistaDialegCrearItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegCrearItem() {
+    public VistaDialegCrearItem() throws IOException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegCrearItem();
@@ -71,9 +72,14 @@ public class VistaDialegCrearItem extends JDialog {
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
-            if (!controladorMenuItems.afegirItem(valorsAtributs)) {
-                JOptionPane.showMessageDialog(this, "No s'ha pogut crear un ítem amb els valors donats.");
-                return;
+            try {
+                if (!controladorMenuItems.afegirItem(valorsAtributs)) {
+                    JOptionPane.showMessageDialog(this, "No s'ha pogut crear un ítem amb els valors donats.");
+                    return;
+                }
+            } catch (Exception ex) {
+                // TODO catch
+                ex.printStackTrace();
             }
             JOptionPane.showMessageDialog(this, "Ítem creat amb èxit.");
             dispose();
