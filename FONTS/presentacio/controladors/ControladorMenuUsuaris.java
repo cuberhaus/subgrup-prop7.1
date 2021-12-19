@@ -27,6 +27,7 @@ public class ControladorMenuUsuaris {
     /**
      * Constructora de ControladorMenuUsuaris
      * Crea una instància única de ControladorMenuUsuaris
+     *
      * @return <code> ControladorMenuUsuaris </code>
      */
     public static ControladorMenuUsuaris obtenirInstancia() throws IOException {
@@ -52,7 +53,8 @@ public class ControladorMenuUsuaris {
 
     /**
      * S'intenta iniciar la sessió amb les dades donades
-     * @param id id amb el que volem iniciar sessió
+     *
+     * @param id          id amb el que volem iniciar sessió
      * @param contrasenya contrasenya amb què intentem iniciar la sessió
      * @return True si la sessió hem pogut iniciar sessió
      * @throws Exception No s'ha pogut iniciar sessió
@@ -81,19 +83,21 @@ public class ControladorMenuUsuaris {
 
     /**
      * Afegir un Usuari al conjunt
-     * @param nom de l'usuari
+     *
+     * @param nom         de l'usuari
      * @param contrasenya de l'usuari
      * @return retorna l'id de l'usuari
      * @throws Exception no s'ha pogut crear l'usuari
      */
     public int afegirUsuari(String nom, String contrasenya) throws Exception {
         int id = controladorPresentacio.afegirUsuari(nom, contrasenya);
-        JOptionPane.showMessageDialog(vistaMenuUsuaris,"S'ha creat correctament l'usuari: " + id);
+        JOptionPane.showMessageDialog(vistaMenuUsuaris, "S'ha creat correctament l'usuari: " + id);
         return id;
     }
 
     /**
      * Esborra un usuari del conjunt si és actiu i l'id és correcte
+     *
      * @param id id de l'usuari
      * @throws Exception No s'ha pogut crear l'usuari
      */
@@ -107,27 +111,27 @@ public class ControladorMenuUsuaris {
                     JOptionPane.showMessageDialog(vistaMenuUsuaris, "L'usuari no existeix");
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }
     }
 
     /**
      * Tanca la sessió
+     *
      * @throws Exception No s'ha pogut tancar la sessió
      */
-    public void tancarSessio() throws Exception{
+    public void tancarSessio() throws Exception {
         try {
             controladorPresentacio.tancarSessio();
-        }
-        catch(Exception e) {
-            JOptionPane.showMessageDialog(vistaMenuUsuaris,"La sessió ja és tancada");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, "La sessió ja és tancada");
         }
     }
 
     /**
      * Exporta un conjunt d'usuaris en l'arxiu descrit per absolutePath
+     *
      * @param absolutePath path on es crea l'arxiu
      * @throws IOException No s'ha pogut exportar l'arxiu
      */
@@ -144,25 +148,47 @@ public class ControladorMenuUsuaris {
 
     /**
      * Retorna tots els usuaris del conjunt d'usuaris
+     *
      * @return Conjunt d'usuaris
      */
     public ArrayList<ArrayList<String>> obteUsuaris() {
         return controladorPresentacio.obteUsuaris();
     }
 
-    public void importarUsuaris(String absolutePath) throws Exception{
-       ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
-       if (usuarisNoInicialitzats != null) {
-            JOptionPane.showMessageDialog(vistaMenuUsuaris,"Aquests usuaris no s'han pogut inicialitzar"+usuarisNoInicialitzats);
-       }
+    /**
+     * Importa un conjunt d'usuaris des de un arxiu extern
+     *
+     * @param absolutePath path de l'arxiu des d'on s'obtenen les dades
+     * @throws Exception No s'ha pogut importar l'arxiu
+     */
+    public void importarUsuaris(String absolutePath) throws Exception {
+        ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
+        if (usuarisNoInicialitzats != null) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, "Aquests usuaris no s'han pogut inicialitzar" + usuarisNoInicialitzats);
+        }
     }
 
+    /**
+     * Canvia la contrasenya de l'usuari amb l'id donat
+     *
+     * @param id              identificador de l'usuari
+     * @param novaContrasenya nova contrasenya de l'usuari
+     * @throws Exception No s'ha pogut canviar la contrasenya de l'usuari
+     */
     public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
         //TODO: comprovar id es valid
-        controladorPresentacio.canviaContrasenyaUsuari(id,novaContrasenya);
+        controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
     }
+
+    /**
+     * Canvia el nom de l'usuari amb l'id donat
+     *
+     * @param id     identificador de l'usuari
+     * @param nouNom nou nom de l'usuari
+     * @throws Exception No s'ha pogut canviar el nom de l'usuari
+     */
     public void canviaNomUsuari(String id, String nouNom) throws Exception {
         //TODO: comprovar id es valid
-        controladorPresentacio.canviaNomUsuari(id,nouNom);
+        controladorPresentacio.canviaNomUsuari(id, nouNom);
     }
 }
