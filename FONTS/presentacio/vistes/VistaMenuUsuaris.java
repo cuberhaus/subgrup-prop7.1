@@ -44,9 +44,19 @@ public class VistaMenuUsuaris extends JPanel {
     private static JButton importarButton;
     private static JButton editarUsuariButton;
 
+    /**
+     * Constructora per defecte de VistaMenuUsuaris
+     */
     private VistaMenuUsuaris() {
     }
 
+    /**
+     * Constructora de VistaMenuUsuaris
+     * Crea una instància única de VistaMenuUsuaris
+     *
+     * @return <code> ControladorMenuUsuaris</code>
+     * @throws IOException No s'ha pogut obtenir la instancia de VistaMenuUsuaris
+     */
     public static VistaMenuUsuaris obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new VistaMenuUsuaris();
@@ -57,6 +67,9 @@ public class VistaMenuUsuaris extends JPanel {
         return instancia;
     }
 
+    /**
+     * Inicialitza la Llista d'usuaris
+     */
     private static void inicialitzarLlistaUsuaris() {
         ArrayList<String> nomsColumnes = new ArrayList<>();
         nomsColumnes.add("Nom");
@@ -73,6 +86,9 @@ public class VistaMenuUsuaris extends JPanel {
         instancia.add(jScrollPane, BorderLayout.WEST);
     }
 
+    /**
+     * Sobreescriu la taula d'usuaris amb el conjunt d'usuaris del domini
+     */
     private static void actualitzarLlistaUsuaris() {
         llistaUsuarisTableModel.setRowCount(0);
         ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();
@@ -83,23 +99,25 @@ public class VistaMenuUsuaris extends JPanel {
         jScrollPane.revalidate();
     }
 
+    /**
+     * Esborra el text de tots els camps de text
+     */
     private static void clearText() {
         idText.setText("");
         passwordField.setText("");
         nomText.setText("");
     }
 
+    /**
+     * Inicialitza objectes del menu Usuaris
+     */
     private static void inicialitzarMenuUsuaris() {
         gridBagLayout = new GridBagLayout();
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(10, 10, 10, 10); // Afegeix padding perquè els elements no estiguin massa junts
-
         jpanel = new JPanel();
         jpanel.setLayout(gridBagLayout);
-
         jFileChooser = new JFileChooser();
-        jFileChooser.addActionListener(e -> {
-        });
 
         // Inicialitza tots els elements
         editarUsuariButton();
