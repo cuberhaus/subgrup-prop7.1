@@ -182,6 +182,9 @@ public class ControladorPresentacio {
     }
 
     public ArrayList<ArrayList<String>> obtenirValoracions() {
+        if (!controladorDomini.existeixTipusItemSeleccionat()) {
+            return new ArrayList<>();
+        }
         return controladorDomini.obtenirValoracions();
     }
 
