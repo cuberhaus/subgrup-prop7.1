@@ -196,4 +196,12 @@ public class ControladorPresentacio {
     public ArrayList<String> importarUsuaris(String absolutePath) throws Exception{
         return controladorDomini.importarUsuaris(absolutePath);
     }
+
+    public void canviaContrasenyaUsuari(String id, String novaContrasenya) throws Exception {
+        controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
+    }
+
+    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+        controladorDomini.canviaNomUsuari(id,nouNom);
+    }
 }

@@ -8,6 +8,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
@@ -42,6 +44,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static BorderLayout borderLayout;
     private static JPanel jpanel;
     private static JButton importarButton;
+    private static JButton editarUsuariButton;
 
     private VistaMenuUsuaris() {
     }
@@ -93,6 +96,25 @@ public class VistaMenuUsuaris extends JPanel {
 
         jpanel = new JPanel();
         jpanel.setLayout(gridBagLayout);
+
+        editarUsuariButton = new JButton("Editar");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        jpanel.add(editarUsuariButton, gridBagConstraints);
+        editarUsuariButton.addActionListener(e-> {
+            try {
+                controladorMenuUsuaris.canviaNomUsuari(idText.getText(),nomText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                controladorMenuUsuaris.canviaContrasenyaUsuari(idText.getText(), Arrays.toString(contrasenyaText.getPassword()));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            actualitzarLlistaUsuaris();
+            clearText();
+        });
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
