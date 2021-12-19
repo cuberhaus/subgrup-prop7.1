@@ -271,6 +271,7 @@ public class ControladorDomini {
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // retorna false si no s'ha pogut fer i cert si tot esta be
+
         return false;
     }
 
