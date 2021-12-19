@@ -453,10 +453,12 @@ public class ControladorDomini {
 
         else {
             if (!novaContrasenya.isBlank()) {
+                System.out.println(estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
                 estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
             }
         }
 
+        System.out.println(estatPrograma.obtenirUsuari(idUsuari).obteContrasenya());
         return estatPrograma.obtenirUsuari(idUsuari).obteContrasenya();
     }
 
