@@ -211,7 +211,6 @@ public class ControladorDomini {
         controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV());
     }
 
-    // TODO: Pablo
     public void esborraConjuntUsuaris() {
         estatPrograma.esborraTotsUsuaris();
     }
@@ -239,7 +238,7 @@ public class ControladorDomini {
         ArrayList<ArrayList<String>> valoracions_raw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
         ArrayList<ArrayList<String>> items_raw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
         TaulaCSV taulaItems = new TaulaCSV(items_raw);
-        itemsActuals = new ConjuntItems(nomTipusItem, taulaItems);
+        itemsActuals = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
         valoracionsTipusItemActual = new ConjuntValoracions();
         TaulaCSV taula_valoracions = new TaulaCSV(valoracions_raw);
         valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
@@ -305,16 +304,20 @@ public class ControladorDomini {
         return false;
     }
 
-    public void carregarConjuntItems(String rutaAbsoluta) {
-        // TODO
+    public void carregarConjuntItems(String rutaAbsoluta) throws Exception {
+        ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
+        TaulaCSV taulaItems = new TaulaCSV(items);
+        ConjuntItems nousItems = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
+        for (var x : nousItems.obtenirTotsElsElements().entrySet()) {
+            itemsActuals.afegir(x.getValue());
+        }
         // carrega un conjunt d'items
         // pero no el selecciona
     }
 
     public void esborrarTotsElsItems() {
         // TODO
-        // hi ha un tipus d'ítem seleccionat pero millor comprovar
-        // esborra tots els items del tipus d'ítem seleccionat
+        itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
 
     public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
