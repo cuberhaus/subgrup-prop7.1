@@ -131,7 +131,6 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             usuaris.clear();
         }
 
-
         resultat.add(usuaris);
         return resultat;
     }
