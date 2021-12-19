@@ -404,11 +404,25 @@ public class ControladorDomini {
         return idsNoInclosos;
     }
 
-    public void canviaContrassenya(String id, String novaContrassenya) {
+    public void canviaContrasenya(String id, String novaContrassenya) throws Exception {
+        Id idUsuari = new Id(Integer.parseInt(id), true);
+        if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
+            throw new Exception("L'id d'usuari seleccionat no existeix");
+        }
 
+        else {
+            estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrassenya);
+        }
     }
 
-    public void canviaNom(String id, String nouNom) {
+    public void canviaNom(String id, String nouNom) throws Exception {
+        Id idUsuari = new Id(Integer.parseInt(id), true);
+        if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
+            throw new Exception("L'id d'usuari seleccionat no existeix");
+        }
 
+        else {
+            estatPrograma.obtenirUsuari(idUsuari).setNom(nouNom);
+        }
     }
 }
