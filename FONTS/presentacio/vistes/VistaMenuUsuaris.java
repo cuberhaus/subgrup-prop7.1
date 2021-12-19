@@ -106,11 +106,13 @@ public class VistaMenuUsuaris extends JPanel {
                 controladorMenuUsuaris.canviaNomUsuari(idText.getText(),nomText.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
             try {
                 controladorMenuUsuaris.canviaContrasenyaUsuari(idText.getText(), contrasenyaText.getPassword());
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
             actualitzarLlistaUsuaris();
             clearText();
@@ -131,6 +133,7 @@ public class VistaMenuUsuaris extends JPanel {
                     actualitzarLlistaUsuaris();
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
                 }
             }
         });
@@ -152,9 +155,6 @@ public class VistaMenuUsuaris extends JPanel {
 
         nomText = new JTextField();
         nomText.setColumns(10);
-        nomText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
-        });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         jpanel.add(nomText, gridBagConstraints);
@@ -166,9 +166,6 @@ public class VistaMenuUsuaris extends JPanel {
 
         idText = new JTextField();
         idText.setColumns(10);
-        idText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
-        });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         jpanel.add(idText, gridBagConstraints);
@@ -180,9 +177,6 @@ public class VistaMenuUsuaris extends JPanel {
 
         contrasenyaText = new JPasswordField();
         contrasenyaText.setColumns(10);
-        contrasenyaText.addActionListener(e -> {
-            // Al pitjar enter fa una acció
-        });
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         jpanel.add(contrasenyaText, gridBagConstraints);
@@ -191,11 +185,12 @@ public class VistaMenuUsuaris extends JPanel {
         afegirUsuari.addActionListener(e -> {
             try {
                 int id = controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(contrasenyaText.getPassword()));
-                llistaUsuarisTableModel.addRow(new String[]{nomText.getText(), String.valueOf(id), String.valueOf(true)});
+                actualitzarLlistaUsuaris();
                 jScrollPane.revalidate();
                 clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -210,6 +205,7 @@ public class VistaMenuUsuaris extends JPanel {
                 clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -225,6 +221,7 @@ public class VistaMenuUsuaris extends JPanel {
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
@@ -237,6 +234,7 @@ public class VistaMenuUsuaris extends JPanel {
                 controladorMenuUsuaris.tancarSessio();
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
             usuariActiuInfo.setText("Sessio no iniciada");
         });
@@ -261,6 +259,7 @@ public class VistaMenuUsuaris extends JPanel {
                     controladorMenuUsuaris.exportarConjuntUsuaris(pathConjunt.getAbsolutePath());
                 } catch (IOException ex) {
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
                 }
             }
         });

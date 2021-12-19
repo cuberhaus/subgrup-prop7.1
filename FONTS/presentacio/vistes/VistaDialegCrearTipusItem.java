@@ -68,6 +68,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
 
         JButton botoCrearTipusItem = new JButton("Crea tipus d'ítem");
         botoCrearTipusItem.addActionListener(e -> {
+            // TODO (maria): comprovar que les distàncies són compatibles amb el valor atribut
             String nom = nomTipusItem.getText();
             if (nom.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "El tipus d'ítem ha de tenir un nom.");
@@ -80,12 +81,10 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 if (nomTipusAtribut.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
                             "No pot haver-hi un tipus d'atribut sense nom.");
-                    return;
                 }
                 if (nomAValorAtribut.containsKey(nomTipusAtribut)) {
                     JOptionPane.showMessageDialog(this,
                             "No pot haver-hi dos tipus d'atributs amb el mateix nom.");
-                    return;
                 }
                 String valorTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(3)).getSelectedItem();
                 String distanciaTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(5)).getSelectedItem();
@@ -93,16 +92,14 @@ public class VistaDialegCrearTipusItem extends JDialog {
             }
             try {
                 controladorMenuTipusItem.crearTipusItem(nom, nomAValorAtribut);
+                dispose();
             } catch (IllegalArgumentException e1) {
                 JOptionPane.showMessageDialog(this,
                         "Ja existeix un tipus d'ítem amb aquest nom.");
-                return;
             } catch (IOException e2) {
                 JOptionPane.showMessageDialog(this,
                         "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
-                return;
             }
-            dispose();
         });
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         panellCrearTipusItem.add(botoCrearTipusItem);
