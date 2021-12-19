@@ -188,4 +188,8 @@ public class ControladorPresentacio {
     public ArrayList<ArrayList<String>> obteUsuaris() {
         return controladorDomini.obteUsuaris();
     }
+
+    public void importarUsuaris(String absolutePath) {
+        controladorDomini.importarUsuaris(absolutePath);
+    }
 }

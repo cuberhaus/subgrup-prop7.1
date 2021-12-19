@@ -366,4 +366,8 @@ public class ControladorDomini {
     public ArrayList<ArrayList<String>> obteUsuaris() {
         return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
     }
+
+    public void importarUsuaris(String absolutePath) {
+
+    }
 }

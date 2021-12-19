@@ -112,4 +112,8 @@ public class ControladorMenuUsuaris {
     public ArrayList<ArrayList<String>> obteUsuaris() {
         return controladorPresentacio.obteUsuaris();
     }
+
+    public void importarUsuaris(String absolutePath) {
+        controladorPresentacio.importarUsuaris(absolutePath);
+    }
 }

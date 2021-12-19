@@ -41,6 +41,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static DefaultTableModel llistaUsuarisTableModel;
     private static BorderLayout borderLayout;
     private static JPanel jpanel;
+    private static JButton importarButton;
 
     private VistaMenuUsuaris() {
     }
@@ -68,8 +69,6 @@ public class VistaMenuUsuaris extends JPanel {
         llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount()-1);
         llistaUsuaris = new JTable(llistaUsuarisTableModel);
         jScrollPane = new JScrollPane(llistaUsuaris);
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
         instancia.add(jScrollPane, BorderLayout.WEST);
     }
 
@@ -90,6 +89,20 @@ public class VistaMenuUsuaris extends JPanel {
 
         jpanel = new JPanel();
         jpanel.setLayout(gridBagLayout);
+
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        importarButton = new JButton("Importar usuaris");
+        jpanel.add(importarButton, gridBagConstraints);
+        importarButton.addActionListener(e-> {
+            JDialog pathDialog = new JDialog();
+            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
+            if (estatJfile == APPROVE_OPTION) {
+                File pathConjunt = jFileChooser.getSelectedFile();
+                controladorMenuUsuaris.importarUsuaris(pathConjunt.getAbsolutePath());
+            }
+        });
 
         usuariActiuLabel = new JLabel("Usuari actiu:");
         gridBagConstraints.gridx = 0;
