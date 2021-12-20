@@ -128,10 +128,17 @@ public class ConjuntValoracions {
         return res;
     }
 
+    /**
+     * Esborra totes les valoracions del conjunt de valoracions
+     */
     public void esborraTotesLesValoracions() {
         valoracions.clear();
     }
 
+    /**
+     * Esborra totes les valoracions on apareix l'ítem amb l'identificador donat
+     * @param idItem identificador de l'ítem
+     */
     public void esborraValoracionsItem(Id idItem) {
         Set<Pair<Usuari, Item>> setEntrades = valoracions.keySet();
 

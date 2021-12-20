@@ -163,8 +163,15 @@ public class Programa {
         conjuntUsuaris.esborrar(id);
     }
 
+    /**
+     * Esborra tots els usuaris del conjunt d'usuaris
+     */
     public void esborraTotsUsuaris() {conjuntUsuaris.esborrarTotsUsuaris();}
 
+    /**
+     * Obté un arrayList de tipusItems del Programa
+     * @return arrayList de tipusItems
+     */
     public ArrayList<String> obteTipusItem() {
         return new ArrayList<>(tipusItems.keySet());
     }
