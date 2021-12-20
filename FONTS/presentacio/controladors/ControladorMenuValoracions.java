@@ -54,7 +54,7 @@ public class ControladorMenuValoracions {
     /**
      * Comprova que un id és un valor natural, si no ho és llença una excepció 0 no inclòs
      * @param id identificador
-     * @throws Exception el id no és vàlid
+     * @throws Exception l'id no és vàlid
      */
     public void idUsuariEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
@@ -67,7 +67,7 @@ public class ControladorMenuValoracions {
     /**
      * Comprova que un id és un valor natural, si no ho és llença una excepció 0 no inclòs
      * @param id identificador
-     * @throws Exception el id no és vàlid
+     * @throws Exception l'id no és vàlid
      */
     public void idItemEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
