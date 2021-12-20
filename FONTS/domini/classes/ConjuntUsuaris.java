@@ -19,6 +19,10 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     }
 
     //user nom password actiu
+    /**
+     * Constructora de ConjuntUsuaris donada una llista d'usuaris
+     * @param llistaUsuaris llista d'usuaris amb la que s'inicialitza el conjunt
+     */
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();
         llistaUsuaris.remove(0);
@@ -115,11 +119,14 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             usuaris.clear();
         }
 
-
         resultat.add(usuaris);
         return resultat;
     }
 
+    /**
+     * Retorna una llista amb tots els usuaris i els seus atributs
+     * @return Llista amb tots els usuaris
+     */
     public ArrayList<ArrayList<String>> obtenirLlistaUsuaris() {
         ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         ArrayList<String> usuaris = new ArrayList<>();
@@ -137,6 +144,9 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         return resultat;
     }
 
+    /**
+     * Modificadora que canvia l'estat de tots els usuaris a no actius
+     */
     public void esborrarTotsUsuaris() {
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {
