@@ -169,9 +169,8 @@ public class VistaMenuValoracions extends JPanel {
                         JOptionPane.showMessageDialog(instancia, "La valoració no existeix");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+                    JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat");
                 }
-                controladorMenuValoracions.editarValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(instancia, ex.getMessage());
@@ -185,14 +184,19 @@ public class VistaMenuValoracions extends JPanel {
     private static void esborrarTotesLesValoracionsButton() {
         esborrarTotesLesValoracionsButton = new JButton("Esborra totes les valoracions");
         esborrarTotesLesValoracionsButton.addActionListener(e -> {
-            if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
-                int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar totes les valoracions", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
-                if (resposta == 0) {
-                    controladorMenuValoracions.esborrarTotesLesValoracions();
-                    JOptionPane.showMessageDialog(instancia, "S'han esborrat les valoracions amb èxit");
+            try {
+                if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
+                    int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar totes les valoracions", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
+                    if (resposta == 0) {
+                        controladorMenuValoracions.esborrarTotesLesValoracions();
+                        JOptionPane.showMessageDialog(instancia, "S'han esborrat les valoracions amb èxit");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+
+            } catch(Exception ex) {
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
