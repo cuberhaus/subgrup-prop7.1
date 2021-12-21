@@ -1,9 +1,6 @@
 package presentacio.vistes;
 
-import excepcions.AccesAEstatIncorrecteException;
-import excepcions.NoExisteixElementException;
-import excepcions.NomInternIncorrecteException;
-import excepcions.UsuariIncorrecteException;
+import excepcions.*;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -118,11 +115,13 @@ public class VistaMenuTipusItem extends JPanel {
                             tipusItemsComboBoxModel.removeAllElements();
                             tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
                             JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
-                        } catch (Exception e1) {
+                        } catch (JaExisteixElementException e1) {
+                            JOptionPane.showMessageDialog(instancia,
+                                    "Ja existeix un tipus d'ítem amb el nom indicat.");
+                        } catch (Exception e2) {
                             JOptionPane.showMessageDialog(instancia,
                                     "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
                         }
-                        // TODO (maria): mirar exception especial quan ja n'existeix un amb aquest nom
                     }
                 }
             }
@@ -156,15 +155,10 @@ public class VistaMenuTipusItem extends JPanel {
                         botoVeureTipusItem.setEnabled(true);
                         botoEditarTipusItem.setEnabled(true);
                     }
-                } catch (NoExisteixElementException ex) {
-                    // TODO: catch it
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (AccesAEstatIncorrecteException ex) {
-                    ex.printStackTrace();
-                } catch (UsuariIncorrecteException ex) {
-                    ex.printStackTrace();
+                } catch (Exception e1) {
+                    System.out.println(e1.getMessage());
+                    JOptionPane.showMessageDialog(instancia,
+                            "No s'ha pogut seleccionar el tipus d'ítem. Torna-ho a intentar.");
                 }
             } else {
                 JOptionPane.showMessageDialog(instancia,

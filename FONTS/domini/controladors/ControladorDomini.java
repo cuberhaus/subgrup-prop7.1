@@ -364,12 +364,19 @@ public class ControladorDomini {
         nomTipusItemActual = nomTipusItem;
         // TODO (edgar): treure barra baixes! i revisar si n'hi ha més
         // TODO (edgar): no funciona però l'ítem existeix
+        System.out.println("ole");
         ArrayList<ArrayList<String>> valoracionsEnBrut = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
+        System.out.println("holi");
         ArrayList<ArrayList<String>> itemsEnBrut = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
+        System.out.println("hola2");
         TaulaCSV taulaItems = new TaulaCSV(itemsEnBrut);
+        System.out.println("hola3");
         itemsActuals = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
+        System.out.println("hola");
         valoracionsTipusItemActual = new ConjuntValoracions();
+        System.out.println("adeu");
         TaulaCSV taulaValoracions = new TaulaCSV(valoracionsEnBrut);
+        System.out.println("siau");
         valoracionsTipusItemActual.afegir(taulaValoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
@@ -681,6 +688,6 @@ public class ControladorDomini {
      */
     public void exportaValoracions(String absolutePath) throws IOException {
         Date today = Calendar.getInstance().getTime();
-        controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today.toString());
+        controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today);
     }
 }

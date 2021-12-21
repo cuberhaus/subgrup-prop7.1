@@ -39,7 +39,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException, NomInternIncorrecteException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException, NomInternIncorrecteException, JaExisteixElementException {
         Map<String, Pair<String, String>> nomAValorAtributAmbFormat = new TreeMap<>();
         for (Map.Entry<String, Pair<String, String>> atribut : nomAValorAtribut.entrySet()) {
             String valorAtribut;

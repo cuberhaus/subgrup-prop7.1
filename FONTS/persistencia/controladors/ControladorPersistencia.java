@@ -119,8 +119,9 @@ public class ControladorPersistencia {
     }
     public ArrayList<ArrayList<String>> obtenirConjuntItems(String tipusItem, String nom) throws IOException {
         nom += ".csv";
-        if(!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom)))
-            return null;
+        if (!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom))) {
+            return new ArrayList<>();
+        }
         return lector.llegirCSV(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom).toString());
     }
     public void borrarConjuntItems( String tipusItem, String nom) throws IOException {
