@@ -3,6 +3,7 @@ package domini.classes.recomanador.metode_recomanador;
 import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import excepcions.NoExisteixElementException;
+import utilitats.Pair;
 
 import java.util.Map;
 

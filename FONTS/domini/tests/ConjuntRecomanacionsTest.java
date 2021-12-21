@@ -1,7 +1,7 @@
 package domini.tests;
 
 import domini.classes.Id;
-import domini.classes.Pair;
+import utilitats.Pair;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.Recomanacio;
 import org.junit.Test;

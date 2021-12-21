@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import domini.classes.Pair;
+import utilitats.Pair;
 import excepcions.*;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;

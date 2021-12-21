@@ -10,6 +10,7 @@ import domini.classes.recomanador.filtre.FiltreExclusiu;
 import domini.classes.recomanador.filtre.FiltreInclusiu;
 import excepcions.*;
 import persistencia.controladors.ControladorPersistencia;
+import utilitats.Pair;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;

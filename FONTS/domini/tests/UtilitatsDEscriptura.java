@@ -3,8 +3,8 @@ package domini.tests;
 import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
-import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.UsuariIncorrecteException;
+import utilitats.Pair;
 
 import java.util.*;
 

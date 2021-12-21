@@ -204,7 +204,6 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
             if (valoracions.containsKey(item)) {
                 res.add(valoracions.get(item).obtenirValor());
             } else res.add(-1.);
-            // TODO: -1 per denotar que no esta vist. Potser seria millor agafar la mitjana
         }
         return res;
     }

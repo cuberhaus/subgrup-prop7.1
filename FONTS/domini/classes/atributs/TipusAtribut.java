@@ -37,7 +37,6 @@ public class TipusAtribut {
     public TipusAtribut(String valor, String distancia) throws NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
-        // TODO: crear excepcions pròpies
         if (this.valorAtribut == null || this.distancia == null) {
             throw new NomInternIncorrecteException("El ValorAtribut o Distancia demanats no existeixen.");
         }
@@ -61,43 +60,28 @@ public class TipusAtribut {
     }
 
     private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
-        switch (valorAtribut) {
-            case "ValorBoolea":
-                return new ValorBoolea();
-            case "ValorCategoric":
-                return new ValorCategoric();
-            case "ValorNumeric":
-                return new ValorNumeric();
-            case "ValorTextual":
-                return new ValorTextual();
-            case "ValorConjuntBoolea":
-                return new ValorConjuntBoolea();
-            case "ValorConjuntCategoric":
-                return new ValorConjuntCategoric();
-            case "ValorConjuntNumeric":
-                return new ValorConjuntNumeric();
-            case "ValorConjuntTextual":
-                return new ValorConjuntTextual();
-            default:
-                return null;
-        }
+        return switch (valorAtribut) {
+            case "ValorBoolea" -> new ValorBoolea();
+            case "ValorCategoric" -> new ValorCategoric();
+            case "ValorNumeric" -> new ValorNumeric();
+            case "ValorTextual" -> new ValorTextual();
+            case "ValorConjuntBoolea" -> new ValorConjuntBoolea();
+            case "ValorConjuntCategoric" -> new ValorConjuntCategoric();
+            case "ValorConjuntNumeric" -> new ValorConjuntNumeric();
+            case "ValorConjuntTextual" -> new ValorConjuntTextual();
+            default -> null;
+        };
     }
 
     private static Distancia distanciaDesDelNom(String distancia) {
-        switch (distancia) {
-            case "DistanciaDiferenciaDeConjunts":
-                return new DistanciaDiferenciaDeConjunts();
-            case "DistanciaDiscreta":
-                return new DistanciaDiscreta();
-            case "DistanciaEuclidiana":
-                return new DistanciaEuclidiana();
-            case "DistanciaLevenshtein":
-                return new DistanciaLevenshtein();
-            case "DistanciaZero":
-                return new DistanciaZero();
-            default:
-                return null;
-        }
+        return switch (distancia) {
+            case "DistanciaDiferenciaDeConjunts" -> new DistanciaDiferenciaDeConjunts();
+            case "DistanciaDiscreta" -> new DistanciaDiscreta();
+            case "DistanciaEuclidiana" -> new DistanciaEuclidiana();
+            case "DistanciaLevenshtein" -> new DistanciaLevenshtein();
+            case "DistanciaZero" -> new DistanciaZero();
+            default -> null;
+        };
     }
     
     /**

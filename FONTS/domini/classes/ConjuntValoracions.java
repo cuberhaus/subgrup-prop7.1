@@ -4,6 +4,7 @@ import domini.classes.csv.TaulaCSV;
 import excepcions.AccesAEstatIncorrecteException;
 import excepcions.NoExisteixElementException;
 import excepcions.UsuariIncorrecteException;
+import utilitats.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;

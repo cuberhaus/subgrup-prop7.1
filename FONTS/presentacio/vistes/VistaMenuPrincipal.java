@@ -13,7 +13,7 @@ import java.io.IOException;
  * @author maria.prat
  */
 public class VistaMenuPrincipal extends JFrame {
-
+    // TODO: al tancar que guardi els usuaris.
     private static VistaMenuPrincipal instancia;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
     private static JMenuBar menuBarra;

@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import domini.classes.Pair;
+import utilitats.Pair;
 import domini.controladors.ControladorDomini;
 import excepcions.*;
 

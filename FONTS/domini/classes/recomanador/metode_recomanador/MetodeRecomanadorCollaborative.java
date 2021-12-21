@@ -4,6 +4,7 @@ import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.Recomanacio;
 import excepcions.NoExisteixElementException;
+import utilitats.Pair;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
