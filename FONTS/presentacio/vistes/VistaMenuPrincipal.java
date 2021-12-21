@@ -31,6 +31,7 @@ public class VistaMenuPrincipal extends JFrame {
     }
 
     private static void inicialitzarMenuPrincipal() throws IOException, NomInternIncorrecteException {
+        // TODO (maria): una vista no pot llançar excepció, ha de fer catch i revisar que cap ho faci
         instancia.setTitle("Menu Principal");
         instancia.setResizable(false);
 

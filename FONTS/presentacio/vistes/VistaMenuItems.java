@@ -57,12 +57,12 @@ public class VistaMenuItems extends JPanel {
         botoCrearItem.addActionListener(e -> {
             try {
                 controladorMenuItems.crearNouItem();
-            } catch (IOException ex) {
+            } catch (IOException e1) {
                 // TODO catch
-                ex.printStackTrace();
-            } catch (NomInternIncorrecteException ex) {
+                e1.printStackTrace();
+            } catch (NomInternIncorrecteException e2) {
                 //TODO:
-                ex.printStackTrace();
+                e2.printStackTrace();
             }
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
@@ -71,12 +71,12 @@ public class VistaMenuItems extends JPanel {
         botoEditarItem.addActionListener(e -> {
             try {
                 controladorMenuItems.editarItem();
-            } catch (IOException ex) {
+            } catch (IOException e1) {
                 //TODO: cath
-                ex.printStackTrace();
-            } catch (NomInternIncorrecteException ex) {
+                e1.printStackTrace();
+            } catch (NomInternIncorrecteException e2) {
                 //TODO: catch
-                ex.printStackTrace();
+                e2.printStackTrace();
             } catch (NoExisteixElementException ex) {
                 // TODO
                 ex.printStackTrace();
@@ -84,15 +84,11 @@ public class VistaMenuItems extends JPanel {
         });
         menuLateral.add(botoEditarItem);
         JButton botoEsborrarItem = new JButton("Esborra un ítem");
-        botoEsborrarItem.addActionListener(e -> {
-            controladorMenuItems.esborrarItem();
-        });
+        botoEsborrarItem.addActionListener(e -> controladorMenuItems.esborrarItem());
         menuLateral.add(botoEsborrarItem);
 
         JButton botoEsborrarTotsElsItems = new JButton("Esborra tots els ítems");
-        botoEsborrarTotsElsItems.addActionListener(e -> {
-            controladorMenuItems.esborrarTotsElsItems();
-        });
+        botoEsborrarTotsElsItems.addActionListener(e -> controladorMenuItems.esborrarTotsElsItems());
         menuLateral.add(botoEsborrarTotsElsItems);
 
         JButton botoCarregarConjuntItems = new JButton("Afegeix ítems des d'un conjunt");

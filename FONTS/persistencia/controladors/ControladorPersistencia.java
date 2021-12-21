@@ -63,19 +63,23 @@ public class ControladorPersistencia {
     private Path obteCarpetaTipusItem(String nom) {
         return Paths.get(direccioCarpetaItems.toString(), nom);
     }
+
     private Path obteRutaDefinicioTipusItem(String nom) {
         return Paths.get(direccioCarpetaItems.toString(),nom, "definicio.csv");
     }
-    public void guardarTipusItem(ArrayList<ArrayList<String>> tipus_item, String nom) throws IOException {
+
+    public void guardarTipusItem(ArrayList<ArrayList<String>> tipusItem, String nom) throws IOException {
         Path path = obteCarpetaTipusItem(nom);
         if (!Files.exists(path)) {
             Files.createDirectory(path);
         }
         else if (Files.exists(obteRutaDefinicioTipusItem(nom))) {
+            // TODO (edgar): això s'ignora i no s'hauria d'ignorar
             obteRutaDefinicioTipusItem(nom).toFile().delete();
         }
-        escriptor.escriureCSV(obteRutaDefinicioTipusItem(nom).toString(), tipus_item);
+        escriptor.escriureCSV(obteRutaDefinicioTipusItem(nom).toString(), tipusItem);
     }
+
     public ArrayList<ArrayList<String>> obtenirTipusItem(String nom) throws IOException {
         if(!Files.exists(obteRutaDefinicioTipusItem(nom)))
             return null;
@@ -108,14 +112,16 @@ public class ControladorPersistencia {
         nom += ".csv";
         Path path = Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom);
         if (Files.exists(path)) {
+            // TODO (edgar): això s'ignora i no s'hauria d'ignorar
             path.toFile().delete();
         }
         escriptor.escriureCSV(path.toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntItems(String tipusItem, String nom) throws IOException {
         nom += ".csv";
-        if(!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom)))
-            return null;
+        if (!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom))) {
+            return new ArrayList<>();
+        }
         return lector.llegirCSV(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom).toString());
     }
     public void borrarConjuntItems( String tipusItem, String nom) throws IOException {

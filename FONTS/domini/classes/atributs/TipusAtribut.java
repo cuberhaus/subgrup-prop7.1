@@ -35,7 +35,7 @@ public class TipusAtribut {
         this.distancia = distanciaDesDelNom(distancia);
         // TODO: crear excepcions pròpies
         if (this.valorAtribut == null || this.distancia == null) {
-            throw new NomInternIncorrecteException("El valorAtribut o Distancia demanats no existeixen.");
+            throw new NomInternIncorrecteException("El ValorAtribut o Distancia demanats no existeixen.");
         }
     }
 

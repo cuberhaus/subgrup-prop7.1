@@ -39,7 +39,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException, NomInternIncorrecteException, JaExisteixElementException {
         Map<String, Pair<String, String>> nomAValorAtributAmbFormat = new TreeMap<>();
         for (Map.Entry<String, Pair<String, String>> atribut : nomAValorAtribut.entrySet()) {
             String valorAtribut;
@@ -83,7 +83,7 @@ public class ControladorMenuTipusItem {
                     distanciaAtribut = "DistanciaEuclidiana";
                     break;
                 case "Levenshtein":
-                    distanciaAtribut = "";
+                    distanciaAtribut = "DistanciaLevenshtein";
                     break;
                 case "Zero":
                     distanciaAtribut = "DistanciaZero";
@@ -93,7 +93,7 @@ public class ControladorMenuTipusItem {
             }
             nomAValorAtributAmbFormat.put(atribut.getKey(), new Pair<>(valorAtribut, distanciaAtribut));
         }
-        controladorPresentacio.crearTipusItem(nom, nomAValorAtribut);
+        controladorPresentacio.crearTipusItem(nom, nomAValorAtributAmbFormat);
     }
 
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
