@@ -221,7 +221,7 @@ public class VistaMenuUsuaris extends JPanel {
     }
 
     private static void eliminarUsuariButton() {
-        eliminarUsuariButton = new JButton("Esborrar Usuari");
+        eliminarUsuariButton = new JButton("Esborrar usuari");
         eliminarUsuariButton.addActionListener(e -> {
             try {
                 controladorMenuUsuaris.esborrarUsuari(idText.getText());
@@ -261,7 +261,7 @@ public class VistaMenuUsuaris extends JPanel {
     }
 
     private static void iniciarSessioButton() {
-        iniciarSessioButton = new JButton("Iniciar Sessió");
+        iniciarSessioButton = new JButton("Iniciar sessió");
         iniciarSessioButton.addActionListener(e -> {
             try {
                 if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(passwordField.getPassword()))) {
@@ -279,7 +279,7 @@ public class VistaMenuUsuaris extends JPanel {
     }
 
     private static void tancarSessioButton() {
-        tancarSessioButton = new JButton("Tancar Sessió");
+        tancarSessioButton = new JButton("Tancar sessió");
         tancarSessioButton.addActionListener(e -> {
             try {
                 controladorMenuUsuaris.tancarSessio();
