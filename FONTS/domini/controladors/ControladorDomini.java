@@ -121,7 +121,6 @@ public class ControladorDomini {
             throw new Exception("L'usuari ja existeix");
         }
         else {
-            if (contrasenya.isBlank()) throw new Exception("La contrasenya es buida o nomes conte espais en buit");
             estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
             return id.obtenirValor();
         }
