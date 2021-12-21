@@ -38,6 +38,7 @@ public class VistaMenuValoracions extends JPanel {
     private static BorderLayout borderLayout;
     private static JPanel jpanel;
     private static JButton esborrarTotesLesValoracionsButton;
+    private static JButton exportarConjuntValoracions;
 
     /**
      * Constructora per defecte de VistaMenuUsuaris
@@ -130,10 +131,27 @@ public class VistaMenuValoracions extends JPanel {
         editaValoracioButton();
         conjuntDeValoracionsButton();
         esborrarTotesLesValoracionsButton();
+        exportarConjuntValoracions();
 
         borderLayout = new BorderLayout();
         instancia.setLayout(borderLayout);
         instancia.add(jpanel, BorderLayout.CENTER);
+    }
+
+    private static void exportarConjuntValoracions() {
+        exportarConjuntValoracions = new JButton("Exportar valoracions");
+        exportarConjuntValoracions.addActionListener(e-> {
+            JDialog pathDialog = new JDialog();
+            jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
+            if (estatJfile == APPROVE_OPTION) {
+                File pathConjunt = jFileChooser.getSelectedFile();
+                controladorMenuValoracions.exportaValoracions(pathConjunt.getAbsolutePath());
+            }
+        });
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        jpanel.add(exportarConjuntValoracions, gridBagConstraints);
     }
 
     private static void conjuntDeValoracionsButton() {

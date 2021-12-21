@@ -533,4 +533,12 @@ public class ControladorDomini {
             }
         }
     }
+
+    /**
+     *
+     * @param absolutePath path a la carpeta on exportem les valoracions
+     */
+    public void exportaValoracions(String absolutePath) {
+
+    }
 }
