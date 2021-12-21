@@ -2,10 +2,7 @@ package presentacio.controladors;
 
 import domini.classes.Pair;
 import domini.controladors.ControladorDomini;
-import excepcions.FormatIncorrecteException;
-import excepcions.JaExisteixElementException;
-import excepcions.NomInternIncorrecteException;
-import excepcions.SessioNoIniciadaException;
+import excepcions.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -121,7 +118,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
+    public void seleccionarTipusItem(String nomTipusItem) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 

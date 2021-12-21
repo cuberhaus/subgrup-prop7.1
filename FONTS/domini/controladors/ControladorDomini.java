@@ -8,10 +8,7 @@ import domini.classes.recomanador.*;
 import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.filtre.FiltreExclusiu;
 import domini.classes.recomanador.filtre.FiltreInclusiu;
-import excepcions.FormatIncorrecteException;
-import excepcions.JaExisteixElementException;
-import excepcions.NomInternIncorrecteException;
-import excepcions.SessioNoIniciadaException;
+import excepcions.*;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -308,7 +305,7 @@ public class ControladorDomini {
         nomTipusItemActual = null;
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
+    public void seleccionarTipusItem(String nomTipusItem) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
         if (nomTipusItemActual != null) {
             deseleccionarTipusItem();
         }

@@ -2,7 +2,7 @@ package domini.classes;
 
 
 import domini.classes.csv.TaulaCSV;
-import excepcions.FormatIncorrecteException;
+import excepcions.AccesAEstatIncorrecteException;
 import excepcions.JaExisteixElementException;
 
 import java.util.*;
@@ -42,24 +42,23 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
-    public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws FormatIncorrecteException, JaExisteixElementException, Exception {
+    public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws AccesAEstatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         this.tipusItem = tipusItem;
 
         elements = new TreeMap<>();
         int id;
         for (int i = 0; i < taula.obtenirNumItems(); ++i) {
-            String sid = taula.obtenirValorAtribut(i, "id");
             try {
+                String sid = taula.obtenirValorAtribut(i, "id");
                 id = Integer.parseInt(sid);
-            } catch (NumberFormatException e1) {
-                throw new FormatIncorrecteException("L'id no es un integer");
+                Id identificador = new Id(id, true);
+                if (elements.containsKey(identificador)) {
+                    throw new JaExisteixElementException("L'item creat ja existeix al conjunt");
+                }
+                afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
+            } catch (Exception ignored) {
             }
-            Id identificador = new Id(id, true);
-            if (elements.containsKey(identificador)) {
-                throw new JaExisteixElementException("L'item creat ja existeix al conjunt");
-            }
-            afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
         }
     }
 

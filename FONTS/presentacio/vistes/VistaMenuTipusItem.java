@@ -1,6 +1,9 @@
 package presentacio.vistes;
 
+import excepcions.AccesAEstatIncorrecteException;
+import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
+import excepcions.UsuariIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -144,9 +147,15 @@ public class VistaMenuTipusItem extends JPanel {
                         botoVeureTipusItem.setEnabled(true);
                         botoEditarTipusItem.setEnabled(true);
                     }
-                } catch (Exception e1) {
-                    JOptionPane.showMessageDialog(instancia,
-                            "No s'ha pogut seleccionar el tipus d'ítem.");
+                } catch (NoExisteixElementException ex) {
+                    // TODO: catch it
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (AccesAEstatIncorrecteException ex) {
+                    ex.printStackTrace();
+                } catch (UsuariIncorrecteException ex) {
+                    ex.printStackTrace();
                 }
             } else {
                 JOptionPane.showMessageDialog(instancia,

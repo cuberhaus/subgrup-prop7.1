@@ -1,9 +1,7 @@
 package presentacio.controladors;
 
 import domini.classes.Pair;
-import excepcions.FormatIncorrecteException;
-import excepcions.JaExisteixElementException;
-import excepcions.NomInternIncorrecteException;
+import excepcions.*;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
@@ -114,7 +112,7 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
+    public void seleccionarTipusItem(String nomTipusItem) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorPresentacio.seleccionarTipusItem(nomTipusItem);
     }
 
