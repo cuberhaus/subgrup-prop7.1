@@ -34,7 +34,6 @@ public class ControladorPresentacio {
      * @throws IOException Hi ha hagut algun error en l'entrada/sortida
      * @throws NomInternIncorrecteException Algun valor demanat no existeix
      */
-    /**
     public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorPresentacio();
