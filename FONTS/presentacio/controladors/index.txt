@@ -1,0 +1,10 @@
+Controladors de la capa de presentacio i un controlador per vista.
+
+ControladorMenuItems.java
+ControladorMenuPrincipal.java
+ControladorMenuRecomanacions.java
+ControladorMenuTipusItem.java
+ControladorMenuUsuari.java
+ControladorMenuValoracions.java
+ControladorPresentacio.java
+index.txt
