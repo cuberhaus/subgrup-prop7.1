@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuRecomanacions;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class VistaMenuRecomanacions extends JPanel {
         altura = this.getHeight();
     }
 
-    public static VistaMenuRecomanacions obtenirInstancia() throws IOException {
+    public static VistaMenuRecomanacions obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new VistaMenuRecomanacions();
             controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();

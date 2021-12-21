@@ -59,6 +59,9 @@ public class VistaMenuItems extends JPanel {
             } catch (IOException ex) {
                 // TODO catch
                 ex.printStackTrace();
+            } catch (NomInternIncorrecteException ex) {
+                //TODO:
+                ex.printStackTrace();
             }
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
@@ -69,6 +72,9 @@ public class VistaMenuItems extends JPanel {
                 controladorMenuItems.editarItem();
             } catch (IOException ex) {
                 //TODO: cath
+                ex.printStackTrace();
+            } catch (NomInternIncorrecteException ex) {
+                //TODO: catch
                 ex.printStackTrace();
             }
         });
