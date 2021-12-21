@@ -228,6 +228,9 @@ public class VistaMenuTipusItem extends JPanel {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot mostrar el tipus d'ítem. Torna-ho a intentar.");
+                } catch (NomInternIncorrecteException ex) {
+                    //TODO: catch
+                    ex.printStackTrace();
                 }
             }
         });
@@ -245,6 +248,9 @@ public class VistaMenuTipusItem extends JPanel {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot editar el tipus d'ítem. Torna-ho a intentar.");
+                } catch (NomInternIncorrecteException ex) {
+                    //TODO catch
+                    ex.printStackTrace();
                 }
             }
         });

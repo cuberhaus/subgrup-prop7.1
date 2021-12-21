@@ -33,6 +33,11 @@ public class ControladorDomini {
     private Recomanador recomanador;
     private ConjuntRecomanacions recomanacions;
 
+    /**
+     * Contructor privat de la classe per defecte
+     * @throws IOException si no existeix algun fitxer de la càrrega de fitxers per defecte
+     * @throws NomInternIncorrecteException si hi ha algun problema amb els noms dels fitxers dels metodes interns
+     */
     private ControladorDomini() throws IOException, NomInternIncorrecteException {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
         estatPrograma = Programa.obtenirInstancia();
@@ -42,6 +47,12 @@ public class ControladorDomini {
         }
     }
 
+    /**
+     * Retorna la instancia de Controlador Domini
+     * @return La instancia de controlador domini
+     * @throws IOException si no existeix algun fitxer de la càrrega de fitxers per defecte
+     * @throws NomInternIncorrecteException si hi ha algun problema amb els noms dels fitxers dels metodes interns
+     */
     public static ControladorDomini obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorDomini();
@@ -91,6 +102,12 @@ public class ControladorDomini {
         }
     }
 
+    /**
+     * Comproba si existeix un usuari al conjunt d'usuaris del programa
+     * @param id <code>int</code> l'id de l'usuari
+     * @return retorna si existeix l'usuari al conjunt o no
+     * @throws Exception si l'usuari ja existeix
+     */
     public boolean existeixUsuari(int id) throws Exception {
         Id id_bo = new Id(id, true);
         return estatPrograma.conteUsuari(id_bo) && estatPrograma.obtenirUsuari(id_bo).isActiu();
@@ -146,24 +163,51 @@ public class ControladorDomini {
         this.estatPrograma.tancarSessio();
     }
 
+    /**
+     * Afegeix la una valoració a la llista de valoracions
+     * @param usuariId <code>String</code> l'id de l'usuari
+     * @param itemId <code>String</code> l'id de l'item
+     * @param valor <code>String</code> valor de la valoracio
+     * @throws Exception si no existeix l'usuari o no existeis l'item
+     */
     public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         valoracionsTipusItemActual.afegir(new Valoracio(Double.parseDouble(valor), us, item));
     }
 
+    /**
+     * Comproba si al conjunt existeix una valoracio d'un usuari cap a un item
+     * @param usuariId <code>String</code> l'id de l'usuari
+     * @param itemId <code>String</code> l'id de l'item
+     * @return retorna si existeix la valoracio de l'usuari cap a un item
+     * @throws Exception si no existeix l'usuari o no existeix l'item
+     */
     public boolean existeixValoracio(String usuariId, String itemId) throws Exception {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         return valoracionsTipusItemActual.conte(us, item);
     }
 
+    /**
+     * S'esborra la valoracio de un usuari cap a un item
+     * @param usuariId <code>String</code> l'id de l'usuari
+     * @param itemId <code>String</code> l'id id de l'item
+     * @throws Exception si no existeix l'usuari o no existeix l'item
+     */
     public void esborraValoracio(String usuariId, String itemId) throws Exception {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         valoracionsTipusItemActual.esborrar(valoracionsTipusItemActual.obte(us, item));
     }
 
+    /**
+     * Edita la valoracio
+     * @param usuariId <code>String</code> l'id de l'usuari
+     * @param itemId <code>String</code> l'id de l'item
+     * @param valor <code>String</code> el valor a escriure a la recomanacio
+     * @throws Exception si no s'ha pogut modificar la valoracio perque l'usuari i/o l'item no existeixen
+     */
     public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
         esborraValoracio(usuariId, itemId);
         afegirValoracio(usuariId, itemId, valor);
@@ -456,6 +500,10 @@ public class ControladorDomini {
         return retornaValoracions;
     }
 
+    /**
+     * Desseleciona el tipus item actual i esborra la relacio del porgrama actual amb aquest.
+     * @throws IOException
+     */
     public void deseleccionarTipusItem() throws IOException {
         // TODO: si no n'hi ha cap de seleccionat retornar una excepció personalitzada per distingir entre
         //  les dues excepcions i posar-me un todo (maria)

@@ -143,51 +143,6 @@ public class VistaMenuUsuaris extends JPanel {
         instancia.add(jpanel,BorderLayout.CENTER);
     }
 
-    private static void editarUsuariButton() {
-        editarUsuariButton = new JButton("Editar");
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
-        jpanel.add(editarUsuariButton, gridBagConstraints);
-        editarUsuariButton.addActionListener(e-> {
-            try {
-                controladorMenuUsuaris.canviaNomUsuari(idText.getText(),nomText.getText());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(instancia, ex.getMessage());
-            }
-            try {
-                controladorMenuUsuaris.canviaContrasenyaUsuari(idText.getText(), passwordField.getPassword());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(instancia, ex.getMessage());
-            }
-            actualitzarLlistaUsuaris();
-            clearText();
-        });
-    }
-
-    private static void importarButton() {
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        importarButton = new JButton("Importar usuaris");
-        importarButton.addActionListener(e-> {
-            JDialog pathDialog = new JDialog();
-            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
-            if (estatJfile == APPROVE_OPTION) {
-                File pathConjunt = jFileChooser.getSelectedFile();
-                try {
-                    controladorMenuUsuaris.importarUsuaris(pathConjunt.getAbsolutePath());
-                    actualitzarLlistaUsuaris();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
-                }
-            }
-        });
-        jpanel.add(importarButton, gridBagConstraints);
-    }
-
     private static void usuariActiuLabel() {
         usuariActiuLabel = new JLabel("Usuari actiu:");
         gridBagConstraints.gridx = 0;
@@ -217,21 +172,6 @@ public class VistaMenuUsuaris extends JPanel {
         jpanel.add(nomText, gridBagConstraints);
     }
 
-    private static void idLabel() {
-        idLabel = new JLabel("Id: ");
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jpanel.add(idLabel, gridBagConstraints);
-    }
-
-    private static void idText() {
-        idText = new JTextField();
-        idText.setColumns(10);
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        jpanel.add(idText, gridBagConstraints);
-    }
-
     private static void contrasenyaLabel() {
         contrasenyaLabel = new JLabel("Contrasenya: ");
         gridBagConstraints.gridx = 0;
@@ -247,8 +187,23 @@ public class VistaMenuUsuaris extends JPanel {
         jpanel.add(passwordField, gridBagConstraints);
     }
 
+    private static void idLabel() {
+        idLabel = new JLabel("Id: ");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jpanel.add(idLabel, gridBagConstraints);
+    }
+
+    private static void idText() {
+        idText = new JTextField();
+        idText.setColumns(10);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        jpanel.add(idText, gridBagConstraints);
+    }
+
     private static void afegirUsuariButton() {
-        afegirUsuariButton = new JButton("Afegir Usuari");
+        afegirUsuariButton = new JButton("Afegir usuari");
         afegirUsuariButton.addActionListener(e -> {
             try {
                 int id = controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(passwordField.getPassword()));
@@ -266,7 +221,7 @@ public class VistaMenuUsuaris extends JPanel {
     }
 
     private static void eliminarUsuariButton() {
-        eliminarUsuariButton = new JButton("Esborrar Usuari");
+        eliminarUsuariButton = new JButton("Esborrar usuari");
         eliminarUsuariButton.addActionListener(e -> {
             try {
                 controladorMenuUsuaris.esborrarUsuari(idText.getText());
@@ -282,8 +237,31 @@ public class VistaMenuUsuaris extends JPanel {
         jpanel.add(eliminarUsuariButton, gridBagConstraints);
     }
 
+    private static void editarUsuariButton() {
+        editarUsuariButton = new JButton("Editar usuari");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        jpanel.add(editarUsuariButton, gridBagConstraints);
+        editarUsuariButton.addActionListener(e-> {
+            try {
+                controladorMenuUsuaris.canviaNomUsuari(idText.getText(),nomText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
+            }
+            try {
+                controladorMenuUsuaris.canviaContrasenyaUsuari(idText.getText(), passwordField.getPassword());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
+            }
+            actualitzarLlistaUsuaris();
+            clearText();
+        });
+    }
+
     private static void iniciarSessioButton() {
-        iniciarSessioButton = new JButton("Iniciar Sessió");
+        iniciarSessioButton = new JButton("Iniciar sessió");
         iniciarSessioButton.addActionListener(e -> {
             try {
                 if (controladorMenuUsuaris.iniciarSessio(idText.getText(), String.valueOf(passwordField.getPassword()))) {
@@ -296,12 +274,12 @@ public class VistaMenuUsuaris extends JPanel {
             }
         });
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         jpanel.add(iniciarSessioButton, gridBagConstraints);
     }
 
     private static void tancarSessioButton() {
-        tancarSessioButton = new JButton("Tancar Sessió");
+        tancarSessioButton = new JButton("Tancar sessió");
         tancarSessioButton.addActionListener(e -> {
             try {
                 controladorMenuUsuaris.tancarSessio();
@@ -312,14 +290,36 @@ public class VistaMenuUsuaris extends JPanel {
             usuariActiuInfo.setText("Sessio no iniciada");
         });
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         jpanel.add(tancarSessioButton, gridBagConstraints);
+    }
+
+    private static void importarButton() {
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        importarButton = new JButton("Importar usuaris");
+        importarButton.addActionListener(e-> {
+            JDialog pathDialog = new JDialog();
+            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
+            if (estatJfile == APPROVE_OPTION) {
+                File pathConjunt = jFileChooser.getSelectedFile();
+                try {
+                    controladorMenuUsuaris.importarUsuaris(pathConjunt.getAbsolutePath());
+                    actualitzarLlistaUsuaris();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
+                }
+            }
+        });
+        jpanel.add(importarButton, gridBagConstraints);
     }
 
     private static void exportarConjuntUsuarisButton() {
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        exportarConjuntUsuarisButton = new JButton("Exportar Usuaris");
+        gridBagConstraints.gridy = 10;
+        exportarConjuntUsuarisButton = new JButton("Exportar usuaris");
         exportarConjuntUsuarisButton.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
             jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -339,7 +339,7 @@ public class VistaMenuUsuaris extends JPanel {
 
     private static void esborrarConjuntButton() {
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 11;
         esborrarConjuntButton = new JButton("Esborrar tots els usuaris");
         esborrarConjuntButton.addActionListener(e -> {
             int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar tots els usuaris", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
