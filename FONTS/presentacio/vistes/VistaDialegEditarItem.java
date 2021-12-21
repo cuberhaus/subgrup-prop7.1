@@ -85,7 +85,7 @@ public class VistaDialegEditarItem extends JDialog {
                 // TODO: catch it
                 ex.printStackTrace();
             }
-            JOptionPane.showMessageDialog(this, "Ítem editat amb èxit.");
+            JOptionPane.showMessageDialog(this, "Item editat amb èxit.");
             dispose();
         });
         botoGuardarItem.setAlignmentX(Component.CENTER_ALIGNMENT);

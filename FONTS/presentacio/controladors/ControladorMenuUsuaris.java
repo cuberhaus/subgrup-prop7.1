@@ -39,8 +39,9 @@ public class ControladorMenuUsuaris {
     /**
      * Constructora de ControladorMenuUsuaris
      * Crea una instància única de ControladorMenuUsuaris
-     *
      * @return <code> ControladorMenuUsuaris </code>
+     * @throws IOException no existeix el fitxer o no es pot obrir
+     * @throws NomInternIncorrecteException el nom del fitxer intern no existeix
      */
     public static ControladorMenuUsuaris obtenirInstancia() throws IOException, NomInternIncorrecteException {
         try {
@@ -75,7 +76,6 @@ public class ControladorMenuUsuaris {
      * @param id          id amb el que volem iniciar sessió
      * @param contrasenya contrasenya amb què intentem iniciar la sessió
      * @return True si la sessió hem pogut iniciar sessió
-     * @throws Exception No s'ha pogut iniciar sessió
      */
     public boolean iniciarSessio(String id, String contrasenya) {
         try {
@@ -104,7 +104,6 @@ public class ControladorMenuUsuaris {
      * @param nom         de l'usuari
      * @param contrasenya de l'usuari
      * @return retorna l'id de l'usuari
-     * @throws Exception no s'ha pogut crear l'usuari
      */
     public int afegirUsuari(String nom, String contrasenya) {
         try {
@@ -121,7 +120,6 @@ public class ControladorMenuUsuaris {
      * Esborra un usuari del conjunt si és actiu i l'id és correcte
      *
      * @param id id de l'usuari
-     * @throws Exception No s'ha pogut crear l'usuari
      */
     public void esborrarUsuari(String id) {
         try {
@@ -139,8 +137,6 @@ public class ControladorMenuUsuaris {
 
     /**
      * Tanca la sessió
-     *
-     * @throws Exception No s'ha pogut tancar la sessió
      */
     public void tancarSessio() {
         try {
@@ -202,7 +198,6 @@ public class ControladorMenuUsuaris {
      *
      * @param id              identificador de l'usuari
      * @param novaContrasenya nova contrasenya de l'usuari
-     * @throws Exception No s'ha pogut canviar la contrasenya de l'usuari
      */
     public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) {
         try {
@@ -218,7 +213,6 @@ public class ControladorMenuUsuaris {
      *
      * @param id     identificador de l'usuari
      * @param nouNom nou nom de l'usuari
-     * @throws Exception No s'ha pogut canviar el nom de l'usuari
      */
     public void canviaNomUsuari(String id, String nouNom) {
         try {

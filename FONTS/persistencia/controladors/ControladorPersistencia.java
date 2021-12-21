@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Controlador per la capa de Persistència.
- * @author edgar.moreno && pablo.vega
+ * @author edgar.moreno and pablo.vega
  */
 public class ControladorPersistencia {
 

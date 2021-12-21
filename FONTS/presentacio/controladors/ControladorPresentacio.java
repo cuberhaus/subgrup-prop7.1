@@ -33,6 +33,7 @@ public class ControladorPresentacio {
      * @return <code> ControladorPresentacio </code>
      * @throws IOException Hi ha hagut algun error en l'entrada/sortida
      * @throws NomInternIncorrecteException Algun valor demanat no existeix
+     * @throws DistanciaNoCompatibleAmbValorException l'atribut no es pot calcular amb la distancia seleccionada
      */
     public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
@@ -327,7 +328,7 @@ public class ControladorPresentacio {
      * Modificadora del nom del usuari amb l'identificador donat
      * @param id identificadora del usuari
      * @param nouNom nou nom de l'usuari
-     * @throws NoExisteixElementException
+     * @throws NoExisteixElementException a
      */
     public void canviaNomUsuari(String id, String nouNom) throws NoExisteixElementException {
         controladorDomini.canviaNomUsuari(id,nouNom);
