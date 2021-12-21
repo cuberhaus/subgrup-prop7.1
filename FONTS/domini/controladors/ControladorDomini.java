@@ -213,15 +213,30 @@ public class ControladorDomini {
         afegirValoracio(usuariId, itemId, valor);
     }
 
+    /**
+     * Llegeix el contingut del fitxer de les valoracions
+     * @param rutaAbsolut <code>String</code> ubicacio de l'arxiu a llegir
+     * @throws Exception si no s'ha pogut afegir la valoracio al contenidor
+     */
     public void carregaConjuntValoracions(String rutaAbsolut) throws Exception {
         ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
         valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
+    /**
+     * Obtenir el conjunt d'items actuals
+     * @return <code>ArraList&lt;String&gt;</code> conjunt d'items del tipus item seleccionar
+     */
     public ArrayList<String> obtenirLlistaConjunts() {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
+    /**
+     * Carrega tipus d'item a partir d'un fitxer
+     * @param nom <code>String</code> nom del tipus d'item
+     * @param rutaAbsoluta <code>String</code> ubicacio del fitxer
+     * @throws Exception si el fitxer no existeix o no te format correcte
+     */
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
@@ -238,7 +253,12 @@ public class ControladorDomini {
         // TODO (edgar): afegir exception quan ja existeix tipus item amb aquest nom i que sigui una exception explicativa
     }
 
-
+    /**
+     * Carrega el tipus item amb el nom existent
+     * @param nom <code>String</code> nom del tipus d'item
+     * @throws IOException si no s'ha pogut obrir el fitxer
+     * @throws NomInternIncorrecteException si no existeix un fitxer amb el tipus d'item dessitjat
+     */
     public void carregarTipusItem(String nom) throws IOException, NomInternIncorrecteException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.obtenirTipusItem(nom);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
@@ -250,6 +270,14 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
+    /**
+     * Crea el tipus d'item amb el nom i els seus atributs
+     * @param nom <code>String</code> nom del tipus d'item
+     * @param nomAValorAtribut <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> que conté els atributs amb el tipus
+     * @throws IllegalArgumentException si ja existeix el tipus d'item
+     * @throws IOException si no existeix el fitxer i/o no es pot obrir
+     * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
+     */
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
         if (estatPrograma.conteTipusItem(nom)) {
             // TODO: crear excepcio
@@ -264,11 +292,18 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(tipus.convertirAArrayList(), nom);
     }
 
-    /** Retorna els noms dels conjunts d'items coneguts**/
+    /**
+     * Retorna el nom dels items carregats
+     * @return <code>ArrayList&lt;String&gt;</code> llista del noms
+     */
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         return estatPrograma.obteTipusItem();
     }
 
+    /**
+     * Obtenir les distancies
+     * @return <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> amb els valors
+     */
     public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
         TipusItem tipus = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, Pair<String, String>> valors = new TreeMap<>();
@@ -278,19 +313,26 @@ public class ControladorDomini {
         return valors;
     }
 
+    /**
+     * Veure si la sessio esta iniciada o no
+     * @return <code>boolean</code> si esta inicicada o no
+     */
     public boolean esSessioIniciada() {
         return estatPrograma.isSessioIniciada();
     }
 
     /**
-     *
-     * @param absolutePath Absolute path to folder where the new file will be created
+     * Exporta el conjunt d'usuaris a un fitxer
+     * @param absolutePath <code>String</code> ubicacio del fitxer
      */
     public void exportarConjuntDadesUsuari(String absolutePath) throws IOException {
         Date today = Calendar.getInstance().getTime();
         controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV(), "Usuari" + today);
     }
 
+    /**
+     * Esborra tot el conjunt d'usuaris
+     */
     public void esborraConjuntUsuaris() {
         estatPrograma.esborraTotsUsuaris();
     }
@@ -302,6 +344,9 @@ public class ControladorDomini {
         return nomTipusItemActual;
     }
 
+    /**
+     * Esborra el tipus d'item seleccionat
+     */
     public void esborrarTipusItemSeleccionat() {
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         itemsActuals = null;
@@ -310,6 +355,11 @@ public class ControladorDomini {
         nomTipusItemActual = null;
     }
 
+    /**
+     * Selecciona el tipus item
+     * @param nomTipusItem <code>String</code> el nom del tipus d'item
+     * @throws Exception si no s'ha pogut seleccionar el tipus d'item
+     */
     public void seleccionarTipusItem(String nomTipusItem) throws Exception {
         if (nomTipusItemActual != null) {
             deseleccionarTipusItem();
@@ -326,20 +376,38 @@ public class ControladorDomini {
         valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
+    /**
+     * Obte la llista d'items
+     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> conjunt de items
+     */
     public ArrayList<ArrayList<String>> obtenirItems() {
         ArrayList<ArrayList<String>> res = itemsActuals.converteixAArray();
         res.remove(0);
         return res;
     }
 
+    /**
+     * Obte el nom dels atributs de l'item seleccionat
+     * @return <code>ArrayList&lt;String&gt;</code> conjunt del nom dels atributs
+     */
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
         return new ArrayList<>(estatPrograma.obteTipusItem(nomTipusItemActual).obtenirTipusAtributs().keySet());
     }
 
+    /**
+     * Retorna la existencia del tipus item sleccionat
+     * @return <code>boolean</code> si existeix o no
+     */
     public boolean existeixTipusItemSeleccionat() {
         return nomTipusItemActual != null;
     }
 
+    /**
+     * Afegeix un item al conjunt
+     * @param valorsAtributs <code>Map&lt;String, String&gt;</code> els atributs i el seu valor
+     * @return <code>boolean</code> true si 'sha afegit
+     * @throws Exception si no s'ha pogut afegir l'item
+     */
     public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
@@ -360,6 +428,7 @@ public class ControladorDomini {
         return true;
     }
 
+
     // TODO: Pablo, s'han de borrar les seves valoracions!!!!
     // TODO falta por acabar pero tengo hambre
     // Esborra l'ítem amb aquest id
@@ -367,6 +436,12 @@ public class ControladorDomini {
     // l'item es del tipus d'ítem seleccionat
     // retorna fals si es invalid o no s'ha pogut esborrar
     // pot ser una paraula, un numero, estar buit, etc
+
+    /**
+     * Esborra l'item amb l'id dessitjat
+     * @param id <code>String</code> l'id de l'item a eesborrar
+     * @return <code>boolean</code> si s'ha pogut esborrar o no
+     */
     public boolean esborrarItem(String id) {
         //Comprobacio si id es valid nomes de transformar
         int idItemABuscar;
@@ -386,6 +461,12 @@ public class ControladorDomini {
         }
     }
 
+    /**
+     * Obtenir el item amb l'id seleccionat
+     * @param id <code>String</code> l'id de l'item a obtenir
+     * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item
+     * @throws IllegalArgumentException si l'identificador no es valid
+     */
     public Map<String, String> obtenirItem(String id) throws IllegalArgumentException {
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
@@ -410,6 +491,11 @@ public class ControladorDomini {
         return false;
     }
 
+    /**
+     * Carrega un conjunt d'items a partir d'un fitxer
+     * @param rutaAbsoluta <code>String</code> ruta del fitxer
+     * @throws Exception si no s'ha pogut obrir el fitxer
+     */
     public void carregarConjuntItems(String rutaAbsoluta) throws Exception {
         ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TaulaCSV taulaItems = new TaulaCSV(items);
@@ -419,6 +505,9 @@ public class ControladorDomini {
         }
     }
 
+    /**
+     * Esborra tots els items del tipus d'item seleccionat
+     */
     public void esborrarTotsElsItems() {
         itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
@@ -430,6 +519,14 @@ public class ControladorDomini {
         // si el nou atribut no té nom ("") vol dir que s'ha eliminat
     }
 
+    //TODO: filtros
+    /**
+     * Obte una recomanacio amb el metode Collaborative
+     * @param nomAtributs
+     * @param filtreInclusiu
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
@@ -448,6 +545,14 @@ public class ControladorDomini {
         return res;
     }
 
+    //TODO: filtros
+    /**
+     *
+     * @param nomAtributs
+     * @param filtreInclusiu
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
@@ -466,6 +571,14 @@ public class ControladorDomini {
         return res;
     }
 
+    //TODO: filtros
+    /**
+     *
+     * @param nomAtributs
+     * @param filtreInclusiu
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
@@ -484,16 +597,27 @@ public class ControladorDomini {
         return res;
     }
 
+    //TODO: filtros
+
+    /**
+     *
+     * @return
+     */
     public double avaluarRecomanacio() {
         return recomanacions.obteDiscountedCumulativeGain()/recomanacions.obteIdealDiscountedCumulativeGain();
     }
 
-    //Esborrar tal cual
+    /**
+     * Esborra totes les valoracions
+     */
     public void esborrarTotesLesValoracions() {
         valoracionsTipusItemActual.esborraTotesLesValoracions();
     }
 
-    //Necessita IDUsuari, IDItem, Rating
+    /**
+     * Obte les valoracions
+     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> llista de les valoracions
+     */
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         ArrayList<ArrayList<String>> retornaValoracions =  valoracionsTipusItemActual.convertirAArrayList();
         retornaValoracions.remove(0);
