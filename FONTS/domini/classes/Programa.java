@@ -100,7 +100,7 @@ public class Programa {
      *
      * @return Usuari
      */
-    public Usuari obtenirUsuariSessioIniciada() throws Exception {
+    public Usuari obtenirUsuariSessioIniciada() throws SessioNoIniciadaException {
         return sessio.obtenirUsuariSessioIniciada();
     }
 

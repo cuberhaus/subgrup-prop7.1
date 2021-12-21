@@ -84,7 +84,7 @@ public class ControladorMenuValoracions {
      * @param valor valor de la valoració
      * @throws Exception no s'ha pogut afegir la valoració
      */
-    public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
+    public void afegirValoracio(String usuariId, String itemId, String valor) {
         try {
             idUsuariEsValid(usuariId);
             idItemEsValid(itemId);
@@ -120,7 +120,7 @@ public class ControladorMenuValoracions {
      * @param valor nou valor de la valoració
      * @throws Exception no s'ha pogut editar la valoració
      */
-    public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
+    public void editarValoracio(String usuariId, String itemId, String valor) {
         try {
             idUsuariEsValid(usuariId);
             idItemEsValid(itemId);

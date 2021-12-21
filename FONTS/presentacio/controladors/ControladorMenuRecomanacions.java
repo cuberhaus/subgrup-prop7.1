@@ -1,6 +1,8 @@
 package presentacio.controladors;
 
+import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
+import excepcions.SessioNoIniciadaException;
 import presentacio.vistes.VistaMenuRecomanacions;
 
 import javax.swing.*;
@@ -32,15 +34,15 @@ public class ControladorMenuRecomanacions {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorPresentacio.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorPresentacio.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorPresentacio.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 

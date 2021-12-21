@@ -55,7 +55,7 @@ public class SessioIniciada extends Sessio {
      * @throws Exception si l'estat és sessioNoIniciada
      */
     @Override
-    public Usuari obtenirUsuariSessioIniciada() throws Exception{
+    public Usuari obtenirUsuariSessioIniciada() throws SessioNoIniciadaException{
         return usuari;
     }
 }
