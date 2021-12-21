@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
@@ -16,7 +17,7 @@ public class VistaDialegCrearItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegCrearItem() throws IOException, NomInternIncorrecteException {
+    public VistaDialegCrearItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegCrearItem();

@@ -1,6 +1,7 @@
 package presentacio.vistes;
 
 import domini.classes.Pair;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.JaExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
@@ -21,7 +22,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
     private JPanel panellCrearTipusItem;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public VistaDialegCrearTipusItem() throws IOException, NomInternIncorrecteException {
+    public VistaDialegCrearTipusItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         super(null, Dialog.ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         inicialitzarDialegCrearTipusItem();
@@ -70,7 +71,6 @@ public class VistaDialegCrearTipusItem extends JDialog {
 
         JButton botoCrearTipusItem = new JButton("Crea tipus d'ítem");
         botoCrearTipusItem.addActionListener(e -> {
-            // TODO (maria): comprovar que les distàncies són compatibles amb el valor atribut
             String nom = nomTipusItem.getText();
             if (nom.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "El tipus d'ítem ha de tenir un nom.");
@@ -102,7 +102,10 @@ public class VistaDialegCrearTipusItem extends JDialog {
             } catch (JaExisteixElementException e1) {
                 JOptionPane.showMessageDialog(this,
                         "Ja existeix un tipus d'ítem amb aquest nom.");
-            } catch (Exception e2) {
+            } catch (DistanciaNoCompatibleAmbValorException distanciaNoCompatibleAmbValorException) {
+                JOptionPane.showMessageDialog(this,
+                        "Hi ha una distància que no és compatible amb el valor escollit");
+            } catch (Exception e3) {
                 JOptionPane.showMessageDialog(this,
                         "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
             }
