@@ -98,6 +98,10 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         return usuaris;
     }
 
+    /**
+     * Obté els usuaris per al format CSV
+     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut dels usuaris amb la capaçalera
+     */
     public ArrayList<ArrayList<String>> obtenirUsuarisCSV() {
         ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         ArrayList<String> usuaris = new ArrayList<>();
