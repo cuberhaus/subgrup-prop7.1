@@ -28,4 +28,12 @@ public class ControladorMenuPrincipal {
         }
         return instancia;
     }
+
+    /**
+     * Obre el manual d'usuari.
+     * @throws IOException si hi ha cap problema.
+     */
+    public void obreManual() throws IOException{
+        controladorPresentacio.obreManual();
+    }
 }

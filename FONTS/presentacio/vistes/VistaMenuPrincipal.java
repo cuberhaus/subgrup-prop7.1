@@ -55,16 +55,22 @@ public class VistaMenuPrincipal extends JFrame {
         menuBarra = new JMenuBar();
         JMenu informacio = new JMenu("Sobre el recomanador");
 
-        informacio.add(new JMenuItem("Manual d'usuari"));
-        // TODO(maria): obrir manual d'usuari
-
         informacio.add(new JMenuItem(new AbstractAction("Autors") {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 new VistaDialegAutors().setVisible(true);
             }
         }));
-
+        informacio.add(new JMenuItem(new AbstractAction("Manual d'usuari") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    controladorMenuPrincipal.obreManual();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(menuBarra, "No s'ha pogut obrir el manual.");
+                }
+            }
+        }));
         menuBarra.add(informacio);
         menuBarra.add(Box.createHorizontalGlue());
     }

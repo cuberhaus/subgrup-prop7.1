@@ -341,4 +341,12 @@ public class ControladorPresentacio {
     public void exportaValoracions(String absolutePath) throws IOException {
         controladorDomini.exportaValoracions(absolutePath);
     }
+
+    /**
+     * Obre el manual d'usuari.
+     * @throws IOException si hi ha cap problema.
+     */
+    public void obreManual() throws IOException{
+        controladorDomini.obreManual();
+    }
 }

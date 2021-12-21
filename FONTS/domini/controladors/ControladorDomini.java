@@ -726,4 +726,12 @@ public class ControladorDomini {
         Date today = Calendar.getInstance().getTime();
         controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today);
     }
+
+    /**
+     * Obre el Manual d'usuari.
+     * @throws IOException Hi ha algun error.
+     */
+    public void obreManual() throws IOException {
+        controladorPersistencia.obreManual();
+    }
 }

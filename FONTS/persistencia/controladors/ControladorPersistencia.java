@@ -3,6 +3,7 @@ package persistencia.controladors;
 import persistencia.classes.EscriptorDeCSV;
 import persistencia.classes.LectorDeCSV;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +21,7 @@ public class ControladorPersistencia {
     private final Path direccioCarpetaItems = Paths.get("..", "EXE", "dades", "items");
     private final Path direccioCarpetaUsuaris = Paths.get("..", "EXE", "dades", "usuaris");
     private final Path direccioCarpetaValoracions = Paths.get("..", "EXE", "dades", "valoracions");
+    private final Path direccioManual = Paths.get("..", "EXE", "dades", "ManualD'Usuari.pdf");
 
     private static ControladorPersistencia instancia;
     private final EscriptorDeCSV escriptor;
@@ -170,5 +172,10 @@ public class ControladorPersistencia {
 
     public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula, String nom) throws IOException {
         escriptor.escriureCSV(ubicacio, taula, nom);
+    }
+
+    public void obreManual() throws IOException {
+        File myFile = direccioManual.toFile();
+        Desktop.getDesktop().open(myFile);
     }
 }
