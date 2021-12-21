@@ -112,6 +112,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     /**
      * @return Còpia profunda del <code>Map&lt;Usuari, Valoracio&gt;</code> que relaciona els Usuaris que han fet les
      * valoracions de l'Item amb la valoració.
+     * @throws UsuariIncorrecteException no trobem l'usuari
      */
     public Map<Usuari, Valoracio> obtenirValoracions() throws UsuariIncorrecteException {
         Map<Usuari, Valoracio> valoracions = new TreeMap<>();

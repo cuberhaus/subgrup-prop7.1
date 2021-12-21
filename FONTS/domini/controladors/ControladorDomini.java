@@ -18,7 +18,7 @@ import java.util.*;
 
 /**
  * Classe que representa el controlador de domini
- * @author edgar.moreno && pablo.vega
+ * @author edgar.moreno and pablo.vega
  */
 public class ControladorDomini {
     private static ControladorDomini instancia;
@@ -635,7 +635,7 @@ public class ControladorDomini {
     }
 
     /**
-     * @pre hi ha un tipusItem seleccionat
+     * pre: Hi ha un tipusItem seleccionat
      * Desselecciona el tipus item actual i esborra la relacio del programa actual amb aquest.
      * @throws IOException hi ha un problema guardant el tipus item actual.
      */
@@ -684,7 +684,7 @@ public class ControladorDomini {
      * Funcio que canvia la contrasenya d'un usuari
      * @param id es l'id de l'usuari a editar
      * @param novaContrasenyaArray es la contrasenya a la que es vol canviar
-     * @throws Exception si l'usuari no existeix, retorna excepcio
+     * @throws NoExisteixElementException si l'usuari no existeix, retorna excepcio
      */
     public void canviaContrasenyaUsuari(String id, char[] novaContrasenyaArray) throws NoExisteixElementException {
         String novaContrasenya = String.valueOf(novaContrasenyaArray);
@@ -703,7 +703,7 @@ public class ControladorDomini {
      * Funcio que canvia el nom d'un usuari
      * @param id id de l'usuari
      * @param nouNom nom a canviar
-     * @throws Exception Si l'usuari no existeix es retorna excepcio
+     * @throws NoExisteixElementException Si l'usuari no existeix es retorna excepcio
      */
     public void canviaNomUsuari(String id, String nouNom) throws NoExisteixElementException {
         Id idUsuari = new Id(Integer.parseInt(id), true);
@@ -721,6 +721,7 @@ public class ControladorDomini {
     /**
      *
      * @param absolutePath path a la carpeta on exportem les valoracions
+     * @throws IOException el fitxer no es pot obrir
      */
     public void exportaValoracions(String absolutePath) throws IOException {
         Date today = Calendar.getInstance().getTime();

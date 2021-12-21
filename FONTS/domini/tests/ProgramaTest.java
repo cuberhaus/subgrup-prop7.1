@@ -47,6 +47,7 @@ public class ProgramaTest {
     /**
      * Provem a preguntar si la sessió està iniciada en els 3 casos possibles, quan encara
      * no hem executat cap funció, i després d'iniciar i tancar sessio.
+     * @throws Exception si la sessio ja esta iniciada
      */
     @Test
     public void isSessioIniciada() throws Exception {

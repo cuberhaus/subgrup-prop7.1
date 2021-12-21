@@ -83,7 +83,7 @@ public class VistaDialegCrearItem extends JDialog {
                 // TODO catch
                 ex.printStackTrace();
             }
-            JOptionPane.showMessageDialog(this, "Ítem creat amb èxit.");
+            JOptionPane.showMessageDialog(this, "Item creat amb èxit.");
             dispose();
         });
         botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);

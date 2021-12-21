@@ -57,6 +57,7 @@ public class VistaMenuUsuaris extends JPanel {
      *
      * @return <code> ControladorMenuUsuaris</code>
      * @throws IOException No s'ha pogut obtenir la instància de VistaMenuUsuaris
+     * @throws NomInternIncorrecteException el fitxer intern no existeix
      */
     public static VistaMenuUsuaris obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {

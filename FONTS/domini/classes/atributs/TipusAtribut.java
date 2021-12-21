@@ -25,6 +25,7 @@ public class TipusAtribut {
      * Constructor d'un TipusAtribut a partir d'un valor i una distància.
      * @param valorAtribut Valor de l'atribut
      * @param distancia Distància de l'atribut
+     * @throws DistanciaNoCompatibleAmbValorException el valor atribut i la distancia no son compatibles.
      */
     public TipusAtribut(ValorAtribut<?> valorAtribut, Distancia distancia) throws DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtribut;
