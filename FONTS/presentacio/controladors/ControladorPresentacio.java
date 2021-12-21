@@ -209,4 +209,8 @@ public class ControladorPresentacio {
     public void canviaNomUsuari(String id, String nouNom) throws Exception {
         controladorDomini.canviaNomUsuari(id,nouNom);
     }
+
+    public void exportaValoracions(String absolutePath) {
+        controladorDomini.exportaValoracions(absolutePath);
+    }
 }
