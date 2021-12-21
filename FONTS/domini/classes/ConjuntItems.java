@@ -44,6 +44,12 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
+    /**
+     * Constructora de Conjunt d'ítems.
+     * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
+     * @param tipusItem el tipus dels items a crear.
+     * @throws AccesAEstatIncorrecteException la taula que s'ha passat no està inicialitzada.
+     */
     public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws AccesAEstatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         this.tipusItem = tipusItem;
@@ -137,12 +143,12 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         return new ConjuntItems(tipusItem.copiar(), copiaElements);
     }
 
-    @Override
     /**
      * Afegeix un item al conjunt d'ítems
      * @param element <code>Item</code> a afegir al conjunt
      */
-    public void afegir(Item element) {
+    @Override
+    public void afegir(Item element){
         if (!tipusItem.equals(element.obtenirTipusItem())) {
             throw new IllegalArgumentException();
         }
@@ -151,6 +157,10 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
+    /**
+     * Crea una matriu on la primera fila es una capsalera i despres a cada fila hi ha un item.
+     * @return Una matriu d'<code>String</code> que serialitza el ConjuntItems.
+     */
     public ArrayList<ArrayList<String>> converteixAArray() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         ArrayList<String> capsalera = new ArrayList<>();

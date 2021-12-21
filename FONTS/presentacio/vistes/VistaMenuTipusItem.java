@@ -91,7 +91,7 @@ public class VistaMenuTipusItem extends JPanel {
                 vistaDialegCrearTipusItem.setVisible(true);
                 tipusItemsComboBoxModel.removeAllElements();
                 tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
-            } catch (Exception exception) {
+            } catch (Exception e1) {
                 JOptionPane.showMessageDialog(instancia,
                         "No s'ha pogut crear el tipus d'ítem.");
             }

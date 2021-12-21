@@ -106,7 +106,7 @@ public class ControladorMenuUsuaris {
      * @return retorna l'id de l'usuari
      * @throws Exception no s'ha pogut crear l'usuari
      */
-    public int afegirUsuari(String nom, String contrasenya) throws Exception {
+    public int afegirUsuari(String nom, String contrasenya) {
         try {
             int id = controladorPresentacio.afegirUsuari(nom, contrasenya);
             JOptionPane.showMessageDialog(vistaMenuUsuaris, "S'ha creat correctament l'usuari: " + id);
@@ -123,7 +123,7 @@ public class ControladorMenuUsuaris {
      * @param id id de l'usuari
      * @throws Exception No s'ha pogut crear l'usuari
      */
-    public void esborrarUsuari(String id) throws Exception {
+    public void esborrarUsuari(String id) {
         try {
             idEsValid(id);
             if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
@@ -204,7 +204,7 @@ public class ControladorMenuUsuaris {
      * @param novaContrasenya nova contrasenya de l'usuari
      * @throws Exception No s'ha pogut canviar la contrasenya de l'usuari
      */
-    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) {
         try {
             idEsValid(id);
             controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
@@ -220,7 +220,7 @@ public class ControladorMenuUsuaris {
      * @param nouNom nou nom de l'usuari
      * @throws Exception No s'ha pogut canviar el nom de l'usuari
      */
-    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+    public void canviaNomUsuari(String id, String nouNom) {
         try {
             idEsValid(id);
             controladorPresentacio.canviaNomUsuari(id, nouNom);

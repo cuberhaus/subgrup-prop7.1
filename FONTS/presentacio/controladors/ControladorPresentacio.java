@@ -42,7 +42,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
 
-    public int obtenirSessio() throws Exception {
+    public int obtenirSessio() throws SessioNoIniciadaException {
         return controladorDomini.obtenirSessio();
     }
 
@@ -50,15 +50,15 @@ public class ControladorPresentacio {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
     }
 
-    public boolean existeixUsuari(int id) throws Exception {
+    public boolean existeixUsuari(int id) throws NoExisteixElementException {
         return controladorDomini.existeixUsuari(id);
     }
 
-    public int afegirUsuari(String nom, String contrasenya) throws Exception {
+    public int afegirUsuari(String nom, String contrasenya) throws NoExisteixElementException, JaExisteixElementException {
         return controladorDomini.afegirUsuari(nom,contrasenya);
     }
 
-    public void esborrarUsuari(int id) throws Exception {
+    public void esborrarUsuari(int id) throws NoExisteixElementException {
         controladorDomini.esborrarUsuari(id);
     }
 
@@ -70,7 +70,7 @@ public class ControladorPresentacio {
         controladorDomini.afegirValoracio(usuariId,itemId,valor);
     }
 
-    public boolean existeixValoracio(String usuariId, String itemId) throws Exception {
+    public boolean existeixValoracio(String usuariId, String itemId) throws NoExisteixElementException {
         return controladorDomini.existeixValoracio(usuariId,itemId);
     }
 
@@ -78,11 +78,11 @@ public class ControladorPresentacio {
         controladorDomini.esborraValoracio(usuariId,itemId);
     }
 
-    public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
+    public void editarValoracio(String usuariId, String itemId, String valor) throws NoExisteixElementException, UsuariIncorrecteException {
         controladorDomini.editarValoracio(usuariId,itemId,valor);
     }
 
-    public void carregarConjuntValoracions(String pathAbsolut) throws Exception {
+    public void carregarConjuntValoracions(String pathAbsolut) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
     }
 
@@ -150,7 +150,7 @@ public class ControladorPresentacio {
         return controladorDomini.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems(String rutaAbsoluta) throws Exception {
+    public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
         controladorDomini.carregarConjuntItems(rutaAbsoluta);
     }
 
@@ -162,15 +162,15 @@ public class ControladorPresentacio {
         controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
     }
 
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 
@@ -201,11 +201,11 @@ public class ControladorPresentacio {
         return controladorDomini.importarUsuaris(absolutePath);
     }
 
-    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws NoExisteixElementException {
         controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
     }
 
-    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+    public void canviaNomUsuari(String id, String nouNom) throws NoExisteixElementException {
         controladorDomini.canviaNomUsuari(id,nouNom);
     }
 

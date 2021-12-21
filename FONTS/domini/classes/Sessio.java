@@ -40,5 +40,5 @@ public abstract class Sessio {
      * @return Usuari amb sessió iniciada
      * @throws Exception si l'estat és sessioNoIniciada
      */
-    abstract public Usuari obtenirUsuariSessioIniciada() throws Exception;
+    abstract public Usuari obtenirUsuariSessioIniciada() throws SessioNoIniciadaException;
 }

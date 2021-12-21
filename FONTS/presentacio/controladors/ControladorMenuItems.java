@@ -1,6 +1,7 @@
 package presentacio.controladors;
 
 import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.AccesAEstatIncorrecteException;
 import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaDialegCrearItem;
@@ -92,7 +93,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems() throws Exception {
+    public void carregarConjuntItems() throws IOException, AccesAEstatIncorrecteException {
         JDialog dialegFitxer = new JDialog();
         JFileChooser selectorFitxer = new JFileChooser();
         int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);

@@ -12,6 +12,9 @@ public abstract class Distancia {
      */
     public abstract Distancia copiar();
 
+    /**
+     * @return el nom de la subclasse de l'instància.
+     */
     public abstract String obteNomDistancia();
 
     @Override

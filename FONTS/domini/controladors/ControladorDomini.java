@@ -63,7 +63,7 @@ public class ControladorDomini {
      * Obté l'id de l'usuari que ha iniciat la sessió
      * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
      */
-    public int obtenirSessio() throws Exception {
+    public int obtenirSessio() throws SessioNoIniciadaException {
         if (this.estatPrograma.isSessioIniciada()) return 0;
         else {
             Usuari usuari = this.estatPrograma.obtenirUsuariSessioIniciada();
@@ -107,7 +107,7 @@ public class ControladorDomini {
      * @return retorna si existeix l'usuari al conjunt o no
      * @throws Exception si l'usuari ja existeix
      */
-    public boolean existeixUsuari(int id) throws Exception {
+    public boolean existeixUsuari(int id) throws NoExisteixElementException {
         Id idBo = new Id(id, true);
         return estatPrograma.conteUsuari(idBo) && estatPrograma.obtenirUsuari(idBo).isActiu();
     }
@@ -130,10 +130,10 @@ public class ControladorDomini {
      * @param nom nom del usuari
      * @param contrasenya contrasenya del usuari
      */
-    public int afegirUsuari(String nom, String contrasenya) throws Exception {
+    public int afegirUsuari(String nom, String contrasenya) throws NoExisteixElementException, JaExisteixElementException {
         Id id = obteIdUsuariDisponible();
         if (estatPrograma.conteUsuari(id) && estatPrograma.obtenirUsuari(id).isActiu()) {
-            throw new Exception("L'usuari ja existeix");
+            throw new JaExisteixElementException("L'usuari " + nom + " ja existeix");
         }
         else {
             estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
@@ -145,10 +145,10 @@ public class ControladorDomini {
      * Esborra usuari, falta parametre del conjunt
      * @param id id del usuari
      */
-    public void esborrarUsuari(int id) throws Exception {
+    public void esborrarUsuari(int id) throws NoExisteixElementException {
         Id id1 = new Id(id, true);
         if (!estatPrograma.conteUsuari(id1) || !estatPrograma.obtenirUsuari(id1).isActiu()) {
-            throw new Exception("L'usuari no existeix");
+            throw new NoExisteixElementException("L'usuari no existeix");
         }
         else {
             estatPrograma.esborraUsuari(new Id(id, true));
@@ -169,7 +169,7 @@ public class ControladorDomini {
      * @param valor <code>String</code> valor de la valoracio
      * @throws Exception si no existeix l'usuari o no existeis l'item
      */
-    public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
+    public void afegirValoracio(String usuariId, String itemId, String valor) throws NoExisteixElementException, UsuariIncorrecteException {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         valoracionsTipusItemActual.afegir(new Valoracio(Double.parseDouble(valor), us, item));
@@ -182,7 +182,7 @@ public class ControladorDomini {
      * @return retorna si existeix la valoracio de l'usuari cap a un item
      * @throws Exception si no existeix l'usuari o no existeix l'item
      */
-    public boolean existeixValoracio(String usuariId, String itemId) throws Exception {
+    public boolean existeixValoracio(String usuariId, String itemId) throws NoExisteixElementException {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         return valoracionsTipusItemActual.conte(us, item);
@@ -194,7 +194,7 @@ public class ControladorDomini {
      * @param itemId <code>String</code> l'id id de l'item
      * @throws Exception si no existeix l'usuari o no existeix l'item
      */
-    public void esborraValoracio(String usuariId, String itemId) throws Exception {
+    public void esborraValoracio(String usuariId, String itemId) throws NoExisteixElementException {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(itemId)));
         valoracionsTipusItemActual.esborrar(valoracionsTipusItemActual.obte(us, item));
@@ -207,7 +207,7 @@ public class ControladorDomini {
      * @param valor <code>String</code> el valor a escriure a la recomanacio
      * @throws Exception si no s'ha pogut modificar la valoracio perque l'usuari i/o l'item no existeixen
      */
-    public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
+    public void editarValoracio(String usuariId, String itemId, String valor) throws NoExisteixElementException, UsuariIncorrecteException {
         esborraValoracio(usuariId, itemId);
         afegirValoracio(usuariId, itemId, valor);
     }
@@ -217,7 +217,7 @@ public class ControladorDomini {
      * @param rutaAbsolut <code>String</code> ubicacio de l'arxiu a llegir
      * @throws Exception si no s'ha pogut afegir la valoracio al contenidor
      */
-    public void carregaConjuntValoracions(String rutaAbsolut) throws Exception {
+    public void carregaConjuntValoracions(String rutaAbsolut) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
         ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
         valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
@@ -370,8 +370,6 @@ public class ControladorDomini {
             deseleccionarTipusItem();
         }
         nomTipusItemActual = nomTipusItem;
-        // TODO (edgar): treure barra baixes! i revisar si n'hi ha més
-        // TODO (edgar): no funciona però l'ítem existeix
         ArrayList<ArrayList<String>> valoracionsEnBrut = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
         ArrayList<ArrayList<String>> itemsEnBrut = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
         TaulaCSV taulaItems = new TaulaCSV(itemsEnBrut);
@@ -432,14 +430,6 @@ public class ControladorDomini {
         return true;
     }
 
-    // TODO: Pablo, s'han de borrar les seves valoracions!!!!
-    // TODO falta por acabar pero tengo hambre
-    // Esborra l'ítem amb aquest id
-    // hi ha un tipus d'ítem seleccionat pero millor comprovar
-    // l'item es del tipus d'ítem seleccionat
-    // retorna fals si es invalid o no s'ha pogut esborrar
-    // pot ser una paraula, un numero, estar buit, etc
-
     /**
      * Esborra l'item amb l'id dessitjat
      * @param id <code>String</code> l'id de l'item a eesborrar
@@ -499,7 +489,7 @@ public class ControladorDomini {
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
      * @throws Exception si no s'ha pogut obrir el fitxer
      */
-    public void carregarConjuntItems(String rutaAbsoluta) throws Exception {
+    public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
         ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TaulaCSV taulaItems = new TaulaCSV(items);
         ConjuntItems nousItems = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
@@ -530,7 +520,7 @@ public class ControladorDomini {
      * @return
      * @throws Exception
      */
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
@@ -556,7 +546,7 @@ public class ControladorDomini {
      * @return
      * @throws Exception
      */
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
@@ -582,7 +572,7 @@ public class ControladorDomini {
      * @return
      * @throws Exception
      */
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
+    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
@@ -655,7 +645,7 @@ public class ControladorDomini {
      * @return retorna els usuaris que no s'han pogut afegir
      * @throws Exception si l'usuari ha posat una direccio de fitxer no valida
      */
-    public ArrayList<String> importarUsuaris(String ubicacioFitxer) throws Exception {
+    public ArrayList<String> importarUsuaris(String ubicacioFitxer) throws IOException {
         ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(ubicacioFitxer);
         ConjuntUsuaris conjuntUsuaris = new ConjuntUsuaris(llistaUsuaris);
         ArrayList<Usuari> llista = conjuntUsuaris.obtenirUsuaris();
@@ -665,7 +655,6 @@ public class ControladorDomini {
             if (!estatPrograma.conteUsuari(usuari.obtenirId())) {
                 estatPrograma.afegirUsuari(usuari);
             }
-
             else {
                 idsNoInclosos.add(String.valueOf(usuari.obtenirId().obtenirValor()));
             }
@@ -680,13 +669,12 @@ public class ControladorDomini {
      * @param novaContrasenyaArray es la contrasenya a la que es vol canviar
      * @throws Exception si l'usuari no existeix, retorna excepcio
      */
-    public void canviaContrasenyaUsuari(String id, char[] novaContrasenyaArray) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenyaArray) throws NoExisteixElementException {
         String novaContrasenya = String.valueOf(novaContrasenyaArray);
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
-            throw new Exception("Canvi de contrasenya: L'id d'usuari seleccionat no existeix");
+            throw new NoExisteixElementException("Canvi de contrasenya: L'id d'usuari seleccionat no existeix");
         }
-
         else {
             if (!novaContrasenya.isBlank()) {
                 estatPrograma.obtenirUsuari(idUsuari).setContrasenya(novaContrasenya);
@@ -700,10 +688,10 @@ public class ControladorDomini {
      * @param nouNom nom a canviar
      * @throws Exception Si l'usuari no existeix es retorna excepcio
      */
-    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+    public void canviaNomUsuari(String id, String nouNom) throws NoExisteixElementException {
         Id idUsuari = new Id(Integer.parseInt(id), true);
         if (!estatPrograma.conteUsuari(idUsuari) || !estatPrograma.obtenirUsuari(idUsuari).isActiu()) {
-            throw new Exception("Canvi de nom: L'id d'usuari seleccionat no existeix");
+            throw new NoExisteixElementException("Canvi de nom: L'id d'usuari seleccionat no existeix");
         }
 
         else {
