@@ -176,7 +176,6 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
-    // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
@@ -190,6 +189,7 @@ public class ControladorDomini {
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(definicio, nom);
+        // TODO (edgar): afegir exception quan ja existeix tipus item amb aquest nom i que sigui una exception explicativa
     }
 
 
@@ -204,7 +204,6 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
-    // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
         if (estatPrograma.conteTipusItem(nom)) {
             // TODO: crear excepcio
@@ -243,7 +242,7 @@ public class ControladorDomini {
      */
     public void exportarConjuntDadesUsuari(String absolutePath) throws IOException {
         Date today = Calendar.getInstance().getTime();
-        controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV(), "Usuari" + today.toString());
+        controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV(), "Usuari" + today);
     }
 
     public void esborraConjuntUsuaris() {
@@ -270,6 +269,8 @@ public class ControladorDomini {
             deseleccionarTipusItem();
         }
         nomTipusItemActual = nomTipusItem;
+        // TODO (edgar): treure barra baixes! i revisar si n'hi ha més
+        // TODO (edgar): no funciona però l'ítem existeix
         ArrayList<ArrayList<String>> valoracions_raw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
         ArrayList<ArrayList<String>> items_raw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
         TaulaCSV taulaItems = new TaulaCSV(items_raw);
@@ -301,6 +302,7 @@ public class ControladorDomini {
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for(var x : tipusItem.obtenirTipusAtributs().entrySet()) {
             String valor = valorsAtributs.get(x.getKey());
+            // TODO (edgar): solucionar aquest warning
             Class<? extends ValorAtribut> clase = x.getValue().obtenirValorAtribut().getClass();
             Constructor<?> ctor = clase.getConstructor(String.class);
             Object object = ctor.newInstance(valor);
