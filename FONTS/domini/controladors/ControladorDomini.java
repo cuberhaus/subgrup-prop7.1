@@ -230,20 +230,16 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
-<<<<<<< HEAD
     /**
      * Carrega tipus d'item a partir d'un fitxer
      * @param nom <code>String</code> nom del tipus d'item
      * @param rutaAbsoluta <code>String</code> ubicacio del fitxer
      * @throws Exception si el fitxer no existeix o no te format correcte
      */
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
-=======
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         if (estatPrograma.conteTipusItem(nom)) {
             throw new JaExisteixElementException("Ja existeix un tipus item amb aquest nom.");
         }
->>>>>>> e7756f8cac8e56dddbc5922a40e262f2dfd644ee
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
@@ -276,7 +272,6 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
-<<<<<<< HEAD
     /**
      * Crea el tipus d'item amb el nom i els seus atributs
      * @param nom <code>String</code> nom del tipus d'item
@@ -285,10 +280,7 @@ public class ControladorDomini {
      * @throws IOException si no existeix el fitxer i/o no es pot obrir
      * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
      */
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
-=======
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
->>>>>>> e7756f8cac8e56dddbc5922a40e262f2dfd644ee
         if (estatPrograma.conteTipusItem(nom)) {
             throw new JaExisteixElementException("Ja existeix aquest tipus item.");
         }
@@ -365,16 +357,12 @@ public class ControladorDomini {
         nomTipusItemActual = null;
     }
 
-<<<<<<< HEAD
     /**
      * Selecciona el tipus item
      * @param nomTipusItem <code>String</code> el nom del tipus d'item
      * @throws Exception si no s'ha pogut seleccionar el tipus d'item
      */
-    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
-=======
     public void seleccionarTipusItem(String nomTipusItem) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
->>>>>>> e7756f8cac8e56dddbc5922a40e262f2dfd644ee
         if (nomTipusItemActual != null) {
             deseleccionarTipusItem();
         }
