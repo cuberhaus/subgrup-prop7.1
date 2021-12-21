@@ -1,6 +1,7 @@
 package presentacio.vistes;
 
 import domini.classes.Pair;
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class VistaDialegMostrarTipusItem extends JDialog {
 
     // TODO: afegir editar TipusItem
 
-    public VistaDialegMostrarTipusItem() throws IOException {
+    public VistaDialegMostrarTipusItem() throws IOException, NomInternIncorrecteException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = controladorMenuTipusItem.obtenirNomTipusItemSeleccionat();

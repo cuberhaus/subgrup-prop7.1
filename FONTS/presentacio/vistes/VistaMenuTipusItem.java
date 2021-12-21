@@ -1,7 +1,5 @@
 package presentacio.vistes;
 
-import excepcions.FormatIncorrecteException;
-import excepcions.JaExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
@@ -91,12 +89,9 @@ public class VistaMenuTipusItem extends JPanel {
                 vistaDialegCrearTipusItem.setVisible(true);
                 tipusItemsComboBoxModel.removeAllElements();
                 tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
-            } catch (NomInternIncorrecteException ex) {
-                // TODO: catchit
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                // TOdo: doododod
-                ex.printStackTrace();
+            } catch (Exception e1) {
+                JOptionPane.showMessageDialog(instancia,
+                        "No s'ha pogut crear un tipus d'ítem.");
             }
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
@@ -113,14 +108,9 @@ public class VistaMenuTipusItem extends JPanel {
                 try {
                     controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
                     JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
-                } catch (IOException e1) {
+                } catch (Exception e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
-                }
-                catch (JaExisteixElementException e1) {
-                    // TODO:
-                } catch (FormatIncorrecteException ex) {
-                    ex.printStackTrace();
                 }
                 // TODO (maria): mirar exception especial quan ja n'existeix un amb aquest nom
             }
@@ -233,6 +223,9 @@ public class VistaMenuTipusItem extends JPanel {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot mostrar el tipus d'ítem. Torna-ho a intentar.");
+                } catch (NomInternIncorrecteException ex) {
+                    //TODO: catch
+                    ex.printStackTrace();
                 }
             }
         });
@@ -250,6 +243,9 @@ public class VistaMenuTipusItem extends JPanel {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot editar el tipus d'ítem. Torna-ho a intentar.");
+                } catch (NomInternIncorrecteException ex) {
+                    //TODO catch
+                    ex.printStackTrace();
                 }
             }
         });

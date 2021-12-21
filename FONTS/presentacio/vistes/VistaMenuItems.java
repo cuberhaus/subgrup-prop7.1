@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ public class VistaMenuItems extends JPanel {
     private VistaMenuItems() {
     }
 
-    public static VistaMenuItems obtenirInstancia() throws IOException {
+    public static VistaMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new VistaMenuItems();
             controladorMenuItems = ControladorMenuItems.obtenirInstancia();
@@ -58,6 +59,9 @@ public class VistaMenuItems extends JPanel {
             } catch (IOException ex) {
                 // TODO catch
                 ex.printStackTrace();
+            } catch (NomInternIncorrecteException ex) {
+                //TODO:
+                ex.printStackTrace();
             }
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
@@ -68,6 +72,9 @@ public class VistaMenuItems extends JPanel {
                 controladorMenuItems.editarItem();
             } catch (IOException ex) {
                 //TODO: cath
+                ex.printStackTrace();
+            } catch (NomInternIncorrecteException ex) {
+                //TODO: catch
                 ex.printStackTrace();
             }
         });

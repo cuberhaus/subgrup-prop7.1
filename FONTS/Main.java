@@ -1,3 +1,4 @@
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorPresentacio;
 
 import java.io.IOException;
@@ -6,7 +7,7 @@ import java.io.IOException;
  * @author maria.prat
  */
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NomInternIncorrecteException {
         ControladorPresentacio.obtenirInstancia();
     }
 }
