@@ -82,11 +82,11 @@ public class LectorDeCSV {
                     if (posicioCometes.contains(index)) lletres[i] = '\"';
                     ++index;
                 }
-                temporal.add(String.valueOf(lletres));
+                temporal.add(String.valueOf(lletres).trim());
                 ++index;
             }
 
-            tabla.add(new ArrayList<>(temporal));
+            tabla.add(temporal);
             valors.clear();
         }
 

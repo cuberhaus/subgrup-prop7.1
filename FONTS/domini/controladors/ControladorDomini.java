@@ -369,8 +369,6 @@ public class ControladorDomini {
             deseleccionarTipusItem();
         }
         nomTipusItemActual = nomTipusItem;
-        // TODO (edgar): treure barra baixes! i revisar si n'hi ha més
-        // TODO (edgar): no funciona però l'ítem existeix
         ArrayList<ArrayList<String>> valoracionsEnBrut = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
         ArrayList<ArrayList<String>> itemsEnBrut = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
         TaulaCSV taulaItems = new TaulaCSV(itemsEnBrut);
@@ -430,14 +428,6 @@ public class ControladorDomini {
         itemsActuals.afegir(item);
         return true;
     }
-
-    // TODO: Pablo, s'han de borrar les seves valoracions!!!!
-    // TODO falta por acabar pero tengo hambre
-    // Esborra l'ítem amb aquest id
-    // hi ha un tipus d'ítem seleccionat pero millor comprovar
-    // l'item es del tipus d'ítem seleccionat
-    // retorna fals si es invalid o no s'ha pogut esborrar
-    // pot ser una paraula, un numero, estar buit, etc
 
     /**
      * Esborra l'item amb l'id dessitjat

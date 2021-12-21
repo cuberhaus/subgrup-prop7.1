@@ -74,7 +74,6 @@ public class ControladorPersistencia {
             Files.createDirectory(path);
         }
         else if (Files.exists(obteRutaDefinicioTipusItem(nom))) {
-            // TODO (edgar): això s'ignora i no s'hauria d'ignorar
             obteRutaDefinicioTipusItem(nom).toFile().delete();
         }
         escriptor.escriureCSV(obteRutaDefinicioTipusItem(nom).toString(), tipusItem);
@@ -112,7 +111,6 @@ public class ControladorPersistencia {
         nom += ".csv";
         Path path = Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom);
         if (Files.exists(path)) {
-            // TODO (edgar): això s'ignora i no s'hauria d'ignorar
             path.toFile().delete();
         }
         escriptor.escriureCSV(path.toString(), conjunt);
