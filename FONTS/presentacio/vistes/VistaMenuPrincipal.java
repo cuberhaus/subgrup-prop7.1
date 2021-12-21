@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuPrincipal;
 
 import javax.swing.*;
@@ -20,7 +21,7 @@ public class VistaMenuPrincipal extends JFrame {
     private VistaMenuPrincipal() {
     }
 
-    public static VistaMenuPrincipal obtenirInstancia() throws IOException {
+    public static VistaMenuPrincipal obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new VistaMenuPrincipal();
             controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
@@ -29,7 +30,7 @@ public class VistaMenuPrincipal extends JFrame {
         return instancia;
     }
 
-    private static void inicialitzarMenuPrincipal() throws IOException {
+    private static void inicialitzarMenuPrincipal() throws IOException, NomInternIncorrecteException {
         instancia.setTitle("Menu Principal");
         instancia.setResizable(false);
 
@@ -66,7 +67,7 @@ public class VistaMenuPrincipal extends JFrame {
         menuBarra.add(Box.createHorizontalGlue());
     }
 
-    private static void inicialitzarMenuPestanyes() throws IOException {
+    private static void inicialitzarMenuPestanyes() throws IOException, NomInternIncorrecteException {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", VistaMenuTipusItem.obtenirInstancia());
         menuPestanyes.add("Ítems", VistaMenuItems.obtenirInstancia());

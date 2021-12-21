@@ -191,7 +191,7 @@ public class ControladorMenuValoracions {
         return false;
     }
 
-    public void exportaValoracions(String absolutePath) {
+    public void exportaValoracions(String absolutePath) throws IOException {
         controladorPresentacio.exportaValoracions(absolutePath);
     }
 }

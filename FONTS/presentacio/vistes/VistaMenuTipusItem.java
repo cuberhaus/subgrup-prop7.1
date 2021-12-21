@@ -92,9 +92,6 @@ public class VistaMenuTipusItem extends JPanel {
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(instancia,
                         "No s'ha pogut crear un tipus d'ítem.");
-            } catch (NomInternIncorrecteException ex) {
-                // TODO: catchit
-                ex.printStackTrace();
             }
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
@@ -226,6 +223,9 @@ public class VistaMenuTipusItem extends JPanel {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot mostrar el tipus d'ítem. Torna-ho a intentar.");
+                } catch (NomInternIncorrecteException ex) {
+                    //TODO: catch
+                    ex.printStackTrace();
                 }
             }
         });
@@ -243,6 +243,9 @@ public class VistaMenuTipusItem extends JPanel {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot editar el tipus d'ítem. Torna-ho a intentar.");
+                } catch (NomInternIncorrecteException ex) {
+                    //TODO catch
+                    ex.printStackTrace();
                 }
             }
         });

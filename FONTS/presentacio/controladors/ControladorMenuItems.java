@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaDialegCrearItem;
 import presentacio.vistes.VistaDialegEditarItem;
 import presentacio.vistes.VistaMenuItems;
@@ -21,7 +22,7 @@ public class ControladorMenuItems {
     private ControladorMenuItems () {
     }
 
-    public static ControladorMenuItems obtenirInstancia() throws IOException {
+    public static ControladorMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorMenuItems();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
