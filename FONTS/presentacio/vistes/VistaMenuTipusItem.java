@@ -92,6 +92,9 @@ public class VistaMenuTipusItem extends JPanel {
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(instancia,
                         "No s'ha pogut crear un tipus d'ítem.");
+            } catch (NomInternIncorrecteException ex) {
+                // TODO: catchit
+                ex.printStackTrace();
             }
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
