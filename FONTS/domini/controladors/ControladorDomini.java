@@ -522,11 +522,26 @@ public class ControladorDomini {
         itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
 
-    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
-        // TODO
-        // relaciona el nom de l'atribut anterior amb el nou (es a dir permet canviar el nom del tipus d'atribut)
-        // es una mica horrible perque ha de passar per tots els items per canviar, crec
-        // si el nou atribut no té nom ("") vol dir que s'ha eliminat
+    /**
+     * Canvia el nom del tipus item seleccionat.
+     * @param nouNom nou nom pel tipus item.
+     * @throws IOException Problema canviant el nom del tipus item a la persistencia.
+     */
+    public void editarTipusItem(String nouNom) throws IOException {
+        if (nomTipusItemActual == null) return;
+        controladorPersistencia.borrarTipusItem(nomTipusItemActual);
+        controladorPersistencia.borrarConjuntValoracions(nomTipusItemActual);
+        TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual).copiar();
+        for (var item : itemsActuals.obtenirTotsElsElements().entrySet()) {
+            item.getValue().canviaNomTipusItem(nouNom);
+        }
+        estatPrograma.esborraTipusItem(nouNom);
+        tipusItem.canviaElNom(nouNom);
+        nomTipusItemActual = nouNom;
+        estatPrograma.afegirTipusItem(nouNom, tipusItem);
+        controladorPersistencia.guardarTipusItem(tipusItem.convertirAArrayList(), nouNom);
+        controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nouNom, "basic");
+        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nouNom);
     }
 
     //TODO: filtros
@@ -640,7 +655,6 @@ public class ControladorDomini {
      * @throws IOException hi ha un problema guardant el tipus item actual.
      */
     public void deseleccionarTipusItem() throws IOException {
-
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);

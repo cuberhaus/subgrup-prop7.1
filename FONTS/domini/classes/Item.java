@@ -2,7 +2,6 @@ package domini.classes;
 
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
-import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.UsuariIncorrecteException;
 
 import java.util.*;
@@ -246,5 +245,13 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         if (!atributs.containsKey(nomAtribut))
             return;
         atributs.put(nomAtribut, valor);
+    }
+
+    /**
+     * Canvia el nom del tipus item.
+     * @param nouNom nou nom del tipus d'item.
+     */
+    public void canviaNomTipusItem(String nouNom) {
+        tipusItem.canviaElNom(nouNom);
     }
 }

@@ -253,8 +253,8 @@ public class ControladorPresentacio {
         controladorDomini.esborrarTotsElsItems();
     }
 
-    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
-        controladorDomini.editarTipusItem(relacioNomsTipusAtributs);
+    public void editarTipusItem(String nouNom) throws IOException {
+        controladorDomini.editarTipusItem(nouNom);
     }
 
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {

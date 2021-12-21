@@ -174,8 +174,8 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
-        controladorPresentacio.editarTipusItem(relacioNomsTipusAtributs);
+    public void editarTipusItem(String nouNom) throws IOException {
+        controladorPresentacio.editarTipusItem(nouNom);
     }
 
     public void deseleccionarTipusItem() throws IOException {
