@@ -29,4 +29,22 @@ public class EscriptorDeCSV {
         }
         fitxer.close();
     }
+
+    public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> tauleta, String nomTemporal) throws IOException {
+        File comprobacio = new File(ubicacio);
+        if (comprobacio.isDirectory()) {
+            ubicacio = ubicacio + "/" + nomTemporal + ".csv";
+        }
+        BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio));
+        for (ArrayList<String> fila : tauleta) {
+            boolean primer = true;
+            for (String contingut : fila) {
+                if (!primer) fitxer.write(',');
+                fitxer.write(contingut);
+                primer = false;
+            }
+            fitxer.write('\n');
+        }
+        fitxer.close();
+    }
 }

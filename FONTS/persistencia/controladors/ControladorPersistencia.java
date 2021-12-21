@@ -159,4 +159,8 @@ public class ControladorPersistencia {
     public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
         escriptor.escriureCSV(ubicacio, taula);
     }
+
+    public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula, String nom) throws IOException {
+        escriptor.escriureCSV(ubicacio, taula, nom);
+    }
 }

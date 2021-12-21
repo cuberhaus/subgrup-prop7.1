@@ -72,14 +72,14 @@ public class ProgramaTest {
         assertEquals(u1, u2);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = Exception.class)
     public void obtenirUsuariSessioIniciadaDemanantUsuariAbansDiniciarSessio() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();
         Usuari u2 = p1.obtenirUsuariSessioIniciada();
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = Exception.class)
     public void obtenirUsuariSessioIniciadaDespresDeTancarSessio() throws Exception {
         p1.reset();
         Programa p1 = Programa.obtenirInstancia();

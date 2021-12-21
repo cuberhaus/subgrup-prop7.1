@@ -12,10 +12,7 @@ import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Classe que representa el controlador de domini
@@ -121,7 +118,6 @@ public class ControladorDomini {
             throw new Exception("L'usuari ja existeix");
         }
         else {
-            if (contrasenya.isBlank()) throw new Exception("La contrasenya es buida o nomes conte espais en buit");
             estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
             return id.obtenirValor();
         }
@@ -246,7 +242,8 @@ public class ControladorDomini {
      * @param absolutePath Absolute path to folder where the new file will be created
      */
     public void exportarConjuntDadesUsuari(String absolutePath) throws IOException {
-        controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV());
+        Date today = Calendar.getInstance().getTime();
+        controladorPersistencia.escriureCSVQualsevol(absolutePath, estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV(), "Usuari" + today.toString());
     }
 
     public void esborraConjuntUsuaris() {
