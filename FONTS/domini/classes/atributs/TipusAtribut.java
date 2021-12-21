@@ -53,42 +53,45 @@ public class TipusAtribut {
     }
 
     private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
-        if (Objects.equals(valorAtribut, "ValorBoolea")) {
-            return new ValorBoolea();
-        } else if (Objects.equals(valorAtribut, "ValorCategoric")) {
-            return new ValorCategoric();
-        } else if (Objects.equals(valorAtribut, "ValorNumeric")) {
-            return new ValorNumeric();
-        } else if (Objects.equals(valorAtribut, "ValorTextual")) {
-            return new ValorTextual();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntBoolea")) {
-            return new ValorConjuntBoolea();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntCategoric")) {
-            return new ValorConjuntCategoric();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntNumeric")) {
-            return new ValorConjuntNumeric();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntTextual")) {
-            return new ValorConjuntTextual();
-        } else {
-            return null;
+        switch (valorAtribut) {
+            case "ValorBoolea":
+                return new ValorBoolea();
+            case "ValorCategoric":
+                return new ValorCategoric();
+            case "ValorNumeric":
+                return new ValorNumeric();
+            case "ValorTextual":
+                return new ValorTextual();
+            case "ValorConjuntBoolea":
+                return new ValorConjuntBoolea();
+            case "ValorConjuntCategoric":
+                return new ValorConjuntCategoric();
+            case "ValorConjuntNumeric":
+                return new ValorConjuntNumeric();
+            case "ValorConjuntTextual":
+                return new ValorConjuntTextual();
+            default:
+                return null;
         }
     }
 
     private static Distancia distanciaDesDelNom(String distancia) {
-        if (Objects.equals(distancia, "DistanciaDiferenciaDeConjunts")) {
-            return new DistanciaDiferenciaDeConjunts();
-        } else if (Objects.equals(distancia, "DistanciaDiscreta")) {
-            return new DistanciaDiscreta();
-        } else if (Objects.equals(distancia, "DistanciaEuclidiana")) {
-            return new DistanciaEuclidiana();
-        } else if (Objects.equals(distancia, "DistanciaLevenshtein")) {
-            return new DistanciaLevenshtein();
-        } else if (Objects.equals(distancia, "DistanciaZero")) {
-            return new DistanciaZero();
-        } else {
-            return null;
+        switch (distancia) {
+            case "DistanciaDiferenciaDeConjunts":
+                return new DistanciaDiferenciaDeConjunts();
+            case "DistanciaDiscreta":
+                return new DistanciaDiscreta();
+            case "DistanciaEuclidiana":
+                return new DistanciaEuclidiana();
+            case "DistanciaLevenshtein":
+                return new DistanciaLevenshtein();
+            case "DistanciaZero":
+                return new DistanciaZero();
+            default:
+                return null;
         }
     }
+    
     /**
      * @return ValorAtribut del TipusAtribut.
      */
