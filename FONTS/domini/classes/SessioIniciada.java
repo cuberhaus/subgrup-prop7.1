@@ -1,5 +1,7 @@
 package domini.classes;
 
+import excepcions.SessioNoIniciadaException;
+
 /**
  * Representa l'estat de la sessió en el cas en què s'ha iniciat sessió.
  *
@@ -22,7 +24,7 @@ public class SessioIniciada extends Sessio {
      * @throws Exception si l'estat és sessioNoIniciada
      */
     @Override
-    public void tancarSessio(Programa programa) throws Exception {
+    public void tancarSessio(Programa programa) throws SessioNoIniciadaException {
         usuari = null;
         programa.cambiarEstat(new SessioNoIniciada());
     }

@@ -1,6 +1,7 @@
 package domini.classes;
 
 import domini.classes.recomanador.metode_recomanador.Punt;
+import excepcions.UsuariIncorrecteException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -147,12 +148,12 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      * @param valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
      * @return booleà retornat
      */
-    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException, UsuariIncorrecteException {
         if (valoracio == null) {
             throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
         }
         if (!this.equals(valoracio.obtenirUsuari())) {
-            throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
+            throw new UsuariIncorrecteException("No es pot afegir a un usuari una valoració d'un altre usuari.");
         }
         if (valoracions.containsKey(valoracio.obtenirItem())) {
             return false;

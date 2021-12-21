@@ -1,6 +1,7 @@
 package presentacio.controladors;
 
 import domini.classes.Pair;
+import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
@@ -25,7 +26,7 @@ public class ControladorMenuTipusItem {
     private ControladorMenuTipusItem () {
     }
 
-    public static ControladorMenuTipusItem obtenirInstancia() throws IOException {
+    public static ControladorMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorMenuTipusItem();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
@@ -37,7 +38,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException, IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
         controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
     }
 

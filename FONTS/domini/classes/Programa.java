@@ -1,5 +1,7 @@
 package domini.classes;
 
+import excepcions.SessioNoIniciadaException;
+
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -60,7 +62,7 @@ public class Programa {
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
      */
-    public void tancarSessio() throws Exception {
+    public void tancarSessio() throws SessioNoIniciadaException {
         sessio.tancarSessio(this);
     }
 

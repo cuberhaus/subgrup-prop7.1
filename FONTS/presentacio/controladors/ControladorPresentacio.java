@@ -2,6 +2,8 @@ package presentacio.controladors;
 
 import domini.classes.Pair;
 import domini.controladors.ControladorDomini;
+import excepcions.NomInternIncorrecteException;
+import excepcions.SessioNoIniciadaException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class ControladorPresentacio {
     private ControladorPresentacio() {
     }
 
-    public static ControladorPresentacio obtenirInstancia() throws IOException {
+    public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorPresentacio();
             controladorDomini = ControladorDomini.obtenirInstancia();
@@ -61,7 +63,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarUsuari(id);
     }
 
-    public void tancarSessio() throws Exception {
+    public void tancarSessio() throws SessioNoIniciadaException {
         controladorDomini.tancarSessio();
     }
 
@@ -89,7 +91,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
