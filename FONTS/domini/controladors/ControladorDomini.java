@@ -33,6 +33,11 @@ public class ControladorDomini {
     private Recomanador recomanador;
     private ConjuntRecomanacions recomanacions;
 
+    /**
+     * Contructor privat de la classe per defecte
+     * @throws IOException si no existeix algun fitxer de la càrrega de fitxers per defecte
+     * @throws NomInternIncorrecteException si hi ha algun problema amb els noms dels fitxers dels metodes interns
+     */
     private ControladorDomini() throws IOException, NomInternIncorrecteException {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
         estatPrograma = Programa.obtenirInstancia();
@@ -42,6 +47,12 @@ public class ControladorDomini {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     * @throws NomInternIncorrecteException
+     */
     public static ControladorDomini obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorDomini();
@@ -456,6 +467,10 @@ public class ControladorDomini {
         return retornaValoracions;
     }
 
+    /**
+     * Desseleciona el tipus item actual i esborra la relacio del porgrama actual amb aquest.
+     * @throws IOException
+     */
     public void deseleccionarTipusItem() throws IOException {
         // TODO: si no n'hi ha cap de seleccionat retornar una excepció personalitzada per distingir entre
         //  les dues excepcions i posar-me un todo (maria)
