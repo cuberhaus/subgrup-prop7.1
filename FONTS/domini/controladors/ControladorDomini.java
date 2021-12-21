@@ -8,6 +8,8 @@ import domini.classes.recomanador.*;
 import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.filtre.FiltreExclusiu;
 import domini.classes.recomanador.filtre.FiltreInclusiu;
+import excepcions.NomInternIncorrecteException;
+import excepcions.SessioNoIniciadaException;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -31,7 +33,7 @@ public class ControladorDomini {
     private Recomanador recomanador;
     private ConjuntRecomanacions recomanacions;
 
-    private ControladorDomini() throws IOException {
+    private ControladorDomini() throws IOException, NomInternIncorrecteException {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
         estatPrograma = Programa.obtenirInstancia();
         ArrayList<String> llistaTipusItems = controladorPersistencia.obtenirNomsDeTotsElsTipusItems();
@@ -40,7 +42,7 @@ public class ControladorDomini {
         }
     }
 
-    public static ControladorDomini obtenirInstancia() throws IOException {
+    public static ControladorDomini obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorDomini();
         }
@@ -140,7 +142,7 @@ public class ControladorDomini {
     /**
      * Tanca la sessio de programa
      */
-    public void tancarSessio() throws Exception {
+    public void tancarSessio() throws SessioNoIniciadaException {
         this.estatPrograma.tancarSessio();
     }
 
@@ -193,7 +195,7 @@ public class ControladorDomini {
     }
 
 
-    public void carregarTipusItem(String nom) throws IOException {
+    public void carregarTipusItem(String nom) throws IOException, NomInternIncorrecteException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.obtenirTipusItem(nom);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
@@ -204,8 +206,7 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
-    // TODO: MARIA prerequisit no hi ha tipusitem seleccionat
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
         if (estatPrograma.conteTipusItem(nom)) {
             // TODO: crear excepcio
             throw new IllegalArgumentException("Ja existeix aquest tipus item.");

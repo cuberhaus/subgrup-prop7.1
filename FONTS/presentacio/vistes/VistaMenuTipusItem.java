@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -33,7 +34,7 @@ public class VistaMenuTipusItem extends JPanel {
     private VistaMenuTipusItem() {
     }
 
-    public static VistaMenuTipusItem obtenirInstancia() throws IOException {
+    public static VistaMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new VistaMenuTipusItem();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
@@ -86,6 +87,9 @@ public class VistaMenuTipusItem extends JPanel {
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(instancia,
                         "No s'ha pogut crear un tipus d'ítem.");
+            } catch (NomInternIncorrecteException ex) {
+                // TODO: catchit
+                ex.printStackTrace();
             }
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
