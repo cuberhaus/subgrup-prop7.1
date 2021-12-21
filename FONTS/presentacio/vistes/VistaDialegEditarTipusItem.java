@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
@@ -18,9 +19,7 @@ public class VistaDialegEditarTipusItem extends JDialog {
     private JPanel panellLlistaTipusAtributs;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    // TODO: afegir editar TipusItem
-
-    public VistaDialegEditarTipusItem() throws IOException, NomInternIncorrecteException {
+    public VistaDialegEditarTipusItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = controladorMenuTipusItem.obtenirNomTipusItemSeleccionat();

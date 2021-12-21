@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaMenuRecomanacions;
 
@@ -16,7 +17,7 @@ public class ControladorMenuRecomanacions {
     private ControladorMenuRecomanacions() {
     }
 
-    public static ControladorMenuRecomanacions obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static ControladorMenuRecomanacions obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorMenuRecomanacions();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();

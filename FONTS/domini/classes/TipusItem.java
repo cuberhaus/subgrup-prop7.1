@@ -4,6 +4,7 @@ import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 import domini.classes.csv.TaulaCSV;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 
 import java.util.*;
 
@@ -175,7 +176,7 @@ public class TipusItem {
      * trobar un TipusAtribut que els reconegui als dos.
      */
     private static TipusAtribut trobaTipusAtribut(ValorAtribut<?> valorAtribut1,
-                                                  ValorAtribut<?> valorAtribut2) throws IllegalArgumentException {
+                                                  ValorAtribut<?> valorAtribut2) throws IllegalArgumentException, DistanciaNoCompatibleAmbValorException {
         // Considerem cada cas particularment per a poder definir la distància que li correspon a cada TipusAtribut
         // i assegurar-nos que és compatible amb el ValorAtribut.
         if (valorAtribut1 instanceof ValorBoolea) {
@@ -235,7 +236,7 @@ public class TipusItem {
      * @param s <code>String</code> que conté el valor d'un atribut.
      * @return TipusAtribut per defecte que admet el valor contingut en 's'.
      */
-    private TipusAtribut dedueixTipusAtribut(String s) {
+    private TipusAtribut dedueixTipusAtribut(String s) throws DistanciaNoCompatibleAmbValorException {
         try {
             Double.parseDouble(s);
         } catch (NumberFormatException e1) {

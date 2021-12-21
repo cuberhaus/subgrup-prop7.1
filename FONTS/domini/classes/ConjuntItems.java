@@ -3,6 +3,7 @@ package domini.classes;
 
 import domini.classes.csv.TaulaCSV;
 import excepcions.AccesAEstatIncorrecteException;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.JaExisteixElementException;
 import excepcions.NoExisteixElementException;
 
@@ -141,7 +142,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * Afegeix un item al conjunt d'ítems
      * @param element <code>Item</code> a afegir al conjunt
      */
-    public void afegir(Item element){
+    public void afegir(Item element) {
         if (!tipusItem.equals(element.obtenirTipusItem())) {
             throw new IllegalArgumentException();
         }
