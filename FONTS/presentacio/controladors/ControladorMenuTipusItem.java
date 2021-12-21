@@ -27,7 +27,7 @@ public class ControladorMenuTipusItem {
     private ControladorMenuTipusItem () {
     }
 
-    public static ControladorMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static ControladorMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorMenuTipusItem();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
@@ -39,7 +39,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException, NomInternIncorrecteException, JaExisteixElementException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         Map<String, Pair<String, String>> nomAValorAtributAmbFormat = new TreeMap<>();
         for (Map.Entry<String, Pair<String, String>> atribut : nomAValorAtribut.entrySet()) {
             String valorAtribut;
@@ -100,8 +100,62 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.carregarTipusItem(nom, rutaAbsoluta);
     }
 
-    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
-        return controladorPresentacio.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() throws DistanciaNoCompatibleAmbValorException {
+        Map<String, Pair<String, String>> atributsAmbFormat = controladorPresentacio.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
+        Map<String, Pair<String, String>> atributs = new TreeMap<>();
+        for (Map.Entry<String, Pair<String, String>> atribut : atributsAmbFormat.entrySet()) {
+            String valorAtribut;
+            String distanciaAtribut;
+            switch (atribut.getValue().x) {
+                case "ValorBoolea":
+                    valorAtribut = "Booleà";
+                    break;
+                case "ValorCategoric":
+                    valorAtribut = "Categòric";
+                    break;
+                case "ValorNumeric":
+                    valorAtribut = "Numèric";
+                    break;
+                case "ValorTextual":
+                    valorAtribut = "Textual";
+                    break;
+                case "ValorConjuntBoolea":
+                    valorAtribut = "Conjunt booleà";
+                    break;
+                case "ValorConjuntCategoric":
+                    valorAtribut = "Conjunt categòric";
+                    break;
+                case "ValorConjuntNumeric":
+                    valorAtribut = "Conjunt numèric";
+                    break;
+                case "ValorConjuntTextual":
+                    valorAtribut = "Conjunt textual";
+                    break;
+                default:
+                    valorAtribut = "";
+            }
+            switch (atribut.getValue().y) {
+                case "DistanciaDiferenciaDeConjunts":
+                    distanciaAtribut = "Diferència de conjunts";
+                    break;
+                case "DistanciaDiscreta":
+                    distanciaAtribut = "Discreta";
+                    break;
+                case "DistanciaEuclidiana":
+                    distanciaAtribut = "Euclidiana";
+                    break;
+                case "DistanciaLevenshtein":
+                    distanciaAtribut = "Levenshtein";
+                    break;
+                case "DistanciaZero":
+                    distanciaAtribut = "Zero";
+                    break;
+                default:
+                    distanciaAtribut = "";
+            }
+            atributs.put(atribut.getKey(), new Pair<>(valorAtribut, distanciaAtribut));
+        }
+        return atributs;
     }
 
     public String obtenirNomTipusItemSeleccionat() {

@@ -23,7 +23,7 @@ public class ControladorPresentacio {
     private ControladorPresentacio() {
     }
 
-    public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorPresentacio();
             controladorDomini = ControladorDomini.obtenirInstancia();
@@ -34,7 +34,7 @@ public class ControladorPresentacio {
         return instancia;
     }
 
-    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() throws DistanciaNoCompatibleAmbValorException {
         return controladorDomini.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
     }
 
@@ -90,7 +90,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
@@ -114,7 +114,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirNomTipusItemSeleccionat();
     }
 
-    public void esborrarTipusItemSeleccionat() {
+    public void esborrarTipusItemSeleccionat() throws IOException {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 

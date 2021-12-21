@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuRecomanacions;
 
@@ -23,7 +24,7 @@ public class VistaMenuRecomanacions extends JPanel {
         altura = this.getHeight();
     }
 
-    public static VistaMenuRecomanacions obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static VistaMenuRecomanacions obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new VistaMenuRecomanacions();
             controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();

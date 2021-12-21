@@ -2,6 +2,7 @@ package domini.classes;
 
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.UsuariIncorrecteException;
 
 import java.util.*;

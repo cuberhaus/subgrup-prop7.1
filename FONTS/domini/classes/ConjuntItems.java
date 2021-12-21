@@ -3,6 +3,7 @@ package domini.classes;
 
 import domini.classes.csv.TaulaCSV;
 import excepcions.AccesAEstatIncorrecteException;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.JaExisteixElementException;
 import excepcions.NoExisteixElementException;
 

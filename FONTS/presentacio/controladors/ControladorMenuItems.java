@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.AccesAEstatIncorrecteException;
 import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
@@ -24,7 +25,7 @@ public class ControladorMenuItems {
     private ControladorMenuItems () {
     }
 
-    public static ControladorMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static ControladorMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorMenuItems();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
@@ -72,7 +73,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.obtenirItem(id);
     }
 
-    public void editarItem() throws IOException, NomInternIncorrecteException, NoExisteixElementException {
+    public void editarItem() throws IOException, NomInternIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
@@ -121,7 +122,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.esSessioIniciada();
     }
 
-    public void crearNouItem() throws IOException, NomInternIncorrecteException {
+    public void crearNouItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {

@@ -1,6 +1,7 @@
 package presentacio.vistes;
 
 import excepcions.NoExisteixElementException;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
@@ -17,7 +18,7 @@ public class VistaDialegEditarItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegEditarItem(String id, Map<String, String> atributs) throws IOException, NomInternIncorrecteException {
+    public VistaDialegEditarItem(String id, Map<String, String> atributs) throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegEditarItem(id, atributs);
