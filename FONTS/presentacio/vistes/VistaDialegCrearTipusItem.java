@@ -1,6 +1,7 @@
 package presentacio.vistes;
 
 import domini.classes.Pair;
+import excepcions.JaExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
@@ -107,6 +108,9 @@ public class VistaDialegCrearTipusItem extends JDialog {
             } catch (NomInternIncorrecteException ex) {
                 // TODO: catchejar
                 ex.printStackTrace();
+            } catch (JaExisteixElementException ex) {
+                ex.printStackTrace();
+                //TODO tdododod
             }
         });
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);

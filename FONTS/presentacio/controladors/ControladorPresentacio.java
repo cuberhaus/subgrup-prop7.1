@@ -2,8 +2,7 @@ package presentacio.controladors;
 
 import domini.classes.Pair;
 import domini.controladors.ControladorDomini;
-import excepcions.NomInternIncorrecteException;
-import excepcions.SessioNoIniciadaException;
+import excepcions.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -91,11 +90,11 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         controladorDomini.carregarTipusItem(nom, rutaAbsoluta);
     }
 
@@ -119,7 +118,7 @@ public class ControladorPresentacio {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
+    public void seleccionarTipusItem(String nomTipusItem) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 

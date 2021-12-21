@@ -8,8 +8,7 @@ import domini.classes.recomanador.*;
 import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.filtre.FiltreExclusiu;
 import domini.classes.recomanador.filtre.FiltreInclusiu;
-import excepcions.NomInternIncorrecteException;
-import excepcions.SessioNoIniciadaException;
+import excepcions.*;
 import persistencia.controladors.ControladorPersistencia;
 
 import java.io.IOException;
@@ -231,6 +230,7 @@ public class ControladorDomini {
         return controladorPersistencia.obtenirConjuntsItem(nomTipusItemActual);
     }
 
+<<<<<<< HEAD
     /**
      * Carrega tipus d'item a partir d'un fitxer
      * @param nom <code>String</code> nom del tipus d'item
@@ -238,19 +238,25 @@ public class ControladorDomini {
      * @throws Exception si el fitxer no existeix o no te format correcte
      */
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
+=======
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
+        if (estatPrograma.conteTipusItem(nom)) {
+            throw new JaExisteixElementException("Ja existeix un tipus item amb aquest nom.");
+        }
+>>>>>>> e7756f8cac8e56dddbc5922a40e262f2dfd644ee
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
             try {
                 tipusAtributs.put(fila.get(0), new TipusAtribut(fila.get(1), fila.get(2)));
             } catch (Exception e) {
-                throw new Exception();
+                throw new FormatIncorrecteException("El format del fitxer donat no s'adequa.");
             }
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(definicio, nom);
-        // TODO (edgar): afegir exception quan ja existeix tipus item amb aquest nom i que sigui una exception explicativa
+        controladorPersistencia.guardarConjuntValoracions(new ArrayList<>(), nom);
     }
 
     /**
@@ -270,6 +276,7 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(definicio, nom);
     }
 
+<<<<<<< HEAD
     /**
      * Crea el tipus d'item amb el nom i els seus atributs
      * @param nom <code>String</code> nom del tipus d'item
@@ -279,9 +286,11 @@ public class ControladorDomini {
      * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
      */
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
+=======
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
+>>>>>>> e7756f8cac8e56dddbc5922a40e262f2dfd644ee
         if (estatPrograma.conteTipusItem(nom)) {
-            // TODO: crear excepcio
-            throw new IllegalArgumentException("Ja existeix aquest tipus item.");
+            throw new JaExisteixElementException("Ja existeix aquest tipus item.");
         }
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : nomAValorAtribut.entrySet()) {
@@ -290,6 +299,7 @@ public class ControladorDomini {
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(tipus.convertirAArrayList(), nom);
+        controladorPersistencia.guardarConjuntValoracions(new ArrayList<>(), nom);
     }
 
     /**
@@ -355,24 +365,28 @@ public class ControladorDomini {
         nomTipusItemActual = null;
     }
 
+<<<<<<< HEAD
     /**
      * Selecciona el tipus item
      * @param nomTipusItem <code>String</code> el nom del tipus d'item
      * @throws Exception si no s'ha pogut seleccionar el tipus d'item
      */
     public void seleccionarTipusItem(String nomTipusItem) throws Exception {
+=======
+    public void seleccionarTipusItem(String nomTipusItem) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
+>>>>>>> e7756f8cac8e56dddbc5922a40e262f2dfd644ee
         if (nomTipusItemActual != null) {
             deseleccionarTipusItem();
         }
         nomTipusItemActual = nomTipusItem;
         // TODO (edgar): treure barra baixes! i revisar si n'hi ha més
         // TODO (edgar): no funciona però l'ítem existeix
-        ArrayList<ArrayList<String>> valoracions_raw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
-        ArrayList<ArrayList<String>> items_raw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
-        TaulaCSV taulaItems = new TaulaCSV(items_raw);
+        ArrayList<ArrayList<String>> valoracionsRaw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
+        ArrayList<ArrayList<String>> itemsRaw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
+        TaulaCSV taulaItems = new TaulaCSV(itemsRaw);
         itemsActuals = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
         valoracionsTipusItemActual = new ConjuntValoracions();
-        TaulaCSV taula_valoracions = new TaulaCSV(valoracions_raw);
+        TaulaCSV taula_valoracions = new TaulaCSV(valoracionsRaw);
         valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
@@ -416,7 +430,6 @@ public class ControladorDomini {
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for(var x : tipusItem.obtenirTipusAtributs().entrySet()) {
             String valor = valorsAtributs.get(x.getKey());
-            // TODO (edgar): solucionar aquest warning
             Class<? extends ValorAtribut> clase = x.getValue().obtenirValorAtribut().getClass();
             Constructor<?> ctor = clase.getConstructor(String.class);
             Object object = ctor.newInstance(valor);
@@ -716,6 +729,6 @@ public class ControladorDomini {
      */
     public void exportaValoracions(String absolutePath) throws IOException {
         Date today = Calendar.getInstance().getTime();
-        controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today.toString());
+        controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today);
     }
 }
