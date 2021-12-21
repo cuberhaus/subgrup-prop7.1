@@ -2,6 +2,8 @@ package domini.classes;
 
 
 import domini.classes.csv.TaulaCSV;
+import excepcions.FormatIncorrecteException;
+import excepcions.JaExisteixElementException;
 
 import java.util.*;
 
@@ -40,7 +42,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
-    public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws Exception {
+    public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws FormatIncorrecteException, JaExisteixElementException, Exception {
         taula.eliminarEspaisInnecessaris();
         this.tipusItem = tipusItem;
 
@@ -51,11 +53,11 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             try {
                 id = Integer.parseInt(sid);
             } catch (NumberFormatException e1) {
-                throw new InputMismatchException("L'id no es un integer");
+                throw new FormatIncorrecteException("L'id no es un integer");
             }
             Id identificador = new Id(id, true);
             if (elements.containsKey(identificador)) {
-                throw new InputMismatchException("L'item creat ja existeix al conjunt");
+                throw new JaExisteixElementException("L'item creat ja existeix al conjunt");
             }
             afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
         }

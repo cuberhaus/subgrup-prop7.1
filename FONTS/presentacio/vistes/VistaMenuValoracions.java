@@ -146,7 +146,12 @@ public class VistaMenuValoracions extends JPanel {
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjunt = jFileChooser.getSelectedFile();
-                controladorMenuValoracions.exportaValoracions(pathConjunt.getAbsolutePath());
+                try {
+                    controladorMenuValoracions.exportaValoracions(pathConjunt.getAbsolutePath());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    // TODO: catch
+                }
             }
         });
         gridBagConstraints.gridx = 0;

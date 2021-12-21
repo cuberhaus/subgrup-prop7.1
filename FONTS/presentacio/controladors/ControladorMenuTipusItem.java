@@ -1,18 +1,16 @@
 package presentacio.controladors;
 
-import com.sun.source.tree.Tree;
 import domini.classes.Pair;
-import domini.classes.atributs.valors.*;
+import excepcions.FormatIncorrecteException;
+import excepcions.JaExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -43,7 +41,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
         Map<String, Pair<String, String>> nomAValorAtributAmbFormat = new TreeMap<>();
         for (Map.Entry<String, Pair<String, String>> atribut : nomAValorAtribut.entrySet()) {
             String valorAtribut;
@@ -100,7 +98,7 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.crearTipusItem(nom, nomAValorAtribut);
     }
 
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         controladorPresentacio.carregarTipusItem(nom, rutaAbsoluta);
     }
 

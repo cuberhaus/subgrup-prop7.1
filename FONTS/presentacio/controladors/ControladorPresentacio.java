@@ -2,6 +2,8 @@ package presentacio.controladors;
 
 import domini.classes.Pair;
 import domini.controladors.ControladorDomini;
+import excepcions.FormatIncorrecteException;
+import excepcions.JaExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import excepcions.SessioNoIniciadaException;
 
@@ -91,11 +93,11 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         controladorDomini.carregarTipusItem(nom, rutaAbsoluta);
     }
 
@@ -210,7 +212,7 @@ public class ControladorPresentacio {
         controladorDomini.canviaNomUsuari(id,nouNom);
     }
 
-    public void exportaValoracions(String absolutePath) {
+    public void exportaValoracions(String absolutePath) throws IOException {
         controladorDomini.exportaValoracions(absolutePath);
     }
 }

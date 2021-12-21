@@ -41,7 +41,7 @@ public class TaulaCSV {
      * @param taula ArrayList que conté tot el contingut de la taula.
      * @throws Exception si la taula es buida.
      */
-    public TaulaCSV(ArrayList<ArrayList<String>> taula) throws Exception {
+    public TaulaCSV(ArrayList<ArrayList<String>> taula) throws IllegalCallerException {
         valorsItem = new ArrayList<>();
         atributsAIndex = new HashMap<>();
         indexAAtributs = new ArrayList<>();
@@ -49,7 +49,7 @@ public class TaulaCSV {
         numItems = 0;
 
         if (taula.size() == 0) {
-            throw new Exception("La taula es buida");
+            return;
         }
         this.afegirConjuntAtributs(taula.get(0));
 
@@ -63,11 +63,11 @@ public class TaulaCSV {
      * Donada una llista d'atributs, els introdueix en l'estructura de dades.
      *
      * @param atributs és la llista d'atributs que volem tenir.
-     * @throws Exception si la taula ja ha estat inicialitzada amb uns atributs.
+     * @throws IllegalCallerException si la taula ja ha estat inicialitzada amb uns atributs.
      */
-    public void afegirConjuntAtributs(ArrayList<String> atributs) throws Exception {
+    public void afegirConjuntAtributs(ArrayList<String> atributs) throws IllegalCallerException {
         if (numAtributs != -1) {
-            throw new Exception("La taula ja s'havia inicialitzat prèviament.");
+            throw new IllegalCallerException("La taula ja s'havia inicialitzat prèviament.");
         }
 
         else {
@@ -87,13 +87,13 @@ public class TaulaCSV {
      * @throws Exception si la taula no té els atributs prèviament definits o la quantitat de valors de l'ítem
      * a afegir no és igual al d'atributs.
      */
-    public void afegirConjuntValors(ArrayList<String> valors) throws Exception {
+    public void afegirConjuntValors(ArrayList<String> valors) throws IllegalCallerException {
         if (numAtributs == -1) {
-            throw new Exception("No s'han inicialitzat els atributs");
+            throw new IllegalCallerException("No s'han inicialitzat els atributs");
         }
 
         else if (numAtributs != valors.size()) {
-            throw new Exception("La quantitat de valors de l'item a afegir es diferent a la " +
+            throw new IllegalCallerException("La quantitat de valors de l'item a afegir es diferent a la " +
                     "quantitat d'atributs");
         }
 
@@ -284,11 +284,11 @@ public class TaulaCSV {
 
     /**
      * Elimina els espais del principi i del final de la taula;
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats.
+     * @throws IllegalCallerException la taula no ha estat inicialitzada amb els atributs desitjats.
      */
-    public void eliminarEspaisInnecessaris() throws Exception {
+    public void eliminarEspaisInnecessaris() throws IllegalCallerException {
         if (!estaInicialitzada()) {
-            throw new Exception("La taula no ha estat inicialitzada.");
+            throw new IllegalCallerException("La taula no ha estat inicialitzada.");
         }
         for (int i = 0; i < numAtributs; ++i) {
             String nomRetallat = indexAAtributs.get(i).trim();

@@ -1,5 +1,7 @@
 package presentacio.vistes;
 
+import excepcions.FormatIncorrecteException;
+import excepcions.JaExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
@@ -89,11 +91,11 @@ public class VistaMenuTipusItem extends JPanel {
                 vistaDialegCrearTipusItem.setVisible(true);
                 tipusItemsComboBoxModel.removeAllElements();
                 tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
-            } catch (Exception e1) {
-                JOptionPane.showMessageDialog(instancia,
-                        "No s'ha pogut crear un tipus d'ítem.");
             } catch (NomInternIncorrecteException ex) {
                 // TODO: catchit
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                // TOdo: doododod
                 ex.printStackTrace();
             }
         });
@@ -111,9 +113,14 @@ public class VistaMenuTipusItem extends JPanel {
                 try {
                     controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
                     JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
-                } catch (Exception e1) {
+                } catch (IOException e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
+                }
+                catch (JaExisteixElementException e1) {
+                    // TODO:
+                } catch (FormatIncorrecteException ex) {
+                    ex.printStackTrace();
                 }
                 // TODO (maria): mirar exception especial quan ja n'existeix un amb aquest nom
             }

@@ -102,9 +102,8 @@ public class ControladorMenuValoracions {
      * Esborra una valoració del conjunt amb els identificadors donats
      * @param usuariId identificador de l'usuari
      * @param itemId identificador d'ítem
-     * @throws Exception no s'ha pogut esborrar la valoració
      */
-    public void esborrarValoracio(String usuariId, String itemId) throws Exception {
+    public void esborrarValoracio(String usuariId, String itemId) {
         try {
             idUsuariEsValid(usuariId);
             idItemEsValid(itemId);
@@ -191,7 +190,7 @@ public class ControladorMenuValoracions {
         return false;
     }
 
-    public void exportaValoracions(String absolutePath) {
+    public void exportaValoracions(String absolutePath) throws IOException {
         controladorPresentacio.exportaValoracions(absolutePath);
     }
 }
