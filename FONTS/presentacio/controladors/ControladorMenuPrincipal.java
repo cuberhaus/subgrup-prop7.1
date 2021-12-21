@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaMenuPrincipal;
 
@@ -18,7 +19,7 @@ public class ControladorMenuPrincipal {
     private ControladorMenuPrincipal () {
     }
 
-    public static ControladorMenuPrincipal obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static ControladorMenuPrincipal obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorMenuPrincipal();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();

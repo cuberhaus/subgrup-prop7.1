@@ -2,6 +2,7 @@ package domini.classes.atributs;
 
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 
 import java.util.Objects;
@@ -25,17 +26,23 @@ public class TipusAtribut {
      * @param valorAtribut Valor de l'atribut
      * @param distancia Distància de l'atribut
      */
-    public TipusAtribut(ValorAtribut<?> valorAtribut, Distancia distancia) {
+    public TipusAtribut(ValorAtribut<?> valorAtribut, Distancia distancia) throws DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtribut;
         this.distancia = distancia;
+        if (!distancia.admet(valorAtribut)) {
+            throw new DistanciaNoCompatibleAmbValorException("El ValorAtribut i la Distancia donats no són compatibles");
+        }
     }
 
-    public TipusAtribut(String valor, String distancia) throws NomInternIncorrecteException {
+    public TipusAtribut(String valor, String distancia) throws NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
         // TODO: crear excepcions pròpies
         if (this.valorAtribut == null || this.distancia == null) {
             throw new NomInternIncorrecteException("El ValorAtribut o Distancia demanats no existeixen.");
+        }
+        if (!this.distancia.admet(this.valorAtribut)) {
+            throw new DistanciaNoCompatibleAmbValorException("El ValorAtribut i la Distancia donats no són compatibles");
         }
     }
 
@@ -111,6 +118,11 @@ public class TipusAtribut {
      * @return Còpia profunda del TipusAtribut.
      */
     public TipusAtribut copiar() {
-        return new TipusAtribut(valorAtribut.copiar(), distancia.copiar());
+        try {
+            return new TipusAtribut(valorAtribut.copiar(), distancia.copiar());
+        } catch (DistanciaNoCompatibleAmbValorException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

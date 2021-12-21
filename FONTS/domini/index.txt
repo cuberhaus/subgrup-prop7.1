@@ -1,5 +1,7 @@
-Carpeta de la capa de domini del projecte, hi trobem la carpeta classes/ amb el codi de les classes del projecte i la
-carpeta tests/ amb els tests del projecte. Tambe hi ha el main interactiu
+Carpeta de la capa de domini del projecte, hi trobem la carpeta classes on trobem la implementació de totes les classes,
+la carpeta controladors on està implementat el controlador de domini i la carpeta tests on trobem els drivers i els JUnits
+de les classes de domini.
+
 classes/
+controladors/
 tests/
-Main.java

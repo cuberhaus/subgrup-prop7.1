@@ -1,0 +1,16 @@
+Implementacio de les vistes.
+
+index.txt
+Pantalla.java
+VistaDialegAutors.java
+VistaDialegCrearItem.java
+VistaDialegCrearTipusItem.java
+VistaDialegEditarItem.java
+VistaDialegEditarTipusItem.java
+VistaDialegMostrarTipusItem.java
+VistaMenuItems.java
+VistaMenuPrincipal.java
+VistaMenuRecomanacions.java
+VistaMenuTipusItem.java
+VistaMenuUsuaris.java
+VistaMenuValoracions.java

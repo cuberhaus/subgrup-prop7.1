@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
@@ -19,7 +20,7 @@ public class VistaMenuItems extends JPanel {
     private VistaMenuItems() {
     }
 
-    public static VistaMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static VistaMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new VistaMenuItems();
             controladorMenuItems = ControladorMenuItems.obtenirInstancia();
@@ -63,6 +64,9 @@ public class VistaMenuItems extends JPanel {
             } catch (NomInternIncorrecteException e2) {
                 //TODO:
                 e2.printStackTrace();
+            } catch (DistanciaNoCompatibleAmbValorException distanciaNoCompatibleAmbValorException) {
+                //TODO:
+                distanciaNoCompatibleAmbValorException.printStackTrace();
             }
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
@@ -80,6 +84,8 @@ public class VistaMenuItems extends JPanel {
             } catch (NoExisteixElementException ex) {
                 // TODO
                 ex.printStackTrace();
+            } catch (DistanciaNoCompatibleAmbValorException distanciaNoCompatibleAmbValorException) {
+                distanciaNoCompatibleAmbValorException.printStackTrace();
             }
         });
         menuLateral.add(botoEditarItem);

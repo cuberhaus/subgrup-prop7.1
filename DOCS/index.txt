@@ -1,6 +1,5 @@
 Conte la documentacio del projecte.
-DescripcioDelsCasosDUs.pdf
-DiagramaDeCasosDUs.jpg
-DiagramaEstatic.pdf
-DissenyIRelacioDeClasses.pdf
+javadoc/
+PRIMERA ENTREGA/
+SEGONA ENTREGA/
 index.txt

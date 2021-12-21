@@ -37,7 +37,7 @@ public class ControladorDomini {
      * @throws IOException si no existeix algun fitxer de la càrrega de fitxers per defecte
      * @throws NomInternIncorrecteException si hi ha algun problema amb els noms dels fitxers dels metodes interns
      */
-    private ControladorDomini() throws IOException, NomInternIncorrecteException {
+    private ControladorDomini() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
         estatPrograma = Programa.obtenirInstancia();
         ArrayList<String> llistaTipusItems = controladorPersistencia.obtenirNomsDeTotsElsTipusItems();
@@ -52,7 +52,7 @@ public class ControladorDomini {
      * @throws IOException si no existeix algun fitxer de la càrrega de fitxers per defecte
      * @throws NomInternIncorrecteException si hi ha algun problema amb els noms dels fitxers dels metodes interns
      */
-    public static ControladorDomini obtenirInstancia() throws IOException, NomInternIncorrecteException {
+    public static ControladorDomini obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorDomini();
         }
@@ -262,7 +262,7 @@ public class ControladorDomini {
      * @throws IOException si no s'ha pogut obrir el fitxer
      * @throws NomInternIncorrecteException si no existeix un fitxer amb el tipus d'item dessitjat
      */
-    public void carregarTipusItem(String nom) throws IOException, NomInternIncorrecteException {
+    public void carregarTipusItem(String nom) throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.obtenirTipusItem(nom);
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : definicio) {
@@ -281,7 +281,7 @@ public class ControladorDomini {
      * @throws IOException si no existeix el fitxer i/o no es pot obrir
      * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
      */
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (estatPrograma.conteTipusItem(nom)) {
             throw new JaExisteixElementException("Ja existeix aquest tipus item.");
         }
@@ -308,7 +308,7 @@ public class ControladorDomini {
      * Obtenir les distancies
      * @return <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> amb els valors
      */
-    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() {
+    public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() throws DistanciaNoCompatibleAmbValorException {
         TipusItem tipus = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, Pair<String, String>> valors = new TreeMap<>();
         for(var x : tipus.obtenirTipusAtributs().entrySet()) {
@@ -351,8 +351,9 @@ public class ControladorDomini {
     /**
      * Esborra el tipus d'item seleccionat
      */
-    public void esborrarTipusItemSeleccionat() {
+    public void esborrarTipusItemSeleccionat() throws IOException {
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
+        controladorPersistencia.borrarConjuntValoracions(nomTipusItemActual);
         itemsActuals = null;
         estatPrograma.esborraTipusItem(nomTipusItemActual);
         valoracionsTipusItemActual = null;
@@ -635,7 +636,7 @@ public class ControladorDomini {
      * @return retorna la llista d'usuaris
      */
     public ArrayList<ArrayList<String>> obteUsuaris() {
-        return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
+        return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuarisActius();
     }
 
     /**
