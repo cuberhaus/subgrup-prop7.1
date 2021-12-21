@@ -84,7 +84,14 @@ public class VistaMenuItems extends JPanel {
         });
         menuLateral.add(botoEditarItem);
         JButton botoEsborrarItem = new JButton("Esborra un ítem");
-        botoEsborrarItem.addActionListener(e -> controladorMenuItems.esborrarItem());
+        botoEsborrarItem.addActionListener(e -> {
+            try {
+                controladorMenuItems.esborrarItem();
+            } catch (NoExisteixElementException ex) {
+                // TODO
+                ex.printStackTrace();
+            }
+        });
         menuLateral.add(botoEsborrarItem);
 
         JButton botoEsborrarTotsElsItems = new JButton("Esborra tots els ítems");

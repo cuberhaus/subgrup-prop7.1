@@ -1,6 +1,7 @@
 package domini.classes;
 
 import domini.classes.csv.TaulaCSV;
+import excepcions.NoExisteixElementException;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             String password = usuari.get(2);
             String actiu = usuari.get(3);
 
-            Boolean actiuUsuari = Boolean.parseBoolean(actiu.trim());
+            boolean actiuUsuari = Boolean.parseBoolean(actiu.trim());
             int idNum = Integer.parseInt(id);
             Id idUsuari = new Id(idNum, actiuUsuari);
             elements.put(idUsuari, new Usuari(idUsuari, nom, password));
@@ -61,7 +62,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      * @param id que correspon al usuari que volem esborrar
      */
     @Override
-    public Usuari esborrar(Id id) {
+    public Usuari esborrar(Id id) throws NoExisteixElementException {
         Usuari u1 = this.obtenir(id);
         u1.setActiu(false);
         return elements.put(u1.obtenirId(), u1);

@@ -53,7 +53,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
 
-    public void esborrarItem() {
+    public void esborrarItem() throws NoExisteixElementException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {

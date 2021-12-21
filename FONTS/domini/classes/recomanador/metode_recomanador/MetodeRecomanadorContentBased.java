@@ -3,6 +3,7 @@ package domini.classes.recomanador.metode_recomanador;
 import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.Recomanacio;
+import excepcions.NoExisteixElementException;
 
 import java.util.*;
 
@@ -40,7 +41,7 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) throws NoExisteixElementException {
         TreeMap<Id, Double> valorItem = new TreeMap<>();
         KNN knn = new KNN(conjuntRecomanable.obtenirTotsElsElements().values().toArray(new Item[0]));
         for (Valoracio val : valoracionsUsuari.obtenitTotesLesValoracions().values()) {

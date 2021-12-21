@@ -138,7 +138,7 @@ public class ControladorPresentacio {
         return controladorDomini.afegirItem(valorsAtributs);
     }
 
-    public boolean esborrarItem(String id) {
+    public boolean esborrarItem(String id) throws NoExisteixElementException {
         return controladorDomini.esborrarItem(id);
     }
 

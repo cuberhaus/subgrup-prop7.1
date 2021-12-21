@@ -3,6 +3,7 @@ package domini.classes.recomanador.metode_recomanador;
 import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.Recomanacio;
+import excepcions.NoExisteixElementException;
 
 import java.util.*;
 
@@ -25,7 +26,7 @@ public class MetodeRecomanadorHibrid extends MetodeRecomanador {
 
     // Una primera aproximacio es demanar a cada mètode el doble dels necessaris i ordenar-los per les valoracions normalitzades.
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) throws NoExisteixElementException {
         ArrayList<Recomanacio> recCollab = metodeCollab.obteRecomanacions(usuari, conjuntRecomanable, valoracionsUsuari, 2*numRecomanacions).obtenirConjuntRecomanacions();
         ArrayList<Recomanacio> recContent = metodeContent.obteRecomanacions(usuari, conjuntRecomanable, valoracionsUsuari, 2*numRecomanacions).obtenirConjuntRecomanacions();
         double factorCollab = 0.;

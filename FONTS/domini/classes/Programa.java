@@ -163,7 +163,7 @@ public class Programa {
      *
      * @param id el paràmetre s'ha marcat com a no actiu.
      */
-    public void esborraUsuari(Id id) {
+    public void esborraUsuari(Id id) throws NoExisteixElementException {
         conjuntUsuaris.esborrar(id);
     }
 

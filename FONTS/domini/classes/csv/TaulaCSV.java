@@ -120,7 +120,7 @@ public class TaulaCSV {
             throw new AccesAEstatIncorrecteException("No s'han inicialitzat els atributs");
         }
         else if (!this.atributsAIndex.containsKey(atribut)) {
-            throw new NoExisteixElementException("L'atribut desitjat no es troba en aquest contenidor");
+            throw new NoExisteixElementException("L'atribut " + atribut + " no es troba en aquest contenidor");
         }
 
         else {
