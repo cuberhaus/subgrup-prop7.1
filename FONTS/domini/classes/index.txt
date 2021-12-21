@@ -12,7 +12,6 @@ ElementIdentificat.java
 Id.java
 index.txt
 Item.java
-Pair.java
 Programa.java
 Sessio.java
 SessioIniciada.java
