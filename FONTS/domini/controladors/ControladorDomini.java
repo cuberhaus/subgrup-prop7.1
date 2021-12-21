@@ -219,7 +219,6 @@ public class ControladorDomini {
             tipusAtributs.put(fila.getKey(), new TipusAtribut(fila.getValue().x, fila.getValue().y));
         }
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
-        //nomTipusItemActual = nom;
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(tipus.convertirAArrayList(), nom);
     }
@@ -241,8 +240,6 @@ public class ControladorDomini {
     public boolean esSessioIniciada() {
         return estatPrograma.isSessioIniciada();
     }
-
-    // TODO: Pablo
 
     /**
      *
@@ -299,9 +296,7 @@ public class ControladorDomini {
         return nomTipusItemActual != null;
     }
 
-    // TODO: Pablo
     public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
-        // TODO
         // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // retorna false si no s'ha pogut fer i cert si tot esta be
@@ -329,7 +324,7 @@ public class ControladorDomini {
     // pot ser una paraula, un numero, estar buit, etc
     public boolean esborrarItem(String id) {
         //Comprobacio si id es valid nomes de transformar
-        int idItemABuscar = -1;
+        int idItemABuscar;
         try {
             idItemABuscar = Integer.parseInt(id);
         } catch (NumberFormatException e) {
@@ -347,7 +342,6 @@ public class ControladorDomini {
     }
 
     public Map<String, String> obtenirItem(String id) throws IllegalArgumentException {
-        // TODO: pèro esta fet
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // l'item es del tipus d'ítem seleccionat
@@ -392,7 +386,6 @@ public class ControladorDomini {
     }
 
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
-        // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
@@ -411,7 +404,6 @@ public class ControladorDomini {
     }
 
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
-        // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa
@@ -430,7 +422,6 @@ public class ControladorDomini {
     }
 
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
-        // TODO
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
         // i el filtre que li passa

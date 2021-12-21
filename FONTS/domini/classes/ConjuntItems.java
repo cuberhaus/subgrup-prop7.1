@@ -136,10 +136,10 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * @param element <code>Item</code> a afegir al conjunt
      */
     public void afegir(Item element){
-        if (element.obtenirTipusItem() != this.tipusItem) {
+        // TODO: no estic massa segur que aixo sigui correcte.
+        if (!tipusItem.equals(element.obtenirTipusItem())) {
             throw new IllegalArgumentException();
         }
-
         else {
             super.afegir(element);
         }
