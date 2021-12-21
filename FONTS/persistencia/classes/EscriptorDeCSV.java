@@ -17,6 +17,10 @@ public class EscriptorDeCSV {
      * @throws IOException si no existeix el fitxer, llença exepcio
      */
     public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> tauleta) throws IOException {
+        File comprobacio = new File(ubicacio);
+        if (!comprobacio.isDirectory()) {
+            ubicacio = ubicacio + "/temporal.csv";
+        }
         BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio));
         for (ArrayList<String> fila : tauleta) {
             boolean primer = true;
