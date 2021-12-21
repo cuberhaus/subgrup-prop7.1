@@ -1,5 +1,6 @@
 package domini.classes;
 
+import excepcions.SessioIniciadaException;
 import excepcions.SessioNoIniciadaException;
 
 /**
@@ -26,7 +27,7 @@ public class SessioNoIniciada extends Sessio {
      * @throws Exception si l'estat és sessioIniciada
      */
     @Override
-    public void iniciarSessio(Programa programa, Usuari usuari) throws Exception{
+    public void iniciarSessio(Programa programa, Usuari usuari) throws SessioIniciadaException {
         programa.cambiarEstat(new SessioIniciada(usuari));
     }
 

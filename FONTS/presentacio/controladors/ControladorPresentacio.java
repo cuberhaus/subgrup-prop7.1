@@ -46,7 +46,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirSessio();
     }
 
-    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
+    public void iniciarSessio(int idSessio, String contrasenya) throws NoExisteixElementException, ContrasenyaIncorrectaException, SessioIniciadaException {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
     }
 
@@ -142,7 +142,7 @@ public class ControladorPresentacio {
         return controladorDomini.esborrarItem(id);
     }
 
-    public Map<String, String> obtenirItem(String id) {
+    public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
         return controladorDomini.obtenirItem(id);
     }
 

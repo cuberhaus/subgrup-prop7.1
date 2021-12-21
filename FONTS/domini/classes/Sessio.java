@@ -1,5 +1,6 @@
 package domini.classes;
 
+import excepcions.SessioIniciadaException;
 import excepcions.SessioNoIniciadaException;
 
 /**
@@ -24,7 +25,7 @@ public abstract class Sessio {
      * @param programa Instancia de programa
      * @throws Exception si l'estat és sessioIniciada
      */
-    abstract void iniciarSessio(Programa programa, Usuari usuari) throws Exception;
+    abstract void iniciarSessio(Programa programa, Usuari usuari) throws SessioIniciadaException;
 
     /**
      * Retorna true si la sessió està iniciada.

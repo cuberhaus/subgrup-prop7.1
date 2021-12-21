@@ -77,14 +77,14 @@ public class ControladorDomini {
      * @param idSessio id de l'usuari que inicia la sessió
      * @param contrasenya contrasenya de l'usuari
      */
-    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
+    public void iniciarSessio(int idSessio, String contrasenya) throws SessioIniciadaException, ContrasenyaIncorrectaException, NoExisteixElementException {
         Id idUsuariBuscat = new Id(idSessio, true);
         if (this.estatPrograma.conteUsuari(idUsuariBuscat)) {
             Usuari usuariCercat = this.estatPrograma.obtenirUsuari(idUsuariBuscat);
             Id idUsuariCercat = usuariCercat.obtenirId();
 
             if (!idUsuariCercat.esActiu()) {
-                throw new Exception("L'usuari existeix pero no es actiu");
+                throw new NoExisteixElementException("L'usuari existeix pero no es actiu");
             }
 
             else if (usuariCercat.isContrasenya(contrasenya)) {
@@ -92,12 +92,12 @@ public class ControladorDomini {
             }
 
             else {
-                throw new Exception("La contrasenya es incorrecta");
+                throw new ContrasenyaIncorrectaException("La contrasenya es incorrecta");
             }
         }
 
         else {
-            throw new Exception("L'usuari no existeix");
+            throw new NoExisteixElementException("L'usuari no existeix");
         }
     }
 
@@ -108,8 +108,8 @@ public class ControladorDomini {
      * @throws Exception si l'usuari ja existeix
      */
     public boolean existeixUsuari(int id) throws Exception {
-        Id id_bo = new Id(id, true);
-        return estatPrograma.conteUsuari(id_bo) && estatPrograma.obtenirUsuari(id_bo).isActiu();
+        Id idBo = new Id(id, true);
+        return estatPrograma.conteUsuari(idBo) && estatPrograma.obtenirUsuari(idBo).isActiu();
     }
 
 
@@ -367,15 +367,13 @@ public class ControladorDomini {
             deseleccionarTipusItem();
         }
         nomTipusItemActual = nomTipusItem;
-        // TODO (edgar): treure barra baixes! i revisar si n'hi ha més
-        // TODO (edgar): no funciona però l'ítem existeix
-        ArrayList<ArrayList<String>> valoracionsRaw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
-        ArrayList<ArrayList<String>> itemsRaw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
-        TaulaCSV taulaItems = new TaulaCSV(itemsRaw);
+        ArrayList<ArrayList<String>> valoracionsEnBrut = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
+        ArrayList<ArrayList<String>> itemsEnBrut = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
+        TaulaCSV taulaItems = new TaulaCSV(itemsEnBrut);
         itemsActuals = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
         valoracionsTipusItemActual = new ConjuntValoracions();
-        TaulaCSV taula_valoracions = new TaulaCSV(valoracionsRaw);
-        valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
+        TaulaCSV taulaValoracions = new TaulaCSV(valoracionsEnBrut);
+        valoracionsTipusItemActual.afegir(taulaValoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
     /**
@@ -468,7 +466,7 @@ public class ControladorDomini {
      * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item
      * @throws IllegalArgumentException si l'identificador no es valid
      */
-    public Map<String, String> obtenirItem(String id) throws IllegalArgumentException {
+    public Map<String, String> obtenirItem(String id) throws IllegalArgumentException, NoExisteixElementException {
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // l'item es del tipus d'ítem seleccionat

@@ -1,5 +1,7 @@
 package domini.classes;
 
+import excepcions.NoExisteixElementException;
+import excepcions.SessioIniciadaException;
 import excepcions.SessioNoIniciadaException;
 
 import java.util.ArrayList;
@@ -71,7 +73,7 @@ public class Programa {
      *
      * @param usuari Usuari amb el qual iniciem la sessió.
      */
-    public void iniciarSessio(Usuari usuari) throws Exception {
+    public void iniciarSessio(Usuari usuari) throws SessioIniciadaException {
         sessio.iniciarSessio(this, usuari);
     }
 
@@ -118,7 +120,7 @@ public class Programa {
      * @param idUsuari id de l'usuari
      * @return Usuari amb l'id desitjat
      */
-    public Usuari obtenirUsuari(Id idUsuari) throws Exception{
+    public Usuari obtenirUsuari(Id idUsuari) throws NoExisteixElementException {
         return conjuntUsuaris.obtenir(idUsuari);
     }
 
