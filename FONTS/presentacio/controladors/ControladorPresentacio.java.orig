@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import utilitats.Pair;
+import domini.classes.Pair;
 import domini.controladors.ControladorDomini;
 import excepcions.*;
 
@@ -26,6 +26,7 @@ public class ControladorPresentacio {
     private ControladorPresentacio() {
     }
 
+<<<<<<< HEAD
     /**
      * Constructora de ControladorPresentacio
      * Crea una instància única de ControladorPresentacio
@@ -34,7 +35,10 @@ public class ControladorPresentacio {
      * @throws IOException Hi ha hagut algun error en l'entrada/sortida
      * @throws NomInternIncorrecteException Algun valor demanat no existeix
      */
+    public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException {
+=======
     public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+>>>>>>> refs/remotes/origin/master
         if (instancia == null) {
             instancia = new ControladorPresentacio();
             controladorDomini = ControladorDomini.obtenirInstancia();
@@ -241,7 +245,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirItem(id);
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
         return controladorDomini.editarItem(id, valorsAtributs);
     }
 
