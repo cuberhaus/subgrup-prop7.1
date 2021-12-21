@@ -52,6 +52,7 @@ public class TaulaCSV {
         numItems = 0;
 
         if (taula.size() == 0) {
+            numAtributs = 0;
             return;
         }
         this.afegirConjuntAtributs(taula.get(0));

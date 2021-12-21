@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
@@ -75,6 +76,9 @@ public class VistaMenuItems extends JPanel {
                 ex.printStackTrace();
             } catch (NomInternIncorrecteException ex) {
                 //TODO: catch
+                ex.printStackTrace();
+            } catch (NoExisteixElementException ex) {
+                // TODO
                 ex.printStackTrace();
             }
         });

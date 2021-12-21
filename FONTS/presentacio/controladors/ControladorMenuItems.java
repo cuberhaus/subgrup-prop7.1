@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaDialegCrearItem;
 import presentacio.vistes.VistaDialegEditarItem;
@@ -66,11 +67,11 @@ public class ControladorMenuItems {
         }
     }
 
-    public Map<String, String> obtenirItem(String id) {
+    public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
         return controladorPresentacio.obtenirItem(id);
     }
 
-    public void editarItem() throws IOException, NomInternIncorrecteException {
+    public void editarItem() throws IOException, NomInternIncorrecteException, NoExisteixElementException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
