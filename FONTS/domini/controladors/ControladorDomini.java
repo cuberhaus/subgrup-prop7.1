@@ -189,10 +189,10 @@ public class ControladorDomini {
     }
 
     /**
-     *
-     * @param usuariId
-     * @param itemId
-     * @throws Exception
+     * S'esborra la valoracio de un usuari cap a un item
+     * @param usuariId <code>String</code> l'id de l'usuari
+     * @param itemId <code>String</code> l'id id de l'item
+     * @throws Exception si no existeix l'usuari o no existeix l'item
      */
     public void esborraValoracio(String usuariId, String itemId) throws Exception {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
@@ -200,6 +200,13 @@ public class ControladorDomini {
         valoracionsTipusItemActual.esborrar(valoracionsTipusItemActual.obte(us, item));
     }
 
+    /**
+     * Edita la valoracio
+     * @param usuariId <code>String</code> l'id de l'usuari
+     * @param itemId <code>String</code> l'id de l'item
+     * @param valor <code>String</code> el valor a escriure a la recomanacio
+     * @throws Exception si no s'ha pogut modificar la valoracio perque l'usuari i/o l'item no existeixen
+     */
     public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
         esborraValoracio(usuariId, itemId);
         afegirValoracio(usuariId, itemId, valor);
