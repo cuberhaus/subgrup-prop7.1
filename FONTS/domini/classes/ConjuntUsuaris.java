@@ -132,17 +132,19 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      * Retorna una llista amb tots els usuaris i els seus atributs
      * @return Llista amb tots els usuaris
      */
-    public ArrayList<ArrayList<String>> obtenirLlistaUsuaris() {
+    public ArrayList<ArrayList<String>> obtenirLlistaUsuarisActius() {
         ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         ArrayList<String> usuaris = new ArrayList<>();
 
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {
-            usuaris.add(elements.get(id).obtenirNom());
-            usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
-            usuaris.add(String.valueOf(elements.get(id).obtenirId().esActiu()));
-            resultat.add(new ArrayList<>(usuaris));
-            usuaris.clear();
+            if (id.esActiu()) {
+                usuaris.add(elements.get(id).obtenirNom());
+                usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
+                usuaris.add(String.valueOf(elements.get(id).obtenirId().esActiu()));
+                resultat.add(new ArrayList<>(usuaris));
+                usuaris.clear();
+            }
         }
 
         resultat.add(usuaris);

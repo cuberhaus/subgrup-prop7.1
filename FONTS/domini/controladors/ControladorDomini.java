@@ -636,7 +636,7 @@ public class ControladorDomini {
      * @return retorna la llista d'usuaris
      */
     public ArrayList<ArrayList<String>> obteUsuaris() {
-        return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
+        return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuarisActius();
     }
 
     /**

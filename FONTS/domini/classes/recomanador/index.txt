@@ -8,3 +8,4 @@ Recomanacio.java
 Recomanador.java
 RecomanadorCollaborative.java
 RecomanadorContentBased.java
+RecomanadorHibrid.java

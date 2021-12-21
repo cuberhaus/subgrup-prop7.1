@@ -1,5 +1,6 @@
 Conte els fitxers amb la implementacio de les classes del projecte. Conte 3 subpackages amb les classes propies del
 recomanador, les classes per representar els atributs dels items i les classes pel processament d'arxius CSV.
+
 recomanador/
 atributs/
 csv/
@@ -7,13 +8,10 @@ ConjuntIdentificat.java
 ConjuntItems.java
 ConjuntUsuaris.java
 ConjuntValoracions.java
-Contenidor.java
 ElementIdentificat.java
-EscriptorDeFitxers.java
 Id.java
 index.txt
 Item.java
-LectorDeFitxers.java
 Pair.java
 Programa.java
 Sessio.java
