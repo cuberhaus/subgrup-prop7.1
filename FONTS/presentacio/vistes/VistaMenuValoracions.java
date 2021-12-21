@@ -182,7 +182,7 @@ public class VistaMenuValoracions extends JPanel {
     }
 
     private static void creaValoracioButton() {
-        creaValoracioButton = new JButton("Crea Valoració");
+        creaValoracioButton = new JButton("Afegir valoració");
         creaValoracioButton.addActionListener(e -> {
             try {
                 controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
@@ -197,7 +197,7 @@ public class VistaMenuValoracions extends JPanel {
     }
 
     private static void esborraValoracioButton() {
-        esborraValoracioButton = new JButton("Esborra valoració");
+        esborraValoracioButton = new JButton("Esborrar valoració");
         esborraValoracioButton.addActionListener(e -> {
             try {
                 controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText());
@@ -212,7 +212,7 @@ public class VistaMenuValoracions extends JPanel {
     }
 
     private static void editaValoracioButton() {
-        editaValoracioButton = new JButton("Edita valoració");
+        editaValoracioButton = new JButton("Editar valoració");
         editaValoracioButton.addActionListener(e -> {
             try {
                 if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
@@ -235,7 +235,7 @@ public class VistaMenuValoracions extends JPanel {
     }
 
     private static void conjuntDeValoracionsButton() {
-        conjuntDeValoracionsButton = new JButton("Carrega conjunt de valoracions");
+        conjuntDeValoracionsButton = new JButton("Importar valoracions");
         conjuntDeValoracionsButton.addActionListener(e -> {
             // TODO: logica
             JDialog pathDialog = new JDialog();
@@ -278,7 +278,7 @@ public class VistaMenuValoracions extends JPanel {
     }
 
     private static void esborrarTotesLesValoracionsButton() {
-        esborrarTotesLesValoracionsButton = new JButton("Esborra totes les valoracions");
+        esborrarTotesLesValoracionsButton = new JButton("Esborrar totes les valoracions");
         esborrarTotesLesValoracionsButton.addActionListener(e -> {
             try {
                 if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
