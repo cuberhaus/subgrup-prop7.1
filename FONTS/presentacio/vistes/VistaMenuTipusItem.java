@@ -170,8 +170,8 @@ public class VistaMenuTipusItem extends JPanel {
 
     private static void inicialitzarPanellAdministrarTipusItem() {
         panellAdministrarTipusItem = new JPanel(new FlowLayout());
-        JButton deselecciona = new JButton("Deselecciona");
-        deselecciona.addActionListener(e -> {
+        JButton desselecciona = new JButton("Desselecciona");
+        desselecciona.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
@@ -186,7 +186,7 @@ public class VistaMenuTipusItem extends JPanel {
                 }
             }
         });
-        panellAdministrarTipusItem.add(deselecciona);
+        panellAdministrarTipusItem.add(desselecciona);
         JButton esborra = new JButton("Esborra");
         esborra.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
