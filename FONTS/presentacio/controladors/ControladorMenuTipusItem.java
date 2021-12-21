@@ -43,7 +43,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
         Map<String, Pair<String, String>> nomAValorAtributAmbFormat = new TreeMap<>();
         for (Map.Entry<String, Pair<String, String>> atribut : nomAValorAtribut.entrySet()) {
             String valorAtribut;
@@ -98,8 +98,6 @@ public class ControladorMenuTipusItem {
             nomAValorAtributAmbFormat.put(atribut.getKey(), new Pair<>(valorAtribut, distanciaAtribut));
         }
         controladorPresentacio.crearTipusItem(nom, nomAValorAtribut);
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
-        controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
     }
 
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {

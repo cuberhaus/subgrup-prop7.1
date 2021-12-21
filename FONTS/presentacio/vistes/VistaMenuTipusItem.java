@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ public class VistaMenuTipusItem extends JPanel {
     private VistaMenuTipusItem() {
     }
 
-    public static VistaMenuTipusItem obtenirInstancia() throws IOException {
+    public static VistaMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new VistaMenuTipusItem();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
