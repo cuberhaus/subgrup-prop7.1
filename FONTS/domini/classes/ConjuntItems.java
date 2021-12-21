@@ -132,7 +132,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
 
     @Override
     /**
-     * Afegeix un item al conjunt d'items
+     * Afegeix un item al conjunt d'ítems
      * @param element <code>Item</code> a afegir al conjunt
      */
     public void afegir(Item element){
