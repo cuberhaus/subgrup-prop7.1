@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
@@ -76,6 +77,9 @@ public class VistaMenuItems extends JPanel {
             } catch (NomInternIncorrecteException e2) {
                 //TODO: catch
                 e2.printStackTrace();
+            } catch (NoExisteixElementException ex) {
+                // TODO
+                ex.printStackTrace();
             }
         });
         menuLateral.add(botoEditarItem);

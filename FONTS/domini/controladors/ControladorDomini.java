@@ -77,14 +77,14 @@ public class ControladorDomini {
      * @param idSessio id de l'usuari que inicia la sessió
      * @param contrasenya contrasenya de l'usuari
      */
-    public void iniciarSessio(int idSessio, String contrasenya) throws Exception {
+    public void iniciarSessio(int idSessio, String contrasenya) throws SessioIniciadaException, ContrasenyaIncorrectaException, NoExisteixElementException {
         Id idUsuariBuscat = new Id(idSessio, true);
         if (this.estatPrograma.conteUsuari(idUsuariBuscat)) {
             Usuari usuariCercat = this.estatPrograma.obtenirUsuari(idUsuariBuscat);
             Id idUsuariCercat = usuariCercat.obtenirId();
 
             if (!idUsuariCercat.esActiu()) {
-                throw new Exception("L'usuari existeix pero no es actiu");
+                throw new NoExisteixElementException("L'usuari existeix pero no es actiu");
             }
 
             else if (usuariCercat.isContrasenya(contrasenya)) {
@@ -92,12 +92,12 @@ public class ControladorDomini {
             }
 
             else {
-                throw new Exception("La contrasenya es incorrecta");
+                throw new ContrasenyaIncorrectaException("La contrasenya es incorrecta");
             }
         }
 
         else {
-            throw new Exception("L'usuari no existeix");
+            throw new NoExisteixElementException("L'usuari no existeix");
         }
     }
 
@@ -108,8 +108,8 @@ public class ControladorDomini {
      * @throws Exception si l'usuari ja existeix
      */
     public boolean existeixUsuari(int id) throws Exception {
-        Id id_bo = new Id(id, true);
-        return estatPrograma.conteUsuari(id_bo) && estatPrograma.obtenirUsuari(id_bo).isActiu();
+        Id idBo = new Id(id, true);
+        return estatPrograma.conteUsuari(idBo) && estatPrograma.obtenirUsuari(idBo).isActiu();
     }
 
 
@@ -212,6 +212,11 @@ public class ControladorDomini {
         afegirValoracio(usuariId, itemId, valor);
     }
 
+    /**
+     * Llegeix el contingut del fitxer de les valoracions
+     * @param rutaAbsolut <code>String</code> ubicacio de l'arxiu a llegir
+     * @throws Exception si no s'ha pogut afegir la valoracio al contenidor
+     */
     public void carregaConjuntValoracions(String rutaAbsolut) throws Exception {
         ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
         valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
@@ -469,7 +474,7 @@ public class ControladorDomini {
      * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item
      * @throws IllegalArgumentException si l'identificador no es valid
      */
-    public Map<String, String> obtenirItem(String id) throws IllegalArgumentException {
+    public Map<String, String> obtenirItem(String id) throws IllegalArgumentException, NoExisteixElementException {
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // l'item es del tipus d'ítem seleccionat
@@ -521,6 +526,14 @@ public class ControladorDomini {
         // si el nou atribut no té nom ("") vol dir que s'ha eliminat
     }
 
+    //TODO: filtros
+    /**
+     * Obte una recomanacio amb el metode Collaborative
+     * @param nomAtributs
+     * @param filtreInclusiu
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
@@ -539,6 +552,14 @@ public class ControladorDomini {
         return res;
     }
 
+    //TODO: filtros
+    /**
+     *
+     * @param nomAtributs
+     * @param filtreInclusiu
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
@@ -557,6 +578,14 @@ public class ControladorDomini {
         return res;
     }
 
+    //TODO: filtros
+    /**
+     *
+     * @param nomAtributs
+     * @param filtreInclusiu
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws Exception {
         // retorna conjunt d'ids d'items recomanats
         // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
@@ -575,6 +604,12 @@ public class ControladorDomini {
         return res;
     }
 
+    //TODO: filtros
+
+    /**
+     *
+     * @return
+     */
     public double avaluarRecomanacio() {
         return recomanacions.obteDiscountedCumulativeGain()/recomanacions.obteIdealDiscountedCumulativeGain();
     }

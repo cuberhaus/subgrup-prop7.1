@@ -77,7 +77,7 @@ public class ControladorMenuUsuaris {
      * @return True si la sessió hem pogut iniciar sessió
      * @throws Exception No s'ha pogut iniciar sessió
      */
-    public boolean iniciarSessio(String id, String contrasenya) throws Exception {
+    public boolean iniciarSessio(String id, String contrasenya) {
         try {
             boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
             idEsValid(id);

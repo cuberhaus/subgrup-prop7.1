@@ -4,6 +4,7 @@ package domini.classes;
 import domini.classes.csv.TaulaCSV;
 import excepcions.AccesAEstatIncorrecteException;
 import excepcions.JaExisteixElementException;
+import excepcions.NoExisteixElementException;
 
 import java.util.*;
 
@@ -112,7 +113,11 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             if (!that.conte(element.getKey())) {
                 return false;
             }
-            if (!that.obtenir(element.getKey()).equals(element.getValue())) {
+            try {
+                if (!that.obtenir(element.getKey()).equals(element.getValue())) {
+                    return false;
+                }
+            } catch (NoExisteixElementException e) {
                 return false;
             }
         }
