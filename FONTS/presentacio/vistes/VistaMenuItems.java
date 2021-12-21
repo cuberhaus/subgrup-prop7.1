@@ -56,12 +56,12 @@ public class VistaMenuItems extends JPanel {
         botoCrearItem.addActionListener(e -> {
             try {
                 controladorMenuItems.crearNouItem();
-            } catch (Exception ex) {
+            } catch (IOException e1) {
                 // TODO catch
-                ex.printStackTrace();
-            } catch (NomInternIncorrecteException ex) {
+                e1.printStackTrace();
+            } catch (NomInternIncorrecteException e2) {
                 //TODO:
-                ex.printStackTrace();
+                e2.printStackTrace();
             }
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
@@ -70,12 +70,12 @@ public class VistaMenuItems extends JPanel {
         botoEditarItem.addActionListener(e -> {
             try {
                 controladorMenuItems.editarItem();
-            } catch (Exception ex) {
+            } catch (IOException e1) {
                 //TODO: cath
-                ex.printStackTrace();
-            } catch (NomInternIncorrecteException ex) {
+                e1.printStackTrace();
+            } catch (NomInternIncorrecteException e2) {
                 //TODO: catch
-                ex.printStackTrace();
+                e2.printStackTrace();
             }
         });
         menuLateral.add(botoEditarItem);

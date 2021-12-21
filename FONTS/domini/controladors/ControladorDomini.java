@@ -251,9 +251,10 @@ public class ControladorDomini {
     }
 
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
+        // TODO (edgar) URGENT: arreglar aquesta funció i la de dalt, no creen un fitxer buit a valoracions
         if (estatPrograma.conteTipusItem(nom)) {
-            // TODO: crear excepcio
-            throw new IllegalArgumentException("Ja existeix aquest tipus item.");
+            // TODO (edgar): crear excepcio
+            throw new IllegalArgumentException("Ja existeix aquest tipus d'ítem.");
         }
         TreeMap<String, TipusAtribut> tipusAtributs = new TreeMap<>();
         for (var fila : nomAValorAtribut.entrySet()) {
@@ -317,13 +318,13 @@ public class ControladorDomini {
         nomTipusItemActual = nomTipusItem;
         // TODO (edgar): treure barra baixes! i revisar si n'hi ha més
         // TODO (edgar): no funciona però l'ítem existeix
-        ArrayList<ArrayList<String>> valoracions_raw = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
-        ArrayList<ArrayList<String>> items_raw = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
-        TaulaCSV taulaItems = new TaulaCSV(items_raw);
+        ArrayList<ArrayList<String>> valoracionsEnBrut = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
+        ArrayList<ArrayList<String>> itemsEnBrut = controladorPersistencia.obtenirConjuntItems(nomTipusItemActual, "basic");
+        TaulaCSV taulaItems = new TaulaCSV(itemsEnBrut);
         itemsActuals = new ConjuntItems(taulaItems, estatPrograma.obteTipusItem(nomTipusItemActual));
         valoracionsTipusItemActual = new ConjuntValoracions();
-        TaulaCSV taula_valoracions = new TaulaCSV(valoracions_raw);
-        valoracionsTipusItemActual.afegir(taula_valoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
+        TaulaCSV taulaValoracions = new TaulaCSV(valoracionsEnBrut);
+        valoracionsTipusItemActual.afegir(taulaValoracions, itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
 
     public ArrayList<ArrayList<String>> obtenirItems() {
@@ -501,7 +502,7 @@ public class ControladorDomini {
     }
 
     /**
-     * Desseleciona el tipus item actual i esborra la relacio del porgrama actual amb aquest.
+     * Desseleciona el tipus item actual i esborra la relacio del programa actual amb aquest.
      * @throws IOException
      */
     public void deseleccionarTipusItem() throws IOException {
@@ -592,6 +593,6 @@ public class ControladorDomini {
      */
     public void exportaValoracions(String absolutePath) throws IOException {
         Date today = Calendar.getInstance().getTime();
-        controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today.toString());
+        controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today);
     }
 }

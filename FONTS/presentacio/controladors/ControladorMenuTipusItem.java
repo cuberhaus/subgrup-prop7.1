@@ -87,7 +87,7 @@ public class ControladorMenuTipusItem {
                     distanciaAtribut = "DistanciaEuclidiana";
                     break;
                 case "Levenshtein":
-                    distanciaAtribut = "";
+                    distanciaAtribut = "DistanciaLevenshtein";
                     break;
                 case "Zero":
                     distanciaAtribut = "DistanciaZero";
@@ -97,7 +97,7 @@ public class ControladorMenuTipusItem {
             }
             nomAValorAtributAmbFormat.put(atribut.getKey(), new Pair<>(valorAtribut, distanciaAtribut));
         }
-        controladorPresentacio.crearTipusItem(nom, nomAValorAtribut);
+        controladorPresentacio.crearTipusItem(nom, nomAValorAtributAmbFormat);
     }
 
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {

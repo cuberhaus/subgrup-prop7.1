@@ -102,6 +102,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 JOptionPane.showMessageDialog(this,
                         "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
             } catch (NomInternIncorrecteException e2) {
+                System.out.print(e2.getMessage());
                 JOptionPane.showMessageDialog(this,
                         "Ja existeix un tipus d'ítem amb aquest nom.");
             }
