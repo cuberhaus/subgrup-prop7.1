@@ -1,6 +1,7 @@
 package presentacio.vistes;
 
 import domini.classes.Pair;
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
     private JPanel panellCrearTipusItem;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public VistaDialegCrearTipusItem() throws IOException {
+    public VistaDialegCrearTipusItem() throws IOException, NomInternIncorrecteException {
         super(null, Dialog.ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         inicialitzarDialegCrearTipusItem();
@@ -103,6 +104,9 @@ public class VistaDialegCrearTipusItem extends JDialog {
             } catch (IOException e2) {
                 JOptionPane.showMessageDialog(this,
                         "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
+            } catch (NomInternIncorrecteException ex) {
+                // TODO: catchejar
+                ex.printStackTrace();
             }
         });
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);

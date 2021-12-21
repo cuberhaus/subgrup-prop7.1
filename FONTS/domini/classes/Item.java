@@ -2,6 +2,7 @@ package domini.classes;
 
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
+import excepcions.UsuariIncorrecteException;
 
 import java.util.*;
 
@@ -111,7 +112,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @return Còpia profunda del <code>Map&lt;Usuari, Valoracio&gt;</code> que relaciona els Usuaris que han fet les
      * valoracions de l'Item amb la valoració.
      */
-    public Map<Usuari, Valoracio> obtenirValoracions() {
+    public Map<Usuari, Valoracio> obtenirValoracions() throws UsuariIncorrecteException {
         Map<Usuari, Valoracio> valoracions = new TreeMap<>();
         for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
             valoracions.put(valoracioEntry.getKey().copiar(), valoracioEntry.getValue().copiar());

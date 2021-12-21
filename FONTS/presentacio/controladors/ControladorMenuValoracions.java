@@ -191,4 +191,7 @@ public class ControladorMenuValoracions {
         return false;
     }
 
+    public void exportaValoracions(String absolutePath) {
+        controladorPresentacio.exportaValoracions(absolutePath);
+    }
 }

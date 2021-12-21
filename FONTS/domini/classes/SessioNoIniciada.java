@@ -1,5 +1,7 @@
 package domini.classes;
 
+import excepcions.SessioNoIniciadaException;
+
 /**
  * Representa l'estat de la sessió en el cas en què no s'ha iniciat una sessió.
  *
@@ -13,8 +15,8 @@ public class SessioNoIniciada extends Sessio {
      * @throws Exception si l'estat és sessioNoIniciada
      */
     @Override
-    public void tancarSessio(Programa programa) throws Exception {
-        throw new Exception("No es pot tancar la sessió d'una sessió ja tancada");
+    public void tancarSessio(Programa programa) throws SessioNoIniciadaException {
+        throw new SessioNoIniciadaException("No es pot tancar la sessió d'una sessió ja tancada");
     }
 
     /**

@@ -3,6 +3,7 @@ package presentacio.controladors;
 import com.sun.source.tree.Tree;
 import domini.classes.Pair;
 import domini.classes.atributs.valors.*;
+import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
@@ -30,7 +31,7 @@ public class ControladorMenuTipusItem {
     private ControladorMenuTipusItem () {
     }
 
-    public static ControladorMenuTipusItem obtenirInstancia() throws IOException {
+    public static ControladorMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorMenuTipusItem();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
@@ -97,6 +98,8 @@ public class ControladorMenuTipusItem {
             nomAValorAtributAmbFormat.put(atribut.getKey(), new Pair<>(valorAtribut, distanciaAtribut));
         }
         controladorPresentacio.crearTipusItem(nom, nomAValorAtribut);
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException {
+        controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
     }
 
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {

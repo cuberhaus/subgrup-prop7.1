@@ -34,7 +34,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static JLabel usuariActiuInfo;
     private static ControladorMenuUsuaris controladorMenuUsuaris;
     private static JFileChooser jFileChooser;
-    private static JButton exportarConjuntDadesButton;
+    private static JButton exportarConjuntUsuarisButton;
     private static JButton esborrarConjuntButton;
     private static JTable llistaUsuaris;
     private static JScrollPane jScrollPane;
@@ -134,7 +134,7 @@ public class VistaMenuUsuaris extends JPanel {
         eliminarUsuariButton();
         iniciarSessioButton();
         tancarSessioButton();
-        exportarConjuntDadesButton();
+        exportarConjuntUsuarisButton();
         esborrarConjuntButton();
 
         borderLayout = new BorderLayout();
@@ -315,11 +315,11 @@ public class VistaMenuUsuaris extends JPanel {
         jpanel.add(tancarSessioButton, gridBagConstraints);
     }
 
-    private static void exportarConjuntDadesButton() {
+    private static void exportarConjuntUsuarisButton() {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
-        exportarConjuntDadesButton = new JButton("Exportar Usuaris");
-        exportarConjuntDadesButton.addActionListener(e -> {
+        exportarConjuntUsuarisButton = new JButton("Exportar Usuaris");
+        exportarConjuntUsuarisButton.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
             jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
@@ -333,7 +333,7 @@ public class VistaMenuUsuaris extends JPanel {
                 }
             }
         });
-        jpanel.add(exportarConjuntDadesButton, gridBagConstraints);
+        jpanel.add(exportarConjuntUsuarisButton, gridBagConstraints);
     }
 
     private static void esborrarConjuntButton() {

@@ -2,6 +2,7 @@ package domini.classes.atributs;
 
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
+import excepcions.NomInternIncorrecteException;
 
 import java.util.Objects;
 
@@ -29,12 +30,12 @@ public class TipusAtribut {
         this.distancia = distancia;
     }
 
-    public TipusAtribut(String valor, String distancia) throws IllegalArgumentException {
+    public TipusAtribut(String valor, String distancia) throws NomInternIncorrecteException {
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
         // TODO: crear excepcions pròpies
         if (this.valorAtribut == null || this.distancia == null) {
-            throw new IllegalArgumentException();
+            throw new NomInternIncorrecteException("El valorAtribut o Distancia demanats no existeixen.");
         }
     }
 

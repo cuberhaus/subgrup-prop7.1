@@ -1,5 +1,7 @@
 package presentacio.controladors;
 
+import excepcions.NomInternIncorrecteException;
+import excepcions.SessioNoIniciadaException;
 import presentacio.vistes.VistaMenuUsuaris;
 
 import javax.swing.*;
@@ -40,7 +42,7 @@ public class ControladorMenuUsuaris {
      *
      * @return <code> ControladorMenuUsuaris </code>
      */
-    public static ControladorMenuUsuaris obtenirInstancia() throws IOException {
+    public static ControladorMenuUsuaris obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorMenuUsuaris();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
@@ -136,10 +138,10 @@ public class ControladorMenuUsuaris {
      *
      * @throws Exception No s'ha pogut tancar la sessió
      */
-    public void tancarSessio() throws Exception {
+    public void tancarSessio() {
         try {
             controladorPresentacio.tancarSessio();
-        } catch (Exception e) {
+        } catch (SessioNoIniciadaException e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, "La sessió ja és tancada");
         }
     }
@@ -183,7 +185,7 @@ public class ControladorMenuUsuaris {
     public void importarUsuaris(String absolutePath) throws Exception {
         try {
             ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
-            if (usuarisNoInicialitzats != null) {
+            if (usuarisNoInicialitzats != null && usuarisNoInicialitzats.size() != 0) {
                 JOptionPane.showMessageDialog(vistaMenuUsuaris, "Aquests usuaris no s'han pogut inicialitzar" + usuarisNoInicialitzats);
             }
         } catch (Exception e) {
