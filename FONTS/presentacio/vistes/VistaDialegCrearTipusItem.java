@@ -81,10 +81,12 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 if (nomTipusAtribut.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
                             "No pot haver-hi un tipus d'atribut sense nom.");
+                    return;
                 }
                 if (nomAValorAtribut.containsKey(nomTipusAtribut)) {
                     JOptionPane.showMessageDialog(this,
                             "No pot haver-hi dos tipus d'atributs amb el mateix nom.");
+                    return;
                 }
                 String valorTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(3)).getSelectedItem();
                 String distanciaTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(5)).getSelectedItem();
@@ -93,6 +95,8 @@ public class VistaDialegCrearTipusItem extends JDialog {
             try {
                 controladorMenuTipusItem.crearTipusItem(nom, nomAValorAtribut);
                 dispose();
+                JOptionPane.showMessageDialog(this,
+                        "Tipus d'ítem creat amb èxit.");
             } catch (IllegalArgumentException e1) {
                 JOptionPane.showMessageDialog(this,
                         "Ja existeix un tipus d'ítem amb aquest nom.");

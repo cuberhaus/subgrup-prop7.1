@@ -10,26 +10,33 @@ import java.io.IOException;
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 /**
+ * Vista per la gestió de tipus d'ítems
  * @author maria.prat
  */
 public class VistaMenuTipusItem extends JPanel {
+
+    /**
+     * Instància per implementar el patró Singleton.
+     */
+    private static VistaMenuTipusItem instancia;
 
     private static final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
     private static final String kMissatgeTipusItemNoSeleccionat = "No s'ha escollit cap tipus d'ítem";
 
     private static ControladorMenuTipusItem controladorMenuTipusItem;
-    private static VistaMenuTipusItem instancia;
-
-    private static JLabel textTipusItemSeleccionat;
-    private static JButton botoVeureTipusItem;
-    private static JButton botoEditarTipusItem;
-    private static DefaultComboBoxModel<String> tipusItemsComboBoxModel;
 
     private static JPanel panellAfegirTipusItem;
     private static JPanel panellSeleccionarTipusItem;
     private static JPanel panellAdministrarTipusItem;
     private static JPanel panellMostrarTipusItemSeleccionat;
+    private static JLabel textTipusItemSeleccionat;
+    private static JButton botoVeureTipusItem;
+    private static JButton botoEditarTipusItem;
+    private static DefaultComboBoxModel<String> tipusItemsComboBoxModel;
 
+    /**
+     * Constructor d'una VistaMenuTipusItem
+     */
     private VistaMenuTipusItem() {
     }
 
@@ -81,9 +88,7 @@ public class VistaMenuTipusItem extends JPanel {
                 vistaDialegCrearTipusItem.setVisible(true);
                 tipusItemsComboBoxModel.removeAllElements();
                 tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
-                JOptionPane.showMessageDialog(instancia,
-                        "Tipus d'ítem creat amb èxit.");
-            } catch (IOException ex) {
+            } catch (Exception e1) {
                 JOptionPane.showMessageDialog(instancia,
                         "No s'ha pogut crear un tipus d'ítem.");
             }
@@ -106,6 +111,7 @@ public class VistaMenuTipusItem extends JPanel {
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
                 }
+                // TODO (maria): mirar exception especial quan ja n'existeix un amb aquest nom
             }
         });
         panellAfegirTipusItem.add(botoCarregarTipusItem);
@@ -137,7 +143,7 @@ public class VistaMenuTipusItem extends JPanel {
                         botoVeureTipusItem.setEnabled(true);
                         botoEditarTipusItem.setEnabled(true);
                     }
-                } catch (Exception ex) {
+                } catch (Exception e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut seleccionar el tipus d'ítem.");
                 }
@@ -209,7 +215,7 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = null;
+                VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem;
                 try {
                     vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem();
                     vistaDialegMostrarTipusItem.setVisible(true);
@@ -226,7 +232,7 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                VistaDialegEditarTipusItem vistaDialegEditarTipusItem = null;
+                VistaDialegEditarTipusItem vistaDialegEditarTipusItem;
                 try {
                     vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
                     vistaDialegEditarTipusItem.setVisible(true);
