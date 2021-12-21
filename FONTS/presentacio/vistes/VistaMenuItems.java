@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ public class VistaMenuItems extends JPanel {
     private VistaMenuItems() {
     }
 
-    public static VistaMenuItems obtenirInstancia() throws IOException {
+    public static VistaMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new VistaMenuItems();
             controladorMenuItems = ControladorMenuItems.obtenirInstancia();
@@ -55,7 +56,7 @@ public class VistaMenuItems extends JPanel {
         botoCrearItem.addActionListener(e -> {
             try {
                 controladorMenuItems.crearNouItem();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 // TODO catch
                 ex.printStackTrace();
             }
@@ -66,22 +67,18 @@ public class VistaMenuItems extends JPanel {
         botoEditarItem.addActionListener(e -> {
             try {
                 controladorMenuItems.editarItem();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 //TODO: cath
                 ex.printStackTrace();
             }
         });
         menuLateral.add(botoEditarItem);
         JButton botoEsborrarItem = new JButton("Esborra un ítem");
-        botoEsborrarItem.addActionListener(e -> {
-            controladorMenuItems.esborrarItem();
-        });
+        botoEsborrarItem.addActionListener(e -> controladorMenuItems.esborrarItem());
         menuLateral.add(botoEsborrarItem);
 
         JButton botoEsborrarTotsElsItems = new JButton("Esborra tots els ítems");
-        botoEsborrarTotsElsItems.addActionListener(e -> {
-            controladorMenuItems.esborrarTotsElsItems();
-        });
+        botoEsborrarTotsElsItems.addActionListener(e -> controladorMenuItems.esborrarTotsElsItems());
         menuLateral.add(botoEsborrarTotsElsItems);
 
         JButton botoCarregarConjuntItems = new JButton("Afegeix ítems des d'un conjunt");

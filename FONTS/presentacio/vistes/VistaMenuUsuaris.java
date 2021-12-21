@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuUsuaris;
 
 import javax.swing.*;
@@ -57,7 +58,7 @@ public class VistaMenuUsuaris extends JPanel {
      * @return <code> ControladorMenuUsuaris</code>
      * @throws IOException No s'ha pogut obtenir la instància de VistaMenuUsuaris
      */
-    public static VistaMenuUsuaris obtenirInstancia() throws IOException {
+    public static VistaMenuUsuaris obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new VistaMenuUsuaris();
             controladorMenuUsuaris = ControladorMenuUsuaris.obtenirInstancia();

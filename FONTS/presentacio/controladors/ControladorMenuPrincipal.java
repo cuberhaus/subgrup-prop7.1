@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaMenuPrincipal;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class ControladorMenuPrincipal {
     private ControladorMenuPrincipal () {
     }
 
-    public static ControladorMenuPrincipal obtenirInstancia() throws IOException {
+    public static ControladorMenuPrincipal obtenirInstancia() throws IOException, NomInternIncorrecteException {
         if (instancia == null) {
             instancia = new ControladorMenuPrincipal();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();

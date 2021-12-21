@@ -98,15 +98,12 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 dispose();
                 JOptionPane.showMessageDialog(this,
                         "Tipus d'ítem creat amb èxit.");
-            } catch (IllegalArgumentException e1) {
-                JOptionPane.showMessageDialog(this,
-                        "Ja existeix un tipus d'ítem amb aquest nom.");
-            } catch (IOException e2) {
+            } catch (IOException e1) {
                 JOptionPane.showMessageDialog(this,
                         "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
-            } catch (NomInternIncorrecteException ex) {
-                // TODO: catchejar
-                ex.printStackTrace();
+            } catch (NomInternIncorrecteException e2) {
+                JOptionPane.showMessageDialog(this,
+                        "Ja existeix un tipus d'ítem amb aquest nom.");
             }
         });
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);

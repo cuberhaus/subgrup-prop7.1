@@ -210,7 +210,7 @@ public class ControladorPresentacio {
         controladorDomini.canviaNomUsuari(id,nouNom);
     }
 
-    public void exportaValoracions(String absolutePath) {
+    public void exportaValoracions(String absolutePath) throws IOException {
         controladorDomini.exportaValoracions(absolutePath);
     }
 }
