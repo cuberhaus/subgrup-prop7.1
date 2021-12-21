@@ -34,6 +34,8 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             String actiu = usuari.get(3);
 
             System.out.println(actiu);
+            System.out.println(Boolean.parseBoolean(actiu));
+
 
             Boolean actiuUsuari = Boolean.parseBoolean(actiu);
             int idNum = Integer.parseInt(id);
