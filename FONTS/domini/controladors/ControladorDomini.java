@@ -252,7 +252,8 @@ public class ControladorDomini {
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(definicio, nom);
-        controladorPersistencia.guardarConjuntValoracions(new ArrayList<>(), nom);
+        ConjuntValoracions buit = new ConjuntValoracions();
+        controladorPersistencia.guardarConjuntValoracions(buit.convertirAArrayList(), nom);
     }
 
     /**
@@ -291,7 +292,8 @@ public class ControladorDomini {
         TipusItem tipus = new TipusItem(nom, tipusAtributs);
         estatPrograma.afegirTipusItem(nom, tipus);
         controladorPersistencia.guardarTipusItem(tipus.convertirAArrayList(), nom);
-        controladorPersistencia.guardarConjuntValoracions(new ArrayList<>(), nom);
+        ConjuntValoracions buit = new ConjuntValoracions();
+        controladorPersistencia.guardarConjuntValoracions(buit.convertirAArrayList(), nom);
     }
 
     /**
