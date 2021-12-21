@@ -19,6 +19,7 @@ public class EscriptorDeCSV {
     public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> tauleta) throws IOException {
         File comprobacio = new File(ubicacio);
         if (!comprobacio.isDirectory()) {
+            System.out.println("Marico");
             ubicacio = ubicacio + "/temporal.csv";
         }
         BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio));
