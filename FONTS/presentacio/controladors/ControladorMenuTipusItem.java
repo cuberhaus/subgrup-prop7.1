@@ -1,18 +1,14 @@
 package presentacio.controladors;
 
-import com.sun.source.tree.Tree;
 import domini.classes.Pair;
-import domini.classes.atributs.valors.*;
-import excepcions.NomInternIncorrecteException;
+import excepcions.*;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -100,7 +96,7 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.crearTipusItem(nom, nomAValorAtributAmbFormat);
     }
 
-    public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
+    public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         controladorPresentacio.carregarTipusItem(nom, rutaAbsoluta);
     }
 
@@ -116,7 +112,7 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.esborrarTipusItemSeleccionat();
     }
 
-    public void seleccionarTipusItem(String nomTipusItem) throws Exception {
+    public void seleccionarTipusItem(String nomTipusItem) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorPresentacio.seleccionarTipusItem(nomTipusItem);
     }
 

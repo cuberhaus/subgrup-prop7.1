@@ -1,6 +1,9 @@
 package domini.classes;
 
 import domini.classes.csv.TaulaCSV;
+import excepcions.AccesAEstatIncorrecteException;
+import excepcions.NoExisteixElementException;
+import excepcions.UsuariIncorrecteException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,9 +32,8 @@ public class ConjuntValoracions {
      * @param valoracions Una taula de valoracions
      * @param items       un conjunt d'ítems
      * @param usuaris     un conjunt d'usuaris
-     * @throws Exception no s'ha pogut eliminar els espais
      */
-    public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws Exception {
+    public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws NoExisteixElementException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         valoracions.eliminarEspaisInnecessaris();
         ArrayList<String> idsUsuaris = valoracions.obtenirValorsAtribut("userId");
         ArrayList<String> idsItems = valoracions.obtenirValorsAtribut("itemId");

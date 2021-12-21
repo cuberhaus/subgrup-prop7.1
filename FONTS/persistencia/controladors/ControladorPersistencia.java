@@ -130,31 +130,35 @@ public class ControladorPersistencia {
         }
     }
 
-    private String obtePathConjuntUsuaris(String nom) {
-        return direccioCarpetaUsuaris + "/" + nom;
+    private Path obtePathConjuntUsuaris(String nom) {
+        return Paths.get(direccioCarpetaUsuaris.toString(),nom+".csv");
     }
     public void guardarConjuntUsuaris(ArrayList<ArrayList<String>> conjunt, String nom) throws IOException {
-        escriptor.escriureCSV(obtePathConjuntUsuaris(nom), conjunt);
+        escriptor.escriureCSV(obtePathConjuntUsuaris(nom).toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntUsuaris(String nom) throws IOException {
-        return lector.llegirCSV(obtePathConjuntUsuaris(nom));
+        return lector.llegirCSV(obtePathConjuntUsuaris(nom).toString());
     }
     public void borrarConjuntUsuaris(String nom) throws IOException {
-        Path conjunt = Paths.get(obtePathConjuntUsuaris(nom));
+        Path conjunt = Paths.get(obtePathConjuntUsuaris(nom).toString());
         Files.delete(conjunt);
     }
 
-    private String obtePathConjuntValoracions(String nom) {
-        return direccioCarpetaValoracions + "/" + nom;
+    private Path obtePathConjuntValoracions(String nom) {
+        return Paths.get(direccioCarpetaValoracions.toString(),nom+".csv");
     }
     public void guardarConjuntValoracions(ArrayList<ArrayList<String>> conjunt, String nom) throws IOException {
-        escriptor.escriureCSV(obtePathConjuntValoracions(nom), conjunt);
+        Path path = obtePathConjuntValoracions(nom);
+        if (Files.exists(path)) {
+            path.toFile().delete();
+        }
+        escriptor.escriureCSV(path.toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntValoracions(String nom) throws IOException {
-        return lector.llegirCSV(obtePathConjuntValoracions(nom));
+        return lector.llegirCSV(obtePathConjuntValoracions(nom).toString());
     }
     public void borrarConjuntValoracions(String nom) throws IOException {
-        Path conjunt = Paths.get(obtePathConjuntValoracions(nom));
+        Path conjunt = Paths.get(obtePathConjuntValoracions(nom).toString());
         Files.delete(conjunt);
     }
 
