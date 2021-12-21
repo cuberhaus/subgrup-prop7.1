@@ -88,7 +88,7 @@ public class ControladorMenuItems {
         }
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
         return controladorPresentacio.editarItem(id, valorsAtributs);
     }
 

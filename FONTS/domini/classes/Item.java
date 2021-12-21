@@ -22,7 +22,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * Conté les valoracions de l'Item.
      * Relaciona l'Usuari que ha fet la valoració amb la valoració.
      */
-    private Map<Usuari, Valoracio> valoracions;
+    private final Map<Usuari, Valoracio> valoracions;
 
     /**
      * Constructor d'un ítem amb conjunt de valoracions buit.
@@ -239,5 +239,11 @@ public class Item implements Comparable<Item>, ElementIdentificat {
            res.add(x.getValue().toString());
         }
         return res;
+    }
+
+    public void modificaAtribut(String nomAtribut, ValorAtribut<?> valor) {
+        if (!atributs.containsKey(nomAtribut))
+            return;
+        atributs.put(nomAtribut, valor);
     }
 }

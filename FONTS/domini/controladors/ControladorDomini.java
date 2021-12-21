@@ -472,21 +472,37 @@ public class ControladorDomini {
         return res;
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
-        // TODO
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
         // edita l'item amb l'id donat amb els valors donats
         // valorsAtribut es un mapa del nom de l'atribut al nou valor
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // l'item es del tipus d'ítem seleccionat
         // existeix un item amb aquest id pero millor comprovar
         // retorna true si tot be i retorna fals si alguna cosa no funcioa
-        return false;
+        int idItemABuscar;
+        try {
+            idItemABuscar = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        Item item = itemsActuals.obtenir(new Id(idItemABuscar));
+        for (var atribut : item.obtenirAtributs().entrySet()) {
+            try {
+                String valor = valorsAtributs.get(atribut.getKey());
+                Class<? extends ValorAtribut> clase = atribut.getValue().getClass();
+                Constructor<?> ctor = clase.getConstructor(String.class);
+                Object object = ctor.newInstance(valor);
+                item.modificaAtribut(atribut.getKey(), clase.cast(object));
+            }
+            catch (Exception ignore) {}
+        }
+        return true;
     }
 
     /**
      * Carrega un conjunt d'items a partir d'un fitxer
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
-     * @throws Exception si no s'ha pogut obrir el fitxer
+     * @throws IOException si no s'ha pogut obrir el fitxer
      */
     public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
         ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
@@ -513,7 +529,7 @@ public class ControladorDomini {
 
     //TODO: filtros
     /**
-     * Obte una recomanacio amb el metode Collaborative
+     * Obte una recomanacio amb el metode Recomanador
      * @param nomAtributs
      * @param filtreInclusiu
      * @return
@@ -617,12 +633,12 @@ public class ControladorDomini {
     }
 
     /**
-     * Desseleciona el tipus item actual i esborra la relacio del porgrama actual amb aquest.
-     * @throws IOException
+     * @pre hi ha un tipusItem seleccionat
+     * Desselecciona el tipus item actual i esborra la relacio del programa actual amb aquest.
+     * @throws IOException hi ha un problema guardant el tipus item actual.
      */
     public void deseleccionarTipusItem() throws IOException {
-        // TODO: si no n'hi ha cap de seleccionat retornar una excepció personalitzada per distingir entre
-        //  les dues excepcions i posar-me un todo (maria)
+
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);
@@ -642,7 +658,7 @@ public class ControladorDomini {
      * Carrega un conjunt d'usuaris a partir d'un path
      * @param ubicacioFitxer la direccio del fitxer a llegir
      * @return retorna els usuaris que no s'han pogut afegir
-     * @throws Exception si l'usuari ha posat una direccio de fitxer no valida
+     * @throws IOException si l'usuari ha posat una direccio de fitxer no valida
      */
     public ArrayList<String> importarUsuaris(String ubicacioFitxer) throws IOException {
         ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(ubicacioFitxer);

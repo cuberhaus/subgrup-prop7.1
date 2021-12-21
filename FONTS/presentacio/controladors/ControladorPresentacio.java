@@ -146,7 +146,7 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirItem(id);
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
         return controladorDomini.editarItem(id, valorsAtributs);
     }
 
