@@ -1,14 +1,19 @@
 package presentacio.controladors;
 
+import com.sun.source.tree.Tree;
 import domini.classes.Pair;
+import domini.classes.atributs.valors.*;
 import presentacio.vistes.VistaDialegCrearTipusItem;
 import presentacio.vistes.VistaDialegEditarTipusItem;
 import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author maria.prat
@@ -37,8 +42,61 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.obtenirNomsTipusItemsCarregats();
     }
 
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomValorAAtribut) throws IllegalArgumentException, IOException {
-        controladorPresentacio.crearTipusItem(nom, nomValorAAtribut);
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException {
+        Map<String, Pair<String, String>> nomAValorAtributAmbFormat = new TreeMap<>();
+        for (Map.Entry<String, Pair<String, String>> atribut : nomAValorAtribut.entrySet()) {
+            String valorAtribut;
+            String distanciaAtribut;
+            switch (atribut.getValue().x) {
+                case "Booleà":
+                    valorAtribut = "ValorBoolea";
+                    break;
+                case "Categòric":
+                    valorAtribut = "ValorCategoric";
+                    break;
+                case "Numèric":
+                    valorAtribut = "ValorNumeric";
+                    break;
+                case "Textual":
+                    valorAtribut = "ValorTextual";
+                    break;
+                case "Conjunt booleà":
+                    valorAtribut = "ValorConjuntBoolea";
+                    break;
+                case "Conjunt categòric":
+                    valorAtribut = "ValorConjuntCategoric";
+                    break;
+                case "Conjunt numèric":
+                    valorAtribut = "ValorConjuntNumeric";
+                    break;
+                case "Conjunt textual":
+                    valorAtribut = "ValorConjuntTextual";
+                    break;
+                default:
+                    valorAtribut = "";
+            }
+            switch (atribut.getValue().y) {
+                case "Diferència de conjunts":
+                    distanciaAtribut = "DistanciaDiferenciaDeConjunts";
+                    break;
+                case "Discreta":
+                    distanciaAtribut = "DistanciaDiscreta";
+                    break;
+                case "Euclidiana":
+                    distanciaAtribut = "DistanciaEuclidiana";
+                    break;
+                case "Levenshtein":
+                    distanciaAtribut = "";
+                    break;
+                case "Zero":
+                    distanciaAtribut = "DistanciaZero";
+                    break;
+                default:
+                    distanciaAtribut = "";
+            }
+            nomAValorAtributAmbFormat.put(atribut.getKey(), new Pair<>(valorAtribut, distanciaAtribut));
+        }
+        controladorPresentacio.crearTipusItem(nom, nomAValorAtribut);
     }
 
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws Exception {
