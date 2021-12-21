@@ -106,7 +106,7 @@ public class ControladorDomini {
      * Comproba si existeix un usuari al conjunt d'usuaris del programa
      * @param id <code>int</code> l'id de l'usuari
      * @return retorna si existeix l'usuari al conjunt o no
-     * @throws Exception si l'usuari ja existeix
+     * @throws NoExisteixElementException si l'usuari ja existeix
      */
     public boolean existeixUsuari(int id) throws NoExisteixElementException {
         Id idBo = new Id(id, true);
@@ -544,18 +544,15 @@ public class ControladorDomini {
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nouNom);
     }
 
-    //TODO: filtros
     /**
-     * Obte una recomanacio amb el metode Recomanador
-     * @param nomAtributs
-     * @param filtreInclusiu
-     * @return
-     * @throws Exception
+     * Obte una recomanacio amb el metode Recomanador Collaborative per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
-        // retorna conjunt d'ids d'items recomanats
-        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
-        // i el filtre que li passa
         Filtre filtre;
         if (filtreInclusiu) {
             filtre = new FiltreInclusiu(nomAtributs);
@@ -570,18 +567,15 @@ public class ControladorDomini {
         return res;
     }
 
-    //TODO: filtros
     /**
-     *
-     * @param nomAtributs
-     * @param filtreInclusiu
-     * @return
-     * @throws Exception
+     * Obte una recomanacio amb el metode Recomanador ContentBased per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
-        // retorna conjunt d'ids d'items recomanats
-        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
-        // i el filtre que li passa
         Filtre filtre;
         if (filtreInclusiu) {
             filtre = new FiltreInclusiu(nomAtributs);
@@ -596,18 +590,15 @@ public class ControladorDomini {
         return res;
     }
 
-    //TODO: filtros
     /**
-     *
-     * @param nomAtributs
-     * @param filtreInclusiu
-     * @return
-     * @throws Exception
+     * Obte una recomanacio amb el metode Recomanador Hibrid per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
-        // retorna conjunt d'ids d'items recomanats
-        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
-        // i el filtre que li passa
         Filtre filtre;
         if (filtreInclusiu) {
             filtre = new FiltreInclusiu(nomAtributs);
@@ -622,11 +613,9 @@ public class ControladorDomini {
         return res;
     }
 
-    //TODO: filtros
-
     /**
-     *
-     * @return
+     * Retorna una avaluacio de la ultima recomanacio feta.
+     * @return El NDGC de la ultima recomanacio.
      */
     public double avaluarRecomanacio() {
         return recomanacions.obteDiscountedCumulativeGain()/recomanacions.obteIdealDiscountedCumulativeGain();
