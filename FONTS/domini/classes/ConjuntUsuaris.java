@@ -33,6 +33,8 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
             String password = usuari.get(2);
             String actiu = usuari.get(3);
 
+
+            actiu = actiu.substring(0, 1).toUpperCase() + actiu.substring(1);
             System.out.println(actiu);
             System.out.println(Boolean.parseBoolean(actiu));
 
