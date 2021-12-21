@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class VistaDialegEditarItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegEditarItem(String id, Map<String, String> atributs) throws IOException {
+    public VistaDialegEditarItem(String id, Map<String, String> atributs) throws IOException, NomInternIncorrecteException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegEditarItem(id, atributs);

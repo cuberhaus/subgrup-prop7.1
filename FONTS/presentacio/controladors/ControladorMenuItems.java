@@ -70,7 +70,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.obtenirItem(id);
     }
 
-    public void editarItem() throws IOException {
+    public void editarItem() throws IOException, NomInternIncorrecteException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
@@ -119,7 +119,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.esSessioIniciada();
     }
 
-    public void crearNouItem() throws IOException {
+    public void crearNouItem() throws IOException, NomInternIncorrecteException {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
