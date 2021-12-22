@@ -5,4 +5,5 @@ Contingut de la carpeta:
 -Diagrama de classes.pdf -> diagrama de classes de les 3 capes conjuntes.
 -Disseny de clases.pdf
 -RelacioDeClasses.pdf -> fitxer de text amb les classes implementades per cada membre de l'equip.
+-JocsDeProva.pdf -> fitxer dels jocs de prova
 
