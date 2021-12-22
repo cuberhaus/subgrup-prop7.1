@@ -14,6 +14,7 @@ import utilitats.Pair;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -496,25 +497,21 @@ public class ControladorDomini {
         return res;
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
+    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         int idItemABuscar;
         try {
             idItemABuscar = Integer.parseInt(id);
         } catch (NumberFormatException e) {
-            return false;
+            throw new FormatIncorrecteException("L'identificador " + id + " no és vàlid.");
         }
         Item item = itemsActuals.obtenir(new Id(idItemABuscar));
         for (var atribut : item.obtenirAtributs().entrySet()) {
-            try {
-                String valor = valorsAtributs.get(atribut.getKey());
-                Class<? extends ValorAtribut> clase = atribut.getValue().getClass();
-                Constructor<?> ctor = clase.getConstructor(String.class);
-                Object object = ctor.newInstance(valor);
-                item.modificaAtribut(atribut.getKey(), clase.cast(object));
-            }
-            catch (Exception ignore) {}
+            String valor = valorsAtributs.get(atribut.getKey());
+            Class<? extends ValorAtribut> classe = atribut.getValue().getClass();
+            Constructor<?> constructor = classe.getConstructor(String.class);
+            Object object = constructor.newInstance(valor);
+            item.modificarAtribut(atribut.getKey(), classe.cast(object));
         }
-        return true;
     }
 
     // TODO (edgar): afegir javadoc
@@ -774,5 +771,11 @@ public class ControladorDomini {
      */
     public void guardarPrograma() {
         // TODO (edgar): implementar i escriure javadoc
+    }
+
+    public ArrayList<String> obtenirIdsItems() {
+        ArrayList<String> idsItems = new ArrayList<>();
+        itemsActuals.obtenirTotsElsElements().keySet().forEach((id) -> {idsItems.add(String.valueOf(id.obtenirValor()));});
+        return idsItems;
     }
 }

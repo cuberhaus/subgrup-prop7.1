@@ -75,8 +75,8 @@ public class VistaMenuValoracions extends JPanel {
         for (ArrayList<String> valoracio : valoracions) {
             llistaValoracionsTableModel.addRow(valoracio.toArray());
         }
-//        llistaValoracionsTableModel.removeRow(llistaValoracionsTableModel.getRowCount()-1);
         llistaValoracions = new JTable(llistaValoracionsTableModel);
+        llistaValoracions.setEnabled(false);
         jScrollPane = new JScrollPane(llistaValoracions);
         instancia.add(jScrollPane, BorderLayout.WEST);
     }
@@ -84,23 +84,13 @@ public class VistaMenuValoracions extends JPanel {
     /**
      * Sobreescriu la taula de valoracions amb el conjunt de valoracions del domini
      */
-    private static void actualitzarLlistaUsuaris() {
+    public static void actualitzarTaula() {
         llistaValoracionsTableModel.setRowCount(0);
-        ArrayList<ArrayList<String>> usuaris = controladorMenuValoracions.obtenirValoracions();
-        for (ArrayList<String> usuari : usuaris) {
-            llistaValoracionsTableModel.addRow(usuari.toArray());
+        ArrayList<ArrayList<String>> valoracions = controladorMenuValoracions.obtenirValoracions();
+        for (ArrayList<String> valoracio : valoracions) {
+            llistaValoracionsTableModel.addRow(valoracio.toArray());
         }
-        llistaValoracionsTableModel.removeRow(llistaValoracionsTableModel.getRowCount()-1);
         jScrollPane.revalidate();
-    }
-
-    /**
-     * Esborra el text de tots els camps de text
-     */
-    private static void clearText() {
-        itemIdText.setText("");
-        usuariIdText.setText("");
-        valorText.setText("");
     }
 
     /**

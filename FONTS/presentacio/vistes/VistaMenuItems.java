@@ -15,8 +15,11 @@ import java.util.ArrayList;
 public class VistaMenuItems extends JPanel {
     private static VistaMenuItems instancia;
     private static ControladorMenuItems controladorMenuItems;
+
     private static JPanel menuLateral;
     private static JTable llistaItems;
+    private static DefaultTableModel llistaItemsTableModel;
+    private static JScrollPane llistaItemsScroll;
 
     private VistaMenuItems() {
     }
@@ -38,17 +41,17 @@ public class VistaMenuItems extends JPanel {
 
     private static void inicialitzarLlistaItems() {
         ArrayList<String> nomsColumnes = new ArrayList<>();
-        nomsColumnes.add("Id");
-        nomsColumnes.addAll(controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat());
-        // TODO: revisar que això està bé i que l'ordre de les columnes i els atributs és el mateix
-        // TODO: potser cal un JScrollPane per la taula
-        DefaultTableModel llistaItemsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
-        llistaItems = new JTable(llistaItemsTableModel);
-        ArrayList<ArrayList<String>> items = controladorMenuItems.obtenirItems();
-        for (ArrayList<String> item : items) {
-            llistaItemsTableModel.addRow(item.toArray());
+        nomsColumnes.add("Identificador d'ítem");
+
+        llistaItemsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
+        ArrayList<String> itemIds = controladorMenuItems.obtenirIdsItems();
+        for (String itemId : itemIds) {
+            llistaItemsTableModel.addRow(new String[]{itemId});
         }
-        instancia.add(llistaItems, BorderLayout.CENTER);
+        llistaItems = new JTable(llistaItemsTableModel);
+        llistaItems.setEnabled(false);
+        llistaItemsScroll = new JScrollPane(llistaItems);
+        instancia.add(llistaItemsScroll, BorderLayout.WEST);
     }
 
     private static void inicialitzarMenuLateral() {
@@ -56,31 +59,36 @@ public class VistaMenuItems extends JPanel {
         menuLateral.setLayout(new BoxLayout(menuLateral, BoxLayout.Y_AXIS));
         menuLateral.add(Box.createVerticalGlue());
         JButton botoCrearItem = new JButton("Crea un nou ítem");
+        botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoCrearItem.addActionListener(e -> {
             controladorMenuItems.crearNouItem();
+            actualitzarTaula();
         });
         menuLateral.add(botoCrearItem);
         JButton botoEditarItem = new JButton("Edita un ítem");
+        botoEditarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoEditarItem.addActionListener(e -> {
             controladorMenuItems.editarItem();
         });
         menuLateral.add(botoEditarItem);
         JButton botoEsborrarItem = new JButton("Esborra un ítem");
+        botoEsborrarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoEsborrarItem.addActionListener(e -> {
-            try {
-                controladorMenuItems.esborrarItem();
-            } catch (NoExisteixElementException ex) {
-                // TODO
-                ex.printStackTrace();
-            }
+            controladorMenuItems.esborrarItem();
+            actualitzarTaula();
         });
         menuLateral.add(botoEsborrarItem);
 
         JButton botoEsborrarTotsElsItems = new JButton("Esborra tots els ítems");
-        botoEsborrarTotsElsItems.addActionListener(e -> controladorMenuItems.esborrarTotsElsItems());
+        botoEsborrarTotsElsItems.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoEsborrarTotsElsItems.addActionListener(e -> {
+            controladorMenuItems.esborrarTotsElsItems();
+            actualitzarTaula();
+        });
         menuLateral.add(botoEsborrarTotsElsItems);
 
         JButton botoCarregarConjuntItems = new JButton("Afegeix ítems des d'un conjunt");
+        botoCarregarConjuntItems.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoCarregarConjuntItems.addActionListener(e -> {
             boolean deduirTipusItem = true;
             if (controladorMenuItems.existeixTipusItemSeleccionat()) {
@@ -92,12 +100,30 @@ public class VistaMenuItems extends JPanel {
             if (deduirTipusItem) {
                 nomTipusItem = JOptionPane.showInputDialog("Introdueix el nom del nou tipus d'ítem:");
             }
-            controladorMenuItems.carregarConjuntItems(deduirTipusItem, nomTipusItem);
+            if (nomTipusItem != null) {
+                controladorMenuItems.carregarConjuntItems(deduirTipusItem, nomTipusItem);
+                actualitzarTaula();
+            }
         });
 
         menuLateral.add(botoCarregarConjuntItems);
+
+        JButton botoExportarConjuntItems = new JButton("Exporta el conjunt d'ítems");
+        botoExportarConjuntItems.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoExportarConjuntItems.addActionListener(e -> {
+        });
+
+        menuLateral.add(botoExportarConjuntItems);
         menuLateral.add(Box.createVerticalGlue());
-        instancia.add(menuLateral, BorderLayout.EAST);
+        instancia.add(menuLateral, BorderLayout.CENTER);
     }
 
+    public static void actualitzarTaula() {
+        llistaItemsTableModel.setRowCount(0);
+        ArrayList<ArrayList<String>> usuaris = controladorMenuItems.obtenirItems();
+        for (ArrayList<String> usuari : usuaris) {
+            llistaItemsTableModel.addRow(usuari.toArray());
+        }
+        llistaItemsScroll.revalidate();
+    }
 }

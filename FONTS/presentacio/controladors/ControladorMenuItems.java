@@ -4,10 +4,12 @@ import excepcions.*;
 import presentacio.vistes.VistaDialegCrearItem;
 import presentacio.vistes.VistaDialegEditarItem;
 import presentacio.vistes.VistaMenuItems;
+import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -28,6 +30,10 @@ public class ControladorMenuItems {
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
         }
         return instancia;
+    }
+
+    public static void actualitzarTaula() {
+        VistaMenuItems.actualitzarTaula();
     }
 
     public ArrayList<ArrayList<String>> obtenirItems() {
@@ -52,15 +58,19 @@ public class ControladorMenuItems {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
 
-    public void esborrarItem() throws NoExisteixElementException {
+    public void esborrarItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols esborrar:");
-            if (!controladorPresentacio.esborrarItem(id)) {
-                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
-            } else {
-                JOptionPane.showMessageDialog(vistaMenuItems, "L'ítem s'ha esborrat amb èxit.");
+            try {
+                String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols esborrar:");
+                if (!controladorPresentacio.esborrarItem(id)) {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
+                } else {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "L'ítem s'ha esborrat amb èxit.");
+                }
+            } catch (NoExisteixElementException ex) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut esborrar l'ítem.");
             }
         }
     }
@@ -74,20 +84,22 @@ public class ControladorMenuItems {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
             String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols editar:");
-            try {
-                Map<String, String> atributs = controladorPresentacio.obtenirItem(id);
-                VistaDialegEditarItem vistaDialegEditarItem = new VistaDialegEditarItem(id, atributs);
-                vistaDialegEditarItem.setVisible(true);
-            } catch (NoExisteixElementException e) {
-                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut editar l'ítem.");
+            if (id != null) {
+                VistaDialegEditarItem vistaDialegEditarItem;
+                try {
+                    vistaDialegEditarItem = new VistaDialegEditarItem(id, controladorPresentacio.obtenirItem(id));
+                    vistaDialegEditarItem.setVisible(true);
+                } catch (NoExisteixElementException ex) {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "No existeix cap ítem amb identificador " + id);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut editar l'ítem.");
+                }
             }
         }
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
-        return controladorPresentacio.editarItem(id, valorsAtributs);
+    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException, FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        controladorPresentacio.editarItem(id, valorsAtributs);
     }
 
     public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem) {
@@ -142,5 +154,12 @@ public class ControladorMenuItems {
 
     public String obtenirNomTipusItemSeleccionat() {
         return controladorPresentacio.obtenirNomTipusItemSeleccionat();
+    }
+
+    public ArrayList<String> obtenirIdsItems() {
+        if (!existeixTipusItemSeleccionat()) {
+            return new ArrayList<>();
+        }
+        return controladorPresentacio.obtenirIdsItems();
     }
 }

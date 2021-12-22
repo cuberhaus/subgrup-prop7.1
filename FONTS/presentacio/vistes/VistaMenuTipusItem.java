@@ -148,6 +148,7 @@ public class VistaMenuTipusItem extends JPanel {
             if (nomTipusItem != null) {
                 try {
                     controladorMenuTipusItem.seleccionarTipusItem(nomTipusItem);
+                    controladorMenuTipusItem.actualitzarVistesTipusItemSeleccionat();
                     if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                         textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                         botoVeureTipusItem.setEnabled(false);
@@ -162,6 +163,7 @@ public class VistaMenuTipusItem extends JPanel {
                         botoEsborrarTipusItem.setEnabled(true);
                     }
                 } catch (Exception e1) {
+                    System.out.println(e1.getMessage());
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut seleccionar el tipus d'ítem. Torna-ho a intentar.");
                 }
@@ -181,8 +183,9 @@ public class VistaMenuTipusItem extends JPanel {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
                 try {
-                    controladorMenuTipusItem.deseleccionarTipusItem();
+                    controladorMenuTipusItem.desseleccionarTipusItem();
                     textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                    controladorMenuTipusItem.actualitzarVistesTipusItemSeleccionat();
                     botoVeureTipusItem.setEnabled(false);
                     botoEditarTipusItem.setEnabled(false);
                     botoDeseleccionarTipusItem.setEnabled(false);
@@ -207,6 +210,7 @@ public class VistaMenuTipusItem extends JPanel {
                         tipusItemsComboBoxModel.removeAllElements();
                         tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
                         textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                        controladorMenuTipusItem.actualitzarVistesTipusItemSeleccionat();
                         botoVeureTipusItem.setEnabled(false);
                         botoEditarTipusItem.setEnabled(false);
                         botoDeseleccionarTipusItem.setEnabled(false);

@@ -252,7 +252,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @param nomAtribut nom d'atribut a modificar
      * @param valor nou valor
      */
-    public void modificaAtribut(String nomAtribut, ValorAtribut<?> valor) {
+    public void modificarAtribut(String nomAtribut, ValorAtribut<?> valor) {
         if (!atributs.containsKey(nomAtribut))
             return;
         atributs.put(nomAtribut, valor);

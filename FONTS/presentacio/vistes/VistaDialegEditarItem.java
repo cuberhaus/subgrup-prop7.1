@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.FormatIncorrecteException;
 import excepcions.NoExisteixElementException;
 import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
@@ -8,6 +9,7 @@ import presentacio.controladors.ControladorMenuItems;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,7 @@ public class VistaDialegEditarItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegEditarItem(String id, Map<String, String> atributs) throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public VistaDialegEditarItem(String id, Map<String, String> atributs) throws DistanciaNoCompatibleAmbValorException, NomInternIncorrecteException, IOException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegEditarItem(id, atributs);
@@ -71,22 +73,21 @@ public class VistaDialegEditarItem extends JDialog {
             if (!controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
                 for (Component component : panellLlistaAtributs.getComponents()) {
                     JPanel atribut = (JPanel) component;
-                    String nomAtribut = ((JLabel) atribut.getComponent(1)).getText();
-                    String valorTipusAtribut = ((JTextField) atribut.getComponent(2)).getText();
+                    String nomAtribut = ((JLabel) atribut.getComponent(0)).getText();
+                    String valorTipusAtribut = ((JTextField) atribut.getComponent(1)).getText();
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
             try {
-                if (!controladorMenuItems.editarItem(id, valorsAtributs)) {
-                    JOptionPane.showMessageDialog(this, "No s'ha pogut guardar l'ítem amb els valors donats.");
-                    return;
-                }
+                controladorMenuItems.editarItem(id, valorsAtributs);
+                JOptionPane.showMessageDialog(this, "S'ha editat l'ítem amb èxit");
             } catch (NoExisteixElementException ex) {
-                // TODO: catch it
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "No existeix cap ítem amb aquest identificador.");
+            } catch (FormatIncorrecteException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "No s'ha pogut editar l'ítem.");
             }
-            JOptionPane.showMessageDialog(this, "Item editat amb èxit.");
-            dispose();
         });
         botoGuardarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }

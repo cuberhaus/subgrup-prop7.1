@@ -178,7 +178,11 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.editarTipusItem(nouNom);
     }
 
-    public void deseleccionarTipusItem() throws IOException {
+    public void desseleccionarTipusItem() throws IOException {
         controladorPresentacio.deseleccionarTipusItem();
+    }
+
+    public void actualitzarVistesTipusItemSeleccionat() {
+        controladorPresentacio.actualitzarVistesTipusItemSeleccionat();
     }
 }

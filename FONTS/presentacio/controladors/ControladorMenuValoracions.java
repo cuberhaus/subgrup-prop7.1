@@ -189,4 +189,8 @@ public class ControladorMenuValoracions {
     public void exportaValoracions(String absolutePath) throws IOException {
         controladorPresentacio.exportaValoracions(absolutePath);
     }
+
+    public static void actualitzarTaula() {
+        VistaMenuValoracions.actualitzarTaula();
+    }
 }

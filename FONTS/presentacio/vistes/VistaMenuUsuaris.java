@@ -84,6 +84,7 @@ public class VistaMenuUsuaris extends JPanel {
         }
         llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount()-1);
         llistaUsuaris = new JTable(llistaUsuarisTableModel);
+        llistaUsuaris.setEnabled(false);
         jScrollPane = new JScrollPane(llistaUsuaris);
         instancia.add(jScrollPane, BorderLayout.WEST);
     }

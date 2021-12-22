@@ -5,6 +5,7 @@ import domini.controladors.ControladorDomini;
 import excepcions.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -16,6 +17,9 @@ public class ControladorPresentacio {
 
     private static ControladorDomini controladorDomini;
     private static ControladorPresentacio instancia;
+
+    private static ControladorMenuItems controladorMenuItems;
+    private static ControladorMenuValoracions controladorMenuValoracions;
     private static ControladorMenuUsuaris controladorMenuUsuaris;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
     private static ControladorMenuTipusItem controladorMenuTipusItem;
@@ -321,8 +325,8 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirItem(id);
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
-        return controladorDomini.editarItem(id, valorsAtributs);
+    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException, FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        controladorDomini.editarItem(id, valorsAtributs);
     }
 
     /**
@@ -485,5 +489,14 @@ public class ControladorPresentacio {
 
     public void guardarPrograma() {
         controladorDomini.guardarPrograma();
+    }
+
+    public ArrayList<String> obtenirIdsItems() {
+        return controladorDomini.obtenirIdsItems();
+    }
+
+    public void actualitzarVistesTipusItemSeleccionat() {
+        ControladorMenuItems.actualitzarTaula();
+        ControladorMenuValoracions.actualitzarTaula();
     }
 }
