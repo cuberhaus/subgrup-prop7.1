@@ -1,5 +1,6 @@
-Conte la documentacio del projecte.
+Conte la documentacio del projecte. El javadoc, i una carpeta amb la documentacio entregada a cada entrega.
 javadoc/
 PRIMERA ENTREGA/
 SEGONA ENTREGA/
+TERCERA ENTREGA/
 index.txt
