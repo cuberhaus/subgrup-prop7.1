@@ -139,17 +139,20 @@ public class ControladorDomini {
      * @param nom nom del usuari
      * @param contrasenya contrasenya del usuari
      * @return Retorna l'identificador de l'usuari creat
-     * @throws NoExisteixElementException no existeix l'element
      * @throws JaExisteixElementException l'element ja existeix
      */
-    public int afegirUsuari(String nom, String contrasenya) throws NoExisteixElementException, JaExisteixElementException {
+    public int afegirUsuari(String nom, String contrasenya) throws JaExisteixElementException {
         Id id = obteIdUsuariDisponible();
-        if (estatPrograma.conteUsuari(id) && estatPrograma.obtenirUsuari(id).isActiu()) {
-            throw new JaExisteixElementException("L'usuari " + nom + " ja existeix");
-        }
-        else {
-            estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
-            return id.obtenirValor();
+        try {
+            if (estatPrograma.conteUsuari(id) && estatPrograma.obtenirUsuari(id).isActiu()) {
+                throw new JaExisteixElementException("L'usuari " + nom + " ja existeix");
+            }
+            else {
+                estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
+                return id.obtenirValor();
+            }
+        } catch (Exception ignored) {
+            return -1;
         }
     }
 
@@ -237,6 +240,9 @@ public class ControladorDomini {
      * @throws UsuariIncorrecteException c
      */
     public void carregaConjuntValoracions(String rutaAbsolut) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
+        if (nomTipusItemActual == null) {
+            throw new AccesAEstatIncorrecteException("S'ha de seleccionar un tipus d'item abans");
+        }
         ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
         valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
@@ -568,8 +574,16 @@ public class ControladorDomini {
      * @param nouNom nou nom pel tipus item.
      * @throws IOException Problema canviant el nom del tipus item a la persistencia.
      */
-    public void editarTipusItem(String nouNom) throws IOException {
+    public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         if (nomTipusItemActual == null) return;
+        if (nouNom.isEmpty()) {
+            // TODO (edgar): posar una excepció millor?
+            throw new FormatIncorrecteException("El nom d'un tipus d'ítem no pot ser buit.");
+        }
+        if (existeixTipusItem(nouNom)) {
+            // TODO (edgar): posar una excepció millor?
+            throw new JaExisteixElementException("Ja existeix un tipus d'ítem amb nom: \"" + nouNom + "\"");
+        }
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.borrarConjuntValoracions(nomTipusItemActual);
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual).copiar();
@@ -583,6 +597,11 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(tipusItem.convertirAArrayList(), nouNom);
         controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nouNom, "basic");
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nouNom);
+    }
+
+    private boolean existeixTipusItem(String nouNom) {
+        // TODO (edgar): implementar aixo;
+        return false;
     }
 
     /**

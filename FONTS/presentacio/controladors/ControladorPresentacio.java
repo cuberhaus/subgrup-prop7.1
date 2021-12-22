@@ -19,11 +19,11 @@ public class ControladorPresentacio {
     private static ControladorPresentacio instancia;
 
     private static ControladorMenuItems controladorMenuItems;
-    private static ControladorMenuValoracions controladorMenuValoracions;
-    private static ControladorMenuUsuaris controladorMenuUsuaris;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
-    private static ControladorMenuTipusItem controladorMenuTipusItem;
     private static ControladorMenuRecomanacions controladorMenuRecomanacions;
+    private static ControladorMenuTipusItem controladorMenuTipusItem;
+    private static ControladorMenuUsuaris controladorMenuUsuaris;
+    private static ControladorMenuValoracions controladorMenuValoracions;
 
     /**
      * Constructora per defecte de ControladorPresentacio
@@ -33,12 +33,12 @@ public class ControladorPresentacio {
 
     /**
      * Constructora de ControladorPresentacio
-     * Crea una instància única de ControladorPresentacio
+     * Crea una instància única de ControladorPresentacio seguint el patró Singleton
      *
      * @return <code> ControladorPresentacio </code>
-     * @throws IOException Hi ha hagut algun error en l'entrada/sortida
-     * @throws NomInternIncorrecteException Algun valor demanat no existeix
-     * @throws DistanciaNoCompatibleAmbValorException l'atribut no es pot calcular amb la distancia seleccionada
+     * @throws IOException si hi ha hagut algun error en l'entrada/sortida
+     * @throws NomInternIncorrecteException si algun valor demanat no existeix
+     * @throws DistanciaNoCompatibleAmbValorException si el valor de l'atribut no es compatible amb la distancia seleccionada
      */
     public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
@@ -52,16 +52,17 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obtenir les distancies
+     * Retorna un mapa que relaciona el nom de cada atribut del tipus d'item seleccionat amb una parella formada pel
+     * valor de l'atribut i la seva distancia
      * @return <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> amb els valors
-     * @throws DistanciaNoCompatibleAmbValorException La distancia no es compatible amb el valor
+     * @throws DistanciaNoCompatibleAmbValorException si alguna distancia no es compatible amb el valor de l'atribut
      */
     public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() throws DistanciaNoCompatibleAmbValorException {
         return controladorDomini.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
     }
 
     /**
-     * Retorna el nom dels items carregats
+     * Retorna el nom dels tipus d'items carregats
      * @return <code>ArrayList&lt;String&gt;</code> llista dels noms
      */
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
@@ -69,31 +70,31 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obté l'identificador de l'usuari que ha iniciat sessió
+     * Obte l'identificador de l'usuari que ha iniciat sessio
      * @return identificador de l'usuari
-     * @throws SessioNoIniciadaException La sessió no està iniciada
+     * @throws SessioNoIniciadaException si la sessio no està iniciada
      */
     public int obtenirSessio() throws SessioNoIniciadaException {
         return controladorDomini.obtenirSessio();
     }
 
     /**
-     * Inicia sessió amb l'identificador donat si la contrasenya és correcte
+     * Inicia sessio amb l'identificador donat si la contrasenya és correcte
      * @param idSessio identificador d'usuari
      * @param contrasenya contrasenya
-     * @throws NoExisteixElementException no existeix l'identificador d'usuari
-     * @throws ContrasenyaIncorrectaException La contrasenya no és correcte
-     * @throws SessioIniciadaException La sessió ja està iniciada
+     * @throws NoExisteixElementException si no existeix un usuari amb l'identificador donat
+     * @throws ContrasenyaIncorrectaException si la contrasenya no és correcta
+     * @throws SessioIniciadaException si la sessió ja està iniciada
      */
     public void iniciarSessio(int idSessio, String contrasenya) throws NoExisteixElementException, ContrasenyaIncorrectaException, SessioIniciadaException {
         controladorDomini.iniciarSessio(idSessio, contrasenya);
     }
 
     /**
-     * Retorna true si existeix l'usuari amb l'identificador donat
+     * Retorna cert si existeix l'usuari amb l'identificador donat
      * @param id identificador d'usuari
-     * @return true si l'usuari existeix, altrament, retorna false
-     * @throws NoExisteixElementException No existeix element
+     * @return cert si l'usuari existeix, altrament, retorna fals
+     * @throws NoExisteixElementException si no existeix un usuari amb l'identificador donat
      */
     public boolean existeixUsuari(int id) throws NoExisteixElementException {
         return controladorDomini.existeixUsuari(id);
@@ -103,18 +104,18 @@ public class ControladorPresentacio {
      * Afegeix un usuari al conjunt d'usuaris
      * @param nom nom de l'usuari
      * @param contrasenya contrasenya de l'usuari
-     * @return retorna l'identificador que s'ha assignat a l'usuari
-     * @throws NoExisteixElementException No existeix element
+     * @return l'identificador que s'ha assignat a l'usuari
+     * @throws NoExisteixElementException si no existeix un usuari amb l'identificador que se li assigna
      * @throws JaExisteixElementException L'element ja existeix
      */
     public int afegirUsuari(String nom, String contrasenya) throws NoExisteixElementException, JaExisteixElementException {
-        return controladorDomini.afegirUsuari(nom,contrasenya);
+        return controladorDomini.afegirUsuari(nom, contrasenya);
     }
 
     /**
      * Esborra un usuari del conjunt
      * @param id identificador de l'usuari
-     * @throws NoExisteixElementException L'element no existeix
+     * @throws NoExisteixElementException si no existeix un usuari amb l'identificador donat
      */
     public void esborrarUsuari(int id) throws NoExisteixElementException {
         controladorDomini.esborrarUsuari(id);
@@ -122,7 +123,7 @@ public class ControladorPresentacio {
 
     /**
      * Tanca la sessió
-     * @throws SessioNoIniciadaException La sessió no està iniciada
+     * @throws SessioNoIniciadaException si la sessió no està iniciada
      */
     public void tancarSessio() throws SessioNoIniciadaException {
         controladorDomini.tancarSessio();
@@ -182,6 +183,7 @@ public class ControladorPresentacio {
      */
     public void carregarConjuntValoracions(String pathAbsolut) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
+        controladorMenuUsuaris.actualitzaTaula();
     }
 
     /**
@@ -358,7 +360,7 @@ public class ControladorPresentacio {
      * @param nouNom nou nom pel tipus item.
      * @throws IOException Problema canviant el nom del tipus item a la persistència.
      */
-    public void editarTipusItem(String nouNom) throws IOException {
+    public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         controladorDomini.editarTipusItem(nouNom);
     }
 

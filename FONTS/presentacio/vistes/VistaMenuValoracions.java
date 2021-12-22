@@ -31,7 +31,7 @@ public class VistaMenuValoracions extends JPanel {
     private static JButton esborraValoracioButton;
     private static JButton editaValoracioButton;
     private static JFileChooser jFileChooser;
-    private static JButton conjuntDeValoracionsButton;
+    private static JButton importaValoracionsButton;
     private static JTable llistaValoracions;
     private static DefaultTableModel llistaValoracionsTableModel;
     private static JScrollPane jScrollPane;
@@ -126,7 +126,7 @@ public class VistaMenuValoracions extends JPanel {
         creaValoracioButton();
         esborraValoracioButton();
         editaValoracioButton();
-        conjuntDeValoracionsButton();
+        importaValoracionsButton();
         esborrarTotesLesValoracionsButton();
         exportarConjuntValoracions();
 
@@ -219,13 +219,9 @@ public class VistaMenuValoracions extends JPanel {
         editaValoracioButton.addActionListener(e -> {
             try {
                 if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
-                    if (controladorMenuValoracions.existeixValoracio(usuariIdText.getText(), itemIdText.getText())) {
                         controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
                         actualitzarTaula();
                         clearText();
-                    } else {
-                        JOptionPane.showMessageDialog(instancia, "La valoració no existeix");
-                    }
                 } else {
                     JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat");
                 }
@@ -239,11 +235,11 @@ public class VistaMenuValoracions extends JPanel {
         jpanel.add(editaValoracioButton, gridBagConstraints);
     }
 
-    private static void conjuntDeValoracionsButton() {
-        conjuntDeValoracionsButton = new JButton("Importar valoracions");
-        conjuntDeValoracionsButton.addActionListener(e -> {
-            // TODO: logica
+    private static void importaValoracionsButton() {
+        importaValoracionsButton = new JButton("Importar valoracions");
+        importaValoracionsButton.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
+            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjuntVal = jFileChooser.getSelectedFile();
@@ -258,7 +254,7 @@ public class VistaMenuValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        jpanel.add(conjuntDeValoracionsButton, gridBagConstraints);
+        jpanel.add(importaValoracionsButton, gridBagConstraints);
     }
 
     private static void exportarConjuntValoracions() {
@@ -272,8 +268,8 @@ public class VistaMenuValoracions extends JPanel {
                 try {
                     controladorMenuValoracions.exportaValoracions(pathConjunt.getAbsolutePath());
                 } catch (IOException ex) {
-                    //TODO catch
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
                 }
             }
         });

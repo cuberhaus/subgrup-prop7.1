@@ -18,8 +18,11 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * Constructora de Conjunt d'ítems.
      * @param nomTipusItem <code>String</code> nom del tipus d'ítem.
      * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
-     * @throws Exception si id no és correcte o l'ítem creat ja és al conjunt.
+     * @throws AccesAEstatIncorrecteException si id no és correcte o l'ítem creat ja és al conjunt.
+     * @throws NoExisteixElementException b
+     * @throws DistanciaNoCompatibleAmbValorException a
      */
+    //TODO: doc
     public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException, FormatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula, taula.obtenirNumItems());

@@ -92,7 +92,7 @@ public class VistaMenuUsuaris extends JPanel {
     /**
      * Sobreescriu la taula d'usuaris amb el conjunt d'usuaris del domini
      */
-    private static void actualitzarLlistaUsuaris() {
+    public static void actualitzarLlistaUsuaris() {
         llistaUsuarisTableModel.setRowCount(0);
         ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();
         for (ArrayList<String> usuari : usuaris) {
