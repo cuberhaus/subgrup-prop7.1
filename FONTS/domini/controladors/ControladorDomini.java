@@ -448,7 +448,8 @@ public class ControladorDomini {
      * @return <code>boolean</code> true si 'sha afegit
      * @throws Exception si no s'ha pogut afegir l'item
      */
-    public int afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    // TODO: arreglar javadoc
+    public int afegirItem(Map<String, String> valorsAtributs) throws IllegalArgumentException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
@@ -513,7 +514,7 @@ public class ControladorDomini {
         return res;
     }
 
-    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public void editarItem(String id, Map<String, String> valorsAtributs) throws IllegalArgumentException, NoExisteixElementException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         int idItemABuscar;
         try {
             idItemABuscar = Integer.parseInt(id);
@@ -523,6 +524,15 @@ public class ControladorDomini {
         Item item = itemsActuals.obtenir(new Id(idItemABuscar));
         for (var atribut : item.obtenirAtributs().entrySet()) {
             String valor = valorsAtributs.get(atribut.getKey());
+            if (valor == null) {
+                // TODO (edgar): revisar
+                throw new IllegalArgumentException("No hi ha cap atribut amb nom " + atribut.getKey());
+            }
+            if (valor.contains(",") || valor.contains("\"")) {
+                // TODO (edgar): revisar
+                throw new FormatIncorrecteException("Els atributs no poden tenir el caràcter , ni \"");
+
+            }
             Class<? extends ValorAtribut> classe = atribut.getValue().getClass();
             Constructor<?> constructor = classe.getConstructor(String.class);
             Object object = constructor.newInstance(valor);
@@ -819,7 +829,7 @@ public class ControladorDomini {
 
     public ArrayList<String> obtenirIdsItems() {
         ArrayList<String> idsItems = new ArrayList<>();
-        itemsActuals.obtenirTotsElsElements().keySet().forEach((id) -> {idsItems.add(String.valueOf(id.obtenirValor()));});
+        itemsActuals.obtenirTotsElsElements().keySet().forEach((id) -> idsItems.add(String.valueOf(id.obtenirValor())));
         return idsItems;
     }
 }

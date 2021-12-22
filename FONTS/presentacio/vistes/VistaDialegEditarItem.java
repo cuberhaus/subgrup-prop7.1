@@ -78,16 +78,7 @@ public class VistaDialegEditarItem extends JDialog {
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
-            try {
-                controladorMenuItems.editarItem(id, valorsAtributs);
-                JOptionPane.showMessageDialog(this, "S'ha editat l'ítem amb èxit");
-            } catch (NoExisteixElementException ex) {
-                JOptionPane.showMessageDialog(this, "No existeix cap ítem amb aquest identificador.");
-            } catch (FormatIncorrecteException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "No s'ha pogut editar l'ítem.");
-            }
+            controladorMenuItems.editarItem(this, id, valorsAtributs);
         });
         botoGuardarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }

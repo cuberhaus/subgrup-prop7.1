@@ -75,15 +75,8 @@ public class VistaDialegCrearItem extends JDialog {
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
-            try {
-                String nouId = controladorMenuItems.afegirItem(valorsAtributs);
-                JOptionPane.showMessageDialog(this, "Item creat amb èxit amb identificador " + nouId);
-                dispose();
-            } catch (FormatIncorrecteException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "No s'ha pogut crear un ítem amb els valors donats.");
-            }
+            controladorMenuItems.afegirItem(valorsAtributs);
+            dispose();
         });
         botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }

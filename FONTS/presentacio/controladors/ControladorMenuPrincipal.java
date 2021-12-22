@@ -2,7 +2,7 @@ package presentacio.controladors;
 
 import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
-import presentacio.EncarregatActualitzarTaules;
+import presentacio.EncarregatActualitzarVistes;
 import presentacio.vistes.VistaMenuPrincipal;
 
 import javax.swing.*;
@@ -19,7 +19,7 @@ public class ControladorMenuPrincipal {
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuPrincipal instancia;
     private static VistaMenuPrincipal vistaMenuPrincipal;
-    private static EncarregatActualitzarTaules encarregatActualitzarTaules;
+    private static EncarregatActualitzarVistes encarregatActualitzarVistes;
 
     private ControladorMenuPrincipal () {
     }
@@ -40,10 +40,10 @@ public class ControladorMenuPrincipal {
                     }
                 }
             });
-            EncarregatActualitzarTaules.afegirObservador(ControladorMenuTipusItem.obtenirInstancia());
-            EncarregatActualitzarTaules.afegirObservador(ControladorMenuItems.obtenirInstancia());
-            EncarregatActualitzarTaules.afegirObservador(ControladorMenuUsuaris.obtenirInstancia());
-            EncarregatActualitzarTaules.afegirObservador(ControladorMenuValoracions.obtenirInstancia());
+            EncarregatActualitzarVistes.afegirObservador(ControladorMenuTipusItem.obtenirInstancia());
+            EncarregatActualitzarVistes.afegirObservador(ControladorMenuItems.obtenirInstancia());
+            EncarregatActualitzarVistes.afegirObservador(ControladorMenuUsuaris.obtenirInstancia());
+            EncarregatActualitzarVistes.afegirObservador(ControladorMenuValoracions.obtenirInstancia());
         }
         return instancia;
     }

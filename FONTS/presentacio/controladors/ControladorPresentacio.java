@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import presentacio.EncarregatActualitzarTaules;
+import presentacio.EncarregatActualitzarVistes;
 import utilitats.Pair;
 import domini.controladors.ControladorDomini;
 import excepcions.*;
@@ -184,7 +184,7 @@ public class ControladorPresentacio {
      */
     public void carregarConjuntValoracions(String pathAbsolut) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
-        EncarregatActualitzarTaules.notificarObservadors();
+        EncarregatActualitzarVistes.notificarObservadors();
     }
 
     /**
@@ -301,8 +301,9 @@ public class ControladorPresentacio {
      * Afegeix un item al conjunt
      * @param valorsAtributs <code>Map&lt;String, String&gt;</code> els atributs i el seu valor
      * @return <code>boolean</code> true si 'sha afegit
-     * @throws Exception si no s'ha pogut afegir l'item
+     *
      */
+    // TODO: arreglar javadoc
     public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return String.valueOf(controladorDomini.afegirItem(valorsAtributs));
     }
@@ -341,6 +342,7 @@ public class ControladorPresentacio {
      * @throws IOException si no s'ha pogut obrir el fitxer
      * @throws AccesAEstatIncorrecteException Accedeix a estat incorrecte
      */
+    // TODO: arreglar javadoc
     public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException, FormatIncorrecteException {
         if (deduirTipusItem) {
             controladorDomini.carregarConjuntItems(nomTipusItem, rutaAbsoluta);

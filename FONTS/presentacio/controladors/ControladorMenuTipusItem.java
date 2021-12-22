@@ -1,11 +1,8 @@
 package presentacio.controladors;
 
-import presentacio.EncarregatActualitzarTaules;
+import presentacio.EncarregatActualitzarVistes;
 import utilitats.Pair;
 import excepcions.*;
-import presentacio.vistes.VistaDialegCrearTipusItem;
-import presentacio.vistes.VistaDialegEditarTipusItem;
-import presentacio.vistes.VistaDialegMostrarTipusItem;
 import presentacio.vistes.VistaMenuTipusItem;
 
 import java.io.IOException;
@@ -16,7 +13,7 @@ import java.util.TreeMap;
 /**
  * @author maria.prat
  */
-public class ControladorMenuTipusItem implements EncarregatActualitzarTaules.Observador {
+public class ControladorMenuTipusItem implements EncarregatActualitzarVistes.Observador {
 
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuTipusItem instancia;
@@ -183,6 +180,6 @@ public class ControladorMenuTipusItem implements EncarregatActualitzarTaules.Obs
 
     @Override
     public void actualitzar() {
-        vistaMenuTipusItem.actualitzarTipusItems();
+        VistaMenuTipusItem.actualitzarTipusItems();
     }
 }

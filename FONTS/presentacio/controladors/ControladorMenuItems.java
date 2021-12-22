@@ -1,35 +1,50 @@
 package presentacio.controladors;
 
 import excepcions.*;
-import presentacio.EncarregatActualitzarTaules;
+import presentacio.EncarregatActualitzarVistes;
 import presentacio.vistes.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
-public class ControladorMenuItems implements EncarregatActualitzarTaules.Observador {
+/**
+ * Classe que representa el controlador del Menu d'items
+ * @author maria.prat
+ */
+public class ControladorMenuItems implements EncarregatActualitzarVistes.Observador {
 
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuItems instancia;
     private static VistaMenuItems vistaMenuItems;
 
+    /**
+     * Constructor per defecte del controlador
+     */
     private ControladorMenuItems () {
     }
 
+    /**
+     * Retorna l'única instància del controlador, seguint el patró Singleton
+     */
     public static ControladorMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorMenuItems();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+            vistaMenuItems = VistaMenuItems.obtenirInstancia();
         }
         return instancia;
     }
 
+    /**
+     * @return Matriu que conté els items carregats al programa. Cada fila de la matriu representa un item i cada
+     * columna es correspon amb un atribut.
+     */
     public ArrayList<ArrayList<String>> obtenirItems() {
         if (!existeixTipusItemSeleccionat()) {
             return new ArrayList<>();
@@ -37,6 +52,9 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         return controladorPresentacio.obtenirItems();
     }
 
+    /**
+     * @return Llista que conté els noms dels atributs del tipus d'item seleccionat.
+     */
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
         if (!existeixTipusItemSeleccionat()) {
             return new ArrayList<>();
@@ -44,14 +62,38 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         return controladorPresentacio.obtenirNomAtributsTipusItemSeleccionat();
     }
 
+    /**
+     * @return cert si hi ha un tipus d'item seleccionat. Altrament, retorna fals.
+     */
     public boolean existeixTipusItemSeleccionat() {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return controladorPresentacio.afegirItem(valorsAtributs);
+    /**
+     * Comprova si hi ha un tipus d'item seleccionat i afegeix un nou item al conjunt d'items del programa.
+     * Emet un missatge si hi ha algun error.
+     * @param valorsAtributs conté un mapa que relaciona el nom de cada atribut de l'item amb el seu valor en forma de
+     *                       String
+     */
+    public void afegirItem(Map<String, String> valorsAtributs) {
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+        } else {
+            try {
+                String nouId = controladorPresentacio.afegirItem(valorsAtributs);
+                JOptionPane.showMessageDialog(vistaMenuItems, "Item creat amb èxit amb identificador " + nouId);
+            } catch (FormatIncorrecteException ex) {
+                JOptionPane.showMessageDialog(vistaMenuItems, ex.getMessage());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut crear un ítem amb els valors donats.");
+            }
+        }
     }
 
+    /**
+     * Comprova si hi ha un tipus d'item seleccionat, demana un identificador a l'usuari i esborra l'item amb
+     * l'identificador donat. Emet un missatge si hi ha algun error.
+     */
     public void esborrarItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
@@ -69,10 +111,10 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         }
     }
 
-    public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
-        return controladorPresentacio.obtenirItem(id);
-    }
-
+    /**
+     * Comprova si hi ha un tipus d'item seleccionat, demana un identificador a l'usuari i crea un diàleg per editar
+     * l'item amb l'identificador donat. Emet un missatge si hi ha algun error.
+     */
     public void editarItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
@@ -96,10 +138,34 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         }
     }
 
-    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException, FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        controladorPresentacio.editarItem(id, valorsAtributs);
+    /**
+     * Edita l'item amb l'identificador donat, substituint els atributs antics pels donats. Emet missatges al component
+     * donat si hi ha algun error.
+     * @param component Component on es mostraran els missatges
+     * @param id String que conté l'identificador de l'item
+     * @param valorsAtributs mapa que relaciona el nom de l'atribut amb el seu nou valor
+     */
+    public void editarItem(Component component, String id, Map<String, String> valorsAtributs) {
+        try {
+            controladorPresentacio.editarItem(id, valorsAtributs);
+            JOptionPane.showMessageDialog(component, "S'ha editat l'ítem amb èxit");
+        } catch (NoExisteixElementException ex) {
+            JOptionPane.showMessageDialog(component, "No existeix cap ítem amb aquest identificador.");
+        } catch (FormatIncorrecteException ex) {
+            JOptionPane.showMessageDialog(component, ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(component, "No s'ha pogut editar l'ítem.");
+        }
     }
 
+    /**
+     * Demana un arxiu a l'usuari i carrega un conjunt d'items de l'arxiu. El tipus d'item es pot deduir del conjunt
+     * o be utilitzar el tipus d'item seleccionat. En el cas de deduir-se, el nom del nou tipus d'item sera el donat.
+     * Emet un missatge si hi ha algun error.
+     * @param deduirTipusItem indica si s'ha de deduir el tipus d'item del conjunt o si es vol utilitzar el tipus d'item
+     *                        seleccionat
+     * @param nomTipusItem nom del nou tipus d'item si es vol deduir del conjunt
+     */
     public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem) {
         JDialog dialegFitxer = new JDialog();
         JFileChooser selectorFitxer = new JFileChooser();
@@ -118,6 +184,9 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         }
     }
 
+    /**
+     * Comprova que hi ha un tipus d'item seleccionat i esborra tots els items d'aquest tipus d'item.
+     */
     public void esborrarTotsElsItems() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
@@ -132,10 +201,19 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         }
     }
 
+
+    /**
+     * @return cert si l'usuari ha iniciat sessio i, altrament, retorna fals
+     */
     public boolean sessioIniciada() {
         return controladorPresentacio.esSessioIniciada();
     }
 
+    /**
+     * Comprova que hi ha un tipu d'item seleccionat i crea un dialeg per crear un nou item d'aquest tipus. Emet un
+     * missatge si hi ha algun error.
+     *
+     */
     public void crearNouItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
@@ -150,10 +228,17 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         }
     }
 
+    /**
+     * @return el nom del tipus d'item seleccionat, retorna null si no n'hi ha cap de seleccionat
+     */
     public String obtenirNomTipusItemSeleccionat() {
         return controladorPresentacio.obtenirNomTipusItemSeleccionat();
     }
 
+    /**
+     * @return una llista amb els identificadors dels items carregats o una llista buida si no hi ha cap tipus d'item
+     * seleccionat
+     */
     public ArrayList<String> obtenirIdsItems() {
         if (!existeixTipusItemSeleccionat()) {
             return new ArrayList<>();
@@ -161,6 +246,10 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         return controladorPresentacio.obtenirIdsItems();
     }
 
+    /**
+     * Comprova si hi ha un tipus d'item seleccionat, demana un identificador a l'usuari i crea un dialeg que mostra
+     * l'item amb l'identificador donat. Emet un missatge si hi ha algun error.
+     */
     public void mostarItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");

@@ -1,10 +1,8 @@
 package presentacio.vistes;
 
-import excepcions.AccesAEstatIncorrecteException;
 import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
-import presentacio.EncarregatActualitzarTaules;
+import presentacio.EncarregatActualitzarVistes;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
@@ -21,7 +19,7 @@ public class VistaMenuItems extends JPanel {
     private static JTable llistaItems;
     private static DefaultTableModel llistaItemsTableModel;
     private static JScrollPane llistaItemsScroll;
-    private static EncarregatActualitzarTaules EncarregatTipusItemSeleccionat;
+    private static EncarregatActualitzarVistes EncarregatTipusItemSeleccionat;
 
     private VistaMenuItems() {
     }
@@ -69,15 +67,11 @@ public class VistaMenuItems extends JPanel {
         menuLateral.add(botoCrearItem);
         JButton botoMostrarItem = new JButton("Mostra un ítem");
         botoMostrarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoMostrarItem.addActionListener(e -> {
-            controladorMenuItems.mostarItem();
-        });
+        botoMostrarItem.addActionListener(e -> controladorMenuItems.mostarItem());
         menuLateral.add(botoMostrarItem);
         JButton botoEditarItem = new JButton("Edita un ítem");
         botoEditarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoEditarItem.addActionListener(e -> {
-            controladorMenuItems.editarItem();
-        });
+        botoEditarItem.addActionListener(e -> controladorMenuItems.editarItem());
         menuLateral.add(botoEditarItem);
         JButton botoEsborrarItem = new JButton("Esborra un ítem");
         botoEsborrarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -110,7 +104,7 @@ public class VistaMenuItems extends JPanel {
             }
             if (nomTipusItem != null) {
                 controladorMenuItems.carregarConjuntItems(deduirTipusItem, nomTipusItem);
-                EncarregatTipusItemSeleccionat.notificarObservadors();
+                EncarregatActualitzarVistes.notificarObservadors();
             }
         });
 

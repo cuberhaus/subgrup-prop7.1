@@ -1,7 +1,7 @@
 package presentacio.vistes;
 
 import excepcions.*;
-import presentacio.EncarregatActualitzarTaules;
+import presentacio.EncarregatActualitzarVistes;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -90,7 +90,7 @@ public class VistaMenuTipusItem extends JPanel {
                 VistaDialegCrearTipusItem vistaDialegCrearTipusItem;
                 vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
                 vistaDialegCrearTipusItem.setVisible(true);
-                EncarregatActualitzarTaules.notificarObservadors();
+                EncarregatActualitzarVistes.notificarObservadors();
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(instancia,
                         "No s'ha pogut crear el tipus d'ítem.");
@@ -115,7 +115,7 @@ public class VistaMenuTipusItem extends JPanel {
                         try {
                             controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
                             JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
-                            EncarregatActualitzarTaules.notificarObservadors();
+                            EncarregatActualitzarVistes.notificarObservadors();
                         } catch (JaExisteixElementException e1) {
                             JOptionPane.showMessageDialog(instancia,
                                     "Ja existeix un tipus d'ítem amb el nom indicat.");
@@ -147,7 +147,7 @@ public class VistaMenuTipusItem extends JPanel {
             if (nomTipusItem != null) {
                 try {
                     controladorMenuTipusItem.seleccionarTipusItem(nomTipusItem);
-                    EncarregatActualitzarTaules.notificarObservadors();
+                    EncarregatActualitzarVistes.notificarObservadors();
                 } catch (Exception e1) {
                     System.out.println(e1.getMessage());
                     JOptionPane.showMessageDialog(instancia,
@@ -170,7 +170,7 @@ public class VistaMenuTipusItem extends JPanel {
             } else {
                 try {
                     controladorMenuTipusItem.desseleccionarTipusItem();
-                    EncarregatActualitzarTaules.notificarObservadors();
+                    EncarregatActualitzarVistes.notificarObservadors();
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut deseleccionar el tipus d'ítem seleccionat.");
@@ -188,7 +188,7 @@ public class VistaMenuTipusItem extends JPanel {
                 if (resposta == 0) {
                     try {
                         controladorMenuTipusItem.esborrarTipusItemSeleccionat();
-                        EncarregatActualitzarTaules.notificarObservadors();
+                        EncarregatActualitzarVistes.notificarObservadors();
                     } catch (IOException e1) {
                         JOptionPane.showMessageDialog(instancia,
                                 "No s'ha pogut esborrar el tipus d'ítem seleccionat.");
@@ -238,7 +238,7 @@ public class VistaMenuTipusItem extends JPanel {
                 try {
                     vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
                     vistaDialegEditarTipusItem.setVisible(true);
-                    EncarregatActualitzarTaules.notificarObservadors();
+                    EncarregatActualitzarVistes.notificarObservadors();
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot editar aquest tipus d'ítem. Torna-ho a intentar.");

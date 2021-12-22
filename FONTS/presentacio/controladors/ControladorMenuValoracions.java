@@ -1,6 +1,6 @@
 package presentacio.controladors;
 
-import presentacio.EncarregatActualitzarTaules;
+import presentacio.EncarregatActualitzarVistes;
 import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author pol.casacuberta
  */
 
-public class ControladorMenuValoracions implements EncarregatActualitzarTaules.Observador {
+public class ControladorMenuValoracions implements EncarregatActualitzarVistes.Observador {
     /**
      * Conté el controlador Presentació
      */
