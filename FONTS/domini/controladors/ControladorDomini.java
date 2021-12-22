@@ -241,6 +241,9 @@ public class ControladorDomini {
      * @throws UsuariIncorrecteException c
      */
     public void carregaConjuntValoracions(String rutaAbsolut) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
+        if (nomTipusItemActual == null) {
+            throw new AccesAEstatIncorrecteException;
+        }
         ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
         valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }
