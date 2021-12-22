@@ -80,7 +80,7 @@ public class ControladorMenuUsuaris implements EncarregatActualitzarVistes.Obser
      */
     public boolean iniciarSessio(String id, String contrasenya) {
         try {
-            boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
+            boolean sessioIniciada = controladorPresentacio.sessioIniciada();
             idEsValid(id);
             if (!sessioIniciada) {
                 if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
@@ -174,7 +174,7 @@ public class ControladorMenuUsuaris implements EncarregatActualitzarVistes.Obser
      * @return Conjunt d'usuaris
      */
     public ArrayList<ArrayList<String>> obteUsuaris() {
-        return controladorPresentacio.obteUsuaris();
+        return controladorPresentacio.obtenirUsuaris();
     }
 
     /**
@@ -203,7 +203,7 @@ public class ControladorMenuUsuaris implements EncarregatActualitzarVistes.Obser
     public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) {
         try {
             idEsValid(id);
-            controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
+            controladorPresentacio.canviarContrasenyaUsuari(id, novaContrasenya);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }
@@ -218,7 +218,7 @@ public class ControladorMenuUsuaris implements EncarregatActualitzarVistes.Obser
     public void canviaNomUsuari(String id, String nouNom) {
         try {
             idEsValid(id);
-            controladorPresentacio.canviaNomUsuari(id, nouNom);
+            controladorPresentacio.canviarNomUsuari(id, nouNom);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }

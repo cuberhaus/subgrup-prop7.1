@@ -188,7 +188,7 @@ public class ControladorMenuValoracions implements EncarregatActualitzarVistes.O
     }
 
     public void exportaValoracions(String absolutePath) throws IOException {
-        controladorPresentacio.exportaValoracions(absolutePath);
+        controladorPresentacio.exportarValoracions(absolutePath);
     }
 
     @Override

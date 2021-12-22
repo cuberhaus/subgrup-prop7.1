@@ -286,7 +286,7 @@ public class ControladorMenuTipusItem implements EncarregatActualitzarVistes.Obs
     public void desseleccionarTipusItem() {
         if (existeixTipusItemSeleccionat()) {
             try {
-                controladorPresentacio.deseleccionarTipusItem();
+                controladorPresentacio.desseleccionarTipusItem();
                 EncarregatActualitzarVistes.notificarObservadors();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(vistaMenuTipusItem,

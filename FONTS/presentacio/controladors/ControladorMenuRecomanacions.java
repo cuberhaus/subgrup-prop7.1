@@ -42,7 +42,7 @@ public class ControladorMenuRecomanacions {
      * @return cert si l'usuari ha iniciat sessio i, altrament, retorna fals
      */
     public static boolean sessioIniciada() {
-        return controladorPresentacio.esSessioIniciada();
+        return controladorPresentacio.sessioIniciada();
     }
 
     /**

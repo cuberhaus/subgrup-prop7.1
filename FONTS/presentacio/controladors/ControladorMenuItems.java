@@ -206,7 +206,7 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
      * @return cert si l'usuari ha iniciat sessio i, altrament, retorna fals
      */
     public boolean sessioIniciada() {
-        return controladorPresentacio.esSessioIniciada();
+        return controladorPresentacio.sessioIniciada();
     }
 
     /**

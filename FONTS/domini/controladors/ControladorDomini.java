@@ -305,13 +305,12 @@ public class ControladorDomini {
      * Crea el tipus d'item amb el nom i els seus atributs
      * @param nom <code>String</code> nom del tipus d'item
      * @param nomAValorAtribut <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> que conté els atributs amb el tipus
-     * @throws IllegalArgumentException si ja existeix el tipus d'item
      * @throws IOException si no existeix el fitxer i/o no es pot obrir
      * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
-     * @throws JaExisteixElementException ja existeix l'element
+     * @throws JaExisteixElementException ja existeix un tipus d'item amb aquest nom
      * @throws DistanciaNoCompatibleAmbValorException la distancia no és compatible amb el valor
      */
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (estatPrograma.conteTipusItem(nom)) {
             throw new JaExisteixElementException("Ja existeix aquest tipus item.");
         }
@@ -352,7 +351,7 @@ public class ControladorDomini {
      * Veure si la sessio esta iniciada o no
      * @return <code>boolean</code> si esta inicicada o no
      */
-    public boolean esSessioIniciada() {
+    public boolean sessioIniciada() {
         return estatPrograma.isSessioIniciada();
     }
 
@@ -694,6 +693,7 @@ public class ControladorDomini {
      * @return El NDGC de la ultima recomanacio.
      */
     public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) {
+        // TODO (edgar): afegir les valoracions al conjunt de valoracions
         return recomanacions.calculaDiscountedCumulativeGain(valoracions) /
                 recomanacions.calculaIdealDiscountedCumulativeGain(valoracions, recomanacions.obtenirConjuntRecomanacions().size());
     }
