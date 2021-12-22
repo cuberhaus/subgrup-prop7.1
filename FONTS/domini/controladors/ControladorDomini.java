@@ -718,8 +718,10 @@ public class ControladorDomini {
      * Retorna una avaluacio de la ultima recomanacio feta.
      * @return El NDGC de la ultima recomanacio.
      */
-    public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) {
-        // TODO (edgar): afegir les valoracions al conjunt de valoracions
+    public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) throws SessioNoIniciadaException, NoExisteixElementException, UsuariIncorrecteException {
+        for (var valoracio : valoracions) {
+            valoracionsTipusItemActual.afegir(new Valoracio(valoracio.y, estatPrograma.obtenirUsuariSessioIniciada(), itemsActuals.obtenir(new Id(valoracio.x))));
+        }
         return recomanacions.calculaDiscountedCumulativeGain(valoracions) /
                 recomanacions.calculaIdealDiscountedCumulativeGain(valoracions, recomanacions.obtenirConjuntRecomanacions().size());
     }
