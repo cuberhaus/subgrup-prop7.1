@@ -147,6 +147,8 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      *
      * @param valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
      * @return booleà retornat
+     * @throws IllegalArgumentException la valoracio es nul·la
+     * @throws UsuariIncorrecteException usuari incorrecte
      */
     public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException, UsuariIncorrecteException {
         if (valoracio == null) {
