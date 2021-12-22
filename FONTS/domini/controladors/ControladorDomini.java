@@ -328,7 +328,7 @@ public class ControladorDomini {
 
     /**
      * Retorna el nom dels items carregats
-     * @return <code>ArrayList&lt;String&gt;</code> llista del noms
+     * @return <code>ArrayList&lt;String&gt;</code> llista de noms
      */
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         return estatPrograma.obteTipusItem();
@@ -588,7 +588,7 @@ public class ControladorDomini {
         for (var item : itemsActuals.obtenirTotsElsElements().entrySet()) {
             item.getValue().canviaNomTipusItem(nouNom);
         }
-        estatPrograma.esborraTipusItem(nouNom);
+        estatPrograma.esborraTipusItem(nomTipusItemActual);
         tipusItem.canviaElNom(nouNom);
         nomTipusItemActual = nouNom;
         estatPrograma.afegirTipusItem(nouNom, tipusItem);
