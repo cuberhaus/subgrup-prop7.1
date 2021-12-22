@@ -38,6 +38,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             }
             Id identificador = new Id(id, true);
             if (elements.containsKey(identificador)) {
+                System.out.println(identificador.obtenirValor());
                 throw new InputMismatchException("L'item creat ja existeix al conjunt");
             }
             afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
