@@ -134,9 +134,11 @@ public class ControladorPersistencia {
     private Path obtePathConjuntUsuaris(String nom) {
         return Paths.get(direccioCarpetaUsuaris.toString(),nom+".csv");
     }
+
     public void guardarConjuntUsuaris(ArrayList<ArrayList<String>> conjunt, String nom) throws IOException {
         escriptor.escriureCSV(obtePathConjuntUsuaris(nom).toString(), conjunt);
     }
+
     public ArrayList<ArrayList<String>> obtenirConjuntUsuaris(String nom) throws IOException {
         // TODO (pablo i edgar): revisar si això us sembla bé, és per crear un conjunt d'usuaris buit (el fitxer) si no
         // existeix

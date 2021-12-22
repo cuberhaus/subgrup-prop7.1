@@ -1,10 +1,7 @@
 package presentacio.controladors;
 
 import excepcions.*;
-import presentacio.vistes.VistaDialegCrearItem;
-import presentacio.vistes.VistaDialegEditarItem;
-import presentacio.vistes.VistaMenuItems;
-import presentacio.vistes.VistaMenuValoracions;
+import presentacio.vistes.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -85,14 +82,18 @@ public class ControladorMenuItems {
         } else {
             String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols editar:");
             if (id != null) {
-                VistaDialegEditarItem vistaDialegEditarItem;
-                try {
-                    vistaDialegEditarItem = new VistaDialegEditarItem(id, controladorPresentacio.obtenirItem(id));
-                    vistaDialegEditarItem.setVisible(true);
-                } catch (NoExisteixElementException ex) {
-                    JOptionPane.showMessageDialog(vistaMenuItems, "No existeix cap ítem amb identificador " + id);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut editar l'ítem.");
+                if (!id.isEmpty()) {
+                    VistaDialegEditarItem vistaDialegEditarItem;
+                    try {
+                        vistaDialegEditarItem = new VistaDialegEditarItem(id, controladorPresentacio.obtenirItem(id));
+                        vistaDialegEditarItem.setVisible(true);
+                    } catch (NoExisteixElementException ex) {
+                        JOptionPane.showMessageDialog(vistaMenuItems, "No existeix cap ítem amb identificador " + id);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut editar l'ítem.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "Un identificador no pot ser buit.");
                 }
             }
         }
@@ -161,5 +162,28 @@ public class ControladorMenuItems {
             return new ArrayList<>();
         }
         return controladorPresentacio.obtenirIdsItems();
+    }
+
+    public void mostarItem() {
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+        } else {
+            String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols veure:");
+            if (id != null) {
+                if (!id.isEmpty()) {
+                    VistaDialegMostrarItem vistaDialegMostrarItem;
+                    try {
+                        vistaDialegMostrarItem = new VistaDialegMostrarItem(id, controladorPresentacio.obtenirItem(id));
+                        vistaDialegMostrarItem.setVisible(true);
+                    } catch (NoExisteixElementException ex) {
+                        JOptionPane.showMessageDialog(vistaMenuItems, "No existeix cap ítem amb identificador " + id);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut mostrar l'ítem.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "Un identificador no pot ser buit.");
+                }
+            }
+        }
     }
 }

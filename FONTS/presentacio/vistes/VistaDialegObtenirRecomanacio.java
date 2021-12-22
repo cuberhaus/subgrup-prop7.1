@@ -39,7 +39,7 @@ public class VistaDialegObtenirRecomanacio extends JDialog {
 
         ArrayList<String> nomsColumnes = new ArrayList<>();
         nomsColumnes.add("Identificador d'ítem");
-        nomsColumnes.addAll(controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat());
+        nomsColumnes.addAll(ControladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat());
 
         llistaRecomanacionsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
         for (String itemId : recomanacio) {

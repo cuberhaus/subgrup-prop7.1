@@ -65,6 +65,12 @@ public class VistaMenuItems extends JPanel {
             actualitzarTaula();
         });
         menuLateral.add(botoCrearItem);
+        JButton botoMostrarItem = new JButton("Mostra un ítem");
+        botoMostrarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoMostrarItem.addActionListener(e -> {
+            controladorMenuItems.mostarItem();
+        });
+        menuLateral.add(botoMostrarItem);
         JButton botoEditarItem = new JButton("Edita un ítem");
         botoEditarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoEditarItem.addActionListener(e -> {
