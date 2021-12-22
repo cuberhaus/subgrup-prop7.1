@@ -1,5 +1,7 @@
 package domini.classes.atributs.valors;
 
+import excepcions.FormatIncorrecteException;
+
 import java.util.ArrayList;
 
 /**
@@ -41,7 +43,7 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
      * Constructor amb una String.
      * @param s <code>bString</code> que conté els valors que s'assignaran a aquest atribut separats pel símbol ';'
      */
-    public ValorConjuntBoolea(String s) {
+    public ValorConjuntBoolea(String s) throws FormatIncorrecteException {
         if (s == null) {
             this.valor = null;
         } else if (s.isEmpty()) {

@@ -2,10 +2,7 @@ package domini.classes;
 
 
 import domini.classes.csv.TaulaCSV;
-import excepcions.AccesAEstatIncorrecteException;
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.JaExisteixElementException;
-import excepcions.NoExisteixElementException;
+import excepcions.*;
 
 import java.util.*;
 
@@ -23,7 +20,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
      * @throws Exception si id no és correcte o l'ítem creat ja és al conjunt.
      */
-    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException {
+    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException, FormatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula, taula.obtenirNumItems());
 

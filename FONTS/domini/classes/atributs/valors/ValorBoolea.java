@@ -1,5 +1,7 @@
 package domini.classes.atributs.valors;
 
+import excepcions.FormatIncorrecteException;
+
 /**
  * Representa el valor booleà d'un atribut.
  * @author maria.prat
@@ -24,11 +26,17 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
      * Constructor d'un ValorBooleà amb una String que conté un booleà.
      * @param s <code>String</code> que conté el valor d'aquest atribut.
      */
-    public ValorBoolea(String s) {
+    public ValorBoolea(String s) throws FormatIncorrecteException {
         if (s == null || s.isEmpty()) {
             this.valor = null;
         } else {
-            this.valor = Boolean.parseBoolean(s.toLowerCase());
+            if (s.toLowerCase().equals("true")) {
+                this.valor = true;
+            } else if (s.toLowerCase().equals("false")) {
+                this.valor = false;
+            } else {
+                throw new FormatIncorrecteException("No es pot llegir un booleà de: " + s);
+            }
         }
     }
 

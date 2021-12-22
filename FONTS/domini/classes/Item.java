@@ -2,6 +2,7 @@ package domini.classes;
 
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
+import excepcions.FormatIncorrecteException;
 import excepcions.UsuariIncorrecteException;
 
 import java.util.*;
@@ -50,7 +51,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @param valors <code>ArrayList&lt;String&gt;</code> que conté els valors de l'ítem en forma de String.
      * @throws IllegalArgumentException si els valors donats no són compatibles amb el TipusItem.
      */
-    public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
+    public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException, FormatIncorrecteException {
         this.id = id;
         this.tipusItem = tipusItem;
         assignarAtributs(nomAtributs, valors);
@@ -179,9 +180,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @throws IllegalArgumentException Si no es pot llegir el valor de la classe donada de la String donada o si no es
      * reconeix la subclasse de 'valorAtribut'.
      */
-    private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException {
+    private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException, FormatIncorrecteException {
         if (valorAtribut instanceof ValorBoolea) {
-            return new ValorBoolea(Boolean.parseBoolean(s));
+            return new ValorBoolea(s);
         } else if (valorAtribut instanceof ValorCategoric) {
             return new ValorCategoric(s);
         } else if (valorAtribut instanceof ValorNumeric) {
@@ -207,7 +208,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @param valors Valors dels atributs guardats com Strings
      * @throws IllegalArgumentException Si els noms i valors donats no són compatibles amb el TipusItem de l'Item.
      */
-    private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
+    private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException, FormatIncorrecteException {
         if (tipusItem.obtenirTipusAtributs().size() != nomAtributs.size() ||
                 tipusItem.obtenirTipusAtributs().size() != valors.size()) {
             throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
@@ -240,7 +241,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         ArrayList<String> res = new ArrayList<>();
         res.add(Integer.toString(id.valor));
         for (var x : atributs.entrySet()) {
-           res.add(x.getValue().obtenirValor().toString());
+           res.add(x.getValue().toString());
         }
         return res;
     }

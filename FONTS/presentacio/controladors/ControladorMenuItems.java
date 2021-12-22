@@ -69,17 +69,19 @@ public class ControladorMenuItems {
         return controladorPresentacio.obtenirItem(id);
     }
 
-    public void editarItem() throws IOException, NomInternIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException {
+    public void editarItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
             String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols editar:");
-            Map<String, String> atributs = controladorPresentacio.obtenirItem(id);
-            if (atributs == null) {
-                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
-            } else {
+            try {
+                Map<String, String> atributs = controladorPresentacio.obtenirItem(id);
                 VistaDialegEditarItem vistaDialegEditarItem = new VistaDialegEditarItem(id, atributs);
                 vistaDialegEditarItem.setVisible(true);
+            } catch (NoExisteixElementException e) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut editar l'ítem.");
             }
         }
     }

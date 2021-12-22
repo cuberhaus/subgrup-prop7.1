@@ -334,7 +334,7 @@ public class ControladorPresentacio {
      * @throws IOException si no s'ha pogut obrir el fitxer
      * @throws AccesAEstatIncorrecteException Accedeix a estat incorrecte
      */
-    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException {
+    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException, FormatIncorrecteException {
         if (deduirTipusItem) {
             controladorDomini.carregarConjuntItems(nomTipusItem, rutaAbsoluta);
         } else {
@@ -425,7 +425,7 @@ public class ControladorPresentacio {
      * @throws IOException no s'ha pogut desseleccionar l'ítem
      */
     public void deseleccionarTipusItem() throws IOException {
-        controladorDomini.deseleccionarTipusItem();
+        controladorDomini.desseleccionarTipusItem();
     }
 
     /**
@@ -433,7 +433,7 @@ public class ControladorPresentacio {
      * @return retorna un ArrayList amb el conjunt d'usuaris
      */
     public ArrayList<ArrayList<String>> obteUsuaris() {
-        return controladorDomini.obteUsuaris();
+        return controladorDomini.obtenirUsuaris();
     }
 
     /**

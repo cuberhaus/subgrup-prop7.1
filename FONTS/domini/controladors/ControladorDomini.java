@@ -396,7 +396,7 @@ public class ControladorDomini {
      */
     public void seleccionarTipusItem(String nomTipusItem) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
         if (nomTipusItemActual != null) {
-            deseleccionarTipusItem();
+            desseleccionarTipusItem();
         }
         nomTipusItemActual = nomTipusItem;
         ArrayList<ArrayList<String>> valoracionsEnBrut = controladorPersistencia.obtenirConjuntValoracions(nomTipusItem);
@@ -443,18 +443,12 @@ public class ControladorDomini {
     public int afegirItem(Map<String, String> valorsAtributs) throws Exception {
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
-        // TODO: esborrar els xivatos
-        for(var x : valorsAtributs.entrySet()) {
-            System.out.println(x.getKey() + " " + x.getValue());
-        }
         for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             String valor = valorsAtributs.get(tipusAtribut.getKey());
             Class<? extends ValorAtribut> classe = tipusAtribut.getValue().obtenirValorAtribut().getClass();
-            System.out.println(classe);
             Constructor<?> constructor = classe.getConstructor(String.class);
             Object object = constructor.newInstance(valor);
             atributs.put(tipusAtribut.getKey(), classe.cast(object));
-            System.out.println(atributs.get(tipusAtribut.getKey()).obtenirValor());
         }
         Item item = new Item(obteIdItemDisponible(), tipusItem, atributs, new HashMap<>());
         itemsActuals.afegir(item);
@@ -493,7 +487,7 @@ public class ControladorDomini {
      * @throws IllegalArgumentException si l'identificador no es valid
      * @throws NoExisteixElementException no existeix item
      */
-    public Map<String, String> obtenirItem(String id) throws IllegalArgumentException, NoExisteixElementException {
+    public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
         TreeMap<String, String> res = new TreeMap<>();
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(id)));
         for (var x : item.obtenirAtributs().entrySet()) {
@@ -524,7 +518,7 @@ public class ControladorDomini {
     }
 
     // TODO (edgar): afegir javadoc
-    public void carregarConjuntItems(String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException {
+    public void carregarConjuntItems(String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException, FormatIncorrecteException {
         if (estatPrograma.conteTipusItem(nomTipusItem)) {
             throw new JaExisteixElementException("Ja existeix un tipus d'item amb nom " + nomTipusItem);
         }
@@ -680,7 +674,7 @@ public class ControladorDomini {
      * Desselecciona el tipus item actual i esborra la relacio del programa actual amb aquest.
      * @throws IOException hi ha un problema guardant el tipus item actual.
      */
-    public void deseleccionarTipusItem() throws IOException {
+    public void desseleccionarTipusItem() throws IOException {
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);
@@ -692,7 +686,7 @@ public class ControladorDomini {
      * Retorna la llista de tots els usuaris actius i no actius del programa
      * @return retorna la llista d'usuaris
      */
-    public ArrayList<ArrayList<String>> obteUsuaris() {
+    public ArrayList<ArrayList<String>> obtenirUsuaris() {
         return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuarisActius();
     }
 

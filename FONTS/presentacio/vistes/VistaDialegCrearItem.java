@@ -1,6 +1,7 @@
 package presentacio.vistes;
 
 import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.FormatIncorrecteException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
