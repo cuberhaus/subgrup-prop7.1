@@ -50,6 +50,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      *                    troben a <code>valors</code>.
      * @param valors <code>ArrayList&lt;String&gt;</code> que conté els valors de l'ítem en forma de String.
      * @throws IllegalArgumentException si els valors donats no són compatibles amb el TipusItem.
+     * @throws FormatIncorrecteException El format és incorrecte
      */
     public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException, FormatIncorrecteException {
         this.id = id;
@@ -179,6 +180,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @param s <code>String</code> que conté el valor de l'atribut
      * @return <code>ValorAtribut</code> de la mateixa subclasse que 'valorAtribut' i amb el valor que conté 's'
      * @throws IllegalArgumentException Si no es pot llegir el valor de la classe donada de la String donada o si no es
+     * @throws FormatIncorrecteException El format no és correcte
      * reconeix la subclasse de 'valorAtribut'.
      */
     private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException, FormatIncorrecteException {
@@ -208,6 +210,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @param nomAtributs Noms dels atributs
      * @param valors Valors dels atributs guardats com Strings
      * @throws IllegalArgumentException Si els noms i valors donats no són compatibles amb el TipusItem de l'Item.
+     * @throws FormatIncorrecteException El format no és correcte
      */
     private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException, FormatIncorrecteException {
         atributs = new TreeMap<>();

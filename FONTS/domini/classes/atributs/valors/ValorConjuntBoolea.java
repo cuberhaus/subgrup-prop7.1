@@ -42,6 +42,7 @@ public class ValorConjuntBoolea extends ValorConjunt<Boolean> {
     /**
      * Constructor amb una String.
      * @param s <code>bString</code> que conté els valors que s'assignaran a aquest atribut separats pel símbol ';'
+     * @throws FormatIncorrecteException El format és incorrecte
      */
     public ValorConjuntBoolea(String s) throws FormatIncorrecteException {
         if (s == null) {

@@ -76,6 +76,7 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
      * Emet un missatge si hi ha algun error.
      * @param valorsAtributs conté un mapa que relaciona el nom de cada atribut de l'item amb el seu valor en forma de
      *                       String
+     * @param component Component que llença el missatge
      */
     public void afegirItem(Component component, Map<String, String> valorsAtributs) {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
