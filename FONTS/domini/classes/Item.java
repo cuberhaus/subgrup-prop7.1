@@ -140,6 +140,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
         double distancia = 0.0;
         for (Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
+            if (atributs.get(tipusAtribut.getKey()) == null || item.atributs.get(tipusAtribut.getKey()) == null) continue;
             distancia += tipusAtribut.getValue().obtenirDistancia().obtenir(atributs.get(tipusAtribut.getKey()),
                     item.atributs.get(tipusAtribut.getKey())) /
                     (tipusAtribut.getValue().obtenirDistancia().obtenirFactorDeNormalitzacio());

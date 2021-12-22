@@ -5,7 +5,6 @@ import domini.classes.ConjuntUsuaris;
 import domini.classes.ConjuntValoracions;
 import domini.classes.recomanador.filtre.Filtre;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
-import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 
 /**
  * Representa un recomanador col·laboratiu.

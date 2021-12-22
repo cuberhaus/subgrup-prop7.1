@@ -304,7 +304,7 @@ public class ControladorPresentacio {
      *
      */
     // TODO: arreglar javadoc
-    public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoExisteixElementException {
         return String.valueOf(controladorDomini.afegirItem(valorsAtributs));
     }
 

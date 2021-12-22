@@ -109,6 +109,7 @@ public class KMeans {
         double distancia = punt.distancia(baricentres[0]);
         int conjunt = 0;
         for (int i = 1; i < k; ++i) {
+            if (baricentres[i] == null) continue;
             double novaDist = punt.distancia(baricentres[i]);
             if (novaDist < distancia){
                 conjunt = i;

@@ -449,19 +449,16 @@ public class ControladorDomini {
      * @throws Exception si no s'ha pogut afegir l'item
      */
     // TODO: arreglar javadoc
-    public int afegirItem(Map<String, String> valorsAtributs) throws IllegalArgumentException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public int afegirItem(Map<String, String> valorsAtributs) throws IllegalArgumentException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, NoExisteixElementException {
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             String valor = valorsAtributs.get(tipusAtribut.getKey());
             if (valor == null) {
-                // TODO (edgar): revisar
-                throw new IllegalArgumentException("No hi ha cap atribut amb nom " + tipusAtribut.getKey());
+                throw new NoExisteixElementException("No hi ha cap atribut amb nom " + tipusAtribut.getKey());
             }
             if (valor.contains(",") || valor.contains("\"")) {
-                // TODO (edgar): revisar
                 throw new FormatIncorrecteException("Els atributs no poden tenir el caràcter , ni \"");
-
             }
             Class<? extends ValorAtribut> classe = tipusAtribut.getValue().obtenirValorAtribut().getClass();
             Constructor<?> constructor = classe.getConstructor(String.class);
@@ -480,7 +477,6 @@ public class ControladorDomini {
      * @throws NoExisteixElementException no existeix l'item
      */
     public boolean esborrarItem(String id) throws NoExisteixElementException {
-        //Comprobacio si id es valid nomes de transformar
         int idItemABuscar;
         try {
             idItemABuscar = Integer.parseInt(id);
@@ -525,11 +521,9 @@ public class ControladorDomini {
         for (var atribut : item.obtenirAtributs().entrySet()) {
             String valor = valorsAtributs.get(atribut.getKey());
             if (valor == null) {
-                // TODO (edgar): revisar
                 throw new IllegalArgumentException("No hi ha cap atribut amb nom " + atribut.getKey());
             }
             if (valor.contains(",") || valor.contains("\"")) {
-                // TODO (edgar): revisar
                 throw new FormatIncorrecteException("Els atributs no poden tenir el caràcter , ni \"");
 
             }
