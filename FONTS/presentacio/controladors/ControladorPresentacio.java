@@ -487,7 +487,7 @@ public class ControladorPresentacio {
         controladorDomini.obrirManual();
     }
 
-    public void guardarPrograma() {
+    public void guardarPrograma() throws IOException {
         controladorDomini.guardarPrograma();
     }
 

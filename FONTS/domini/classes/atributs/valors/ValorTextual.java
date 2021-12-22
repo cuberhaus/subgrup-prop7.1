@@ -18,6 +18,10 @@ public class ValorTextual extends ValorAtribut<String> {
      */
     public ValorTextual(String valor) {
         this.valor = valor;
+        if (this.valor == null) return;
+        if (valor.length() < 2 || valor.charAt(0) != '"' ) {
+            this.valor = '"' + valor + '"';
+        }
     }
 
     /**

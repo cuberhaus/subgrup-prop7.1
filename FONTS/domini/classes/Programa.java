@@ -5,6 +5,7 @@ import excepcions.SessioIniciadaException;
 import excepcions.SessioNoIniciadaException;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -183,5 +184,15 @@ public class Programa {
      */
     public ArrayList<String> obteTipusItem() {
         return new ArrayList<>(tipusItems.keySet());
+    }
+
+    /**
+     * Afegeix un conjunt d'usuaris
+     * @param cjt Usuaris a afegir.
+     */
+    public void afegeixConjuntUsuaris(ConjuntUsuaris cjt) {
+        for (Map.Entry<Id, Usuari> usuari : cjt.elements.entrySet()) {
+            conjuntUsuaris.afegir(usuari.getValue().copiar());
+        }
     }
 }

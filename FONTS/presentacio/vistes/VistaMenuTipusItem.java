@@ -165,7 +165,7 @@ public class VistaMenuTipusItem extends JPanel {
                 } catch (Exception e1) {
                     System.out.println(e1.getMessage());
                     JOptionPane.showMessageDialog(instancia,
-                            "No s'ha pogut seleccionar el tipus d'ítem. Torna-ho a intentar.");
+                            "No s'ha pogut seleccionar el tipus d'ítem. Torna-ho a intentar. Error:\n" + e1.getMessage());
                 }
             } else {
                 JOptionPane.showMessageDialog(instancia,

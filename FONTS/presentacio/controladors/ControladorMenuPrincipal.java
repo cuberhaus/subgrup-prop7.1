@@ -30,7 +30,12 @@ public class ControladorMenuPrincipal {
             vistaMenuPrincipal.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent windowEvent) {
-                    controladorPresentacio.guardarPrograma();
+                    try {
+                        controladorPresentacio.guardarPrograma();
+                    } catch (IOException e) {
+                        // TODO: catch it (no se si te sentit perque estas tancant)
+                        e.printStackTrace();
+                    }
                 }
             });
         }

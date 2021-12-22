@@ -26,17 +26,18 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();
         llistaUsuaris.remove(0);
-        llistaUsuaris.remove(llistaUsuaris.size() - 1);
         for (ArrayList<String> usuari : llistaUsuaris) {
-            String id = usuari.get(1);
-            String nom = usuari.get(0);
-            String password = usuari.get(2);
-            String actiu = usuari.get(3);
+            try {
+                String id = usuari.get(1);
+                String nom = usuari.get(0);
+                String password = usuari.get(2);
+                String actiu = usuari.get(3);
 
-            boolean actiuUsuari = Boolean.parseBoolean(actiu.trim());
-            int idNum = Integer.parseInt(id);
-            Id idUsuari = new Id(idNum, actiuUsuari);
-            elements.put(idUsuari, new Usuari(idUsuari, nom, password));
+                boolean actiuUsuari = Boolean.parseBoolean(actiu.trim());
+                int idNum = Integer.parseInt(id);
+                Id idUsuari = new Id(idNum, actiuUsuari);
+                elements.put(idUsuari, new Usuari(idUsuari, nom, password));
+            } catch (Exception ignored) {}
         }
     }
 
