@@ -656,8 +656,9 @@ public class ControladorDomini {
      * Retorna una avaluacio de la ultima recomanacio feta.
      * @return El NDGC de la ultima recomanacio.
      */
-    public double avaluarRecomanacio() {
-        return recomanacions.obteDiscountedCumulativeGain()/recomanacions.obteIdealDiscountedCumulativeGain();
+    public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) {
+        return recomanacions.calculaDiscountedCumulativeGain(valoracions) /
+                recomanacions.calculaIdealDiscountedCumulativeGain(valoracions, recomanacions.obtenirConjuntRecomanacions().size());
     }
 
     /**

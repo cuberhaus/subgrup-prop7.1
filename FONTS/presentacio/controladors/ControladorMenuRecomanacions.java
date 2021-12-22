@@ -1,15 +1,14 @@
 package presentacio.controladors;
 
-import excepcions.NoExisteixElementException;
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
-import excepcions.SessioNoIniciadaException;
+import excepcions.*;
 import presentacio.vistes.VistaMenuRecomanacions;
+import utilitats.Pair;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ControladorMenuRecomanacions {
 
@@ -28,19 +27,35 @@ public class ControladorMenuRecomanacions {
         return instancia;
     }
 
-    public boolean sessioIniciada() {
+    public static boolean sessioIniciada() {
         return controladorPresentacio.esSessioIniciada();
     }
 
-    public boolean existeixTipusItemSeleccionat() {
+    public static boolean existeixTipusItemSeleccionat() {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public double avaluarRecomanacio() {
-        return controladorPresentacio.avaluarRecomanacio();
+    public static String avaluarRecomanacio(ArrayList<Pair<String, String>> valoracions) {
+        ArrayList<Pair<Integer, Double>> valoracionsAmbFormat = new ArrayList<>();
+        try {
+            for (Pair<String, String> valoracio : valoracions) {
+                if (valoracio.y != null && !valoracio.y.isEmpty()) {
+                    double valor = Double.parseDouble(valoracio.y);
+                    if (valor < 0) {
+                        JOptionPane.showMessageDialog(vistaMenuRecomanacions, "Les valoracions han de ser nombres positius.");
+                        return "";
+                    }
+                    valoracionsAmbFormat.add(new Pair<>(Integer.parseInt(valoracio.x), valor));
+                }
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(vistaMenuRecomanacions, "Les valoracions han de ser nombres.");
+            return "";
+        }
+        return String.valueOf(controladorPresentacio.avaluarRecomanacio(valoracionsAmbFormat));
     }
 
-    public ArrayList<String> obtenirNomAtributsTipusItemSeleccionat() {
+    public static ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No hi ha cap tipus d'ítem seleccionat.");
             return new ArrayList<>();
@@ -50,13 +65,6 @@ public class ControladorMenuRecomanacions {
 
     public String obtenirNomTipusItemSeleccionat() {
         return controladorPresentacio.obtenirNomTipusItemSeleccionat();
-    }
-
-    public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
-        if (!existeixTipusItemSeleccionat()) {
-            return new ArrayList<>();
-        }
-        return controladorPresentacio.obtenirNomAtributsTipusItemSeleccionat();
     }
 
     public ArrayList<String> obtenirRecomanacio(String descripcioMetode, Map<String, Boolean> nomsAtributsFiltre) {
@@ -81,5 +89,14 @@ public class ControladorMenuRecomanacions {
             JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No s'ha pogut obtenir la recomanació.");
         }
         return new ArrayList<>();
+    }
+
+    public Map<String, String> obtenirItem(String itemId) {
+        try {
+            return controladorPresentacio.obtenirItem(itemId);
+        } catch (NoExisteixElementException e1) {
+            JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No existeix cap ítem amb identificador " + itemId);
+            return new TreeMap<>();
+        }
     }
 }

@@ -402,8 +402,8 @@ public class ControladorPresentacio {
      * Obté l'avaluació de la recomanació
      * @return avaluació de la recomanació
      */
-    public double avaluarRecomanacio() {
-        return controladorDomini.avaluarRecomanacio();
+    public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) {
+        return controladorDomini.avaluarRecomanacio(valoracions);
     }
 
     /**

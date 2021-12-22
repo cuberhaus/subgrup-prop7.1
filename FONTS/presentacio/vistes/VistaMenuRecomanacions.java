@@ -87,12 +87,12 @@ public class VistaMenuRecomanacions extends JPanel {
             } else {
                 if (nomTipusItemFiltre == null) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 } else if (!nomTipusItemFiltre.equals(controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat())) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 }
@@ -124,12 +124,12 @@ public class VistaMenuRecomanacions extends JPanel {
             } else {
                 if (nomTipusItemFiltre == null) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 } else if (!nomTipusItemFiltre.equals(controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat())) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 }
@@ -141,8 +141,9 @@ public class VistaMenuRecomanacions extends JPanel {
                             (String) metodeComboBox.getSelectedItem(), nomsAtributsFiltre);
                     vistaDialegObtenirRecomanacio.setVisible(true);
                 } catch (Exception e1) {
+                    System.out.println(e1.getMessage());
                     JOptionPane.showMessageDialog(instancia,
-                            "No es pot mostrar aquest tipus d'ítem. Torna-ho a intentar.");
+                            "No es pot mostrar la recomanació. Torna-ho a intentar.");
                 }
             }
         });

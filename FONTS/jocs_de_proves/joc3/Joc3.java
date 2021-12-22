@@ -76,15 +76,15 @@ public class Joc3 {
 
             totalDCG += recomanacionsCollab.calculaDiscountedCumulativeGain(valoracions_unk);
             totalIDCG += recomanacionsCollab.calculaIdealDiscountedCumulativeGain(valoracions_unk, Q);
-            totalNDCG += recomanacionsCollab.obteDiscountedCumulativeGain()/recomanacionsCollab.obteIdealDiscountedCumulativeGain();
+            totalNDCG += recomanacionsCollab.obtenirDiscountedCumulativeGain()/recomanacionsCollab.obtenirIdealDiscountedCumulativeGain();
 
             totalDCG2 += recomanacionsContent.calculaDiscountedCumulativeGain(valoracions_unk);
             totalIDCG2 += recomanacionsContent.calculaIdealDiscountedCumulativeGain(valoracions_unk, Q);
-            totalNDCG2 += recomanacionsContent.obteDiscountedCumulativeGain()/recomanacionsContent.obteIdealDiscountedCumulativeGain();
+            totalNDCG2 += recomanacionsContent.obtenirDiscountedCumulativeGain()/recomanacionsContent.obtenirIdealDiscountedCumulativeGain();
 
             totalDCG3 += recomanacionsHibrid.calculaDiscountedCumulativeGain(valoracions_unk);
             totalIDCG3 += recomanacionsHibrid.calculaIdealDiscountedCumulativeGain(valoracions_unk, Q);
-            totalNDCG3 += recomanacionsHibrid.obteDiscountedCumulativeGain()/recomanacionsHibrid.obteIdealDiscountedCumulativeGain();
+            totalNDCG3 += recomanacionsHibrid.obtenirDiscountedCumulativeGain()/recomanacionsHibrid.obtenirIdealDiscountedCumulativeGain();
         }
         System.out.println("Recomanador colaboratiu:\nDGC mitja: " + totalDCG/q + ", IDCG mitja: " + totalIDCG/q +
                 ", NDCG mitja: " + totalNDCG/q);

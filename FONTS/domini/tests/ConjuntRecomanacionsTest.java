@@ -78,8 +78,8 @@ public class ConjuntRecomanacionsTest {
         valoracions.add(new Pair<>(5, 5.));
         assertEquals(0.56821575976, recomanacions.calculaNormalizedDiscountedCumulativeGain(valoracions), delta);
         assertEquals(0.56821575976, recomanacions.calculaNormalizedDiscountedCumulativeGain(valoracions, 5), delta);
-        assertEquals(354.803373032, recomanacions.obteIdealDiscountedCumulativeGain(), delta);
-        assertEquals(201.604868175, recomanacions.obteDiscountedCumulativeGain(), delta);
+        assertEquals(354.803373032, recomanacions.obtenirIdealDiscountedCumulativeGain(), delta);
+        assertEquals(201.604868175, recomanacions.obtenirDiscountedCumulativeGain(), delta);
     }
 
 }

@@ -54,11 +54,11 @@ public class Joc2 {
             ConjuntRecomanacions recomanacionsContent = recomanadorContentBased.obteRecomanacions(us, itemsRecomanables, numRecomanacions);
             totalDCG += recomanacionsCollab.calculaDiscountedCumulativeGain(valoracionsUnk);
             totalIDCG += recomanacionsCollab.calculaIdealDiscountedCumulativeGain(valoracionsUnk, numRecomanacions);
-            totalNDCG += recomanacionsCollab.obteDiscountedCumulativeGain()/recomanacionsCollab.obteIdealDiscountedCumulativeGain();
+            totalNDCG += recomanacionsCollab.obtenirDiscountedCumulativeGain()/recomanacionsCollab.obtenirIdealDiscountedCumulativeGain();
 
             totalDCG2 += recomanacionsContent.calculaDiscountedCumulativeGain(valoracionsUnk);
             totalIDCG2 += recomanacionsContent.calculaIdealDiscountedCumulativeGain(valoracionsUnk, numRecomanacions);
-            totalNDCG2 += recomanacionsContent.obteDiscountedCumulativeGain()/recomanacionsContent.obteIdealDiscountedCumulativeGain();
+            totalNDCG2 += recomanacionsContent.obtenirDiscountedCumulativeGain()/recomanacionsContent.obtenirIdealDiscountedCumulativeGain();
         }
         System.out.println("Recomanador colaboratiu:\nDGC mitja: " + totalDCG/usuaris.mida() + ", IDCG mitja: " + totalIDCG/usuaris.mida() +
                 ", NDCG mitja: " + totalNDCG/usuaris.mida());

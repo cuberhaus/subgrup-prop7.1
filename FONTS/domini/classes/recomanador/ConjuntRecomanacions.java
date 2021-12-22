@@ -159,6 +159,6 @@ public class ConjuntRecomanacions {
         return calculaDiscountedCumulativeGain(valoracions, p) / calculaIdealDiscountedCumulativeGain(valoracions, p);
     }
 
-    public double obteDiscountedCumulativeGain() { return discountedCumulativeGain; }
-    public double obteIdealDiscountedCumulativeGain() { return idealDiscountedCumulativeGain; }
+    public double obtenirDiscountedCumulativeGain() { return discountedCumulativeGain; }
+    public double obtenirIdealDiscountedCumulativeGain() { return idealDiscountedCumulativeGain; }
 }
