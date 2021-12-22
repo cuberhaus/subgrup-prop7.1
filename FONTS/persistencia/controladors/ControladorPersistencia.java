@@ -154,8 +154,7 @@ public class ControladorPersistencia {
         if (Files.exists(path)) {
             return lector.llegirCSV(path.toString());
         }
-        ArrayList<ArrayList<String>> conjunt = new ArrayList<>();
-        return conjunt;
+        return new ArrayList<>();
     }
 
     public void borrarConjuntUsuaris(String nom) throws IOException {
@@ -188,6 +187,7 @@ public class ControladorPersistencia {
     public ArrayList<ArrayList<String>> llegirCSVQualsevol(String ubicacio) throws IOException {
         return lector.llegirCSV(ubicacio);
     }
+
     public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
         escriptor.escriureCSV(ubicacio, taula);
     }
