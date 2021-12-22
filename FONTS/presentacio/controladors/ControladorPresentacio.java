@@ -360,7 +360,7 @@ public class ControladorPresentacio {
      * @param nouNom nou nom pel tipus item.
      * @throws IOException Problema canviant el nom del tipus item a la persistència.
      */
-    public void editarTipusItem(String nouNom) throws IOException {
+    public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         controladorDomini.editarTipusItem(nouNom);
     }
 
