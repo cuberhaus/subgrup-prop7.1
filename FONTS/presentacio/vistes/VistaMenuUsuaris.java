@@ -75,7 +75,7 @@ public class VistaMenuUsuaris extends JPanel {
     private static void inicialitzarLlistaUsuaris() {
         ArrayList<String> nomsColumnes = new ArrayList<>();
         nomsColumnes.add("Nom");
-        nomsColumnes.add("Identificador d'Usuari");
+        nomsColumnes.add("Identificador d'usuari");
         nomsColumnes.add("Actiu");
         llistaUsuarisTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
         ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();

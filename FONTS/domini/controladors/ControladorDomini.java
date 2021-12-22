@@ -427,17 +427,14 @@ public class ControladorDomini {
      * @throws Exception si no s'ha pogut afegir l'item
      */
     public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
-        // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
-        // hi ha un tipus d'ítem seleccionat pero millor comprovar
-        // retorna false si no s'ha pogut fer i cert si tot esta be
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
-        for(var x : tipusItem.obtenirTipusAtributs().entrySet()) {
-            String valor = valorsAtributs.get(x.getKey());
-            Class<? extends ValorAtribut> clase = x.getValue().obtenirValorAtribut().getClass();
-            Constructor<?> ctor = clase.getConstructor(String.class);
-            Object object = ctor.newInstance(valor);
-            atributs.put(x.getKey(), clase.cast(object));
+        for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
+            String valor = valorsAtributs.get(tipusAtribut.getKey());
+            Class<? extends ValorAtribut> classe = tipusAtribut.getValue().obtenirValorAtribut().getClass();
+            Constructor<?> constructor = classe.getConstructor(String.class);
+            Object object = constructor.newInstance(valor);
+            atributs.put(tipusAtribut.getKey(), classe.cast(object));
         }
         Item item = new Item(obteIdItemDisponible(), tipusItem, atributs, new HashMap<>());
 
@@ -517,8 +514,22 @@ public class ControladorDomini {
         return true;
     }
 
+    // TODO (edgar): afegir javadoc
+    public void carregarConjuntItems(String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException {
+        if (estatPrograma.conteTipusItem(nomTipusItem)) {
+            throw new JaExisteixElementException("Ja existeix un tipus d'item amb nom " + nomTipusItem);
+        }
+        ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
+        TaulaCSV taulaItems = new TaulaCSV(items);
+        ConjuntItems nousItems = new ConjuntItems(nomTipusItem, taulaItems);
+        for (var x : nousItems.obtenirTotsElsElements().entrySet()) {
+            itemsActuals.afegir(x.getValue());
+        }
+    }
+
     /**
      * Carrega un conjunt d'items a partir d'un fitxer
+     *
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
      * @throws IOException si no s'ha pogut obrir el fitxer
      * @throws AccesAEstatIncorrecteException taula no inicialitzada

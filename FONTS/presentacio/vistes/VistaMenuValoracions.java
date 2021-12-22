@@ -67,9 +67,9 @@ public class VistaMenuValoracions extends JPanel {
      */
     private static void inicialitzarLlistaValoracions() {
         ArrayList<String> nomsColumnes = new ArrayList<>();
-        nomsColumnes.add("Identificador d'Usuari");
-        nomsColumnes.add("Identificador d'Item");
-        nomsColumnes.add("Valoracio");
+        nomsColumnes.add("Identificador d'usuari");
+        nomsColumnes.add("Identificador d'ítem");
+        nomsColumnes.add("Valoració");
         llistaValoracionsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
         ArrayList<ArrayList<String>> valoracions = controladorMenuValoracions.obtenirValoracions();
         for (ArrayList<String> valoracio : valoracions) {

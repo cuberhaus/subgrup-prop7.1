@@ -308,11 +308,18 @@ public class ControladorPresentacio {
 
     /**
      * Carrega un conjunt d'items a partir d'un fitxer
+     *
+     * @param deduirTipusItem
+     * @param nomTipusItem
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
      * @throws IOException si no s'ha pogut obrir el fitxer
      */
-    public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
-        controladorDomini.carregarConjuntItems(rutaAbsoluta);
+    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException {
+        if (deduirTipusItem) {
+            controladorDomini.carregarConjuntItems(nomTipusItem, rutaAbsoluta);
+        } else {
+            controladorDomini.carregarConjuntItems(rutaAbsoluta);
+        }
     }
 
     /**

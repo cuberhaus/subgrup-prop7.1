@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.AccesAEstatIncorrecteException;
 import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
@@ -56,18 +57,7 @@ public class VistaMenuItems extends JPanel {
         menuLateral.add(Box.createVerticalGlue());
         JButton botoCrearItem = new JButton("Crea un nou ítem");
         botoCrearItem.addActionListener(e -> {
-            try {
-                controladorMenuItems.crearNouItem();
-            } catch (IOException e1) {
-                // TODO catch
-                e1.printStackTrace();
-            } catch (NomInternIncorrecteException e2) {
-                //TODO:
-                e2.printStackTrace();
-            } catch (DistanciaNoCompatibleAmbValorException distanciaNoCompatibleAmbValorException) {
-                //TODO:
-                distanciaNoCompatibleAmbValorException.printStackTrace();
-            }
+            controladorMenuItems.crearNouItem();
         });
         // TODO: hi ha d'haver un tipus d'ítem seleccionat
         menuLateral.add(botoCrearItem);
@@ -106,15 +96,22 @@ public class VistaMenuItems extends JPanel {
 
         JButton botoCarregarConjuntItems = new JButton("Afegeix ítems des d'un conjunt");
         botoCarregarConjuntItems.addActionListener(e -> {
-            try {
-                controladorMenuItems.carregarConjuntItems();
-            } catch (Exception ex) {
-                // TODO: catch
+            boolean deduirTipusItem = true;
+            if (controladorMenuItems.existeixTipusItemSeleccionat()) {
+                int resposta = JOptionPane.showConfirmDialog(instancia,
+                        "Vols deduïr el tipus d'ítem del conjunt?", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
+                deduirTipusItem = (resposta == JOptionPane.YES_OPTION);
             }
+            String nomTipusItem = controladorMenuItems.obtenirNomTipusItemSeleccionat();
+            if (deduirTipusItem) {
+                nomTipusItem = JOptionPane.showInputDialog("Introdueix el nom del nou tipus d'ítem:");
+            }
+            controladorMenuItems.carregarConjuntItems(deduirTipusItem, nomTipusItem);
         });
-        // TODO: han de ser del tipus d'ítem seleccionat o que no hi hagi un tipus d'ítem seleccionat
+
         menuLateral.add(botoCarregarConjuntItems);
         menuLateral.add(Box.createVerticalGlue());
         instancia.add(menuLateral, BorderLayout.EAST);
     }
+
 }

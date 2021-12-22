@@ -1,9 +1,6 @@
 package presentacio.controladors;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.AccesAEstatIncorrecteException;
-import excepcions.NoExisteixElementException;
-import excepcions.NomInternIncorrecteException;
+import excepcions.*;
 import presentacio.vistes.VistaDialegCrearItem;
 import presentacio.vistes.VistaDialegEditarItem;
 import presentacio.vistes.VistaMenuItems;
@@ -93,14 +90,21 @@ public class ControladorMenuItems {
         return controladorPresentacio.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems() throws IOException, AccesAEstatIncorrecteException {
+    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem) {
         JDialog dialegFitxer = new JDialog();
         JFileChooser selectorFitxer = new JFileChooser();
         int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
         if (estatSelectorFitxer == APPROVE_OPTION) {
             File rutaFitxer = selectorFitxer.getSelectedFile();
-            controladorPresentacio.carregarConjuntItems(rutaFitxer.getAbsolutePath());
-            // TODO: afegir missatge d'error
+            try {
+                controladorPresentacio.carregarConjuntItems(deduirTipusItem, nomTipusItem, rutaFitxer.getAbsolutePath());
+            } catch (JaExisteixElementException e1) {
+                JOptionPane.showMessageDialog(vistaMenuItems,
+                        e1.getMessage());
+            } catch (Exception e2) {
+                JOptionPane.showMessageDialog(vistaMenuItems,
+                        "No s'han pogut afegir ítems d'aquest conjunt.");
+            }
         }
     }
 
@@ -122,12 +126,21 @@ public class ControladorMenuItems {
         return controladorPresentacio.esSessioIniciada();
     }
 
-    public void crearNouItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public void crearNouItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            VistaDialegCrearItem vistaDialegCrearItem = new VistaDialegCrearItem();
-            vistaDialegCrearItem.setVisible(true);
+            VistaDialegCrearItem vistaDialegCrearItem = null;
+            try {
+                vistaDialegCrearItem = new VistaDialegCrearItem();
+                vistaDialegCrearItem.setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut crear l'ítem.");
+            }
         }
+    }
+
+    public String obtenirNomTipusItemSeleccionat() {
+        return controladorPresentacio.obtenirNomTipusItemSeleccionat();
     }
 }
