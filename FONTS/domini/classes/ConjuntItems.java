@@ -19,15 +19,14 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * @param nomTipusItem <code>String</code> nom del tipus d'ítem.
      * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
      * @throws AccesAEstatIncorrecteException si id no és correcte o l'ítem creat ja és al conjunt.
-     * @throws NoExisteixElementException b
-     * @throws DistanciaNoCompatibleAmbValorException a
+     * @throws NoExisteixElementException La taula es incompleta
+     * @throws DistanciaNoCompatibleAmbValorException La definicio de TipusItem es incorrecta
+     * @throws FormatIncorrecteException Un item te un format incorrecte
      */
-    //TODO: doc
     public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException,
             DistanciaNoCompatibleAmbValorException, NoExisteixElementException, FormatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula, taula.obtenirNumItems());
-
         elements = new TreeMap<>();
         int id = 0;
         boolean errores = false;
