@@ -448,11 +448,20 @@ public class ControladorDomini {
      * @return <code>boolean</code> true si 'sha afegit
      * @throws Exception si no s'ha pogut afegir l'item
      */
-    public int afegirItem(Map<String, String> valorsAtributs) throws Exception {
+    public int afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             String valor = valorsAtributs.get(tipusAtribut.getKey());
+            if (valor == null) {
+                // TODO (edgar): revisar
+                throw new IllegalArgumentException("No hi ha cap atribut amb nom " + tipusAtribut.getKey());
+            }
+            if (valor.contains(",") || valor.contains("\"")) {
+                // TODO (edgar): revisar
+                throw new FormatIncorrecteException("Els atributs no poden tenir el caràcter , ni \"");
+
+            }
             Class<? extends ValorAtribut> classe = tipusAtribut.getValue().obtenirValorAtribut().getClass();
             Constructor<?> constructor = classe.getConstructor(String.class);
             Object object = constructor.newInstance(valor);

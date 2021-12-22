@@ -303,7 +303,7 @@ public class ControladorPresentacio {
      * @return <code>boolean</code> true si 'sha afegit
      * @throws Exception si no s'ha pogut afegir l'item
      */
-    public String afegirItem(Map<String, String> valorsAtributs) throws Exception {
+    public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return String.valueOf(controladorDomini.afegirItem(valorsAtributs));
     }
 

@@ -48,7 +48,7 @@ public class ControladorMenuItems implements EncarregatActualitzarTaules.Observa
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public String afegirItem(Map<String, String> valorsAtributs) throws Exception {
+    public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
 
