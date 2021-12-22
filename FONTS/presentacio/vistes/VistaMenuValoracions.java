@@ -94,6 +94,15 @@ public class VistaMenuValoracions extends JPanel {
     }
 
     /**
+     * Esborra el text de tots els camps de text
+     */
+    private static void clearText() {
+        usuariIdText.setText("");
+        itemIdText.setText("");
+        valorText.setText("");
+    }
+
+    /**
      * Inicialitza objectes del menu Valoracions
      */
     private static void inicialitzarMenuValoracions() {
@@ -177,6 +186,7 @@ public class VistaMenuValoracions extends JPanel {
             try {
                 controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
                 actualitzarTaula();
+                clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(instancia, ex.getMessage());
@@ -193,6 +203,7 @@ public class VistaMenuValoracions extends JPanel {
             try {
                 controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText());
                 actualitzarTaula();
+                clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(instancia, ex.getMessage());
@@ -211,6 +222,7 @@ public class VistaMenuValoracions extends JPanel {
                     if (controladorMenuValoracions.existeixValoracio(usuariIdText.getText(), itemIdText.getText())) {
                         controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
                         actualitzarTaula();
+                        clearText();
                     } else {
                         JOptionPane.showMessageDialog(instancia, "La valoració no existeix");
                     }
