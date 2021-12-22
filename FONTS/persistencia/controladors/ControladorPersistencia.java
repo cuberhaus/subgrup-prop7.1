@@ -27,9 +27,19 @@ public class ControladorPersistencia {
     private final EscriptorDeCSV escriptor;
     private final LectorDeCSV lector;
 
-    private ControladorPersistencia() {
+    private ControladorPersistencia() throws IOException {
         escriptor = new EscriptorDeCSV();
         lector = new LectorDeCSV();
+
+        if (!direccioCarpetaItems.toFile().exists()) {
+            Files.createDirectory(direccioCarpetaItems);
+        }
+        if (!direccioCarpetaUsuaris.toFile().exists()) {
+            Files.createDirectory(direccioCarpetaUsuaris);
+        }
+        if (!direccioCarpetaValoracions.toFile().exists()) {
+            Files.createDirectory(direccioCarpetaValoracions);
+        }
     }
 
     private boolean borraDirectori(File directoriABorrar) {
@@ -42,7 +52,7 @@ public class ControladorPersistencia {
         return directoriABorrar.delete();
     }
 
-    public static ControladorPersistencia obtenirInstancia() {
+    public static ControladorPersistencia obtenirInstancia() throws IOException {
         if (instancia == null) {
             instancia = new ControladorPersistencia();
         }
@@ -140,14 +150,11 @@ public class ControladorPersistencia {
     }
 
     public ArrayList<ArrayList<String>> obtenirConjuntUsuaris(String nom) throws IOException {
-        // TODO (pablo i edgar): revisar si això us sembla bé, és per crear un conjunt d'usuaris buit (el fitxer) si no
-        // existeix
         Path path = obtePathConjuntUsuaris(nom);
         if (Files.exists(path)) {
             return lector.llegirCSV(path.toString());
         }
         ArrayList<ArrayList<String>> conjunt = new ArrayList<>();
-        escriptor.escriureCSV(path.toString(), conjunt);
         return conjunt;
     }
 
@@ -167,7 +174,11 @@ public class ControladorPersistencia {
         escriptor.escriureCSV(path.toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntValoracions(String nom) throws IOException {
-        return lector.llegirCSV(obtePathConjuntValoracions(nom).toString());
+        Path path = obtePathConjuntValoracions(nom);
+        if (Files.exists(path)) {
+            return lector.llegirCSV(path.toString());
+        }
+        return new ArrayList<>();
     }
     public void borrarConjuntValoracions(String nom) throws IOException {
         Path conjunt = Paths.get(obtePathConjuntValoracions(nom).toString());
