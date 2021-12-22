@@ -419,7 +419,7 @@ public class ControladorPresentacio {
      * @param valoracions valoracions fetes per l'usuari dels items recomanats en l'ultima recomanacio
      * @return valoració de la recomanacio amb el valor del NDCG de la recomanacio
      */
-    public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) {
+    public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) throws NoExisteixElementException, SessioNoIniciadaException, UsuariIncorrecteException {
         return controladorDomini.avaluarRecomanacio(valoracions);
     }
 

@@ -2,6 +2,7 @@ package presentacio.controladors;
 
 import excepcions.NoExisteixElementException;
 import excepcions.SessioNoIniciadaException;
+import excepcions.UsuariIncorrecteException;
 import presentacio.vistes.VistaMenuRecomanacions;
 import utilitats.Pair;
 
@@ -59,7 +60,7 @@ public class ControladorMenuRecomanacions {
      * @return String que conte el NDCG que avalua la recomanacio feta pel programa donades les valoracions de l'usuari.
      * Retorna una String buida si alguna de les valoracions no te el format esperat i emet un missatge en cas d'error.
      */
-    public static String avaluarRecomanacio(ArrayList<Pair<String, String>> valoracions) {
+    public static String avaluarRecomanacio(ArrayList<Pair<String, String>> valoracions) throws NoExisteixElementException, SessioNoIniciadaException, UsuariIncorrecteException {
         ArrayList<Pair<Integer, Double>> valoracionsAmbFormat = new ArrayList<>();
         try {
             for (Pair<String, String> valoracio : valoracions) {

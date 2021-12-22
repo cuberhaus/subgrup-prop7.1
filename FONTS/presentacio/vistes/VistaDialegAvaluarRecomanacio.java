@@ -1,5 +1,8 @@
 package presentacio.vistes;
 
+import excepcions.NoExisteixElementException;
+import excepcions.SessioNoIniciadaException;
+import excepcions.UsuariIncorrecteException;
 import presentacio.controladors.ControladorMenuRecomanacions;
 import utilitats.Pair;
 
@@ -75,7 +78,17 @@ public class VistaDialegAvaluarRecomanacio extends JDialog {
                     String valorValoracio = ((JTextField) ((JPanel) component).getComponent(1)).getText();
                     valoracions.add(new Pair<>(idItem, valorValoracio));
                 }
-                valorAvaluacio.setText(ControladorMenuRecomanacions.avaluarRecomanacio(valoracions));
+                try {
+                    valorAvaluacio.setText(ControladorMenuRecomanacions.avaluarRecomanacio(valoracions));
+                    // TODO: hi ha noves valoracions
+                } catch (NoExisteixElementException ex) {
+                    // TODO: catch it
+                    ex.printStackTrace();
+                } catch (SessioNoIniciadaException ex) {
+                    ex.printStackTrace();
+                } catch (UsuariIncorrecteException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         panellObtenirAvaluacio.add(botoObtenirAvaluacio);
