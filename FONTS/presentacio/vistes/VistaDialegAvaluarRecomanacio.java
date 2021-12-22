@@ -77,7 +77,8 @@ public class VistaDialegAvaluarRecomanacio extends JDialog {
                     valoracions.add(new Pair<>(idItem, valorValoracio));
                 }
                 try {
-                    valorAvaluacio.setText(ControladorMenuRecomanacions.avaluarRecomanacio(valoracions));
+                    String avaluacio = ControladorMenuRecomanacions.avaluarRecomanacio(valoracions);
+                    valorAvaluacio.setText(avaluacio.substring(0, Math.min(5, avaluacio.length())));
                     EncarregatActualitzarVistes.notificarObservadors();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this,
