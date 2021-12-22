@@ -58,7 +58,7 @@ public class ControladorMenuPrincipal {
      * Obre el manual d'usuari.
      * @throws IOException si hi ha un problema a l'hora de llegir l'arxiu
      */
-    public void obreManual() throws IOException{
+    public void obrirManual() throws IOException{
         controladorPresentacio.obrirManual();
     }
 }

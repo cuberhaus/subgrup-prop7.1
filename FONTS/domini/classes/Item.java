@@ -259,7 +259,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * Canvia el nom del tipus item.
      * @param nouNom nou nom del tipus d'item.
      */
-    public void canviaNomTipusItem(String nouNom) {
-        tipusItem.canviaElNom(nouNom);
+    public void canviarNomTipusItem(String nouNom) {
+        tipusItem.canviarNom(nouNom);
     }
 }

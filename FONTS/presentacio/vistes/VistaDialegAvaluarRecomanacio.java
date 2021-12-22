@@ -1,8 +1,5 @@
 package presentacio.vistes;
 
-import excepcions.NoExisteixElementException;
-import excepcions.SessioNoIniciadaException;
-import excepcions.UsuariIncorrecteException;
 import presentacio.EncarregatActualitzarVistes;
 import presentacio.controladors.ControladorMenuRecomanacions;
 import utilitats.Pair;

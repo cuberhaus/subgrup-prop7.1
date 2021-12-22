@@ -62,7 +62,7 @@ public class VistaMenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    controladorMenuPrincipal.obreManual();
+                    controladorMenuPrincipal.obrirManual();
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(menuBarra, "No s'ha pogut obrir el manual d'usuari.");
                 }

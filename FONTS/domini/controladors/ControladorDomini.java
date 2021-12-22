@@ -625,10 +625,10 @@ public class ControladorDomini {
         controladorPersistencia.borrarConjuntValoracions(nomTipusItemActual);
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual).copiar();
         for (var item : itemsActuals.obtenirTotsElsElements().entrySet()) {
-            item.getValue().canviaNomTipusItem(nouNom);
+            item.getValue().canviarNomTipusItem(nouNom);
         }
         estatPrograma.esborraTipusItem(nomTipusItemActual);
-        tipusItem.canviaElNom(nouNom);
+        tipusItem.canviarNom(nouNom);
         nomTipusItemActual = nouNom;
         estatPrograma.afegirTipusItem(nouNom, tipusItem);
         controladorPersistencia.guardarTipusItem(tipusItem.convertirAArrayList(), nouNom);

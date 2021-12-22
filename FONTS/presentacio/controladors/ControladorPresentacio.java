@@ -473,7 +473,7 @@ public class ControladorPresentacio {
      * @throws NoExisteixElementException no existeix l'element
      */
     public void canviarContrasenyaUsuari(String id, char[] novaContrasenya) throws NoExisteixElementException {
-        controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
+        controladorDomini.canviaContrasenyaUsuari(id, novaContrasenya);
     }
 
     /**
