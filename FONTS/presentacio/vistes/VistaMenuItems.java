@@ -8,7 +8,6 @@ import presentacio.controladors.ControladorMenuItems;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class VistaMenuItems extends JPanel {
@@ -24,7 +23,7 @@ public class VistaMenuItems extends JPanel {
     private VistaMenuItems() {
     }
 
-    public static VistaMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public static VistaMenuItems obtenirInstancia() throws Exception {
         if (instancia == null) {
             instancia = new VistaMenuItems();
             controladorMenuItems = ControladorMenuItems.obtenirInstancia();

@@ -1,12 +1,9 @@
 package presentacio.vistes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuRecomanacions;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,7 +25,7 @@ public class VistaMenuRecomanacions extends JPanel {
     private VistaMenuRecomanacions() {
     }
 
-    public static VistaMenuRecomanacions obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public static VistaMenuRecomanacions obtenirInstancia() throws Exception {
         if (instancia == null) {
             instancia = new VistaMenuRecomanacions();
             controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();
@@ -82,17 +79,17 @@ public class VistaMenuRecomanacions extends JPanel {
         JButton botoEditarFiltre = new JButton("Edita filtre");
         botoEditarFiltre.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoEditarFiltre.addActionListener(actionEvent -> {
-            if (!controladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
+            if (!ControladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
                 if (nomTipusItemFiltre == null) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : ControladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 } else if (!nomTipusItemFiltre.equals(controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat())) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : ControladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 }
@@ -117,19 +114,19 @@ public class VistaMenuRecomanacions extends JPanel {
         JButton botoObtenirRecomanacio = new JButton("Obté recomanació");
         botoObtenirRecomanacio.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoObtenirRecomanacio.addActionListener(actionEvent -> {
-            if (!controladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
+            if (!ControladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
-            } else if (!controladorMenuRecomanacions.sessioIniciada()) {
+            } else if (!ControladorMenuRecomanacions.sessioIniciada()) {
                 JOptionPane.showMessageDialog(instancia, "No has iniciat la sessió.");
             } else {
                 if (nomTipusItemFiltre == null) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : ControladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 } else if (!nomTipusItemFiltre.equals(controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat())) {
                     nomsAtributsFiltre = new TreeMap<>();
-                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
+                    for (String nomAtribut : ControladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat()) {
                         nomsAtributsFiltre.put(nomAtribut, true);
                     }
                 }

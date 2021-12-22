@@ -19,7 +19,7 @@ public class VistaDialegMostrarItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegMostrarItem(String id, Map<String, String> atributs) throws DistanciaNoCompatibleAmbValorException, NomInternIncorrecteException, IOException {
+    public VistaDialegMostrarItem(String id, Map<String, String> atributs) throws Exception {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegMostrarItem(id, atributs);

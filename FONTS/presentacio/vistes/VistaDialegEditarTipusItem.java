@@ -21,7 +21,7 @@ public class VistaDialegEditarTipusItem extends JDialog {
     private JPanel panellLlistaTipusAtributs;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public VistaDialegEditarTipusItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public VistaDialegEditarTipusItem() throws Exception {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = controladorMenuTipusItem.obtenirNomTipusItemSeleccionat();
@@ -52,14 +52,8 @@ public class VistaDialegEditarTipusItem extends JDialog {
 
         JButton botoGuardarTipusItem = new JButton("Guarda");
         botoGuardarTipusItem.addActionListener(e -> {
-            try {
-                controladorMenuTipusItem.editarTipusItem(nomTipusItem.getText());
+            if (controladorMenuTipusItem.editarTipusItem(this, nomTipusItem.getText())) {
                 dispose();
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this,
-                        "No es pot editar aquest tipus d'ítem. Torna-ho a intentar.");
-            } catch (FormatIncorrecteException | JaExisteixElementException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         });
         botoGuardarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);

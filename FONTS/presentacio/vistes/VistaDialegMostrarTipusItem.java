@@ -2,12 +2,10 @@ package presentacio.vistes;
 
 import utilitats.Pair;
 import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -21,7 +19,7 @@ public class VistaDialegMostrarTipusItem extends JDialog {
     private JPanel panellLlistaTipusAtributs;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public VistaDialegMostrarTipusItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public VistaDialegMostrarTipusItem() throws Exception {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = controladorMenuTipusItem.obtenirNomTipusItemSeleccionat();
@@ -58,7 +56,7 @@ public class VistaDialegMostrarTipusItem extends JDialog {
 
         panellLlistaTipusAtributs = new JPanel();
         panellLlistaTipusAtributs.setLayout(new BoxLayout(panellLlistaTipusAtributs, BoxLayout.Y_AXIS));
-        Map<String, Pair<String, String>> tipusAtributs = controladorMenuTipusItem.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
+        Map<String, Pair<String, String>> tipusAtributs = controladorMenuTipusItem.obtenirTipusAtributsTipusItemSeleccionat();
         for (String nomTipusAtribut : tipusAtributs.keySet()) {
             JPanel tipusAtribut = new JPanel(new FlowLayout());
 

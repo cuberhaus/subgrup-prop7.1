@@ -16,7 +16,7 @@ public class VistaDialegEditarFiltre extends JDialog {
 
     private final ControladorMenuRecomanacions controladorMenuRecomanacions;
 
-    public VistaDialegEditarFiltre(Map<String, Boolean> nomsAtributsFiltre) throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public VistaDialegEditarFiltre(Map<String, Boolean> nomsAtributsFiltre) throws Exception {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();
         inicialitzarDialegEditarFiltre(nomsAtributsFiltre);
@@ -38,7 +38,7 @@ public class VistaDialegEditarFiltre extends JDialog {
         panellScrollLlistaAtributs.setPreferredSize(new Dimension(getWidth(), 3 * getHeight() / 4));
         panellPrincipal.add(panellScrollLlistaAtributs, BorderLayout.CENTER);
 
-        if (controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
+        if (ControladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
             JLabel text = new JLabel("El tipus d'ítem seleccionat no té cap atribut.");
             text.setAlignmentX(Component.CENTER_ALIGNMENT);
             text.setFont(new Font("Sans", Font.BOLD, 13));

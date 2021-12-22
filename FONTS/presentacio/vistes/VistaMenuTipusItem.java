@@ -1,6 +1,5 @@
 package presentacio.vistes;
 
-import excepcions.*;
 import presentacio.EncarregatActualitzarVistes;
 import presentacio.controladors.ControladorMenuTipusItem;
 
@@ -44,7 +43,7 @@ public class VistaMenuTipusItem extends JPanel {
     private VistaMenuTipusItem() {
     }
 
-    public static VistaMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public static VistaMenuTipusItem obtenirInstancia() throws Exception {
         if (instancia == null) {
             instancia = new VistaMenuTipusItem();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
@@ -112,17 +111,7 @@ public class VistaMenuTipusItem extends JPanel {
                     int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
                     if (estatSelectorFitxer == APPROVE_OPTION) {
                         File rutaFitxer = selectorFitxer.getSelectedFile();
-                        try {
-                            controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
-                            JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
-                            EncarregatActualitzarVistes.notificarObservadors();
-                        } catch (JaExisteixElementException e1) {
-                            JOptionPane.showMessageDialog(instancia,
-                                    "Ja existeix un tipus d'ítem amb el nom indicat.");
-                        } catch (Exception e2) {
-                            JOptionPane.showMessageDialog(instancia,
-                                    "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
-                        }
+                        controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
                     }
                 }
             }
@@ -145,14 +134,7 @@ public class VistaMenuTipusItem extends JPanel {
         selecciona.addActionListener(e -> {
             String nomTipusItem = (String) tipusItemsComboBox.getSelectedItem();
             if (nomTipusItem != null) {
-                try {
-                    controladorMenuTipusItem.seleccionarTipusItem(nomTipusItem);
-                    EncarregatActualitzarVistes.notificarObservadors();
-                } catch (Exception e1) {
-                    System.out.println(e1.getMessage());
-                    JOptionPane.showMessageDialog(instancia,
-                            "No s'ha pogut seleccionar el tipus d'ítem. Torna-ho a intentar. Error:\n" + e1.getMessage());
-                }
+                controladorMenuTipusItem.seleccionarTipusItem(nomTipusItem);
             } else {
                 JOptionPane.showMessageDialog(instancia,
                     "No hi ha cap element de la llista seleccionat.");
@@ -168,13 +150,7 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                try {
-                    controladorMenuTipusItem.desseleccionarTipusItem();
-                    EncarregatActualitzarVistes.notificarObservadors();
-                } catch (IOException e1) {
-                    JOptionPane.showMessageDialog(instancia,
-                            "No s'ha pogut deseleccionar el tipus d'ítem seleccionat.");
-                }
+                controladorMenuTipusItem.desseleccionarTipusItem();
             }
         });
         panellAdministrarTipusItem.add(botoDeseleccionarTipusItem);
@@ -186,13 +162,7 @@ public class VistaMenuTipusItem extends JPanel {
                 int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar el tipus d'ítem seleccionat" +
                         " i totes les seves dades?", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
                 if (resposta == 0) {
-                    try {
-                        controladorMenuTipusItem.esborrarTipusItemSeleccionat();
-                        EncarregatActualitzarVistes.notificarObservadors();
-                    } catch (IOException e1) {
-                        JOptionPane.showMessageDialog(instancia,
-                                "No s'ha pogut esborrar el tipus d'ítem seleccionat.");
-                    }
+                    controladorMenuTipusItem.esborrarTipusItemSeleccionat();
                 }
             }
         });
