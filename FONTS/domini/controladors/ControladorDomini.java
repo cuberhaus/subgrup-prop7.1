@@ -328,7 +328,7 @@ public class ControladorDomini {
 
     /**
      * Retorna el nom dels items carregats
-     * @return <code>ArrayList&lt;String&gt;</code> llista del noms
+     * @return <code>ArrayList&lt;String&gt;</code> llista de noms
      */
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         return estatPrograma.obteTipusItem();
@@ -577,11 +577,9 @@ public class ControladorDomini {
     public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         if (nomTipusItemActual == null) return;
         if (nouNom.isEmpty()) {
-            // TODO (edgar): posar una excepció millor?
             throw new FormatIncorrecteException("El nom d'un tipus d'ítem no pot ser buit.");
         }
         if (existeixTipusItem(nouNom)) {
-            // TODO (edgar): posar una excepció millor?
             throw new JaExisteixElementException("Ja existeix un tipus d'ítem amb nom: \"" + nouNom + "\"");
         }
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
@@ -590,7 +588,7 @@ public class ControladorDomini {
         for (var item : itemsActuals.obtenirTotsElsElements().entrySet()) {
             item.getValue().canviaNomTipusItem(nouNom);
         }
-        estatPrograma.esborraTipusItem(nouNom);
+        estatPrograma.esborraTipusItem(nomTipusItemActual);
         tipusItem.canviaElNom(nouNom);
         nomTipusItemActual = nouNom;
         estatPrograma.afegirTipusItem(nouNom, tipusItem);
@@ -600,8 +598,7 @@ public class ControladorDomini {
     }
 
     private boolean existeixTipusItem(String nouNom) {
-        // TODO (edgar): implementar aixo;
-        return false;
+        return estatPrograma.conteTipusItem(nouNom);
     }
 
     /**
