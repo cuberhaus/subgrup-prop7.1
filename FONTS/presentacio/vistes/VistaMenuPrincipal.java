@@ -77,7 +77,7 @@ public class VistaMenuPrincipal extends JFrame {
     private static void inicialitzarMenuPestanyes() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", VistaMenuTipusItem.obtenirInstancia());
-        menuPestanyes.add("Ítems", VistaMenuItems.obtenirInstancia());
+        menuPestanyes.add("Items", VistaMenuItems.obtenirInstancia());
         menuPestanyes.add("Usuaris", VistaMenuUsuaris.obtenirInstancia());
         menuPestanyes.add("Valoracions", VistaMenuValoracions.obtenirInstancia());
         menuPestanyes.add("Recomanacions", VistaMenuRecomanacions.obtenirInstancia());
