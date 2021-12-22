@@ -142,14 +142,18 @@ public class ControladorDomini {
      * @throws NoExisteixElementException no existeix l'element
      * @throws JaExisteixElementException l'element ja existeix
      */
-    public int afegirUsuari(String nom, String contrasenya) throws NoExisteixElementException, JaExisteixElementException {
+    public int afegirUsuari(String nom, String contrasenya) throws JaExisteixElementException {
         Id id = obteIdUsuariDisponible();
-        if (estatPrograma.conteUsuari(id) && estatPrograma.obtenirUsuari(id).isActiu()) {
-            throw new JaExisteixElementException("L'usuari " + nom + " ja existeix");
-        }
-        else {
-            estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
-            return id.obtenirValor();
+        try {
+            if (estatPrograma.conteUsuari(id) && estatPrograma.obtenirUsuari(id).isActiu()) {
+                throw new JaExisteixElementException("L'usuari " + nom + " ja existeix");
+            }
+            else {
+                estatPrograma.afegirUsuari(new Usuari(id, nom, contrasenya));
+                return id.obtenirValor();
+            }
+        } catch (Exception ignored) {
+            return -1;
         }
     }
 
