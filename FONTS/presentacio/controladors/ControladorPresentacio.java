@@ -250,26 +250,62 @@ public class ControladorPresentacio {
         controladorDomini.carregarConjuntItems(rutaAbsoluta);
     }
 
+    /**
+     * Esborra tots els items del tipus d'ítem seleccionat
+     */
     public void esborrarTotsElsItems() {
         controladorDomini.esborrarTotsElsItems();
     }
 
+    /**
+     * Canvia el nom del tipus item seleccionat.
+     * @param nouNom nou nom pel tipus item.
+     * @throws IOException Problema canviant el nom del tipus item a la persistència.
+     */
     public void editarTipusItem(String nouNom) throws IOException {
         controladorDomini.editarTipusItem(nouNom);
     }
 
+    /**
+     * Obte una recomanacio amb el metode Recomanador Collaborative per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
+     */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
+    /**
+     * Obte una recomanacio amb el metode Recomanador ContentBased per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
+     */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
+    /**
+     * Obte una recomanacio amb el metode Recomanador Hibrid per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
+     */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 
+    /**
+     * Obté l'avaluació de la recomanació
+     * @return avaluació de la recomanació
+     */
     public double avaluarRecomanacio() {
         return controladorDomini.avaluarRecomanacio();
     }
@@ -292,6 +328,10 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirValoracions();
     }
 
+    /**
+     * Desselecciona el tipus d'ítem
+     * @throws IOException no s'ha pogut desseleccionar l'ítem
+     */
     public void deseleccionarTipusItem() throws IOException {
         controladorDomini.deseleccionarTipusItem();
     }
