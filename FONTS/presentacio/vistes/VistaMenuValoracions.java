@@ -268,8 +268,8 @@ public class VistaMenuValoracions extends JPanel {
                 try {
                     controladorMenuValoracions.exportaValoracions(pathConjunt.getAbsolutePath());
                 } catch (IOException ex) {
-                    //TODO catch
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
                 }
             }
         });
