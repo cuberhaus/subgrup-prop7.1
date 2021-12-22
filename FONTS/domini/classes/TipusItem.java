@@ -62,6 +62,7 @@ public class TipusItem {
         this.tipusAtributs = new TreeMap<>();
         for (int i = 0; i < taulaCSV.obtenirNomsAtributs().size(); ++i) {
             for (int j = 0; j < numCandidats; ++j) {
+                if (taulaCSV.obtenirNomsAtributs().get(i).equals("id")) continue;
                 if (this.tipusAtributs.containsKey(taulaCSV.obtenirNomsAtributs().get(i))) {
                     TipusAtribut tipusAtributActual = dedueixTipusAtribut(taulaCSV.obtenirValorAtribut(j,
                             taulaCSV.obtenirNomsAtributs().get(i)));
