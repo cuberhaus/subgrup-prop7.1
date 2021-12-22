@@ -6,7 +6,11 @@ import presentacio.controladors.ControladorMenuItems;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 /**
  * Vista del menu d'items.
@@ -114,6 +118,15 @@ public class VistaMenuItems extends JPanel {
         JButton botoExportarConjuntItems = new JButton("Exporta el conjunt d'ítems");
         botoExportarConjuntItems.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoExportarConjuntItems.addActionListener(e -> {
+            // TODO (pol)
+            JDialog dialegRuta = new JDialog();
+            JFileChooser selectorFitxer = new JFileChooser();
+            selectorFitxer.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int estatJFile = selectorFitxer.showOpenDialog(dialegRuta);
+            if (estatJFile == APPROVE_OPTION) {
+                File rutaConjuntItems = selectorFitxer.getSelectedFile();
+                controladorMenuItems.exportarItems(rutaConjuntItems.getAbsolutePath());
+            }
         });
 
         menuLateral.add(botoExportarConjuntItems);

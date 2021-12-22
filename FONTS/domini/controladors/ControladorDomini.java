@@ -428,7 +428,7 @@ public class ControladorDomini {
      * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> conjunt de items
      */
     public ArrayList<ArrayList<String>> obtenirItems() {
-        ArrayList<ArrayList<String>> res = itemsActuals.converteixAArray();
+        ArrayList<ArrayList<String>> res = itemsActuals.convertirAArrayList();
         res.remove(0);
         return res;
     }
@@ -632,7 +632,7 @@ public class ControladorDomini {
         nomTipusItemActual = nouNom;
         estatPrograma.afegirTipusItem(nouNom, tipusItem);
         controladorPersistencia.guardarTipusItem(tipusItem.convertirAArrayList(), nouNom);
-        controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nouNom, "basic");
+        controladorPersistencia.guardarConjuntItems(itemsActuals.convertirAArrayList(), nouNom, "basic");
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nouNom);
     }
 
@@ -752,7 +752,7 @@ public class ControladorDomini {
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);
-        controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nomTipusItemActual, "basic");
+        controladorPersistencia.guardarConjuntItems(itemsActuals.convertirAArrayList(), nomTipusItemActual, "basic");
         nomTipusItemActual = null;
     }
 
@@ -862,5 +862,15 @@ public class ControladorDomini {
         ArrayList<String> idsItems = new ArrayList<>();
         itemsActuals.obtenirTotsElsElements().keySet().forEach((id) -> idsItems.add(String.valueOf(id.obtenirValor())));
         return idsItems;
+    }
+
+    /**
+     * Exporta els items a la ruta donada
+     * @param rutaAbsoluta ruta on volem guardar l'arxiu
+     * @throws IOException si hi ha hagut un error en la lectura o escriptura de fitxers
+     */
+    public void exportarItems(String rutaAbsoluta) throws IOException {
+        Date avui = Calendar.getInstance().getTime();
+        controladorPersistencia.escriureCSVQualsevol(rutaAbsoluta, itemsActuals.convertirAArrayList(), "Items" + avui);
     }
 }

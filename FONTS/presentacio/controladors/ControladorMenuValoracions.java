@@ -187,10 +187,18 @@ public class ControladorMenuValoracions implements EncarregatActualitzarVistes.O
         return false;
     }
 
+    /**
+     * Exporta les valoracions a un arxiu en la localització indicada per absolutePath
+     * @param absolutePath path on es crearà l'arxiu
+     * @throws IOException Hi ha hagut un error d'entrada/sortida
+     */
     public void exportaValoracions(String absolutePath) throws IOException {
         controladorPresentacio.exportarValoracions(absolutePath);
     }
 
+    /**
+     * Actualitza la finestra amb els valors més actuals
+     */
     @Override
     public void actualitzar() {
         VistaMenuValoracions.actualitzarTaula();

@@ -518,4 +518,12 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirIdsItems();
     }
 
+    /**
+     * Exporta els items a la ruta donada
+     * @param rutaAbsoluta ruta on volem guardar l'arxiu
+     * @throws IOException si hi ha hagut un error en la lectura o escriptura de fitxers
+     */
+    public void exportarItems(String rutaAbsoluta) throws IOException {
+        controladorDomini.exportarItems(rutaAbsoluta);
+    }
 }

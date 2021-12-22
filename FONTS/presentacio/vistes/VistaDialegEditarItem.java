@@ -73,7 +73,9 @@ public class VistaDialegEditarItem extends JDialog {
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
-            controladorMenuItems.editarItem(this, id, valorsAtributs);
+            if (controladorMenuItems.editarItem(this, id, valorsAtributs)) {
+                dispose();
+            }
         });
         botoGuardarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
