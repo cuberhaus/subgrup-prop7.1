@@ -222,4 +222,8 @@ public class ControladorMenuUsuaris {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }
     }
+
+    public void actualitzaTaula() {
+        VistaMenuUsuaris.actualitzarLlistaUsuaris();
+    }
 }
