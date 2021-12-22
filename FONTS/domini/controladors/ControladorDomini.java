@@ -570,8 +570,16 @@ public class ControladorDomini {
      * @param nouNom nou nom pel tipus item.
      * @throws IOException Problema canviant el nom del tipus item a la persistencia.
      */
-    public void editarTipusItem(String nouNom) throws IOException {
+    public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         if (nomTipusItemActual == null) return;
+        if (nouNom.isEmpty()) {
+            // TODO (edgar): posar una excepció millor?
+            throw new FormatIncorrecteException("El nom d'un tipus d'ítem no pot ser buit.");
+        }
+        if (existeixTipusItem(nouNom)) {
+            // TODO (edgar): posar una excepció millor?
+            throw new JaExisteixElementException("Ja existeix un tipus d'ítem amb nom: \"" + nouNom + "\"");
+        }
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.borrarConjuntValoracions(nomTipusItemActual);
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual).copiar();
@@ -585,6 +593,11 @@ public class ControladorDomini {
         controladorPersistencia.guardarTipusItem(tipusItem.convertirAArrayList(), nouNom);
         controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nouNom, "basic");
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nouNom);
+    }
+
+    private boolean existeixTipusItem(String nouNom) {
+        // TODO (edgar): implementar aixo;
+        return false;
     }
 
     /**

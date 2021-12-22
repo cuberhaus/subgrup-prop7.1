@@ -264,6 +264,10 @@ public class VistaMenuTipusItem extends JPanel {
                 try {
                     vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
                     vistaDialegEditarTipusItem.setVisible(true);
+                    textTipusItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
+                    controladorMenuTipusItem.actualitzarVistesTipusItemSeleccionat();
+                    tipusItemsComboBoxModel.removeAllElements();
+                    tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No es pot editar aquest tipus d'ítem. Torna-ho a intentar.");

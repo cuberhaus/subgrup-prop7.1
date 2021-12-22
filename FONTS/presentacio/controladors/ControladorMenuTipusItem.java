@@ -174,7 +174,7 @@ public class ControladorMenuTipusItem {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public void editarTipusItem(String nouNom) throws IOException {
+    public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         controladorPresentacio.editarTipusItem(nouNom);
     }
 
