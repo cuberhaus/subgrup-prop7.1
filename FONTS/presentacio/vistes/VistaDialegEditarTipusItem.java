@@ -6,7 +6,6 @@ import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * @author maria.prat
@@ -26,13 +25,13 @@ public class VistaDialegEditarTipusItem extends JDialog {
         inicialitzarDialegMostrarTipusItem();
     }
 
-    private void inicialitzarDialegMostrarTipusItem() {
+    private void inicialitzarDialegMostrarTipusItem() throws IOException {
         setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8),
                 Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Editar tipus d'ítem");
         setResizable(false);
         // TODO: implementar
-        controladorMenuTipusItem.editarTipusItem(new HashMap<>());
+        controladorMenuTipusItem.editarTipusItem("");
     }
 }

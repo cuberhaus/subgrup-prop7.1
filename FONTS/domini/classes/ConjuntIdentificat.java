@@ -60,6 +60,7 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
      * @param id Identificador d'un element.
      * @return L'element que anteriorment estava identificat amb l'identificador donat. Si el conjunt no contenia cap
      * element amb aquest Id, retorna <code>null</code>.
+     * @throws NoExisteixElementException si no exiteix l'element al conjunt
      */
     public T esborrar(Id id) throws NoExisteixElementException {
         return elements.remove(id);

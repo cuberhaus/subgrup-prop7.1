@@ -262,4 +262,13 @@ public class TipusItem {
     public String toString() {
         return obtenirNom();
     }
+
+
+    /**
+     * Canvia el nom del tipus item.
+     * @param nouNom nou nom del tipus d'item.
+     */
+    public void canviaElNom(String nouNom) {
+        nom = nouNom;
+    }
 }

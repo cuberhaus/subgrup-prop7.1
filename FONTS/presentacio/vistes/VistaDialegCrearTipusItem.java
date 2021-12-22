@@ -1,6 +1,6 @@
 package presentacio.vistes;
 
-import domini.classes.Pair;
+import utilitats.Pair;
 import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.JaExisteixElementException;
 import excepcions.NomInternIncorrecteException;

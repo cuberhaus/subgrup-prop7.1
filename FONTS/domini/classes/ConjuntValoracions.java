@@ -4,6 +4,7 @@ import domini.classes.csv.TaulaCSV;
 import excepcions.AccesAEstatIncorrecteException;
 import excepcions.NoExisteixElementException;
 import excepcions.UsuariIncorrecteException;
+import utilitats.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,9 @@ public class ConjuntValoracions {
      * @param valoracions Una taula de valoracions
      * @param items       un conjunt d'ítems
      * @param usuaris     un conjunt d'usuaris
+     * @throws NoExisteixElementException l'element no es troba al conjunt
+     * @throws AccesAEstatIncorrecteException la taula no esta inicialitzada
+     * @throws UsuariIncorrecteException no existeix l'usuari
      */
     public void afegir(TaulaCSV valoracions, ConjuntItems items, ConjuntUsuaris usuaris) throws NoExisteixElementException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         valoracions.eliminarEspaisInnecessaris();

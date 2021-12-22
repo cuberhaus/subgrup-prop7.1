@@ -4,13 +4,14 @@ import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.Recomanacio;
 import excepcions.NoExisteixElementException;
+import utilitats.Pair;
 
 import java.util.*;
 
 public class MetodeRecomanadorHibrid extends MetodeRecomanador {
 
-    private MetodeRecomanadorCollaborative metodeCollab;
-    private MetodeRecomanadorContentBased metodeContent;
+    private final MetodeRecomanadorCollaborative metodeCollab;
+    private final MetodeRecomanadorContentBased metodeContent;
     /**
      * Crea un <code>MetodeRecomanador</code> donant un conjunt de dades per defecte.
      *

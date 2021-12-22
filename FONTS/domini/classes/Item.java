@@ -2,7 +2,6 @@ package domini.classes;
 
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
-import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.UsuariIncorrecteException;
 
 import java.util.*;
@@ -23,7 +22,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * Conté les valoracions de l'Item.
      * Relaciona l'Usuari que ha fet la valoració amb la valoració.
      */
-    private Map<Usuari, Valoracio> valoracions;
+    private final Map<Usuari, Valoracio> valoracions;
 
     /**
      * Constructor d'un ítem amb conjunt de valoracions buit.
@@ -112,6 +111,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     /**
      * @return Còpia profunda del <code>Map&lt;Usuari, Valoracio&gt;</code> que relaciona els Usuaris que han fet les
      * valoracions de l'Item amb la valoració.
+     * @throws UsuariIncorrecteException no trobem l'usuari
      */
     public Map<Usuari, Valoracio> obtenirValoracions() throws UsuariIncorrecteException {
         Map<Usuari, Valoracio> valoracions = new TreeMap<>();
@@ -240,5 +240,19 @@ public class Item implements Comparable<Item>, ElementIdentificat {
            res.add(x.getValue().toString());
         }
         return res;
+    }
+
+    public void modificaAtribut(String nomAtribut, ValorAtribut<?> valor) {
+        if (!atributs.containsKey(nomAtribut))
+            return;
+        atributs.put(nomAtribut, valor);
+    }
+
+    /**
+     * Canvia el nom del tipus item.
+     * @param nouNom nou nom del tipus d'item.
+     */
+    public void canviaNomTipusItem(String nouNom) {
+        tipusItem.canviaElNom(nouNom);
     }
 }

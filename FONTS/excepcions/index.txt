@@ -1,0 +1,13 @@
+Implementació de les excepcions customitzades.
+
+AccesAEstatIncorrecteException.java
+ContrasenyaIncorrectaException.java
+DistanciaNoCompatibleAmbValorException.java
+FormatIncorrecteException.java
+index.txt
+JaExisteixElemenException.java
+NoExisteixElementException.java
+NomInternIncorrecteExcepction.java
+SessioIniciadaException.java
+SessioNoIniciadaException.java
+UsuariIncorrecteException.java

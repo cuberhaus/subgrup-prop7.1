@@ -10,6 +10,7 @@ import domini.classes.recomanador.filtre.FiltreExclusiu;
 import domini.classes.recomanador.filtre.FiltreInclusiu;
 import excepcions.*;
 import persistencia.controladors.ControladorPersistencia;
+import utilitats.Pair;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -17,7 +18,7 @@ import java.util.*;
 
 /**
  * Classe que representa el controlador de domini
- * @author edgar.moreno && pablo.vega
+ * @author edgar.moreno and pablo.vega
  */
 public class ControladorDomini {
     private static ControladorDomini instancia;
@@ -105,7 +106,7 @@ public class ControladorDomini {
      * Comproba si existeix un usuari al conjunt d'usuaris del programa
      * @param id <code>int</code> l'id de l'usuari
      * @return retorna si existeix l'usuari al conjunt o no
-     * @throws Exception si l'usuari ja existeix
+     * @throws NoExisteixElementException si l'usuari ja existeix
      */
     public boolean existeixUsuari(int id) throws NoExisteixElementException {
         Id idBo = new Id(id, true);
@@ -473,21 +474,37 @@ public class ControladorDomini {
         return res;
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
-        // TODO
+    public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
         // edita l'item amb l'id donat amb els valors donats
         // valorsAtribut es un mapa del nom de l'atribut al nou valor
         // hi ha un tipus d'ítem seleccionat pero millor comprovar
         // l'item es del tipus d'ítem seleccionat
         // existeix un item amb aquest id pero millor comprovar
         // retorna true si tot be i retorna fals si alguna cosa no funcioa
-        return false;
+        int idItemABuscar;
+        try {
+            idItemABuscar = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        Item item = itemsActuals.obtenir(new Id(idItemABuscar));
+        for (var atribut : item.obtenirAtributs().entrySet()) {
+            try {
+                String valor = valorsAtributs.get(atribut.getKey());
+                Class<? extends ValorAtribut> clase = atribut.getValue().getClass();
+                Constructor<?> ctor = clase.getConstructor(String.class);
+                Object object = ctor.newInstance(valor);
+                item.modificaAtribut(atribut.getKey(), clase.cast(object));
+            }
+            catch (Exception ignore) {}
+        }
+        return true;
     }
 
     /**
      * Carrega un conjunt d'items a partir d'un fitxer
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
-     * @throws Exception si no s'ha pogut obrir el fitxer
+     * @throws IOException si no s'ha pogut obrir el fitxer
      */
     public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
         ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
@@ -505,25 +522,37 @@ public class ControladorDomini {
         itemsActuals = new ConjuntItems(estatPrograma.obteTipusItem(nomTipusItemActual));
     }
 
-    public void editarTipusItem(Map<String, String> relacioNomsTipusAtributs) {
-        // TODO
-        // relaciona el nom de l'atribut anterior amb el nou (es a dir permet canviar el nom del tipus d'atribut)
-        // es una mica horrible perque ha de passar per tots els items per canviar, crec
-        // si el nou atribut no té nom ("") vol dir que s'ha eliminat
+    /**
+     * Canvia el nom del tipus item seleccionat.
+     * @param nouNom nou nom pel tipus item.
+     * @throws IOException Problema canviant el nom del tipus item a la persistencia.
+     */
+    public void editarTipusItem(String nouNom) throws IOException {
+        if (nomTipusItemActual == null) return;
+        controladorPersistencia.borrarTipusItem(nomTipusItemActual);
+        controladorPersistencia.borrarConjuntValoracions(nomTipusItemActual);
+        TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual).copiar();
+        for (var item : itemsActuals.obtenirTotsElsElements().entrySet()) {
+            item.getValue().canviaNomTipusItem(nouNom);
+        }
+        estatPrograma.esborraTipusItem(nouNom);
+        tipusItem.canviaElNom(nouNom);
+        nomTipusItemActual = nouNom;
+        estatPrograma.afegirTipusItem(nouNom, tipusItem);
+        controladorPersistencia.guardarTipusItem(tipusItem.convertirAArrayList(), nouNom);
+        controladorPersistencia.guardarConjuntItems(itemsActuals.converteixAArray(), nouNom, "basic");
+        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nouNom);
     }
 
-    //TODO: filtros
     /**
-     * Obte una recomanacio amb el metode Collaborative
-     * @param nomAtributs
-     * @param filtreInclusiu
-     * @return
-     * @throws Exception
+     * Obte una recomanacio amb el metode Recomanador Collaborative per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
-        // retorna conjunt d'ids d'items recomanats
-        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
-        // i el filtre que li passa
         Filtre filtre;
         if (filtreInclusiu) {
             filtre = new FiltreInclusiu(nomAtributs);
@@ -538,18 +567,15 @@ public class ControladorDomini {
         return res;
     }
 
-    //TODO: filtros
     /**
-     *
-     * @param nomAtributs
-     * @param filtreInclusiu
-     * @return
-     * @throws Exception
+     * Obte una recomanacio amb el metode Recomanador ContentBased per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
-        // retorna conjunt d'ids d'items recomanats
-        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
-        // i el filtre que li passa
         Filtre filtre;
         if (filtreInclusiu) {
             filtre = new FiltreInclusiu(nomAtributs);
@@ -564,18 +590,15 @@ public class ControladorDomini {
         return res;
     }
 
-    //TODO: filtros
     /**
-     *
-     * @param nomAtributs
-     * @param filtreInclusiu
-     * @return
-     * @throws Exception
+     * Obte una recomanacio amb el metode Recomanador Hibrid per al usuari que esta actiu.
+     * @param nomAtributs atributs considerats pel filtre
+     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @return El conjunt de id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
-        // retorna conjunt d'ids d'items recomanats
-        // utilitza l'usuari que ha iniciat sessio, el tipus d'item seleccionat, els conjunts del tipus d'item seleccionat
-        // i el filtre que li passa
         Filtre filtre;
         if (filtreInclusiu) {
             filtre = new FiltreInclusiu(nomAtributs);
@@ -590,11 +613,9 @@ public class ControladorDomini {
         return res;
     }
 
-    //TODO: filtros
-
     /**
-     *
-     * @return
+     * Retorna una avaluacio de la ultima recomanacio feta.
+     * @return El NDGC de la ultima recomanacio.
      */
     public double avaluarRecomanacio() {
         return recomanacions.obteDiscountedCumulativeGain()/recomanacions.obteIdealDiscountedCumulativeGain();
@@ -618,12 +639,11 @@ public class ControladorDomini {
     }
 
     /**
-     * Desseleciona el tipus item actual i esborra la relacio del porgrama actual amb aquest.
-     * @throws IOException
+     * pre: Hi ha un tipusItem seleccionat
+     * Desselecciona el tipus item actual i esborra la relacio del programa actual amb aquest.
+     * @throws IOException hi ha un problema guardant el tipus item actual.
      */
     public void deseleccionarTipusItem() throws IOException {
-        // TODO: si no n'hi ha cap de seleccionat retornar una excepció personalitzada per distingir entre
-        //  les dues excepcions i posar-me un todo (maria)
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
         controladorPersistencia.guardarTipusItem(estatPrograma.obteTipusItem(nomTipusItemActual).convertirAArrayList(), nomTipusItemActual);
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItemActual);
@@ -636,14 +656,14 @@ public class ControladorDomini {
      * @return retorna la llista d'usuaris
      */
     public ArrayList<ArrayList<String>> obteUsuaris() {
-        return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuaris();
+        return estatPrograma.obtenirTotsElsUsuaris().obtenirLlistaUsuarisActius();
     }
 
     /**
      * Carrega un conjunt d'usuaris a partir d'un path
      * @param ubicacioFitxer la direccio del fitxer a llegir
      * @return retorna els usuaris que no s'han pogut afegir
-     * @throws Exception si l'usuari ha posat una direccio de fitxer no valida
+     * @throws IOException si l'usuari ha posat una direccio de fitxer no valida
      */
     public ArrayList<String> importarUsuaris(String ubicacioFitxer) throws IOException {
         ArrayList<ArrayList<String>> llistaUsuaris = controladorPersistencia.llegirCSVQualsevol(ubicacioFitxer);
@@ -667,7 +687,7 @@ public class ControladorDomini {
      * Funcio que canvia la contrasenya d'un usuari
      * @param id es l'id de l'usuari a editar
      * @param novaContrasenyaArray es la contrasenya a la que es vol canviar
-     * @throws Exception si l'usuari no existeix, retorna excepcio
+     * @throws NoExisteixElementException si l'usuari no existeix, retorna excepcio
      */
     public void canviaContrasenyaUsuari(String id, char[] novaContrasenyaArray) throws NoExisteixElementException {
         String novaContrasenya = String.valueOf(novaContrasenyaArray);
@@ -686,7 +706,7 @@ public class ControladorDomini {
      * Funcio que canvia el nom d'un usuari
      * @param id id de l'usuari
      * @param nouNom nom a canviar
-     * @throws Exception Si l'usuari no existeix es retorna excepcio
+     * @throws NoExisteixElementException Si l'usuari no existeix es retorna excepcio
      */
     public void canviaNomUsuari(String id, String nouNom) throws NoExisteixElementException {
         Id idUsuari = new Id(Integer.parseInt(id), true);
@@ -704,9 +724,18 @@ public class ControladorDomini {
     /**
      *
      * @param absolutePath path a la carpeta on exportem les valoracions
+     * @throws IOException el fitxer no es pot obrir
      */
     public void exportaValoracions(String absolutePath) throws IOException {
         Date today = Calendar.getInstance().getTime();
         controladorPersistencia.escriureCSVQualsevol(absolutePath, valoracionsTipusItemActual.convertirAArrayList(), "Valoracions" + today);
+    }
+
+    /**
+     * Obre el Manual d'usuari.
+     * @throws IOException Hi ha algun error.
+     */
+    public void obreManual() throws IOException {
+        controladorPersistencia.obreManual();
     }
 }

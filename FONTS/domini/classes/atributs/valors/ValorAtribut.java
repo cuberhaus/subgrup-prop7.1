@@ -36,4 +36,5 @@ public abstract class ValorAtribut<T> {
      * @return Valor del ValorAtribut.
      */
     public abstract T obtenirValor();
+
 }

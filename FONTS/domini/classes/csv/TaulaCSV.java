@@ -88,7 +88,7 @@ public class TaulaCSV {
     /**
      * Donada una llista de valors, afegeix els valors al contenidor de valors.
      * @param valors conjunt de valors.
-     * @throws Exception si la taula no té els atributs prèviament definits o la quantitat de valors de l'ítem
+     * @throws IllegalCallerException si la taula no té els atributs prèviament definits o la quantitat de valors de l'ítem
      * a afegir no és igual al d'atributs.
      */
     public void afegirConjuntValors(ArrayList<String> valors) throws IllegalCallerException {
@@ -113,7 +113,8 @@ public class TaulaCSV {
      *
      * @param atribut the atribut
      * @return the valors atribut
-     * @throws Exception els atributs de la taula no han estat inicialitzats o l'atribut desitjat no es troba a la taula.
+     * @throws AccesAEstatIncorrecteException els atributs de la taula no han estat inicialitzats 
+     * @throws NoExisteixElementException l'atribut desitjat no es troba a la taula.
      */
     public ArrayList<String> obtenirValorsAtribut(String atribut) throws AccesAEstatIncorrecteException, NoExisteixElementException {
         if (numAtributs == -1) {
@@ -162,7 +163,8 @@ public class TaulaCSV {
      * Retorna els valors de l'ítem seleccionat.
      * @param indexItem the index item
      * @return item
-     * @throws Exception no s'han inicialitzat els atributs de la taula o l'índex de l'ítem no existeix.
+     * @throws AccesAEstatIncorrecteException no s'han inicialitzat els atributs de la taula
+     * @throws NoExisteixElementException l'índex de l'ítem no existeix.
      */
     public ArrayList<String> obtenirItem(Integer indexItem) throws AccesAEstatIncorrecteException, NoExisteixElementException {
         if (numAtributs == -1) {
@@ -183,7 +185,7 @@ public class TaulaCSV {
      * Retorna la llista d'atributs.
      *
      * @return atrib list
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats.
+     * @throws AccesAEstatIncorrecteException la taula no ha estat inicialitzada amb els atributs desitjats.
      */
     public ArrayList<String> obtenirNomsAtributs() throws AccesAEstatIncorrecteException {
         if (numAtributs == -1) {
@@ -266,7 +268,8 @@ public class TaulaCSV {
      * @param indexItem <code>int</code> indexItem de l'ítem
      * @param atribut <code>String</code> nom de l'atribut
      * @return <code>String</code> del valor de l'atribut
-     * @throws Exception la taula no ha estat inicialitzada amb els atributs desitjats, l'atribut no existeix o l'índex
+     * @throws AccesAEstatIncorrecteException la taula no ha estat inicialitzada amb els atributs desitjats
+     * @throws NoExisteixElementException l'atribut no existeix o l'índex
      * de l'ítem no existeix.
      */
     public String obtenirValorAtribut(int indexItem, String atribut) throws NoExisteixElementException, AccesAEstatIncorrecteException {
@@ -288,7 +291,7 @@ public class TaulaCSV {
 
     /**
      * Elimina els espais del principi i del final de la taula;
-     * @throws IllegalCallerException la taula no ha estat inicialitzada amb els atributs desitjats.
+     * @throws AccesAEstatIncorrecteException la taula no ha estat inicialitzada amb els atributs desitjats.
      */
     public void eliminarEspaisInnecessaris() throws AccesAEstatIncorrecteException {
         if (!estaInicialitzada()) {

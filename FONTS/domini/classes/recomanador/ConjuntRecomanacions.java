@@ -1,7 +1,6 @@
 package domini.classes.recomanador;
 
-import domini.classes.Pair;
-import domini.classes.recomanador.Recomanacio;
+import utilitats.Pair;
 
 import java.util.*;
 

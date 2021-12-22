@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.NoExisteixElementException;
 import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
@@ -75,11 +76,16 @@ public class VistaDialegEditarItem extends JDialog {
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
-            if (!controladorMenuItems.editarItem(id, valorsAtributs)) {
-                JOptionPane.showMessageDialog(this, "No s'ha pogut guardar l'ítem amb els valors donats.");
-                return;
+            try {
+                if (!controladorMenuItems.editarItem(id, valorsAtributs)) {
+                    JOptionPane.showMessageDialog(this, "No s'ha pogut guardar l'ítem amb els valors donats.");
+                    return;
+                }
+            } catch (NoExisteixElementException ex) {
+                // TODO: catch it
+                ex.printStackTrace();
             }
-            JOptionPane.showMessageDialog(this, "Ítem editat amb èxit.");
+            JOptionPane.showMessageDialog(this, "Item editat amb èxit.");
             dispose();
         });
         botoGuardarItem.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -25,6 +25,7 @@ public class TipusAtribut {
      * Constructor d'un TipusAtribut a partir d'un valor i una distància.
      * @param valorAtribut Valor de l'atribut
      * @param distancia Distància de l'atribut
+     * @throws DistanciaNoCompatibleAmbValorException el valor atribut i la distancia no son compatibles.
      */
     public TipusAtribut(ValorAtribut<?> valorAtribut, Distancia distancia) throws DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtribut;
@@ -37,7 +38,6 @@ public class TipusAtribut {
     public TipusAtribut(String valor, String distancia) throws NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
-        // TODO: crear excepcions pròpies
         if (this.valorAtribut == null || this.distancia == null) {
             throw new NomInternIncorrecteException("El ValorAtribut o Distancia demanats no existeixen.");
         }

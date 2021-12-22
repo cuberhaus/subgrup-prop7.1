@@ -1,13 +1,18 @@
-Carpeta principal del codi. Hi trobem la carpeta domini/ que inclou la implementacio de la capa de domini del projecte.
-Tambe hi trobem la carpeta utilitats/, que inclou llibreries que no formen part del projecte pero que faciliten la
+Carpeta principal del codi. Hi trobem una carpeta per a cada cada del programa: Presentació, Domini i Persistencia.
+Trobem una carpeta exepcions on guardem les excepcions customitzades que hem fet servir al codi.
+Tambe hi trobem la carpeta utilitats, que inclou llibreries que no formen part del projecte pero que faciliten la
 implementacio dels drivers de les classes del projecte. La carpeta jocs_de_proves/ inclou els executables dels jocs de
 proves del projecte i lib/ inclou les llibreries necessàries pels tests.
 Tambe hi ha el Main del projecte, un arxiu amb les instruccions per compilar-lo utilitzant el Makefile i el Makefile.
+
 domini/
-utilitats/
+excepcions/
 jocs_de_proves/
 lib/
+persistencia/
+presentacio/
+utilitats/
 index.txt
-Main.java
 InstruccionsPerCompilar.md
+Main.java
 Makefile
