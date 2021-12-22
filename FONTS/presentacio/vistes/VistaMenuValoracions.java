@@ -176,6 +176,7 @@ public class VistaMenuValoracions extends JPanel {
         creaValoracioButton.addActionListener(e -> {
             try {
                 controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
+                actualitzarTaula();
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(instancia, ex.getMessage());
@@ -191,6 +192,7 @@ public class VistaMenuValoracions extends JPanel {
         esborraValoracioButton.addActionListener(e -> {
             try {
                 controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText());
+                actualitzarTaula();
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(instancia, ex.getMessage());
@@ -208,6 +210,7 @@ public class VistaMenuValoracions extends JPanel {
                 if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
                     if (controladorMenuValoracions.existeixValoracio(usuariIdText.getText(), itemIdText.getText())) {
                         controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
+                        actualitzarTaula();
                     } else {
                         JOptionPane.showMessageDialog(instancia, "La valoració no existeix");
                     }
@@ -234,6 +237,7 @@ public class VistaMenuValoracions extends JPanel {
                 File pathConjuntVal = jFileChooser.getSelectedFile();
                 try {
                     controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
+                    actualitzarTaula();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(instancia, ex.getMessage());
@@ -274,6 +278,7 @@ public class VistaMenuValoracions extends JPanel {
                     int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar totes les valoracions", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
                     if (resposta == 0) {
                         controladorMenuValoracions.esborrarTotesLesValoracions();
+                        actualitzarTaula();
                         JOptionPane.showMessageDialog(instancia, "S'han esborrat les valoracions amb èxit");
                     }
                 } else {
