@@ -1,15 +1,13 @@
 package presentacio.vistes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuRecomanacions;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.Map;
 
 /**
+ * Vista pel dialeg que permet editar el filtre d'una recomanacio
  * @author maria.prat
  */
 public class VistaDialegEditarFiltre extends JDialog {

@@ -282,7 +282,7 @@ public class inout
   }
 
   public void write (int[] v) throws Exception {
-    for (int i=0; i < v.length; i++) write (" " + v[i]);
+    for (int j : v) write(" " + j);
   }
 
   public void writeln (int[] v) throws Exception {
@@ -306,7 +306,7 @@ public class inout
   }
 
   public void write (double[] v) throws Exception {
-    for (int i=0; i < v.length; i++) write (" " + v[i]);
+    for (double value : v) write(" " + value);
   }
 
   public void writeln (double[] v) throws Exception {
@@ -333,16 +333,16 @@ public class inout
   }
 
   public void write (int[][] m) throws Exception {
-    for (int i=0; i < m.length; i++) {
-      write (m[i]);
-      write (";");
+    for (int[] ints : m) {
+      write(ints);
+      write(";");
     }
   }
 
   public void writeln (int[][] m) throws Exception {
-    for (int i=0; i < m.length; i++) {
-      write (m[i]);
-      writeln (";");
+    for (int[] ints : m) {
+      write(ints);
+      writeln(";");
     }
   }
 
@@ -366,16 +366,16 @@ public class inout
   }
 
   public void write (double[][] m) throws Exception {
-    for (int i=0; i < m.length; i++) {
-      write (m[i]);
-      write (";");
+    for (double[] doubles : m) {
+      write(doubles);
+      write(";");
     }
   }
 
   public void writeln (double[][] m) throws Exception {
-    for (int i=0; i < m.length; i++) {
-      write (m[i]);
-      writeln (";");
+    for (double[] doubles : m) {
+      write(doubles);
+      writeln(";");
     }
   }
 }

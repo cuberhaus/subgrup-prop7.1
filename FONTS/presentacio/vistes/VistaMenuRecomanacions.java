@@ -7,6 +7,10 @@ import java.awt.*;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Vista del menu de recomanacions
+ * @author maria.prat
+ */
 public class VistaMenuRecomanacions extends JPanel {
     private static VistaMenuRecomanacions instancia;
     private static ControladorMenuRecomanacions controladorMenuRecomanacions;

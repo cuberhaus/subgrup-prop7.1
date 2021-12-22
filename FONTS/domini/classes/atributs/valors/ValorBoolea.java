@@ -30,9 +30,9 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
         if (s == null || s.isEmpty()) {
             this.valor = null;
         } else {
-            if (s.toLowerCase().equals("true")) {
+            if (s.equalsIgnoreCase("true")) {
                 this.valor = true;
-            } else if (s.toLowerCase().equals("false")) {
+            } else if (s.equalsIgnoreCase("false")) {
                 this.valor = false;
             } else {
                 throw new FormatIncorrecteException("No es pot llegir un booleà de: " + s);

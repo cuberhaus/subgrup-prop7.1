@@ -1,18 +1,15 @@
 package presentacio.vistes;
 
 import utilitats.Pair;
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.JaExisteixElementException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Vista pel dialeg que permet la creacio d'un tipus d'item.
  * @author maria.prat
  */
 public class VistaDialegCrearTipusItem extends JDialog {

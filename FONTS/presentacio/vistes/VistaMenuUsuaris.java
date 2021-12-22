@@ -208,7 +208,7 @@ public class VistaMenuUsuaris extends JPanel {
         afegirUsuariButton = new JButton("Afegir usuari");
         afegirUsuariButton.addActionListener(e -> {
             try {
-                int id = controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(passwordField.getPassword()));
+                controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(passwordField.getPassword()));
                 actualitzarTaula();
                 jScrollPane.revalidate();
                 clearText();

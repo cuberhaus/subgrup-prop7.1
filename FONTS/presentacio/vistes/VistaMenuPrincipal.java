@@ -1,7 +1,5 @@
 package presentacio.vistes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuPrincipal;
 
 import javax.swing.*;
@@ -10,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 /**
+ * Vista del menu principal
  * @author maria.prat
  */
 public class VistaMenuPrincipal extends JFrame {

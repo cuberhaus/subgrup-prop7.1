@@ -1,17 +1,14 @@
 package presentacio.vistes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.FormatIncorrecteException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Vista pel dialeg que permet la creacio d'un item.
  * @author maria.prat
  */
 public class VistaDialegCrearItem extends JDialog {

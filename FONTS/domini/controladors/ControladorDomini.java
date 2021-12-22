@@ -111,7 +111,7 @@ public class ControladorDomini {
     }
 
     /**
-     * Comproba si existeix un usuari al conjunt d'usuaris del programa
+     * Comprova si existeix un usuari al conjunt d'usuaris del programa
      * @param id <code>int</code> l'id de l'usuari
      * @return retorna si existeix l'usuari al conjunt o no
      * @throws NoExisteixElementException si l'usuari ja existeix
@@ -122,18 +122,26 @@ public class ControladorDomini {
     }
 
 
-    private Id obteIdUsuariDisponible() {
+    /**
+     * @return retorna un identificador disponible per un usuari
+     */
+    private Id obtenirIdUsuariDisponible() {
         while (estatPrograma.conteUsuari(new Id(ultimIdUsat, true))) {
             ultimIdUsat++;
         }
         return new Id(ultimIdUsat, true);
     }
+
+    /**
+     * @return retorna un identificador disponible per un item
+     */
     private Id obteIdItemDisponible() {
         while (itemsActuals.conte(new Id(ultimIdUsatItem, true))) {
             ultimIdUsatItem++;
         }
         return new Id(ultimIdUsatItem, true);
     }
+
     /**
      * Afegeix un Usuari que encara no existeix.
      * @param nom nom del usuari
@@ -142,7 +150,7 @@ public class ControladorDomini {
      * @throws JaExisteixElementException l'element ja existeix
      */
     public int afegirUsuari(String nom, String contrasenya) throws JaExisteixElementException {
-        Id id = obteIdUsuariDisponible();
+        Id id = obtenirIdUsuariDisponible();
         try {
             if (estatPrograma.conteUsuari(id) && estatPrograma.obtenirUsuari(id).isActiu()) {
                 throw new JaExisteixElementException("L'usuari " + nom + " ja existeix");
@@ -305,13 +313,12 @@ public class ControladorDomini {
      * Crea el tipus d'item amb el nom i els seus atributs
      * @param nom <code>String</code> nom del tipus d'item
      * @param nomAValorAtribut <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> que conté els atributs amb el tipus
-     * @throws IllegalArgumentException si ja existeix el tipus d'item
      * @throws IOException si no existeix el fitxer i/o no es pot obrir
      * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
-     * @throws JaExisteixElementException ja existeix l'element
+     * @throws JaExisteixElementException ja existeix un tipus d'item amb aquest nom
      * @throws DistanciaNoCompatibleAmbValorException la distancia no és compatible amb el valor
      */
-    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
+    public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (estatPrograma.conteTipusItem(nom)) {
             throw new JaExisteixElementException("Ja existeix aquest tipus item.");
         }
@@ -352,7 +359,7 @@ public class ControladorDomini {
      * Veure si la sessio esta iniciada o no
      * @return <code>boolean</code> si esta inicicada o no
      */
-    public boolean esSessioIniciada() {
+    public boolean sessioIniciada() {
         return estatPrograma.isSessioIniciada();
     }
 
@@ -442,20 +449,26 @@ public class ControladorDomini {
         return nomTipusItemActual != null;
     }
 
+
     /**
      * Afegeix un item al conjunt
      * @param valorsAtributs <code>Map&lt;String, String&gt;</code> els atributs i el seu valor
-     * @return <code>boolean</code> true si 'sha afegit
-     * @throws Exception si no s'ha pogut afegir l'item
+     * @return retorna l'identificador que s'ha assignat a l'item
+     * @throws IllegalArgumentException si falta algun atribut
+     * @throws FormatIncorrecteException si hi ha atributs amb valor incorrecte
+     * @throws NoSuchMethodException si no s'ha pogut crear l'item del tipus d'item seleccionat
+     * @throws InvocationTargetException si l'item no es correspon amb el tipus d'item seleccionat
+     * @throws InstantiationException si l'item no es correspon amb el tipus d'item seleccionat
+     * @throws IllegalAccessException si no s'ha pogut crear l'item del tipus d'item seleccionat
      */
-    // TODO: arreglar javadoc
-    public int afegirItem(Map<String, String> valorsAtributs) throws IllegalArgumentException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, NoExisteixElementException {
+    public int afegirItem(Map<String, String> valorsAtributs) throws IllegalArgumentException, FormatIncorrecteException,
+            NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
         for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             String valor = valorsAtributs.get(tipusAtribut.getKey());
             if (valor == null) {
-                throw new NoExisteixElementException("No hi ha cap atribut amb nom " + tipusAtribut.getKey());
+                throw new IllegalArgumentException("No hi ha cap atribut amb nom " + tipusAtribut.getKey());
             }
             if (valor.contains(",") || valor.contains("\"")) {
                 throw new FormatIncorrecteException("Els atributs no poden tenir el caràcter , ni \"");
@@ -471,7 +484,7 @@ public class ControladorDomini {
     }
 
     /**
-     * Esborra l'item amb l'id dessitjat
+     * Esborra l'item amb l'id desitjat
      * @param id <code>String</code> l'id de l'item a eesborrar
      * @return <code>boolean</code> si s'ha pogut esborrar o no
      * @throws NoExisteixElementException no existeix l'item
@@ -510,7 +523,20 @@ public class ControladorDomini {
         return res;
     }
 
-    public void editarItem(String id, Map<String, String> valorsAtributs) throws IllegalArgumentException, NoExisteixElementException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    /**
+     * @param id identificador de l'item que es vol editar
+     * @param valorsAtributs mapa que relaciona el nom dels atributs de l'item amb el seu nou valor
+     * @throws IllegalArgumentException si falta algun atribut
+     * @throws FormatIncorrecteException si hi ha atributs amb valor incorrecte
+     * @throws NoSuchMethodException si no s'ha pogut crear l'item del tipus d'item seleccionat
+     * @throws InvocationTargetException si l'item donat no es correspon amb el tipus d'item seleccionat
+     * @throws InstantiationException si els valors de l'item no es corresponen amb el tipus d'item seleccionat
+     * @throws IllegalAccessException si no s'ha pogut editar l'item del tipus d'item seleccionat
+     * @throws NoExisteixElementException si no existeix un item amb l'identificador donat
+     */
+    public void editarItem(String id, Map<String, String> valorsAtributs) throws IllegalArgumentException,
+            NoExisteixElementException, FormatIncorrecteException, NoSuchMethodException, InvocationTargetException,
+            InstantiationException, IllegalAccessException {
         int idItemABuscar;
         try {
             idItemABuscar = Integer.parseInt(id);
@@ -610,8 +636,13 @@ public class ControladorDomini {
         controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nouNom);
     }
 
-    private boolean existeixTipusItem(String nouNom) {
-        return estatPrograma.conteTipusItem(nouNom);
+
+    /**
+     * @param nom nom del tipus d'item
+     * @return retorna cert si existeix un tipus d'item carregat amb el nom donat
+     */
+    private boolean existeixTipusItem(String nom) {
+        return estatPrograma.conteTipusItem(nom);
     }
 
     /**
@@ -688,6 +719,7 @@ public class ControladorDomini {
      * @return El NDGC de la ultima recomanacio.
      */
     public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) {
+        // TODO (edgar): afegir les valoracions al conjunt de valoracions
         return recomanacions.calculaDiscountedCumulativeGain(valoracions) /
                 recomanacions.calculaIdealDiscountedCumulativeGain(valoracions, recomanacions.obtenirConjuntRecomanacions().size());
     }
@@ -821,6 +853,9 @@ public class ControladorDomini {
         }
     }
 
+    /**
+     * @return llista amb els identificadors dels items del tipus d'item seleccionat
+     */
     public ArrayList<String> obtenirIdsItems() {
         ArrayList<String> idsItems = new ArrayList<>();
         itemsActuals.obtenirTotsElsElements().keySet().forEach((id) -> idsItems.add(String.valueOf(id.obtenirValor())));

@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class ControladorPresentacio {
 
-    private static ControladorDomini controladorDomini;
     private static ControladorPresentacio instancia;
+    private static ControladorDomini controladorDomini;
 
     private static ControladorMenuItems controladorMenuItems;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
@@ -27,19 +27,15 @@ public class ControladorPresentacio {
     private static ControladorMenuValoracions controladorMenuValoracions;
 
     /**
-     * Constructora per defecte de ControladorPresentacio
+     * Constructor per defecte del Controlador de la capa de presentacio
      */
     private ControladorPresentacio() {
     }
 
     /**
-     * Constructora de ControladorPresentacio
-     * Crea una instància única de ControladorPresentacio seguint el patró Singleton
-     *
-     * @return <code> ControladorPresentacio </code>
-     * @throws IOException si hi ha hagut algun error en l'entrada/sortida
-     * @throws NomInternIncorrecteException si algun valor demanat no existeix
-     * @throws DistanciaNoCompatibleAmbValorException si el valor de l'atribut no es compatible amb la distancia seleccionada
+     * Constructor del controlador
+     * @return instància única de ControladorPresentacio seguint el patró Singleton
+     * @throws Exception si hi ha hagut algun error carregant les dades del programa
      */
     public static ControladorPresentacio obtenirInstancia() throws Exception {
         if (instancia == null) {
@@ -71,24 +67,23 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obte l'identificador de l'usuari que ha iniciat sessio
-     * @return identificador de l'usuari
-     * @throws SessioNoIniciadaException si la sessio no està iniciada
+     * @return identificador de l'usuari que ha iniciat la sessio
+     * @throws SessioNoIniciadaException si la sessio no esta iniciada
      */
     public int obtenirSessio() throws SessioNoIniciadaException {
         return controladorDomini.obtenirSessio();
     }
 
     /**
-     * Inicia sessio amb l'identificador donat si la contrasenya és correcte
-     * @param idSessio identificador d'usuari
-     * @param contrasenya contrasenya
+     * Inicia sessio amb l'usuari amb l'identificador donat si la contrasenya es correcta
+     * @param id identificador d'usuari
+     * @param contrasenya contrasenya de l'usuari
      * @throws NoExisteixElementException si no existeix un usuari amb l'identificador donat
-     * @throws ContrasenyaIncorrectaException si la contrasenya no és correcta
-     * @throws SessioIniciadaException si la sessió ja està iniciada
+     * @throws ContrasenyaIncorrectaException si la contrasenya no es correcta
+     * @throws SessioIniciadaException si la sessio ja estava iniciada previament
      */
-    public void iniciarSessio(int idSessio, String contrasenya) throws NoExisteixElementException, ContrasenyaIncorrectaException, SessioIniciadaException {
-        controladorDomini.iniciarSessio(idSessio, contrasenya);
+    public void iniciarSessio(int id, String contrasenya) throws NoExisteixElementException, ContrasenyaIncorrectaException, SessioIniciadaException {
+        controladorDomini.iniciarSessio(id, contrasenya);
     }
 
     /**
@@ -105,11 +100,10 @@ public class ControladorPresentacio {
      * Afegeix un usuari al conjunt d'usuaris
      * @param nom nom de l'usuari
      * @param contrasenya contrasenya de l'usuari
-     * @return l'identificador que s'ha assignat a l'usuari
-     * @throws NoExisteixElementException si no existeix un usuari amb l'identificador que se li assigna
-     * @throws JaExisteixElementException L'element ja existeix
+     * @return identificador que s'ha assignat a l'usuari
+     * @throws Exception si hi ha hagut algun problema afegint l'usuari
      */
-    public int afegirUsuari(String nom, String contrasenya) throws NoExisteixElementException, JaExisteixElementException {
+    public int afegirUsuari(String nom, String contrasenya) throws Exception {
         return controladorDomini.afegirUsuari(nom, contrasenya);
     }
 
@@ -123,8 +117,8 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Tanca la sessió
-     * @throws SessioNoIniciadaException si la sessió no està iniciada
+     * Tanca la sessio
+     * @throws SessioNoIniciadaException si la sessio no esta iniciada
      */
     public void tancarSessio() throws SessioNoIniciadaException {
         controladorDomini.tancarSessio();
@@ -198,12 +192,13 @@ public class ControladorPresentacio {
     /**
      * Crea el tipus d'item amb el nom i els seus atributs
      * @param nom <code>String</code> nom del tipus d'item
-     * @param nomAValorAtribut <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> que conté els atributs amb el tipus
-     * @throws IllegalArgumentException si ja existeix el tipus d'item
-     * @throws IOException si no existeix el fitxer i/o no es pot obrir
-     * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
-     * @throws JaExisteixElementException ja existeix l'element
-     * @throws DistanciaNoCompatibleAmbValorException la distancia no és compatible amb el valor
+     * @param nomAValorAtribut <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> que relaciona el nom de cada
+     *                         atribut amb ua parella formada pel tipus del valor de l'atribut i la distancia
+     * @throws IOException si hi ha un problema escrivint el fitxer del tipus d'item
+     * @throws NomInternIncorrecteException si el fitxer del tipus d'item no s'ha creat amb el format correcte
+     * @throws JaExisteixElementException si ja existeix un tipus d'item amb aquest nom
+     * @throws DistanciaNoCompatibleAmbValorException si alguna parella de distancia i valor de l'atribut no es
+     * compatible
      */
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
@@ -212,9 +207,9 @@ public class ControladorPresentacio {
     /**
      * Carrega tipus d'item a partir d'un fitxer
      * @param nom <code>String</code> nom del tipus d'item
-     * @param rutaAbsoluta <code>String</code> ubicacio del fitxer
-     * @throws IOException si el fitxer no existeix o no te format correcte
-     * @throws JaExisteixElementException l'element ja existeix al conjunt
+     * @param rutaAbsoluta <code>String</code> ruta absoluta del fitxer
+     * @throws IOException si el fitxer no s'ha pogut llegir
+     * @throws JaExisteixElementException si ja existeix un tipus d'item amb el nom donat
      * @throws FormatIncorrecteException el fitxer no te el format correcte
      */
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
@@ -225,8 +220,8 @@ public class ControladorPresentacio {
      * Consultora de si la sessió està iniciada o no
      * @return retorna true si la sessió està iniciada, altrament retorna false
      */
-    public boolean esSessioIniciada() {
-        return controladorDomini.esSessioIniciada();
+    public boolean sessioIniciada() {
+        return controladorDomini.sessioIniciada();
     }
 
     /**
@@ -246,35 +241,34 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obté el nom del tipus d'ítem seleccionat
-     * @return null si no hi ha cap seleccionat
+     * @return retorna el nom del tipus d'item seleccionat o null si no n'hi ha cap de seleccionat
      */
     public String obtenirNomTipusItemSeleccionat() {
         return controladorDomini.obtenirNomTipusItemSeleccionat();
     }
 
     /**
-     * Esborra el tipus d'item seleccionat
-     * @throws IOException S'ha produit un error en l'entrada/sortida
+     * Esborra totes les dades relacionades amb el tipus d'item seleccionat
+     * @throws IOException si no s'han pogut esborrar els fitxers
      */
     public void esborrarTipusItemSeleccionat() throws IOException {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 
     /**
-     * Selecciona el tipus item
-     * @param nomTipusItem <code>String</code> el nom del tipus d'item
-     * @throws IOException Error en l'entrada/sortida
-     * @throws AccesAEstatIncorrecteException S'accedeix a estat incorrecte
-     * @throws NoExisteixElementException No existeix l'element
-     * @throws UsuariIncorrecteException L'usuari no és correcte
+     * Selecciona el tipus item carregat amb el nom donat
+     * @param nomTipusItem <code> String </code> el nom del tipus d'item
+     * @throws IOException si no s'han pogut llegir els fitxers del tipus d'item
+     * @throws AccesAEstatIncorrecteException si hi ha hagut algun error carregant els fitxers del tipus d'item
+     * @throws NoExisteixElementException si no existeix cap tipus d'item amb el nom donat
+     * @throws UsuariIncorrecteException si hi ha hagut algun error en els fitxers del tipus d'item
      */
     public void seleccionarTipusItem(String nomTipusItem) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 
     /**
-     * Obte la llista d'items
+     * Obte la llista d'items del tipus d'item seleccionat
      * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> conjunt de items
      */
     public ArrayList<ArrayList<String>> obtenirItems() {
@@ -282,68 +276,86 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obte el nom dels atributs de l'item seleccionat
-     * @return <code>ArrayList&lt;String&gt;</code> conjunt del nom dels atributs
+     * @return llista amb els noms dels atributs de l'item seleccionat
      */
     public ArrayList<String> obtenirNomAtributsTipusItemSeleccionat() {
         return controladorDomini.obtenirNomsAtributsTipusItemSeleccionat();
     }
 
     /**
-     * Retorna la existencia del tipus item sleccionat
-     * @return <code>boolean</code> si existeix o no
+     * @return cert si hi ha un tipus d'item selecccionat i, altrament, retorna fals
      */
     public boolean existeixTipusItemSeleccionat() {
         return controladorDomini.existeixTipusItemSeleccionat();
     }
 
     /**
-     * Afegeix un item al conjunt
-     * @param valorsAtributs <code>Map&lt;String, String&gt;</code> els atributs i el seu valor
-     * @return <code>boolean</code> true si 'sha afegit
-     *
+     * @param valorsAtributs <code>Map&lt;String, String&gt;</code> que relaciona el nom dels atributs de l'item del
+     *                       tipus d'item seleccionat amb els seus valors guardats en una String
+     * @return cert si s'ha pogut afegir un item amb els parametres donats
+     * @throws FormatIncorrecteException si el format dels atributs no es correcte
+     * @throws InvocationTargetException si no s'han pogut obtenir els valors dels atributs dels parametres donats
+     * @throws NoSuchMethodException si no s'han pogut obtenir els valors dels atributs dels parametres donats
+     * @throws InstantiationException si no s'han pogut obtenir els valors dels atributs dels parametres donats
+     * @throws IllegalAccessException si no s'han pogut obtenir els valors dels atributs dels parametres donats
      */
-    // TODO: arreglar javadoc
-    public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoExisteixElementException {
+    public String afegirItem(Map<String, String> valorsAtributs) throws FormatIncorrecteException,
+            InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return String.valueOf(controladorDomini.afegirItem(valorsAtributs));
     }
 
     /**
-     * Esborra l'item amb l'id dessitjat
-     * @param id <code>String</code> l'id de l'item a eesborrar
-     * @return <code>boolean</code> si s'ha pogut esborrar o no
-     * @throws NoExisteixElementException No existeix l'element
+     * @param id identificador de l'item que es vol esborrar
+     * @return cert si s'ha pogut esborrar l'item amb l'identificador donat, altrament retorna fals
+     * @throws NoExisteixElementException si no existeix un item amb l'identificador donat
      */
     public boolean esborrarItem(String id) throws NoExisteixElementException {
         return controladorDomini.esborrarItem(id);
     }
 
     /**
-     * Obtenir el item amb l'id seleccionat
-     * @param id <code>String</code> l'id de l'item a obtenir
-     * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item
+     * @param id identificador de l'item que es vol obtenir
+     * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item amb l'identificador donat
      * @throws IllegalArgumentException si l'identificador no es valid
-     * @throws NoExisteixElementException No existeix l'element
+     * @throws NoExisteixElementException si no existeix un item amb l'identificador donat
      */
     public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
         return controladorDomini.obtenirItem(id);
     }
 
-    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException, FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    /**
+     * @param id identificador de l'item que es vol editar
+     * @param valorsAtributs mapa que relaciona el nom dels atributs del l'item amb el nou valor en forma de String
+     * @throws NoExisteixElementException si no existeix un item amb l'identificador donat
+     * @throws FormatIncorrecteException si el format dels atributs no es correcte
+     * @throws InvocationTargetException si no s'han pogut obtenir els valors dels atributs dels parametres donats
+     * @throws NoSuchMethodException si no s'han pogut obtenir els valors dels atributs dels parametres donats
+     * @throws InstantiationException si no s'han pogut obtenir els valors dels atributs dels parametres donats
+     * @throws IllegalAccessException si no s'han pogut obtenir els valors dels atributs dels parametres donats
+     */
+    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException,
+            FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException,
+            IllegalAccessException {
         controladorDomini.editarItem(id, valorsAtributs);
     }
 
+
     /**
-     * Carrega un conjunt d'items a partir d'un fitxer
-     *
-     * @param deduirTipusItem
-     * @param nomTipusItem
-     * @param rutaAbsoluta <code>String</code> ruta del fitxer
-     * @throws IOException si no s'ha pogut obrir el fitxer
-     * @throws AccesAEstatIncorrecteException Accedeix a estat incorrecte
+     * @param deduirTipusItem si es cert, es deduira el tipus item del conjunt i se li assignara el nom donat, altrament
+     *                        s'utilitzara el tipus d'item seleccionat
+     * @param nomTipusItem nom del tipus d'item que es creara si deduirTipusItem es cert
+     * @param rutaAbsoluta String que conte la ruta absoluta al fitxer
+     * @throws IOException si hi ha un error llegint el fitxer o creant els fitxers
+     * @throws AccesAEstatIncorrecteException si hi ha algun error llegint els items del fitxer
+     * @throws DistanciaNoCompatibleAmbValorException si es crea un tipus d'atribut amb valor i distancia incompatibles
+     * @throws NoExisteixElementException si hi ha algun error creant els fitxers del tipus d'item
+     * @throws JaExisteixElementException si ja existeix un tipus d'item amb el nom donat, en el cas que deduirTipusItem
+     * sigui cert
+     * @throws FormatIncorrecteException si el format del fitxer no es correcte i no es poden llegir items del fitxer
      */
-    // TODO: arreglar javadoc
-    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException, FormatIncorrecteException {
+    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem, String rutaAbsoluta) throws IOException,
+            AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException,
+            JaExisteixElementException, FormatIncorrecteException {
         if (deduirTipusItem) {
             controladorDomini.carregarConjuntItems(nomTipusItem, rutaAbsoluta);
         } else {
@@ -352,7 +364,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Esborra tots els items del tipus d'ítem seleccionat
+     * Esborra tots els items del tipus d'item seleccionat
      */
     public void esborrarTotsElsItems() {
         controladorDomini.esborrarTotsElsItems();
@@ -361,51 +373,51 @@ public class ControladorPresentacio {
     /**
      * Canvia el nom del tipus item seleccionat.
      * @param nouNom nou nom pel tipus item.
-     * @throws IOException Problema canviant el nom del tipus item a la persistència.
+     * @throws IOException si hi ha un problema editant els fitxers del tipus d'item
      */
     public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         controladorDomini.editarTipusItem(nouNom);
     }
 
     /**
-     * Obté una recomanació amb el mètode Recomanador Collaborative per a l'usuari que està actiu.
+     * Obté una recomanació amb el mètode Recomanador Collaborative per l'usuari que està actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
-     * @return El conjunt d'id's dels items recomanats.
+     * @param filtreInclusiu cert si el filtre és de tipus inclusiu, fals si és exclusiu.
+     * @return El conjunt d'identificadors dels items recomanats.
      * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
-     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
+     * @throws NoExisteixElementException si hi ha un error a l'hora de crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
     }
 
     /**
-     * Obté una recomanació amb el mètode Recomanador ContentBased per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador ContentBased per l'usuari que te la sessio iniciada
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
-     * @return El conjunt de id's dels items recomanats.
+     * @param filtreInclusiu cert si el filtre és de tipus inclusiu, fals si és exclusiu.
+     * @return El conjunt d'identificadors dels items recomanats.
      * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
-     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
+     * @throws NoExisteixElementException si hi ha un error a l'hora de crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
     }
 
     /**
-     * Obté una recomanació amb el mètode Recomanador Híbrid per a l'usuari que està actiu.
+     * Obté una recomanació amb el mètode Recomanador Híbrid per l'usuari que te la sessio iniciada
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
-     * @return El conjunt d'id's dels items recomanats.
+     * @param filtreInclusiu cert si el filtre és de tipus inclusiu, fals si és exclusiu.
+     * @return El conjunt d'identificadors dels items recomanats.
      * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
-     * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
+     * @throws NoExisteixElementException si hi ha un error a l'hora de crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
         return controladorDomini.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
     }
 
     /**
-     * Obté l'avaluació de la recomanació
-     * @return avaluació de la recomanació
+     * @param valoracions valoracions fetes per l'usuari dels items recomanats en l'ultima recomanacio
+     * @return valoració de la recomanacio amb el valor del NDCG de la recomanacio
      */
     public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) {
         return controladorDomini.avaluarRecomanacio(valoracions);
@@ -419,8 +431,8 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obté les valoracions del tipus d'ítem seleccionat
-     * @return ArrayList amb el conjunt de valoracions
+     * @return ArrayList amb el conjunt de valoracions del tipus d'item seleccionat, retorna una llista buida si no hi
+     * ha cap tipus d'item seleccionat
      */
     public ArrayList<ArrayList<String>> obtenirValoracions() {
         if (!controladorDomini.existeixTipusItemSeleccionat()) {
@@ -430,18 +442,17 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Desselecciona el tipus d'ítem
-     * @throws IOException no s'ha pogut desseleccionar l'ítem
+     * Desselecciona el tipus d'item
+     * @throws IOException si no s'ha pogut desseleccionar el tipus d'item
      */
-    public void deseleccionarTipusItem() throws IOException {
+    public void desseleccionarTipusItem() throws IOException {
         controladorDomini.desseleccionarTipusItem();
     }
 
     /**
-     * Obté el conjunt d'usuaris
-     * @return retorna un ArrayList amb el conjunt d'usuaris
+     * @return retorna una matriu amb el conjunt d'usuaris. Cada fila representa un usuari.
      */
-    public ArrayList<ArrayList<String>> obteUsuaris() {
+    public ArrayList<ArrayList<String>> obtenirUsuaris() {
         return controladorDomini.obtenirUsuaris();
     }
 
@@ -461,7 +472,7 @@ public class ControladorPresentacio {
      * @param novaContrasenya contrasenya nova
      * @throws NoExisteixElementException no existeix l'element
      */
-    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws NoExisteixElementException {
+    public void canviarContrasenyaUsuari(String id, char[] novaContrasenya) throws NoExisteixElementException {
         controladorDomini.canviaContrasenyaUsuari(id,novaContrasenya);
     }
 
@@ -471,7 +482,7 @@ public class ControladorPresentacio {
      * @param nouNom nou nom de l'usuari
      * @throws NoExisteixElementException a
      */
-    public void canviaNomUsuari(String id, String nouNom) throws NoExisteixElementException {
+    public void canviarNomUsuari(String id, String nouNom) throws NoExisteixElementException {
         controladorDomini.canviaNomUsuari(id,nouNom);
     }
 
@@ -480,22 +491,29 @@ public class ControladorPresentacio {
      * @param absolutePath path on volem guardar l'arxiu
      * @throws IOException Error en l'entrada/sortida
      */
-    public void exportaValoracions(String absolutePath) throws IOException {
+    public void exportarValoracions(String absolutePath) throws IOException {
         controladorDomini.exportaValoracions(absolutePath);
     }
 
     /**
      * Obre el manual d'usuari.
-     * @throws IOException si hi ha cap problema.
+     * @throws IOException si hi ha algun error obrint el manual d'usuari
      */
-    public void obreManual() throws IOException{
+    public void obrirManual() throws IOException{
         controladorDomini.obrirManual();
     }
 
+    /**
+     * Guarda tots els fitxers relacionats amb el tipus d'item seleccionat
+     * @throws IOException si hi ha algun error llegint o escrivint fitxers
+     */
     public void guardarPrograma() throws IOException {
         controladorDomini.guardarPrograma();
     }
 
+    /**
+     * @return Llista amb els identificadors de tots els items del tipus d'item seleccionat
+     */
     public ArrayList<String> obtenirIdsItems() {
         return controladorDomini.obtenirIdsItems();
     }

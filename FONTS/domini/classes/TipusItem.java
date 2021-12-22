@@ -45,12 +45,12 @@ public class TipusItem {
      * @param nomTipusItem <code>String</code> que conté el nom del TipusItem.
      * @param taulaCSV <code>TaulaCSV</code> que conté els ítems.
      * @param numCandidats Nombre d'ítems que es consideraran per deduir el tipus de cada atribut.
-     * @throws AccesAEstatIncorrecteException Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
-     * @throws NoExisteixElementException a
-     * @throws DistanciaNoCompatibleAmbValorException b
+     * @throws AccesAEstatIncorrecteException si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
+     * @throws NoExisteixElementException si el format de la taula no es correcta
+     * @throws DistanciaNoCompatibleAmbValorException si hi ha una parella de valor i distancia no compatible
      */
-    //TODO: acabar documentacion
-    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException {
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws AccesAEstatIncorrecteException,
+            NoExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (numCandidats < 0) {
             throw new IllegalArgumentException("Es necessita com a mínim un candidat per crear un TipusItem");
         }

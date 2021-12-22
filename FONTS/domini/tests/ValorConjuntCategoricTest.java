@@ -3,7 +3,6 @@ package domini.tests;
 import domini.classes.atributs.valors.ValorAtribut;
 import domini.classes.atributs.valors.ValorCategoric;
 import domini.classes.atributs.valors.ValorConjuntCategoric;
-import domini.classes.atributs.valors.ValorTextual;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;

@@ -6,19 +6,14 @@ import presentacio.controladors.ControladorMenuTipusItem;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 /**
- * Vista per la gestió de tipus d'ítems
+ * Vista pel menu de tipus d'ítems
  * @author maria.prat
  */
 public class VistaMenuTipusItem extends JPanel {
-
-    /**
-     * Instància per implementar el patró Singleton.
-     */
     private static VistaMenuTipusItem instancia;
 
     private static final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
@@ -77,7 +72,6 @@ public class VistaMenuTipusItem extends JPanel {
         inicialitzarPanellMostrarTipusItemSeleccionat();
         instancia.add(panellMostrarTipusItemSeleccionat);
         instancia.add(Box.createVerticalGlue());
-        // TODO: afegir editar tipus item seleccionat
     }
 
     private static void inicialitzarPanellAfegirTipusItem() {
