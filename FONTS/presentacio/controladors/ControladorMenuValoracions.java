@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import presentacio.EncarregatActualitzarTaules;
 import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @author pol.casacuberta
  */
 
-public class ControladorMenuValoracions {
+public class ControladorMenuValoracions implements EncarregatActualitzarTaules.Observador {
     /**
      * Conté el controlador Presentació
      */
@@ -190,7 +191,8 @@ public class ControladorMenuValoracions {
         controladorPresentacio.exportaValoracions(absolutePath);
     }
 
-    public static void actualitzarTaula() {
+    @Override
+    public void actualitzar() {
         VistaMenuValoracions.actualitzarTaula();
     }
 }

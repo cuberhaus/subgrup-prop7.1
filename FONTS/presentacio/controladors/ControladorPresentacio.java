@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import presentacio.EncarregatActualitzarTaules;
 import utilitats.Pair;
 import domini.controladors.ControladorDomini;
 import excepcions.*;
@@ -183,7 +184,7 @@ public class ControladorPresentacio {
      */
     public void carregarConjuntValoracions(String pathAbsolut) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
-        controladorMenuUsuaris.actualitzaTaula();
+        EncarregatActualitzarTaules.notificarObservadors();
     }
 
     /**
@@ -497,8 +498,4 @@ public class ControladorPresentacio {
         return controladorDomini.obtenirIdsItems();
     }
 
-    public void actualitzarVistesTipusItemSeleccionat() {
-        ControladorMenuItems.actualitzarTaula();
-        ControladorMenuValoracions.actualitzarTaula();
-    }
 }

@@ -1,6 +1,7 @@
 package presentacio.controladors;
 
 import excepcions.*;
+import presentacio.EncarregatActualitzarTaules;
 import presentacio.vistes.*;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
-public class ControladorMenuItems {
+public class ControladorMenuItems implements EncarregatActualitzarTaules.Observador {
 
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuItems instancia;
@@ -27,10 +28,6 @@ public class ControladorMenuItems {
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
         }
         return instancia;
-    }
-
-    public static void actualitzarTaula() {
-        VistaMenuItems.actualitzarTaula();
     }
 
     public ArrayList<ArrayList<String>> obtenirItems() {
@@ -185,5 +182,10 @@ public class ControladorMenuItems {
                 }
             }
         }
+    }
+
+    @Override
+    public void actualitzar() {
+        VistaMenuItems.actualitzarTaula();
     }
 }

@@ -2,6 +2,7 @@ package presentacio.controladors;
 
 import excepcions.NomInternIncorrecteException;
 import excepcions.SessioNoIniciadaException;
+import presentacio.EncarregatActualitzarTaules;
 import presentacio.vistes.VistaMenuUsuaris;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * @author pol.casacuberta
  */
 
-public class ControladorMenuUsuaris {
+public class ControladorMenuUsuaris implements EncarregatActualitzarTaules.Observador {
     /**
      * Conté el controlador Presentació
      */
@@ -223,7 +224,8 @@ public class ControladorMenuUsuaris {
         }
     }
 
-    public void actualitzaTaula() {
-        VistaMenuUsuaris.actualitzarLlistaUsuaris();
+    @Override
+    public void actualitzar() {
+        VistaMenuUsuaris.actualitzarTaula();
     }
 }

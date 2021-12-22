@@ -1,5 +1,6 @@
 package presentacio.controladors;
 
+import presentacio.EncarregatActualitzarTaules;
 import utilitats.Pair;
 import excepcions.*;
 import presentacio.vistes.VistaDialegCrearTipusItem;
@@ -15,14 +16,11 @@ import java.util.TreeMap;
 /**
  * @author maria.prat
  */
-public class ControladorMenuTipusItem {
+public class ControladorMenuTipusItem implements EncarregatActualitzarTaules.Observador {
 
     private static ControladorPresentacio controladorPresentacio;
     private static ControladorMenuTipusItem instancia;
     private static VistaMenuTipusItem vistaMenuTipusItem;
-    private static VistaDialegCrearTipusItem vistaDialegCrearTipusItem;
-    private static VistaDialegEditarTipusItem vistaDialegEditarTipusItem;
-    private static VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem;
 
     private ControladorMenuTipusItem () {
     }
@@ -31,6 +29,7 @@ public class ControladorMenuTipusItem {
         if (instancia == null) {
             instancia = new ControladorMenuTipusItem();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+            VistaMenuTipusItem.obtenirInstancia();
         }
         return instancia;
     }
@@ -182,7 +181,8 @@ public class ControladorMenuTipusItem {
         controladorPresentacio.deseleccionarTipusItem();
     }
 
-    public void actualitzarVistesTipusItemSeleccionat() {
-        controladorPresentacio.actualitzarVistesTipusItemSeleccionat();
+    @Override
+    public void actualitzar() {
+        vistaMenuTipusItem.actualitzarTipusItems();
     }
 }

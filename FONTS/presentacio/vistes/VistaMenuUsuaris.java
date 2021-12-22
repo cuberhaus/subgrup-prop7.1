@@ -92,7 +92,7 @@ public class VistaMenuUsuaris extends JPanel {
     /**
      * Sobreescriu la taula d'usuaris amb el conjunt d'usuaris del domini
      */
-    public static void actualitzarLlistaUsuaris() {
+    public static void actualitzarTaula() {
         llistaUsuarisTableModel.setRowCount(0);
         ArrayList<ArrayList<String>> usuaris = controladorMenuUsuaris.obteUsuaris();
         for (ArrayList<String> usuari : usuaris) {
@@ -209,7 +209,7 @@ public class VistaMenuUsuaris extends JPanel {
         afegirUsuariButton.addActionListener(e -> {
             try {
                 int id = controladorMenuUsuaris.afegirUsuari(nomText.getText(), String.valueOf(passwordField.getPassword()));
-                actualitzarLlistaUsuaris();
+                actualitzarTaula();
                 jScrollPane.revalidate();
                 clearText();
             } catch (Exception ex) {
@@ -227,7 +227,7 @@ public class VistaMenuUsuaris extends JPanel {
         eliminarUsuariButton.addActionListener(e -> {
             try {
                 controladorMenuUsuaris.esborrarUsuari(idText.getText());
-                actualitzarLlistaUsuaris();
+                actualitzarTaula();
                 clearText();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -257,7 +257,7 @@ public class VistaMenuUsuaris extends JPanel {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
-            actualitzarLlistaUsuaris();
+            actualitzarTaula();
             clearText();
         });
     }
@@ -308,7 +308,7 @@ public class VistaMenuUsuaris extends JPanel {
                 File pathConjunt = jFileChooser.getSelectedFile();
                 try {
                     controladorMenuUsuaris.importarUsuaris(pathConjunt.getAbsolutePath());
-                    actualitzarLlistaUsuaris();
+                    actualitzarTaula();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(instancia, ex.getMessage());
@@ -347,7 +347,7 @@ public class VistaMenuUsuaris extends JPanel {
             int resposta = JOptionPane.showConfirmDialog(instancia, "Segur que vols esborrar tots els usuaris", "Selecciona una opció", JOptionPane.YES_NO_OPTION);
             if (resposta == 0) {
                 controladorMenuUsuaris.esborrarConjuntUsuaris();
-                actualitzarLlistaUsuaris();
+                actualitzarTaula();
                 JOptionPane.showMessageDialog(instancia, "S'han esborrat els usuaris amb èxit");
             }
         });

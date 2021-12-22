@@ -63,7 +63,7 @@ public class VistaDialegEditarFiltre extends JDialog {
         panellPrincipal.add(panellBotoGuardarFiltre, BorderLayout.SOUTH);
 
         botoGuardarFiltre.addActionListener(e -> {
-            if (!controladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
+            if (!ControladorMenuRecomanacions.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
                 for (Component component : panellLlistaAtributs.getComponents()) {
                     JCheckBox atribut = (JCheckBox) component;
                     nomsAtributsFiltre.put(atribut.getText(), atribut.isSelected());

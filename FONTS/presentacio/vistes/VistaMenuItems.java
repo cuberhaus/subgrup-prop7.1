@@ -4,6 +4,7 @@ import excepcions.AccesAEstatIncorrecteException;
 import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NoExisteixElementException;
 import excepcions.NomInternIncorrecteException;
+import presentacio.EncarregatActualitzarTaules;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class VistaMenuItems extends JPanel {
     private static JTable llistaItems;
     private static DefaultTableModel llistaItemsTableModel;
     private static JScrollPane llistaItemsScroll;
+    private static EncarregatActualitzarTaules EncarregatTipusItemSeleccionat;
 
     private VistaMenuItems() {
     }
@@ -108,7 +110,7 @@ public class VistaMenuItems extends JPanel {
             }
             if (nomTipusItem != null) {
                 controladorMenuItems.carregarConjuntItems(deduirTipusItem, nomTipusItem);
-                actualitzarTaula();
+                EncarregatTipusItemSeleccionat.notificarObservadors();
             }
         });
 
