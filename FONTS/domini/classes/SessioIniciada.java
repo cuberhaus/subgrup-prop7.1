@@ -21,11 +21,9 @@ public class SessioIniciada extends Sessio {
 
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
-     *
-     * @throws SessioNoIniciadaException si l'estat és sessioNoIniciada
      */
     @Override
-    public void tancarSessio(Programa programa) throws SessioNoIniciadaException {
+    public void tancarSessio(Programa programa) {
         usuari = null;
         programa.cambiarEstat(new SessioNoIniciada());
     }
