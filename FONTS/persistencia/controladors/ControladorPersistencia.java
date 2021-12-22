@@ -138,8 +138,17 @@ public class ControladorPersistencia {
         escriptor.escriureCSV(obtePathConjuntUsuaris(nom).toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntUsuaris(String nom) throws IOException {
-        return lector.llegirCSV(obtePathConjuntUsuaris(nom).toString());
+        // TODO (pablo i edgar): revisar si això us sembla bé, és per crear un conjunt d'usuaris buit (el fitxer) si no
+        // existeix
+        Path path = obtePathConjuntUsuaris(nom);
+        if (Files.exists(path)) {
+            return lector.llegirCSV(path.toString());
+        }
+        ArrayList<ArrayList<String>> conjunt = new ArrayList<>();
+        escriptor.escriureCSV(path.toString(), conjunt);
+        return conjunt;
     }
+
     public void borrarConjuntUsuaris(String nom) throws IOException {
         Path conjunt = Paths.get(obtePathConjuntUsuaris(nom).toString());
         Files.delete(conjunt);

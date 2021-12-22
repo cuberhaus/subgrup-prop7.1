@@ -25,19 +25,23 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      */
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();
-        llistaUsuaris.remove(0);
-        for (ArrayList<String> usuari : llistaUsuaris) {
-            try {
-                String id = usuari.get(1);
-                String nom = usuari.get(0);
-                String password = usuari.get(2);
-                String actiu = usuari.get(3);
+        // TODO (pablo i edgar): no sé si això està bé però sino peta
+        if (llistaUsuaris.size() > 0) {
+            llistaUsuaris.remove(0);
+            for (ArrayList<String> usuari : llistaUsuaris) {
+                try {
+                    String id = usuari.get(1);
+                    String nom = usuari.get(0);
+                    String password = usuari.get(2);
+                    String actiu = usuari.get(3);
 
-                boolean actiuUsuari = Boolean.parseBoolean(actiu.trim());
-                int idNum = Integer.parseInt(id);
-                Id idUsuari = new Id(idNum, actiuUsuari);
-                elements.put(idUsuari, new Usuari(idUsuari, nom, password));
-            } catch (Exception ignored) {}
+                    boolean actiuUsuari = Boolean.parseBoolean(actiu.trim());
+                    int idNum = Integer.parseInt(id);
+                    Id idUsuari = new Id(idNum, actiuUsuari);
+                    elements.put(idUsuari, new Usuari(idUsuari, nom, password));
+                } catch (Exception ignored) {
+                }
+            }
         }
     }
 
