@@ -343,6 +343,7 @@ public class ControladorDomini {
     }
 
     /**
+     * Obté el nom del tipus d'ítem seleccionat
      * @return null si no hi ha cap seleccionat
      */
     public String obtenirNomTipusItemSeleccionat() {
@@ -545,11 +546,11 @@ public class ControladorDomini {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador Collaborative per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador Collaborative per a l'usuari que està actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
-     * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
+     * @return El conjunt d'id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
@@ -568,11 +569,11 @@ public class ControladorDomini {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador ContentBased per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador ContentBased per al usuari que esta actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
      * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
@@ -591,11 +592,11 @@ public class ControladorDomini {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador Hibrid per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador Híbrid per a l'usuari que està actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
-     * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
+     * @return El conjunt d'id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {

@@ -170,14 +170,32 @@ public class ControladorPresentacio {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
     }
 
+    /**
+     * Obtenir el conjunt d'items actuals
+     * @return <code>ArraList&lt;String&gt;</code> conjunt d'items del tipus item seleccionar
+     */
     public ArrayList<String> obtenirLlistaConjunts() {
         return controladorDomini.obtenirLlistaConjunts();
     }
 
+    /**
+     * Crea el tipus d'item amb el nom i els seus atributs
+     * @param nom <code>String</code> nom del tipus d'item
+     * @param nomAValorAtribut <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> que conté els atributs amb el tipus
+     * @throws IllegalArgumentException si ja existeix el tipus d'item
+     * @throws IOException si no existeix el fitxer i/o no es pot obrir
+     * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
+     */
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
     }
 
+    /**
+     * Carrega tipus d'item a partir d'un fitxer
+     * @param nom <code>String</code> nom del tipus d'item
+     * @param rutaAbsoluta <code>String</code> ubicacio del fitxer
+     * @throws Exception si el fitxer no existeix o no te format correcte
+     */
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         controladorDomini.carregarTipusItem(nom, rutaAbsoluta);
     }
@@ -206,38 +224,79 @@ public class ControladorPresentacio {
         controladorDomini.esborraConjuntUsuaris();
     }
 
+    /**
+     * Obté el nom del tipus d'ítem seleccionat
+     * @return null si no hi ha cap seleccionat
+     */
     public String obtenirNomTipusItemSeleccionat() {
         return controladorDomini.obtenirNomTipusItemSeleccionat();
     }
 
+    /**
+     * Esborra el tipus d'item seleccionat
+     */
     public void esborrarTipusItemSeleccionat() throws IOException {
         controladorDomini.esborrarTipusItemSeleccionat();
     }
 
+    /**
+     * Selecciona el tipus item
+     * @param nomTipusItem <code>String</code> el nom del tipus d'item
+     * @throws Exception si no s'ha pogut seleccionar el tipus d'item
+     */
     public void seleccionarTipusItem(String nomTipusItem) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
     }
 
+    /**
+     * Obte la llista d'items
+     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> conjunt de items
+     */
     public ArrayList<ArrayList<String>> obtenirItems() {
         return controladorDomini.obtenirItems();
     }
 
+    /**
+     * Obte el nom dels atributs de l'item seleccionat
+     * @return <code>ArrayList&lt;String&gt;</code> conjunt del nom dels atributs
+     */
     public ArrayList<String> obtenirNomAtributsTipusItemSeleccionat() {
         return controladorDomini.obtenirNomsAtributsTipusItemSeleccionat();
     }
 
+    /**
+     * Retorna la existencia del tipus item sleccionat
+     * @return <code>boolean</code> si existeix o no
+     */
     public boolean existeixTipusItemSeleccionat() {
         return controladorDomini.existeixTipusItemSeleccionat();
     }
 
+    /**
+     * Afegeix un item al conjunt
+     * @param valorsAtributs <code>Map&lt;String, String&gt;</code> els atributs i el seu valor
+     * @return <code>boolean</code> true si 'sha afegit
+     * @throws Exception si no s'ha pogut afegir l'item
+     */
     public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
         return controladorDomini.afegirItem(valorsAtributs);
     }
 
+    /**
+     * Esborra l'item amb l'id dessitjat
+     * @param id <code>String</code> l'id de l'item a eesborrar
+     * @return <code>boolean</code> si s'ha pogut esborrar o no
+     */
     public boolean esborrarItem(String id) throws NoExisteixElementException {
         return controladorDomini.esborrarItem(id);
     }
 
+    /**
+     * Obtenir el item amb l'id seleccionat
+     * @param id <code>String</code> l'id de l'item a obtenir
+     * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item
+     * @throws IllegalArgumentException si l'identificador no es valid
+     */
     public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
         return controladorDomini.obtenirItem(id);
     }
@@ -246,6 +305,11 @@ public class ControladorPresentacio {
         return controladorDomini.editarItem(id, valorsAtributs);
     }
 
+    /**
+     * Carrega un conjunt d'items a partir d'un fitxer
+     * @param rutaAbsoluta <code>String</code> ruta del fitxer
+     * @throws IOException si no s'ha pogut obrir el fitxer
+     */
     public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
         controladorDomini.carregarConjuntItems(rutaAbsoluta);
     }
@@ -267,11 +331,11 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador Collaborative per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador Collaborative per a l'usuari que està actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
-     * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
+     * @return El conjunt d'id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
@@ -279,11 +343,11 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador ContentBased per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador ContentBased per al usuari que esta actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
      * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
@@ -291,11 +355,11 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador Hibrid per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador Híbrid per a l'usuari que està actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
-     * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
+     * @return El conjunt d'id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
