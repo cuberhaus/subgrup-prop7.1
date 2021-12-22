@@ -29,7 +29,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
 
         elements = new TreeMap<>();
         int id = 0;
-        boolean errores = true;
+        boolean errores = false;
         for (int i = 0; i < taula.obtenirNumItems(); ++i) {
             String sid = taula.obtenirValorAtribut(i, "id");
             try {
