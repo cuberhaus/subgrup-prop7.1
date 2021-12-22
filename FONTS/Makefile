@@ -15,6 +15,10 @@ $(MAIN): $(SOURCES)
 
 clean:
 	rm -rf ../EXE/domini
+	rm -rf ../EXE/persistencia
+	rm -rf ../EXE/presentacio
+	rm -rf ../EXE/utilitats
+	rm -rf ../EXE/excepcions
 	rm -rf ../EXE/libs
 	rm -rf ../EXE/Main.class
 	rm -rf ../EXE/jocs_de_proves/joc1/Joc1.class
