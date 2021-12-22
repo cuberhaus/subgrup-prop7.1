@@ -139,7 +139,6 @@ public class ControladorDomini {
      * @param nom nom del usuari
      * @param contrasenya contrasenya del usuari
      * @return Retorna l'identificador de l'usuari creat
-     * @throws NoExisteixElementException no existeix l'element
      * @throws JaExisteixElementException l'element ja existeix
      */
     public int afegirUsuari(String nom, String contrasenya) throws JaExisteixElementException {
@@ -241,6 +240,9 @@ public class ControladorDomini {
      * @throws UsuariIncorrecteException c
      */
     public void carregaConjuntValoracions(String rutaAbsolut) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
+        if (nomTipusItemActual == null) {
+            throw new AccesAEstatIncorrecteException("S'ha de seleccionar un tipus d'item abans");
+        }
         ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
         valoracionsTipusItemActual.afegir(new TaulaCSV(valoracions), itemsActuals, estatPrograma.obtenirTotsElsUsuaris());
     }

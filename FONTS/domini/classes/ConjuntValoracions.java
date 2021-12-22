@@ -49,6 +49,10 @@ public class ConjuntValoracions {
             Id idItem = new Id(idItemInt, true);
             Id idUsuari = new Id(idUsuariInt, true);
             Item item = items.obtenir(idItem);
+
+            if (!usuaris.conte(idUsuari)) {
+                usuaris.afegir(new Usuari(idUsuari));
+            }
             Usuari usuari = usuaris.obtenir(idUsuari);
             double doubleValoracio = Double.parseDouble(valors.get(i));
             Valoracio valoracio = new Valoracio(doubleValoracio, usuari, item);

@@ -219,13 +219,9 @@ public class VistaMenuValoracions extends JPanel {
         editaValoracioButton.addActionListener(e -> {
             try {
                 if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
-                    if (controladorMenuValoracions.existeixValoracio(usuariIdText.getText(), itemIdText.getText())) {
                         controladorMenuValoracions.editarValoracio(usuariIdText.getText(),itemIdText.getText(),valorText.getText());
                         actualitzarTaula();
                         clearText();
-                    } else {
-                        JOptionPane.showMessageDialog(instancia, "La valoració no existeix");
-                    }
                 } else {
                     JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat");
                 }
@@ -242,8 +238,8 @@ public class VistaMenuValoracions extends JPanel {
     private static void conjuntDeValoracionsButton() {
         conjuntDeValoracionsButton = new JButton("Importar valoracions");
         conjuntDeValoracionsButton.addActionListener(e -> {
-            // TODO: logica
             JDialog pathDialog = new JDialog();
+            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjuntVal = jFileChooser.getSelectedFile();
@@ -272,8 +268,8 @@ public class VistaMenuValoracions extends JPanel {
                 try {
                     controladorMenuValoracions.exportaValoracions(pathConjunt.getAbsolutePath());
                 } catch (IOException ex) {
-                    //TODO catch
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
                 }
             }
         });
