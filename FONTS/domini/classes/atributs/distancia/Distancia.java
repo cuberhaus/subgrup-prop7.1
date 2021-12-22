@@ -23,11 +23,6 @@ public abstract class Distancia {
         return getClass() == obj.getClass();
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
     /**
      * @param valorAtribut Valor d'un atribut
      * @return Cert si la distància admet el valor donat. Altrament, fals.

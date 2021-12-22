@@ -15,7 +15,7 @@ public class TaulaCSVTest {
 
     //Probem que no podem assignar dos cops els atributs a la taula
     @Test(expected = Exception.class)
-    public void introduirListaAtributsDosCops() throws Exception {
+    public void introduirListaAtributsDosCops() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         atributs.add("genere");
@@ -38,7 +38,7 @@ public class TaulaCSVTest {
 
     //Si no hem inicialitzat amb atributs la taula abans excepcio
     @Test(expected = Exception.class)
-    public void introduirLlistaDeValorsLlencaExcepcioSiNoInicialitzat() throws Exception {
+    public void introduirLlistaDeValorsLlencaExcepcioSiNoInicialitzat() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> valors = new ArrayList<>();
         valors.add("hola");
@@ -48,7 +48,7 @@ public class TaulaCSVTest {
 
     //Si no tenim la mateixa quantitat de valors que d'atributs
     @Test(expected = Exception.class)
-    public void introduirLlistaDeValorsExepcioSiNoQuantitatAtributsCorrecte() throws Exception {
+    public void introduirLlistaDeValorsExepcioSiNoQuantitatAtributsCorrecte() {
         TaulaCSV tauleta = new TaulaCSV();
         ArrayList<String> atributs = new ArrayList<>();
         ArrayList<String> valors = new ArrayList<>();

@@ -1,6 +1,5 @@
 package domini.classes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NoExisteixElementException;
 
 import java.util.TreeMap;
