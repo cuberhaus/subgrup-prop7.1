@@ -25,7 +25,6 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      */
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();
-        // TODO (pablo i edgar): no sé si això està bé però sino peta
         if (llistaUsuaris.size() > 0) {
             llistaUsuaris.remove(0);
             for (ArrayList<String> usuari : llistaUsuaris) {
