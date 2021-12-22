@@ -174,6 +174,7 @@ public class TipusItem {
      * tal que els dos valors donats poden ser transformats en valors admesos per aquest.
      * @throws IllegalArgumentException si no hi ha una relació entre la parella de ValorsAtributs donats i no es pot
      * trobar un TipusAtribut que els reconegui als dos.
+     * @throws DistanciaNoCompatibleAmbValorException no es pot calcular la distancia del valor atribut.
      */
     private static TipusAtribut trobaTipusAtribut(ValorAtribut<?> valorAtribut1,
                                                   ValorAtribut<?> valorAtribut2) throws IllegalArgumentException, DistanciaNoCompatibleAmbValorException {
@@ -235,6 +236,7 @@ public class TipusItem {
     /**
      * @param s <code>String</code> que conté el valor d'un atribut.
      * @return TipusAtribut per defecte que admet el valor contingut en 's'.
+     * @throws DistanciaNoCompatibleAmbValorException no es pot calcular la distancia
      */
     private TipusAtribut dedueixTipusAtribut(String s) throws DistanciaNoCompatibleAmbValorException {
         try {

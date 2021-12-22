@@ -82,7 +82,6 @@ public class ControladorMenuValoracions {
      * @param usuariId identificador de l'usuari
      * @param itemId identificador de l'ítem
      * @param valor valor de la valoració
-     * @throws Exception no s'ha pogut afegir la valoració
      */
     public void afegirValoracio(String usuariId, String itemId, String valor) {
         try {

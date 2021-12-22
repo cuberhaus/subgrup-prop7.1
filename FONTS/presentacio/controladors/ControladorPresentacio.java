@@ -163,7 +163,7 @@ public class ControladorPresentacio {
      * @param pathAbsolut path on es troba l'arxiu
      * @throws NoExisteixElementException no existeix l'element
      * @throws IOException error en l'entrada/sortida
-     * @throws AccesAEstatIncorrecteException
+     * @throws AccesAEstatIncorrecteException a
      * @throws UsuariIncorrecteException L'usuari no és correcte
      */
     public void carregarConjuntValoracions(String pathAbsolut) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
