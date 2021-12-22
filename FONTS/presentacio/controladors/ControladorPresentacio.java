@@ -47,10 +47,18 @@ public class ControladorPresentacio {
         return instancia;
     }
 
+    /**
+     * Obtenir les distancies
+     * @return <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> amb els valors
+     */
     public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() throws DistanciaNoCompatibleAmbValorException {
         return controladorDomini.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
     }
 
+    /**
+     * Retorna el nom dels items carregats
+     * @return <code>ArrayList&lt;String&gt;</code> llista dels noms
+     */
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
         return controladorDomini.obtenirNomsTipusItemsCarregats();
     }
