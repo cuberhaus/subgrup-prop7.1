@@ -1,16 +1,12 @@
 package presentacio.vistes;
 
-import domini.classes.Pair;
 import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
-import presentacio.controladors.ControladorMenuItems;
 import presentacio.controladors.ControladorMenuRecomanacions;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
