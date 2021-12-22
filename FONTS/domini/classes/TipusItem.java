@@ -276,7 +276,7 @@ public class TipusItem {
      * Canvia el nom del tipus item.
      * @param nouNom nou nom del tipus d'item.
      */
-    public void canviaElNom(String nouNom) {
+    public void canviarNom(String nouNom) {
         nom = nouNom;
     }
 }

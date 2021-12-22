@@ -3,6 +3,7 @@ package presentacio.vistes;
 import java.awt.*;
 
 /**
+ * Classe d'utilitats per centrar elements a la pantalla.
  * @author maria.prat
  */
 public class Pantalla {

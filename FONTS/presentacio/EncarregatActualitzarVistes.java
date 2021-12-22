@@ -9,7 +9,7 @@ import java.util.List;
  * @author maria.prat
  */
 public class EncarregatActualitzarVistes {
-    private static final List<Observador> observadors = new ArrayList<>();
+    private static final ArrayList<Observador> observadors = new ArrayList<>();
 
     /**
      * Constructor per defecte
