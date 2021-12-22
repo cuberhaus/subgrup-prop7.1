@@ -54,7 +54,7 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
     public Usuari(Id id) {
         this.id = id;
         this.nom = null;
-        this.contrasenya = null;
+        this.contrasenya = "";
         this.valoracions = new TreeMap<>();
     }
 
