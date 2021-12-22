@@ -56,8 +56,7 @@ public class ControladorMenuItems {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            String id = JOptionPane.showInputDialog(instancia,
-                    "Introdueix l'identificador de l'ítem que vols esborrar:");
+            String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols esborrar:");
             if (!controladorPresentacio.esborrarItem(id)) {
                 JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
             } else {
@@ -74,8 +73,7 @@ public class ControladorMenuItems {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            String id = JOptionPane.showInputDialog(instancia,
-                    "Introdueix l'identificador de l'ítem que vols editar:");
+            String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols editar:");
             Map<String, String> atributs = controladorPresentacio.obtenirItem(id);
             if (atributs == null) {
                 JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
