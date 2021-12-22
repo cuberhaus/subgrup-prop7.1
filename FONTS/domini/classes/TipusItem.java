@@ -4,7 +4,9 @@ import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 import domini.classes.csv.TaulaCSV;
+import excepcions.AccesAEstatIncorrecteException;
 import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.NoExisteixElementException;
 
 import java.util.*;
 
@@ -45,7 +47,7 @@ public class TipusItem {
      * @param numCandidats Nombre d'ítems que es consideraran per deduir el tipus de cada atribut.
      * @throws Exception Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
      */
-    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws Exception {
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (numCandidats < 0) {
             throw new IllegalArgumentException("Es necessita com a mínim un candidat per crear un TipusItem");
         }

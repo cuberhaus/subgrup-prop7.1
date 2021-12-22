@@ -50,6 +50,7 @@ public class ControladorPresentacio {
     /**
      * Obtenir les distancies
      * @return <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> amb els valors
+     * @throws DistanciaNoCompatibleAmbValorException La distancia no es compatible amb el valor
      */
     public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() throws DistanciaNoCompatibleAmbValorException {
         return controladorDomini.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
@@ -194,6 +195,8 @@ public class ControladorPresentacio {
      * @throws IllegalArgumentException si ja existeix el tipus d'item
      * @throws IOException si no existeix el fitxer i/o no es pot obrir
      * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
+     * @throws JaExisteixElementException ja existeix l'element
+     * @throws DistanciaNoCompatibleAmbValorException la distancia no és compatible amb el valor
      */
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         controladorDomini.crearTipusItem(nom, nomAValorAtribut);
@@ -203,7 +206,9 @@ public class ControladorPresentacio {
      * Carrega tipus d'item a partir d'un fitxer
      * @param nom <code>String</code> nom del tipus d'item
      * @param rutaAbsoluta <code>String</code> ubicacio del fitxer
-     * @throws Exception si el fitxer no existeix o no te format correcte
+     * @throws IOException si el fitxer no existeix o no te format correcte
+     * @throws JaExisteixElementException l'element ja existeix al conjunt
+     * @throws FormatIncorrecteException el fitxer no te el format correcte
      */
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         controladorDomini.carregarTipusItem(nom, rutaAbsoluta);
@@ -243,6 +248,7 @@ public class ControladorPresentacio {
 
     /**
      * Esborra el tipus d'item seleccionat
+     * @throws IOException S'ha produit un error en l'entrada/sortida
      */
     public void esborrarTipusItemSeleccionat() throws IOException {
         controladorDomini.esborrarTipusItemSeleccionat();
@@ -251,7 +257,10 @@ public class ControladorPresentacio {
     /**
      * Selecciona el tipus item
      * @param nomTipusItem <code>String</code> el nom del tipus d'item
-     * @throws Exception si no s'ha pogut seleccionar el tipus d'item
+     * @throws IOException Error en l'entrada/sortida
+     * @throws AccesAEstatIncorrecteException S'accedeix a estat incorrecte
+     * @throws NoExisteixElementException No existeix l'element
+     * @throws UsuariIncorrecteException L'usuari no és correcte
      */
     public void seleccionarTipusItem(String nomTipusItem) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.seleccionarTipusItem(nomTipusItem);
@@ -295,6 +304,7 @@ public class ControladorPresentacio {
      * Esborra l'item amb l'id dessitjat
      * @param id <code>String</code> l'id de l'item a eesborrar
      * @return <code>boolean</code> si s'ha pogut esborrar o no
+     * @throws NoExisteixElementException No existeix l'element
      */
     public boolean esborrarItem(String id) throws NoExisteixElementException {
         return controladorDomini.esborrarItem(id);
@@ -305,6 +315,7 @@ public class ControladorPresentacio {
      * @param id <code>String</code> l'id de l'item a obtenir
      * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item
      * @throws IllegalArgumentException si l'identificador no es valid
+     * @throws NoExisteixElementException No existeix l'element
      */
     public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
         return controladorDomini.obtenirItem(id);
@@ -316,11 +327,19 @@ public class ControladorPresentacio {
 
     /**
      * Carrega un conjunt d'items a partir d'un fitxer
+     *
+     * @param deduirTipusItem
+     * @param nomTipusItem
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
      * @throws IOException si no s'ha pogut obrir el fitxer
+     * @throws AccesAEstatIncorrecteException Accedeix a estat incorrecte
      */
-    public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
-        controladorDomini.carregarConjuntItems(rutaAbsoluta);
+    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException {
+        if (deduirTipusItem) {
+            controladorDomini.carregarConjuntItems(nomTipusItem, rutaAbsoluta);
+        } else {
+            controladorDomini.carregarConjuntItems(rutaAbsoluta);
+        }
     }
 
     /**

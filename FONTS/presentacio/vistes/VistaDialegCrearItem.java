@@ -17,7 +17,7 @@ public class VistaDialegCrearItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegCrearItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public VistaDialegCrearItem() throws DistanciaNoCompatibleAmbValorException, NomInternIncorrecteException, IOException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegCrearItem();
@@ -69,8 +69,8 @@ public class VistaDialegCrearItem extends JDialog {
             if (!controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
                 for (Component component : panellLlistaAtributs.getComponents()) {
                     JPanel atribut = (JPanel) component;
-                    String nomAtribut = ((JLabel) atribut.getComponent(1)).getText();
-                    String valorTipusAtribut = ((JTextField) atribut.getComponent(2)).getText();
+                    String nomAtribut = ((JLabel) atribut.getComponent(0)).getText();
+                    String valorTipusAtribut = ((JTextField) atribut.getComponent(1)).getText();
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }

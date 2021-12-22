@@ -53,6 +53,7 @@ public class ControladorDomini {
      * @return La instancia de controlador domini
      * @throws IOException si no existeix algun fitxer de la càrrega de fitxers per defecte
      * @throws NomInternIncorrecteException si hi ha algun problema amb els noms dels fitxers dels metodes interns
+     * @throws DistanciaNoCompatibleAmbValorException La distancia no es compatible amb el valor
      */
     public static ControladorDomini obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
@@ -64,6 +65,7 @@ public class ControladorDomini {
     /**
      * Obté l'id de l'usuari que ha iniciat la sessió
      * @return retorna 0 en cas que no hi hagi sessió iniciada, altrament retorna l'id de l'usuari
+     * @throws SessioNoIniciadaException Si la sessió no està iniciada
      */
     public int obtenirSessio() throws SessioNoIniciadaException {
         if (this.estatPrograma.isSessioIniciada()) return 0;
@@ -75,9 +77,12 @@ public class ControladorDomini {
     }
 
     /**
-     * Inicia sessió amb l'usuari de id idSessio si la contrasenya és correcte
+     * Inicia sessió amb l'usuari d'id idSessio si la contrasenya és correcte
      * @param idSessio id de l'usuari que inicia la sessió
      * @param contrasenya contrasenya de l'usuari
+     * @throws SessioIniciadaException La sessió no està iniciada
+     * @throws ContrasenyaIncorrectaException la contrasenya no és correcte
+     * @throws NoExisteixElementException No existeix element
      */
     public void iniciarSessio(int idSessio, String contrasenya) throws SessioIniciadaException, ContrasenyaIncorrectaException, NoExisteixElementException {
         Id idUsuariBuscat = new Id(idSessio, true);
@@ -131,6 +136,9 @@ public class ControladorDomini {
      * Afegeix un Usuari que encara no existeix.
      * @param nom nom del usuari
      * @param contrasenya contrasenya del usuari
+     * @return Retorna l'identificador de l'usuari creat
+     * @throws NoExisteixElementException no existeix l'element
+     * @throws JaExisteixElementException l'element ja existeix
      */
     public int afegirUsuari(String nom, String contrasenya) throws NoExisteixElementException, JaExisteixElementException {
         Id id = obteIdUsuariDisponible();
@@ -146,6 +154,7 @@ public class ControladorDomini {
     /**
      * Esborra usuari, falta parametre del conjunt
      * @param id id del usuari
+     * @throws NoExisteixElementException no existeix element
      */
     public void esborrarUsuari(int id) throws NoExisteixElementException {
         Id id1 = new Id(id, true);
@@ -159,6 +168,7 @@ public class ControladorDomini {
 
     /**
      * Tanca la sessio de programa
+     * @throws SessioNoIniciadaException La sessió no està iniciada
      */
     public void tancarSessio() throws SessioNoIniciadaException {
         this.estatPrograma.tancarSessio();
@@ -270,6 +280,7 @@ public class ControladorDomini {
      * @param nom <code>String</code> nom del tipus d'item
      * @throws IOException si no s'ha pogut obrir el fitxer
      * @throws NomInternIncorrecteException si no existeix un fitxer amb el tipus d'item dessitjat
+     * @throws  DistanciaNoCompatibleAmbValorException la distància no és compatible amb el valor
      */
     public void carregarTipusItem(String nom) throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         ArrayList<ArrayList<String>> definicio = controladorPersistencia.obtenirTipusItem(nom);
@@ -289,6 +300,8 @@ public class ControladorDomini {
      * @throws IllegalArgumentException si ja existeix el tipus d'item
      * @throws IOException si no existeix el fitxer i/o no es pot obrir
      * @throws NomInternIncorrecteException el fitxer amb el nom del tipus d'item no existeix
+     * @throws JaExisteixElementException ja existeix l'element
+     * @throws DistanciaNoCompatibleAmbValorException la distancia no és compatible amb el valor
      */
     public void crearTipusItem(String nom, Map<String, Pair<String, String>> nomAValorAtribut) throws IllegalArgumentException, IOException, NomInternIncorrecteException, JaExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (estatPrograma.conteTipusItem(nom)) {
@@ -337,6 +350,7 @@ public class ControladorDomini {
 
     /**
      * Exporta el conjunt d'usuaris a un fitxer
+     * @throws IOException Error en l'entrada/sortida
      * @param absolutePath <code>String</code> ubicacio del fitxer
      */
     public void exportarConjuntDadesUsuari(String absolutePath) throws IOException {
@@ -427,17 +441,14 @@ public class ControladorDomini {
      * @throws Exception si no s'ha pogut afegir l'item
      */
     public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
-        // Crea un item amb els valors donats i del tipus de l'ítem seleccionat
-        // hi ha un tipus d'ítem seleccionat pero millor comprovar
-        // retorna false si no s'ha pogut fer i cert si tot esta be
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
-        for(var x : tipusItem.obtenirTipusAtributs().entrySet()) {
-            String valor = valorsAtributs.get(x.getKey());
-            Class<? extends ValorAtribut> clase = x.getValue().obtenirValorAtribut().getClass();
-            Constructor<?> ctor = clase.getConstructor(String.class);
-            Object object = ctor.newInstance(valor);
-            atributs.put(x.getKey(), clase.cast(object));
+        for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
+            String valor = valorsAtributs.get(tipusAtribut.getKey());
+            Class<? extends ValorAtribut> classe = tipusAtribut.getValue().obtenirValorAtribut().getClass();
+            Constructor<?> constructor = classe.getConstructor(String.class);
+            Object object = constructor.newInstance(valor);
+            atributs.put(tipusAtribut.getKey(), classe.cast(object));
         }
         Item item = new Item(obteIdItemDisponible(), tipusItem, atributs, new HashMap<>());
 
@@ -517,8 +528,22 @@ public class ControladorDomini {
         return true;
     }
 
+    // TODO (edgar): afegir javadoc
+    public void carregarConjuntItems(String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException {
+        if (estatPrograma.conteTipusItem(nomTipusItem)) {
+            throw new JaExisteixElementException("Ja existeix un tipus d'item amb nom " + nomTipusItem);
+        }
+        ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
+        TaulaCSV taulaItems = new TaulaCSV(items);
+        ConjuntItems nousItems = new ConjuntItems(nomTipusItem, taulaItems);
+        for (var x : nousItems.obtenirTotsElsElements().entrySet()) {
+            itemsActuals.afegir(x.getValue());
+        }
+    }
+
     /**
      * Carrega un conjunt d'items a partir d'un fitxer
+     *
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
      * @throws IOException si no s'ha pogut obrir el fitxer
      * @throws AccesAEstatIncorrecteException taula no inicialitzada
