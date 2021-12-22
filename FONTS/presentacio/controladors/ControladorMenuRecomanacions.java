@@ -1,6 +1,7 @@
 package presentacio.controladors;
 
-import excepcions.*;
+import excepcions.NoExisteixElementException;
+import excepcions.SessioNoIniciadaException;
 import presentacio.vistes.VistaMenuRecomanacions;
 import utilitats.Pair;
 
@@ -123,7 +124,7 @@ public class ControladorMenuRecomanacions {
         } catch (SessioNoIniciadaException e1) {
             JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No has iniciat la sessió.");
         } catch (Exception e2) {
-            JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No s'ha pogut obtenir la recomanació.");
+            JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No s'ha pogut obtenir la recomanació. Error:\n" + e2.getMessage());
         }
         return new ArrayList<>();
     }

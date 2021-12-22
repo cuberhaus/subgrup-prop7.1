@@ -472,7 +472,6 @@ public class ControladorDomini {
             }
             if (valor.contains(",") || valor.contains("\"")) {
                 throw new FormatIncorrecteException("Els atributs no poden tenir el caràcter , ni \"");
-
             }
             Class<? extends ValorAtribut> classe = tipusAtribut.getValue().obtenirValorAtribut().getClass();
             Constructor<?> constructor = classe.getConstructor(String.class);

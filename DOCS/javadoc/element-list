@@ -1,4 +1,3 @@
-unnamed package
 domini.classes
 domini.classes.atributs
 domini.classes.atributs.distancia
@@ -16,6 +15,7 @@ jocs_de_proves.joc3
 persistencia.classes
 persistencia.controladors
 persistencia.tests
+presentacio
 presentacio.controladors
 presentacio.vistes
 utilitats

@@ -113,7 +113,6 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      */
     @Override
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) throws NoExisteixElementException {
-
         int posicioUsuari = buscaPosicioUsuari(usuari);
 
         if (posicioUsuari == -1)
