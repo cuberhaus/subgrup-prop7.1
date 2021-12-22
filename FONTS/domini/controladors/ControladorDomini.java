@@ -26,7 +26,7 @@ public class ControladorDomini {
 
     private final Programa estatPrograma;
     private int ultimIdUsat = 1000000;
-    private int ultimIdUsatItem = 0;
+    private int ultimIdUsatItem = 1000000;
     private String nomTipusItemActual = null;
     private ConjuntValoracions valoracionsTipusItemActual = null;
     private ConjuntItems itemsActuals = null;
