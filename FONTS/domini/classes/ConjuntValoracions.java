@@ -58,6 +58,12 @@ public class ConjuntValoracions {
         }
     }
 
+
+    /**
+     * @param usuari Usuari que ha fet la valoracio
+     * @param item Item valorat
+     * @return retorna si hi ha una valoracio al conjunt del usuari donat a l'item donat.
+     */
     public boolean conte(Usuari usuari, Item item) {
         return valoracions.containsKey(new Pair<>(usuari, item));
     }

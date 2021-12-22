@@ -162,6 +162,7 @@ public class Programa {
     public TipusItem obteTipusItem(String nom) {
         return tipusItems.get(nom);
     }
+
     /**
      * Marca com a no actiu un usuari del conjunt d'usuaris.
      * @param id el paràmetre s'ha marcat com a no actiu.
@@ -177,8 +178,8 @@ public class Programa {
     public void esborraTotsUsuaris() {conjuntUsuaris.esborrarTotsUsuaris();}
 
     /**
-     * Obté un arrayList de tipusItems del Programa
-     * @return arrayList de tipusItems
+     * Obté un <code>ArrayList</code> amb els noms dels <code>TipusItem</code> guardats.
+     * @return <code>ArrayList</code> amb tots els noms.
      */
     public ArrayList<String> obteTipusItem() {
         return new ArrayList<>(tipusItems.keySet());

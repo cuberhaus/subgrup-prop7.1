@@ -25,6 +25,11 @@ public class Id implements Comparable<Id> {
         this.valor = valor;
         this.actiu = actiu;
     }
+
+    /**
+     * Constructor d'un Id, es fica actiu.
+     * @param valor Valor de l'identificador.
+     */
     public Id(int valor) {
         this.valor = valor;
         this.actiu = true;
@@ -47,7 +52,6 @@ public class Id implements Comparable<Id> {
      * @return Còpia de l'identificador.
      */
     public Id copiar() {
-        // Com que 'valor' i 'actiu' són tipus primitius només s'ha de crear un nou Id.
         return new Id(valor, actiu);
     }
 
