@@ -443,12 +443,17 @@ public class ControladorDomini {
     public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
+        for(var x : valorsAtributs.entrySet()) {
+            System.out.println(x.getKey() + " " + x.getValue());
+        }
         for(Map.Entry<String, TipusAtribut> tipusAtribut : tipusItem.obtenirTipusAtributs().entrySet()) {
             String valor = valorsAtributs.get(tipusAtribut.getKey());
             Class<? extends ValorAtribut> classe = tipusAtribut.getValue().obtenirValorAtribut().getClass();
+            System.out.println(classe);
             Constructor<?> constructor = classe.getConstructor(String.class);
             Object object = constructor.newInstance(valor);
             atributs.put(tipusAtribut.getKey(), classe.cast(object));
+            System.out.println(atributs.get(tipusAtribut.getKey()).obtenirValor());
         }
         Item item = new Item(obteIdItemDisponible(), tipusItem, atributs, new HashMap<>());
 

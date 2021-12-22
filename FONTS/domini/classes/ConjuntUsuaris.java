@@ -3,7 +3,6 @@ package domini.classes;
 import domini.classes.csv.TaulaCSV;
 import excepcions.NoExisteixElementException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
@@ -19,10 +18,10 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         elements = new TreeMap<>();
     }
 
-    //user nom password actiu
     /**
      * Constructora de ConjuntUsuaris donada una llista d'usuaris
-     * @param llistaUsuaris llista d'usuaris amb la que s'inicialitza el conjunt
+     * @param llistaUsuaris llista d'usuaris amb la que s'inicialitza el conjunt, per a cada fila l'ordre ha de ser:
+     *                      IdUsuari, nomUsuari, contrasenyaUsuari, UsuariActiu
      */
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();

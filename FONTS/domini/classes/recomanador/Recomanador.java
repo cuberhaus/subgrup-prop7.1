@@ -19,6 +19,13 @@ public abstract class Recomanador {
     protected ConjuntValoracions valoracionsPubliques;
     protected Filtre filtre;
     protected MetodeRecomanador metodeRecomanador;
+
+    /**
+     * @param usuari Usuari a qui recomanar
+     * @param numRecomanacions nombre de recomanacions sol·licitades
+     * @return El conjunt de recomanacions per l'usuari
+     * @throws NoExisteixElementException Si hi ha algun error durant l'obtencio de les recomanacions
+     */
     public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) throws NoExisteixElementException {
         return metodeRecomanador.obteRecomanacions(usuari, numRecomanacions);
     }

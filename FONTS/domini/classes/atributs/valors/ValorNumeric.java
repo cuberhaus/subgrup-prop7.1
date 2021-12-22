@@ -20,6 +20,11 @@ public class ValorNumeric extends ValorAtribut<Double> {
         this.valor = valor;
     }
 
+
+    public ValorNumeric(String valor) {
+        this.valor = Double.parseDouble(valor);
+    }
+
     /**
      * @return Còpia del ValorNumeric.
      */

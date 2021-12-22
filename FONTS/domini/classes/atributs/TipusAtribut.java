@@ -60,6 +60,11 @@ public class TipusAtribut {
         return Objects.hash(valorAtribut, distancia);
     }
 
+
+    /**
+     * @param valorAtribut Identificador de un ValorAtribut
+     * @return la subclasse de ValorAtribut amb nom l'identificador o null si no existeix.
+     */
     private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
         switch (valorAtribut) {
             case "ValorBoolea":
@@ -82,7 +87,10 @@ public class TipusAtribut {
                 return null;
         }
     }
-
+    /**
+     * @param distancia Identificador de una Distancia
+     * @return la subclasse de Distancia amb nom l'identificador o null si no existeix.
+     */
     private static Distancia distanciaDesDelNom(String distancia) {
         switch (distancia) {
             case "DistanciaDiferenciaDeConjunts":

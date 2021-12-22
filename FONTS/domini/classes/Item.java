@@ -233,15 +233,24 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
+    /**
+     * @return una <code>ArrayList</code> amb el valor de cada atribut en l'ordre per defecte del map.
+     */
     public ArrayList<String> converteixAArray() {
         ArrayList<String> res = new ArrayList<>();
         res.add(Integer.toString(id.valor));
         for (var x : atributs.entrySet()) {
-           res.add(x.getValue().toString());
+           res.add(x.getValue().obtenirValor().toString());
         }
         return res;
     }
 
+
+    /**
+     * Modifica un atribut a un valor nou, si no existeix no fa res.
+     * @param nomAtribut nom d'atribut a modificar
+     * @param valor nou valor
+     */
     public void modificaAtribut(String nomAtribut, ValorAtribut<?> valor) {
         if (!atributs.containsKey(nomAtribut))
             return;
