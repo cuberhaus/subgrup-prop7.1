@@ -240,7 +240,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         ArrayList<String> res = new ArrayList<>();
         res.add(Integer.toString(id.valor));
         for (var x : atributs.entrySet()) {
-           res.add(x.getValue().toString());
+           res.add(x.getValue().obtenirValor().toString());
         }
         return res;
     }
