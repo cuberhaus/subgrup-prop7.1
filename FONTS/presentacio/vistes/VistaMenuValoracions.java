@@ -31,7 +31,7 @@ public class VistaMenuValoracions extends JPanel {
     private static JButton esborraValoracioButton;
     private static JButton editaValoracioButton;
     private static JFileChooser jFileChooser;
-    private static JButton conjuntDeValoracionsButton;
+    private static JButton importaValoracionsButton;
     private static JTable llistaValoracions;
     private static DefaultTableModel llistaValoracionsTableModel;
     private static JScrollPane jScrollPane;
@@ -126,7 +126,7 @@ public class VistaMenuValoracions extends JPanel {
         creaValoracioButton();
         esborraValoracioButton();
         editaValoracioButton();
-        conjuntDeValoracionsButton();
+        importaValoracionsButton();
         esborrarTotesLesValoracionsButton();
         exportarConjuntValoracions();
 
@@ -235,9 +235,9 @@ public class VistaMenuValoracions extends JPanel {
         jpanel.add(editaValoracioButton, gridBagConstraints);
     }
 
-    private static void conjuntDeValoracionsButton() {
-        conjuntDeValoracionsButton = new JButton("Importar valoracions");
-        conjuntDeValoracionsButton.addActionListener(e -> {
+    private static void importaValoracionsButton() {
+        importaValoracionsButton = new JButton("Importar valoracions");
+        importaValoracionsButton.addActionListener(e -> {
             JDialog pathDialog = new JDialog();
             jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
@@ -254,7 +254,7 @@ public class VistaMenuValoracions extends JPanel {
         });
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        jpanel.add(conjuntDeValoracionsButton, gridBagConstraints);
+        jpanel.add(importaValoracionsButton, gridBagConstraints);
     }
 
     private static void exportarConjuntValoracions() {

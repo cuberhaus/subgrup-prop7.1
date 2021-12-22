@@ -538,10 +538,12 @@ public class ControladorDomini {
         }
         ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
         TaulaCSV taulaItems = new TaulaCSV(items);
-        ConjuntItems nousItems = new ConjuntItems(nomTipusItem, taulaItems);
-        for (var x : nousItems.obtenirTotsElsElements().entrySet()) {
-            itemsActuals.afegir(x.getValue());
-        }
+        itemsActuals = new ConjuntItems(nomTipusItem, taulaItems);
+        estatPrograma.afegirTipusItem(nomTipusItem, itemsActuals.obteTipusItem());
+        valoracionsTipusItemActual = new ConjuntValoracions();
+        nomTipusItemActual = nomTipusItem;
+        controladorPersistencia.guardarTipusItem(itemsActuals.obteTipusItem().convertirAArrayList(), nomTipusItem);
+        controladorPersistencia.guardarConjuntValoracions(valoracionsTipusItemActual.convertirAArrayList(), nomTipusItem);
     }
 
     /**

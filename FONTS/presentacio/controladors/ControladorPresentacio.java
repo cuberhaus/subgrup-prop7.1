@@ -183,6 +183,7 @@ public class ControladorPresentacio {
      */
     public void carregarConjuntValoracions(String pathAbsolut) throws NoExisteixElementException, IOException, AccesAEstatIncorrecteException, UsuariIncorrecteException {
         controladorDomini.carregaConjuntValoracions(pathAbsolut);
+        controladorMenuUsuaris.actualitzaTaula();
     }
 
     /**

@@ -116,7 +116,7 @@ public class ControladorMenuItems {
                         e1.getMessage());
             } catch (Exception e2) {
                 JOptionPane.showMessageDialog(vistaMenuItems,
-                        "No s'han pogut afegir ítems d'aquest conjunt.");
+                        "No s'han pogut afegir ítems d'aquest conjunt. Error:\n" + e2.getMessage());
             }
         }
     }

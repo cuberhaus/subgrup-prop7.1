@@ -169,8 +169,8 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             capsalera.add(x.getKey());
         }
         res.add(capsalera);
-        for (var x : elements.entrySet()) {
-            res.add(x.getValue().converteixAArray());
+        for (Map.Entry<Id, Item> items : elements.entrySet()) {
+            res.add(items.getValue().converteixAArray());
         }
         return res;
     }

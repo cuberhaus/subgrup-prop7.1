@@ -209,11 +209,6 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @throws IllegalArgumentException Si els noms i valors donats no són compatibles amb el TipusItem de l'Item.
      */
     private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException, FormatIncorrecteException {
-        if (tipusItem.obtenirTipusAtributs().size()+1 != nomAtributs.size() ||
-                tipusItem.obtenirTipusAtributs().size()+1 != valors.size()) {
-            throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
-                    "mides diferents.");
-        }
         atributs = new TreeMap<>();
         for (int i = 0; i < nomAtributs.size(); ++i) {
             if (nomAtributs.get(i).equals("id")) continue;
