@@ -374,6 +374,8 @@ public class ControladorPresentacio {
      * Canvia el nom del tipus item seleccionat.
      * @param nouNom nou nom pel tipus item.
      * @throws IOException si hi ha un problema editant els fitxers del tipus d'item
+     * @throws FormatIncorrecteException el format no és correcte
+     * @throws JaExisteixElementException l'element ja existeix
      */
     public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         controladorDomini.editarTipusItem(nouNom);
@@ -418,6 +420,9 @@ public class ControladorPresentacio {
     /**
      * @param valoracions valoracions fetes per l'usuari dels items recomanats en l'ultima recomanacio
      * @return valoració de la recomanacio amb el valor del NDCG de la recomanacio
+     * @throws NoExisteixElementException No existeix l'element
+     * @throws SessioNoIniciadaException la sessio no està iniciada
+     * @throws UsuariIncorrecteException l'usuari és incorrecte
      */
     public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) throws NoExisteixElementException, SessioNoIniciadaException, UsuariIncorrecteException {
         return controladorDomini.avaluarRecomanacio(valoracions);

@@ -25,6 +25,7 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
     /**
      * Constructor d'un ValorBooleà amb una String que conté un booleà.
      * @param s <code>String</code> que conté el valor d'aquest atribut.
+     * @throws FormatIncorrecteException El format és incorrecte
      */
     public ValorBoolea(String s) throws FormatIncorrecteException {
         if (s == null || s.isEmpty()) {

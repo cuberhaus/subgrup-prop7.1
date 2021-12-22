@@ -59,6 +59,9 @@ public class ControladorMenuRecomanacions {
      *                    String fetes per l'usuari sobre el items d'una recomanacio
      * @return String que conte el NDCG que avalua la recomanacio feta pel programa donades les valoracions de l'usuari.
      * Retorna una String buida si alguna de les valoracions no te el format esperat i emet un missatge en cas d'error.
+     * @throws NoExisteixElementException no existeix l'element
+     * @throws SessioNoIniciadaException La sessió no està iniciada
+     * @throws UsuariIncorrecteException L'usuari és incorrecte
      */
     public static String avaluarRecomanacio(ArrayList<Pair<String, String>> valoracions) throws NoExisteixElementException, SessioNoIniciadaException, UsuariIncorrecteException {
         ArrayList<Pair<Integer, Double>> valoracionsAmbFormat = new ArrayList<>();

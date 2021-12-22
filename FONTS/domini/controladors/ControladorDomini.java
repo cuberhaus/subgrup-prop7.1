@@ -612,6 +612,8 @@ public class ControladorDomini {
      * Canvia el nom del tipus item seleccionat.
      * @param nouNom nou nom pel tipus item.
      * @throws IOException Problema canviant el nom del tipus item a la persistencia.
+     * @throws FormatIncorrecteException El format no és correcte
+     * @throws JaExisteixElementException L'element ja existeix
      */
     public void editarTipusItem(String nouNom) throws IOException, FormatIncorrecteException, JaExisteixElementException {
         if (nomTipusItemActual == null) return;
@@ -717,6 +719,10 @@ public class ControladorDomini {
     /**
      * Retorna una avaluacio de la ultima recomanacio feta.
      * @return El NDGC de la ultima recomanacio.
+     * @throws SessioNoIniciadaException La sessió no està iniciada
+     * @throws NoExisteixElementException no existeix un element
+     * @throws UsuariIncorrecteException L'usuari no és correcte
+     * @param valoracions array amb les valoracions
      */
     public double avaluarRecomanacio(ArrayList<Pair<Integer,Double>> valoracions) throws SessioNoIniciadaException, NoExisteixElementException, UsuariIncorrecteException {
         for (var valoracio : valoracions) {
