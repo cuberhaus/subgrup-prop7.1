@@ -23,7 +23,8 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * @throws DistanciaNoCompatibleAmbValorException a
      */
     //TODO: doc
-    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, FormatIncorrecteException {
+    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException,
+            DistanciaNoCompatibleAmbValorException, NoExisteixElementException, FormatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula, taula.obtenirNumItems());
 
@@ -165,7 +166,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * Crea una matriu on la primera fila es una capsalera i despres a cada fila hi ha un item.
      * @return Una matriu d'<code>String</code> que serialitza el ConjuntItems.
      */
-    public ArrayList<ArrayList<String>> converteixAArray() {
+    public ArrayList<ArrayList<String>> convertirAArrayList() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         ArrayList<String> capsalera = new ArrayList<>();
         capsalera.add("id");

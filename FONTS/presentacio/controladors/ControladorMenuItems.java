@@ -7,6 +7,7 @@ import presentacio.vistes.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -142,14 +143,16 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
     /**
      * Edita l'item amb l'identificador donat, substituint els atributs antics pels donats. Emet missatges al component
      * donat si hi ha algun error.
+     * @return cert si ha pogut editar l'item i fals si hi ha hagut algun error
      * @param component Component on es mostraran els missatges
      * @param id String que conté l'identificador de l'item
      * @param valorsAtributs mapa que relaciona el nom de l'atribut amb el seu nou valor
      */
-    public void editarItem(Component component, String id, Map<String, String> valorsAtributs) {
+    public boolean editarItem(Component component, String id, Map<String, String> valorsAtributs) {
         try {
             controladorPresentacio.editarItem(id, valorsAtributs);
             JOptionPane.showMessageDialog(component, "S'ha editat l'ítem amb èxit");
+            return true;
         } catch (NoExisteixElementException ex) {
             JOptionPane.showMessageDialog(component, "No existeix cap ítem amb aquest identificador.");
         } catch (FormatIncorrecteException ex) {
@@ -157,6 +160,7 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(component, "No s'ha pogut editar l'ítem.");
         }
+        return false;
     }
 
     /**
@@ -276,5 +280,21 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
     @Override
     public void actualitzar() {
         VistaMenuItems.actualitzarTaula();
+    }
+
+    /**
+     * @param rutaAbsoluta exportar un conjunt d'items a la ruta donada
+     */
+    public void exportarItems(String rutaAbsoluta) {
+        if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
+            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+        } else {
+            try {
+                controladorPresentacio.exportarItems(rutaAbsoluta);
+                JOptionPane.showMessageDialog(vistaMenuItems, "S'ha exportat el conjunt d'ítems amb èxit.");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut exportar el conjunt d'ítems.");
+            }
+        }
     }
 }
