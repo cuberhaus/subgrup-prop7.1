@@ -21,7 +21,7 @@ public class ControladorPersistencia {
     private final Path direccioCarpetaItems = Paths.get("..", "EXE", "dades", "items");
     private final Path direccioCarpetaUsuaris = Paths.get("..", "EXE", "dades", "usuaris");
     private final Path direccioCarpetaValoracions = Paths.get("..", "EXE", "dades", "valoracions");
-    private final Path direccioManual = Paths.get("..", "EXE", "dades", "ManualD'Usuari.pdf");
+    private final Path direccioManual = Paths.get("..", "EXE", "dades", "ManualDUsuari.pdf");
 
     private static ControladorPersistencia instancia;
     private final EscriptorDeCSV escriptor;
