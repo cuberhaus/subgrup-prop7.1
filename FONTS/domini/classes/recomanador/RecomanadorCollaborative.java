@@ -9,7 +9,6 @@ import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBas
 
 /**
  * Representa un recomanador col·laboratiu.
- * Aquesta classe encara no està completament implementada, ja que no és una funcionalitat principal del projecte.
  * @author maria.prat
  */
 public class RecomanadorCollaborative extends Recomanador {

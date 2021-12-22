@@ -35,6 +35,13 @@ public class TipusAtribut {
         }
     }
 
+    /**
+     * @param valor String que conte el nom del ValorAtribut
+     * @param distancia String que conte el nom de la Distancia
+     * @throws NomInternIncorrecteException si el nom del valor o de la distancia no es correspon amb la representacio
+     * interna
+     * @throws DistanciaNoCompatibleAmbValorException si la parella de valor i distancia no es compatible
+     */
     public TipusAtribut(String valor, String distancia) throws NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
