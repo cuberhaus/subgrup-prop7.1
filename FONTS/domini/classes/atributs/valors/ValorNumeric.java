@@ -20,7 +20,10 @@ public class ValorNumeric extends ValorAtribut<Double> {
         this.valor = valor;
     }
 
-
+    /**
+     * Constructor amb el valor numèric a partir d'una String.
+     * @param valor <code>String</code> que conté el valor d'aquest atribut.
+     */
     public ValorNumeric(String valor) {
         this.valor = Double.parseDouble(valor);
     }
@@ -44,5 +47,10 @@ public class ValorNumeric extends ValorAtribut<Double> {
     @Override
     public Double obtenirValor() {
         return valor;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.valor);
     }
 }

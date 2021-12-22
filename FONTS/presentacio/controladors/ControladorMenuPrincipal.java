@@ -4,6 +4,8 @@ import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaMenuPrincipal;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 /**
@@ -25,6 +27,12 @@ public class ControladorMenuPrincipal {
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuPrincipal = VistaMenuPrincipal.obtenirInstancia();
             vistaMenuPrincipal.setVisible(true);
+            vistaMenuPrincipal.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent windowEvent) {
+                    controladorPresentacio.guardarPrograma();
+                }
+            });
         }
         return instancia;
     }

@@ -440,9 +440,10 @@ public class ControladorDomini {
      * @return <code>boolean</code> true si 'sha afegit
      * @throws Exception si no s'ha pogut afegir l'item
      */
-    public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
+    public int afegirItem(Map<String, String> valorsAtributs) throws Exception {
         TipusItem tipusItem = estatPrograma.obteTipusItem(nomTipusItemActual);
         TreeMap<String, ValorAtribut<?>> atributs = new TreeMap<>();
+        // TODO: esborrar els xivatos
         for(var x : valorsAtributs.entrySet()) {
             System.out.println(x.getKey() + " " + x.getValue());
         }
@@ -456,9 +457,8 @@ public class ControladorDomini {
             System.out.println(atributs.get(tipusAtribut.getKey()).obtenirValor());
         }
         Item item = new Item(obteIdItemDisponible(), tipusItem, atributs, new HashMap<>());
-
         itemsActuals.afegir(item);
-        return true;
+        return item.obtenirId().obtenirValor();
     }
 
     /**
@@ -494,25 +494,15 @@ public class ControladorDomini {
      * @throws NoExisteixElementException no existeix item
      */
     public Map<String, String> obtenirItem(String id) throws IllegalArgumentException, NoExisteixElementException {
-        // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
-        // hi ha un tipus d'ítem seleccionat pero millor comprovar
-        // l'item es del tipus d'ítem seleccionat
-        // retorna null si l'id no es valid
         TreeMap<String, String> res = new TreeMap<>();
         Item item = itemsActuals.obtenir(new Id(Integer.parseInt(id)));
         for (var x : item.obtenirAtributs().entrySet()) {
-            res.put(x.getKey(), x.getValue().obtenirValor().toString());
+            res.put(x.getKey(), x.getValue().toString());
         }
         return res;
     }
 
     public boolean editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException {
-        // edita l'item amb l'id donat amb els valors donats
-        // valorsAtribut es un mapa del nom de l'atribut al nou valor
-        // hi ha un tipus d'ítem seleccionat pero millor comprovar
-        // l'item es del tipus d'ítem seleccionat
-        // existeix un item amb aquest id pero millor comprovar
-        // retorna true si tot be i retorna fals si alguna cosa no funcioa
         int idItemABuscar;
         try {
             idItemABuscar = Integer.parseInt(id);
@@ -782,7 +772,13 @@ public class ControladorDomini {
      * Obre el Manual d'usuari.
      * @throws IOException Hi ha algun error.
      */
-    public void obreManual() throws IOException {
+    public void obrirManual() throws IOException {
         controladorPersistencia.obreManual();
+    }
+
+    /**
+     */
+    public void guardarPrograma() {
+        // TODO (edgar): implementar i escriure javadoc
     }
 }

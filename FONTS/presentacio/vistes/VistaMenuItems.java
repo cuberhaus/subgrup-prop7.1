@@ -59,7 +59,6 @@ public class VistaMenuItems extends JPanel {
         botoCrearItem.addActionListener(e -> {
             controladorMenuItems.crearNouItem();
         });
-        // TODO: hi ha d'haver un tipus d'ítem seleccionat
         menuLateral.add(botoCrearItem);
         JButton botoEditarItem = new JButton("Edita un ítem");
         botoEditarItem.addActionListener(e -> {

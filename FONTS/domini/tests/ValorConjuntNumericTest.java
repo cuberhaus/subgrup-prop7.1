@@ -35,7 +35,7 @@ public class ValorConjuntNumericTest {
                     {null, null},
                     {"", new ArrayList<ValorAtribut<Double>>()},
                     {"0.0;1.111;;-11.0;", new ArrayList<ValorAtribut<Double>>(Arrays.asList(
-                            new ValorNumeric(0.0), new ValorNumeric(1.111), new ValorNumeric(null),
+                            new ValorNumeric(0.0), new ValorNumeric(1.111), new ValorNumeric((Double) null),
                             new ValorNumeric(-11.0)))}
             });
         }

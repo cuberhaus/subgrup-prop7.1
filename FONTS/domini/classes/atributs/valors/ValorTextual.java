@@ -40,4 +40,9 @@ public class ValorTextual extends ValorAtribut<String> {
     public String obtenirValor() {
         return valor;
     }
+
+    @Override
+    public String toString() {
+        return this.valor;
+    }
 }

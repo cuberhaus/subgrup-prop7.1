@@ -296,8 +296,8 @@ public class ControladorPresentacio {
      * @return <code>boolean</code> true si 'sha afegit
      * @throws Exception si no s'ha pogut afegir l'item
      */
-    public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
-        return controladorDomini.afegirItem(valorsAtributs);
+    public String afegirItem(Map<String, String> valorsAtributs) throws Exception {
+        return String.valueOf(controladorDomini.afegirItem(valorsAtributs));
     }
 
     /**
@@ -480,6 +480,10 @@ public class ControladorPresentacio {
      * @throws IOException si hi ha cap problema.
      */
     public void obreManual() throws IOException{
-        controladorDomini.obreManual();
+        controladorDomini.obrirManual();
+    }
+
+    public void guardarPrograma() {
+        controladorDomini.guardarPrograma();
     }
 }

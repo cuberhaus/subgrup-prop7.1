@@ -48,7 +48,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
+    public String afegirItem(Map<String, String> valorsAtributs) throws Exception {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
 
@@ -128,7 +128,7 @@ public class ControladorMenuItems {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            VistaDialegCrearItem vistaDialegCrearItem = null;
+            VistaDialegCrearItem vistaDialegCrearItem;
             try {
                 vistaDialegCrearItem = new VistaDialegCrearItem();
                 vistaDialegCrearItem.setVisible(true);

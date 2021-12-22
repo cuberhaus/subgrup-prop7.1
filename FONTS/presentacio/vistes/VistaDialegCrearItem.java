@@ -75,16 +75,12 @@ public class VistaDialegCrearItem extends JDialog {
                 }
             }
             try {
-                if (!controladorMenuItems.afegirItem(valorsAtributs)) {
-                    JOptionPane.showMessageDialog(this, "No s'ha pogut crear un ítem amb els valors donats.");
-                    return;
-                }
+                String nouId = controladorMenuItems.afegirItem(valorsAtributs);
+                JOptionPane.showMessageDialog(this, "Item creat amb èxit amb identificador " + nouId);
+                dispose();
             } catch (Exception ex) {
-                // TODO catch
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "No s'ha pogut crear un ítem amb els valors donats.");
             }
-            JOptionPane.showMessageDialog(this, "Item creat amb èxit.");
-            dispose();
         });
         botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }

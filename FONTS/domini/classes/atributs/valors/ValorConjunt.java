@@ -30,4 +30,17 @@ public abstract class ValorConjunt<T> extends ValorAtribut<ArrayList<ValorAtribu
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (ValorAtribut<?> element : this.valor) {
+            if (s.length() > 0) {
+                s.append(";");
+            } else {
+                s.append(element.toString());
+            }
+        }
+        return s.toString();
+    }
 }

@@ -63,4 +63,9 @@ public class ValorBoolea extends ValorAtribut<Boolean> {
         }
         return s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false");
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.valor);
+    }
 }

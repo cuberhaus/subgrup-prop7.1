@@ -37,4 +37,10 @@ public abstract class ValorAtribut<T> {
      */
     public abstract T obtenirValor();
 
+    /**
+     * @return Transforma el ValorAtribut en una String;
+     */
+    @Override
+    public abstract String toString();
+
 }
