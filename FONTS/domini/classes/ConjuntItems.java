@@ -2,6 +2,7 @@ package domini.classes;
 
 
 import domini.classes.csv.TaulaCSV;
+import excepcions.*;
 
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
      * @throws Exception si id no és correcte o l'ítem creat ja és al conjunt.
      */
-    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws Exception {
+    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException, FormatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula, taula.obtenirNumItems());
 
@@ -40,24 +41,29 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
-    public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws Exception {
+    /**
+     * Constructora de Conjunt d'ítems.
+     * @param taula <code>TaulaCSV</code> contenidor del fitxer CSV desitjar.
+     * @param tipusItem el tipus dels items a crear.
+     * @throws AccesAEstatIncorrecteException la taula que s'ha passat no està inicialitzada.
+     */
+    public ConjuntItems(TaulaCSV taula, TipusItem tipusItem) throws AccesAEstatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         this.tipusItem = tipusItem;
 
         elements = new TreeMap<>();
         int id;
         for (int i = 0; i < taula.obtenirNumItems(); ++i) {
-            String sid = taula.obtenirValorAtribut(i, "id");
             try {
+                String sid = taula.obtenirValorAtribut(i, "id");
                 id = Integer.parseInt(sid);
-            } catch (NumberFormatException e1) {
-                throw new InputMismatchException("L'id no es un integer");
+                Id identificador = new Id(id, true);
+                if (elements.containsKey(identificador)) {
+                    throw new JaExisteixElementException("L'item creat ja existeix al conjunt");
+                }
+                afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
+            } catch (Exception ignored) {
             }
-            Id identificador = new Id(id, true);
-            if (elements.containsKey(identificador)) {
-                throw new InputMismatchException("L'item creat ja existeix al conjunt");
-            }
-            afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
         }
     }
 
@@ -111,7 +117,11 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             if (!that.conte(element.getKey())) {
                 return false;
             }
-            if (!that.obtenir(element.getKey()).equals(element.getValue())) {
+            try {
+                if (!that.obtenir(element.getKey()).equals(element.getValue())) {
+                    return false;
+                }
+            } catch (NoExisteixElementException e) {
                 return false;
             }
         }
@@ -130,13 +140,12 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         return new ConjuntItems(tipusItem.copiar(), copiaElements);
     }
 
-    @Override
     /**
      * Afegeix un item al conjunt d'ítems
      * @param element <code>Item</code> a afegir al conjunt
      */
+    @Override
     public void afegir(Item element){
-        // TODO: no estic massa segur que aixo sigui correcte.
         if (!tipusItem.equals(element.obtenirTipusItem())) {
             throw new IllegalArgumentException();
         }
@@ -145,6 +154,10 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
         }
     }
 
+    /**
+     * Crea una matriu on la primera fila es una capsalera i despres a cada fila hi ha un item.
+     * @return Una matriu d'<code>String</code> que serialitza el ConjuntItems.
+     */
     public ArrayList<ArrayList<String>> converteixAArray() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         ArrayList<String> capsalera = new ArrayList<>();

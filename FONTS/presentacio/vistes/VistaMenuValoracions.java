@@ -38,6 +38,7 @@ public class VistaMenuValoracions extends JPanel {
     private static BorderLayout borderLayout;
     private static JPanel jpanel;
     private static JButton esborrarTotesLesValoracionsButton;
+    private static JButton exportarConjuntValoracions;
 
     /**
      * Constructora per defecte de VistaMenuUsuaris
@@ -66,42 +67,30 @@ public class VistaMenuValoracions extends JPanel {
      */
     private static void inicialitzarLlistaValoracions() {
         ArrayList<String> nomsColumnes = new ArrayList<>();
-        nomsColumnes.add("Identificador d'Usuari");
-        nomsColumnes.add("Identificador d'Item");
-        nomsColumnes.add("Valoracio");
+        nomsColumnes.add("Identificador d'usuari");
+        nomsColumnes.add("Identificador d'ítem");
+        nomsColumnes.add("Valoració");
         llistaValoracionsTableModel = new DefaultTableModel(nomsColumnes.toArray(), 0);
         ArrayList<ArrayList<String>> valoracions = controladorMenuValoracions.obtenirValoracions();
         for (ArrayList<String> valoracio : valoracions) {
             llistaValoracionsTableModel.addRow(valoracio.toArray());
         }
-//        llistaValoracionsTableModel.removeRow(llistaValoracionsTableModel.getRowCount()-1);
         llistaValoracions = new JTable(llistaValoracionsTableModel);
+        llistaValoracions.setEnabled(false);
         jScrollPane = new JScrollPane(llistaValoracions);
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
         instancia.add(jScrollPane, BorderLayout.WEST);
     }
 
     /**
      * Sobreescriu la taula de valoracions amb el conjunt de valoracions del domini
      */
-    private static void actualitzarLlistaUsuaris() {
+    public static void actualitzarTaula() {
         llistaValoracionsTableModel.setRowCount(0);
-        ArrayList<ArrayList<String>> usuaris = controladorMenuValoracions.obtenirValoracions();
-        for (ArrayList<String> usuari : usuaris) {
-            llistaValoracionsTableModel.addRow(usuari.toArray());
+        ArrayList<ArrayList<String>> valoracions = controladorMenuValoracions.obtenirValoracions();
+        for (ArrayList<String> valoracio : valoracions) {
+            llistaValoracionsTableModel.addRow(valoracio.toArray());
         }
-        llistaValoracionsTableModel.removeRow(llistaValoracionsTableModel.getRowCount()-1);
         jScrollPane.revalidate();
-    }
-
-    /**
-     * Esborra el text de tots els camps de text
-     */
-    private static void clearText() {
-        itemIdText.setText("");
-        usuariIdText.setText("");
-        valorText.setText("");
     }
 
     /**
@@ -130,36 +119,90 @@ public class VistaMenuValoracions extends JPanel {
         editaValoracioButton();
         conjuntDeValoracionsButton();
         esborrarTotesLesValoracionsButton();
+        exportarConjuntValoracions();
 
         borderLayout = new BorderLayout();
         instancia.setLayout(borderLayout);
         instancia.add(jpanel, BorderLayout.CENTER);
     }
 
-    private static void conjuntDeValoracionsButton() {
-        conjuntDeValoracionsButton = new JButton("Carrega conjunt de valoracions");
-        conjuntDeValoracionsButton.addActionListener(e -> {
-            // TODO: logica
-            JDialog pathDialog = new JDialog();
-            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
-            if (estatJfile == APPROVE_OPTION) {
-                File pathConjuntVal = jFileChooser.getSelectedFile();
-                System.out.println(pathConjuntVal.getAbsolutePath());
-                try {
-                    controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
-                }
+    private static void usuariIdLabel() {
+        usuariIdLabel = new JLabel("Id Usuari: ");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jpanel.add(usuariIdLabel, gridBagConstraints);
+    }
+
+    private static void usuariIdText() {
+        usuariIdText = new JTextField();
+        usuariIdText.setColumns(10);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        jpanel.add(usuariIdText, gridBagConstraints);
+    }
+
+    private static void itemIdLabel() {
+        itemIdLabel = new JLabel("Id Item: ");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jpanel.add(itemIdLabel, gridBagConstraints);
+    }
+
+    private static void itemIdText() {
+        itemIdText = new JTextField();
+        itemIdText.setColumns(10);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        jpanel.add(itemIdText, gridBagConstraints);
+    }
+
+    private static void valorLabel() {
+        valorLabel = new JLabel("Valor: ");
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jpanel.add(valorLabel, gridBagConstraints);
+    }
+
+    private static void valorText() {
+        valorText = new JTextField();
+        valorText.setColumns(10);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        jpanel.add(valorText, gridBagConstraints);
+    }
+
+    private static void creaValoracioButton() {
+        creaValoracioButton = new JButton("Afegir valoració");
+        creaValoracioButton.addActionListener(e -> {
+            try {
+                controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
             }
         });
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        jpanel.add(conjuntDeValoracionsButton, gridBagConstraints);
+        gridBagConstraints.gridy = 3;
+        jpanel.add(creaValoracioButton, gridBagConstraints);
+    }
+
+    private static void esborraValoracioButton() {
+        esborraValoracioButton = new JButton("Esborrar valoració");
+        esborraValoracioButton.addActionListener(e -> {
+            try {
+                controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(instancia, ex.getMessage());
+            }
+        });
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jpanel.add(esborraValoracioButton, gridBagConstraints);
     }
 
     private static void editaValoracioButton() {
-        editaValoracioButton = new JButton("Edita valoració");
+        editaValoracioButton = new JButton("Editar valoració");
         editaValoracioButton.addActionListener(e -> {
             try {
                 if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
@@ -181,8 +224,50 @@ public class VistaMenuValoracions extends JPanel {
         jpanel.add(editaValoracioButton, gridBagConstraints);
     }
 
+    private static void conjuntDeValoracionsButton() {
+        conjuntDeValoracionsButton = new JButton("Importar valoracions");
+        conjuntDeValoracionsButton.addActionListener(e -> {
+            // TODO: logica
+            JDialog pathDialog = new JDialog();
+            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
+            if (estatJfile == APPROVE_OPTION) {
+                File pathConjuntVal = jFileChooser.getSelectedFile();
+                try {
+                    controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(instancia, ex.getMessage());
+                }
+            }
+        });
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        jpanel.add(conjuntDeValoracionsButton, gridBagConstraints);
+    }
+
+    private static void exportarConjuntValoracions() {
+        exportarConjuntValoracions = new JButton("Exportar valoracions");
+        exportarConjuntValoracions.addActionListener(e-> {
+            JDialog pathDialog = new JDialog();
+            jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int estatJfile = jFileChooser.showOpenDialog(pathDialog);
+            if (estatJfile == APPROVE_OPTION) {
+                File pathConjunt = jFileChooser.getSelectedFile();
+                try {
+                    controladorMenuValoracions.exportaValoracions(pathConjunt.getAbsolutePath());
+                } catch (IOException ex) {
+                    //TODO catch
+                    ex.printStackTrace();
+                }
+            }
+        });
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        jpanel.add(exportarConjuntValoracions, gridBagConstraints);
+    }
+
     private static void esborrarTotesLesValoracionsButton() {
-        esborrarTotesLesValoracionsButton = new JButton("Esborra totes les valoracions");
+        esborrarTotesLesValoracionsButton = new JButton("Esborrar totes les valoracions");
         esborrarTotesLesValoracionsButton.addActionListener(e -> {
             try {
                 if (controladorMenuValoracions.existeixTipusItemSeleccionat()) {
@@ -200,82 +285,8 @@ public class VistaMenuValoracions extends JPanel {
             }
         });
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         jpanel.add(esborrarTotesLesValoracionsButton, gridBagConstraints);
     }
 
-    private static void esborraValoracioButton() {
-        esborraValoracioButton = new JButton("Esborra valoració");
-        esborraValoracioButton.addActionListener(e -> {
-            try {
-                controladorMenuValoracions.esborrarValoracio(usuariIdText.getText(), itemIdText.getText());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(instancia, ex.getMessage());
-            }
-        });
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        jpanel.add(esborraValoracioButton, gridBagConstraints);
-    }
-
-    private static void creaValoracioButton() {
-        creaValoracioButton = new JButton("Crea Valoració");
-        creaValoracioButton.addActionListener(e -> {
-            try {
-                controladorMenuValoracions.afegirValoracio(usuariIdText.getText(), itemIdText.getText(), valorText.getText());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(instancia, ex.getMessage());
-            }
-        });
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jpanel.add(creaValoracioButton, gridBagConstraints);
-    }
-
-    private static void valorText() {
-        valorText = new JTextField();
-        valorText.setColumns(10);
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        jpanel.add(valorText, gridBagConstraints);
-    }
-
-    private static void valorLabel() {
-        valorLabel = new JLabel("Valor: ");
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        jpanel.add(valorLabel, gridBagConstraints);
-    }
-
-    private static void itemIdText() {
-        itemIdText = new JTextField();
-        itemIdText.setColumns(10);
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        jpanel.add(itemIdText, gridBagConstraints);
-    }
-
-    private static void itemIdLabel() {
-        itemIdLabel = new JLabel("Id Item: ");
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        jpanel.add(itemIdLabel, gridBagConstraints);
-    }
-
-    private static void usuariIdText() {
-        usuariIdText = new JTextField();
-        usuariIdText.setColumns(10);
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        jpanel.add(usuariIdText, gridBagConstraints);
-    }
-
-    private static void usuariIdLabel() {
-        usuariIdLabel = new JLabel("Id Usuari: ");
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jpanel.add(usuariIdLabel, gridBagConstraints);
-    }
 }

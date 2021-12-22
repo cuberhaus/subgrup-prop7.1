@@ -82,9 +82,8 @@ public class ControladorMenuValoracions {
      * @param usuariId identificador de l'usuari
      * @param itemId identificador de l'ítem
      * @param valor valor de la valoració
-     * @throws Exception no s'ha pogut afegir la valoració
      */
-    public void afegirValoracio(String usuariId, String itemId, String valor) throws Exception {
+    public void afegirValoracio(String usuariId, String itemId, String valor) {
         try {
             idUsuariEsValid(usuariId);
             idItemEsValid(itemId);
@@ -102,9 +101,8 @@ public class ControladorMenuValoracions {
      * Esborra una valoració del conjunt amb els identificadors donats
      * @param usuariId identificador de l'usuari
      * @param itemId identificador d'ítem
-     * @throws Exception no s'ha pogut esborrar la valoració
      */
-    public void esborrarValoracio(String usuariId, String itemId) throws Exception {
+    public void esborrarValoracio(String usuariId, String itemId) {
         try {
             idUsuariEsValid(usuariId);
             idItemEsValid(itemId);
@@ -119,9 +117,8 @@ public class ControladorMenuValoracions {
      * @param usuariId identificador de l'usuari
      * @param itemId identificador de l'ítem
      * @param valor nou valor de la valoració
-     * @throws Exception no s'ha pogut editar la valoració
      */
-    public void editarValoracio(String usuariId, String itemId, String valor) throws Exception {
+    public void editarValoracio(String usuariId, String itemId, String valor) {
         try {
             idUsuariEsValid(usuariId);
             idItemEsValid(itemId);
@@ -138,9 +135,8 @@ public class ControladorMenuValoracions {
     /**
      * Carrega un conjunt de valoracions des d'un arxiu localitzat en rutaAbsoluta
      * @param rutaAbsoluta path de l'arxiu
-     * @throws Exception no s'han pogut carregar les valoracions
      */
-    public void carregarConjuntValoracions(String rutaAbsoluta) throws Exception {
+    public void carregarConjuntValoracions(String rutaAbsoluta) {
         try {
             controladorPresentacio.carregarConjuntValoracions(rutaAbsoluta);
         } catch (Exception e) {
@@ -180,9 +176,8 @@ public class ControladorMenuValoracions {
      * @param idUsuari identificador d'usuari
      * @param idItem identificador d'ítem
      * @return retorna true si la valoració existeix, altrament, retorna false
-     * @throws Exception No s'ha pogut consultar el valor
      */
-    public boolean existeixValoracio(String idUsuari, String idItem) throws Exception {
+    public boolean existeixValoracio(String idUsuari, String idItem) {
         try {
             return controladorPresentacio.existeixValoracio(idUsuari, idItem);
         } catch (Exception e) {
@@ -191,4 +186,11 @@ public class ControladorMenuValoracions {
         return false;
     }
 
+    public void exportaValoracions(String absolutePath) throws IOException {
+        controladorPresentacio.exportaValoracions(absolutePath);
+    }
+
+    public static void actualitzarTaula() {
+        VistaMenuValoracions.actualitzarTaula();
+    }
 }

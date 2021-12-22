@@ -1,7 +1,11 @@
 package presentacio.controladors;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaMenuPrincipal;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 /**
@@ -17,13 +21,32 @@ public class ControladorMenuPrincipal {
     private ControladorMenuPrincipal () {
     }
 
-    public static ControladorMenuPrincipal obtenirInstancia() throws IOException {
+    public static ControladorMenuPrincipal obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorMenuPrincipal();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
             vistaMenuPrincipal = VistaMenuPrincipal.obtenirInstancia();
             vistaMenuPrincipal.setVisible(true);
+            vistaMenuPrincipal.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent windowEvent) {
+                    try {
+                        controladorPresentacio.guardarPrograma();
+                    } catch (IOException e) {
+                        // TODO: catch it (no se si te sentit perque estas tancant)
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
         return instancia;
+    }
+
+    /**
+     * Obre el manual d'usuari.
+     * @throws IOException si hi ha cap problema.
+     */
+    public void obreManual() throws IOException{
+        controladorPresentacio.obreManual();
     }
 }

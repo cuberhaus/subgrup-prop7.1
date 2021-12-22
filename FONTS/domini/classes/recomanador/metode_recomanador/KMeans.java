@@ -81,7 +81,6 @@ public class KMeans {
             }
         }
     }
-    // TODO: inicialitzacio no aleatoria?
 
     private void canviaDeConjunt(int punt, int nouConjunt) {
         particions[conjuntDelPunt[punt]].remove(punt);

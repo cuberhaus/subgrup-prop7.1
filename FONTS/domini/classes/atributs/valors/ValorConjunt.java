@@ -1,7 +1,6 @@
 package domini.classes.atributs.valors;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Representa el valor compost d'un atribut.
@@ -29,5 +28,17 @@ public abstract class ValorConjunt<T> extends ValorAtribut<ArrayList<ValorAtribu
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (ValorAtribut<?> element : this.valor) {
+            if (s.length() > 0) {
+                s.append(";");
+            }
+            s.append(element.toString());
+        }
+        return s.toString();
     }
 }

@@ -4,6 +4,9 @@ import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
 import domini.classes.csv.TaulaCSV;
+import excepcions.AccesAEstatIncorrecteException;
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.NoExisteixElementException;
 
 import java.util.*;
 
@@ -44,7 +47,7 @@ public class TipusItem {
      * @param numCandidats Nombre d'ítems que es consideraran per deduir el tipus de cada atribut.
      * @throws Exception Si el 'numCandidats' no està entre 1 i el nombre total d'ítems.
      */
-    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws Exception {
+    public TipusItem(String nomTipusItem, TaulaCSV taulaCSV, int numCandidats) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException {
         if (numCandidats < 0) {
             throw new IllegalArgumentException("Es necessita com a mínim un candidat per crear un TipusItem");
         }
@@ -173,9 +176,10 @@ public class TipusItem {
      * tal que els dos valors donats poden ser transformats en valors admesos per aquest.
      * @throws IllegalArgumentException si no hi ha una relació entre la parella de ValorsAtributs donats i no es pot
      * trobar un TipusAtribut que els reconegui als dos.
+     * @throws DistanciaNoCompatibleAmbValorException no es pot calcular la distancia del valor atribut.
      */
     private static TipusAtribut trobaTipusAtribut(ValorAtribut<?> valorAtribut1,
-                                                  ValorAtribut<?> valorAtribut2) throws IllegalArgumentException {
+                                                  ValorAtribut<?> valorAtribut2) throws IllegalArgumentException, DistanciaNoCompatibleAmbValorException {
         // Considerem cada cas particularment per a poder definir la distància que li correspon a cada TipusAtribut
         // i assegurar-nos que és compatible amb el ValorAtribut.
         if (valorAtribut1 instanceof ValorBoolea) {
@@ -234,8 +238,9 @@ public class TipusItem {
     /**
      * @param s <code>String</code> que conté el valor d'un atribut.
      * @return TipusAtribut per defecte que admet el valor contingut en 's'.
+     * @throws DistanciaNoCompatibleAmbValorException no es pot calcular la distancia
      */
-    private TipusAtribut dedueixTipusAtribut(String s) {
+    private TipusAtribut dedueixTipusAtribut(String s) throws DistanciaNoCompatibleAmbValorException {
         try {
             Double.parseDouble(s);
         } catch (NumberFormatException e1) {
@@ -260,5 +265,14 @@ public class TipusItem {
 
     public String toString() {
         return obtenirNom();
+    }
+
+
+    /**
+     * Canvia el nom del tipus item.
+     * @param nouNom nou nom del tipus d'item.
+     */
+    public void canviaElNom(String nouNom) {
+        nom = nouNom;
     }
 }

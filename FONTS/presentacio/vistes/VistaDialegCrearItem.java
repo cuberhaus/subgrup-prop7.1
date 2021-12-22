@@ -1,5 +1,8 @@
 package presentacio.vistes;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.FormatIncorrecteException;
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
@@ -15,7 +18,7 @@ public class VistaDialegCrearItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegCrearItem() throws IOException {
+    public VistaDialegCrearItem() throws DistanciaNoCompatibleAmbValorException, NomInternIncorrecteException, IOException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegCrearItem();
@@ -67,22 +70,18 @@ public class VistaDialegCrearItem extends JDialog {
             if (!controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
                 for (Component component : panellLlistaAtributs.getComponents()) {
                     JPanel atribut = (JPanel) component;
-                    String nomAtribut = ((JLabel) atribut.getComponent(1)).getText();
-                    String valorTipusAtribut = ((JTextField) atribut.getComponent(2)).getText();
+                    String nomAtribut = ((JLabel) atribut.getComponent(0)).getText();
+                    String valorTipusAtribut = ((JTextField) atribut.getComponent(1)).getText();
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
             try {
-                if (!controladorMenuItems.afegirItem(valorsAtributs)) {
-                    JOptionPane.showMessageDialog(this, "No s'ha pogut crear un ítem amb els valors donats.");
-                    return;
-                }
+                String nouId = controladorMenuItems.afegirItem(valorsAtributs);
+                JOptionPane.showMessageDialog(this, "Item creat amb èxit amb identificador " + nouId);
+                dispose();
             } catch (Exception ex) {
-                // TODO catch
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "No s'ha pogut crear un ítem amb els valors donats.");
             }
-            JOptionPane.showMessageDialog(this, "Ítem creat amb èxit.");
-            dispose();
         });
         botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }

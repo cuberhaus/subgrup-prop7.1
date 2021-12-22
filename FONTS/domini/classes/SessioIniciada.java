@@ -1,5 +1,8 @@
 package domini.classes;
 
+import excepcions.SessioIniciadaException;
+import excepcions.SessioNoIniciadaException;
+
 /**
  * Representa l'estat de la sessió en el cas en què s'ha iniciat sessió.
  *
@@ -19,10 +22,10 @@ public class SessioIniciada extends Sessio {
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
      *
-     * @throws Exception si l'estat és sessioNoIniciada
+     * @throws SessioNoIniciadaException si l'estat és sessioNoIniciada
      */
     @Override
-    public void tancarSessio(Programa programa) throws Exception {
+    public void tancarSessio(Programa programa) throws SessioNoIniciadaException {
         usuari = null;
         programa.cambiarEstat(new SessioNoIniciada());
     }
@@ -31,11 +34,11 @@ public class SessioIniciada extends Sessio {
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
      *
      * @param usuari Usuari amb el qual iniciem la sessió.
-     * @throws Exception si l'estat és sessioIniciada
+     * @throws SessioIniciadaException si l'estat és sessioIniciada
      */
     @Override
-    public void iniciarSessio(Programa programa, Usuari usuari) throws Exception {
-        throw new Exception("No es pot iniciar sessió sense abans tancar la sessió");
+    public void iniciarSessio(Programa programa, Usuari usuari) throws SessioIniciadaException {
+        throw new SessioIniciadaException("No es pot iniciar sessió sense abans tancar la sessió");
     }
 
     /**
@@ -49,10 +52,10 @@ public class SessioIniciada extends Sessio {
     /**
      * Retorna l'usuari amb la sessió iniciada.
      *
-     * @throws Exception si l'estat és sessioNoIniciada
+     * @throws SessioNoIniciadaException si l'estat és sessioNoIniciada
      */
     @Override
-    public Usuari obtenirUsuariSessioIniciada() throws Exception{
+    public Usuari obtenirUsuariSessioIniciada() throws SessioNoIniciadaException{
         return usuari;
     }
 }

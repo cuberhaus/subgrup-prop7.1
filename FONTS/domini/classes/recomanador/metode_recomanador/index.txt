@@ -1,10 +1,11 @@
 Conté les classes que implementen el mètode recomanador i altres que el mètode recomanador necessita.
 ConjuntPunts.java
-KMeans.java
-Punt.java
 index.txt
+KMeans.java
+KNN.java
+MetodeRecomandor.java
 MetodeRecomanadorCollaborative.java
 MetodeRecomanadorContentBased.java
-MetodeRecomanador.java
+MetodeRecomanadorHibrid.java
+Punt.java
 SlopeOne.java
-KNN.java

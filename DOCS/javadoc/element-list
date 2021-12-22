@@ -7,7 +7,15 @@ domini.classes.csv
 domini.classes.recomanador
 domini.classes.recomanador.filtre
 domini.classes.recomanador.metode_recomanador
+domini.controladors
 domini.tests
+excepcions
 jocs_de_proves.joc1
 jocs_de_proves.joc2
+jocs_de_proves.joc3
+persistencia.classes
+persistencia.controladors
+persistencia.tests
+presentacio.controladors
+presentacio.vistes
 utilitats

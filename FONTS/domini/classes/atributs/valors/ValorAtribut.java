@@ -14,6 +14,9 @@ public abstract class ValorAtribut<T> {
      */
     public abstract ValorAtribut<?> copiar();
 
+    /**
+     * @return el nom de la subclasse de l'instància.
+     */
     public abstract String obteNomValor();
 
     @Override
@@ -33,4 +36,11 @@ public abstract class ValorAtribut<T> {
      * @return Valor del ValorAtribut.
      */
     public abstract T obtenirValor();
+
+    /**
+     * @return Transforma el ValorAtribut en una String;
+     */
+    @Override
+    public abstract String toString();
+
 }

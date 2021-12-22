@@ -2,6 +2,7 @@ package domini.tests;
 
 import domini.classes.atributs.valors.*;
 
+import excepcions.FormatIncorrecteException;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -46,7 +47,7 @@ public class ValorBooleaTest {
         }
 
         @Test
-        public void constructorAmbString_HauriaDeCrearValorBoolea() {
+        public void constructorAmbString_HauriaDeCrearValorBoolea() throws FormatIncorrecteException {
             assertEquals(new ValorBoolea(valor), new ValorBoolea(esperat));
         }
     }

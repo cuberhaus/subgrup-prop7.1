@@ -3,6 +3,8 @@ package domini.tests;
 import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.ValorAtribut;
+import excepcions.UsuariIncorrecteException;
+import utilitats.Pair;
 
 import java.util.*;
 
@@ -10,7 +12,7 @@ import java.util.*;
  * @author Tots.
  */
 public class UtilitatsDEscriptura {
-    public static void imprimirItem(Item item) {
+    public static void imprimirItem(Item item) throws UsuariIncorrecteException {
         System.out.println("******* Item *******");
         System.out.println("* Id de l'Item:");
         imprimirId(item.obtenirId());
@@ -94,7 +96,7 @@ public class UtilitatsDEscriptura {
         imprimirValoracionsUsuari(valoracions);
     }
 
-    public static void  imprimirConjuntItems(ConjuntItems conjuntItems) {
+    public static void  imprimirConjuntItems(ConjuntItems conjuntItems) throws UsuariIncorrecteException {
         ArrayList<Item> items = new ArrayList<>(conjuntItems.obtenirTotsElsElements().values());
         UtilitatsDEscriptura.imprimirTipusItem(conjuntItems.obteTipusItem());
         for (Item item : items) {

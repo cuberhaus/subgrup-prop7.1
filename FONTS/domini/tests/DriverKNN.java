@@ -4,6 +4,7 @@ import domini.classes.*;
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
 import domini.classes.recomanador.metode_recomanador.KNN;
+import excepcions.DistanciaNoCompatibleAmbValorException;
 import utilitats.consola;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class DriverKNN {
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws DistanciaNoCompatibleAmbValorException {
         tipusItem = new TipusItem("escalar");
         domini.classes.atributs.valors.ValorNumeric valorAtribut = new domini.classes.atributs.valors.ValorNumeric();
         tipusItem = new TipusItem("escalar", new TreeMap<>(Map.of(

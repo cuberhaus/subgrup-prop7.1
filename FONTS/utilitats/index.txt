@@ -1,4 +1,5 @@
 Carpeta que conte classes que inclouen metodes que faciliten la lectura i escriptura a la terminal. S'utilitzen als
 drivers de les classes del projecte.
-consola
-inout
+consola.java
+inout.java
+Pair.java

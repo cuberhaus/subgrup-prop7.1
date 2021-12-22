@@ -1,28 +1,34 @@
 package presentacio.vistes;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuRecomanacions;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class VistaMenuRecomanacions extends JPanel {
-    private static int amplada;
-    private static int altura;
     private static VistaMenuRecomanacions instancia;
     private static ControladorMenuRecomanacions controladorMenuRecomanacions;
     private static JPanel panellSeleccionarMetode;
     private static JPanel panellSeleccionarFiltre;
-    private static JPanel panellMostrarRecomanacio;
-    private static JPanel panellAvaluarRecomanacio;
+    private static JPanel panellObtenirRecomanacio;
+    private static JComboBox<String> metodeComboBox;
+
+    /**
+     * Guardem el nom del tipus d'ítem del filtre que tenim guardat per actualitzar-lo quan canviem el tipus d'ítem
+     * seleccionat.
+     */
+    private static String nomTipusItemFiltre;
+    private static Map<String, Boolean> nomsAtributsFiltre;
 
     private VistaMenuRecomanacions() {
-        amplada = this.getWidth();
-        altura = this.getHeight();
     }
 
-    public static VistaMenuRecomanacions obtenirInstancia() throws IOException {
+    public static VistaMenuRecomanacions obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new VistaMenuRecomanacions();
             controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();
@@ -51,78 +57,95 @@ public class VistaMenuRecomanacions extends JPanel {
         instancia.add(panellSeleccionarMetode);
         inicialitzarPanellSeleccionarFiltre();
         instancia.add(panellSeleccionarFiltre);
-        inicialitzarPanellMostrarRecomanacio();
-        instancia.add(panellMostrarRecomanacio);
-        inicialitzarPanellAvaluarRecomanacio();
-        instancia.add(panellAvaluarRecomanacio);
+        inicialitzarPanellObtenirRecomanacio();
+        instancia.add(panellObtenirRecomanacio);
         instancia.add(Box.createVerticalGlue());
-
-        /*
-        controladorMenuRecomanacions.sessioIniciada();
-        controladorMenuRecomanacions.existeixTipusItemSeleccionat();
-        controladorMenuRecomanacions.obtenirRecomanacioCollaborative(new ArrayList<>(), false);
-        controladorMenuRecomanacions.obtenirRecomanacioContentBased(new ArrayList<>(), false);
-        controladorMenuRecomanacions.obtenirRecomanacioHibrida(new ArrayList<>(), false);
-        controladorMenuRecomanacions.avaluarRecomanacio();
-         */
     }
 
     private static void inicialitzarPanellSeleccionarMetode() {
         panellSeleccionarMetode = new JPanel(new FlowLayout());
         JLabel descripcio = new JLabel("Selecciona el mètode:");
         panellSeleccionarMetode.add(descripcio);
-        JComboBox<String> metodeComboBox = new JComboBox<>(new String[]{"Basat en els ítems que has valorat",
+        metodeComboBox = new JComboBox<>(new String[]{"Basat en els ítems que has valorat",
                 "Basat en usuaris amb gustos semblants als teus", "Basat en tot"});
         panellSeleccionarMetode.add(metodeComboBox);
         panellSeleccionarMetode.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
     private static void inicialitzarPanellSeleccionarFiltre() {
-        panellSeleccionarFiltre = new JPanel();
-        panellSeleccionarFiltre.setLayout(new BoxLayout(panellSeleccionarFiltre, BoxLayout.Y_AXIS));
+        panellSeleccionarFiltre = new JPanel(new FlowLayout());
+
         JLabel descripcio = new JLabel("Selecciona un filtre pels atributs del tipus d'ítem seleccionat:");
         descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
         panellSeleccionarFiltre.add(descripcio);
 
-        // TODO (maria): implementar botons
-        JPanel panellBotonsFiltre = new JPanel(new FlowLayout());
+        JButton botoEditarFiltre = new JButton("Edita filtre");
+        botoEditarFiltre.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoEditarFiltre.addActionListener(actionEvent -> {
+            if (!controladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            } else {
+                if (nomTipusItemFiltre == null) {
+                    nomsAtributsFiltre = new TreeMap<>();
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                        nomsAtributsFiltre.put(nomAtribut, true);
+                    }
+                } else if (!nomTipusItemFiltre.equals(controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat())) {
+                    nomsAtributsFiltre = new TreeMap<>();
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                        nomsAtributsFiltre.put(nomAtribut, true);
+                    }
+                }
+                nomTipusItemFiltre = controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat();
 
-        JButton botoSeleccionarTots = new JButton("Seleccionar tots");
-        botoSeleccionarTots.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoSeleccionarTots.addActionListener(actionEvent -> {});
-        panellBotonsFiltre.add(botoSeleccionarTots);
-
-        JButton botoDeseleccionarTots = new JButton("Deseleccionar tots");
-        botoDeseleccionarTots.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoDeseleccionarTots.addActionListener(actionEvent -> {});
-        panellBotonsFiltre.add(botoDeseleccionarTots);
-
-        panellSeleccionarFiltre.add(panellBotonsFiltre);
-
-        JPanel panellLlistaAtributs = new JPanel(new FlowLayout());
-        JPanel llistaAtributs = new JPanel();
-        llistaAtributs.setLayout(new BoxLayout(llistaAtributs, BoxLayout.Y_AXIS));
-        JScrollPane panellScroll = new JScrollPane(llistaAtributs);
-        panellScroll.setPreferredSize(new Dimension(3 * amplada / 4, 3 * altura / 4));
-        if (controladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
-            ArrayList<String> nomsAtributs = controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat();
-            for (String nomsAtribut : nomsAtributs) {
-                llistaAtributs.add(new JCheckBox(nomsAtribut));
+                VistaDialegEditarFiltre vistaDialegEditarFiltre;
+                try {
+                    vistaDialegEditarFiltre = new VistaDialegEditarFiltre(nomsAtributsFiltre);
+                    vistaDialegEditarFiltre.setVisible(true);
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(instancia,
+                            "No es pot mostrar aquest tipus d'ítem. Torna-ho a intentar.");
+                }
             }
-        } else {
-            JLabel textTipusItemSeleccionat = new JLabel("No hi ha cap tipus d'ítem seleccionat.");
-            textTipusItemSeleccionat.setAlignmentX(Component.CENTER_ALIGNMENT);
-            llistaAtributs.add(textTipusItemSeleccionat);
-        }
-        panellLlistaAtributs.add(panellScroll);
-        panellSeleccionarFiltre.add(panellLlistaAtributs);
+        });
+        panellSeleccionarFiltre.add(botoEditarFiltre);
     }
 
-    private static void inicialitzarPanellMostrarRecomanacio() {
-        panellMostrarRecomanacio = new JPanel();
-    }
+    private static void inicialitzarPanellObtenirRecomanacio() {
+        panellObtenirRecomanacio = new JPanel(new FlowLayout());
 
-    private static void inicialitzarPanellAvaluarRecomanacio() {
-        panellAvaluarRecomanacio = new JPanel();
+        JButton botoObtenirRecomanacio = new JButton("Obté recomanació");
+        botoObtenirRecomanacio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoObtenirRecomanacio.addActionListener(actionEvent -> {
+            if (!controladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
+                JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
+            } else if (!controladorMenuRecomanacions.sessioIniciada()) {
+                JOptionPane.showMessageDialog(instancia, "No has iniciat la sessió.");
+            } else {
+                if (nomTipusItemFiltre == null) {
+                    nomsAtributsFiltre = new TreeMap<>();
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                        nomsAtributsFiltre.put(nomAtribut, true);
+                    }
+                } else if (!nomTipusItemFiltre.equals(controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat())) {
+                    nomsAtributsFiltre = new TreeMap<>();
+                    for (String nomAtribut : controladorMenuRecomanacions.obtenirNomAtributsTipusItemSeleccionat()) {
+                        nomsAtributsFiltre.put(nomAtribut, true);
+                    }
+                }
+                nomTipusItemFiltre = controladorMenuRecomanacions.obtenirNomTipusItemSeleccionat();
+
+                VistaDialegObtenirRecomanacio vistaDialegObtenirRecomanacio;
+                try {
+                    vistaDialegObtenirRecomanacio = new VistaDialegObtenirRecomanacio(
+                            (String) metodeComboBox.getSelectedItem(), nomsAtributsFiltre);
+                    vistaDialegObtenirRecomanacio.setVisible(true);
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(instancia,
+                            "No es pot mostrar aquest tipus d'ítem. Torna-ho a intentar.");
+                }
+            }
+        });
+        panellObtenirRecomanacio.add(botoObtenirRecomanacio);
     }
 }

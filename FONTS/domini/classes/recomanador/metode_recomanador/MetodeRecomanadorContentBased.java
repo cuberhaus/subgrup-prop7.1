@@ -3,6 +3,8 @@ package domini.classes.recomanador.metode_recomanador;
 import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.Recomanacio;
+import excepcions.NoExisteixElementException;
+import utilitats.Pair;
 
 import java.util.*;
 
@@ -40,12 +42,11 @@ public class MetodeRecomanadorContentBased extends MetodeRecomanador {
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
      */
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) throws NoExisteixElementException {
         TreeMap<Id, Double> valorItem = new TreeMap<>();
         KNN knn = new KNN(conjuntRecomanable.obtenirTotsElsElements().values().toArray(new Item[0]));
         for (Valoracio val : valoracionsUsuari.obtenitTotesLesValoracions().values()) {
             if (val.obtenirValor() > minimaValoracioConsiderada) {
-                // TODO: agafo tants veins com recomanacions volem, no te perque ser la millor eleccio
                 ArrayList<Item> veins = knn.obtenirVeins(val.obtenirItem(), numRecomanacions);
                 for (Item it : veins) {
                     if (valorItem.containsKey(it.obtenirId())) {

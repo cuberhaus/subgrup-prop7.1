@@ -6,6 +6,7 @@ import domini.classes.csv.TaulaCSV;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborative;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
+import utilitats.Pair;
 
 import java.io.File;
 import java.util.ArrayList;

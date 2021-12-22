@@ -1,8 +1,8 @@
 package domini.classes;
 
 import domini.classes.csv.TaulaCSV;
+import excepcions.NoExisteixElementException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
@@ -18,25 +18,26 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         elements = new TreeMap<>();
     }
 
-    //user nom password actiu
     /**
      * Constructora de ConjuntUsuaris donada una llista d'usuaris
-     * @param llistaUsuaris llista d'usuaris amb la que s'inicialitza el conjunt
+     * @param llistaUsuaris llista d'usuaris amb la que s'inicialitza el conjunt, per a cada fila l'ordre ha de ser:
+     *                      IdUsuari, nomUsuari, contrasenyaUsuari, UsuariActiu
      */
     public ConjuntUsuaris(ArrayList<ArrayList<String>> llistaUsuaris) {
         elements = new TreeMap<>();
         llistaUsuaris.remove(0);
-        llistaUsuaris.remove(llistaUsuaris.size() - 1);
         for (ArrayList<String> usuari : llistaUsuaris) {
-            String id = usuari.get(1);
-            String nom = usuari.get(0);
-            String password = usuari.get(2);
-            String actiu = usuari.get(3);
+            try {
+                String id = usuari.get(1);
+                String nom = usuari.get(0);
+                String password = usuari.get(2);
+                String actiu = usuari.get(3);
 
-            Boolean actiuUsuari = Boolean.parseBoolean(actiu);
-            int idNum = Integer.parseInt(id);
-            Id idUsuari = new Id(idNum, actiuUsuari);
-            elements.put(idUsuari, new Usuari(idUsuari, nom, password));
+                boolean actiuUsuari = Boolean.parseBoolean(actiu.trim());
+                int idNum = Integer.parseInt(id);
+                Id idUsuari = new Id(idNum, actiuUsuari);
+                elements.put(idUsuari, new Usuari(idUsuari, nom, password));
+            } catch (Exception ignored) {}
         }
     }
 
@@ -61,7 +62,7 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      * @param id que correspon al usuari que volem esborrar
      */
     @Override
-    public Usuari esborrar(Id id) {
+    public Usuari esborrar(Id id) throws NoExisteixElementException {
         Usuari u1 = this.obtenir(id);
         u1.setActiu(false);
         return elements.put(u1.obtenirId(), u1);
@@ -97,6 +98,10 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
         return usuaris;
     }
 
+    /**
+     * Obté els usuaris per al format CSV
+     * @return <code>ArrayList&lt;ArrayList&lt;String&gt;&gt;</code> del contingut dels usuaris amb la capaçalera
+     */
     public ArrayList<ArrayList<String>> obtenirUsuarisCSV() {
         ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         ArrayList<String> usuaris = new ArrayList<>();
@@ -127,17 +132,19 @@ public class ConjuntUsuaris extends ConjuntIdentificat<Usuari> {
      * Retorna una llista amb tots els usuaris i els seus atributs
      * @return Llista amb tots els usuaris
      */
-    public ArrayList<ArrayList<String>> obtenirLlistaUsuaris() {
+    public ArrayList<ArrayList<String>> obtenirLlistaUsuarisActius() {
         ArrayList<ArrayList<String>> resultat = new ArrayList<>();
         ArrayList<String> usuaris = new ArrayList<>();
 
         Set<Id> keys = elements.keySet();
         for (Id id : keys) {
-            usuaris.add(elements.get(id).obtenirNom());
-            usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
-            usuaris.add(String.valueOf(elements.get(id).obtenirId().esActiu()));
-            resultat.add(new ArrayList<>(usuaris));
-            usuaris.clear();
+            if (id.esActiu()) {
+                usuaris.add(elements.get(id).obtenirNom());
+                usuaris.add(String.valueOf(elements.get(id).obtenirId().obtenirValor()));
+                usuaris.add(String.valueOf(elements.get(id).obtenirId().esActiu()));
+                resultat.add(new ArrayList<>(usuaris));
+                usuaris.clear();
+            }
         }
 
         resultat.add(usuaris);

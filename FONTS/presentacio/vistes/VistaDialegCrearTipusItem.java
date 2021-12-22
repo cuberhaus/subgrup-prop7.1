@@ -1,6 +1,9 @@
 package presentacio.vistes;
 
-import domini.classes.Pair;
+import utilitats.Pair;
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.JaExisteixElementException;
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -19,7 +22,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
     private JPanel panellCrearTipusItem;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public VistaDialegCrearTipusItem() throws IOException {
+    public VistaDialegCrearTipusItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         super(null, Dialog.ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         inicialitzarDialegCrearTipusItem();
@@ -68,7 +71,6 @@ public class VistaDialegCrearTipusItem extends JDialog {
 
         JButton botoCrearTipusItem = new JButton("Crea tipus d'ítem");
         botoCrearTipusItem.addActionListener(e -> {
-            // TODO (maria): comprovar que les distàncies són compatibles amb el valor atribut
             String nom = nomTipusItem.getText();
             if (nom.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "El tipus d'ítem ha de tenir un nom.");
@@ -81,10 +83,12 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 if (nomTipusAtribut.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
                             "No pot haver-hi un tipus d'atribut sense nom.");
+                    return;
                 }
                 if (nomAValorAtribut.containsKey(nomTipusAtribut)) {
                     JOptionPane.showMessageDialog(this,
                             "No pot haver-hi dos tipus d'atributs amb el mateix nom.");
+                    return;
                 }
                 String valorTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(3)).getSelectedItem();
                 String distanciaTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(5)).getSelectedItem();
@@ -93,10 +97,15 @@ public class VistaDialegCrearTipusItem extends JDialog {
             try {
                 controladorMenuTipusItem.crearTipusItem(nom, nomAValorAtribut);
                 dispose();
-            } catch (IllegalArgumentException e1) {
+                JOptionPane.showMessageDialog(this,
+                        "Tipus d'ítem creat amb èxit.");
+            } catch (JaExisteixElementException e1) {
                 JOptionPane.showMessageDialog(this,
                         "Ja existeix un tipus d'ítem amb aquest nom.");
-            } catch (IOException e2) {
+            } catch (DistanciaNoCompatibleAmbValorException distanciaNoCompatibleAmbValorException) {
+                JOptionPane.showMessageDialog(this,
+                        "Hi ha una distància que no és compatible amb el valor escollit");
+            } catch (Exception e3) {
                 JOptionPane.showMessageDialog(this,
                         "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
             }

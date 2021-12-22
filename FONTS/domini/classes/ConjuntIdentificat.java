@@ -1,5 +1,8 @@
 package domini.classes;
 
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.NoExisteixElementException;
+
 import java.util.TreeMap;
 
 /**
@@ -28,12 +31,12 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
     /**
      * @param id id <code>Id</code> que conté l'identificador de l'element que es vol trobar.
      * @return Element del conjunt identificat amb l'identificador donat.
-     * @throws IllegalArgumentException Si l'identificador donat és nul o el conjunt no conté cap element amb
+     * @throws NoExisteixElementException Si l'identificador donat és nul o el conjunt no conté cap element amb
      * l'identificador donat.
      */
-    public T obtenir(Id id) throws IllegalArgumentException {
+    public T obtenir(Id id) throws NoExisteixElementException {
         if (id == null || !elements.containsKey(id)) {
-            throw new IllegalArgumentException("El conjunt no conté cap element amb aquest Id");
+            throw new NoExisteixElementException("El conjunt no conté cap element amb aquest Id");
         }
         return elements.get(id);
     }
@@ -57,8 +60,9 @@ public abstract class ConjuntIdentificat<T extends ElementIdentificat> {
      * @param id Identificador d'un element.
      * @return L'element que anteriorment estava identificat amb l'identificador donat. Si el conjunt no contenia cap
      * element amb aquest Id, retorna <code>null</code>.
+     * @throws NoExisteixElementException si no exiteix l'element al conjunt
      */
-    public T esborrar(Id id) {
+    public T esborrar(Id id) throws NoExisteixElementException {
         return elements.remove(id);
     }
 

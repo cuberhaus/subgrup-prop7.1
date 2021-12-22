@@ -1,12 +1,13 @@
 package presentacio.vistes;
 
-import domini.classes.Pair;
+import utilitats.Pair;
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,16 +21,14 @@ public class VistaDialegMostrarTipusItem extends JDialog {
     private JPanel panellLlistaTipusAtributs;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    // TODO: afegir editar TipusItem
-
-    public VistaDialegMostrarTipusItem() throws IOException {
+    public VistaDialegMostrarTipusItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         this.nomTipusItem = controladorMenuTipusItem.obtenirNomTipusItemSeleccionat();
         inicialitzarDialegMostrarTipusItem();
     }
 
-    private void inicialitzarDialegMostrarTipusItem() {
+    private void inicialitzarDialegMostrarTipusItem() throws DistanciaNoCompatibleAmbValorException {
         setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8),
                 Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
@@ -38,7 +37,7 @@ public class VistaDialegMostrarTipusItem extends JDialog {
         inicialitzarPanellMostrarTipusItem();
     }
 
-    private void inicialitzarPanellMostrarTipusItem() {
+    private void inicialitzarPanellMostrarTipusItem() throws DistanciaNoCompatibleAmbValorException {
         panellMostrarTipusItem = new JPanel();
         panellMostrarTipusItem.setLayout(new BoxLayout(panellMostrarTipusItem, BoxLayout.Y_AXIS));
 

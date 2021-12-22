@@ -3,6 +3,8 @@ package domini.classes.recomanador.metode_recomanador;
 import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
 import domini.classes.recomanador.Recomanacio;
+import excepcions.NoExisteixElementException;
+import utilitats.Pair;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -86,7 +88,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
         return itemsUsables;
     }
 
-    private Double[][] generaTaulaValoracions(ArrayList<Integer> particioUsuari, Item[] items) {
+    private Double[][] generaTaulaValoracions(ArrayList<Integer> particioUsuari, Item[] items) throws NoExisteixElementException {
         int numUsuaris = particioUsuari.size();
         int numItems = items.length;
         Double[][] valoracions = new Double[numUsuaris][numItems];
@@ -110,7 +112,7 @@ public class MetodeRecomanadorCollaborative extends MetodeRecomanador {
      *          retorna null.
      */
     @Override
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable, ConjuntValoracions valoracionsUsuari, int numRecomanacions) throws NoExisteixElementException {
 
         int posicioUsuari = buscaPosicioUsuari(usuari);
 

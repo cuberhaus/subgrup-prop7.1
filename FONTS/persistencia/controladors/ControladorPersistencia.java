@@ -3,6 +3,7 @@ package persistencia.controladors;
 import persistencia.classes.EscriptorDeCSV;
 import persistencia.classes.LectorDeCSV;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,13 +14,14 @@ import java.util.ArrayList;
 
 /**
  * Controlador per la capa de Persistència.
- * @author edgar.moreno && pablo.vega
+ * @author edgar.moreno and pablo.vega
  */
 public class ControladorPersistencia {
 
     private final Path direccioCarpetaItems = Paths.get("..", "EXE", "dades", "items");
     private final Path direccioCarpetaUsuaris = Paths.get("..", "EXE", "dades", "usuaris");
     private final Path direccioCarpetaValoracions = Paths.get("..", "EXE", "dades", "valoracions");
+    private final Path direccioManual = Paths.get("..", "EXE", "dades", "ManualD'Usuari.pdf");
 
     private static ControladorPersistencia instancia;
     private final EscriptorDeCSV escriptor;
@@ -63,10 +65,12 @@ public class ControladorPersistencia {
     private Path obteCarpetaTipusItem(String nom) {
         return Paths.get(direccioCarpetaItems.toString(), nom);
     }
+
     private Path obteRutaDefinicioTipusItem(String nom) {
         return Paths.get(direccioCarpetaItems.toString(),nom, "definicio.csv");
     }
-    public void guardarTipusItem(ArrayList<ArrayList<String>> tipus_item, String nom) throws IOException {
+
+    public void guardarTipusItem(ArrayList<ArrayList<String>> tipusItem, String nom) throws IOException {
         Path path = obteCarpetaTipusItem(nom);
         if (!Files.exists(path)) {
             Files.createDirectory(path);
@@ -74,8 +78,9 @@ public class ControladorPersistencia {
         else if (Files.exists(obteRutaDefinicioTipusItem(nom))) {
             obteRutaDefinicioTipusItem(nom).toFile().delete();
         }
-        escriptor.escriureCSV(obteRutaDefinicioTipusItem(nom).toString(), tipus_item);
+        escriptor.escriureCSV(obteRutaDefinicioTipusItem(nom).toString(), tipusItem);
     }
+
     public ArrayList<ArrayList<String>> obtenirTipusItem(String nom) throws IOException {
         if(!Files.exists(obteRutaDefinicioTipusItem(nom)))
             return null;
@@ -114,8 +119,9 @@ public class ControladorPersistencia {
     }
     public ArrayList<ArrayList<String>> obtenirConjuntItems(String tipusItem, String nom) throws IOException {
         nom += ".csv";
-        if(!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom)))
-            return null;
+        if (!Files.exists(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom))) {
+            return new ArrayList<>();
+        }
         return lector.llegirCSV(Paths.get(obteCarpetaTipusItem(tipusItem).toString(), nom).toString());
     }
     public void borrarConjuntItems( String tipusItem, String nom) throws IOException {
@@ -125,31 +131,35 @@ public class ControladorPersistencia {
         }
     }
 
-    private String obtePathConjuntUsuaris(String nom) {
-        return direccioCarpetaUsuaris + "/" + nom;
+    private Path obtePathConjuntUsuaris(String nom) {
+        return Paths.get(direccioCarpetaUsuaris.toString(),nom+".csv");
     }
     public void guardarConjuntUsuaris(ArrayList<ArrayList<String>> conjunt, String nom) throws IOException {
-        escriptor.escriureCSV(obtePathConjuntUsuaris(nom), conjunt);
+        escriptor.escriureCSV(obtePathConjuntUsuaris(nom).toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntUsuaris(String nom) throws IOException {
-        return lector.llegirCSV(obtePathConjuntUsuaris(nom));
+        return lector.llegirCSV(obtePathConjuntUsuaris(nom).toString());
     }
     public void borrarConjuntUsuaris(String nom) throws IOException {
-        Path conjunt = Paths.get(obtePathConjuntUsuaris(nom));
+        Path conjunt = Paths.get(obtePathConjuntUsuaris(nom).toString());
         Files.delete(conjunt);
     }
 
-    private String obtePathConjuntValoracions(String nom) {
-        return direccioCarpetaValoracions + "/" + nom;
+    private Path obtePathConjuntValoracions(String nom) {
+        return Paths.get(direccioCarpetaValoracions.toString(),nom+".csv");
     }
     public void guardarConjuntValoracions(ArrayList<ArrayList<String>> conjunt, String nom) throws IOException {
-        escriptor.escriureCSV(obtePathConjuntValoracions(nom), conjunt);
+        Path path = obtePathConjuntValoracions(nom);
+        if (Files.exists(path)) {
+            path.toFile().delete();
+        }
+        escriptor.escriureCSV(path.toString(), conjunt);
     }
     public ArrayList<ArrayList<String>> obtenirConjuntValoracions(String nom) throws IOException {
-        return lector.llegirCSV(obtePathConjuntValoracions(nom));
+        return lector.llegirCSV(obtePathConjuntValoracions(nom).toString());
     }
     public void borrarConjuntValoracions(String nom) throws IOException {
-        Path conjunt = Paths.get(obtePathConjuntValoracions(nom));
+        Path conjunt = Paths.get(obtePathConjuntValoracions(nom).toString());
         Files.delete(conjunt);
     }
 
@@ -158,5 +168,14 @@ public class ControladorPersistencia {
     }
     public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula) throws IOException {
         escriptor.escriureCSV(ubicacio, taula);
+    }
+
+    public void escriureCSVQualsevol(String ubicacio, ArrayList<ArrayList<String>> taula, String nom) throws IOException {
+        escriptor.escriureCSV(ubicacio, taula, nom);
+    }
+
+    public void obreManual() throws IOException {
+        File myFile = direccioManual.toFile();
+        Desktop.getDesktop().open(myFile);
     }
 }

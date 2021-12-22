@@ -2,6 +2,8 @@ package domini.classes.atributs;
 
 import domini.classes.atributs.distancia.*;
 import domini.classes.atributs.valors.*;
+import excepcions.DistanciaNoCompatibleAmbValorException;
+import excepcions.NomInternIncorrecteException;
 
 import java.util.Objects;
 
@@ -23,18 +25,24 @@ public class TipusAtribut {
      * Constructor d'un TipusAtribut a partir d'un valor i una distància.
      * @param valorAtribut Valor de l'atribut
      * @param distancia Distància de l'atribut
+     * @throws DistanciaNoCompatibleAmbValorException el valor atribut i la distancia no son compatibles.
      */
-    public TipusAtribut(ValorAtribut<?> valorAtribut, Distancia distancia) {
+    public TipusAtribut(ValorAtribut<?> valorAtribut, Distancia distancia) throws DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtribut;
         this.distancia = distancia;
+        if (!distancia.admet(valorAtribut)) {
+            throw new DistanciaNoCompatibleAmbValorException("El ValorAtribut i la Distancia donats no són compatibles");
+        }
     }
 
-    public TipusAtribut(String valor, String distancia) throws IllegalArgumentException {
+    public TipusAtribut(String valor, String distancia) throws NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         this.valorAtribut = valorAtributDesDelNom(valor);
         this.distancia = distanciaDesDelNom(distancia);
-        // TODO: crear excepcions pròpies
         if (this.valorAtribut == null || this.distancia == null) {
-            throw new IllegalArgumentException();
+            throw new NomInternIncorrecteException("El ValorAtribut o Distancia demanats no existeixen.");
+        }
+        if (!this.distancia.admet(this.valorAtribut)) {
+            throw new DistanciaNoCompatibleAmbValorException("El ValorAtribut i la Distancia donats no són compatibles");
         }
     }
 
@@ -52,43 +60,54 @@ public class TipusAtribut {
         return Objects.hash(valorAtribut, distancia);
     }
 
-    private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
-        if (Objects.equals(valorAtribut, "ValorBoolea")) {
-            return new ValorBoolea();
-        } else if (Objects.equals(valorAtribut, "ValorCategoric")) {
-            return new ValorCategoric();
-        } else if (Objects.equals(valorAtribut, "ValorNumeric")) {
-            return new ValorNumeric();
-        } else if (Objects.equals(valorAtribut, "ValorTextual")) {
-            return new ValorTextual();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntBoolea")) {
-            return new ValorConjuntBoolea();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntCategoric")) {
-            return new ValorConjuntCategoric();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntNumeric")) {
-            return new ValorConjuntNumeric();
-        } else if (Objects.equals(valorAtribut, "ValorConjuntTextual")) {
-            return new ValorConjuntTextual();
-        } else {
-            return null;
-        }
-    }
 
-    private static Distancia distanciaDesDelNom(String distancia) {
-        if (Objects.equals(distancia, "DistanciaDiferenciaDeConjunts")) {
-            return new DistanciaDiferenciaDeConjunts();
-        } else if (Objects.equals(distancia, "DistanciaDiscreta")) {
-            return new DistanciaDiscreta();
-        } else if (Objects.equals(distancia, "DistanciaEuclidiana")) {
-            return new DistanciaEuclidiana();
-        } else if (Objects.equals(distancia, "DistanciaLevenshtein")) {
-            return new DistanciaLevenshtein();
-        } else if (Objects.equals(distancia, "DistanciaZero")) {
-            return new DistanciaZero();
-        } else {
-            return null;
+    /**
+     * @param valorAtribut Identificador de un ValorAtribut
+     * @return la subclasse de ValorAtribut amb nom l'identificador o null si no existeix.
+     */
+    private static ValorAtribut<?> valorAtributDesDelNom(String valorAtribut) {
+        switch (valorAtribut) {
+            case "ValorBoolea":
+                return new ValorBoolea();
+            case "ValorCategoric":
+                return new ValorCategoric();
+            case "ValorNumeric":
+                return new ValorNumeric();
+            case "ValorTextual":
+                return new ValorTextual();
+            case "ValorConjuntBoolea":
+                return new ValorConjuntBoolea();
+            case "ValorConjuntCategoric":
+                return new ValorConjuntCategoric();
+            case "ValorConjuntNumeric":
+                return new ValorConjuntNumeric();
+            case "ValorConjuntTextual":
+                return new ValorConjuntTextual();
+            default:
+                return null;
         }
     }
+    /**
+     * @param distancia Identificador de una Distancia
+     * @return la subclasse de Distancia amb nom l'identificador o null si no existeix.
+     */
+    private static Distancia distanciaDesDelNom(String distancia) {
+        switch (distancia) {
+            case "DistanciaDiferenciaDeConjunts":
+                return new DistanciaDiferenciaDeConjunts();
+            case "DistanciaDiscreta":
+                return new DistanciaDiscreta();
+            case "DistanciaEuclidiana":
+                return new DistanciaEuclidiana();
+            case "DistanciaLevenshtein":
+                return new DistanciaLevenshtein();
+            case "DistanciaZero":
+                return new DistanciaZero();
+            default:
+                return null;
+        }
+    }
+    
     /**
      * @return ValorAtribut del TipusAtribut.
      */
@@ -107,6 +126,11 @@ public class TipusAtribut {
      * @return Còpia profunda del TipusAtribut.
      */
     public TipusAtribut copiar() {
-        return new TipusAtribut(valorAtribut.copiar(), distancia.copiar());
+        try {
+            return new TipusAtribut(valorAtribut.copiar(), distancia.copiar());
+        } catch (DistanciaNoCompatibleAmbValorException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

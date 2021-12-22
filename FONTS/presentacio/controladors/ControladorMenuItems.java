@@ -1,12 +1,15 @@
 package presentacio.controladors;
 
+import excepcions.*;
 import presentacio.vistes.VistaDialegCrearItem;
 import presentacio.vistes.VistaDialegEditarItem;
 import presentacio.vistes.VistaMenuItems;
+import presentacio.vistes.VistaMenuValoracions;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -21,12 +24,16 @@ public class ControladorMenuItems {
     private ControladorMenuItems () {
     }
 
-    public static ControladorMenuItems obtenirInstancia() throws IOException {
+    public static ControladorMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new ControladorMenuItems();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
         }
         return instancia;
+    }
+
+    public static void actualitzarTaula() {
+        VistaMenuItems.actualitzarTaula();
     }
 
     public ArrayList<ArrayList<String>> obtenirItems() {
@@ -47,7 +54,7 @@ public class ControladorMenuItems {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public boolean afegirItem(Map<String, String> valorsAtributs) throws Exception {
+    public String afegirItem(Map<String, String> valorsAtributs) throws Exception {
         return controladorPresentacio.afegirItem(valorsAtributs);
     }
 
@@ -55,48 +62,61 @@ public class ControladorMenuItems {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            String id = JOptionPane.showInputDialog(instancia,
-                    "Introdueix l'identificador de l'ítem que vols esborrar:");
-            if (!controladorPresentacio.esborrarItem(id)) {
-                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
-            } else {
-                JOptionPane.showMessageDialog(vistaMenuItems, "L'ítem s'ha esborrat amb èxit.");
+            try {
+                String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols esborrar:");
+                if (!controladorPresentacio.esborrarItem(id)) {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
+                } else {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "L'ítem s'ha esborrat amb èxit.");
+                }
+            } catch (NoExisteixElementException ex) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut esborrar l'ítem.");
             }
         }
     }
 
-    public Map<String, String> obtenirItem(String id) {
+    public Map<String, String> obtenirItem(String id) throws NoExisteixElementException {
         return controladorPresentacio.obtenirItem(id);
     }
 
-    public void editarItem() throws IOException {
+    public void editarItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            String id = JOptionPane.showInputDialog(instancia,
-                    "Introdueix l'identificador de l'ítem que vols editar:");
-            Map<String, String> atributs = controladorPresentacio.obtenirItem(id);
-            if (atributs == null) {
-                JOptionPane.showMessageDialog(vistaMenuItems, "L'identificador introduït no és vàlid.");
-            } else {
-                VistaDialegEditarItem vistaDialegEditarItem = new VistaDialegEditarItem(id, atributs);
-                vistaDialegEditarItem.setVisible(true);
+            String id = JOptionPane.showInputDialog("Introdueix l'identificador de l'ítem que vols editar:");
+            if (id != null) {
+                VistaDialegEditarItem vistaDialegEditarItem;
+                try {
+                    vistaDialegEditarItem = new VistaDialegEditarItem(id, controladorPresentacio.obtenirItem(id));
+                    vistaDialegEditarItem.setVisible(true);
+                } catch (NoExisteixElementException ex) {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "No existeix cap ítem amb identificador " + id);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut editar l'ítem.");
+                }
             }
         }
     }
 
-    public boolean editarItem(String id, Map<String, String> valorsAtributs) {
-        return controladorPresentacio.editarItem(id, valorsAtributs);
+    public void editarItem(String id, Map<String, String> valorsAtributs) throws NoExisteixElementException, FormatIncorrecteException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        controladorPresentacio.editarItem(id, valorsAtributs);
     }
 
-    public void carregarConjuntItems() throws Exception {
+    public void carregarConjuntItems(boolean deduirTipusItem, String nomTipusItem) {
         JDialog dialegFitxer = new JDialog();
         JFileChooser selectorFitxer = new JFileChooser();
         int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
         if (estatSelectorFitxer == APPROVE_OPTION) {
             File rutaFitxer = selectorFitxer.getSelectedFile();
-            controladorPresentacio.carregarConjuntItems(rutaFitxer.getAbsolutePath());
-            // TODO: afegir missatge d'error
+            try {
+                controladorPresentacio.carregarConjuntItems(deduirTipusItem, nomTipusItem, rutaFitxer.getAbsolutePath());
+            } catch (JaExisteixElementException e1) {
+                JOptionPane.showMessageDialog(vistaMenuItems,
+                        e1.getMessage());
+            } catch (Exception e2) {
+                JOptionPane.showMessageDialog(vistaMenuItems,
+                        "No s'han pogut afegir ítems d'aquest conjunt.");
+            }
         }
     }
 
@@ -118,12 +138,28 @@ public class ControladorMenuItems {
         return controladorPresentacio.esSessioIniciada();
     }
 
-    public void crearNouItem() throws IOException {
+    public void crearNouItem() {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
             JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
-            VistaDialegCrearItem vistaDialegCrearItem = new VistaDialegCrearItem();
-            vistaDialegCrearItem.setVisible(true);
+            VistaDialegCrearItem vistaDialegCrearItem;
+            try {
+                vistaDialegCrearItem = new VistaDialegCrearItem();
+                vistaDialegCrearItem.setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut crear l'ítem.");
+            }
         }
+    }
+
+    public String obtenirNomTipusItemSeleccionat() {
+        return controladorPresentacio.obtenirNomTipusItemSeleccionat();
+    }
+
+    public ArrayList<String> obtenirIdsItems() {
+        if (!existeixTipusItemSeleccionat()) {
+            return new ArrayList<>();
+        }
+        return controladorPresentacio.obtenirIdsItems();
     }
 }

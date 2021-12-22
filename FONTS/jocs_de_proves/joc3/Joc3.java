@@ -7,6 +7,7 @@ import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorCollaborat
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorContentBased;
 import domini.classes.recomanador.metode_recomanador.MetodeRecomanadorHibrid;
 import persistencia.classes.LectorDeCSV;
+import utilitats.Pair;
 
 import java.io.File;
 import java.util.ArrayList;

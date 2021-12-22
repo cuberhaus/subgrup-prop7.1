@@ -1,5 +1,7 @@
 package domini.classes;
 
+import excepcions.UsuariIncorrecteException;
+
 import java.util.Objects;
 
 /**
@@ -30,8 +32,9 @@ public class Valoracio {
      * @param valor  representa el valor de la valoració
      * @param usuari representa l'usuari que ha fet la valoració
      * @param item   representa l'ítem valorat
+     * @throws UsuariIncorrecteException l'usuari no es correcte
      */
-    public Valoracio(double valor, Usuari usuari, Item item) {
+    public Valoracio(double valor, Usuari usuari, Item item) throws UsuariIncorrecteException {
         this.valor = valor;
         this.usuari = usuari;
         this.item = item;
@@ -92,8 +95,9 @@ public class Valoracio {
      * Retorna una còpia de la valoració del paràmetre implícit
      *
      * @return Còpia del paràmetre implícit
+     * @throws UsuariIncorrecteException no existeix l'usuari
      */
-    public Valoracio copiar() {
+    public Valoracio copiar() throws UsuariIncorrecteException {
         return new Valoracio(valor, usuari.copiar(), item.copiar());
     }
 }

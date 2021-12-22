@@ -1,4 +1,4 @@
-package domini.classes;
+package utilitats;
 
 /**
  * Representa una parella d'<code>Objectes</code> de qualssevol classes.

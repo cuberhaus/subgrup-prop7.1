@@ -1,5 +1,6 @@
 package presentacio.vistes;
 
+import excepcions.*;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
@@ -10,30 +11,39 @@ import java.io.IOException;
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 
 /**
+ * Vista per la gestió de tipus d'ítems
  * @author maria.prat
  */
 public class VistaMenuTipusItem extends JPanel {
+
+    /**
+     * Instància per implementar el patró Singleton.
+     */
+    private static VistaMenuTipusItem instancia;
 
     private static final String kPrototipNomTipusItem = new String(new char[20]).replace('\0', '*');
     private static final String kMissatgeTipusItemNoSeleccionat = "No s'ha escollit cap tipus d'ítem";
 
     private static ControladorMenuTipusItem controladorMenuTipusItem;
-    private static VistaMenuTipusItem instancia;
-
-    private static JLabel textTipusItemSeleccionat;
-    private static JButton botoVeureTipusItem;
-    private static JButton botoEditarTipusItem;
-    private static DefaultComboBoxModel<String> tipusItemsComboBoxModel;
 
     private static JPanel panellAfegirTipusItem;
     private static JPanel panellSeleccionarTipusItem;
     private static JPanel panellAdministrarTipusItem;
     private static JPanel panellMostrarTipusItemSeleccionat;
+    private static JLabel textTipusItemSeleccionat;
+    private static JButton botoVeureTipusItem;
+    private static JButton botoEditarTipusItem;
+    private static JButton botoDeseleccionarTipusItem;
+    private static JButton botoEsborrarTipusItem;
+    private static DefaultComboBoxModel<String> tipusItemsComboBoxModel;
 
+    /**
+     * Constructor d'una VistaMenuTipusItem
+     */
     private VistaMenuTipusItem() {
     }
 
-    public static VistaMenuTipusItem obtenirInstancia() throws IOException {
+    public static VistaMenuTipusItem obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         if (instancia == null) {
             instancia = new VistaMenuTipusItem();
             controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
@@ -75,17 +85,15 @@ public class VistaMenuTipusItem extends JPanel {
         JButton botoCrearTipusItem = new JButton("Crea un nou tipus d'ítem");
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoCrearTipusItem.addActionListener(e -> {
-            VistaDialegCrearTipusItem vistaDialegCrearTipusItem;
             try {
+                VistaDialegCrearTipusItem vistaDialegCrearTipusItem;
                 vistaDialegCrearTipusItem = new VistaDialegCrearTipusItem();
                 vistaDialegCrearTipusItem.setVisible(true);
                 tipusItemsComboBoxModel.removeAllElements();
                 tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
+            } catch (Exception e1) {
                 JOptionPane.showMessageDialog(instancia,
-                        "Tipus d'ítem creat amb èxit.");
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(instancia,
-                        "No s'ha pogut crear un tipus d'ítem.");
+                        "No s'ha pogut crear el tipus d'ítem.");
             }
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
@@ -94,17 +102,29 @@ public class VistaMenuTipusItem extends JPanel {
         botoCarregarTipusItem.addActionListener(e -> {
             String nom = JOptionPane.showInputDialog(instancia,
                     "Introdueix el nom del tipus d'ítem:");
-            JDialog dialegFitxer = new JDialog();
-            JFileChooser selectorFitxer = new JFileChooser();
-            int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
-            if (estatSelectorFitxer == APPROVE_OPTION) {
-                File rutaFitxer = selectorFitxer.getSelectedFile();
-                try {
-                    controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
-                    JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
-                } catch (Exception e1) {
+            if (nom != null) {
+                if (nom.isEmpty()) {
                     JOptionPane.showMessageDialog(instancia,
-                            "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
+                            "Un tipus d'ítem no pot tenir un nom buit.");
+                } else {
+                    JDialog dialegFitxer = new JDialog();
+                    JFileChooser selectorFitxer = new JFileChooser();
+                    int estatSelectorFitxer = selectorFitxer.showOpenDialog(dialegFitxer);
+                    if (estatSelectorFitxer == APPROVE_OPTION) {
+                        File rutaFitxer = selectorFitxer.getSelectedFile();
+                        try {
+                            controladorMenuTipusItem.carregarTipusItem(nom, rutaFitxer.getAbsolutePath());
+                            tipusItemsComboBoxModel.removeAllElements();
+                            tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
+                            JOptionPane.showMessageDialog(instancia, "Tipus d'ítem carregat amb èxit.");
+                        } catch (JaExisteixElementException e1) {
+                            JOptionPane.showMessageDialog(instancia,
+                                    "Ja existeix un tipus d'ítem amb el nom indicat.");
+                        } catch (Exception e2) {
+                            JOptionPane.showMessageDialog(instancia,
+                                    "No s'ha pogut carregar un tipus d'ítem d'aquest arxiu.");
+                        }
+                    }
                 }
             }
         });
@@ -128,18 +148,24 @@ public class VistaMenuTipusItem extends JPanel {
             if (nomTipusItem != null) {
                 try {
                     controladorMenuTipusItem.seleccionarTipusItem(nomTipusItem);
+                    controladorMenuTipusItem.actualitzarVistesTipusItemSeleccionat();
                     if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                         textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
                         botoVeureTipusItem.setEnabled(false);
                         botoEditarTipusItem.setEnabled(false);
+                        botoDeseleccionarTipusItem.setEnabled(false);
+                        botoEsborrarTipusItem.setEnabled(false);
                     } else {
                         textTipusItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
                         botoVeureTipusItem.setEnabled(true);
                         botoEditarTipusItem.setEnabled(true);
+                        botoDeseleccionarTipusItem.setEnabled(true);
+                        botoEsborrarTipusItem.setEnabled(true);
                     }
-                } catch (Exception ex) {
+                } catch (Exception e1) {
+                    System.out.println(e1.getMessage());
                     JOptionPane.showMessageDialog(instancia,
-                            "No s'ha pogut seleccionar el tipus d'ítem.");
+                            "No s'ha pogut seleccionar el tipus d'ítem. Torna-ho a intentar. Error:\n" + e1.getMessage());
                 }
             } else {
                 JOptionPane.showMessageDialog(instancia,
@@ -151,25 +177,28 @@ public class VistaMenuTipusItem extends JPanel {
 
     private static void inicialitzarPanellAdministrarTipusItem() {
         panellAdministrarTipusItem = new JPanel(new FlowLayout());
-        JButton deselecciona = new JButton("Deselecciona");
-        deselecciona.addActionListener(e -> {
+        botoDeseleccionarTipusItem = new JButton("Deselecciona");
+        botoDeseleccionarTipusItem.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
                 try {
-                    controladorMenuTipusItem.deseleccionarTipusItem();
+                    controladorMenuTipusItem.desseleccionarTipusItem();
                     textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                    controladorMenuTipusItem.actualitzarVistesTipusItemSeleccionat();
                     botoVeureTipusItem.setEnabled(false);
                     botoEditarTipusItem.setEnabled(false);
+                    botoDeseleccionarTipusItem.setEnabled(false);
+                    botoEsborrarTipusItem.setEnabled(false);
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut deseleccionar el tipus d'ítem seleccionat.");
                 }
             }
         });
-        panellAdministrarTipusItem.add(deselecciona);
-        JButton esborra = new JButton("Esborra");
-        esborra.addActionListener(e -> {
+        panellAdministrarTipusItem.add(botoDeseleccionarTipusItem);
+        botoEsborrarTipusItem = new JButton("Esborra");
+        botoEsborrarTipusItem.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
@@ -178,17 +207,22 @@ public class VistaMenuTipusItem extends JPanel {
                 if (resposta == 0) {
                     try {
                         controladorMenuTipusItem.esborrarTipusItemSeleccionat();
+                        tipusItemsComboBoxModel.removeAllElements();
+                        tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
+                        textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+                        controladorMenuTipusItem.actualitzarVistesTipusItemSeleccionat();
+                        botoVeureTipusItem.setEnabled(false);
+                        botoEditarTipusItem.setEnabled(false);
+                        botoDeseleccionarTipusItem.setEnabled(false);
+                        botoEsborrarTipusItem.setEnabled(false);
                     } catch (IOException e1) {
                         JOptionPane.showMessageDialog(instancia,
                                 "No s'ha pogut esborrar el tipus d'ítem seleccionat.");
-                        textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
-                        botoVeureTipusItem.setEnabled(false);
-                        botoEditarTipusItem.setEnabled(false);
                     }
                 }
             }
         });
-        panellAdministrarTipusItem.add(esborra);
+        panellAdministrarTipusItem.add(botoEsborrarTipusItem);
         panellAdministrarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
@@ -209,13 +243,13 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem = null;
+                VistaDialegMostrarTipusItem vistaDialegMostrarTipusItem;
                 try {
                     vistaDialegMostrarTipusItem = new VistaDialegMostrarTipusItem();
                     vistaDialegMostrarTipusItem.setVisible(true);
-                } catch (IOException ex) {
+                } catch (Exception e1) {
                     JOptionPane.showMessageDialog(instancia,
-                            "No es pot mostrar el tipus d'ítem. Torna-ho a intentar.");
+                            "No es pot mostrar aquest tipus d'ítem. Torna-ho a intentar.");
                 }
             }
         });
@@ -226,13 +260,13 @@ public class VistaMenuTipusItem extends JPanel {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
             } else {
-                VistaDialegEditarTipusItem vistaDialegEditarTipusItem = null;
+                VistaDialegEditarTipusItem vistaDialegEditarTipusItem;
                 try {
                     vistaDialegEditarTipusItem = new VistaDialegEditarTipusItem();
                     vistaDialegEditarTipusItem.setVisible(true);
-                } catch (IOException ex) {
+                } catch (Exception e1) {
                     JOptionPane.showMessageDialog(instancia,
-                            "No es pot editar el tipus d'ítem. Torna-ho a intentar.");
+                            "No es pot editar aquest tipus d'ítem. Torna-ho a intentar.");
                 }
             }
         });
@@ -242,10 +276,14 @@ public class VistaMenuTipusItem extends JPanel {
             textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
             botoVeureTipusItem.setEnabled(false);
             botoEditarTipusItem.setEnabled(false);
+            botoDeseleccionarTipusItem.setEnabled(false);
+            botoEsborrarTipusItem.setEnabled(false);
         } else {
             textTipusItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
             botoVeureTipusItem.setEnabled(true);
             botoEditarTipusItem.setEnabled(true);
+            botoDeseleccionarTipusItem.setEnabled(true);
+            botoEsborrarTipusItem.setEnabled(true);
         }
         textTipusItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));
         informacio.add(textTipusItemSeleccionat);

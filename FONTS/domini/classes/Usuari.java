@@ -1,6 +1,7 @@
 package domini.classes;
 
 import domini.classes.recomanador.metode_recomanador.Punt;
+import excepcions.UsuariIncorrecteException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -146,13 +147,15 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
      *
      * @param valoracio el paràmetre s'ha afegit al conjunt si no hi era abans.
      * @return booleà retornat
+     * @throws IllegalArgumentException la valoracio es nul·la
+     * @throws UsuariIncorrecteException usuari incorrecte
      */
-    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException {
+    public boolean afegirValoracio(Valoracio valoracio) throws IllegalArgumentException, UsuariIncorrecteException {
         if (valoracio == null) {
             throw new IllegalArgumentException("No es pot afegir una valoració nul·la.");
         }
         if (!this.equals(valoracio.obtenirUsuari())) {
-            throw new IllegalArgumentException("No es pot afegir a un usuari una valoració d'un altre usuari.");
+            throw new UsuariIncorrecteException("No es pot afegir a un usuari una valoració d'un altre usuari.");
         }
         if (valoracions.containsKey(valoracio.obtenirItem())) {
             return false;
@@ -203,7 +206,6 @@ public class Usuari implements ElementIdentificat, Comparable<Usuari> {
             if (valoracions.containsKey(item)) {
                 res.add(valoracions.get(item).obtenirValor());
             } else res.add(-1.);
-            // TODO: -1 per denotar que no esta vist. Potser seria millor agafar la mitjana
         }
         return res;
     }

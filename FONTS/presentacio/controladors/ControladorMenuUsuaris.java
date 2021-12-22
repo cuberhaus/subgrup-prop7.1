@@ -1,5 +1,7 @@
 package presentacio.controladors;
 
+import excepcions.NomInternIncorrecteException;
+import excepcions.SessioNoIniciadaException;
 import presentacio.vistes.VistaMenuUsuaris;
 
 import javax.swing.*;
@@ -37,14 +39,19 @@ public class ControladorMenuUsuaris {
     /**
      * Constructora de ControladorMenuUsuaris
      * Crea una instància única de ControladorMenuUsuaris
-     *
      * @return <code> ControladorMenuUsuaris </code>
+     * @throws IOException no existeix el fitxer o no es pot obrir
+     * @throws NomInternIncorrecteException el nom del fitxer intern no existeix
      */
-    public static ControladorMenuUsuaris obtenirInstancia() throws IOException {
-        if (instancia == null) {
-            instancia = new ControladorMenuUsuaris();
-            controladorPresentacio = ControladorPresentacio.obtenirInstancia();
-            vistaMenuUsuaris = VistaMenuUsuaris.obtenirInstancia();
+    public static ControladorMenuUsuaris obtenirInstancia() throws IOException, NomInternIncorrecteException {
+        try {
+            if (instancia == null) {
+                instancia = new ControladorMenuUsuaris();
+                controladorPresentacio = ControladorPresentacio.obtenirInstancia();
+                vistaMenuUsuaris = VistaMenuUsuaris.obtenirInstancia();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }
         return instancia;
     }
@@ -53,7 +60,7 @@ public class ControladorMenuUsuaris {
      * Comprova que un id és un valor natural, si no ho és llença una excepció 0 no inclòs
      *
      * @param id identificador
-     * @throws Exception el id no és vàlid
+     * @throws Exception l'id no és vàlid
      */
     public void idEsValid(String id) throws Exception {
         if (id == null || id.equals("")) {
@@ -69,9 +76,8 @@ public class ControladorMenuUsuaris {
      * @param id          id amb el que volem iniciar sessió
      * @param contrasenya contrasenya amb què intentem iniciar la sessió
      * @return True si la sessió hem pogut iniciar sessió
-     * @throws Exception No s'ha pogut iniciar sessió
      */
-    public boolean iniciarSessio(String id, String contrasenya) throws Exception {
+    public boolean iniciarSessio(String id, String contrasenya) {
         try {
             boolean sessioIniciada = controladorPresentacio.esSessioIniciada();
             idEsValid(id);
@@ -87,7 +93,7 @@ public class ControladorMenuUsuaris {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(vistaMenuUsuaris, e);
+            JOptionPane.showMessageDialog(vistaMenuUsuaris, e.getMessage());
         }
         return false;
     }
@@ -98,9 +104,8 @@ public class ControladorMenuUsuaris {
      * @param nom         de l'usuari
      * @param contrasenya de l'usuari
      * @return retorna l'id de l'usuari
-     * @throws Exception no s'ha pogut crear l'usuari
      */
-    public int afegirUsuari(String nom, String contrasenya) throws Exception {
+    public int afegirUsuari(String nom, String contrasenya) {
         try {
             int id = controladorPresentacio.afegirUsuari(nom, contrasenya);
             JOptionPane.showMessageDialog(vistaMenuUsuaris, "S'ha creat correctament l'usuari: " + id);
@@ -115,9 +120,8 @@ public class ControladorMenuUsuaris {
      * Esborra un usuari del conjunt si és actiu i l'id és correcte
      *
      * @param id id de l'usuari
-     * @throws Exception No s'ha pogut crear l'usuari
      */
-    public void esborrarUsuari(String id) throws Exception {
+    public void esborrarUsuari(String id) {
         try {
             idEsValid(id);
             if (controladorPresentacio.existeixUsuari(Integer.parseInt(id))) {
@@ -133,13 +137,11 @@ public class ControladorMenuUsuaris {
 
     /**
      * Tanca la sessió
-     *
-     * @throws Exception No s'ha pogut tancar la sessió
      */
-    public void tancarSessio() throws Exception {
+    public void tancarSessio() {
         try {
             controladorPresentacio.tancarSessio();
-        } catch (Exception e) {
+        } catch (SessioNoIniciadaException e) {
             JOptionPane.showMessageDialog(vistaMenuUsuaris, "La sessió ja és tancada");
         }
     }
@@ -183,7 +185,7 @@ public class ControladorMenuUsuaris {
     public void importarUsuaris(String absolutePath) throws Exception {
         try {
             ArrayList<String> usuarisNoInicialitzats = controladorPresentacio.importarUsuaris(absolutePath);
-            if (usuarisNoInicialitzats != null) {
+            if (usuarisNoInicialitzats != null && usuarisNoInicialitzats.size() != 0) {
                 JOptionPane.showMessageDialog(vistaMenuUsuaris, "Aquests usuaris no s'han pogut inicialitzar" + usuarisNoInicialitzats);
             }
         } catch (Exception e) {
@@ -196,9 +198,8 @@ public class ControladorMenuUsuaris {
      *
      * @param id              identificador de l'usuari
      * @param novaContrasenya nova contrasenya de l'usuari
-     * @throws Exception No s'ha pogut canviar la contrasenya de l'usuari
      */
-    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) throws Exception {
+    public void canviaContrasenyaUsuari(String id, char[] novaContrasenya) {
         try {
             idEsValid(id);
             controladorPresentacio.canviaContrasenyaUsuari(id, novaContrasenya);
@@ -212,9 +213,8 @@ public class ControladorMenuUsuaris {
      *
      * @param id     identificador de l'usuari
      * @param nouNom nou nom de l'usuari
-     * @throws Exception No s'ha pogut canviar el nom de l'usuari
      */
-    public void canviaNomUsuari(String id, String nouNom) throws Exception {
+    public void canviaNomUsuari(String id, String nouNom) {
         try {
             idEsValid(id);
             controladorPresentacio.canviaNomUsuari(id, nouNom);

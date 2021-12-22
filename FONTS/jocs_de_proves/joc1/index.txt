@@ -1,0 +1,3 @@
+Implementacio del Joc1
+
+Joc1.java

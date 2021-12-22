@@ -2,6 +2,8 @@ package domini.classes;
 
 import domini.classes.atributs.TipusAtribut;
 import domini.classes.atributs.valors.*;
+import excepcions.FormatIncorrecteException;
+import excepcions.UsuariIncorrecteException;
 
 import java.util.*;
 
@@ -21,7 +23,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * Conté les valoracions de l'Item.
      * Relaciona l'Usuari que ha fet la valoració amb la valoració.
      */
-    private Map<Usuari, Valoracio> valoracions;
+    private final Map<Usuari, Valoracio> valoracions;
 
     /**
      * Constructor d'un ítem amb conjunt de valoracions buit.
@@ -49,7 +51,7 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @param valors <code>ArrayList&lt;String&gt;</code> que conté els valors de l'ítem en forma de String.
      * @throws IllegalArgumentException si els valors donats no són compatibles amb el TipusItem.
      */
-    public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
+    public Item(Id id, TipusItem tipusItem, ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException, FormatIncorrecteException {
         this.id = id;
         this.tipusItem = tipusItem;
         assignarAtributs(nomAtributs, valors);
@@ -110,8 +112,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
     /**
      * @return Còpia profunda del <code>Map&lt;Usuari, Valoracio&gt;</code> que relaciona els Usuaris que han fet les
      * valoracions de l'Item amb la valoració.
+     * @throws UsuariIncorrecteException no trobem l'usuari
      */
-    public Map<Usuari, Valoracio> obtenirValoracions() {
+    public Map<Usuari, Valoracio> obtenirValoracions() throws UsuariIncorrecteException {
         Map<Usuari, Valoracio> valoracions = new TreeMap<>();
         for (Map.Entry<Usuari, Valoracio> valoracioEntry : this.valoracions.entrySet()) {
             valoracions.put(valoracioEntry.getKey().copiar(), valoracioEntry.getValue().copiar());
@@ -177,9 +180,9 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @throws IllegalArgumentException Si no es pot llegir el valor de la classe donada de la String donada o si no es
      * reconeix la subclasse de 'valorAtribut'.
      */
-    private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException {
+    private ValorAtribut<?> obtenirValorAtribut(ValorAtribut<?> valorAtribut, String s) throws IllegalArgumentException, FormatIncorrecteException {
         if (valorAtribut instanceof ValorBoolea) {
-            return new ValorBoolea(Boolean.parseBoolean(s));
+            return new ValorBoolea(s);
         } else if (valorAtribut instanceof ValorCategoric) {
             return new ValorCategoric(s);
         } else if (valorAtribut instanceof ValorNumeric) {
@@ -205,14 +208,15 @@ public class Item implements Comparable<Item>, ElementIdentificat {
      * @param valors Valors dels atributs guardats com Strings
      * @throws IllegalArgumentException Si els noms i valors donats no són compatibles amb el TipusItem de l'Item.
      */
-    private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException {
-        if (tipusItem.obtenirTipusAtributs().size() != nomAtributs.size() ||
-                tipusItem.obtenirTipusAtributs().size() != valors.size()) {
+    private void assignarAtributs(ArrayList<String> nomAtributs, ArrayList<String> valors) throws IllegalArgumentException, FormatIncorrecteException {
+        if (tipusItem.obtenirTipusAtributs().size()+1 != nomAtributs.size() ||
+                tipusItem.obtenirTipusAtributs().size()+1 != valors.size()) {
             throw new IllegalArgumentException("No es poden obtenir els atributs d'un Item a partir de conjunts de " +
                     "mides diferents.");
         }
         atributs = new TreeMap<>();
         for (int i = 0; i < nomAtributs.size(); ++i) {
+            if (nomAtributs.get(i).equals("id")) continue;
             if (!tipusItem.obtenirTipusAtributs().containsKey(nomAtributs.get(i))) {
                 throw new IllegalArgumentException("El TipusItem no és compatible amb els noms dels atributs donats.");
             }
@@ -231,12 +235,35 @@ public class Item implements Comparable<Item>, ElementIdentificat {
         }
     }
 
+    /**
+     * @return una <code>ArrayList</code> amb el valor de cada atribut en l'ordre per defecte del map.
+     */
     public ArrayList<String> converteixAArray() {
         ArrayList<String> res = new ArrayList<>();
         res.add(Integer.toString(id.valor));
-        for (var x : atributs.entrySet()) {
+        for (Map.Entry<String, ValorAtribut<?>> x : atributs.entrySet()) {
            res.add(x.getValue().toString());
         }
         return res;
+    }
+
+
+    /**
+     * Modifica un atribut a un valor nou, si no existeix no fa res.
+     * @param nomAtribut nom d'atribut a modificar
+     * @param valor nou valor
+     */
+    public void modificarAtribut(String nomAtribut, ValorAtribut<?> valor) {
+        if (!atributs.containsKey(nomAtribut))
+            return;
+        atributs.put(nomAtribut, valor);
+    }
+
+    /**
+     * Canvia el nom del tipus item.
+     * @param nouNom nou nom del tipus d'item.
+     */
+    public void canviaNomTipusItem(String nouNom) {
+        tipusItem.canviaElNom(nouNom);
     }
 }

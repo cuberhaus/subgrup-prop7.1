@@ -2,6 +2,8 @@ package domini.classes.recomanador.metode_recomanador;
 
 import domini.classes.*;
 import domini.classes.recomanador.ConjuntRecomanacions;
+import excepcions.NoExisteixElementException;
+import utilitats.Pair;
 
 import java.util.Map;
 
@@ -36,8 +38,9 @@ public abstract class MetodeRecomanador {
      * @param valoracionsUsuari Valoracions en les que es basaran les recomanacions.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
+     * @throws NoExisteixElementException a
      */
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntValoracions valoracionsUsuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntValoracions valoracionsUsuari, int numRecomanacions) throws NoExisteixElementException {
         return obteRecomanacions(usuari, items, valoracionsUsuari, numRecomanacions);
     }
 
@@ -47,8 +50,9 @@ public abstract class MetodeRecomanador {
      * @param itemsRecomanables Items que es poden recomanar a l'usuari.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades, extreurà les valoracions de les valoracions públiques de l'usuari.
+     * @throws NoExisteixElementException no existeix la recomanacio
      */
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems itemsRecomanables, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems itemsRecomanables, int numRecomanacions) throws NoExisteixElementException {
         ConjuntValoracions valoracions = new ConjuntValoracions();
         for (Valoracio val : valoracionsPubliques.obtenitTotesLesValoracions().values()) {
             if (val.obtenirUsuari().equals(usuari))
@@ -62,8 +66,9 @@ public abstract class MetodeRecomanador {
      * @param usuari <code>Usuari</code> pel qual es generen les recomanacions.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
+     * @throws NoExisteixElementException l'usuari no existeix
      */
-    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) {
+    public ConjuntRecomanacions obteRecomanacions(Usuari usuari, int numRecomanacions) throws NoExisteixElementException {
         ConjuntValoracions valoracionsUsuari = new ConjuntValoracions();
         for (Map.Entry<Pair<Usuari, Item>, Valoracio> x : valoracionsPubliques.obtenitTotesLesValoracions().entrySet()) {
             if (x.getKey().x.equals(usuari)) {
@@ -80,7 +85,8 @@ public abstract class MetodeRecomanador {
      * @param valoracionsUsuari valoracions que s'utilitzaran per a les recomanacions.
      * @param numRecomanacions numero maxim de recomanacions que es generaran.
      * @return Un <code>ConjuntDeRecomanacions</code> amb les recomanacions generades.
+     * @throws NoExisteixElementException l'element no existeix
      */
     public abstract ConjuntRecomanacions obteRecomanacions(Usuari usuari, ConjuntItems conjuntRecomanable,
-                                                           ConjuntValoracions valoracionsUsuari, int numRecomanacions);
+                                                           ConjuntValoracions valoracionsUsuari, int numRecomanacions) throws NoExisteixElementException;
 }
