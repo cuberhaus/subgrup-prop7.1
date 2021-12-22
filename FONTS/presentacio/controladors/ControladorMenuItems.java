@@ -7,7 +7,6 @@ import presentacio.vistes.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -30,9 +29,10 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
     }
 
     /**
-     * Retorna l'única instància del controlador, seguint el patró Singleton
+     * @return l'única instància del controlador, seguint el patró Singleton
+     * @throws Exception si hi ha algun problema a l'hora de carregar les dades del programa
      */
-    public static ControladorMenuItems obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public static ControladorMenuItems obtenirInstancia() throws Exception {
         if (instancia == null) {
             instancia = new ControladorMenuItems();
             controladorPresentacio = ControladorPresentacio.obtenirInstancia();
@@ -53,7 +53,8 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
     }
 
     /**
-     * @return Llista que conté els noms dels atributs del tipus d'item seleccionat.
+     * @return Llista que conté els noms dels atributs del tipus d'item seleccionat. Si no hi ha cap tipus d'item
+     * seleccionat, retorna una llista buida.
      */
     public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
         if (!existeixTipusItemSeleccionat()) {
@@ -75,17 +76,17 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
      * @param valorsAtributs conté un mapa que relaciona el nom de cada atribut de l'item amb el seu valor en forma de
      *                       String
      */
-    public void afegirItem(Map<String, String> valorsAtributs) {
+    public void afegirItem(Component component, Map<String, String> valorsAtributs) {
         if (!controladorPresentacio.existeixTipusItemSeleccionat()) {
-            JOptionPane.showMessageDialog(vistaMenuItems, "No hi ha cap tipus d'ítem seleccionat.");
+            JOptionPane.showMessageDialog(component, "No hi ha cap tipus d'ítem seleccionat.");
         } else {
             try {
                 String nouId = controladorPresentacio.afegirItem(valorsAtributs);
-                JOptionPane.showMessageDialog(vistaMenuItems, "Item creat amb èxit amb identificador " + nouId);
+                JOptionPane.showMessageDialog(component, "Item creat amb èxit amb identificador " + nouId);
             } catch (FormatIncorrecteException ex) {
-                JOptionPane.showMessageDialog(vistaMenuItems, ex.getMessage());
+                JOptionPane.showMessageDialog(component, ex.getMessage());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(vistaMenuItems, "No s'ha pogut crear un ítem amb els valors donats.");
+                JOptionPane.showMessageDialog(component, "No s'ha pogut crear un ítem amb els valors donats.");
             }
         }
     }
@@ -200,7 +201,6 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
             }
         }
     }
-
 
     /**
      * @return cert si l'usuari ha iniciat sessio i, altrament, retorna fals

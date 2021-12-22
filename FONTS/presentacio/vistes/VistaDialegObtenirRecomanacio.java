@@ -20,7 +20,7 @@ public class VistaDialegObtenirRecomanacio extends JDialog {
     private DefaultTableModel llistaRecomanacionsTableModel;
 
     public VistaDialegObtenirRecomanacio(String descripcioMetode,
-                                         Map<String, Boolean> nomsAtributsFiltre) throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+                                         Map<String, Boolean> nomsAtributsFiltre) throws Exception {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();
         inicialitzarDialegObtenirRecomanacio(descripcioMetode, nomsAtributsFiltre);

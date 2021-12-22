@@ -18,7 +18,7 @@ public class VistaDialegAvaluarRecomanacio extends JDialog {
 
     private final ControladorMenuRecomanacions controladorMenuRecomanacions;
 
-    public VistaDialegAvaluarRecomanacio(ArrayList<String> recomanacio) throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public VistaDialegAvaluarRecomanacio(ArrayList<String> recomanacio) throws Exception {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuRecomanacions = ControladorMenuRecomanacions.obtenirInstancia();
         inicialitzarDialegAvaluarRecomanacio(recomanacio);

@@ -22,7 +22,7 @@ public class VistaDialegCrearTipusItem extends JDialog {
     private JPanel panellCrearTipusItem;
     private JScrollPane panellScrollLlistaTipusAtributs;
 
-    public VistaDialegCrearTipusItem() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public VistaDialegCrearTipusItem() throws Exception {
         super(null, Dialog.ModalityType.APPLICATION_MODAL);
         controladorMenuTipusItem = ControladorMenuTipusItem.obtenirInstancia();
         inicialitzarDialegCrearTipusItem();
@@ -94,20 +94,8 @@ public class VistaDialegCrearTipusItem extends JDialog {
                 String distanciaTipusAtribut = (String) ((JComboBox<?>) tipusAtribut.getComponent(5)).getSelectedItem();
                 nomAValorAtribut.put(nomTipusAtribut, new Pair<>(valorTipusAtribut, distanciaTipusAtribut));
             }
-            try {
-                controladorMenuTipusItem.crearTipusItem(nom, nomAValorAtribut);
+            if (controladorMenuTipusItem.crearTipusItem(this, nom, nomAValorAtribut)) {
                 dispose();
-                JOptionPane.showMessageDialog(this,
-                        "Tipus d'ítem creat amb èxit.");
-            } catch (JaExisteixElementException e1) {
-                JOptionPane.showMessageDialog(this,
-                        "Ja existeix un tipus d'ítem amb aquest nom.");
-            } catch (DistanciaNoCompatibleAmbValorException distanciaNoCompatibleAmbValorException) {
-                JOptionPane.showMessageDialog(this,
-                        "Hi ha una distància que no és compatible amb el valor escollit");
-            } catch (Exception e3) {
-                JOptionPane.showMessageDialog(this,
-                        "No s'ha pogut crear el tipus d'ítem. Torna-ho a intentar.");
             }
         });
         botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);

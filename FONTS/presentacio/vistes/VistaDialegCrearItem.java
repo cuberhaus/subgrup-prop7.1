@@ -18,7 +18,7 @@ public class VistaDialegCrearItem extends JDialog {
 
     private final ControladorMenuItems controladorMenuItems;
 
-    public VistaDialegCrearItem() throws DistanciaNoCompatibleAmbValorException, NomInternIncorrecteException, IOException {
+    public VistaDialegCrearItem() throws Exception {
         super(null, ModalityType.APPLICATION_MODAL);
         controladorMenuItems = ControladorMenuItems.obtenirInstancia();
         inicialitzarDialegCrearItem();
@@ -75,7 +75,7 @@ public class VistaDialegCrearItem extends JDialog {
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
-            controladorMenuItems.afegirItem(valorsAtributs);
+            controladorMenuItems.afegirItem(this, valorsAtributs);
             dispose();
         });
         botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);

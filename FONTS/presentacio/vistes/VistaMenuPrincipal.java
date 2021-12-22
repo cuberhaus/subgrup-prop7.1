@@ -21,7 +21,7 @@ public class VistaMenuPrincipal extends JFrame {
     private VistaMenuPrincipal() {
     }
 
-    public static VistaMenuPrincipal obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public static VistaMenuPrincipal obtenirInstancia() throws Exception {
         if (instancia == null) {
             instancia = new VistaMenuPrincipal();
             controladorMenuPrincipal = ControladorMenuPrincipal.obtenirInstancia();
@@ -30,7 +30,7 @@ public class VistaMenuPrincipal extends JFrame {
         return instancia;
     }
 
-    private static void inicialitzarMenuPrincipal() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    private static void inicialitzarMenuPrincipal() throws Exception {
         // TODO (maria): una vista no pot llançar excepció, ha de fer catch i revisar que cap ho faci
         instancia.setTitle("Menu Principal");
         instancia.setResizable(false);
@@ -66,7 +66,7 @@ public class VistaMenuPrincipal extends JFrame {
                 try {
                     controladorMenuPrincipal.obreManual();
                 } catch (IOException e) {
-                    JOptionPane.showMessageDialog(menuBarra, "No s'ha pogut obrir el manual.");
+                    JOptionPane.showMessageDialog(menuBarra, "No s'ha pogut obrir el manual d'usuari.");
                 }
             }
         }));
@@ -74,7 +74,7 @@ public class VistaMenuPrincipal extends JFrame {
         menuBarra.add(Box.createHorizontalGlue());
     }
 
-    private static void inicialitzarMenuPestanyes() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    private static void inicialitzarMenuPestanyes() throws Exception {
         menuPestanyes = new JTabbedPane();
         menuPestanyes.add("Tipus d'ítem", VistaMenuTipusItem.obtenirInstancia());
         menuPestanyes.add("Items", VistaMenuItems.obtenirInstancia());

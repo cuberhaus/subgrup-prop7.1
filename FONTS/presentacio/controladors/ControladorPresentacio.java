@@ -41,7 +41,7 @@ public class ControladorPresentacio {
      * @throws NomInternIncorrecteException si algun valor demanat no existeix
      * @throws DistanciaNoCompatibleAmbValorException si el valor de l'atribut no es compatible amb la distancia seleccionada
      */
-    public static ControladorPresentacio obtenirInstancia() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
+    public static ControladorPresentacio obtenirInstancia() throws Exception {
         if (instancia == null) {
             instancia = new ControladorPresentacio();
             controladorDomini = ControladorDomini.obtenirInstancia();
