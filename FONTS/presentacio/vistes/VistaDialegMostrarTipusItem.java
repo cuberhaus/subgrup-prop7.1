@@ -80,7 +80,6 @@ public class VistaDialegMostrarTipusItem extends JDialog {
             JComboBox<String> comboBoxDistanciaTipusAtribut = new JComboBox<>(new String[]{"Diferència de conjunts", "Discreta", "Euclidiana", "Levenshtein",
                     "Zero"});
             comboBoxDistanciaTipusAtribut.setSelectedItem(tipusAtributs.get(nomTipusAtribut).y);
-            System.out.println(tipusAtributs.get(nomTipusAtribut).y);
             comboBoxDistanciaTipusAtribut.setEnabled(false);
             tipusAtribut.add(comboBoxDistanciaTipusAtribut);
 

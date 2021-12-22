@@ -242,7 +242,6 @@ public class VistaMenuValoracions extends JPanel {
             int estatJfile = jFileChooser.showOpenDialog(pathDialog);
             if (estatJfile == APPROVE_OPTION) {
                 File pathConjuntVal = jFileChooser.getSelectedFile();
-                System.out.println(pathConjuntVal.getAbsolutePath());
                 try {
                     controladorMenuValoracions.carregarConjuntValoracions(pathConjuntVal.getAbsolutePath());
                 } catch (Exception ex) {

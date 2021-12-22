@@ -9,6 +9,7 @@ import presentacio.vistes.VistaMenuRecomanacions;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ControladorMenuRecomanacions {
 
@@ -35,18 +36,6 @@ public class ControladorMenuRecomanacions {
         return controladorPresentacio.existeixTipusItemSeleccionat();
     }
 
-    public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
-        return controladorPresentacio.obtenirRecomanacioCollaborative(nomAtributs, filtreInclusiu);
-    }
-
-    public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
-        return controladorPresentacio.obtenirRecomanacioContentBased(nomAtributs, filtreInclusiu);
-    }
-
-    public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws NoExisteixElementException, SessioNoIniciadaException {
-        return controladorPresentacio.obtenirRecomanacioHibrida(nomAtributs, filtreInclusiu);
-    }
-
     public double avaluarRecomanacio() {
         return controladorPresentacio.avaluarRecomanacio();
     }
@@ -57,5 +46,40 @@ public class ControladorMenuRecomanacions {
             return new ArrayList<>();
         }
         return controladorPresentacio.obtenirNomAtributsTipusItemSeleccionat();
+    }
+
+    public String obtenirNomTipusItemSeleccionat() {
+        return controladorPresentacio.obtenirNomTipusItemSeleccionat();
+    }
+
+    public ArrayList<String> obtenirNomsAtributsTipusItemSeleccionat() {
+        if (!existeixTipusItemSeleccionat()) {
+            return new ArrayList<>();
+        }
+        return controladorPresentacio.obtenirNomAtributsTipusItemSeleccionat();
+    }
+
+    public ArrayList<String> obtenirRecomanacio(String descripcioMetode, Map<String, Boolean> nomsAtributsFiltre) {
+        ArrayList<String> filtre = new ArrayList<>();
+        nomsAtributsFiltre.forEach((nomAtribut, inclos) -> {
+            if (inclos) {
+                filtre.add(nomAtribut);
+            }
+        });
+        try {
+            switch (descripcioMetode) {
+                case "Basat en els ítems que has valorat":
+                    return controladorPresentacio.obtenirRecomanacioContentBased(filtre, true);
+                case "Basat en usuaris amb gustos semblants als teus":
+                    return controladorPresentacio.obtenirRecomanacioCollaborative(filtre, true);
+                case "Basat en tot":
+                    return controladorPresentacio.obtenirRecomanacioHibrida(filtre, true);
+            }
+        } catch (SessioNoIniciadaException e1) {
+            JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No has iniciat la sessió.");
+        } catch (Exception e2) {
+            JOptionPane.showMessageDialog(vistaMenuRecomanacions, "No s'ha pogut obtenir la recomanació.");
+        }
+        return new ArrayList<>();
     }
 }
