@@ -46,6 +46,7 @@ public class ControladorDomini {
         for (String tipusItem : llistaTipusItems) {
             this.carregarTipusItem(tipusItem);
         }
+        estatPrograma.afegeixConjuntUsuaris(new ConjuntUsuaris(controladorPersistencia.obtenirConjuntUsuaris("basic")));
     }
 
     /**
@@ -517,7 +518,17 @@ public class ControladorDomini {
         return true;
     }
 
-    // TODO (edgar): afegir javadoc
+    /**
+     * Carrega un conjunt d'items amb un nou nom a partir d'un arxiu extern.
+     * @param nomTipusItem El nom del tipusItem que es creara
+     * @param rutaAbsoluta La localitzacio del fitxer d'on es carregara.
+     * @throws IOException Algun problema obrint el fitxer
+     * @throws AccesAEstatIncorrecteException Error creant el nou tipus item.
+     * @throws DistanciaNoCompatibleAmbValorException Error creant el nou tipus item.
+     * @throws NoExisteixElementException Error creant el nou tipus item.
+     * @throws JaExisteixElementException Ja existeix un tipus item amb aquest nom.
+     * @throws FormatIncorrecteException El fitxer no segueix el format esperat.
+     */
     public void carregarConjuntItems(String nomTipusItem, String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, JaExisteixElementException, FormatIncorrecteException {
         if (estatPrograma.conteTipusItem(nomTipusItem)) {
             throw new JaExisteixElementException("Ja existeix un tipus d'item amb nom " + nomTipusItem);
@@ -771,8 +782,13 @@ public class ControladorDomini {
     }
 
     /**
+     * Guarda les modificacions que hagin patit les dades de l'aplicacio abans de tancar-la.
+     * @throws IOException Hi ha algun error.
      */
-    public void guardarPrograma() {
-        // TODO (edgar): implementar i escriure javadoc
+    public void guardarPrograma() throws IOException {
+        controladorPersistencia.guardarConjuntUsuaris(estatPrograma.obtenirTotsElsUsuaris().obtenirUsuarisCSV(), "basic");
+        if (nomTipusItemActual != null) {
+            desseleccionarTipusItem();
+        }
     }
 }
