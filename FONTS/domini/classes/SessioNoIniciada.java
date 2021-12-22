@@ -24,10 +24,9 @@ public class SessioNoIniciada extends Sessio {
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
      *
      * @param usuari Usuari amb el qual iniciem la sessió.
-     * @throws SessioIniciadaException si l'estat és sessioIniciada
      */
     @Override
-    public void iniciarSessio(Programa programa, Usuari usuari) throws SessioIniciadaException {
+    public void iniciarSessio(Programa programa, Usuari usuari) {
         programa.cambiarEstat(new SessioIniciada(usuari));
     }
 
