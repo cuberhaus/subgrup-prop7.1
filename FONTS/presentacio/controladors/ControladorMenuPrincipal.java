@@ -4,6 +4,7 @@ import excepcions.DistanciaNoCompatibleAmbValorException;
 import excepcions.NomInternIncorrecteException;
 import presentacio.vistes.VistaMenuPrincipal;
 
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -33,8 +34,7 @@ public class ControladorMenuPrincipal {
                     try {
                         controladorPresentacio.guardarPrograma();
                     } catch (IOException e) {
-                        // TODO: catch it (no se si te sentit perque estas tancant)
-                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(vistaMenuPrincipal, "No s'han pogut guardar correctament les dades.");
                     }
                 }
             });
