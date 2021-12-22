@@ -39,7 +39,7 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
             }
             if (!errores) {
                 Id identificador = new Id(id, true);
-                if (elements.containsKey(identificador)) {
+                if (!elements.containsKey(identificador)) {
                     afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
                 }
             }
