@@ -23,25 +23,28 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
      * @throws DistanciaNoCompatibleAmbValorException a
      */
     //TODO: doc
-    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException, NoExisteixElementException, DistanciaNoCompatibleAmbValorException, FormatIncorrecteException {
+    public ConjuntItems(String nomTipusItem, TaulaCSV taula) throws AccesAEstatIncorrecteException, DistanciaNoCompatibleAmbValorException, NoExisteixElementException, FormatIncorrecteException {
         taula.eliminarEspaisInnecessaris();
         tipusItem = new TipusItem(nomTipusItem, taula, taula.obtenirNumItems());
 
         elements = new TreeMap<>();
-        int id;
+        int id = 0;
+        boolean errores = false;
         for (int i = 0; i < taula.obtenirNumItems(); ++i) {
             String sid = taula.obtenirValorAtribut(i, "id");
             try {
                 id = Integer.parseInt(sid);
             } catch (NumberFormatException e1) {
-                throw new InputMismatchException("L'id no es un integer");
+                errores = true;
             }
-            Id identificador = new Id(id, true);
-            if (elements.containsKey(identificador)) {
-                System.out.println(identificador.obtenirValor());
-                throw new InputMismatchException("L'item creat ja existeix al conjunt");
+            if (!errores) {
+                Id identificador = new Id(id, true);
+                if (!elements.containsKey(identificador)) {
+                    afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
+                }
             }
-            afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
+
+            errores = false;
         }
     }
 
