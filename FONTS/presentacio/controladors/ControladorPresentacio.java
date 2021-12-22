@@ -526,4 +526,39 @@ public class ControladorPresentacio {
     public void exportarItems(String rutaAbsoluta) throws IOException {
         controladorDomini.exportarItems(rutaAbsoluta);
     }
+
+    /**
+     * @param nomAtribut nom de l'atribut
+     * @return nom en format intern del valor atribut de l'atribut amb el nom donat del tipus d'ítem seleccionat
+     */
+    public String obtenirValorAtributTipusItemSeleccionat(String nomAtribut) {
+        return controladorDomini.obtenirValorAtributTipusItemSeleccionat(nomAtribut);
+    }
+
+    /**
+     * @param nomValorAtributIntern String que conte el nom d'un valor atribut en un format intern
+     * @return String que conte el nom extern del valor atribut donat o una String buida si no el reconeix
+     */
+    public String obtenirNomValorAtributExtern(String nomValorAtributIntern) {
+        switch (nomValorAtributIntern) {
+            case "ValorBoolea":
+                return "Booleà";
+            case "ValorCategoric":
+                return "Categòric";
+            case "ValorNumeric":
+                return "Numèric";
+            case "ValorTextual":
+                return "Textual";
+            case "ValorConjuntBoolea":
+                return "Conjunt booleà";
+            case "ValorConjuntCategoric":
+                return "Conjunt categòric";
+            case "ValorConjuntNumeric":
+                return "Conjunt numèric";
+            case "ValorConjuntTextual":
+                return "Conjunt textual";
+            default:
+                return "";
+        }
+    }
 }

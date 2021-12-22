@@ -47,12 +47,21 @@ public class VistaDialegEditarItem extends JDialog {
         } else {
             for (Map.Entry<String, String> atribut : atributs.entrySet()) {
                 JPanel panellAtribut = new JPanel(new FlowLayout());
+
                 JLabel etiquetaNomAtribut = new JLabel(atribut.getKey());
                 panellAtribut.add(etiquetaNomAtribut);
+
                 JTextField valorAtribut = new JTextField();
                 valorAtribut.setColumns(10);
                 valorAtribut.setText(atribut.getValue());
                 panellAtribut.add(valorAtribut);
+
+                JLabel tipusValorAtribut = new JLabel();
+                tipusValorAtribut.setFont(new Font("Sans", Font.BOLD, 12));
+                tipusValorAtribut.setText(
+                        controladorMenuItems.obtenirValorAtributTipusItemSeleccionat(atribut.getKey()));
+                panellAtribut.add(tipusValorAtribut);
+
                 panellLlistaAtributs.add(panellAtribut);
             }
         }

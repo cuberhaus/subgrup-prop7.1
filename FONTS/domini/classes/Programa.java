@@ -182,7 +182,7 @@ public class Programa {
      * Obté un <code>ArrayList</code> amb els noms dels <code>TipusItem</code> guardats.
      * @return <code>ArrayList</code> amb tots els noms.
      */
-    public ArrayList<String> obteTipusItem() {
+    public ArrayList<String> obteTipusItems() {
         return new ArrayList<>(tipusItems.keySet());
     }
 

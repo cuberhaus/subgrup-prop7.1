@@ -52,6 +52,11 @@ public class VistaDialegCrearItem extends JDialog {
                 JTextField valorAtribut = new JTextField();
                 valorAtribut.setColumns(10);
                 panellAtribut.add(valorAtribut);
+                JLabel tipusValorAtribut = new JLabel();
+                tipusValorAtribut.setFont(new Font("Sans", Font.BOLD, 12));
+                tipusValorAtribut.setText(
+                        controladorMenuItems.obtenirValorAtributTipusItemSeleccionat(nomAtribut));
+                panellAtribut.add(tipusValorAtribut);
                 panellLlistaAtributs.add(panellAtribut);
             }
         }

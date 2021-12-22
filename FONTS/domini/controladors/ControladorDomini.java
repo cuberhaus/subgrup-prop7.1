@@ -338,7 +338,7 @@ public class ControladorDomini {
      * @return <code>ArrayList&lt;String&gt;</code> llista de noms
      */
     public ArrayList<String> obtenirNomsTipusItemsCarregats() {
-        return estatPrograma.obteTipusItem();
+        return estatPrograma.obteTipusItems();
     }
 
     /**
@@ -872,5 +872,13 @@ public class ControladorDomini {
     public void exportarItems(String rutaAbsoluta) throws IOException {
         Date avui = Calendar.getInstance().getTime();
         controladorPersistencia.escriureCSVQualsevol(rutaAbsoluta, itemsActuals.convertirAArrayList(), "Items" + avui);
+    }
+
+    /**
+     * @param nomAtribut nom de l'atribut
+     * @return nom en format intern del valor atribut de l'atribut amb el nom donat del tipus d'ítem seleccionat
+     */
+    public String obtenirValorAtributTipusItemSeleccionat(String nomAtribut) {
+        return estatPrograma.obteTipusItem(nomTipusItemActual).obtenirTipusAtributs().get(nomAtribut).obtenirValorAtribut().getClass().getSimpleName();
     }
 }

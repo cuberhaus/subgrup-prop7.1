@@ -97,33 +97,6 @@ public class ControladorMenuTipusItem implements EncarregatActualitzarVistes.Obs
     }
 
     /**
-     * @param nomValorAtributIntern String que conte el nom d'un valor atribut en un format intern
-     * @return String que conte el nom extern del valor atribut donat o una String buida si no el reconeix
-     */
-    private String obtenirNomValorAtributExtern(String nomValorAtributIntern) {
-        switch (nomValorAtributIntern) {
-            case "ValorBoolea":
-                return "Booleà";
-            case "ValorCategoric":
-                return "Categòric";
-            case "ValorNumeric":
-                return "Numèric";
-            case "ValorTextual":
-                return "Textual";
-            case "ValorConjuntBoolea":
-                return "Conjunt booleà";
-            case "ValorConjuntCategoric":
-                return "Conjunt categòric";
-            case "ValorConjuntNumeric":
-                return "Conjunt numèric";
-            case "ValorConjuntTextual":
-                return "Conjunt textual";
-            default:
-                return "";
-        }
-    }
-
-    /**
      * @param nomDistanciaIntern String que conte el nom d'una distancia en un format intern
      * @return String que conte el nom extern de la distancia donat o una String buida si no el reconeix
      */
@@ -207,7 +180,7 @@ public class ControladorMenuTipusItem implements EncarregatActualitzarVistes.Obs
                 controladorPresentacio.obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat();
         Map<String, Pair<String, String>> atributs = new TreeMap<>();
         for (Map.Entry<String, Pair<String, String>> atribut : atributsAmbFormat.entrySet()) {
-            atributs.put(atribut.getKey(), new Pair<>(obtenirNomValorAtributExtern(atribut.getValue().x),
+            atributs.put(atribut.getKey(), new Pair<>(controladorPresentacio.obtenirNomValorAtributExtern(atribut.getValue().x),
                     obtenirNomDistanciaExtern(atribut.getValue().y)));
         }
         return atributs;

@@ -297,4 +297,13 @@ public class ControladorMenuItems implements EncarregatActualitzarVistes.Observa
             }
         }
     }
+
+    /**
+     * @param nomAtribut nom de l'atribut
+     * @return nom en format intern del valor atribut de l'atribut amb el nom donat del tipus d'ítem seleccionat
+     */
+    public String obtenirValorAtributTipusItemSeleccionat(String nomAtribut) {
+        return controladorPresentacio.obtenirNomValorAtributExtern(
+                controladorPresentacio.obtenirValorAtributTipusItemSeleccionat(nomAtribut));
+    }
 }
