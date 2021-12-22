@@ -43,6 +43,8 @@ public class ConjuntItems extends ConjuntIdentificat<Item> {
                     afegir(new Item(identificador, tipusItem, taula.obtenirNomsAtributs(), taula.obtenirItem(i)));
                 }
             }
+
+            errores = false;
         }
     }
 
