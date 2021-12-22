@@ -37,6 +37,7 @@ public class ControladorDomini {
      * Contructor privat de la classe per defecte
      * @throws IOException si no existeix algun fitxer de la càrrega de fitxers per defecte
      * @throws NomInternIncorrecteException si hi ha algun problema amb els noms dels fitxers dels metodes interns
+     * @throws DistanciaNoCompatibleAmbValorException no es pot calcular la distancia
      */
     private ControladorDomini() throws IOException, NomInternIncorrecteException, DistanciaNoCompatibleAmbValorException {
         controladorPersistencia = ControladorPersistencia.obtenirInstancia();
@@ -168,7 +169,8 @@ public class ControladorDomini {
      * @param usuariId <code>String</code> l'id de l'usuari
      * @param itemId <code>String</code> l'id de l'item
      * @param valor <code>String</code> valor de la valoracio
-     * @throws Exception si no existeix l'usuari o no existeis l'item
+     * @throws NoExisteixElementException no existeis l'item
+     * @throws UsuariIncorrecteException si no existeix l'usuari
      */
     public void afegirValoracio(String usuariId, String itemId, String valor) throws NoExisteixElementException, UsuariIncorrecteException {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
@@ -181,7 +183,7 @@ public class ControladorDomini {
      * @param usuariId <code>String</code> l'id de l'usuari
      * @param itemId <code>String</code> l'id de l'item
      * @return retorna si existeix la valoracio de l'usuari cap a un item
-     * @throws Exception si no existeix l'usuari o no existeix l'item
+     * @throws NoExisteixElementException si no existeix l'usuari o no existeix l'item
      */
     public boolean existeixValoracio(String usuariId, String itemId) throws NoExisteixElementException {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
@@ -193,7 +195,7 @@ public class ControladorDomini {
      * S'esborra la valoracio de un usuari cap a un item
      * @param usuariId <code>String</code> l'id de l'usuari
      * @param itemId <code>String</code> l'id id de l'item
-     * @throws Exception si no existeix l'usuari o no existeix l'item
+     * @throws NoExisteixElementException si no existeix l'usuari o no existeix l'item
      */
     public void esborraValoracio(String usuariId, String itemId) throws NoExisteixElementException {
         Usuari us = estatPrograma.obtenirUsuari(new Id(Integer.parseInt(usuariId)));
@@ -206,7 +208,8 @@ public class ControladorDomini {
      * @param usuariId <code>String</code> l'id de l'usuari
      * @param itemId <code>String</code> l'id de l'item
      * @param valor <code>String</code> el valor a escriure a la recomanacio
-     * @throws Exception si no s'ha pogut modificar la valoracio perque l'usuari i/o l'item no existeixen
+     * @throws NoExisteixElementException l'item no existeixen
+     * @throws UsuariIncorrecteException si no s'ha pogut modificar la valoracio perque l'usuari no existeix
      */
     public void editarValoracio(String usuariId, String itemId, String valor) throws NoExisteixElementException, UsuariIncorrecteException {
         esborraValoracio(usuariId, itemId);
@@ -216,7 +219,10 @@ public class ControladorDomini {
     /**
      * Llegeix el contingut del fitxer de les valoracions
      * @param rutaAbsolut <code>String</code> ubicacio de l'arxiu a llegir
-     * @throws Exception si no s'ha pogut afegir la valoracio al contenidor
+     * @throws IOException si no s'ha pogut afegir la valoracio al contenidor
+     * @throws AccesAEstatIncorrecteException a
+     * @throws NoExisteixElementException b
+     * @throws UsuariIncorrecteException c
      */
     public void carregaConjuntValoracions(String rutaAbsolut) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
         ArrayList<ArrayList<String>> valoracions = controladorPersistencia.llegirCSVQualsevol(rutaAbsolut);
@@ -235,7 +241,9 @@ public class ControladorDomini {
      * Carrega tipus d'item a partir d'un fitxer
      * @param nom <code>String</code> nom del tipus d'item
      * @param rutaAbsoluta <code>String</code> ubicacio del fitxer
-     * @throws Exception si el fitxer no existeix o no te format correcte
+     * @throws IOException si el fitxer no existeix o no te format correcte
+     * @throws JaExisteixElementException l'element ja existeix al conjunt
+     * @throws FormatIncorrecteException el fitxer no te el format correcte
      */
     public void carregarTipusItem(String nom, String rutaAbsoluta) throws IOException, JaExisteixElementException, FormatIncorrecteException {
         if (estatPrograma.conteTipusItem(nom)) {
@@ -308,6 +316,7 @@ public class ControladorDomini {
     /**
      * Obtenir les distancies
      * @return <code>Map&lt;String, Pair&lt;String, String&gt;&gt;</code> amb els valors
+     * @throws DistanciaNoCompatibleAmbValorException el metode distancia no es pot calcular amb l'atribut seleccionat
      */
     public Map<String, Pair<String, String>> obtenirValorsDistanciesTipusAtributsTipusItemSeleccionat() throws DistanciaNoCompatibleAmbValorException {
         TipusItem tipus = estatPrograma.obteTipusItem(nomTipusItemActual);
@@ -343,6 +352,7 @@ public class ControladorDomini {
     }
 
     /**
+     * Obté el nom del tipus d'ítem seleccionat
      * @return null si no hi ha cap seleccionat
      */
     public String obtenirNomTipusItemSeleccionat() {
@@ -351,6 +361,7 @@ public class ControladorDomini {
 
     /**
      * Esborra el tipus d'item seleccionat
+     * @throws IOException el fitxer no es pot obrir
      */
     public void esborrarTipusItemSeleccionat() throws IOException {
         controladorPersistencia.borrarTipusItem(nomTipusItemActual);
@@ -364,7 +375,10 @@ public class ControladorDomini {
     /**
      * Selecciona el tipus item
      * @param nomTipusItem <code>String</code> el nom del tipus d'item
-     * @throws Exception si no s'ha pogut seleccionar el tipus d'item
+     * @throws IOException a
+     * @throws AccesAEstatIncorrecteException b
+     * @throws NoExisteixElementException c
+     * @throws UsuariIncorrecteException d
      */
     public void seleccionarTipusItem(String nomTipusItem) throws IOException, AccesAEstatIncorrecteException, NoExisteixElementException, UsuariIncorrecteException {
         if (nomTipusItemActual != null) {
@@ -435,6 +449,7 @@ public class ControladorDomini {
      * Esborra l'item amb l'id dessitjat
      * @param id <code>String</code> l'id de l'item a eesborrar
      * @return <code>boolean</code> si s'ha pogut esborrar o no
+     * @throws NoExisteixElementException no existeix l'item
      */
     public boolean esborrarItem(String id) throws NoExisteixElementException {
         //Comprobacio si id es valid nomes de transformar
@@ -460,6 +475,7 @@ public class ControladorDomini {
      * @param id <code>String</code> l'id de l'item a obtenir
      * @return <code>Map&lt;String, String&gt;</code> amb el contingut de l'item
      * @throws IllegalArgumentException si l'identificador no es valid
+     * @throws NoExisteixElementException no existeix item
      */
     public Map<String, String> obtenirItem(String id) throws IllegalArgumentException, NoExisteixElementException {
         // Retorna un mapa amb els noms del atributs i el valor dels atributs de l'ítem amb aquest id
@@ -505,6 +521,7 @@ public class ControladorDomini {
      * Carrega un conjunt d'items a partir d'un fitxer
      * @param rutaAbsoluta <code>String</code> ruta del fitxer
      * @throws IOException si no s'ha pogut obrir el fitxer
+     * @throws AccesAEstatIncorrecteException taula no inicialitzada
      */
     public void carregarConjuntItems(String rutaAbsoluta) throws IOException, AccesAEstatIncorrecteException {
         ArrayList<ArrayList<String>> items = controladorPersistencia.llegirCSVQualsevol(rutaAbsoluta);
@@ -545,11 +562,11 @@ public class ControladorDomini {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador Collaborative per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador Collaborative per a l'usuari que està actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
-     * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
+     * @return El conjunt d'id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioCollaborative(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
@@ -568,11 +585,11 @@ public class ControladorDomini {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador ContentBased per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador ContentBased per al usuari que esta actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
      * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioContentBased(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {
@@ -591,11 +608,11 @@ public class ControladorDomini {
     }
 
     /**
-     * Obte una recomanacio amb el metode Recomanador Hibrid per al usuari que esta actiu.
+     * Obté una recomanació amb el mètode Recomanador Híbrid per a l'usuari que està actiu.
      * @param nomAtributs atributs considerats pel filtre
-     * @param filtreInclusiu true si el filtre es de tipus inclusiu, false si es exclusiu.
-     * @return El conjunt de id's dels items recomanats.
-     * @throws SessioNoIniciadaException si no hi ha cap sessio iniciada.
+     * @param filtreInclusiu true si el filtre és de tipus inclusiu, false si és exclusiu.
+     * @return El conjunt d'id's dels items recomanats.
+     * @throws SessioNoIniciadaException si no hi ha cap sessió iniciada.
      * @throws NoExisteixElementException hi ha un problema per crear la recomanació.
      */
     public ArrayList<String> obtenirRecomanacioHibrida(ArrayList<String> nomAtributs, boolean filtreInclusiu) throws SessioNoIniciadaException, NoExisteixElementException {

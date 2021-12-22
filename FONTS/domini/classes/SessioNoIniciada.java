@@ -13,7 +13,7 @@ public class SessioNoIniciada extends Sessio {
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
      *
-     * @throws Exception si l'estat és sessioNoIniciada
+     * @throws SessioNoIniciadaException si l'estat és sessioNoIniciada
      */
     @Override
     public void tancarSessio(Programa programa) throws SessioNoIniciadaException {
@@ -24,7 +24,7 @@ public class SessioNoIniciada extends Sessio {
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
      *
      * @param usuari Usuari amb el qual iniciem la sessió.
-     * @throws Exception si l'estat és sessioIniciada
+     * @throws SessioIniciadaException si l'estat és sessioIniciada
      */
     @Override
     public void iniciarSessio(Programa programa, Usuari usuari) throws SessioIniciadaException {
@@ -42,7 +42,7 @@ public class SessioNoIniciada extends Sessio {
     /**
      * Retorna l'usuari amb la sessió iniciada.
      *
-     * @throws Exception si l'estat és sessioNoIniciada
+     * @throws SessioNoIniciadaException si l'estat és sessioNoIniciada
      */
     @Override
     public Usuari obtenirUsuariSessioIniciada() throws SessioNoIniciadaException {

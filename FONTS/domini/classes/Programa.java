@@ -63,6 +63,7 @@ public class Programa {
 
     /**
      * Canvia l'estat de la sessió a SessioNoIniciada
+     * @throws SessioNoIniciadaException la sessio ja es tancada
      */
     public void tancarSessio() throws SessioNoIniciadaException {
         sessio.tancarSessio(this);
@@ -72,6 +73,7 @@ public class Programa {
      * Canvia l'estat de la sessió a SessioIniciada amb el paràmetre usuari.
      *
      * @param usuari Usuari amb el qual iniciem la sessió.
+     * @throws SessioIniciadaException la sessio ja es iniciada
      */
     public void iniciarSessio(Usuari usuari) throws SessioIniciadaException {
         sessio.iniciarSessio(this, usuari);
@@ -99,6 +101,7 @@ public class Programa {
      * Retorna l'usuari amb la sessió iniciada.
      *
      * @return Usuari
+     * @throws SessioNoIniciadaException la sessio no es iniciada
      */
     public Usuari obtenirUsuariSessioIniciada() throws SessioNoIniciadaException {
         return sessio.obtenirUsuariSessioIniciada();
@@ -119,6 +122,7 @@ public class Programa {
      *
      * @param idUsuari id de l'usuari
      * @return Usuari amb l'id desitjat
+     * @throws NoExisteixElementException no existeix l'usuari
      */
     public Usuari obtenirUsuari(Id idUsuari) throws NoExisteixElementException {
         return conjuntUsuaris.obtenir(idUsuari);
@@ -140,7 +144,7 @@ public class Programa {
     /**
      * Afegeix un tipus d'ítem al conjunt de tipus d'ítems.
      * Retorna true si s'ha afegit correctament, retorna false si ja hi era
-     *
+     * @param nom nom del tipus item
      * @param tipusItem el paràmetre s'ha afegit al conjunt si no hi era abans.
      */
     public void afegirTipusItem(String nom, TipusItem tipusItem) {
@@ -160,8 +164,8 @@ public class Programa {
     }
     /**
      * Marca com a no actiu un usuari del conjunt d'usuaris.
-     *
      * @param id el paràmetre s'ha marcat com a no actiu.
+     * @throws NoExisteixElementException l'usuari no existeix
      */
     public void esborraUsuari(Id id) throws NoExisteixElementException {
         conjuntUsuaris.esborrar(id);
