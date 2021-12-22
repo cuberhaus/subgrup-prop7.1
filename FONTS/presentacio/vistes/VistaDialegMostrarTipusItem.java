@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.Map;
 
 /**
+ * Vista pel dialeg que permet mostrar un tipus d'item.
  * @author maria.prat
  */
 public class VistaDialegMostrarTipusItem extends JDialog {

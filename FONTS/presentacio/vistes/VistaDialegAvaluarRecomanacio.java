@@ -1,17 +1,14 @@
 package presentacio.vistes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuRecomanacions;
 import utilitats.Pair;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
+ * Vista pel dialeg que permet l'avaluacio d'una recomanacio.
  * @author maria.prat
  */
 public class VistaDialegAvaluarRecomanacio extends JDialog {

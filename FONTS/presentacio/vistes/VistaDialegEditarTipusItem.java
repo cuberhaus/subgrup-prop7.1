@@ -1,16 +1,12 @@
 package presentacio.vistes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.FormatIncorrecteException;
-import excepcions.JaExisteixElementException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuTipusItem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 /**
+ * Vista pel dialeg que permet l'edicio d'un tipus d'item.
  * @author maria.prat
  */
 public class VistaDialegEditarTipusItem extends JDialog {

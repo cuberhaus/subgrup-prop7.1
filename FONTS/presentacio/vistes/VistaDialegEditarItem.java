@@ -1,19 +1,14 @@
 package presentacio.vistes;
 
-import excepcions.FormatIncorrecteException;
-import excepcions.NoExisteixElementException;
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.controladors.ControladorMenuItems;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Vista pel dialeg que permet l'edicio d'un item.
  * @author maria.prat
  */
 public class VistaDialegEditarItem extends JDialog {

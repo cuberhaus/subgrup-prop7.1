@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Vista pel dialeg que permet la creacio d'un tipus d'item.
  * @author maria.prat
  */
 public class VistaDialegCrearTipusItem extends JDialog {

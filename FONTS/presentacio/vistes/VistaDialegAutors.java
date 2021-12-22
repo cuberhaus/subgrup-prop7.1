@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Vista pel dialeg que presenta la informacio del projecte i els seus autors.
  * @author maria.prat
  */
 public class VistaDialegAutors extends JDialog {

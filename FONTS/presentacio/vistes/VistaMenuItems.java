@@ -1,7 +1,5 @@
 package presentacio.vistes;
 
-import excepcions.DistanciaNoCompatibleAmbValorException;
-import excepcions.NomInternIncorrecteException;
 import presentacio.EncarregatActualitzarVistes;
 import presentacio.controladors.ControladorMenuItems;
 
@@ -10,6 +8,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Vista del menu d'items.
+ * @author maria.prat
+ */
 public class VistaMenuItems extends JPanel {
     private static VistaMenuItems instancia;
     private static ControladorMenuItems controladorMenuItems;
