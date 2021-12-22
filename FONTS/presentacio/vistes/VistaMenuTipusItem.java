@@ -154,7 +154,6 @@ public class VistaMenuTipusItem extends JPanel {
                         botoEditarTipusItem.setEnabled(false);
                         botoDeseleccionarTipusItem.setEnabled(false);
                         botoEsborrarTipusItem.setEnabled(false);
-
                     } else {
                         textTipusItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
                         botoVeureTipusItem.setEnabled(true);
@@ -163,7 +162,6 @@ public class VistaMenuTipusItem extends JPanel {
                         botoEsborrarTipusItem.setEnabled(true);
                     }
                 } catch (Exception e1) {
-                    System.out.println(e1.getMessage());
                     JOptionPane.showMessageDialog(instancia,
                             "No s'ha pogut seleccionar el tipus d'ítem. Torna-ho a intentar.");
                 }

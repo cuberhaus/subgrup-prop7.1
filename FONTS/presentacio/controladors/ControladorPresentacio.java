@@ -19,6 +19,7 @@ public class ControladorPresentacio {
     private static ControladorMenuUsuaris controladorMenuUsuaris;
     private static ControladorMenuPrincipal controladorMenuPrincipal;
     private static ControladorMenuTipusItem controladorMenuTipusItem;
+    private static ControladorMenuRecomanacions controladorMenuRecomanacions;
 
     /**
      * Constructora per defecte de ControladorPresentacio
