@@ -118,7 +118,6 @@ public class VistaMenuItems extends JPanel {
         JButton botoExportarConjuntItems = new JButton("Exporta el conjunt d'ítems");
         botoExportarConjuntItems.setAlignmentX(Component.CENTER_ALIGNMENT);
         botoExportarConjuntItems.addActionListener(e -> {
-            // TODO (pol)
             JDialog dialegRuta = new JDialog();
             JFileChooser selectorFitxer = new JFileChooser();
             selectorFitxer.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
