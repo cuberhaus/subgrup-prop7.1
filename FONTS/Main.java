@@ -1,3 +1,4 @@
+import com.formdev.flatlaf.FlatDarkLaf;
 import presentacio.controladors.ControladorPresentacio;
 
 /**
@@ -5,6 +6,7 @@ import presentacio.controladors.ControladorPresentacio;
  */
 public class Main {
     public static void main(String[] args) {
+        FlatDarkLaf.setup();
         try {
             ControladorPresentacio.obtenirInstancia();
         } catch (Exception e) {

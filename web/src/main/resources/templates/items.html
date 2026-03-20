@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title>Items</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="page-title">Items</h1>
+    <p class="page-subtitle">
+        <span th:if="${existeixTipusItem}">Tipus d'ítem seleccionat: <span class="badge badge-accent" th:text="${tipusItemNom}"></span></span>
+        <span th:unless="${existeixTipusItem}">No hi ha cap tipus d'ítem seleccionat. <a href="/tipus-item" class="text-decoration-none" style="color: var(--accent);">Selecciona'n un</a>.</span>
+    </p>
+
+    <div th:if="${existeixTipusItem}">
+        <div class="d-flex gap-2 mb-4">
+            <button class="btn btn-accent" data-bs-toggle="modal" data-bs-target="#crearItemModal">Crea un nou ítem</button>
+            <form th:action="@{/items/esborrar-tots}" method="post" class="d-inline"
+                  onsubmit="return confirm('Segur que vols esborrar tots els ítems?');">
+                <button class="btn btn-outline-danger">Esborra tots</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th th:each="attr : ${nomsAtributs}" th:text="${attr}"></th>
+                            <th>Accions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${#lists.isEmpty(items)}">
+                            <td th:colspan="${#lists.size(nomsAtributs) + 2}" class="text-center text-muted py-4">No hi ha cap ítem.</td>
+                        </tr>
+                        <tr th:each="item : ${items}">
+                            <td th:each="val, stat : ${item}" th:text="${val}"></td>
+                            <td>
+                                <a th:href="@{/items/{id}(id=${item[0]})}" class="btn btn-outline-accent btn-sm">Mostra</a>
+                                <form th:action="@{/items/{id}/esborrar(id=${item[0]})}" method="post" class="d-inline"
+                                      onsubmit="return confirm('Esborrar aquest ítem?');">
+                                    <button class="btn btn-outline-danger btn-sm">Esborra</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create item modal -->
+    <div class="modal fade" id="crearItemModal" tabindex="-1" th:if="${existeixTipusItem}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/items/crear}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-white">Crea un nou ítem</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div th:if="${#lists.isEmpty(nomsAtributs)}" class="text-muted">
+                            El tipus d'ítem no té cap atribut.
+                        </div>
+                        <div th:each="attr : ${nomsAtributs}" class="mb-3">
+                            <label class="form-label" th:text="${attr}"></label>
+                            <input type="text" class="form-control" th:name="'attr_' + ${attr}">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-accent" data-bs-dismiss="modal">Cancel·la</button>
+                        <button type="submit" class="btn btn-accent">Crea</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

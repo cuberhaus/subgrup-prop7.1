@@ -39,9 +39,10 @@ public class VistaMenuItems extends JPanel {
     }
 
     private static void inicialitzarMenuItems() {
-        instancia.setLayout(new BorderLayout());
-        inicialitzarMenuLateral();
+        instancia.setLayout(new BorderLayout(UIEstil.PADDING, 0));
+        instancia.setBorder(UIEstil.panelBorder());
         inicialitzarLlistaItems();
+        inicialitzarMenuLateral();
     }
 
     private static void inicialitzarLlistaItems() {
@@ -55,47 +56,52 @@ public class VistaMenuItems extends JPanel {
         }
         llistaItems = new JTable(llistaItemsTableModel);
         llistaItems.setEnabled(false);
+        UIEstil.styleTable(llistaItems);
         llistaItemsScroll = new JScrollPane(llistaItems);
+        llistaItemsScroll.setPreferredSize(new Dimension(300, 0));
         instancia.add(llistaItemsScroll, BorderLayout.WEST);
     }
 
     private static void inicialitzarMenuLateral() {
-        menuLateral = new JPanel();
-        menuLateral.setLayout(new BoxLayout(menuLateral, BoxLayout.Y_AXIS));
+        menuLateral = UIEstil.createButtonColumn(UIEstil.PADDING_SMALL);
+
         menuLateral.add(Box.createVerticalGlue());
-        JButton botoCrearItem = new JButton("Crea un nou ítem");
-        botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton botoCrearItem = UIEstil.createAccentButton("Crea un nou ítem");
         botoCrearItem.addActionListener(e -> {
             controladorMenuItems.crearNouItem();
             actualitzarTaula();
         });
         menuLateral.add(botoCrearItem);
-        JButton botoMostrarItem = new JButton("Mostra un ítem");
-        botoMostrarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuLateral.add(UIEstil.verticalGap());
+
+        JButton botoMostrarItem = UIEstil.createButton("Mostra un ítem");
         botoMostrarItem.addActionListener(e -> controladorMenuItems.mostarItem());
         menuLateral.add(botoMostrarItem);
-        JButton botoEditarItem = new JButton("Edita un ítem");
-        botoEditarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuLateral.add(UIEstil.verticalGap());
+
+        JButton botoEditarItem = UIEstil.createButton("Edita un ítem");
         botoEditarItem.addActionListener(e -> controladorMenuItems.editarItem());
         menuLateral.add(botoEditarItem);
-        JButton botoEsborrarItem = new JButton("Esborra un ítem");
-        botoEsborrarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuLateral.add(UIEstil.verticalGap());
+
+        JButton botoEsborrarItem = UIEstil.createDangerButton("Esborra un ítem");
         botoEsborrarItem.addActionListener(e -> {
             controladorMenuItems.esborrarItem();
             actualitzarTaula();
         });
         menuLateral.add(botoEsborrarItem);
+        menuLateral.add(UIEstil.verticalGap());
 
-        JButton botoEsborrarTotsElsItems = new JButton("Esborra tots els ítems");
-        botoEsborrarTotsElsItems.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton botoEsborrarTotsElsItems = UIEstil.createDangerButton("Esborra tots els ítems");
         botoEsborrarTotsElsItems.addActionListener(e -> {
             controladorMenuItems.esborrarTotsElsItems();
             actualitzarTaula();
         });
         menuLateral.add(botoEsborrarTotsElsItems);
+        menuLateral.add(UIEstil.verticalGapLarge());
 
-        JButton botoCarregarConjuntItems = new JButton("Afegeix ítems des d'un conjunt");
-        botoCarregarConjuntItems.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton botoCarregarConjuntItems = UIEstil.createButton("Afegeix ítems des d'un conjunt");
         botoCarregarConjuntItems.addActionListener(e -> {
             boolean deduirTipusItem = true;
             if (controladorMenuItems.existeixTipusItemSeleccionat()) {
@@ -112,11 +118,10 @@ public class VistaMenuItems extends JPanel {
                 EncarregatActualitzarVistes.notificarObservadors();
             }
         });
-
         menuLateral.add(botoCarregarConjuntItems);
+        menuLateral.add(UIEstil.verticalGap());
 
-        JButton botoExportarConjuntItems = new JButton("Exporta el conjunt d'ítems");
-        botoExportarConjuntItems.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton botoExportarConjuntItems = UIEstil.createButton("Exporta el conjunt d'ítems");
         botoExportarConjuntItems.addActionListener(e -> {
             JDialog dialegRuta = new JDialog();
             JFileChooser selectorFitxer = new JFileChooser();
@@ -127,8 +132,8 @@ public class VistaMenuItems extends JPanel {
                 controladorMenuItems.exportarItems(rutaConjuntItems.getAbsolutePath());
             }
         });
-
         menuLateral.add(botoExportarConjuntItems);
+
         menuLateral.add(Box.createVerticalGlue());
         instancia.add(menuLateral, BorderLayout.CENTER);
     }

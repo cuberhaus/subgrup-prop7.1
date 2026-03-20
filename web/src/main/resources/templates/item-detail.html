@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title>Detall de l'ítem</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <a href="/items" class="btn btn-outline-accent btn-sm">&larr; Tornar</a>
+        <h1 class="page-title mb-0">Ítem <span th:text="${itemId}"></span></h1>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <div th:if="${atributs != null}" class="row g-4">
+        <div class="col-md-8">
+            <div class="card p-4">
+                <h5 class="text-white mb-3">Atributs</h5>
+                <table class="table mb-0">
+                    <tbody>
+                        <tr th:each="entry : ${atributs}">
+                            <td class="text-muted fw-bold" th:text="${entry.key}"></td>
+                            <td th:text="${entry.value}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-4">
+                <h5 class="text-white mb-3">Editar ítem</h5>
+                <form th:action="@{/items/{id}/editar(id=${itemId})}" method="post">
+                    <div th:each="entry : ${atributs}" class="mb-3">
+                        <label class="form-label" th:text="${entry.key}"></label>
+                        <input type="text" class="form-control" th:name="'attr_' + ${entry.key}" th:value="${entry.value}">
+                    </div>
+                    <button type="submit" class="btn btn-accent w-100">Guarda canvis</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

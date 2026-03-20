@@ -21,12 +21,13 @@ public class VistaDialegMostrarItem extends JDialog {
     }
 
     private void inicialitzarDialegMostrarItem(String id, Map<String, String> atributs) {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
+        setBounds(Pantalla.centreHoritzontal(5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Mostra un ítem");
         setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
+        panellPrincipal.setBorder(UIEstil.panelBorder());
         add(panellPrincipal);
 
         JPanel panellLlistaAtributs = new JPanel();
@@ -37,19 +38,17 @@ public class VistaDialegMostrarItem extends JDialog {
         panellPrincipal.add(panellScrollLlistaAtributs, BorderLayout.CENTER);
 
         if (controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
-            JLabel text = new JLabel("El tipus d'ítem seleccionat no té cap atribut.");
+            JLabel text = UIEstil.createLabel("El tipus d'ítem seleccionat no té cap atribut.");
+            text.setFont(UIEstil.FONT_BUTTON);
             text.setAlignmentX(Component.CENTER_ALIGNMENT);
-            text.setFont(new Font("Sans", Font.BOLD, 13));
             panellLlistaAtributs.add(Box.createVerticalGlue());
             panellLlistaAtributs.add(text);
             panellLlistaAtributs.add(Box.createVerticalGlue());
         } else {
             for (Map.Entry<String, String> atribut : atributs.entrySet()) {
-                JPanel panellAtribut = new JPanel(new FlowLayout());
-                JLabel etiquetaNomAtribut = new JLabel(atribut.getKey());
-                panellAtribut.add(etiquetaNomAtribut);
-                JTextField valorAtribut = new JTextField();
-                valorAtribut.setColumns(10);
+                JPanel panellAtribut = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
+                panellAtribut.add(UIEstil.createLabel(atribut.getKey()));
+                JTextField valorAtribut = UIEstil.createTextField(12);
                 valorAtribut.setText(atribut.getValue());
                 valorAtribut.setEnabled(false);
                 panellAtribut.add(valorAtribut);

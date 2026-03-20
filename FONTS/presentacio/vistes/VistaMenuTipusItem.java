@@ -32,9 +32,6 @@ public class VistaMenuTipusItem extends JPanel {
     private static JButton botoEsborrarTipusItem;
     private static DefaultComboBoxModel<String> tipusItemsComboBoxModel;
 
-    /**
-     * Constructor d'una VistaMenuTipusItem
-     */
     private VistaMenuTipusItem() {
     }
 
@@ -47,37 +44,36 @@ public class VistaMenuTipusItem extends JPanel {
         return instancia;
     }
 
-    private static void inicialitzarMenuTipusItem(){
+    private static void inicialitzarMenuTipusItem() {
         instancia.setLayout(new BoxLayout(instancia, BoxLayout.Y_AXIS));
-
-        JLabel titol = new JLabel("Quin tipus d'ítem vols que et recomani?");
-        titol.setFont(new Font("Sans", Font.PLAIN, 20));
-        titol.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel descripcio = new JLabel("Afegeix un tipus d'ítem nou o selecciona un tipus d'ítem existent");
-        descripcio.setFont(new Font("Sans", Font.PLAIN, 14));
-        descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        instancia.setBorder(UIEstil.panelBorder());
 
         instancia.add(Box.createVerticalGlue());
-        instancia.add(titol);
-        instancia.add(Box.createVerticalStrut(10));
-        instancia.add(descripcio);
-        instancia.add(Box.createVerticalGlue());
+        instancia.add(UIEstil.createTitle("Quin tipus d'ítem vols que et recomani?"));
+        instancia.add(UIEstil.verticalGap());
+        instancia.add(UIEstil.createSubtitle("Afegeix un tipus d'ítem nou o selecciona un tipus d'ítem existent"));
+        instancia.add(UIEstil.verticalGapLarge());
+        instancia.add(UIEstil.verticalGapLarge());
+
         inicialitzarPanellAfegirTipusItem();
         instancia.add(panellAfegirTipusItem);
+        instancia.add(UIEstil.verticalGap());
         inicialitzarPanellSeleccionarTipusItem();
         instancia.add(panellSeleccionarTipusItem);
+        instancia.add(UIEstil.verticalGap());
         inicialitzarPanellAdministrarTipusItem();
         instancia.add(panellAdministrarTipusItem);
+        instancia.add(UIEstil.verticalGapLarge());
         inicialitzarPanellMostrarTipusItemSeleccionat();
         instancia.add(panellMostrarTipusItemSeleccionat);
         instancia.add(Box.createVerticalGlue());
     }
 
     private static void inicialitzarPanellAfegirTipusItem() {
-        panellAfegirTipusItem = new JPanel(new FlowLayout());
-        JButton botoCrearTipusItem = new JButton("Crea un nou tipus d'ítem");
-        botoCrearTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panellAfegirTipusItem = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING, 0));
+        panellAfegirTipusItem.setOpaque(false);
+
+        JButton botoCrearTipusItem = UIEstil.createAccentButton("Crea un nou tipus d'ítem");
         botoCrearTipusItem.addActionListener(e -> {
             try {
                 VistaDialegCrearTipusItem vistaDialegCrearTipusItem;
@@ -90,8 +86,8 @@ public class VistaMenuTipusItem extends JPanel {
             }
         });
         panellAfegirTipusItem.add(botoCrearTipusItem);
-        JButton botoCarregarTipusItem = new JButton("Carrega un nou tipus d'ítem");
-        botoCarregarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton botoCarregarTipusItem = UIEstil.createButton("Carrega un nou tipus d'ítem");
         botoCarregarTipusItem.addActionListener(e -> {
             String nom = JOptionPane.showInputDialog(instancia,
                     "Introdueix el nom del tipus d'ítem:");
@@ -114,7 +110,8 @@ public class VistaMenuTipusItem extends JPanel {
     }
 
     private static void inicialitzarPanellSeleccionarTipusItem() {
-        panellSeleccionarTipusItem = new JPanel(new FlowLayout());
+        panellSeleccionarTipusItem = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING_SMALL, 0));
+        panellSeleccionarTipusItem.setOpaque(false);
 
         tipusItemsComboBoxModel = new DefaultComboBoxModel<>();
         tipusItemsComboBoxModel.addAll(controladorMenuTipusItem.obtenirNomsTipusItemsCarregats());
@@ -123,8 +120,10 @@ public class VistaMenuTipusItem extends JPanel {
         tipusItemsComboBox.setModel(tipusItemsComboBoxModel);
         tipusItemsComboBox.setPrototypeDisplayValue(kPrototipNomTipusItem);
         tipusItemsComboBox.setSelectedIndex(-1);
+        tipusItemsComboBox.setFont(UIEstil.FONT_LABEL);
         panellSeleccionarTipusItem.add(tipusItemsComboBox);
-        JButton selecciona = new JButton("Selecciona");
+
+        JButton selecciona = UIEstil.createSmallButton("Selecciona");
         selecciona.addActionListener(e -> {
             String nomTipusItem = (String) tipusItemsComboBox.getSelectedItem();
             if (nomTipusItem != null) {
@@ -138,8 +137,10 @@ public class VistaMenuTipusItem extends JPanel {
     }
 
     private static void inicialitzarPanellAdministrarTipusItem() {
-        panellAdministrarTipusItem = new JPanel(new FlowLayout());
-        botoDeseleccionarTipusItem = new JButton("Deselecciona");
+        panellAdministrarTipusItem = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING, 0));
+        panellAdministrarTipusItem.setOpaque(false);
+
+        botoDeseleccionarTipusItem = UIEstil.createSmallButton("Deselecciona");
         botoDeseleccionarTipusItem.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
@@ -148,7 +149,10 @@ public class VistaMenuTipusItem extends JPanel {
             }
         });
         panellAdministrarTipusItem.add(botoDeseleccionarTipusItem);
-        botoEsborrarTipusItem = new JButton("Esborra");
+
+        botoEsborrarTipusItem = UIEstil.createSmallButton("Esborra");
+        botoEsborrarTipusItem.setBackground(UIEstil.DANGER);
+        botoEsborrarTipusItem.setForeground(Color.WHITE);
         botoEsborrarTipusItem.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
@@ -161,22 +165,29 @@ public class VistaMenuTipusItem extends JPanel {
             }
         });
         panellAdministrarTipusItem.add(botoEsborrarTipusItem);
-        panellAdministrarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
     private static void inicialitzarPanellMostrarTipusItemSeleccionat() {
         panellMostrarTipusItemSeleccionat = new JPanel();
         panellMostrarTipusItemSeleccionat.setLayout(new BoxLayout(panellMostrarTipusItemSeleccionat, BoxLayout.Y_AXIS));
+        panellMostrarTipusItemSeleccionat.setOpaque(false);
 
-        JPanel informacio = new JPanel(new FlowLayout());
-        JLabel text = new JLabel("Tipus d'ítem seleccionat:");
-        text.setFont(new Font("Sans", Font.BOLD, 16));
+        JPanel informacio = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING_SMALL, 0));
+        informacio.setOpaque(false);
+        JLabel text = UIEstil.createLabel("Tipus d'ítem seleccionat:");
+        text.setFont(UIEstil.FONT_BUTTON);
         informacio.add(text);
 
-        JPanel botons = new JPanel(new FlowLayout());
+        textTipusItemSeleccionat = new JLabel();
+        textTipusItemSeleccionat.setFont(new Font("SansSerif", Font.ITALIC, 16));
+        textTipusItemSeleccionat.setForeground(UIEstil.ACCENT);
+        informacio.add(textTipusItemSeleccionat);
+        panellMostrarTipusItemSeleccionat.add(informacio);
 
-        botoVeureTipusItem = new JButton("Mostra el tipus d'ítem seleccionat");
-        botoVeureTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JPanel botons = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING, 0));
+        botons.setOpaque(false);
+
+        botoVeureTipusItem = UIEstil.createButton("Mostra el tipus d'ítem");
         botoVeureTipusItem.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
@@ -192,8 +203,7 @@ public class VistaMenuTipusItem extends JPanel {
             }
         });
 
-        botoEditarTipusItem = new JButton("Edita el tipus d'ítem seleccionat");
-        botoEditarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botoEditarTipusItem = UIEstil.createButton("Edita el tipus d'ítem");
         botoEditarTipusItem.addActionListener(e -> {
             if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
@@ -210,14 +220,9 @@ public class VistaMenuTipusItem extends JPanel {
             }
         });
 
-        textTipusItemSeleccionat = new JLabel();
-        textTipusItemSeleccionat.setFont(new Font("Sans", Font.PLAIN, 16));
-        informacio.add(textTipusItemSeleccionat);
-        panellMostrarTipusItemSeleccionat.add(informacio);
-
         botons.add(botoVeureTipusItem);
         botons.add(botoEditarTipusItem);
-
+        panellMostrarTipusItemSeleccionat.add(UIEstil.verticalGap());
         panellMostrarTipusItemSeleccionat.add(botons);
 
         actualitzarTipusItems();
@@ -226,12 +231,14 @@ public class VistaMenuTipusItem extends JPanel {
     public static void actualitzarTipusItems() {
         if (!controladorMenuTipusItem.existeixTipusItemSeleccionat()) {
             textTipusItemSeleccionat.setText(kMissatgeTipusItemNoSeleccionat);
+            textTipusItemSeleccionat.setForeground(UIEstil.TEXT_SECONDARY);
             botoVeureTipusItem.setEnabled(false);
             botoEditarTipusItem.setEnabled(false);
             botoDeseleccionarTipusItem.setEnabled(false);
             botoEsborrarTipusItem.setEnabled(false);
         } else {
             textTipusItemSeleccionat.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
+            textTipusItemSeleccionat.setForeground(UIEstil.ACCENT);
             botoVeureTipusItem.setEnabled(true);
             botoEditarTipusItem.setEnabled(true);
             botoDeseleccionarTipusItem.setEnabled(true);

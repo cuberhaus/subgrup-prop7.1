@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title>Inici</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="page-title">Sistema de Recomanació</h1>
+    <p class="page-subtitle">Benvingut al sistema de recomanació d'ítems. Selecciona una secció al menú lateral per començar.</p>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card stat-card p-4">
+                <div class="stat-label">Tipus d'ítems carregats</div>
+                <div class="stat-value" th:text="${#lists.size(tipusItems)}">0</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="border-left-color: #50c878;">
+                <div class="stat-label">Usuaris</div>
+                <div class="stat-value" style="color: #50c878;" th:text="${numUsuaris}">0</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="border-left-color: #ffc107;">
+                <div class="stat-label">Valoracions</div>
+                <div class="stat-value" style="color: #ffc107;" th:text="${numValoracions}">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h5 class="text-white mb-3">Estat actual</h5>
+                <table class="table table-sm mb-0">
+                    <tr>
+                        <td class="text-muted">Tipus d'ítem seleccionat</td>
+                        <td>
+                            <span th:if="${tipusItemSeleccionat != null}" class="badge badge-accent" th:text="${tipusItemSeleccionat}"></span>
+                            <span th:if="${tipusItemSeleccionat == null}" class="text-muted">Cap</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">Sessió</td>
+                        <td>
+                            <span th:if="${sessioIniciada}" class="badge" style="background: rgba(80,200,120,.15); color: #50c878;">Iniciada</span>
+                            <span th:unless="${sessioIniciada}" class="text-muted">No iniciada</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">Items carregats</td>
+                        <td th:text="${numItems}">0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h5 class="text-white mb-3">Tipus d'ítems disponibles</h5>
+                <div th:if="${#lists.isEmpty(tipusItems)}" class="text-muted">
+                    No hi ha cap tipus d'ítem carregat. Ves a la secció "Tipus d'ítem" per crear-ne un.
+                </div>
+                <ul class="list-unstyled mb-0" th:unless="${#lists.isEmpty(tipusItems)}">
+                    <li th:each="ti : ${tipusItems}" class="d-flex align-items-center py-1">
+                        <span class="badge badge-accent me-2" th:text="${ti}"></span>
+                        <span th:if="${ti == tipusItemSeleccionat}" class="small text-muted">(seleccionat)</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

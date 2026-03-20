@@ -25,12 +25,13 @@ public class VistaDialegObtenirRecomanacio extends JDialog {
     }
 
     private void inicialitzarDialegObtenirRecomanacio(String descripcioMetode, Map<String, Boolean> nomsAtributsFiltre) {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
+        setBounds(Pantalla.centreHoritzontal(5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Obté recomanació");
         setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
+        panellPrincipal.setBorder(UIEstil.panelBorder());
         add(panellPrincipal);
 
         ArrayList<String> recomanacio = controladorMenuRecomanacions.obtenirRecomanacio(descripcioMetode, nomsAtributsFiltre);
@@ -50,11 +51,13 @@ public class VistaDialegObtenirRecomanacio extends JDialog {
         }
         JTable llistaRecomanacions = new JTable(llistaRecomanacionsTableModel);
         llistaRecomanacions.setEnabled(false);
+        UIEstil.styleTable(llistaRecomanacions);
         JScrollPane llistaRecomanacionsScroll = new JScrollPane(llistaRecomanacions);
         panellPrincipal.add(llistaRecomanacionsScroll, BorderLayout.CENTER);
 
-        JButton botoAvaluarRecomanacio = new JButton("Avalua recomanació");
-        botoAvaluarRecomanacio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
+        JButton botoAvaluarRecomanacio = UIEstil.createAccentButton("Avalua recomanació");
         botoAvaluarRecomanacio.addActionListener(e -> {
             VistaDialegAvaluarRecomanacio vistaDialegAvaluarRecomanacio;
             try {
@@ -64,7 +67,7 @@ public class VistaDialegObtenirRecomanacio extends JDialog {
                 JOptionPane.showMessageDialog(this, "No es pot avaluar aquesta recomanació.");
             }
         });
-
-        panellPrincipal.add(botoAvaluarRecomanacio, BorderLayout.SOUTH);
+        bottomPanel.add(botoAvaluarRecomanacio);
+        panellPrincipal.add(bottomPanel, BorderLayout.SOUTH);
     }
 }

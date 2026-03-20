@@ -19,10 +19,6 @@ public class VistaMenuRecomanacions extends JPanel {
     private static JPanel panellObtenirRecomanacio;
     private static JComboBox<String> metodeComboBox;
 
-    /**
-     * Guardem el nom del tipus d'ítem del filtre que tenim guardat per actualitzar-lo quan canviem el tipus d'ítem
-     * seleccionat.
-     */
     private static String nomTipusItemFiltre;
     private static Map<String, Boolean> nomsAtributsFiltre;
 
@@ -40,48 +36,49 @@ public class VistaMenuRecomanacions extends JPanel {
 
     private static void inicialitzarMenuRecomanacions() {
         instancia.setLayout(new BoxLayout(instancia, BoxLayout.Y_AXIS));
-
-        JLabel titol = new JLabel("Vols que et recomani ítems?");
-        titol.setFont(new Font("Sans", Font.PLAIN, 20));
-        titol.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel descripcio = new JLabel("Selecciona quin mètode de recomanació i filtre vols que faci servir.");
-        descripcio.setFont(new Font("Sans", Font.PLAIN, 14));
-        descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        instancia.setBorder(UIEstil.panelBorder());
 
         instancia.add(Box.createVerticalGlue());
-        instancia.add(titol);
-        instancia.add(Box.createVerticalStrut(10));
-        instancia.add(descripcio);
-        instancia.add(Box.createVerticalGlue());
+        instancia.add(UIEstil.createTitle("Vols que et recomani ítems?"));
+        instancia.add(UIEstil.verticalGap());
+        instancia.add(UIEstil.createSubtitle("Selecciona quin mètode de recomanació i filtre vols que faci servir."));
+        instancia.add(UIEstil.verticalGapLarge());
+        instancia.add(UIEstil.verticalGapLarge());
+
         inicialitzarPanellSeleccionarMetode();
         instancia.add(panellSeleccionarMetode);
+        instancia.add(UIEstil.verticalGap());
         inicialitzarPanellSeleccionarFiltre();
         instancia.add(panellSeleccionarFiltre);
+        instancia.add(UIEstil.verticalGapLarge());
         inicialitzarPanellObtenirRecomanacio();
         instancia.add(panellObtenirRecomanacio);
         instancia.add(Box.createVerticalGlue());
     }
 
     private static void inicialitzarPanellSeleccionarMetode() {
-        panellSeleccionarMetode = new JPanel(new FlowLayout());
-        JLabel descripcio = new JLabel("Selecciona el mètode:");
+        panellSeleccionarMetode = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING_SMALL, 0));
+        panellSeleccionarMetode.setOpaque(false);
+        JLabel descripcio = UIEstil.createLabel("Selecciona el mètode:");
         panellSeleccionarMetode.add(descripcio);
-        metodeComboBox = new JComboBox<>(new String[]{"Basat en els ítems que has valorat",
-                "Basat en usuaris amb gustos semblants als teus", "Basat en tot"});
+        metodeComboBox = new JComboBox<>(new String[]{
+                "Basat en els ítems que has valorat",
+                "Basat en usuaris amb gustos semblants als teus",
+                "Basat en tot"
+        });
+        metodeComboBox.setFont(UIEstil.FONT_LABEL);
         panellSeleccionarMetode.add(metodeComboBox);
         panellSeleccionarMetode.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
     private static void inicialitzarPanellSeleccionarFiltre() {
-        panellSeleccionarFiltre = new JPanel(new FlowLayout());
+        panellSeleccionarFiltre = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING_SMALL, 0));
+        panellSeleccionarFiltre.setOpaque(false);
 
-        JLabel descripcio = new JLabel("Selecciona un filtre pels atributs del tipus d'ítem seleccionat:");
-        descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel descripcio = UIEstil.createLabel("Selecciona un filtre pels atributs del tipus d'ítem seleccionat:");
         panellSeleccionarFiltre.add(descripcio);
 
-        JButton botoEditarFiltre = new JButton("Edita filtre");
-        botoEditarFiltre.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton botoEditarFiltre = UIEstil.createSmallButton("Edita filtre");
         botoEditarFiltre.addActionListener(actionEvent -> {
             if (!ControladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");
@@ -113,10 +110,10 @@ public class VistaMenuRecomanacions extends JPanel {
     }
 
     private static void inicialitzarPanellObtenirRecomanacio() {
-        panellObtenirRecomanacio = new JPanel(new FlowLayout());
+        panellObtenirRecomanacio = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panellObtenirRecomanacio.setOpaque(false);
 
-        JButton botoObtenirRecomanacio = new JButton("Obté recomanació");
-        botoObtenirRecomanacio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton botoObtenirRecomanacio = UIEstil.createAccentButton("Obté recomanació");
         botoObtenirRecomanacio.addActionListener(actionEvent -> {
             if (!ControladorMenuRecomanacions.existeixTipusItemSeleccionat()) {
                 JOptionPane.showMessageDialog(instancia, "No hi ha cap tipus d'ítem seleccionat.");

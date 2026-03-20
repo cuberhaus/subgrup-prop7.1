@@ -22,12 +22,13 @@ public class VistaDialegEditarItem extends JDialog {
     }
 
     private void inicialitzarDialegEditarItem(String id, Map<String, String> atributs) {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
+        setBounds(Pantalla.centreHoritzontal(5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Edita un ítem");
         setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
+        panellPrincipal.setBorder(UIEstil.panelBorder());
         add(panellPrincipal);
 
         JPanel panellLlistaAtributs = new JPanel();
@@ -38,47 +39,41 @@ public class VistaDialegEditarItem extends JDialog {
         panellPrincipal.add(panellScrollLlistaAtributs, BorderLayout.CENTER);
 
         if (controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
-            JLabel text = new JLabel("El tipus d'ítem seleccionat no té cap atribut.");
+            JLabel text = UIEstil.createLabel("El tipus d'ítem seleccionat no té cap atribut.");
+            text.setFont(UIEstil.FONT_BUTTON);
             text.setAlignmentX(Component.CENTER_ALIGNMENT);
-            text.setFont(new Font("Sans", Font.BOLD, 13));
             panellLlistaAtributs.add(Box.createVerticalGlue());
             panellLlistaAtributs.add(text);
             panellLlistaAtributs.add(Box.createVerticalGlue());
         } else {
             for (Map.Entry<String, String> atribut : atributs.entrySet()) {
-                JPanel panellAtribut = new JPanel(new FlowLayout());
-
-                JLabel etiquetaNomAtribut = new JLabel(atribut.getKey());
-                panellAtribut.add(etiquetaNomAtribut);
-
-                JTextField valorAtribut = new JTextField();
-                valorAtribut.setColumns(10);
+                JPanel panellAtribut = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
+                panellAtribut.add(UIEstil.createLabel(atribut.getKey()));
+                JTextField valorAtribut = UIEstil.createTextField(12);
                 valorAtribut.setText(atribut.getValue());
                 panellAtribut.add(valorAtribut);
-
                 JLabel tipusValorAtribut = new JLabel();
-                tipusValorAtribut.setFont(new Font("Sans", Font.BOLD, 12));
-                tipusValorAtribut.setText(
-                        controladorMenuItems.obtenirValorAtributTipusItemSeleccionat(atribut.getKey()));
+                tipusValorAtribut.setFont(UIEstil.FONT_BUTTON);
+                tipusValorAtribut.setForeground(UIEstil.TEXT_SECONDARY);
+                tipusValorAtribut.setText(controladorMenuItems.obtenirValorAtributTipusItemSeleccionat(atribut.getKey()));
                 panellAtribut.add(tipusValorAtribut);
-
                 panellLlistaAtributs.add(panellAtribut);
             }
         }
 
-        JPanel panellBotoGuardarItem = new JPanel(new FlowLayout());
-        JButton botoGuardarItem = new JButton("Guarda ítem");
-        botoGuardarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panellBotoGuardarItem.add(botoGuardarItem);
-        panellPrincipal.add(panellBotoGuardarItem, BorderLayout.SOUTH);
+        JPanel panellBoto = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panellBoto.setOpaque(false);
+        JButton botoGuardar = UIEstil.createAccentButton("Guarda ítem");
+        panellBoto.add(botoGuardar);
+        panellPrincipal.add(panellBoto, BorderLayout.SOUTH);
 
-        botoGuardarItem.addActionListener(e -> {
+        botoGuardar.addActionListener(e -> {
             Map<String, String> valorsAtributs = new HashMap<>();
             if (!controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
                 for (Component component : panellLlistaAtributs.getComponents()) {
-                    JPanel atribut = (JPanel) component;
-                    String nomAtribut = ((JLabel) atribut.getComponent(0)).getText();
-                    String valorTipusAtribut = ((JTextField) atribut.getComponent(1)).getText();
+                    JPanel a = (JPanel) component;
+                    String nomAtribut = ((JLabel) a.getComponent(0)).getText();
+                    String valorTipusAtribut = ((JTextField) a.getComponent(1)).getText();
                     valorsAtributs.put(nomAtribut, valorTipusAtribut);
                 }
             }
@@ -86,6 +81,5 @@ public class VistaDialegEditarItem extends JDialog {
                 dispose();
             }
         });
-        botoGuardarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 }

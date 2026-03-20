@@ -3,15 +3,16 @@ MAIN=../EXE/Main.class
 JOC1=../EXE/jocs_de_proves/joc1/Joc1.class
 JOC2=../EXE/jocs_de_proves/joc2/Joc2.class
 JOC2=../EXE/jocs_de_proves/joc3/Joc3.class
+LIBS=lib/flatlaf-3.4.1.jar
 
 # Default target: called with just make
 # Creates the directory if needed
 $(MAIN): $(SOURCES)
 	@mkdir -p ../EXE
-	@javac -d ../EXE -sourcepath . ./Main.java
-	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc1/Joc1.java
-	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc2/Joc2.java
-	@javac -d ../EXE -sourcepath . ./jocs_de_proves/joc3/Joc3.java
+	@javac -cp $(LIBS) -d ../EXE -sourcepath . ./Main.java
+	@javac -cp $(LIBS) -d ../EXE -sourcepath . ./jocs_de_proves/joc1/Joc1.java
+	@javac -cp $(LIBS) -d ../EXE -sourcepath . ./jocs_de_proves/joc2/Joc2.java
+	@javac -cp $(LIBS) -d ../EXE -sourcepath . ./jocs_de_proves/joc3/Joc3.java
 
 clean:
 	rm -rf ../EXE/domini
@@ -39,7 +40,7 @@ Driver%:
 # Running the project requires Main.class to exist
 .SILENT:
 run: $(MAIN)
-	-java -cp ../EXE Main
+	-java -cp ../EXE:$(LIBS) Main
 
 .SILENT:
 joc1: $(JOC1)

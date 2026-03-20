@@ -22,12 +22,13 @@ public class VistaDialegCrearItem extends JDialog {
     }
 
     private void inicialitzarDialegCrearItem() {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
+        setBounds(Pantalla.centreHoritzontal(5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Crea un nou ítem");
         setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
+        panellPrincipal.setBorder(UIEstil.panelBorder());
         add(panellPrincipal);
 
         JPanel panellLlistaAtributs = new JPanel();
@@ -38,34 +39,32 @@ public class VistaDialegCrearItem extends JDialog {
         panellPrincipal.add(panellScrollLlistaAtributs, BorderLayout.CENTER);
 
         if (controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat().isEmpty()) {
-            JLabel text = new JLabel("El tipus d'ítem seleccionat no té cap atribut.");
+            JLabel text = UIEstil.createLabel("El tipus d'ítem seleccionat no té cap atribut.");
+            text.setFont(UIEstil.FONT_BUTTON);
             text.setAlignmentX(Component.CENTER_ALIGNMENT);
-            text.setFont(new Font("Sans", Font.BOLD, 13));
             panellLlistaAtributs.add(Box.createVerticalGlue());
             panellLlistaAtributs.add(text);
             panellLlistaAtributs.add(Box.createVerticalGlue());
         } else {
             for (String nomAtribut : controladorMenuItems.obtenirNomsAtributsTipusItemSeleccionat()) {
-                JPanel panellAtribut = new JPanel(new FlowLayout());
-                JLabel etiquetaNomAtribut = new JLabel(nomAtribut);
-                panellAtribut.add(etiquetaNomAtribut);
-                JTextField valorAtribut = new JTextField();
-                valorAtribut.setColumns(10);
+                JPanel panellAtribut = new JPanel(new FlowLayout(FlowLayout.CENTER, 6, 4));
+                panellAtribut.add(UIEstil.createLabel(nomAtribut));
+                JTextField valorAtribut = UIEstil.createTextField(12);
                 panellAtribut.add(valorAtribut);
                 JLabel tipusValorAtribut = new JLabel();
-                tipusValorAtribut.setFont(new Font("Sans", Font.BOLD, 12));
-                tipusValorAtribut.setText(
-                        controladorMenuItems.obtenirValorAtributTipusItemSeleccionat(nomAtribut));
+                tipusValorAtribut.setFont(UIEstil.FONT_BUTTON);
+                tipusValorAtribut.setForeground(UIEstil.TEXT_SECONDARY);
+                tipusValorAtribut.setText(controladorMenuItems.obtenirValorAtributTipusItemSeleccionat(nomAtribut));
                 panellAtribut.add(tipusValorAtribut);
                 panellLlistaAtributs.add(panellAtribut);
             }
         }
 
-        JPanel panellBotoCrearItem = new JPanel(new FlowLayout());
-        JButton botoCrearItem = new JButton("Crea ítem");
-        botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panellBotoCrearItem.add(botoCrearItem);
-        panellPrincipal.add(panellBotoCrearItem, BorderLayout.SOUTH);
+        JPanel panellBoto = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panellBoto.setOpaque(false);
+        JButton botoCrearItem = UIEstil.createAccentButton("Crea ítem");
+        panellBoto.add(botoCrearItem);
+        panellPrincipal.add(panellBoto, BorderLayout.SOUTH);
 
         botoCrearItem.addActionListener(e -> {
             Map<String, String> valorsAtributs = new HashMap<>();
@@ -80,6 +79,5 @@ public class VistaDialegCrearItem extends JDialog {
             controladorMenuItems.afegirItem(this, valorsAtributs);
             dispose();
         });
-        botoCrearItem.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 }

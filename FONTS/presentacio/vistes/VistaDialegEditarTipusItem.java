@@ -25,36 +25,39 @@ public class VistaDialegEditarTipusItem extends JDialog {
     }
 
     private void inicialitzarDialegEditarTipusItem() {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8),
+        setBounds(Pantalla.centreHoritzontal(5 * Pantalla.amplada / 8),
                 Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Editar tipus d'ítem");
         setResizable(false);
 
-        JPanel panellPrincipal = new JPanel(new FlowLayout());
-        panellPrincipal.setAlignmentY(Component.CENTER_ALIGNMENT);
+        JPanel panellPrincipal = new JPanel();
+        panellPrincipal.setLayout(new BoxLayout(panellPrincipal, BoxLayout.Y_AXIS));
+        panellPrincipal.setBorder(UIEstil.panelBorder());
 
-        JLabel descripcio = new JLabel("Edita el nom del tipus d'ítem: ");
-        descripcio.setAlignmentX(Component.CENTER_ALIGNMENT);
-        descripcio.setAlignmentY(Component.CENTER_ALIGNMENT);
-        panellPrincipal.add(descripcio);
+        panellPrincipal.add(Box.createVerticalGlue());
 
-        JTextField nomTipusItem = new JTextField();
-        nomTipusItem.setColumns(10);
-        nomTipusItem.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
-        nomTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nomTipusItem.setAlignmentY(Component.CENTER_ALIGNMENT);
-        panellPrincipal.add(nomTipusItem);
+        JPanel formPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING_SMALL, 0));
+        formPanel.setOpaque(false);
+        formPanel.add(UIEstil.createLabel("Edita el nom del tipus d'ítem:"));
 
-        JButton botoGuardarTipusItem = new JButton("Guarda");
-        botoGuardarTipusItem.addActionListener(e -> {
-            if (controladorMenuTipusItem.editarTipusItem(this, nomTipusItem.getText())) {
+        JTextField nomField = UIEstil.createTextField(15);
+        nomField.setText(controladorMenuTipusItem.obtenirNomTipusItemSeleccionat());
+        formPanel.add(nomField);
+
+        JButton botoGuardar = UIEstil.createAccentButton("Guarda");
+        botoGuardar.setPreferredSize(UIEstil.BUTTON_SIZE_SMALL);
+        botoGuardar.setMaximumSize(UIEstil.BUTTON_SIZE_SMALL);
+        botoGuardar.setMinimumSize(UIEstil.BUTTON_SIZE_SMALL);
+        botoGuardar.addActionListener(e -> {
+            if (controladorMenuTipusItem.editarTipusItem(this, nomField.getText())) {
                 dispose();
             }
         });
-        botoGuardarTipusItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botoGuardarTipusItem.setAlignmentY(Component.CENTER_ALIGNMENT);
-        panellPrincipal.add(botoGuardarTipusItem);
+        formPanel.add(botoGuardar);
+
+        panellPrincipal.add(formPanel);
+        panellPrincipal.add(Box.createVerticalGlue());
 
         add(panellPrincipal);
     }

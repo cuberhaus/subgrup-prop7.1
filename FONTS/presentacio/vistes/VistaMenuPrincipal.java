@@ -30,8 +30,8 @@ public class VistaMenuPrincipal extends JFrame {
     }
 
     private static void inicialitzarMenuPrincipal() throws Exception {
-        instancia.setTitle("Menu Principal");
-        instancia.setResizable(false);
+        instancia.setTitle("Sistema de Recomanació");
+        instancia.setResizable(true);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
 
@@ -46,19 +46,25 @@ public class VistaMenuPrincipal extends JFrame {
         instancia.setBounds(Pantalla.centreHoritzontal(3 * Pantalla.amplada / 4),
                 Pantalla.centreVertical(3 * Pantalla.altura / 4),
                 3 * Pantalla.amplada / 4, 3 * Pantalla.altura / 4);
+        instancia.setMinimumSize(new Dimension(900, 600));
     }
 
     private static void inicialitzarMenuBarra() {
         menuBarra = new JMenuBar();
+        menuBarra.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
         JMenu informacio = new JMenu("Sobre el recomanador");
+        informacio.setFont(UIEstil.FONT_LABEL);
 
-        informacio.add(new JMenuItem(new AbstractAction("Autors") {
+        JMenuItem autorsItem = new JMenuItem(new AbstractAction("Autors") {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 new VistaDialegAutors().setVisible(true);
             }
-        }));
-        informacio.add(new JMenuItem(new AbstractAction("Manual d'usuari") {
+        });
+        autorsItem.setFont(UIEstil.FONT_LABEL);
+        informacio.add(autorsItem);
+
+        JMenuItem manualItem = new JMenuItem(new AbstractAction("Manual d'usuari") {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
@@ -67,17 +73,23 @@ public class VistaMenuPrincipal extends JFrame {
                     JOptionPane.showMessageDialog(menuBarra, "No s'ha pogut obrir el manual d'usuari.");
                 }
             }
-        }));
+        });
+        manualItem.setFont(UIEstil.FONT_LABEL);
+        informacio.add(manualItem);
+
         menuBarra.add(informacio);
         menuBarra.add(Box.createHorizontalGlue());
     }
 
     private static void inicialitzarMenuPestanyes() throws Exception {
         menuPestanyes = new JTabbedPane();
-        menuPestanyes.add("Tipus d'ítem", VistaMenuTipusItem.obtenirInstancia());
-        menuPestanyes.add("Items", VistaMenuItems.obtenirInstancia());
-        menuPestanyes.add("Usuaris", VistaMenuUsuaris.obtenirInstancia());
-        menuPestanyes.add("Valoracions", VistaMenuValoracions.obtenirInstancia());
-        menuPestanyes.add("Recomanacions", VistaMenuRecomanacions.obtenirInstancia());
+        menuPestanyes.setFont(UIEstil.FONT_BUTTON);
+        menuPestanyes.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+
+        menuPestanyes.add("  Tipus d'ítem  ", VistaMenuTipusItem.obtenirInstancia());
+        menuPestanyes.add("  Items  ", VistaMenuItems.obtenirInstancia());
+        menuPestanyes.add("  Usuaris  ", VistaMenuUsuaris.obtenirInstancia());
+        menuPestanyes.add("  Valoracions  ", VistaMenuValoracions.obtenirInstancia());
+        menuPestanyes.add("  Recomanacions  ", VistaMenuRecomanacions.obtenirInstancia());
     }
 }

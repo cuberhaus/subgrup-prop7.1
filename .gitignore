@@ -7,3 +7,11 @@ EXE/dades/items
 EXE/dades/valoracions
 EXE/dades/usuaris
 *.DS_Store
+
+# Maven / Spring Boot
+web/target/
+*.log
+!web/.mvn/wrapper/maven-wrapper.jar
+
+# VS Code / Cursor
+.vscode/

@@ -23,50 +23,51 @@ public class VistaDialegAvaluarRecomanacio extends JDialog {
     }
 
     private void inicialitzarDialegAvaluarRecomanacio(ArrayList<String> recomanacio) {
-        setBounds(Pantalla.centreHoritzontal( 5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
+        setBounds(Pantalla.centreHoritzontal(5 * Pantalla.amplada / 8), Pantalla.centreVertical(Pantalla.altura / 2),
                 5 * Pantalla.amplada / 8, Pantalla.altura / 2);
         setTitle("Avalua la recomanació");
         setResizable(false);
 
         JPanel panellPrincipal = new JPanel(new BorderLayout());
+        panellPrincipal.setBorder(UIEstil.panelBorder());
         add(panellPrincipal);
 
         JPanel panellAvaluacio = new JPanel();
         panellAvaluacio.setLayout(new BoxLayout(panellAvaluacio, BoxLayout.Y_AXIS));
+        panellAvaluacio.setBorder(UIEstil.panelBorder());
 
         JScrollPane panellScrollAvaluacio = new JScrollPane(panellAvaluacio);
         panellScrollAvaluacio.setPreferredSize(new Dimension(getWidth(), 3 * getHeight() / 4));
         panellPrincipal.add(panellScrollAvaluacio, BorderLayout.CENTER);
 
         if (recomanacio.isEmpty()) {
-            JLabel text = new JLabel("No s'ha recomanat cap ítem.");
+            JLabel text = UIEstil.createLabel("No s'ha recomanat cap ítem.");
+            text.setFont(UIEstil.FONT_BUTTON);
             text.setAlignmentX(Component.CENTER_ALIGNMENT);
-            text.setFont(new Font("Sans", Font.BOLD, 13));
             panellAvaluacio.add(Box.createVerticalGlue());
             panellAvaluacio.add(text);
             panellAvaluacio.add(Box.createVerticalGlue());
         } else {
             for (String idItem : recomanacio) {
-                JPanel itemRecomanat = new JPanel(new FlowLayout());
-                itemRecomanat.setAlignmentY(Component.CENTER_ALIGNMENT);
-                JLabel etiquetaItem = new JLabel(idItem);
-                itemRecomanat.add(etiquetaItem);
-                JTextField valoracioItem = new JTextField();
-                valoracioItem.setColumns(10);
+                JPanel itemRecomanat = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 4));
+                itemRecomanat.add(UIEstil.createLabel(idItem));
+                JTextField valoracioItem = UIEstil.createTextField(10);
                 itemRecomanat.add(valoracioItem);
                 panellAvaluacio.add(itemRecomanat);
             }
         }
 
-        JPanel panellObtenirAvaluacio = new JPanel(new FlowLayout());
-        JLabel etiquetaAvaluacio = new JLabel("Avaluació de la recomanació (NDGC): ");
-        panellObtenirAvaluacio.add(etiquetaAvaluacio);
-        JTextField valorAvaluacio = new JTextField();
+        JPanel panellObtenirAvaluacio = new JPanel(new FlowLayout(FlowLayout.CENTER, UIEstil.PADDING_SMALL, 0));
+        panellObtenirAvaluacio.setOpaque(false);
+        panellObtenirAvaluacio.add(UIEstil.createLabel("Avaluació de la recomanació (NDCG):"));
+        JTextField valorAvaluacio = UIEstil.createTextField(10);
         valorAvaluacio.setEnabled(false);
-        valorAvaluacio.setColumns(10);
         panellObtenirAvaluacio.add(valorAvaluacio);
-        JButton botoObtenirAvaluacio = new JButton("Calcular");
-        botoObtenirAvaluacio.addActionListener(e -> {
+
+        JButton botoCalcular = UIEstil.createSmallButton("Calcular");
+        botoCalcular.setBackground(UIEstil.ACCENT);
+        botoCalcular.setForeground(Color.WHITE);
+        botoCalcular.addActionListener(e -> {
             ArrayList<Pair<String, String>> valoracions = new ArrayList<>();
             if (recomanacio.isEmpty()) {
                 valorAvaluacio.setText("-");
@@ -81,13 +82,11 @@ public class VistaDialegAvaluarRecomanacio extends JDialog {
                     valorAvaluacio.setText(avaluacio.substring(0, Math.min(5, avaluacio.length())));
                     EncarregatActualitzarVistes.notificarObservadors();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this,
-                            "No es pot avaluar la recomanació.");
+                    JOptionPane.showMessageDialog(this, "No es pot avaluar la recomanació.");
                 }
             }
         });
-        panellObtenirAvaluacio.add(botoObtenirAvaluacio);
-
+        panellObtenirAvaluacio.add(botoCalcular);
         panellPrincipal.add(panellObtenirAvaluacio, BorderLayout.SOUTH);
     }
 }
