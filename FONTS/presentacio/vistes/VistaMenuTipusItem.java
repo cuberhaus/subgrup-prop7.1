@@ -52,6 +52,8 @@ public class VistaMenuTipusItem extends JPanel {
         instancia.add(UIEstil.createTitle("Quin tipus d'ítem vols que et recomani?"));
         instancia.add(UIEstil.verticalGap());
         instancia.add(UIEstil.createSubtitle("Afegeix un tipus d'ítem nou o selecciona un tipus d'ítem existent"));
+        instancia.add(UIEstil.verticalGap());
+        instancia.add(UIEstil.createHint("Defineix l'estructura del catàleg que es recomanarà (ex: Pel·lícules)."));
         instancia.add(UIEstil.verticalGapLarge());
         instancia.add(UIEstil.verticalGapLarge());
 

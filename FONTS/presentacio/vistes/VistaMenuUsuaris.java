@@ -93,6 +93,9 @@ public class VistaMenuUsuaris extends JPanel {
         sessionPanel.add(usuariActiuInfo);
         sessionPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         formPanel.add(sessionPanel);
+        
+        formPanel.add(UIEstil.verticalGap());
+        formPanel.add(UIEstil.createHint("Si no tens cap usuari, crea'n un primer i inicia sessió."));
         formPanel.add(UIEstil.verticalGapLarge());
 
         // Form fields

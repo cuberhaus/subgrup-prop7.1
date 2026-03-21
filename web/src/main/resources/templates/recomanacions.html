@@ -7,6 +7,12 @@
 <div layout:fragment="content">
     <h1 class="page-title">Recomanacions</h1>
     <p class="page-subtitle">Obté recomanacions d'ítems basades en el teu historial de valoracions.</p>
+    <div class="alert alert-info py-2 px-3 small border-0 mb-4" style="background-color: rgba(88, 166, 255, 0.1); color: var(--bs-body-color);">
+        <strong>Pista:</strong> 
+        El mètode <em>Collaborative</em> busca usuaris amb gustos similars als teus. 
+        El mètode <em>Content-based</em> busca ítems amb atributs similars als que has valorat bé.
+        El mètode <em>Híbrid</em> combina les dues estratègies.
+    </div>
 
     <div th:unless="${existeixTipusItem}" class="card p-5 text-center">
         <p class="text-muted mb-2">No hi ha cap tipus d'ítem seleccionat.</p>

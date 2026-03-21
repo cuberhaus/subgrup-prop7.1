@@ -79,6 +79,9 @@ public class VistaMenuValoracions extends JPanel {
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
         formPanel.setBorder(UIEstil.panelBorder());
 
+        formPanel.add(UIEstil.createHint("Puntua ítems perquè el sistema aprengui els gustos dels usuaris."));
+        formPanel.add(UIEstil.verticalGapLarge());
+
         // Form fields
         JPanel fieldsPanel = new JPanel(new GridBagLayout());
         fieldsPanel.setOpaque(false);

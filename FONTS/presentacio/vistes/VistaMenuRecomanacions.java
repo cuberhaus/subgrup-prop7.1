@@ -42,6 +42,8 @@ public class VistaMenuRecomanacions extends JPanel {
         instancia.add(UIEstil.createTitle("Vols que et recomani ítems?"));
         instancia.add(UIEstil.verticalGap());
         instancia.add(UIEstil.createSubtitle("Selecciona quin mètode de recomanació i filtre vols que faci servir."));
+        instancia.add(UIEstil.verticalGap());
+        instancia.add(UIEstil.createHint("Inicia sessió a 'Usuaris' i assegura't que tens 'Valoracions' creades per obtenir millors resultats."));
         instancia.add(UIEstil.verticalGapLarge());
         instancia.add(UIEstil.verticalGapLarge());
 

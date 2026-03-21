@@ -7,7 +7,7 @@
 <div layout:fragment="content">
     <h1 class="page-title">Items</h1>
     <p class="page-subtitle">
-        <span th:if="${existeixTipusItem}">Tipus d'ítem seleccionat: <span class="badge badge-accent" th:text="${tipusItemNom}"></span></span>
+        <span th:if="${existeixTipusItem}">Tipus d'ítem seleccionat: <span class="badge badge-accent" th:text="${tipusItemNom}"></span>. <span class="text-muted small ms-1">Aquí pots crear el catàleg d'objectes seguint l'estructura que has definit.</span></span>
         <span th:unless="${existeixTipusItem}">No hi ha cap tipus d'ítem seleccionat. <a href="/tipus-item" class="text-decoration-none" style="color: var(--accent);">Selecciona'n un</a>.</span>
     </p>
 

@@ -108,6 +108,14 @@ public class UIEstil {
         return lbl;
     }
 
+    public static JLabel createHint(String text) {
+        JLabel lbl = new JLabel("<html><i>💡 Pista: " + text + "</i></html>");
+        lbl.setFont(FONT_LABEL);
+        lbl.setForeground(new Color(255, 204, 0)); // A soft yellow/orange for hints
+        lbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return lbl;
+    }
+
     public static JTextField createTextField(int columns) {
         JTextField tf = new JTextField(columns);
         tf.setFont(FONT_LABEL);

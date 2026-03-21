@@ -6,6 +6,7 @@
 <body>
 <div layout:fragment="content">
     <h1 class="page-title">Valoracions</h1>
+    <p class="page-subtitle mb-2">Puntua els ítems. Les valoracions són essencials perquè el sistema aprengui els teus gustos.</p>
     <p class="page-subtitle">
         <span th:if="${existeixTipusItem}">Tipus d'ítem seleccionat: <span class="badge badge-accent" th:text="${tipusItemNom}"></span></span>
         <span th:unless="${existeixTipusItem}">No hi ha cap tipus d'ítem seleccionat. <a href="/tipus-item" class="text-decoration-none" style="color: var(--accent);">Selecciona'n un</a>.</span>
