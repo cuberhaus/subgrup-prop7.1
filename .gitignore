@@ -22,3 +22,6 @@ web/target/
 
 # VS Code / Cursor
 .vscode/
+
+# Redundant build artifact folder
+web/bin/

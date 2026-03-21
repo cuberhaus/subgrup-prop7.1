@@ -1,10 +1,27 @@
 # Pass all commands to the Makefile inside the FONTS directory
 
-.PHONY: all run clean web web-build web-clean
+.PHONY: all run clean web web-build web-clean help helper compile
 
 # Default target
-all:
+all: helper
+
+helper:
+	@echo "========================================"
+	@echo "   PROP Recommendation System Helper    "
+	@echo "========================================"
+	@echo "Available commands:"
+	@echo "  make run        - Launch Swing GUI"
+	@echo "  make web        - Launch Web Interface"
+	@echo "  make compile    - Compile all Java sources"
+	@echo "  make clean      - Remove compiled .class files"
+	@echo "  make help       - Show this help message"
+	@echo "========================================"
+
+compile:
 	@$(MAKE) -C FONTS
+
+help: helper
+	@:
 
 run:
 	@$(MAKE) -C FONTS run
