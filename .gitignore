@@ -8,6 +8,13 @@ EXE/dades/valoracions
 EXE/dades/usuaris
 *.DS_Store
 
+# Dependencies
+# Note: FONTS/lib/flatlaf-3.4.1.jar is deliberately NOT ignored.
+# The Swing application relies on this JAR to run locally, and since the project
+# uses a standard Makefile (without a dependency manager like Maven for the Swing part),
+# the JAR must be committed so anyone cloning the repo can compile it out-of-the-box.
+!FONTS/lib/flatlaf-3.4.1.jar
+
 # Maven / Spring Boot
 web/target/
 *.log
