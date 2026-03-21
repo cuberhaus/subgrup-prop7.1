@@ -1,11 +1,11 @@
-id,title,genre,director
-101,Inception,Sci-Fi,Nolan
-102,Interstellar,Sci-Fi,Nolan
-103,The Godfather,Crime,Coppola
-104,Pulp Fiction,Crime,Tarantino
-105,Spirited Away,Animation,Miyazaki
-106,Toy Story,Animation,Lasseter
-107,The Matrix,Sci-Fi,Wachowskis
-108,Kill Bill,Action,Tarantino
-109,Reservoir Dogs,Crime,Tarantino
-110,The Dark Knight,Action,Nolan
+id,director,genre,title
+101,Nolan,Sci-Fi,"Inception"
+102,Nolan,Sci-Fi,"Interstellar"
+103,Coppola,Crime,"The Godfather"
+104,Tarantino,Crime,"Pulp Fiction"
+105,Miyazaki,Animation,"Spirited Away"
+106,Lasseter,Animation,"Toy Story"
+107,Wachowskis,Sci-Fi,"The Matrix"
+108,Tarantino,Action,"Kill Bill"
+109,Tarantino,Crime,"Reservoir Dogs"
+110,Nolan,Action,"The Dark Knight"

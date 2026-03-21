@@ -23,8 +23,8 @@ public class LectorDeCSV {
     public ArrayList<ArrayList<String>> llegirCSV(String ubicacio) throws IOException {
         ArrayList<ArrayList<String>> tabla = new ArrayList<>();
 
-        BufferedReader fitxer = new BufferedReader(new FileReader(ubicacio));
-        String fila;
+        try (BufferedReader fitxer = new BufferedReader(new FileReader(ubicacio))) {
+            String fila;
 
         ArrayList<String> atributs = new ArrayList<>();
         if ((fila = fitxer.readLine()) != null) {
@@ -91,7 +91,7 @@ public class LectorDeCSV {
         }
 
         atributs.clear();
-        fitxer.close();
+        }
         return tabla;
     }
 }

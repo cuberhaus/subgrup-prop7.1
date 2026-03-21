@@ -147,12 +147,23 @@ body {
     border: 1px solid var(--card-border);
     color: var(--bs-body-color);
 }
+select.form-select option[value=""] {
+    color: #8899aa;
+}
+select.form-select:has(option[value=""]:checked) {
+    color: #8899aa;
+}
 
 .form-control:focus, .form-select:focus {
     background: rgba(0, 0, 0, 0.3);
     border-color: var(--accent);
     color: var(--bs-body-color);
     box-shadow: 0 0 0 0.2rem rgba(88, 166, 255, 0.15);
+}
+
+option {
+    background: var(--card-bg);
+    color: var(--bs-body-color);
 }
 
 .form-label {

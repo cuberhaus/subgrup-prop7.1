@@ -17,17 +17,17 @@ public class EscriptorDeCSV {
      * @throws IOException si no existeix el fitxer, llença exepcio
      */
     public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> tauleta) throws IOException {
-        BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio));
-        for (ArrayList<String> fila : tauleta) {
-            boolean primer = true;
-            for (String contingut : fila) {
-                if (!primer) fitxer.write(',');
-                fitxer.write(contingut);
-                primer = false;
+        try (BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio))) {
+            for (ArrayList<String> fila : tauleta) {
+                boolean primer = true;
+                for (String contingut : fila) {
+                    if (!primer) fitxer.write(',');
+                    fitxer.write(contingut);
+                    primer = false;
+                }
+                fitxer.write('\n');
             }
-            fitxer.write('\n');
         }
-        fitxer.close();
     }
 
     public void escriureCSV(String ubicacio, ArrayList<ArrayList<String>> tauleta, String nomTemporal) throws IOException {
@@ -35,16 +35,16 @@ public class EscriptorDeCSV {
         if (comprobacio.isDirectory()) {
             ubicacio = ubicacio + "/" + nomTemporal + ".csv";
         }
-        BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio));
-        for (ArrayList<String> fila : tauleta) {
-            boolean primer = true;
-            for (String contingut : fila) {
-                if (!primer) fitxer.write(',');
-                fitxer.write(contingut);
-                primer = false;
+        try (BufferedWriter fitxer = new BufferedWriter(new FileWriter(ubicacio))) {
+            for (ArrayList<String> fila : tauleta) {
+                boolean primer = true;
+                for (String contingut : fila) {
+                    if (!primer) fitxer.write(',');
+                    fitxer.write(contingut);
+                    primer = false;
+                }
+                fitxer.write('\n');
             }
-            fitxer.write('\n');
         }
-        fitxer.close();
     }
 }
