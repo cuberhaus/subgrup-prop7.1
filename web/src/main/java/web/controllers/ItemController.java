@@ -26,7 +26,8 @@ public class ItemController {
         model.addAttribute("tipusItemNom", domini.obtenirNomTipusItemSeleccionat());
         if (domini.existeixTipusItemSeleccionat()) {
             model.addAttribute("nomsAtributs", domini.obtenirNomsAtributsTipusItemSeleccionat());
-            model.addAttribute("items", domini.obtenirItems());
+            ArrayList<ArrayList<String>> totes = domini.obtenirItems();
+            model.addAttribute("items", new ArrayList<>(totes.subList(0, Math.min(500, totes.size()))));
             model.addAttribute("itemIds", domini.obtenirIdsItems());
         } else {
             model.addAttribute("nomsAtributs", new ArrayList<>());

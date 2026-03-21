@@ -21,7 +21,7 @@ public class UsuariController {
     @GetMapping
     public String index(Model model) {
         ArrayList<ArrayList<String>> usuaris = domini.obtenirUsuaris();
-        model.addAttribute("usuaris", usuaris);
+        model.addAttribute("usuaris", new ArrayList<>(usuaris.subList(0, Math.min(500, usuaris.size()))));
         model.addAttribute("sessioIniciada", domini.sessioIniciada());
         try {
             model.addAttribute("sessioId", domini.sessioIniciada() ? "" : String.valueOf(domini.obtenirSessio()));

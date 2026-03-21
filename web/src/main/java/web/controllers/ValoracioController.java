@@ -23,7 +23,8 @@ public class ValoracioController {
         model.addAttribute("existeixTipusItem", domini.existeixTipusItemSeleccionat());
         model.addAttribute("tipusItemNom", domini.obtenirNomTipusItemSeleccionat());
         if (domini.existeixTipusItemSeleccionat()) {
-            model.addAttribute("valoracions", domini.obtenirValoracions());
+            ArrayList<ArrayList<String>> totesVal = domini.obtenirValoracions();
+            model.addAttribute("valoracions", new ArrayList<>(totesVal.subList(0, Math.min(500, totesVal.size()))));
         } else {
             model.addAttribute("valoracions", new ArrayList<>());
         }
