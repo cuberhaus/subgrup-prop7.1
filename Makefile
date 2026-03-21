@@ -31,6 +31,7 @@ clean:
 
 # Spring Boot web interface
 web:
+	@echo "Launching web interface on http://localhost:8081"
 	cd web && ./mvnw spring-boot:run
 
 web-build:
