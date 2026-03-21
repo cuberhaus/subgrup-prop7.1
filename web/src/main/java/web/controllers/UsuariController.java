@@ -24,7 +24,7 @@ public class UsuariController {
         model.addAttribute("usuaris", new ArrayList<>(usuaris.subList(0, Math.min(500, usuaris.size()))));
         model.addAttribute("sessioIniciada", domini.sessioIniciada());
         try {
-            model.addAttribute("sessioId", domini.sessioIniciada() ? "" : String.valueOf(domini.obtenirSessio()));
+            model.addAttribute("sessioId", domini.sessioIniciada() ? String.valueOf(domini.obtenirSessio()) : "");
         } catch (Exception e) {
             model.addAttribute("sessioId", "");
         }
