@@ -21,15 +21,13 @@ public class TestController {
             if (!domini.existeixTipusItemSeleccionat()) {
                 domini.seleccionarTipusItem(domini.obtenirNomsTipusItemsCarregats().get(0));
             }
-            try {
-                domini.iniciarSessio(101, "basic");
-            } catch (Exception ignored) {}
-            
-            ArrayList<String> nomsAtributs = domini.obtenirNomsAtributsTipusItemSeleccionat();
-            ArrayList<String> resultats = domini.obtenirRecomanacioCollaborative(nomsAtributs, true);
             
             StringBuilder sb = new StringBuilder();
-            for (String itemId : resultats) {
+            ArrayList<ArrayList<String>> items = domini.obtenirItems();
+            int count = 0;
+            for (ArrayList<String> row : items) {
+                if (count++ > 5) break;
+                String itemId = row.get(0);
                 sb.append("ID: ").append(itemId).append("\n");
                 try {
                     Map<String, String> item = domini.obtenirItem(itemId);
