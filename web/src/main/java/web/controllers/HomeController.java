@@ -19,8 +19,8 @@ public class HomeController {
         model.addAttribute("tipusItems", domini.obtenirNomsTipusItemsCarregats());
         model.addAttribute("tipusItemSeleccionat", domini.obtenirNomTipusItemSeleccionat());
         model.addAttribute("numUsuaris", domini.obtenirUsuaris().size());
-        model.addAttribute("numItems", domini.existeixTipusItemSeleccionat() ? domini.obtenirItems().size() : 0);
-        model.addAttribute("numValoracions", domini.existeixTipusItemSeleccionat() ? domini.obtenirValoracions().size() : 0);
+        model.addAttribute("numItems", domini.existeixTipusItemSeleccionat() ? domini.obtenirNombreItems() : 0);
+        model.addAttribute("numValoracions", domini.existeixTipusItemSeleccionat() ? domini.obtenirNombreValoracions() : 0);
         model.addAttribute("sessioIniciada", domini.sessioIniciada());
         return "home";
     }

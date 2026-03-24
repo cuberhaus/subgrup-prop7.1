@@ -434,6 +434,15 @@ public class ControladorDomini {
     }
 
     /**
+     * Obte el nombre d'items de manera eficient sense convertir-los a llistes de strings
+     * @return <code>int</code> nombre d'items
+     */
+    public int obtenirNombreItems() {
+        if (itemsActuals == null) return 0;
+        return itemsActuals.obtenirTotsElsElements().size();
+    }
+
+    /**
      * Obte el nom dels atributs de l'item seleccionat
      * @return <code>ArrayList&lt;String&gt;</code> conjunt del nom dels atributs
      */
@@ -747,6 +756,15 @@ public class ControladorDomini {
         ArrayList<ArrayList<String>> retornaValoracions =  valoracionsTipusItemActual.convertirAArrayList();
         retornaValoracions.remove(0);
         return retornaValoracions;
+    }
+
+    /**
+     * Obte el nombre de valoracions de manera eficient sense convertir-les a llistes de strings
+     * @return <code>int</code> nombre de valoracions
+     */
+    public int obtenirNombreValoracions() {
+        if (valoracionsTipusItemActual == null) return 0;
+        return valoracionsTipusItemActual.obtenitTotesLesValoracions().size();
     }
 
     /**
