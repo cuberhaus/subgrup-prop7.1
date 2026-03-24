@@ -83,8 +83,7 @@
                                     </td>
                                 </tr>
                                 <tr th:each="item : ${resultats}">
-                                    <td th:text="${item['id']}"></td>
-                                    <td th:each="attr : ${nomsAtributs}" th:text="${item[attr]}"></td>
+                                    <td th:each="val : ${item}" th:text="${val}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -97,8 +96,8 @@
                         <p class="text-muted small mb-3">Puntua cada ítem recomanat per calcular el NDCG de la recomanació.</p>
                         <div th:each="item, stat : ${resultats}" class="row mb-2 align-items-center">
                             <div class="col-auto">
-                                <span class="badge badge-accent" th:text="'Ítem ' + ${item['id']}"></span>
-                                <input type="hidden" th:name="'item_id_' + ${stat.index}" th:value="${item['id']}">
+                                <span class="badge badge-accent" th:text="'Ítem ' + ${item[0]}"></span>
+                                <input type="hidden" th:name="'item_id_' + ${stat.index}" th:value="${item[0]}">
                             </div>
                             <div class="col">
                                 <input type="number" step="any" class="form-control form-control-sm"

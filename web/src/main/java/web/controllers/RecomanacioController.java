@@ -71,19 +71,23 @@ public class RecomanacioController {
             }
 
             ArrayList<String> nomsAtributs = domini.obtenirNomsAtributsTipusItemSeleccionat();
-            ArrayList<Map<String, String>> itemsRecomanats = new ArrayList<>();
+            ArrayList<ArrayList<String>> itemsRecomanats = new ArrayList<>();
             for (String itemId : resultats) {
                 try {
                     Map<String, String> item = domini.obtenirItem(itemId);
-                    Map<String, String> row = new LinkedHashMap<>();
-                    row.put("id", itemId);
+                    ArrayList<String> row = new ArrayList<>();
+                    row.add(itemId);
                     for (String attr : nomsAtributs) {
-                        row.put(attr, item.getOrDefault(attr, ""));
+                        row.add(item.getOrDefault(attr, ""));
                     }
                     itemsRecomanats.add(row);
-                } catch (Exception ignored) {
-                    Map<String, String> row = new LinkedHashMap<>();
-                    row.put("id", itemId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ArrayList<String> row = new ArrayList<>();
+                    row.add(itemId);
+                    for (String attr : nomsAtributs) {
+                        row.add("ERROR");
+                    }
                     itemsRecomanats.add(row);
                 }
             }
