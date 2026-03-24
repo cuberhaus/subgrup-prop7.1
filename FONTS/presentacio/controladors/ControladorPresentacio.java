@@ -225,6 +225,20 @@ public class ControladorPresentacio {
     }
 
     /**
+     * @return el nombre d'items del tipus d'item seleccionat
+     */
+    public int obtenirNombreItems() {
+        return controladorDomini.obtenirNombreItems();
+    }
+
+    /**
+     * @return el nombre de valoracions del tipus d'item seleccionat
+     */
+    public int obtenirNombreValoracions() {
+        return controladorDomini.obtenirNombreValoracions();
+    }
+
+    /**
      * Exporta el conjunt d'usuaris a un arxiu extern en la localització donada
      * @param absolutePath path de la carpeta on volem crear l'arxiu
      * @throws IOException Error en l'entrada/sortida

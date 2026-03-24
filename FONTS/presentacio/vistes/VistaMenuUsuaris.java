@@ -50,7 +50,7 @@ public class VistaMenuUsuaris extends JPanel {
         for (ArrayList<String> usuari : usuaris) {
             llistaUsuarisTableModel.addRow(usuari.toArray());
         }
-        llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount() - 1);
+        // llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount() - 1);
         llistaUsuaris = new JTable(llistaUsuarisTableModel);
         llistaUsuaris.setEnabled(false);
         UIEstil.styleTable(llistaUsuaris);
@@ -65,7 +65,7 @@ public class VistaMenuUsuaris extends JPanel {
         for (ArrayList<String> usuari : usuaris) {
             llistaUsuarisTableModel.addRow(usuari.toArray());
         }
-        llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount() - 1);
+        // llistaUsuarisTableModel.removeRow(llistaUsuarisTableModel.getRowCount() - 1);
         jScrollPane.revalidate();
     }
 

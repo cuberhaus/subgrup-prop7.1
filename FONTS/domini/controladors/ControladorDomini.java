@@ -48,6 +48,15 @@ public class ControladorDomini {
             this.carregarTipusItem(tipusItem);
         }
         estatPrograma.afegeixConjuntUsuaris(new ConjuntUsuaris(controladorPersistencia.obtenirConjuntUsuaris("basic")));
+        
+        // Seleccionar automàticament el primer tipus d'ítem si n'hi ha algun
+        if (!llistaTipusItems.isEmpty()) {
+            try {
+                this.seleccionarTipusItem(llistaTipusItems.get(0));
+            } catch (Exception ignored) {
+                // Si falla la selecció inicial (ex: format corrupte), ignorem l'error per no bloquejar l'arrencada
+            }
+        }
     }
 
     /**

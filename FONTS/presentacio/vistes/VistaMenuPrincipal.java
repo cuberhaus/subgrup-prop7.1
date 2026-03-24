@@ -86,6 +86,7 @@ public class VistaMenuPrincipal extends JFrame {
         menuPestanyes.setFont(UIEstil.FONT_BUTTON);
         menuPestanyes.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
+        menuPestanyes.add("  Inici  ", VistaMenuInici.obtenirInstancia());
         menuPestanyes.add("  Tipus d'ítem  ", VistaMenuTipusItem.obtenirInstancia());
         menuPestanyes.add("  Items  ", VistaMenuItems.obtenirInstancia());
         menuPestanyes.add("  Usuaris  ", VistaMenuUsuaris.obtenirInstancia());

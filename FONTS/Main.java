@@ -11,7 +11,7 @@ public class Main {
             ControladorPresentacio.obtenirInstancia();
         } catch (Exception e) {
             System.out.println("Hi ha hagut un error iniciant la interficie.");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

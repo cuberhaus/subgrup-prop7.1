@@ -46,6 +46,7 @@ public class ControladorMenuPrincipal {
                 }
             });
             // Afegeix els controladors de les vistes com a observadors de l'encarregat d'actualitzar-les
+            EncarregatActualitzarVistes.afegirObservador(ControladorMenuInici.obtenirInstancia());
             EncarregatActualitzarVistes.afegirObservador(ControladorMenuTipusItem.obtenirInstancia());
             EncarregatActualitzarVistes.afegirObservador(ControladorMenuItems.obtenirInstancia());
             EncarregatActualitzarVistes.afegirObservador(ControladorMenuUsuaris.obtenirInstancia());
