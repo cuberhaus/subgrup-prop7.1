@@ -70,3 +70,23 @@ A continuació es detallen les comandes disponibles:
   make clean
   ```
   *(Esborra tots els fitxers compilats `.class` del directori `EXE/`)*
+
+## 🌐 Web App
+
+A web interface for the recommendation system built with Spring Boot and Thymeleaf, providing browser-based access to the recommendation engine.
+
+**Stack:** Java Spring Boot + Thymeleaf templates
+
+### Quick Start
+
+```bash
+cd web
+./mvnw spring-boot:run      # http://localhost:8081
+```
+
+### Features
+
+- Browse and search items in the recommendation database
+- Get personalized recommendations based on collaborative and content-based filtering
+- User management and rating submission
+- Web-based alternative to the Swing desktop GUI
