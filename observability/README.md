@@ -167,10 +167,14 @@ are needed simultaneously for this experiment.
 ## JMX exporter setup (Phase 4)
 
 The eBPF agent gives HTTP / network / infra metrics for free, but
-nothing about the JVM's internals (GC, heap, thread pool). The JMX
-exporter — a single Java agent JAR added to the JVM via
-`JAVA_TOOL_OPTIONS=-javaagent:...` — closes that gap without touching
-application code.
+exposes very little about the JVM's internals (GC, heap, threads).
+Coroot's node-agent ships a `container_jvm_*` metric family fed by
+JVMTI introspection, but it only attaches to JVMs running inside
+Docker containers; this app runs natively (`./mvnw spring-boot:run` on
+the host), so those series are empty for it.
+
+The JMX exporter — a single Java agent JAR pinned at version 1.5.0 —
+closes that gap by translating MBeans to Prometheus on a side port.
 
 ```bash
 # From the repo root, fetch the agent JAR (idempotent):
@@ -182,8 +186,30 @@ make web
 # Prometheus picks it up automatically via the scrape config.
 ```
 
-See [Makefile](../Makefile) for the `jmx-exporter` target. The agent
-config is in [`jmx_exporter/jmx-config.yaml`](jmx_exporter/jmx-config.yaml).
+See the top-level [Makefile](../Makefile) for the `jmx-exporter` target
+(which fetches the JAR from the upstream GitHub release) and the `web`
+target (which passes the `-javaagent:...` flag to the forked Spring
+Boot JVM). The agent config is in
+[`jmx_exporter/jmx-config.yaml`](jmx_exporter/jmx-config.yaml).
+
+### Things that bit me along the way
+
+- **Don't use `JAVA_TOOL_OPTIONS`.** It's the obvious-looking knob, but
+  Maven inherits the env var into BOTH the wrapper JVM AND the forked
+  Spring Boot JVM, so they both attach the agent and fight for port
+  12345. The second bind fails with `BindException: Address already in
+  use` even though the port is genuinely free. Pass the flag via
+  `-Dspring-boot.run.jvmArguments` instead — that scopes it to the
+  forked app JVM only.
+- **Tomcat MBeans aren't there by default.** Spring Boot 3 disables
+  `server.tomcat.mbeanregistry.enabled` for performance; flip it to
+  `true` if you want connector-pool and global-request metrics on
+  Coroot's Java tab.
+- **Coroot's auto-Java tab needs a containerized JVM.** A native JVM
+  on the host shows up under "Other applications" rather than getting
+  Coroot's prebuilt Java widgets. The JMX exporter's series are still
+  in Prometheus and queryable through Coroot's "Custom Metrics" view —
+  Coroot's own categorisation is the only thing that stays grey.
 
 ## Files in this directory
 

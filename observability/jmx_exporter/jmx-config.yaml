@@ -1,0 +1,58 @@
+# JMX exporter configuration for the Spring Boot 3.2.5 / Tomcat / JVM 21
+# stack under test. Loaded by the Java agent via:
+#
+#   ./mvnw spring-boot:run \
+#     -Dspring-boot.run.jvmArguments="-javaagent:.../jmx_prometheus_javaagent-1.5.0.jar=12345:.../jmx-config.yaml"
+#
+# (See the `web` target in the top-level Makefile. Don't use
+# JAVA_TOOL_OPTIONS — it leaks into the parent Maven JVM and the agent
+# tries to bind the same port twice; the second bind fails with
+# `BindException: Address already in use` even though the port is free.)
+#
+# The agent listens on port 12345 and serves Prometheus-format metrics
+# at /metrics. The Coroot-stack Prometheus (in observability/prometheus/
+# prometheus.yml) scrapes it via `host.docker.internal:12345` and stores
+# the samples in the same TSDB Coroot reads from.
+
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+
+# Allow only the high-value MBean families. Anything not matching is
+# silently dropped — keeps cardinality bounded.
+#
+# Tomcat MBeans (Catalina:* / Tomcat:*) are intentionally NOT in the
+# allowlist: Spring Boot 3 disables Tomcat MBean registration by
+# default, so they don't exist on the bus until you opt in with
+#
+#   server.tomcat.mbeanregistry.enabled=true
+#
+# in `web/src/main/resources/application.properties`. The Coroot PoC
+# leaves them disabled to keep "no application config change" honest;
+# enable the property if you want connector-pool / global-request
+# metrics on the Coroot Java tab.
+allowlistObjectNames:
+  - "java.lang:*"
+  - "java.nio:*"
+  - "org.springframework.boot:type=Endpoint,name=*"
+
+rules:
+  # ── JVM thread / classloader counts (these patterns DO match) ──
+  - pattern: 'java\.lang<type=Threading><>(\w+)'
+    name: jvm_threads_$1
+    type: GAUGE
+  - pattern: 'java\.lang<type=ClassLoading><>(\w+)'
+    name: jvm_classloading_$1
+    type: GAUGE
+
+  # ── Catch-all ──
+  # Without this, MBeans matching the allowlist but no specific rule
+  # would be dropped. The catch-all also produces serviceable names
+  # for memory pools and GC counters out of the box —
+  #   java_lang_g1_concurrent_gc_collectioncount
+  #   java_lang_codecache_usage_used
+  # — which is what Coroot's PromQL widgets ultimately match against.
+  # I tried collapsing those into prettier `jvm_memory_pool_*` /
+  # `jvm_gc_*` names with custom rules but the JMX exporter normalises
+  # MBean attribute order in a way that's surprisingly fiddly to match
+  # — left as a future polish exercise.
+  - pattern: '.*'
