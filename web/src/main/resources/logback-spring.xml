@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Phase 14 (Option A) — JSON-line stdout for the PROP backend.
+  JSON-line stdout for the PROP backend.
 
-  The PersonalPortfolio log-relay sidecar (`scripts/log-relay/`) tails
-  this container's stdout and forwards each line into the in-page
-  debug overlay. Keeping output as one JSON object per line means the
-  relay does not have to guess at parsing free-form text.
+  Two consumers care about this format:
+   1. The PersonalPortfolio log-relay sidecar tails this container's
+      stdout and forwards each line into the in-page debug overlay (the
+      relay does not have to guess at parsing free-form text).
+   2. On the obs-experiment-coroot branch, Coroot's container-log
+      scraper indexes the JSON fields as structured key/value attributes
+      on each log line — including any MDC keys (notably session_id,
+      stamped by SessionIdFilter on requests that carry X-Session-Id).
+
+  The Sentry SentryAppender that used to attach automatically here (via
+  the io.sentry:sentry-logback dependency) is gone with Sentry removal
+  in Phase 2 of the Coroot PoC.
 -->
 <configuration>
     <appender name="STDOUT_JSON" class="ch.qos.logback.core.ConsoleAppender">
