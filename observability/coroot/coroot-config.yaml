@@ -1,0 +1,109 @@
+# Coroot project configuration — declarative form.
+#
+# Mounted into the coroot container at /etc/coroot/config.yaml; the
+# `--config=/etc/coroot/config.yaml` flag in docker-compose.obs.yml
+# tells Coroot to load it on boot. The two `--bootstrap-*` flags also
+# present in compose still apply on FIRST boot for new projects (they
+# preconfigure Prometheus + ClickHouse data sources); on subsequent
+# boots this file is the source of truth and replaces UI-managed
+# project state for the projects listed below.
+#
+# Coverage of Phase 5 deliverables:
+#   - inspectionOverrides.sloLatency / sloAvailability  → SLOs
+#     (the plan called this `inspections.yaml`)
+#   - notificationIntegrations.webhook                  → alert sink
+#     (the plan called this `integrations.yaml`)
+#
+# Both live in one file because that's the shape Coroot expects;
+# splitting them would just require Coroot to merge them at boot.
+
+projects:
+  - name: default
+
+    apiKeys:
+      - key: subgrup-prop-coroot-poc
+        description: "Default API key for the subgrup-prop7.1 Coroot PoC."
+
+    notificationIntegrations:
+      # Used in alert / incident notification templates so the link
+      # back to Coroot's UI from a webhook payload resolves correctly.
+      baseURL: http://localhost:18080
+
+      webhook:
+        # The PoC's local sink container — a small mendhak/http-https-echo
+        # instance that logs every POST to stdout. `webhook-sink:8080`
+        # resolves on the docker-internal network alongside Coroot.
+        # In production this would be a real receiver (Slack relay,
+        # PagerDuty, internal incident bot, etc.).
+        url: http://webhook-sink:8080/coroot
+        tlsSkipVerify: false
+        incidents: true
+        deployments: false
+        alerts: true
+        # Templates are minimal — webhook-sink just prints whatever we
+        # send, so a one-line summary is enough to confirm round-trip.
+        # Production templates would be richer (mention service, SLO,
+        # severity, link back to Coroot).
+        incidentTemplate: |
+          {
+            "kind": "incident",
+            "service": "{{.Application.Name}}",
+            "severity": "{{.Incident.Severity}}",
+            "summary": "{{.Incident.Description}}",
+            "link": "{{.URL}}"
+          }
+        alertTemplate: |
+          {
+            "kind": "alert",
+            "rule": "{{.Rule.Name}}",
+            "severity": "{{.Rule.Severity}}",
+            "summary": "{{.Description}}",
+            "link": "{{.URL}}"
+          }
+
+    # ── SLO inspection overrides (plan: "inspections.yaml") ──
+    #
+    # Coroot auto-infers SLOs based on observed traffic patterns; these
+    # overrides pin the thresholds explicitly so the comparison artefact
+    # has reproducible numbers. The format is documented at
+    # https://docs.coroot.com/configuration/configuration#configuration-file
+    #
+    # `applicationId` shape: <namespace>:<kind>:<name>
+    #   - namespace `_` for non-Kubernetes apps (i.e., everything in
+    #     this docker-only PoC).
+    #   - kind matches Coroot's process classifier — "Application" for
+    #     a generic native process, e.g., the spring-boot JVM.
+    #
+    # Latency SLO: 95% of requests complete under 200 ms.
+    # Availability SLO: 99% of requests succeed.
+    # Both are intentionally tight enough that Scenario A (Thread.sleep
+    # 500 ms injection) and Scenario B (every-Nth synthetic exception)
+    # in SCENARIOS.md will breach them within ~5 minutes of load.
+    inspectionOverrides:
+      sloLatency:
+        - applicationId: "_:Application:java"
+          objectivePercent: 95
+          objectiveThreshold: 200ms
+      sloAvailability:
+        - applicationId: "_:Application:java"
+          objectivePercent: 99
+
+    # ── Application categorisation ──
+    #
+    # Tags every Java process Coroot sees as part of the
+    # `subgrup-prop` category, so alerts/incident notifications can
+    # be filtered by it in the UI. Production would use this to scope
+    # PagerDuty escalation policies per team.
+    applicationCategories:
+      - name: subgrup-prop
+        customPatterns:
+          - "_/java"
+        notificationSettings:
+          alerts:
+            enabled: true
+            webhook:
+              enabled: true
+          incidents:
+            enabled: true
+            webhook:
+              enabled: true

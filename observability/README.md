@@ -213,7 +213,9 @@ Boot JVM). The agent config is in
 
 ## Files in this directory
 
-- `docker-compose.obs.yml` — master compose, 5 services.
+- `docker-compose.obs.yml` — master compose, 6 services (Coroot core +
+  node-agent + cluster-agent + ClickHouse + Prometheus +
+  webhook-sink).
 - `.env.obs.example` — version + port template, safe to commit.
 - `.env.obs` — local overrides, gitignored.
 - `.gitignore` — pinned for the obs working tree.
@@ -221,15 +223,36 @@ Boot JVM). The agent config is in
   exporter target).
 - `clickhouse/disable-system-logs.xml` — ClickHouse override config to
   silence its noisy internal logs.
-- `coroot/` — reserved for future Coroot project YAML (SLO definitions,
-  integrations) added in Phase 5.
+- `coroot/coroot-config.yaml` — Coroot project config: SLO definitions
+  (95% < 200 ms, 99% availability), application categorisation, and
+  webhook receiver pointing at the in-stack sink. Mounted into the
+  Coroot container at `/etc/coroot/config.yaml` (Phase 5).
 - `jmx_exporter/jmx-config.yaml` — Spring Boot scrape rules for the JMX
   agent (Phase 4).
 - `README.md` — this file.
-- `SCENARIOS.md` (Phase 5) — two scripted experiments mirroring the
-  other PoCs for like-for-like comparison.
-- `obs-experiment-notes.md` (Phase 6) — the comparison artefact you fill
+- `SCENARIOS.md` — two scripted experiments (latency regression,
+  error spike) mirroring the LGTM and Honeycomb PoCs for like-for-like
+  comparison (Phase 5).
+- `obs-experiment-notes.md` (Phase 6) — the comparison artefact filled
   in as you actually use Coroot.
+
+## Webhook receiver
+
+Phase 5 adds a `webhook-sink` container running
+`mendhak/http-https-echo`. It logs every incoming POST as one
+structured JSON line. Coroot's config (`coroot/coroot-config.yaml`)
+points incident + alert notifications at it on the docker-internal
+network. When an SLO breaches (Scenario A's `Thread.sleep(500)` is
+designed to cause this within 5 minutes), the sink receives a payload
+visible via:
+
+```bash
+docker logs -f subgrup-prop-coroot-webhook-sink
+```
+
+In production this would be replaced by a Slack relay / PagerDuty
+integration / internal incident bot — the shape is just "POST JSON to
+a URL", which the existing config covers cleanly.
 
 ## Coexistence with the portfolio
 
