@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Phase 14 (Option A) — JSON-line stdout for the PROP backend.
+
+  The PersonalPortfolio log-relay sidecar (`scripts/log-relay/`) tails
+  this container's stdout and forwards each line into the in-page
+  debug overlay. Keeping output as one JSON object per line means the
+  relay does not have to guess at parsing free-form text.
+-->
+<configuration>
+    <appender name="STDOUT_JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames>
+                <timestamp>ts</timestamp>
+                <message>msg</message>
+                <logger>ns</logger>
+                <level>level</level>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT_JSON"/>
+    </root>
+</configuration>
