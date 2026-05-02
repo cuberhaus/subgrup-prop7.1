@@ -1,0 +1,40 @@
+# Prometheus config for the Coroot stack.
+#
+# Two scrape jobs:
+#   1. Prometheus self-scrape (so the Coroot UI's "Prometheus health"
+#      panel has data to render).
+#   2. The JMX exporter running on the host alongside the Spring Boot
+#      JVM. The exporter is added in Phase 4 of the PoC; until then
+#      the target is `down` and that's fine — Coroot tolerates missing
+#      scrape targets without complaint.
+#
+# Things explicitly NOT here:
+#   - No alerting rules. Coroot's UI manages SLO inference and alert
+#     definitions; we don't duplicate them in Prometheus YAML.
+#   - No remote-read. Coroot queries Prometheus directly via the HTTP
+#     API; remote-read is for federation, which this PoC doesn't need.
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - "localhost:9090"
+
+  # Spring Boot JVM via the JMX exporter Java agent (Phase 4).
+  # `host.docker.internal` resolves via the `extra_hosts` mapping in the
+  # Prometheus service. The labels here are what Coroot uses to attach
+  # these metrics to the right "application" in its UI — the cluster-
+  # agent's auto-discovery logic looks for `service` and `job`.
+  - job_name: jmx_exporter_subgrup_prop
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "host.docker.internal:12345"
+        labels:
+          service: subgrup-prop
+          job: spring-boot
+          environment: local-dev

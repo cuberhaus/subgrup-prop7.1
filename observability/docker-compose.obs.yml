@@ -1,0 +1,155 @@
+# Coroot Community Edition — eBPF zero-instrumentation observability
+# stack for the subgrup-prop7.1 Spring Boot backend.
+#
+# Layout follows the canonical Coroot deploy compose
+# (https://github.com/coroot/coroot/blob/main/deploy/docker-compose.yaml)
+# with three local adjustments:
+#   1. Versions pinned (the upstream uses :latest with pull_policy: always).
+#   2. Host ports remapped to dodge the user's existing observability and
+#      Sentry self-hosted stacks (see "Port map" in README.md).
+#   3. ClickHouse system logs disabled via override config (per docs;
+#      reduces disk consumption substantially).
+#
+# Bring up:
+#   docker compose -f observability/docker-compose.obs.yml --env-file observability/.env.obs up -d
+#
+# Bring down (preserving data):
+#   docker compose -f observability/docker-compose.obs.yml down
+#
+# Wipe ALL local state (forces a fresh re-discovery on next bring-up):
+#   docker compose -f observability/docker-compose.obs.yml down -v
+name: subgrup-prop-coroot
+
+services:
+  # Coroot UI + project + alert engine. The bootstrap flags pre-configure
+  # the Prometheus and ClickHouse data sources on first boot so the
+  # operator doesn't have to click through the UI wizard.
+  coroot:
+    image: ghcr.io/coroot/coroot:${COROOT_VERSION:-1.10.0}
+    container_name: subgrup-prop-coroot
+    restart: unless-stopped
+    user: root
+    volumes:
+      - coroot_data:/data
+    ports:
+      # 18080 picked because: 8080 is taken by a sibling demo container,
+      # and 18080 is the same +10000 offset I used for the LGTM PoC's
+      # Grafana (13000). Keeps the dev box's port-map vaguely memorable.
+      - "${COROOT_HOST_PORT:-18080}:8080"
+    command:
+      - "--data-dir=/data"
+      - "--bootstrap-prometheus-url=http://prometheus:9090"
+      - "--bootstrap-refresh-interval=15s"
+      - "--bootstrap-clickhouse-address=clickhouse:9000"
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+      prometheus:
+        condition: service_healthy
+
+  # eBPF agent. Runs privileged with PID=host so it can attach BPF
+  # programs to kernel tracepoints and watch syscalls / packets across
+  # every process on the box. Linux 6.17 has full CO-RE + BTF support so
+  # no kernel header gymnastics are needed.
+  node-agent:
+    image: ghcr.io/coroot/coroot-node-agent:${NODE_AGENT_VERSION:-1.21.0}
+    container_name: subgrup-prop-coroot-node-agent
+    restart: unless-stopped
+    privileged: true
+    pid: "host"
+    volumes:
+      - /sys/kernel/tracing:/sys/kernel/tracing
+      - /sys/kernel/debug:/sys/kernel/debug
+      - /sys/fs/cgroup:/host/sys/fs/cgroup
+      - node_agent_data:/data
+    command:
+      - "--collector-endpoint=http://coroot:8080"
+      - "--cgroupfs-root=/host/sys/fs/cgroup"
+      - "--wal-dir=/data"
+    depends_on:
+      coroot:
+        condition: service_started
+
+  # Cluster-agent scrapes Prometheus targets that Coroot's project config
+  # exposes (custom apps, integrations) and remote-writes the samples
+  # back to Prometheus. We don't strictly need this for the JVM-on-host
+  # PoC since prometheus.yml below scrapes the JMX exporter directly,
+  # but keeping cluster-agent in the topology matches the canonical
+  # Coroot deploy and lets future "add a custom app integration" flows
+  # work without further compose surgery.
+  cluster-agent:
+    image: ghcr.io/coroot/coroot-cluster-agent:${CLUSTER_AGENT_VERSION:-1.5.0}
+    container_name: subgrup-prop-coroot-cluster-agent
+    restart: unless-stopped
+    extra_hosts:
+      # The JVM under test runs ON the host (native `make web`), not in
+      # a container. Without this hostname mapping the cluster-agent
+      # can't reach the JMX exporter at `host.docker.internal:12345`
+      # in Phase 4. Linux Docker requires `host-gateway` explicitly.
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - cluster_agent_data:/data
+    command:
+      - "--coroot-url=http://coroot:8080"
+      - "--metrics-scrape-interval=15s"
+      - "--metrics-wal-dir=/data"
+    depends_on:
+      coroot:
+        condition: service_started
+
+  # Prometheus is purely the metric store — Coroot reads from it via
+  # PromQL and remote-writes from cluster-agent flow into it. We don't
+  # expose 9090 on the host (Coroot UI is the operator-facing endpoint).
+  prometheus:
+    image: prom/prometheus:v2.53.5
+    container_name: subgrup-prop-coroot-prometheus
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--web.enable-lifecycle"
+      - "--web.enable-remote-write-receiver"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ClickHouse stores Coroot's traces and logs. NOT exposed on the host
+  # because the default port 9000 collides with the user's
+  # sentry-self-hosted-nginx; the Coroot service reaches it on the
+  # docker-internal network at `clickhouse:9000` instead.
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.3
+    container_name: subgrup-prop-coroot-clickhouse
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_SKIP_USER_SETUP: "1"
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+      - ./clickhouse/disable-system-logs.xml:/etc/clickhouse-server/config.d/disable-system-logs.xml:ro
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8123/ping"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  coroot_data: {}
+  node_agent_data: {}
+  cluster_agent_data: {}
+  prometheus_data: {}
+  clickhouse_data: {}

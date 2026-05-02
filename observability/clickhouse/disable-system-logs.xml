@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+  ClickHouse system logs are noisy on disk; Coroot consults ClickHouse
+  heavily so the log tables grow fast on a dev box. Disabling them
+  per the official Coroot docs:
+  https://docs.coroot.com/installation/docker#clickhouse-system-tables
+-->
+<clickhouse>
+  <asynchronous_metric_log remove="1"/>
+  <metric_log remove="1"/>
+  <query_log remove="1"/>
+  <query_thread_log remove="1"/>
+  <query_views_log remove="1"/>
+  <part_log remove="1"/>
+  <text_log remove="1"/>
+  <trace_log remove="1"/>
+  <opentelemetry_span_log remove="1"/>
+  <processors_profile_log remove="1"/>
+</clickhouse>

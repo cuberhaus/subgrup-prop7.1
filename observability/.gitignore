@@ -1,0 +1,13 @@
+# Local Coroot operator config (may contain license keys for an EE trial).
+.env.obs
+
+# JMX exporter JAR is downloaded by `make jmx-exporter` (Phase 4) into
+# this directory; we don't vendor binary artifacts in git.
+jmx_exporter/jmx_prometheus_javaagent-*.jar
+
+# Volumes are docker-managed; nothing should land in the working tree.
+clickhouse-data/
+prom-data/
+coroot-data/
+node-agent-data/
+cluster-agent-data/
