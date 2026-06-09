@@ -26,6 +26,13 @@ Root [Makefile](Makefile) delegates everything to [FONTS/Makefile](FONTS/Makefil
 - `make clean` — remove compiled `.class` files.
 - `make web` — start the Spring Boot UI on `http://localhost:8081`.
 
+## Agent skills
+
+Installable skills live under `web/.agents/skills/` (gitignored; restore with `make -C web skills-restore`). Pinned versions are in [web/skills-lock.json](web/skills-lock.json). Skills apply only to `web/` work — the FONTS/ Java coursework is frozen.
+
+- **create-spring-boot-java-project** — consult when scaffolding new Spring Boot modules or controllers in `web/`.
+- **sentry-workflow** — consult when adding Sentry error tracking / observability to the Spring Boot UI.
+
 ## Pitfalls
 
 - **Frozen coursework** — do not refactor, rename, or restructure existing code; the three-layer separation (`domini` / `persistencia` / `presentacio`) is the grading criterion and must be preserved.
