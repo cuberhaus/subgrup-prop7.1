@@ -43,3 +43,9 @@ web-clean:
 # Catch-all for any other targets (like Driver*, *Test, joc1, etc.)
 %:
 	@$(MAKE) -C FONTS $@
+
+##@ Understand (knowledge graph)
+
+.PHONY: understand-dashboard
+understand-dashboard: ## Launch the Understand Anything knowledge-graph dashboard (graph dir = repo root)
+	@node -e "require(require('os').homedir()+'/.understand-anything/repo/understand-anything-plugin/packages/dashboard/launch.cjs')"
