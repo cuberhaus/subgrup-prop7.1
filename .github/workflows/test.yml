@@ -3,8 +3,22 @@ name: Tests
 on:
   push:
     branches: [master]
+    paths:
+      - web/**
+      - FONTS/**
+      - Makefile
+      - .github/workflows/test.yml
   pull_request:
     branches: [master]
+    paths:
+      - web/**
+      - FONTS/**
+      - Makefile
+      - .github/workflows/test.yml
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -25,4 +39,4 @@ jobs:
           cache-dependency-path: web/pom.xml
 
       - name: Run tests
-        run: ./mvnw test -B
+        run: make -C .. web-test
