@@ -1,6 +1,6 @@
 # Pass all commands to the Makefile inside the FONTS directory
 
-.PHONY: all run clean web web-build web-clean help helper compile
+.PHONY: all run clean web web-build web-clean web-test help helper compile
 
 # Default target
 all: helper
@@ -36,6 +36,9 @@ web:
 
 web-build:
 	cd web && ./mvnw package -DskipTests
+
+web-test:
+	cd web && ./mvnw test -B
 
 web-clean:
 	cd web && ./mvnw clean
