@@ -1,6 +1,6 @@
 # subgrup-prop7.1
 
-Frozen FIB-UPC PROP coursework: a Java **Recommender System** structured in three layers (Domain, Persistence, Presentation), applying software design patterns. Originally a team project (subgroup 7.1); a Spring Boot web frontend was added later and is reused as a live-demo backend by the `PersonalPortfolio` repo.
+FIB-UPC PROP coursework: a Java **Recommender System** structured in three layers (Domain, Persistence, Presentation), applying software design patterns. Originally a team project (subgroup 7.1); a Spring Boot web frontend was added later and is reused as a live-demo backend by the `PersonalPortfolio` repo.
 
 ## Architecture
 
@@ -28,14 +28,14 @@ Root [Makefile](Makefile) delegates everything to [FONTS/Makefile](FONTS/Makefil
 
 ## Agent skills
 
-Installable skills live under `web/.agents/skills/` (gitignored; restore with `make -C web skills-restore`). Pinned versions are in [web/skills-lock.json](web/skills-lock.json). Skills apply only to `web/` work — the FONTS/ Java coursework is frozen.
+Installable skills live under `web/.agents/skills/` (gitignored; restore with `make -C web skills-restore`). Pinned versions are in [web/skills-lock.json](web/skills-lock.json). Skills apply only to `web/` work — the `FONTS/` Java coursework is not covered by them.
 
 - **create-spring-boot-java-project** — consult when scaffolding new Spring Boot modules or controllers in `web/`.
 - **sentry-workflow** — consult when adding Sentry error tracking / observability to the Spring Boot UI.
 
 ## Pitfalls
 
-- **Frozen coursework** — do not refactor, rename, or restructure existing code; the three-layer separation (`domini` / `persistencia` / `presentacio`) is the grading criterion and must be preserved.
+- The three-layer separation (`domini` / `persistencia` / `presentacio`) is the grading criterion; keep the layers separate when changing `FONTS/`.
 - The `web/` Spring Boot module is consumed by `PersonalPortfolio` as a live demo backend — keep its HTTP surface stable.
 - Source paths and comments are in **Catalan**; match the existing language when editing.
 - All `make` targets must resolve through the root Makefile's catch-all to [FONTS/Makefile](FONTS/Makefile).
